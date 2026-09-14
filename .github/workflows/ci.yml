@@ -15,4 +15,4 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -e .
       - run: sh scripts/check.sh
-      - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html
+      - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt

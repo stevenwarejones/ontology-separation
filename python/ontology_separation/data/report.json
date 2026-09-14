@@ -111,13 +111,16 @@
       "status": "verifiedBound"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Three-setting conditional no-signaling friend models; Close laboratory loopholes separately from the ideal theorem.",
+      "assumptions": [
+        "LF conditional PR component",
+        "Restrict to the two non-friend settings"
+      ],
+      "declaration": "OntologySeparation.Shared.lf_inner_PR",
+      "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "local_friendliness",
-      "result": "This adapter does not interpret this protocol",
+      "result": "Inner-setting CHSH = 4",
       "scenario": "B01",
-      "status": "outsideScope"
+      "status": "verifiedWitness"
     },
     {
       "assumptions": [
@@ -143,40 +146,55 @@
       "status": "verifiedWitness"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=0; Close laboratory loopholes separately from the ideal theorem.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation",
+        "Z dephasing weight p=0",
+        "Use the specified Bell projective bases; same two non-friend settings for B03"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "unitary_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: S = 1502/625",
       "scenario": "B01",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=1; Close laboratory loopholes separately from the ideal theorem.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation",
+        "Z dephasing weight p=1",
+        "Use the specified Bell projective bases; same two non-friend settings for B03"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "dephased_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: S = 14/25",
       "scenario": "B01",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=1/2; Close laboratory loopholes separately from the ideal theorem.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation",
+        "Z dephasing weight p=1/2",
+        "Use the specified Bell projective bases; same two non-friend settings for B03"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "partial_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: S = 926/625",
       "scenario": "B01",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Finite local response mixtures; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "assumptions": [
+        "Three-setting finite deterministic local response mixtures",
+        "Setting-independent weights"
+      ],
+      "declaration": "OntologySeparation.Shared.local_three_LF_bound",
+      "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "bell_local",
-      "result": "This adapter does not interpret this protocol",
+      "result": "G <= 6",
       "scenario": "B02",
-      "status": "outsideScope"
+      "status": "verifiedBound"
     },
     {
       "assumptions": [
@@ -192,13 +210,16 @@
       "status": "verifiedBound"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Bipartite marginal independence; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "assumptions": [
+        "Three-setting normalized no-signaling probabilities",
+        "Explicit extremal box attains 10"
+      ],
+      "declaration": "OntologySeparation.Shared.LF_ns_sharp",
+      "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "no_signaling",
-      "result": "This adapter does not interpret this protocol",
+      "result": "G <= 10 (attained)",
       "scenario": "B02",
-      "status": "outsideScope"
+      "status": "verifiedBound"
     },
     {
       "assumptions": [
@@ -214,40 +235,55 @@
       "status": "verifiedWitness"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=0; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation and ideal friend reversal",
+        "Z dephasing weight p=0",
+        "Use the specified LF bases"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.LF_score",
+      "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "unitary_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: G = 1214656/180625",
       "scenario": "B02",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=1; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation and ideal friend reversal",
+        "Z dephasing weight p=1",
+        "Use the specified LF bases"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.LF_score",
+      "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "dephased_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: G = 737728/180625",
       "scenario": "B02",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=1/2; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation and ideal friend reversal",
+        "Z dephasing weight p=1/2",
+        "Use the specified LF bases"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.LF_score",
+      "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "partial_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: G = 976192/180625",
       "scenario": "B02",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Finite local response mixtures; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "assumptions": [
+        "Two non-friend settings use the Bell local interface",
+        "Setting restriction preserves local response mixtures"
+      ],
+      "declaration": "QIT.Bell.CHSH.value_le_two_of_isLocal",
+      "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "bell_local",
-      "result": "This adapter does not interpret this protocol",
+      "result": "Inner CHSH <= 2",
       "scenario": "B03",
-      "status": "outsideScope"
+      "status": "verifiedBound"
     },
     {
       "assumptions": [
@@ -262,85 +298,115 @@
       "status": "verifiedWitness"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Bipartite marginal independence; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "assumptions": [
+        "LF PR component is no-signaling (Shared.lf_noSignaling)",
+        "Same non-friend setting restriction"
+      ],
+      "declaration": "OntologySeparation.Shared.lf_inner_PR",
+      "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "no_signaling",
-      "result": "This adapter does not interpret this protocol",
+      "result": "Inner CHSH = 4",
       "scenario": "B03",
-      "status": "outsideScope"
+      "status": "verifiedWitness"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Real projective two-qubit measurements; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "assumptions": [
+        "Assign the Bell singlet bases to the two non-friend settings",
+        "No assertion that this witness is LF-compatible"
+      ],
+      "declaration": "OntologySeparation.Catalog.bellQuantumEvidence",
+      "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "real_singlet",
-      "result": "This adapter does not interpret this protocol",
+      "result": "Inner CHSH = 1502/625 > 2",
       "scenario": "B03",
-      "status": "outsideScope"
+      "status": "verifiedWitness"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=0; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation",
+        "Z dephasing weight p=0",
+        "Use the specified Bell projective bases; same two non-friend settings for B03"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "unitary_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: S = 1502/625",
       "scenario": "B03",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=1; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation",
+        "Z dephasing weight p=1",
+        "Use the specified Bell projective bases; same two non-friend settings for B03"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "dephased_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: S = 14/25",
       "scenario": "B03",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Two-qubit records; p=1/2; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "assumptions": [
+        "ADDED bipartite singlet preparation",
+        "Z dephasing weight p=1/2",
+        "Use the specified Bell projective bases; same two non-friend settings for B03"
+      ],
+      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "partial_memory",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With dephased-singlet preparation: S = 926/625",
       "scenario": "B03",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Finite local response mixtures; Two-qubit calibration only.",
+      "assumptions": [
+        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Two-qubit calibration only.",
       "model": "bell_local",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "B04",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Three-setting conditional no-signaling friend models; Two-qubit calibration only.",
+      "assumptions": [
+        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Two-qubit calibration only.",
       "model": "local_friendliness",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "B04",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Bipartite marginal independence; Two-qubit calibration only.",
+      "assumptions": [
+        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Two-qubit calibration only.",
       "model": "no_signaling",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "B04",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Real projective two-qubit measurements; Two-qubit calibration only.",
+      "assumptions": [
+        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Two-qubit calibration only.",
       "model": "real_singlet",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "B04",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
       "assumptions": [
@@ -379,103 +445,139 @@
       "status": "verifiedToyPrediction"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Bell-local",
+        "A single setting-independent joint distribution over three binary records",
+        "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
+      ],
+      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "bell_local",
-      "result": "No prediction established",
+      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Local Friendliness",
+        "A single setting-independent joint distribution over three binary records",
+        "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
+      ],
+      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "local_friendliness",
-      "result": "No prediction established",
+      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by No-signaling",
+        "A single setting-independent joint distribution over three binary records",
+        "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
+      ],
+      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "no_signaling",
-      "result": "No prediction established",
+      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Quantum singlet",
+        "A single setting-independent joint distribution over three binary records",
+        "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
+      ],
+      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "real_singlet",
-      "result": "No prediction established",
+      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "A single setting-independent joint distribution over three binary records",
+        "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
+      ],
+      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "unitary_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "A single setting-independent joint distribution over three binary records",
+        "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
+      ],
+      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "dephased_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "A single setting-independent joint distribution over three binary records",
+        "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
+      ],
+      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "partial_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Finite local response mixtures; Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "assumptions": [
+        "ADDED two-qubit memory model and complete record leakage before reversal"
+      ],
+      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "bell_local",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With complete inaccessible leakage: P(+) = 1/2",
       "scenario": "P02",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Three-setting conditional no-signaling friend models; Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "assumptions": [
+        "ADDED two-qubit memory model and complete record leakage before reversal"
+      ],
+      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "local_friendliness",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With complete inaccessible leakage: P(+) = 1/2",
       "scenario": "P02",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Bipartite marginal independence; Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "assumptions": [
+        "ADDED two-qubit memory model and complete record leakage before reversal"
+      ],
+      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "no_signaling",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With complete inaccessible leakage: P(+) = 1/2",
       "scenario": "P02",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Real projective two-qubit measurements; Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "assumptions": [
+        "ADDED two-qubit memory model and complete record leakage before reversal"
+      ],
+      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "real_singlet",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With complete inaccessible leakage: P(+) = 1/2",
       "scenario": "P02",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
       "assumptions": [
@@ -514,103 +616,143 @@
       "status": "verifiedToyPrediction"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Bell-local",
+        "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
+        "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
+      ],
+      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "bell_local",
-      "result": "No prediction established",
+      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Local Friendliness",
+        "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
+        "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
+      ],
+      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "local_friendliness",
-      "result": "No prediction established",
+      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "assumptions": [
+        "ADDITIONAL LAW: mixture of an LF sector and a normalized no-signaling sector",
+        "0 <= epsilon <= 1; epsilon >= (G-6)/4",
+        "Sharpness: Shared.LF_NS_contamination_attained; not a communication-cost theorem"
+      ],
+      "declaration": "OntologySeparation.Shared.LF_NS_fraction_required",
+      "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "no_signaling",
-      "result": "No prediction established",
+      "result": "IF LF + NS contamination: G <= 6+4 epsilon (sharp)",
       "scenario": "P03",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Quantum singlet",
+        "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
+        "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
+      ],
+      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "real_singlet",
-      "result": "No prediction established",
+      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
+        "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
+      ],
+      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "unitary_memory",
-      "result": "No prediction established",
+      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
+        "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
+      ],
+      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "dephased_memory",
-      "result": "No prediction established",
+      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
+        "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
+      ],
+      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "partial_memory",
-      "result": "No prediction established",
+      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Finite local response mixtures; Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "assumptions": [
+        "ADDED coherent control and memory channel",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "bell_local",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With phase-echo channel law: P(+) = p/2",
       "scenario": "P04",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Three-setting conditional no-signaling friend models; Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "assumptions": [
+        "ADDED coherent control and memory channel",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "local_friendliness",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With phase-echo channel law: P(+) = p/2",
       "scenario": "P04",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Bipartite marginal independence; Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "assumptions": [
+        "ADDED coherent control and memory channel",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "no_signaling",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With phase-echo channel law: P(+) = p/2",
       "scenario": "P04",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Real projective two-qubit measurements; Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "assumptions": [
+        "ADDED coherent control and memory channel",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "real_singlet",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With phase-echo channel law: P(+) = p/2",
       "scenario": "P04",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
       "assumptions": [
@@ -652,292 +794,416 @@
       "status": "verifiedToyPrediction"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Bell-local",
+        "Two independent fair classical bits; decoder sees only one share",
+        "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
+      ],
+      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "bell_local",
-      "result": "No prediction established",
+      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Local Friendliness",
+        "Two independent fair classical bits; decoder sees only one share",
+        "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
+      ],
+      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "local_friendliness",
-      "result": "No prediction established",
+      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by No-signaling",
+        "Two independent fair classical bits; decoder sees only one share",
+        "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
+      ],
+      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "no_signaling",
-      "result": "No prediction established",
+      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Quantum singlet",
+        "Two independent fair classical bits; decoder sees only one share",
+        "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
+      ],
+      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "real_singlet",
-      "result": "No prediction established",
+      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "Two independent fair classical bits; decoder sees only one share",
+        "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
+      ],
+      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "unitary_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "Two independent fair classical bits; decoder sees only one share",
+        "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
+      ],
+      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "dephased_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "Two independent fair classical bits; decoder sees only one share",
+        "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
+      ],
+      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "partial_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Bell-local",
+        "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
+        "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
+      ],
+      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "bell_local",
-      "result": "No prediction established",
+      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Local Friendliness",
+        "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
+        "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
+      ],
+      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "local_friendliness",
-      "result": "No prediction established",
+      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by No-signaling",
+        "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
+        "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
+      ],
+      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "no_signaling",
-      "result": "No prediction established",
+      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Quantum singlet",
+        "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
+        "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
+      ],
+      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "real_singlet",
-      "result": "No prediction established",
+      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
+        "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
+      ],
+      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "unitary_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
+        "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
+      ],
+      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "dephased_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
+        "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
+      ],
+      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "partial_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Bell-local",
+        "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
+        "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
+      ],
+      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "bell_local",
-      "result": "No prediction established",
+      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Local Friendliness",
+        "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
+        "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
+      ],
+      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "local_friendliness",
-      "result": "No prediction established",
+      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by No-signaling",
+        "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
+        "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
+      ],
+      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "no_signaling",
-      "result": "No prediction established",
+      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Quantum singlet",
+        "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
+        "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
+      ],
+      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "real_singlet",
-      "result": "No prediction established",
+      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
+        "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
+      ],
+      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "unitary_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
+        "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
+      ],
+      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "dephased_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
+        "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
+      ],
+      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "partial_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Bell-local",
+        "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
+        "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
+      ],
+      "declaration": "OntologySeparation.Research.random_query_bound",
+      "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "bell_local",
-      "result": "No prediction established",
+      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Local Friendliness",
+        "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
+        "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
+      ],
+      "declaration": "OntologySeparation.Research.random_query_bound",
+      "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "local_friendliness",
-      "result": "No prediction established",
+      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by No-signaling",
+        "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
+        "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
+      ],
+      "declaration": "OntologySeparation.Research.random_query_bound",
+      "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "no_signaling",
-      "result": "No prediction established",
+      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Quantum singlet",
+        "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
+        "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
+      ],
+      "declaration": "OntologySeparation.Research.random_query_bound",
+      "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "real_singlet",
-      "result": "No prediction established",
+      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
+        "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
+      ],
+      "declaration": "OntologySeparation.Research.random_query_bound",
+      "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "unitary_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
+        "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
+      ],
+      "declaration": "OntologySeparation.Research.random_query_bound",
+      "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "dephased_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
+        "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
+      ],
+      "declaration": "OntologySeparation.Research.random_query_bound",
+      "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "partial_memory",
-      "result": "No prediction established",
+      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Finite local response mixtures; Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "assumptions": [
+        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "bell_local",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "P09",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Three-setting conditional no-signaling friend models; Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "assumptions": [
+        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "local_friendliness",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "P09",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Bipartite marginal independence; Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "assumptions": [
+        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "no_signaling",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "P09",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Real projective two-qubit measurements; Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "assumptions": [
+        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
+        "0 <= p <= 1; column does not fix p"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "real_singlet",
-      "result": "This adapter does not interpret this protocol",
+      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "P09",
-      "status": "outsideScope"
+      "status": "verifiedConditional"
     },
     {
       "assumptions": [
@@ -976,69 +1242,163 @@
       "status": "verifiedToyPrediction"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Bell-local",
+        "A single joint distribution over three public binary records A,B,C",
+        "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
+      ],
+      "declaration": "OntologySeparation.Research.public_error_bound",
+      "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "bell_local",
-      "result": "No prediction established",
+      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Local Friendliness",
+        "A single joint distribution over three public binary records A,B,C",
+        "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
+      ],
+      "declaration": "OntologySeparation.Research.public_error_bound",
+      "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "local_friendliness",
-      "result": "No prediction established",
+      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by No-signaling",
+        "A single joint distribution over three public binary records A,B,C",
+        "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
+      ],
+      "declaration": "OntologySeparation.Research.public_error_bound",
+      "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "no_signaling",
-      "result": "No prediction established",
+      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Quantum singlet",
+        "A single joint distribution over three public binary records A,B,C",
+        "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
+      ],
+      "declaration": "OntologySeparation.Research.public_error_bound",
+      "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "real_singlet",
-      "result": "No prediction established",
+      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "A single joint distribution over three public binary records A,B,C",
+        "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
+      ],
+      "declaration": "OntologySeparation.Research.public_error_bound",
+      "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "unitary_memory",
-      "result": "No prediction established",
+      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "A single joint distribution over three public binary records A,B,C",
+        "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
+      ],
+      "declaration": "OntologySeparation.Research.public_error_bound",
+      "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "dephased_memory",
-      "result": "No prediction established",
+      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     },
     {
-      "assumptions": [],
-      "declaration": null,
-      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "assumptions": [
+        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "A single joint distribution over three public binary records A,B,C",
+        "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
+      ],
+      "declaration": "OntologySeparation.Research.public_error_bound",
+      "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "partial_memory",
-      "result": "No prediction established",
+      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "unresolved"
+      "status": "verifiedConditional"
     }
   ],
+  "extensions": [
+    {
+      "contrast": "Three separately anticorrelated, fair contexts give 3 and have no joint extension",
+      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "requiredLaw": "A single setting-independent joint distribution over three binary records",
+      "result": "Expected number of disagreeing edges <= 2",
+      "scenario": "P01",
+      "scope": "Abstract contextual probability model; not a demonstrated quantum or friend implementation.",
+      "title": "Three-record gluing test"
+    },
+    {
+      "contrast": "If the bad sector is also no-signaling: G <= 6+4 epsilon, attained; epsilon >= (G-6)/4. See Shared.LF_NS_fraction_required and Shared.LF_NS_contamination_attained.",
+      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "requiredLaw": "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
+      "result": "G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
+      "scenario": "P03",
+      "scope": "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.",
+      "title": "LF contamination budget"
+    },
+    {
+      "contrast": "Joint access and parity decoder succeeds with 1",
+      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "requiredLaw": "Two independent fair classical bits; decoder sees only one share",
+      "result": "Every randomized one-share decoder succeeds with 1/2",
+      "scenario": "P05",
+      "scope": "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.",
+      "title": "Access to a parity-encoded record"
+    },
+    {
+      "contrast": "p=0: 1; p=1/2: 3/4; p=1: 1/2",
+      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "requiredLaw": "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
+      "result": "Minus-port probability = 1-p/2",
+      "scenario": "P06",
+      "scope": "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.",
+      "title": "Pauli-order interference"
+    },
+    {
+      "contrast": "Every pure real product amplitude has determinant zero",
+      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "requiredLaw": "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
+      "result": "Normalized output has determinant -1/2 and is not a product amplitude",
+      "scenario": "P07",
+      "scope": "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.",
+      "title": "Controlled-phase product-state test"
+    },
+    {
+      "contrast": "Two classical queries allow success 1",
+      "declaration": "OntologySeparation.Research.random_query_bound",
+      "requiredLaw": "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
+      "result": "Success = 1/2 for every such decoder",
+      "scenario": "P08",
+      "scope": "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.",
+      "title": "Classical query-budget recovery"
+    },
+    {
+      "contrast": "Zero adjacent disagreement forces zero end-to-end disagreement",
+      "declaration": "OntologySeparation.Research.public_error_bound",
+      "requiredLaw": "A single joint distribution over three public binary records A,B,C",
+      "result": "P(A != C) <= P(A != B) + P(B != C)",
+      "scenario": "P10",
+      "scope": "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.",
+      "title": "Public agreement composition"
+    }
+  ],
+  "independent_extension_theorem": "OntologySeparation.independent_sector_underdetermined",
   "models": [
     {
       "id": "bell_local",
@@ -1281,7 +1641,7 @@
     {
       "family": "research",
       "id": "P01",
-      "obligations": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "obligations": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "protocol": {
         "observable": "Compatibility of pairwise views with one joint model",
         "operations": [
@@ -1394,7 +1754,7 @@
     {
       "family": "research",
       "id": "P03",
-      "obligations": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "obligations": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "protocol": {
         "observable": "Minimum causal influence needed to explain an LF score",
         "operations": [
@@ -1506,7 +1866,7 @@
     {
       "family": "research",
       "id": "P05",
-      "obligations": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "obligations": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "protocol": {
         "observable": "Recoverable information under each physical access map",
         "operations": [
@@ -1553,7 +1913,7 @@
     {
       "family": "research",
       "id": "P06",
-      "obligations": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "obligations": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "protocol": {
         "observable": "Causal-order witness jointly with friend correlations",
         "operations": [
@@ -1608,7 +1968,7 @@
     {
       "family": "research",
       "id": "P07",
-      "obligations": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "obligations": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "protocol": {
         "observable": "Entanglement witness and local visibility",
         "operations": [
@@ -1670,7 +2030,7 @@
     {
       "family": "research",
       "id": "P08",
-      "obligations": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "obligations": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "protocol": {
         "observable": "Best recovery probability at a specified query or circuit budget",
         "operations": [
@@ -1768,7 +2128,7 @@
     {
       "family": "research",
       "id": "P10",
-      "obligations": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "obligations": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "protocol": {
         "observable": "Existence of a compatible public behavior under a composition rule",
         "operations": [
@@ -1819,5 +2179,5 @@
       "title": "Rules of shared reality"
     }
   ],
-  "schema_version": 1
+  "schema_version": 2
 }

@@ -103,7 +103,7 @@ def p01 : Scenario where
     outcomes := ["public readout specified by observable"]
     observable := "Compatibility of pairwise views with one joint model"
   }
-  obligations := "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established."
+  obligations := "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open."
 
 def p02 : Scenario where
   id := "P02"
@@ -140,7 +140,7 @@ def p03 : Scenario where
     outcomes := ["public readout specified by observable"]
     observable := "Minimum causal influence needed to explain an LF score"
   }
-  obligations := "Choose an influence metric and prove the tradeoff from the permitted causal model."
+  obligations := "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric."
 
 def p04 : Scenario where
   id := "P04"
@@ -177,7 +177,7 @@ def p05 : Scenario where
     outcomes := ["public readout specified by observable"]
     observable := "Recoverable information under each physical access map"
   }
-  obligations := "Specify operationally different access maps; a passive relabeling alone cannot change predictions."
+  obligations := "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model."
 
 def p06 : Scenario where
   id := "P06"
@@ -195,7 +195,7 @@ def p06 : Scenario where
     outcomes := ["public readout specified by observable"]
     observable := "Causal-order witness jointly with friend correlations"
   }
-  obligations := "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient."
+  obligations := "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic."
 
 def p07 : Scenario where
   id := "P07"
@@ -214,7 +214,7 @@ def p07 : Scenario where
     outcomes := ["public readout specified by observable"]
     observable := "Entanglement witness and local visibility"
   }
-  obligations := "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction."
+  obligations := "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open."
 
 def p08 : Scenario where
   id := "P08"
@@ -232,7 +232,7 @@ def p08 : Scenario where
     outcomes := ["public readout specified by observable"]
     observable := "Best recovery probability at a specified query or circuit budget"
   }
-  obligations := "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim."
+  obligations := "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound."
 
 def p09 : Scenario where
   id := "P09"
@@ -268,7 +268,7 @@ def p10 : Scenario where
     outcomes := ["public readout specified by observable"]
     observable := "Existence of a compatible public behavior under a composition rule"
   }
-  obligations := "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim."
+  obligations := "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open."
 
 def scenarios : List Scenario := [b01, b02, b03, b04, p01, p02, p03, p04, p05, p06, p07, p08, p09, p10]
 

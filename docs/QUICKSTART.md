@@ -30,7 +30,7 @@ lake build
 lake build Tests
 python scripts/audit.py
 python scripts/export.py
-python -m unittest discover -s tests -v
+python -m unittest discover -s python_tests -v
 ```
 
 The initial mathlib cache download can be substantial. Later builds reuse it.
@@ -70,3 +70,5 @@ report = load_report()
 for cell in report.compare(["B02"], ["local_friendliness", "real_singlet"]):
     print(cell["status"], cell["result"], cell["declaration"])
 ```
+
+The full development gate also uses Node.js (18+) for the dependency-free HTML widget logic test. The Python client and offline HTML do not require Node.

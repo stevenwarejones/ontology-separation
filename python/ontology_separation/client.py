@@ -12,7 +12,7 @@ import json
 import subprocess
 import sys
 
-STATUSES = {"verifiedBound", "verifiedWitness", "verifiedToyPrediction", "unresolved", "outsideScope"}
+STATUSES = {"verifiedBound", "verifiedWitness", "verifiedToyPrediction", "verifiedConditional", "requiresExtension"}
 
 @dataclass(frozen=True)
 class Report:
@@ -21,9 +21,9 @@ class Report:
 
     def __post_init__(self) -> None:
         d = self.data
-        if d.get("schema_version") != 1:
-            raise ValueError("Unsupported report schema; expected schema_version=1")
-        for key in ("scenarios", "models", "cells", "binary_profiles"):
+        if d.get("schema_version") != 2:
+            raise ValueError("Unsupported report schema; expected schema_version=2")
+        for key in ("scenarios", "models", "cells", "binary_profiles", "extensions"):
             if not isinstance(d.get(key), list):
                 raise ValueError(f"{key} must be a list")
         def ids(key: str) -> set[str]:
@@ -43,12 +43,22 @@ class Report:
             status = cell.get("status")
             if status not in STATUSES:
                 raise ValueError(f"Unknown evidence status: {status!r}")
+            if status == "verifiedConditional" and not cell.get("assumptions"):
+                raise ValueError("Conditional result needs additional assumptions")
             if status.startswith("verified") and not cell.get("declaration"):
                 raise ValueError("A verified-status cell needs a Lean declaration reference")
             if not status.startswith("verified") and cell.get("declaration") is not None:
-                raise ValueError("An unresolved/out-of-scope cell must not carry a proof label")
+                raise ValueError("A requires-extension cell must not carry a proof label")
             if not isinstance(cell.get("result"), str) or not isinstance(cell.get("assumptions"), list):
                 raise ValueError("Malformed cell result or assumptions")
+        extension_ids = set()
+        for e in d["extensions"]:
+            if e.get("scenario") not in scenarios or e["scenario"] in extension_ids:
+                raise ValueError("Unknown or duplicate extension scenario")
+            extension_ids.add(e["scenario"])
+            if not all(isinstance(e.get(k), str) and e[k] for k in
+                       ("requiredLaw", "declaration", "scope", "result", "contrast", "title")):
+                raise ValueError("Extension needs its law, scope and declaration")
         if pairs != {(s, m) for s in scenarios for m in models}:
             raise ValueError("Report must contain the full scenario-by-model product")
 
@@ -72,8 +82,9 @@ class Report:
                   for c in cells]
         return "\n".join(lines) + "\n"
 
-    def html(self) -> str:
+    def html(self, index_href: str | None = None) -> str:
         esc = html.escape
+        nav = f'<p><a href="{esc(index_href, quote=True)}">Experiment and ontology views</a></p>' if index_href else ""
         cells = self.compare()
         rows = []
         for s in self.data["scenarios"]:
@@ -93,12 +104,12 @@ class Report:
 .wrap{{overflow:auto}}table{{border-collapse:collapse;min-width:1200px}}th,td{{padding:12px;border:1px solid #d5dce2;text-align:left;vertical-align:top}}
 small{{display:block;font-weight:normal;margin-top:5px}}thead th{{background:#172c42;color:white}}
 .verifiedWitness,.verifiedBound{{background:#e8f5ee}}.verifiedToyPrediction{{background:#eef3ff}}
-.unresolved{{background:#fff6df}}.outsideScope{{background:#f3f4f5;color:#56616b}}
+.verifiedConditional{{background:#fff6df}}.requiresExtension{{background:#f3f4f5;color:#56616b}}
 pre{{white-space:pre-wrap;font:13px system-ui}}summary{{cursor:pointer}}button{{padding:8px}}
 </style><h1>Ontology Separation</h1><p>Physical theories, explicit assumptions, Lean-checked mathematics.</p>
-<p>{esc(self.provenance)}</p><p>Green: bound or witness. Blue: proved toy prediction. Amber: unresolved. Gray: outside adapter scope. Expand a cell for assumptions and limitations.</p>
+<p>{esc(self.provenance)}</p><p>Green: native bound or witness. Blue: native toy prediction. Amber: theorem under ADDITIONAL laws, not a prediction entailed by the column alone. Gray: missing extension. Expand a cell for assumptions and limitations.</p>
 <div class="wrap"><table><thead><tr><th>Experiment</th>{heads}</tr></thead><tbody>{"".join(rows)}</tbody></table></div>
-<h2>Assumption profiles</h2><p>All 16 binary profiles are expressible. Their physical realizability is not asserted. False means negation; unspecified adds no constraint.</p></html>'''
+{nav}<h2>Assumption profiles</h2><p>All 16 binary profiles are expressible. Their physical realizability is not asserted. False means negation; unspecified adds no constraint.</p></html>'''
 
 
 def load_report(path: str | Path | None = None) -> Report:

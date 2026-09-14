@@ -9,9 +9,21 @@ proof checker stay fixed.
 
 This is an initial research framework. It includes **14 scenario descriptions**
 and a **7-model comparison matrix**. Bell and genuine Local Friendliness have
-formal reference examples. Some later scenarios have exact toy implementations;
-others are specifications with unresolved physical and mathematical obligations.
+formal reference examples. All later scenarios now have checked restricted subproblems or conditional extensions.
+The matrix has 24 native results and 74 results requiring explicitly added laws;
+it is not 98 unconditional predictions from seven complete physical universes.
 It does not claim ten new beyond-LF discoveries or a simulator for arbitrary physics.
+
+## Browse without installing
+
+Open [examples/index.html](examples/index.html) locally after cloning or downloading.
+It links the full matrix, fourteen per-experiment ontology views (all sixteen
+profiles and every two-axis slice), and a sourced experimental evidence ledger.
+GitHub displays HTML source; download it to use the interactive controls.
+
+Conditional cells explicitly state their added laws. Ontology coloring is a
+conditional preview until a vocabulary-to-theorem `ProfileBridge` is proved.
+Published measurements are separated from calculated witnesses.
 
 ## Start here
 
@@ -66,13 +78,14 @@ explicit real-projective Born-rule model.
 - **Assumption profiles:** all sixteen binary combinations of four selected laws
   can be expressed. Their realizability is a separate proof obligation.
 
-The ten original research proposals retain their names and limitations. Seven
-are currently open protocol specifications. Three have executable toy reductions,
-not solutions to their broader research ambitions. [Scenario guide](docs/SCENARIOS.md)
+The ten original research proposals retain their names and limitations. The seven previously empty directions now include gluing, contamination, access,
+order-interference, pure-state entanglement, classical-query and agreement proofs.
+These are restricted subproblems, not solutions to their broader research ambitions. [Scenario guide](docs/SCENARIOS.md)
 explains the distinction.
 
 ## Read and extend
 
+- [Matrix completion and evidence semantics](docs/MATRIX_COMPLETION.md)
 - [Architecture and decisions](docs/DESIGN.md)
 - [Add a theory, experiment or adapter](docs/EXTENDING.md)
 - [Comparison matrix](docs/MATRIX.md) and [expandable HTML](docs/matrix.html)

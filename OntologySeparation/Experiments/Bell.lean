@@ -6,8 +6,8 @@ and local class as the Lean-QIT adapter. It need not maximize the quantum value.
 namespace OntologySeparation.Bell
 noncomputable section
 
-private def b43 : RealQuantum.Basis := ⟨4/5, 3/5, by norm_num⟩
-private def b01 : RealQuantum.Basis := ⟨0, 1, by norm_num⟩
+def b43 : RealQuantum.Basis := ⟨4/5, 3/5, by norm_num⟩
+def b01 : RealQuantum.Basis := ⟨0, 1, by norm_num⟩
 
 def alice (x : Fin 2) : RealQuantum.Basis :=
   if x.val = 0 then RealQuantum.basis45 else RealQuantum.basis35

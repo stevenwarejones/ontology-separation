@@ -3,22 +3,22 @@
 The framework includes four reference experiments and all ten original proposals.
 An executable toy is not a solution to its motivating research problem.
 
-| ID | Experiment | Initial implementation |
+| ID | Experiment | Current checked subproblem |
 |---|---|---|
 | B01 | Bell CHSH | Local-class bound, PR/no-signaling separation, quantum reference |
 | B02 | Genuine LF, Bong Eq. 13 | Conditional no-signaling LF model, bound 6, exact singlet witness |
 | B03 | Bell violation compatible with LF | Inner PR box has CHSH 4 but belongs to an LF component |
 | B04 | Memory echo | Exact two-qubit density-matrix evaluation with parametric dephasing |
-| P01 | Relative facts fail to compose | Protocol specification; composition semantics open |
+| P01 | Relative facts fail to compose | Joint-record triangle bound and non-gluing witness; broader composition open |
 | P02 | Conservation/public records versus reversal | Exact inaccessible-leakage toy; conservation-law theorem open |
-| P03 | Hidden causal cost of absolute facts | Protocol specification; influence metric and tradeoff open |
+| P03 | Hidden causal cost of absolute facts | LF contamination bounds, including sharp NS tradeoff; causal metric open |
 | P04 | Coherent experimenter choices | Exact phase-control echo toy; full choice theorem open |
-| P05 | Observer identity/subsystem boundaries | Protocol specification; physical access-map comparison open |
-| P06 | Observations with indefinite causal order | Protocol specification; process interpreter required |
-| P07 | Gravitating records | Protocol specification; explicit competing mediator models required |
-| P08 | Computationally limited objectivity | Protocol specification; resource-bounded decoder class required |
+| P05 | Observer identity/subsystem boundaries | One-share versus joint parity recovery and passive relabeling |
+| P06 | Observations with indefinite causal order | X/Z order-interference calibration; process witness open |
+| P07 | Gravitating records | CZ pure-state non-product proof, including complex factors; gravity model open |
+| P08 | Computationally limited objectivity | One-classical-query parity obstruction; coherent-query case excluded |
 | P09 | Observer versus reversible machine | Exact reversible-memory toy; no cognition model |
-| P10 | Rules of shared reality | Protocol specification; operational composition rules required |
+| P10 | Rules of shared reality | Joint-public-record disagreement triangle inequality |
 
 The original literature reevaluation favored P07 and P04, retained P06 and P09
 conditionally, treated P10 as a design target, downgraded P01/P05, treated P02/P03
