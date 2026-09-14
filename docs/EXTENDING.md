@@ -79,3 +79,24 @@ its assumption proofs into the same `Witness` used by Bell and LF comparisons.
 `profileTheory_empty` proves that an inconsistent profile cannot produce a member,
 regardless of the predictor. This is a genuine connection to experiment comparison,
 not merely sixteen checkboxes in the report.
+
+
+## Shared finite interfaces and evidence views
+
+`Behavior.restrict` changes the setting interface while retaining every outcome
+probability and its normalization proof. `FiniteDistribution` and `.mean_le`
+handle finite averages without exposing measure theory. `Extension T` keeps an
+admissible base behavior and a separately specified experimental sector.
+`free_binary_extension` proves that an unconstrained independent sector can
+realize any binary probability; it must not be read as a theorem about every
+physically coupled extension of the original model.
+
+For conditional experimental laws, add an `ExtensionInfo` and a `ClaimId` with a
+proof in `Catalog.Evidence.resolve`. Use `verifiedConditional` when the column's
+native assumptions do not entail those laws. Keep its physical scope visible.
+Run `python scripts/export.py` after building to regenerate every examples page.
+
+To transfer a result to an ontology profile, construct `ProfileBridge` with a
+proof of `.sound` for your explicit vocabulary and predictor. Then
+`ProfileBridge.excludes` transfers a model exclusion. The HTML's optional bridge
+preview is an explanatory conditional and never manufactures this Lean proof.

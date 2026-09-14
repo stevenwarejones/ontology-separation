@@ -42,8 +42,10 @@ arbitrary program preservation theorems are an extension task. It does not model
 consciousness, gravity, thermodynamic costs or indefinite causal order.
 
 No general solver determines all assumption-profile consistency questions. A
-boolean profile alone cannot supply a physical realization. Seven advanced
-protocols remain unresolved; their cells do not carry verified-result labels.
+boolean profile alone cannot supply a physical realization. The seven formerly empty advanced protocols have checked restricted subproblems.
+Their `verifiedConditional` cells require additional laws and do not settle the
+broader physical ambitions. All sixteen-profile UI mappings remain conditional
+until a physical vocabulary bridge is proved; checkbox selection is not proof.
 
 ## Reports
 
@@ -53,3 +55,22 @@ not another formal language. The Python client validates the schema and catches
 missing/duplicate cells, unknown selections and malformed evidence references.
 It cannot authenticate the proofs behind arbitrary imported JSON. Rebuild trusted
 source with Lean when mathematical assurance is required.
+
+
+## Schema 2 and conditional evidence
+
+Schema version 2 adds `extensions` with required laws, contrast and scope, and
+`verifiedConditional` for theorems that need laws beyond the model column.
+`requiresExtension` remains available for future unsupported cases. Schema 1
+snapshots are intentionally rejected instead of silently relabeling old gaps.
+Every ClaimId is resolved to a proof; the resolver's transitive axioms are audited.
+A registered name does not formally check arbitrary English prose: theorem statements
+and premises are the authoritative claims. The generated HTML is a presentation.
+
+Published Hensen/Bong records are sourced literature summaries, not imported raw
+data. No statistical confidence analysis is verified in Lean here. The generic
+`Bound.excluded_by_lower` requires a valid lower bound on the true expectation;
+passing an observed estimator alone would not discharge that premise.
+
+The Python runner fails if it discovers zero tests. Tests verify case-fold-safe
+paths so Mac extraction cannot collapse Lean and Python test directories again.

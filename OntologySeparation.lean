@@ -7,3 +7,8 @@ import OntologySeparation.Adapters.Tsirelson
 import OntologySeparation.Experiments.LocalFriendliness
 import OntologySeparation.Models.Memory
 import OntologySeparation.Catalog.Evidence
+
+import OntologySeparation.Core.Extensions
+import OntologySeparation.Core.Exclusion
+import OntologySeparation.Experiments.Research
+import OntologySeparation.Adapters.Shared

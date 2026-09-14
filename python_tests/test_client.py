@@ -33,10 +33,11 @@ class ReportTests(unittest.TestCase):
         self.assertEqual({c["result"] for c in leaked}, {"1/2"})
         self.assertTrue(all(c["status"] == "verifiedToyPrediction" for c in leaked))
 
-    def test_speculation_is_not_mislabeled(self):
+    def test_research_extensions_are_not_native_predictions(self):
         for cell in self.report.compare(["P01", "P03", "P05", "P06", "P07", "P08", "P10"]):
-            self.assertEqual(cell["status"], "unresolved")
-            self.assertIsNone(cell["declaration"])
+            self.assertEqual(cell["status"], "verifiedConditional")
+            self.assertTrue(cell["declaration"])
+            self.assertTrue(any("ADDITIONAL LAW" in a for a in cell["assumptions"]))
             self.assertTrue(cell["limitation"])
 
     def test_unknown_selection_fails(self):

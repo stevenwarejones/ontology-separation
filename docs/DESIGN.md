@@ -59,7 +59,7 @@ This release does not promise automatic theorem discovery or a universal simulat
 - `OntologySeparation/Catalog`: all named protocols, requirements, open obligations, matrix.
 - `Main.lean`: JSON export of the registered matrix.
 - `python/`: standard-library CLI client and Markdown/HTML rendering.
-- `tests/`: mathematical examples and report-contract tests, including negative cases.
+- `python_tests/`: mathematical examples and report-contract tests, including negative cases.
 - `docs/`: sources, assumptions, limitations, contribution instructions.
 
 ## Original scenario inventory
@@ -154,3 +154,11 @@ The runtime registry is a curated demonstration client; its family dispatch is
 not the extension API. The generic `Theory`, `Interpreter`, `profileTheory`,
 `Bound`, `Witness` and `Separation` interfaces remain open. Reports are a view
 of checked mathematics, and arbitrary JSON is never authenticated by its labels.
+
+
+## Matrix-completion revision
+
+The current design and evidence semantics are detailed in [MATRIX_COMPLETION.md](MATRIX_COMPLETION.md).
+Schema 2 distinguishes native results from additional-law conditional results;
+all HTML views are generated under examples/. The initial missing-law inventory
+is preserved above as historical design context.
