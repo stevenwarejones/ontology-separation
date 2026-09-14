@@ -1,0 +1,1823 @@
+{
+  "binary_profiles": [
+    {
+      "globalTruth": "require",
+      "locality": "require",
+      "measurementIndependent": "require",
+      "realism": "require"
+    },
+    {
+      "globalTruth": "require",
+      "locality": "require",
+      "measurementIndependent": "reject",
+      "realism": "require"
+    },
+    {
+      "globalTruth": "require",
+      "locality": "reject",
+      "measurementIndependent": "require",
+      "realism": "require"
+    },
+    {
+      "globalTruth": "require",
+      "locality": "reject",
+      "measurementIndependent": "reject",
+      "realism": "require"
+    },
+    {
+      "globalTruth": "reject",
+      "locality": "require",
+      "measurementIndependent": "require",
+      "realism": "require"
+    },
+    {
+      "globalTruth": "reject",
+      "locality": "require",
+      "measurementIndependent": "reject",
+      "realism": "require"
+    },
+    {
+      "globalTruth": "reject",
+      "locality": "reject",
+      "measurementIndependent": "require",
+      "realism": "require"
+    },
+    {
+      "globalTruth": "reject",
+      "locality": "reject",
+      "measurementIndependent": "reject",
+      "realism": "require"
+    },
+    {
+      "globalTruth": "require",
+      "locality": "require",
+      "measurementIndependent": "require",
+      "realism": "reject"
+    },
+    {
+      "globalTruth": "require",
+      "locality": "require",
+      "measurementIndependent": "reject",
+      "realism": "reject"
+    },
+    {
+      "globalTruth": "require",
+      "locality": "reject",
+      "measurementIndependent": "require",
+      "realism": "reject"
+    },
+    {
+      "globalTruth": "require",
+      "locality": "reject",
+      "measurementIndependent": "reject",
+      "realism": "reject"
+    },
+    {
+      "globalTruth": "reject",
+      "locality": "require",
+      "measurementIndependent": "require",
+      "realism": "reject"
+    },
+    {
+      "globalTruth": "reject",
+      "locality": "require",
+      "measurementIndependent": "reject",
+      "realism": "reject"
+    },
+    {
+      "globalTruth": "reject",
+      "locality": "reject",
+      "measurementIndependent": "require",
+      "realism": "reject"
+    },
+    {
+      "globalTruth": "reject",
+      "locality": "reject",
+      "measurementIndependent": "reject",
+      "realism": "reject"
+    }
+  ],
+  "cells": [
+    {
+      "assumptions": [
+        "Local response mixture",
+        "Setting-independent mixture weights"
+      ],
+      "declaration": "QIT.Bell.CHSH.value_le_two_of_isLocal",
+      "limitation": "Close laboratory loopholes separately from the ideal theorem.",
+      "model": "bell_local",
+      "result": "S <= 2",
+      "scenario": "B01",
+      "status": "verifiedBound"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Three-setting conditional no-signaling friend models; Close laboratory loopholes separately from the ideal theorem.",
+      "model": "local_friendliness",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B01",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [
+        "No-signaling behavior class"
+      ],
+      "declaration": "OntologySeparation.Catalog.bellPREvidence",
+      "limitation": "Close laboratory loopholes separately from the ideal theorem.",
+      "model": "no_signaling",
+      "result": "PR witness S = 4",
+      "scenario": "B01",
+      "status": "verifiedWitness"
+    },
+    {
+      "assumptions": [
+        "Normalized singlet",
+        "Specified rational projective measurement bases"
+      ],
+      "declaration": "OntologySeparation.Catalog.bellQuantumEvidence",
+      "limitation": "Close laboratory loopholes separately from the ideal theorem.",
+      "model": "real_singlet",
+      "result": "S = 1502/625 > 2",
+      "scenario": "B01",
+      "status": "verifiedWitness"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=0; Close laboratory loopholes separately from the ideal theorem.",
+      "model": "unitary_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B01",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=1; Close laboratory loopholes separately from the ideal theorem.",
+      "model": "dephased_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B01",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=1/2; Close laboratory loopholes separately from the ideal theorem.",
+      "model": "partial_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B01",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Finite local response mixtures; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "model": "bell_local",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [
+        "Conditional no-signaling",
+        "Actual friend records",
+        "Setting-independent prior"
+      ],
+      "declaration": "OntologySeparation.Catalog.lfBoundEvidence",
+      "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "model": "local_friendliness",
+      "result": "G <= 6",
+      "scenario": "B02",
+      "status": "verifiedBound"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Bipartite marginal independence; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "model": "no_signaling",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [
+        "Normalized singlet",
+        "Ideal coherent friend reversal",
+        "Specified bases"
+      ],
+      "declaration": "OntologySeparation.Catalog.lfQuantumEvidence",
+      "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "model": "real_singlet",
+      "result": "G = 1214656/180625 > 6",
+      "scenario": "B02",
+      "status": "verifiedWitness"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=0; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "model": "unitary_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=1; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "model": "dephased_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=1/2; Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "model": "partial_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Finite local response mixtures; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "model": "bell_local",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B03",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [
+        "Fixed friend records",
+        "Conditional PR inner box"
+      ],
+      "declaration": "OntologySeparation.LF.exists_bell_violation_within_LF",
+      "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "model": "local_friendliness",
+      "result": "Inner CHSH = 4 while genuine LF bound holds",
+      "scenario": "B03",
+      "status": "verifiedWitness"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Bipartite marginal independence; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "model": "no_signaling",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B03",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Real projective two-qubit measurements; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "model": "real_singlet",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B03",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=0; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "model": "unitary_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B03",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=1; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "model": "dephased_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B03",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Two-qubit records; p=1/2; This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "model": "partial_memory",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B03",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Finite local response mixtures; Two-qubit calibration only.",
+      "model": "bell_local",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B04",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Three-setting conditional no-signaling friend models; Two-qubit calibration only.",
+      "model": "local_friendliness",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B04",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Bipartite marginal independence; Two-qubit calibration only.",
+      "model": "no_signaling",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B04",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Real projective two-qubit measurements; Two-qubit calibration only.",
+      "model": "real_singlet",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "B04",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Record dephasing strength p=0"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Two-qubit calibration only.",
+      "model": "unitary_memory",
+      "result": "1",
+      "scenario": "B04",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Record dephasing strength p=1"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Two-qubit calibration only.",
+      "model": "dephased_memory",
+      "result": "1/2",
+      "scenario": "B04",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Record dephasing strength p=1/2"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Two-qubit calibration only.",
+      "model": "partial_memory",
+      "result": "3/4",
+      "scenario": "B04",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "model": "bell_local",
+      "result": "No prediction established",
+      "scenario": "P01",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "model": "local_friendliness",
+      "result": "No prediction established",
+      "scenario": "P01",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "model": "no_signaling",
+      "result": "No prediction established",
+      "scenario": "P01",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "model": "real_singlet",
+      "result": "No prediction established",
+      "scenario": "P01",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "model": "unitary_memory",
+      "result": "No prediction established",
+      "scenario": "P01",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "model": "dephased_memory",
+      "result": "No prediction established",
+      "scenario": "P01",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "model": "partial_memory",
+      "result": "No prediction established",
+      "scenario": "P01",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Finite local response mixtures; Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "model": "bell_local",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Three-setting conditional no-signaling friend models; Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "model": "local_friendliness",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Bipartite marginal independence; Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "model": "no_signaling",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Real projective two-qubit measurements; Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "model": "real_singlet",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P02",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Complete inaccessible memory leakage before reversal"
+      ],
+      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "model": "unitary_memory",
+      "result": "1/2",
+      "scenario": "P02",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Complete inaccessible memory leakage before reversal"
+      ],
+      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "model": "dephased_memory",
+      "result": "1/2",
+      "scenario": "P02",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Complete inaccessible memory leakage before reversal"
+      ],
+      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "model": "partial_memory",
+      "result": "1/2",
+      "scenario": "P02",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "model": "bell_local",
+      "result": "No prediction established",
+      "scenario": "P03",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "model": "local_friendliness",
+      "result": "No prediction established",
+      "scenario": "P03",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "model": "no_signaling",
+      "result": "No prediction established",
+      "scenario": "P03",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "model": "real_singlet",
+      "result": "No prediction established",
+      "scenario": "P03",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "model": "unitary_memory",
+      "result": "No prediction established",
+      "scenario": "P03",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "model": "dephased_memory",
+      "result": "No prediction established",
+      "scenario": "P03",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "model": "partial_memory",
+      "result": "No prediction established",
+      "scenario": "P03",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Finite local response mixtures; Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "model": "bell_local",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P04",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Three-setting conditional no-signaling friend models; Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "model": "local_friendliness",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P04",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Bipartite marginal independence; Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "model": "no_signaling",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P04",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Real projective two-qubit measurements; Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "model": "real_singlet",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P04",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Signal phase flip",
+        "p=0"
+      ],
+      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "model": "unitary_memory",
+      "result": "0",
+      "scenario": "P04",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Signal phase flip",
+        "p=1"
+      ],
+      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "model": "dephased_memory",
+      "result": "1/2",
+      "scenario": "P04",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Signal phase flip",
+        "p=1/2"
+      ],
+      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "model": "partial_memory",
+      "result": "1/4",
+      "scenario": "P04",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "model": "bell_local",
+      "result": "No prediction established",
+      "scenario": "P05",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "model": "local_friendliness",
+      "result": "No prediction established",
+      "scenario": "P05",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "model": "no_signaling",
+      "result": "No prediction established",
+      "scenario": "P05",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "model": "real_singlet",
+      "result": "No prediction established",
+      "scenario": "P05",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "model": "unitary_memory",
+      "result": "No prediction established",
+      "scenario": "P05",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "model": "dephased_memory",
+      "result": "No prediction established",
+      "scenario": "P05",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "model": "partial_memory",
+      "result": "No prediction established",
+      "scenario": "P05",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "model": "bell_local",
+      "result": "No prediction established",
+      "scenario": "P06",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "model": "local_friendliness",
+      "result": "No prediction established",
+      "scenario": "P06",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "model": "no_signaling",
+      "result": "No prediction established",
+      "scenario": "P06",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "model": "real_singlet",
+      "result": "No prediction established",
+      "scenario": "P06",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "model": "unitary_memory",
+      "result": "No prediction established",
+      "scenario": "P06",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "model": "dephased_memory",
+      "result": "No prediction established",
+      "scenario": "P06",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "model": "partial_memory",
+      "result": "No prediction established",
+      "scenario": "P06",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "model": "bell_local",
+      "result": "No prediction established",
+      "scenario": "P07",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "model": "local_friendliness",
+      "result": "No prediction established",
+      "scenario": "P07",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "model": "no_signaling",
+      "result": "No prediction established",
+      "scenario": "P07",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "model": "real_singlet",
+      "result": "No prediction established",
+      "scenario": "P07",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "model": "unitary_memory",
+      "result": "No prediction established",
+      "scenario": "P07",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "model": "dephased_memory",
+      "result": "No prediction established",
+      "scenario": "P07",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "model": "partial_memory",
+      "result": "No prediction established",
+      "scenario": "P07",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "model": "bell_local",
+      "result": "No prediction established",
+      "scenario": "P08",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "model": "local_friendliness",
+      "result": "No prediction established",
+      "scenario": "P08",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "model": "no_signaling",
+      "result": "No prediction established",
+      "scenario": "P08",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "model": "real_singlet",
+      "result": "No prediction established",
+      "scenario": "P08",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "model": "unitary_memory",
+      "result": "No prediction established",
+      "scenario": "P08",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "model": "dephased_memory",
+      "result": "No prediction established",
+      "scenario": "P08",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "model": "partial_memory",
+      "result": "No prediction established",
+      "scenario": "P08",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Finite local response mixtures; Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "model": "bell_local",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P09",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Three-setting conditional no-signaling friend models; Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "model": "local_friendliness",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P09",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Bipartite marginal independence; Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "model": "no_signaling",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P09",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Real projective two-qubit measurements; Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "model": "real_singlet",
+      "result": "This adapter does not interpret this protocol",
+      "scenario": "P09",
+      "status": "outsideScope"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Record dephasing strength p=0"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "model": "unitary_memory",
+      "result": "1",
+      "scenario": "P09",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Record dephasing strength p=1"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "model": "dephased_memory",
+      "result": "1/2",
+      "scenario": "P09",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [
+        "Initial |+0>",
+        "Record dephasing strength p=1/2"
+      ],
+      "declaration": "OntologySeparation.Memory.echo_probability",
+      "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "model": "partial_memory",
+      "result": "3/4",
+      "scenario": "P09",
+      "status": "verifiedToyPrediction"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "model": "bell_local",
+      "result": "No prediction established",
+      "scenario": "P10",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "model": "local_friendliness",
+      "result": "No prediction established",
+      "scenario": "P10",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "model": "no_signaling",
+      "result": "No prediction established",
+      "scenario": "P10",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "model": "real_singlet",
+      "result": "No prediction established",
+      "scenario": "P10",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "model": "unitary_memory",
+      "result": "No prediction established",
+      "scenario": "P10",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "model": "dephased_memory",
+      "result": "No prediction established",
+      "scenario": "P10",
+      "status": "unresolved"
+    },
+    {
+      "assumptions": [],
+      "declaration": null,
+      "limitation": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "model": "partial_memory",
+      "result": "No prediction established",
+      "scenario": "P10",
+      "status": "unresolved"
+    }
+  ],
+  "models": [
+    {
+      "id": "bell_local",
+      "kind": "assumption class",
+      "scope": "Finite local response mixtures",
+      "title": "Bell-local"
+    },
+    {
+      "id": "local_friendliness",
+      "kind": "assumption class",
+      "scope": "Three-setting conditional no-signaling friend models",
+      "title": "Local Friendliness"
+    },
+    {
+      "id": "no_signaling",
+      "kind": "assumption class",
+      "scope": "Bipartite marginal independence",
+      "title": "No-signaling"
+    },
+    {
+      "id": "real_singlet",
+      "kind": "concrete model family",
+      "scope": "Real projective two-qubit measurements",
+      "title": "Quantum singlet"
+    },
+    {
+      "id": "unitary_memory",
+      "kind": "concrete toy dynamics",
+      "scope": "Two-qubit records; p=0",
+      "title": "Unitary memory"
+    },
+    {
+      "id": "dephased_memory",
+      "kind": "concrete toy dynamics",
+      "scope": "Two-qubit records; p=1",
+      "title": "Dephased memory"
+    },
+    {
+      "id": "partial_memory",
+      "kind": "concrete toy dynamics",
+      "scope": "Two-qubit records; p=1/2",
+      "title": "Partial dephasing"
+    }
+  ],
+  "profile_notice": "Sixteen expressible profiles; physical realizability requires an explicit vocabulary and witness.",
+  "scenarios": [
+    {
+      "family": "bell",
+      "id": "B01",
+      "obligations": "Close laboratory loopholes separately from the ideal theorem.",
+      "protocol": {
+        "observable": "S = E00 + E01 + E10 - E11",
+        "operations": [
+          {
+            "action": "choose_local_bases",
+            "requires": [],
+            "systems": [
+              "alice",
+              "bob"
+            ]
+          },
+          {
+            "action": "measure",
+            "requires": [],
+            "systems": [
+              "alice",
+              "bob"
+            ]
+          }
+        ],
+        "outcomes": [
+          "a = +/-1",
+          "b = +/-1"
+        ],
+        "preparation": "Prepare a bipartite singlet; independently choose two local bases.",
+        "settings": [
+          "Alice 0/1",
+          "Bob 0/1"
+        ],
+        "systems": [
+          "alice",
+          "bob"
+        ]
+      },
+      "title": "Bell CHSH"
+    },
+    {
+      "family": "lf",
+      "id": "B02",
+      "obligations": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
+      "protocol": {
+        "observable": "Bong et al. Eq. 13 score; LF bound 6",
+        "operations": [
+          {
+            "action": "record",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "alice",
+              "charlie"
+            ]
+          },
+          {
+            "action": "record",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "bob",
+              "debbie"
+            ]
+          },
+          {
+            "action": "ask_or_reverse",
+            "requires": [
+              "coherent_reversal"
+            ],
+            "systems": [
+              "alice",
+              "charlie",
+              "bob",
+              "debbie"
+            ]
+          },
+          {
+            "action": "measure",
+            "requires": [],
+            "systems": [
+              "alice",
+              "bob"
+            ]
+          }
+        ],
+        "outcomes": [
+          "a = +/-1",
+          "b = +/-1"
+        ],
+        "preparation": "Prepare singlet and two blank friend memories.",
+        "settings": [
+          "ask friend",
+          "alternative 1",
+          "alternative 2"
+        ],
+        "systems": [
+          "alice",
+          "charlie",
+          "bob",
+          "debbie"
+        ]
+      },
+      "title": "Genuine Local Friendliness"
+    },
+    {
+      "family": "lfControl",
+      "id": "B03",
+      "obligations": "This is a postquantum LF-compatible witness, not a quantum implementation.",
+      "protocol": {
+        "observable": "CHSH on non-friend settings",
+        "operations": [
+          {
+            "action": "read_friend_or_inner_box",
+            "requires": [],
+            "systems": [
+              "alice",
+              "bob",
+              "charlie",
+              "debbie"
+            ]
+          }
+        ],
+        "outcomes": [
+          "a = +/-1",
+          "b = +/-1"
+        ],
+        "preparation": "Fix friend records; permit a conditional PR inner box.",
+        "settings": [
+          "ask friend",
+          "alternative 1",
+          "alternative 2"
+        ],
+        "systems": [
+          "alice",
+          "bob",
+          "charlie",
+          "debbie"
+        ]
+      },
+      "title": "Bell violation compatible with LF"
+    },
+    {
+      "family": "echo",
+      "id": "B04",
+      "obligations": "Two-qubit calibration only.",
+      "protocol": {
+        "observable": "P(signal = +)",
+        "operations": [
+          {
+            "action": "record",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "signal",
+              "memory"
+            ]
+          },
+          {
+            "action": "reverse",
+            "requires": [
+              "coherent_reversal"
+            ],
+            "systems": [
+              "signal",
+              "memory"
+            ]
+          },
+          {
+            "action": "measure_X",
+            "requires": [],
+            "systems": [
+              "signal"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare signal |+> and memory |0>.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "signal",
+          "memory"
+        ]
+      },
+      "title": "Memory reversal calibration"
+    },
+    {
+      "family": "research",
+      "id": "P01",
+      "obligations": "Define the cross-view composition rule and a feasible joint intervention; no separating theory pair is established.",
+      "protocol": {
+        "observable": "Compatibility of pairwise views with one joint model",
+        "operations": [
+          {
+            "action": "record_local_views",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "lab_a",
+              "lab_b",
+              "lab_c"
+            ]
+          },
+          {
+            "action": "join_views",
+            "requires": [
+              "view_composition"
+            ],
+            "systems": [
+              "lab_a",
+              "lab_b",
+              "lab_c"
+            ]
+          },
+          {
+            "action": "compare_public_records",
+            "requires": [],
+            "systems": [
+              "collector"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare three laboratories with overlapping accessible records.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "lab_a",
+          "lab_b",
+          "lab_c",
+          "collector"
+        ]
+      },
+      "title": "Relative facts fail to compose"
+    },
+    {
+      "family": "leak",
+      "id": "P02",
+      "obligations": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
+      "protocol": {
+        "observable": "P(signal = +) after inaccessible leakage",
+        "operations": [
+          {
+            "action": "record",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "signal",
+              "memory"
+            ]
+          },
+          {
+            "action": "leak_record",
+            "requires": [
+              "record_leakage"
+            ],
+            "systems": [
+              "memory",
+              "environment"
+            ]
+          },
+          {
+            "action": "reverse_accessible",
+            "requires": [
+              "coherent_reversal"
+            ],
+            "systems": [
+              "signal",
+              "memory"
+            ]
+          },
+          {
+            "action": "measure_X",
+            "requires": [],
+            "systems": [
+              "signal"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare signal |+> and blank memory; allow unobserved record leakage.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "signal",
+          "memory",
+          "environment"
+        ]
+      },
+      "title": "Conservation and public records versus reversal"
+    },
+    {
+      "family": "research",
+      "id": "P03",
+      "obligations": "Choose an influence metric and prove the tradeoff from the permitted causal model.",
+      "protocol": {
+        "observable": "Minimum causal influence needed to explain an LF score",
+        "operations": [
+          {
+            "action": "record",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "alice",
+              "bob",
+              "charlie",
+              "debbie"
+            ]
+          },
+          {
+            "action": "bounded_causal_influence",
+            "requires": [
+              "causal_budget"
+            ],
+            "systems": [
+              "alice",
+              "bob"
+            ]
+          },
+          {
+            "action": "measure",
+            "requires": [],
+            "systems": [
+              "alice",
+              "bob"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare an extended friend experiment with a bounded communication resource.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "alice",
+          "bob",
+          "charlie",
+          "debbie"
+        ]
+      },
+      "title": "Hidden causal cost of absolute facts"
+    },
+    {
+      "family": "phase",
+      "id": "P04",
+      "obligations": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
+      "protocol": {
+        "observable": "P(control = +) after phase-controlled memory echo",
+        "operations": [
+          {
+            "action": "record_control",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "control",
+              "memory"
+            ]
+          },
+          {
+            "action": "phase_flip",
+            "requires": [
+              "coherent_control"
+            ],
+            "systems": [
+              "control"
+            ]
+          },
+          {
+            "action": "reverse",
+            "requires": [
+              "coherent_reversal"
+            ],
+            "systems": [
+              "control",
+              "memory"
+            ]
+          },
+          {
+            "action": "measure_X",
+            "requires": [],
+            "systems": [
+              "control"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare a coherent control qubit and blank memory.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "control",
+          "memory"
+        ]
+      },
+      "title": "Coherent experimenter choices"
+    },
+    {
+      "family": "research",
+      "id": "P05",
+      "obligations": "Specify operationally different access maps; a passive relabeling alone cannot change predictions.",
+      "protocol": {
+        "observable": "Recoverable information under each physical access map",
+        "operations": [
+          {
+            "action": "change_factorization",
+            "requires": [
+              "subsystem_relabeling"
+            ],
+            "systems": [
+              "laboratory"
+            ]
+          },
+          {
+            "action": "recover_accessible_record",
+            "requires": [
+              "restricted_access"
+            ],
+            "systems": [
+              "laboratory"
+            ]
+          },
+          {
+            "action": "compare_readout",
+            "requires": [],
+            "systems": [
+              "collector"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare a composite system with two proposed subsystem factorizations.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "laboratory",
+          "collector"
+        ]
+      },
+      "title": "Observer identity and subsystem boundaries"
+    },
+    {
+      "family": "research",
+      "id": "P06",
+      "obligations": "Requires a process-matrix or higher-order-map interpreter; a fixed-order circuit interpreter is insufficient.",
+      "protocol": {
+        "observable": "Causal-order witness jointly with friend correlations",
+        "operations": [
+          {
+            "action": "controlled_order",
+            "requires": [
+              "indefinite_order"
+            ],
+            "systems": [
+              "target",
+              "control",
+              "lab_a",
+              "lab_b"
+            ]
+          },
+          {
+            "action": "record",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "lab_a",
+              "lab_b"
+            ]
+          },
+          {
+            "action": "measure_order_witness",
+            "requires": [],
+            "systems": [
+              "control",
+              "collector"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare target and coherent order control with two friend laboratories.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "target",
+          "control",
+          "lab_a",
+          "lab_b",
+          "collector"
+        ]
+      },
+      "title": "Observations with indefinite causal order"
+    },
+    {
+      "family": "research",
+      "id": "P07",
+      "obligations": "Supply explicit mediator dynamics, coupling/time/noise parameters and competing classical model; no generic classical-gravity prediction.",
+      "protocol": {
+        "observable": "Entanglement witness and local visibility",
+        "operations": [
+          {
+            "action": "record_mass_branch",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "mass_a",
+              "mass_b"
+            ]
+          },
+          {
+            "action": "mediate_interaction",
+            "requires": [
+              "gravitational_dynamics"
+            ],
+            "systems": [
+              "mass_a",
+              "mass_b",
+              "gravity"
+            ]
+          },
+          {
+            "action": "reverse_local_record",
+            "requires": [
+              "coherent_reversal"
+            ],
+            "systems": [
+              "mass_a",
+              "mass_b"
+            ]
+          },
+          {
+            "action": "measure_entanglement",
+            "requires": [],
+            "systems": [
+              "mass_a",
+              "mass_b"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare spatial superpositions whose branches create distinct physical records.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "mass_a",
+          "mass_b",
+          "gravity"
+        ]
+      },
+      "title": "Gravitating records"
+    },
+    {
+      "family": "research",
+      "id": "P08",
+      "obligations": "Formalize the algorithm class and lower bound; this direction was set aside as a breakthrough claim.",
+      "protocol": {
+        "observable": "Best recovery probability at a specified query or circuit budget",
+        "operations": [
+          {
+            "action": "scramble_record",
+            "requires": [
+              "many_body_dynamics"
+            ],
+            "systems": [
+              "memory",
+              "environment"
+            ]
+          },
+          {
+            "action": "bounded_decode",
+            "requires": [
+              "resource_bound"
+            ],
+            "systems": [
+              "memory"
+            ]
+          },
+          {
+            "action": "measure_recovery",
+            "requires": [],
+            "systems": [
+              "collector"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Encode a record in a many-body system; constrain the decoder.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "memory",
+          "environment",
+          "collector"
+        ]
+      },
+      "title": "Computationally limited objectivity"
+    },
+    {
+      "family": "echo",
+      "id": "P09",
+      "obligations": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
+      "protocol": {
+        "observable": "P(signal = +) after physical-memory reversal",
+        "operations": [
+          {
+            "action": "record",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "signal",
+              "memory"
+            ]
+          },
+          {
+            "action": "reverse",
+            "requires": [
+              "coherent_reversal"
+            ],
+            "systems": [
+              "signal",
+              "memory"
+            ]
+          },
+          {
+            "action": "measure_X",
+            "requires": [],
+            "systems": [
+              "signal"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare a signal and a reversible physical memory device.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "signal",
+          "memory"
+        ]
+      },
+      "title": "Observer versus reversible machine"
+    },
+    {
+      "family": "research",
+      "id": "P10",
+      "obligations": "Specify operational composition axioms and prove a separation or equivalence; no automatic new physics claim.",
+      "protocol": {
+        "observable": "Existence of a compatible public behavior under a composition rule",
+        "operations": [
+          {
+            "action": "collect_views",
+            "requires": [
+              "physical_memory"
+            ],
+            "systems": [
+              "agent_a",
+              "agent_b",
+              "agent_c"
+            ]
+          },
+          {
+            "action": "compose_views",
+            "requires": [
+              "view_composition"
+            ],
+            "systems": [
+              "agent_a",
+              "agent_b",
+              "agent_c"
+            ]
+          },
+          {
+            "action": "test_consistency",
+            "requires": [],
+            "systems": [
+              "collector"
+            ]
+          }
+        ],
+        "outcomes": [
+          "public readout specified by observable"
+        ],
+        "preparation": "Prepare a network of agents receiving overlapping experimental records.",
+        "settings": [
+          "protocol as specified"
+        ],
+        "systems": [
+          "agent_a",
+          "agent_b",
+          "agent_c",
+          "collector"
+        ]
+      },
+      "title": "Rules of shared reality"
+    }
+  ],
+  "schema_version": 1
+}

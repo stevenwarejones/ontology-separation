@@ -1,0 +1,99 @@
+# Ontology Separation
+
+**Compare physical assumptions through Lean-verified experimental predictions.**
+
+Ontology Separation is a Lean 4 library with a small Python result browser. Define a
+physical theory, describe an experiment, and prove which predictions distinguish
+it from another theory. Physical assumptions remain explicit; Lean's logic and
+proof checker stay fixed.
+
+This is an initial research framework. It includes **14 scenario descriptions**
+and a **7-model comparison matrix**. Bell and genuine Local Friendliness have
+formal reference examples. Some later scenarios have exact toy implementations;
+others are specifications with unresolved physical and mathematical obligations.
+It does not claim ten new beyond-LF discoveries or a simulator for arbitrary physics.
+
+## Start here
+
+```sh
+python -m pip install -e .
+ontology-separation compare B01 B02
+ontology-separation compare B04 P02 --models unitary_memory dephased_memory partial_memory
+ontology-separation html matrix.html
+```
+
+These commands browse a bundled Lean-generated snapshot. To check proofs locally,
+install [Lean](https://lean-lang.org/install/) and run:
+
+```sh
+lake exe cache get
+sh scripts/check.sh
+```
+
+The pinned toolchain is Lean 4.30.0. The first build downloads mathlib dependencies;
+subsequent builds reuse them. [Quickstart](docs/QUICKSTART.md) has the full setup.
+
+## Ordinary Lean underneath
+
+```lean
+import OntologySeparation
+open OntologySeparation
+
+example : ¬ LF.theory RealQuantum.lfBehavior :=
+  LF.quantumSeparation.excludes
+
+example (m : Memory.Model) :
+    Memory.probability m Memory.echo = 1 - m.strength / 2 :=
+  Memory.echo_probability m
+```
+
+The core has normalized finite probability tables, theory predicates, observables,
+proof-bearing bounds and realized witnesses. A `Separation` combines a universal
+bound with a violating model. Existing Lean-QIT Bell results enter through an
+entrywise probability-preserving adapter. Quantum singlet examples use a small,
+explicit real-projective Born-rule model.
+
+## What the examples establish
+
+- **Bell:** a local-class bound of two, an explicit quantum singlet violation,
+  and a no-signaling PR witness with score four.
+- **Genuine LF:** Bong et al.'s Eq. (13) bound of six for finite conditional
+  no-signaling friend models, plus an exact singlet witness above six.
+- **Bell versus LF:** a conditional PR box violates CHSH on non-friend settings
+  while remaining allowed by the LF model.
+- **Memory experiments:** exact matrix calculations for echo, inaccessible leakage
+  and phase control at arbitrary specified dephasing strength.
+- **Assumption profiles:** all sixteen binary combinations of four selected laws
+  can be expressed. Their realizability is a separate proof obligation.
+
+The ten original research proposals retain their names and limitations. Seven
+are currently open protocol specifications. Three have executable toy reductions,
+not solutions to their broader research ambitions. [Scenario guide](docs/SCENARIOS.md)
+explains the distinction.
+
+## Read and extend
+
+- [Architecture and decisions](docs/DESIGN.md)
+- [Add a theory, experiment or adapter](docs/EXTENDING.md)
+- [Comparison matrix](docs/MATRIX.md) and [expandable HTML](docs/matrix.html)
+- [Contributing and proof policy](CONTRIBUTING.md)
+- [Verification scope](docs/VERIFICATION.md)
+
+Realism, global truth, locality and measurement independence are predicates chosen
+by the model author. **Reject** means logical negation; **unspecified** adds no
+condition. We do not equate statistical measurement independence with human free will.
+
+A checked theorem establishes the stated mathematical implication. Experimental
+interpretation and physical premises remain reviewable assumptions. Loading JSON
+is not proof verification, and evidence labels cannot replace a Lean proof.
+
+## Attribution
+
+Based on [Lean 4](https://lean-lang.org/), [mathlib](https://github.com/leanprover-community/mathlib4),
+and selected [Lean-QIT](https://github.com/QuAIR/Lean-QIT) modules. The LF reference is
+[Bong et al., Nature Physics 16 (2020)](https://arxiv.org/abs/1907.05607v4).
+[Quanundrum](https://github.com/jangnur/Quanundrum) is relevant prior software for
+quantum-agent thought experiments; this project does not claim that comparison of
+physical theories is a new idea.
+
+No package-registry name has been reserved. Apache-2.0 license.

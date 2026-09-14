@@ -1,0 +1,8 @@
+.lake/
+__pycache__/
+*.egg-info/
+.venv/
+build/
+dist/
+matrix.html
+!docs/matrix.html
