@@ -36,9 +36,9 @@ class ExamplesTests(unittest.TestCase):
     def test_conditional_predictions_are_labeled_and_complete(self):
         report=load_report()
         self.assertEqual(len(report.compare()),98)
-        self.assertNotIn('requiresExtension',{c['status'] for c in report.compare()})
+        self.assertNotIn('unavailable',{c['status'] for c in report.compare()})
         for c in report.compare():
-            if c['status']=='verifiedConditional':
+            if c['applicability']=='additional':
                 self.assertTrue(c['declaration'])
                 self.assertTrue(c['assumptions'])
                 self.assertTrue(any('ADDED' in x or 'ADDITIONAL' in x for x in c['assumptions']))
@@ -70,7 +70,7 @@ class ExamplesTests(unittest.TestCase):
                 self.assertIn('all-profiles',content)
                 self.assertIn('ProfileBridge',content)
                 self.assertIn('type="application/json"',content)
-                self.assertIn('not a prediction entailed', (Path(d)/'matrix.html').read_text())
+                self.assertIn('Additional laws are flagged separately', (Path(d)/'matrix.html').read_text())
         bad=deepcopy(report.data['scenarios'][0]);bad['title']='</script><script>alert(1)</script>'
         self.assertNotIn(bad['title'],experiment_html(report,bad))
 

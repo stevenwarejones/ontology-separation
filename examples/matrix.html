@@ -3,207 +3,818 @@
 <style>body{font:15px system-ui;margin:2rem;color:#182838}h1{margin-bottom:.2rem}
 .wrap{overflow:auto}table{border-collapse:collapse;min-width:1200px}th,td{padding:12px;border:1px solid #d5dce2;text-align:left;vertical-align:top}
 small{display:block;font-weight:normal;margin-top:5px}thead th{background:#172c42;color:white}
-.verifiedWitness,.verifiedBound{background:#e8f5ee}.verifiedToyPrediction{background:#eef3ff}
-.verifiedConditional{background:#fff6df}.requiresExtension{background:#f3f4f5;color:#56616b}
+.witness,.realizedBound{background:#e8f5ee}.exact{background:#eef3ff}
+.bound,.theorem{background:#fff6df}.unavailable{background:#f3f4f5;color:#56616b}
 pre{white-space:pre-wrap;font:13px system-ui}summary{cursor:pointer}button{padding:8px}
 </style><h1>Ontology Separation</h1><p>Physical theories, explicit assumptions, Lean-checked mathematics.</p>
 <p><strong>These cells are not unconditional predictions from complete physical universes.</strong> A conditional cell needs its stated additional laws; a bound alone does not prove a model exists.</p>
-<p>Snapshot exported from the Lean executable; recheck with lake build Tests</p><p>Green: native bound or witness. Blue: native toy prediction. Amber: theorem under ADDITIONAL laws, not a prediction entailed by the column alone. Gray: missing extension. Expand a cell for assumptions and limitations.</p>
-<div class="wrap"><table><thead><tr><th>Experiment</th><th>Bell-local<small>assumption class</small></th><th>Local Friendliness<small>assumption class</small></th><th>No-signaling<small>assumption class</small></th><th>Quantum singlet<small>concrete model family</small></th><th>Unitary memory<small>concrete toy dynamics</small></th><th>Dephased memory<small>concrete toy dynamics</small></th><th>Partial dephasing<small>concrete toy dynamics</small></th></tr></thead><tbody><tr><th>B01<br>Bell CHSH</th><td class="verifiedBound"><details><summary>S &lt;= 2</summary><p>verifiedBound</p><pre>Close laboratory loopholes separately from the ideal theorem.
-Assumptions: Local response mixture; Setting-independent mixture weights
-Lean: QIT.Bell.CHSH.value_le_two_of_isLocal</pre></details></td><td class="verifiedWitness"><details><summary>Inner-setting CHSH = 4</summary><p>verifiedWitness</p><pre>Close laboratory loopholes separately from the ideal theorem.
-Assumptions: LF conditional PR component; Restrict to the two non-friend settings
-Lean: OntologySeparation.Shared.lf_inner_PR</pre></details></td><td class="verifiedWitness"><details><summary>PR witness S = 4</summary><p>verifiedWitness</p><pre>Close laboratory loopholes separately from the ideal theorem.
-Assumptions: No-signaling behavior class
-Lean: OntologySeparation.Catalog.bellPREvidence</pre></details></td><td class="verifiedWitness"><details><summary>S = 1502/625 &gt; 2</summary><p>verifiedWitness</p><pre>Close laboratory loopholes separately from the ideal theorem.
-Assumptions: Normalized singlet; Specified rational projective measurement bases
-Lean: OntologySeparation.Catalog.bellQuantumEvidence</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: S = 1502/625</summary><p>verifiedConditional</p><pre>Close laboratory loopholes separately from the ideal theorem.
-Assumptions: ADDED bipartite singlet preparation; Z dephasing weight p=0; Use the specified Bell projective bases; same two non-friend settings for B03
-Lean: OntologySeparation.DephasedSinglet.bell_score</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: S = 14/25</summary><p>verifiedConditional</p><pre>Close laboratory loopholes separately from the ideal theorem.
-Assumptions: ADDED bipartite singlet preparation; Z dephasing weight p=1; Use the specified Bell projective bases; same two non-friend settings for B03
-Lean: OntologySeparation.DephasedSinglet.bell_score</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: S = 926/625</summary><p>verifiedConditional</p><pre>Close laboratory loopholes separately from the ideal theorem.
-Assumptions: ADDED bipartite singlet preparation; Z dephasing weight p=1/2; Use the specified Bell projective bases; same two non-friend settings for B03
-Lean: OntologySeparation.DephasedSinglet.bell_score</pre></details></td></tr><tr><th>B02<br>Genuine Local Friendliness</th><td class="verifiedBound"><details><summary>G &lt;= 6</summary><p>verifiedBound</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
-Assumptions: Three-setting finite deterministic local response mixtures; Setting-independent weights
-Lean: OntologySeparation.Shared.local_three_LF_bound</pre></details></td><td class="verifiedBound"><details><summary>G &lt;= 6</summary><p>verifiedBound</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
-Assumptions: Conditional no-signaling; Actual friend records; Setting-independent prior
-Lean: OntologySeparation.Catalog.lfBoundEvidence</pre></details></td><td class="verifiedBound"><details><summary>G &lt;= 10 (attained)</summary><p>verifiedBound</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
-Assumptions: Three-setting normalized no-signaling probabilities; Explicit extremal box attains 10
-Lean: OntologySeparation.Shared.LF_ns_sharp</pre></details></td><td class="verifiedWitness"><details><summary>G = 1214656/180625 &gt; 6</summary><p>verifiedWitness</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
-Assumptions: Normalized singlet; Ideal coherent friend reversal; Specified bases
-Lean: OntologySeparation.Catalog.lfQuantumEvidence</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: G = 1214656/180625</summary><p>verifiedConditional</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
-Assumptions: ADDED bipartite singlet preparation and ideal friend reversal; Z dephasing weight p=0; Use the specified LF bases
-Lean: OntologySeparation.DephasedSinglet.LF_score</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: G = 737728/180625</summary><p>verifiedConditional</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
-Assumptions: ADDED bipartite singlet preparation and ideal friend reversal; Z dephasing weight p=1; Use the specified LF bases
-Lean: OntologySeparation.DephasedSinglet.LF_score</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: G = 976192/180625</summary><p>verifiedConditional</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
-Assumptions: ADDED bipartite singlet preparation and ideal friend reversal; Z dephasing weight p=1/2; Use the specified LF bases
-Lean: OntologySeparation.DephasedSinglet.LF_score</pre></details></td></tr><tr><th>B03<br>Bell violation compatible with LF</th><td class="verifiedBound"><details><summary>Inner CHSH &lt;= 2</summary><p>verifiedBound</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
-Assumptions: Two non-friend settings use the Bell local interface; Setting restriction preserves local response mixtures
-Lean: QIT.Bell.CHSH.value_le_two_of_isLocal</pre></details></td><td class="verifiedWitness"><details><summary>Inner CHSH = 4 while genuine LF bound holds</summary><p>verifiedWitness</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
-Assumptions: Fixed friend records; Conditional PR inner box
-Lean: OntologySeparation.LF.exists_bell_violation_within_LF</pre></details></td><td class="verifiedWitness"><details><summary>Inner CHSH = 4</summary><p>verifiedWitness</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
-Assumptions: LF PR component is no-signaling (Shared.lf_noSignaling); Same non-friend setting restriction
-Lean: OntologySeparation.Shared.lf_inner_PR</pre></details></td><td class="verifiedWitness"><details><summary>Inner CHSH = 1502/625 &gt; 2</summary><p>verifiedWitness</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
-Assumptions: Assign the Bell singlet bases to the two non-friend settings; No assertion that this witness is LF-compatible
-Lean: OntologySeparation.Catalog.bellQuantumEvidence</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: S = 1502/625</summary><p>verifiedConditional</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
-Assumptions: ADDED bipartite singlet preparation; Z dephasing weight p=0; Use the specified Bell projective bases; same two non-friend settings for B03
-Lean: OntologySeparation.DephasedSinglet.bell_score</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: S = 14/25</summary><p>verifiedConditional</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
-Assumptions: ADDED bipartite singlet preparation; Z dephasing weight p=1; Use the specified Bell projective bases; same two non-friend settings for B03
-Lean: OntologySeparation.DephasedSinglet.bell_score</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With dephased-singlet preparation: S = 926/625</summary><p>verifiedConditional</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
-Assumptions: ADDED bipartite singlet preparation; Z dephasing weight p=1/2; Use the specified Bell projective bases; same two non-friend settings for B03
-Lean: OntologySeparation.DephasedSinglet.bell_score</pre></details></td></tr><tr><th>B04<br>Memory reversal calibration</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With memory-channel law: P(+) = 1-p/2</summary><p>verifiedConditional</p><pre>Two-qubit calibration only.
-Assumptions: ADDED two-qubit |+0&gt; preparation and record/reverse/readout model; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With memory-channel law: P(+) = 1-p/2</summary><p>verifiedConditional</p><pre>Two-qubit calibration only.
-Assumptions: ADDED two-qubit |+0&gt; preparation and record/reverse/readout model; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With memory-channel law: P(+) = 1-p/2</summary><p>verifiedConditional</p><pre>Two-qubit calibration only.
-Assumptions: ADDED two-qubit |+0&gt; preparation and record/reverse/readout model; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With memory-channel law: P(+) = 1-p/2</summary><p>verifiedConditional</p><pre>Two-qubit calibration only.
-Assumptions: ADDED two-qubit |+0&gt; preparation and record/reverse/readout model; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1</summary><p>verifiedToyPrediction</p><pre>Two-qubit calibration only.
-Assumptions: Initial |+0&gt;; Record dephasing strength p=0
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1/2</summary><p>verifiedToyPrediction</p><pre>Two-qubit calibration only.
-Assumptions: Initial |+0&gt;; Record dephasing strength p=1
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>3/4</summary><p>verifiedToyPrediction</p><pre>Two-qubit calibration only.
-Assumptions: Initial |+0&gt;; Record dephasing strength p=1/2
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td></tr><tr><th>P01<br>Relative facts fail to compose</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Expected number of disagreeing edges &lt;= 2</summary><p>verifiedConditional</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
+<p>Exported by the checked Lean catalog command</p><p>Green: a bound with a satisfying model, or a realized witness. Blue: exact value. Amber: a bound without an existence certificate, or a general theorem. Additional laws are flagged separately. Gray: missing interpretation. Expand a cell for assumptions and limitations.</p>
+<div class="wrap"><table><thead><tr><th>Experiment</th><th>Bell-local<small>assumption class</small></th><th>Local Friendliness<small>assumption class</small></th><th>No-signaling<small>assumption class</small></th><th>Quantum singlet<small>concrete model family</small></th><th>Memory dephasing p=0<small>concrete toy dynamics</small></th><th>Memory dephasing p=1<small>concrete toy dynamics</small></th><th>Memory dephasing p=1/2<small>concrete toy dynamics</small></th></tr></thead><tbody><tr><th>B01<br>Bell CHSH</th><td class="realizedBound"><details><summary>≤ 2</summary><p>Bound + satisfying model</p><pre>Close laboratory loopholes separately from the ideal theorem.
+Assumptions: Finite local response mixtures with setting-independent weights
+Lean proposition: (∀ (m : OntologySeparation.Behavior OntologySeparation.Bell.interface),
+    OntologySeparation.Bell.localTheory m → OntologySeparation.Bell.score m ≤ ↑2) ∧
+  ∃ m, OntologySeparation.Bell.localTheory m</pre></details></td><td class="witness"><details><summary>4</summary><p>Realized witness</p><pre>Close laboratory loopholes separately from the ideal theorem.
+Assumptions: LF component with actual records; two non-friend settings
+Lean proposition: ∃ m, (fun q =&gt; OntologySeparation.LF.componentScore q ≤ 6) m ∧ OntologySeparation.LF.innerCHSH m = ↑4</pre></details></td><td class="witness"><details><summary>4</summary><p>Realized witness</p><pre>Close laboratory loopholes separately from the ideal theorem.
+Assumptions: Normalized two-setting no-signaling behaviors
+Lean proposition: ∃ m, OntologySeparation.Bell.noSignalingTheory m ∧ OntologySeparation.Bell.score m = ↑4</pre></details></td><td class="witness"><details><summary>1502/625</summary><p>Realized witness</p><pre>Close laboratory loopholes separately from the ideal theorem.
+Assumptions: Normalized singlet and specified rational measurement bases
+Lean proposition: ∃ m, OntologySeparation.RealQuantum.singletTheory 2 m ∧ OntologySeparation.Bell.score m = ↑(1502 / 625)
+
+Mathematical exclusion:
+OntologySeparation.Bell.localTheory OntologySeparation.Bell.singletBehavior → False</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>1502/625</summary><p>Exact prediction</p><pre>Close laboratory loopholes separately from the ideal theorem.
+Assumptions: ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases; Z dephasing p=0
+Lean proposition: OntologySeparation.Bell.score
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob
+      ↑(&quot;unitary_memory&quot;,
+              { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength
+      ⋯ ⋯) =
+  ↑((1502 -
+        1152 *
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength) /
+      625)</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>14/25</summary><p>Exact prediction</p><pre>Close laboratory loopholes separately from the ideal theorem.
+Assumptions: ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases; Z dephasing p=1
+Lean proposition: OntologySeparation.Bell.score
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob
+      ↑(&quot;dephased_memory&quot;,
+              { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength
+      ⋯ ⋯) =
+  ↑((1502 -
+        1152 *
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength) /
+      625)</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>926/625</summary><p>Exact prediction</p><pre>Close laboratory loopholes separately from the ideal theorem.
+Assumptions: ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases; Z dephasing p=1/2
+Lean proposition: OntologySeparation.Bell.score
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob
+      ↑(&quot;partial_memory&quot;,
+              { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength
+      ⋯ ⋯) =
+  ↑((1502 -
+        1152 *
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength) /
+      625)</pre></details></td></tr><tr><th>B02<br>Genuine Local Friendliness</th><td class="realizedBound"><details><summary>≤ 6</summary><p>Bound + satisfying model</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
+Assumptions: Three-setting local mixtures with setting-independent weights
+Lean proposition: (∀ (m : OntologySeparation.Behavior OntologySeparation.LF.interface),
+    OntologySeparation.Catalog.localThreeTheory m → OntologySeparation.RealQuantum.genuineLF m ≤ ↑6) ∧
+  ∃ m, OntologySeparation.Catalog.localThreeTheory m</pre></details></td><td class="realizedBound"><details><summary>≤ 6</summary><p>Bound + satisfying model</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
+Assumptions: Conditional no-signaling, actual friend records, setting-independent prior
+Lean proposition: (∀ (m : OntologySeparation.Behavior OntologySeparation.LF.interface),
+    OntologySeparation.LF.theory m → OntologySeparation.RealQuantum.genuineLF m ≤ ↑6) ∧
+  ∃ m, OntologySeparation.LF.theory m</pre></details></td><td class="realizedBound"><details><summary>≤ 10</summary><p>Bound + satisfying model</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
+Assumptions: Three-setting no-signaling behaviors
+Lean proposition: (∀ (m : OntologySeparation.Behavior (OntologySeparation.RealQuantum.interface 3)),
+    OntologySeparation.Shared.NoSignaling m → OntologySeparation.RealQuantum.genuineLF m ≤ ↑10) ∧
+  ∃ m, OntologySeparation.Shared.NoSignaling m
+
+Exact prediction:
+OntologySeparation.RealQuantum.genuineLF OntologySeparation.Shared.nsExtreme = ↑10</pre></details></td><td class="witness"><details><summary>1214656/180625</summary><p>Realized witness</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
+Assumptions: Normalized singlet; ideal friend reversal; specified bases
+Lean proposition: ∃ m, OntologySeparation.RealQuantum.singletTheory 3 m ∧ OntologySeparation.RealQuantum.genuineLF m = ↑(1214656 / 180625)
+
+Mathematical exclusion:
+OntologySeparation.LF.theory OntologySeparation.RealQuantum.lfBehavior → False</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>1214656/180625</summary><p>Exact prediction</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
+Assumptions: ADDITIONAL LAW: singlet preparation, specified LF bases and ideal friend reversal; Z dephasing p=0
+Lean proposition: OntologySeparation.RealQuantum.genuineLF
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.RealQuantum.lfAlice
+      OntologySeparation.RealQuantum.lfBob
+      ↑(&quot;unitary_memory&quot;,
+              { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength
+      ⋯ ⋯) =
+  ↑((1214656 -
+        476928 *
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength) /
+      180625)</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>737728/180625</summary><p>Exact prediction</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
+Assumptions: ADDITIONAL LAW: singlet preparation, specified LF bases and ideal friend reversal; Z dephasing p=1
+Lean proposition: OntologySeparation.RealQuantum.genuineLF
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.RealQuantum.lfAlice
+      OntologySeparation.RealQuantum.lfBob
+      ↑(&quot;dephased_memory&quot;,
+              { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength
+      ⋯ ⋯) =
+  ↑((1214656 -
+        476928 *
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength) /
+      180625)</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>976192/180625</summary><p>Exact prediction</p><pre>Ideal reversible friend model; no claim that a qubit is a cognitive observer.
+Assumptions: ADDITIONAL LAW: singlet preparation, specified LF bases and ideal friend reversal; Z dephasing p=1/2
+Lean proposition: OntologySeparation.RealQuantum.genuineLF
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.RealQuantum.lfAlice
+      OntologySeparation.RealQuantum.lfBob
+      ↑(&quot;partial_memory&quot;,
+              { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength
+      ⋯ ⋯) =
+  ↑((1214656 -
+        476928 *
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength) /
+      180625)</pre></details></td></tr><tr><th>B03<br>Bell violation compatible with LF</th><td class="realizedBound"><details><summary>≤ 2</summary><p>Bound + satisfying model</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
+Assumptions: Bell-local interface for the two non-friend settings
+Lean proposition: (∀ (m : OntologySeparation.Behavior OntologySeparation.Bell.interface),
+    OntologySeparation.Bell.localTheory m → OntologySeparation.Bell.score m ≤ ↑2) ∧
+  ∃ m, OntologySeparation.Bell.localTheory m</pre></details></td><td class="witness"><details><summary>4</summary><p>Realized witness</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
+Assumptions: Fixed friend records and a conditional PR inner box
+Lean proposition: ∃ m, (fun q =&gt; OntologySeparation.LF.componentScore q ≤ 6) m ∧ OntologySeparation.LF.innerCHSH m = ↑4</pre></details></td><td class="witness"><details><summary>4</summary><p>Realized witness</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
+Assumptions: No-signaling LF component restricted to non-friend settings
+Lean proposition: ∃ m,
+  (fun q =&gt; OntologySeparation.Shared.NoSignaling q.behavior) m ∧
+    (fun q =&gt; OntologySeparation.Bell.score (OntologySeparation.Shared.inner q.behavior)) m = ↑4</pre></details></td><td class="witness"><details><summary>1502/625</summary><p>Realized witness</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
+Assumptions: Bell singlet bases assigned to the non-friend settings; no LF membership claim
+Lean proposition: ∃ m, OntologySeparation.RealQuantum.singletTheory 2 m ∧ OntologySeparation.Bell.score m = ↑(1502 / 625)</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>1502/625</summary><p>Exact prediction</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
+Assumptions: ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases; Z dephasing p=0
+Lean proposition: OntologySeparation.Bell.score
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob
+      ↑(&quot;unitary_memory&quot;,
+              { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength
+      ⋯ ⋯) =
+  ↑((1502 -
+        1152 *
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength) /
+      625)</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>14/25</summary><p>Exact prediction</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
+Assumptions: ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases; Z dephasing p=1
+Lean proposition: OntologySeparation.Bell.score
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob
+      ↑(&quot;dephased_memory&quot;,
+              { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength
+      ⋯ ⋯) =
+  ↑((1502 -
+        1152 *
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength) /
+      625)</pre></details></td><td class="exact"><strong>Additional laws required</strong><br><details><summary>926/625</summary><p>Exact prediction</p><pre>This is a postquantum LF-compatible witness, not a quantum implementation.
+Assumptions: ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases; Z dephasing p=1/2
+Lean proposition: OntologySeparation.Bell.score
+    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob
+      ↑(&quot;partial_memory&quot;,
+              { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength
+      ⋯ ⋯) =
+  ↑((1502 -
+        1152 *
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength) /
+      625)</pre></details></td></tr><tr><th>B04<br>Memory reversal calibration</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Two-qubit calibration only.
+Assumptions: ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Two-qubit calibration only.
+Assumptions: ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Two-qubit calibration only.
+Assumptions: ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Two-qubit calibration only.
+Assumptions: ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2</pre></details></td><td class="exact"><details><summary>1</summary><p>Exact prediction</p><pre>Two-qubit calibration only.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=0
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }
+      OntologySeparation.Memory.echo) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }
+      OntologySeparation.Memory.echo)</pre></details></td><td class="exact"><details><summary>1/2</summary><p>Exact prediction</p><pre>Two-qubit calibration only.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=1
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }
+      OntologySeparation.Memory.echo) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }
+      OntologySeparation.Memory.echo)</pre></details></td><td class="exact"><details><summary>3/4</summary><p>Exact prediction</p><pre>Two-qubit calibration only.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=1/2
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }
+      OntologySeparation.Memory.echo) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }
+      OntologySeparation.Memory.echo)</pre></details></td></tr><tr><th>P01<br>Relative facts fail to compose</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
 Assumptions: ADDITIONAL LAW, not entailed by Bell-local; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
-Lean: OntologySeparation.Research.no_pairwise_gluing</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Expected number of disagreeing edges &lt;= 2</summary><p>verifiedConditional</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
+Lean proposition: (∃ d, OntologySeparation.Research.GluesPairwise d) → False
+
+Theorem · see full assumptions:
+∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.triangle v)) ≤ 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
 Assumptions: ADDITIONAL LAW, not entailed by Local Friendliness; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
-Lean: OntologySeparation.Research.no_pairwise_gluing</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Expected number of disagreeing edges &lt;= 2</summary><p>verifiedConditional</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
+Lean proposition: (∃ d, OntologySeparation.Research.GluesPairwise d) → False
+
+Theorem · see full assumptions:
+∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.triangle v)) ≤ 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
 Assumptions: ADDITIONAL LAW, not entailed by No-signaling; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
-Lean: OntologySeparation.Research.no_pairwise_gluing</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Expected number of disagreeing edges &lt;= 2</summary><p>verifiedConditional</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
+Lean proposition: (∃ d, OntologySeparation.Research.GluesPairwise d) → False
+
+Theorem · see full assumptions:
+∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.triangle v)) ≤ 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
 Assumptions: ADDITIONAL LAW, not entailed by Quantum singlet; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
-Lean: OntologySeparation.Research.no_pairwise_gluing</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Expected number of disagreeing edges &lt;= 2</summary><p>verifiedConditional</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
-Assumptions: ADDITIONAL LAW, not entailed by Unitary memory; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
-Lean: OntologySeparation.Research.no_pairwise_gluing</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Expected number of disagreeing edges &lt;= 2</summary><p>verifiedConditional</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
-Assumptions: ADDITIONAL LAW, not entailed by Dephased memory; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
-Lean: OntologySeparation.Research.no_pairwise_gluing</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Expected number of disagreeing edges &lt;= 2</summary><p>verifiedConditional</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
-Assumptions: ADDITIONAL LAW, not entailed by Partial dephasing; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
-Lean: OntologySeparation.Research.no_pairwise_gluing</pre></details></td></tr><tr><th>P02<br>Conservation and public records versus reversal</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With complete inaccessible leakage: P(+) = 1/2</summary><p>verifiedConditional</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
-Assumptions: ADDED two-qubit memory model and complete record leakage before reversal
-Lean: OntologySeparation.Memory.leakedEcho_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With complete inaccessible leakage: P(+) = 1/2</summary><p>verifiedConditional</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
-Assumptions: ADDED two-qubit memory model and complete record leakage before reversal
-Lean: OntologySeparation.Memory.leakedEcho_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With complete inaccessible leakage: P(+) = 1/2</summary><p>verifiedConditional</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
-Assumptions: ADDED two-qubit memory model and complete record leakage before reversal
-Lean: OntologySeparation.Memory.leakedEcho_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With complete inaccessible leakage: P(+) = 1/2</summary><p>verifiedConditional</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
-Assumptions: ADDED two-qubit memory model and complete record leakage before reversal
-Lean: OntologySeparation.Memory.leakedEcho_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1/2</summary><p>verifiedToyPrediction</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
-Assumptions: Initial |+0&gt;; Complete inaccessible memory leakage before reversal
-Lean: OntologySeparation.Memory.leakedEcho_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1/2</summary><p>verifiedToyPrediction</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
-Assumptions: Initial |+0&gt;; Complete inaccessible memory leakage before reversal
-Lean: OntologySeparation.Memory.leakedEcho_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1/2</summary><p>verifiedToyPrediction</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
-Assumptions: Initial |+0&gt;; Complete inaccessible memory leakage before reversal
-Lean: OntologySeparation.Memory.leakedEcho_probability</pre></details></td></tr><tr><th>P03<br>Hidden causal cost of absolute facts</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: G &lt;= 6 + 8 epsilon; epsilon &gt;= (G-6)/8</summary><p>verifiedConditional</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
+Lean proposition: (∃ d, OntologySeparation.Research.GluesPairwise d) → False
+
+Theorem · see full assumptions:
+∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.triangle v)) ≤ 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=0; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
+Lean proposition: (∃ d, OntologySeparation.Research.GluesPairwise d) → False
+
+Theorem · see full assumptions:
+∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.triangle v)) ≤ 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
+Lean proposition: (∃ d, OntologySeparation.Research.GluesPairwise d) → False
+
+Theorem · see full assumptions:
+∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.triangle v)) ≤ 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1/2; A single setting-independent joint distribution over three binary records; Abstract contextual probability model; not a demonstrated quantum or friend implementation.
+Lean proposition: (∃ d, OntologySeparation.Research.GluesPairwise d) → False
+
+Theorem · see full assumptions:
+∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.triangle v)) ≤ 2</pre></details></td></tr><tr><th>P02<br>Conservation and public records versus reversal</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
+Assumptions: ADDITIONAL LAW: two-qubit memory and complete inaccessible leakage
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
+Assumptions: ADDITIONAL LAW: two-qubit memory and complete inaccessible leakage
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
+Assumptions: ADDITIONAL LAW: two-qubit memory and complete inaccessible leakage
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
+Assumptions: ADDITIONAL LAW: two-qubit memory and complete inaccessible leakage
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2</pre></details></td><td class="exact"><details><summary>1/2</summary><p>Exact prediction</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=0; Complete inaccessible leakage before reversal
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }
+      OntologySeparation.Memory.leakedEcho) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }
+      OntologySeparation.Memory.leakedEcho)</pre></details></td><td class="exact"><details><summary>1/2</summary><p>Exact prediction</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=1; Complete inaccessible leakage before reversal
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }
+      OntologySeparation.Memory.leakedEcho) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }
+      OntologySeparation.Memory.leakedEcho)</pre></details></td><td class="exact"><details><summary>1/2</summary><p>Exact prediction</p><pre>Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=1/2; Complete inaccessible leakage before reversal
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }
+      OntologySeparation.Memory.leakedEcho) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }
+      OntologySeparation.Memory.leakedEcho)</pre></details></td></tr><tr><th>P03<br>Hidden causal cost of absolute facts</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
 Assumptions: ADDITIONAL LAW, not entailed by Bell-local; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
-Lean: OntologySeparation.Shared.LF_contamination_required</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: G &lt;= 6 + 8 epsilon; epsilon &gt;= (G-6)/8</summary><p>verifiedConditional</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
+Lean proposition: ∀ (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),
+  OntologySeparation.LF.theory good →
+    ∀ (epsilon observed : ℝ),
+      0 ≤ epsilon →
+        epsilon ≤ 1 →
+          observed =
+              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +
+                epsilon * OntologySeparation.RealQuantum.genuineLF bad →
+            (observed - 6) / 8 ≤ epsilon
+
+Theorem · see full assumptions:
+∀ (epsilon : ℝ) (h0 : 0 ≤ epsilon) (h1 : epsilon ≤ 1),
+  OntologySeparation.RealQuantum.genuineLF
+      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =
+    6 + 4 * epsilon</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
 Assumptions: ADDITIONAL LAW, not entailed by Local Friendliness; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
-Lean: OntologySeparation.Shared.LF_contamination_required</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF LF + NS contamination: G &lt;= 6+4 epsilon (sharp)</summary><p>verifiedConditional</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
-Assumptions: ADDITIONAL LAW: mixture of an LF sector and a normalized no-signaling sector; 0 &lt;= epsilon &lt;= 1; epsilon &gt;= (G-6)/4; Sharpness: Shared.LF_NS_contamination_attained; not a communication-cost theorem
-Lean: OntologySeparation.Shared.LF_NS_fraction_required</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: G &lt;= 6 + 8 epsilon; epsilon &gt;= (G-6)/8</summary><p>verifiedConditional</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
+Lean proposition: ∀ (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),
+  OntologySeparation.LF.theory good →
+    ∀ (epsilon observed : ℝ),
+      0 ≤ epsilon →
+        epsilon ≤ 1 →
+          observed =
+              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +
+                epsilon * OntologySeparation.RealQuantum.genuineLF bad →
+            (observed - 6) / 8 ≤ epsilon
+
+Theorem · see full assumptions:
+∀ (epsilon : ℝ) (h0 : 0 ≤ epsilon) (h1 : epsilon ≤ 1),
+  OntologySeparation.RealQuantum.genuineLF
+      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =
+    6 + 4 * epsilon</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
+Assumptions: ADDITIONAL LAW: LF + normalized no-signaling mixture; 0 ≤ epsilon ≤ 1; not a communication-cost theorem
+Lean proposition: ∀ (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),
+  OntologySeparation.LF.theory good →
+    OntologySeparation.Shared.NoSignaling bad →
+      ∀ (epsilon observed : ℝ),
+        0 ≤ epsilon →
+          epsilon ≤ 1 →
+            observed =
+                (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +
+                  epsilon * OntologySeparation.RealQuantum.genuineLF bad →
+              (observed - 6) / 4 ≤ epsilon
+
+Theorem · see full assumptions:
+∀ (epsilon : ℝ) (h0 : 0 ≤ epsilon) (h1 : epsilon ≤ 1),
+  OntologySeparation.RealQuantum.genuineLF
+      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =
+    6 + 4 * epsilon</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
 Assumptions: ADDITIONAL LAW, not entailed by Quantum singlet; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
-Lean: OntologySeparation.Shared.LF_contamination_required</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: G &lt;= 6 + 8 epsilon; epsilon &gt;= (G-6)/8</summary><p>verifiedConditional</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
-Assumptions: ADDITIONAL LAW, not entailed by Unitary memory; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
-Lean: OntologySeparation.Shared.LF_contamination_required</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: G &lt;= 6 + 8 epsilon; epsilon &gt;= (G-6)/8</summary><p>verifiedConditional</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
-Assumptions: ADDITIONAL LAW, not entailed by Dephased memory; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
-Lean: OntologySeparation.Shared.LF_contamination_required</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: G &lt;= 6 + 8 epsilon; epsilon &gt;= (G-6)/8</summary><p>verifiedConditional</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
-Assumptions: ADDITIONAL LAW, not entailed by Partial dephasing; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
-Lean: OntologySeparation.Shared.LF_contamination_required</pre></details></td></tr><tr><th>P04<br>Coherent experimenter choices</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With phase-echo channel law: P(+) = p/2</summary><p>verifiedConditional</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
-Assumptions: ADDED coherent control and memory channel; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.phaseEcho_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With phase-echo channel law: P(+) = p/2</summary><p>verifiedConditional</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
-Assumptions: ADDED coherent control and memory channel; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.phaseEcho_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With phase-echo channel law: P(+) = p/2</summary><p>verifiedConditional</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
-Assumptions: ADDED coherent control and memory channel; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.phaseEcho_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With phase-echo channel law: P(+) = p/2</summary><p>verifiedConditional</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
-Assumptions: ADDED coherent control and memory channel; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.phaseEcho_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>0</summary><p>verifiedToyPrediction</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
-Assumptions: Initial |+0&gt;; Signal phase flip; p=0
-Lean: OntologySeparation.Memory.phaseEcho_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1/2</summary><p>verifiedToyPrediction</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
-Assumptions: Initial |+0&gt;; Signal phase flip; p=1
-Lean: OntologySeparation.Memory.phaseEcho_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1/4</summary><p>verifiedToyPrediction</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
-Assumptions: Initial |+0&gt;; Signal phase flip; p=1/2
-Lean: OntologySeparation.Memory.phaseEcho_probability</pre></details></td></tr><tr><th>P05<br>Observer identity and subsystem boundaries</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Every randomized one-share decoder succeeds with 1/2</summary><p>verifiedConditional</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
+Lean proposition: ∀ (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),
+  OntologySeparation.LF.theory good →
+    ∀ (epsilon observed : ℝ),
+      0 ≤ epsilon →
+        epsilon ≤ 1 →
+          observed =
+              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +
+                epsilon * OntologySeparation.RealQuantum.genuineLF bad →
+            (observed - 6) / 8 ≤ epsilon
+
+Theorem · see full assumptions:
+∀ (epsilon : ℝ) (h0 : 0 ≤ epsilon) (h1 : epsilon ≤ 1),
+  OntologySeparation.RealQuantum.genuineLF
+      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =
+    6 + 4 * epsilon</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=0; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
+Lean proposition: ∀ (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),
+  OntologySeparation.LF.theory good →
+    ∀ (epsilon observed : ℝ),
+      0 ≤ epsilon →
+        epsilon ≤ 1 →
+          observed =
+              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +
+                epsilon * OntologySeparation.RealQuantum.genuineLF bad →
+            (observed - 6) / 8 ≤ epsilon
+
+Theorem · see full assumptions:
+∀ (epsilon : ℝ) (h0 : 0 ≤ epsilon) (h1 : epsilon ≤ 1),
+  OntologySeparation.RealQuantum.genuineLF
+      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =
+    6 + 4 * epsilon</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
+Lean proposition: ∀ (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),
+  OntologySeparation.LF.theory good →
+    ∀ (epsilon observed : ℝ),
+      0 ≤ epsilon →
+        epsilon ≤ 1 →
+          observed =
+              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +
+                epsilon * OntologySeparation.RealQuantum.genuineLF bad →
+            (observed - 6) / 8 ≤ epsilon
+
+Theorem · see full assumptions:
+∀ (epsilon : ℝ) (h0 : 0 ≤ epsilon) (h1 : epsilon ≤ 1),
+  OntologySeparation.RealQuantum.genuineLF
+      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =
+    6 + 4 * epsilon</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1/2; Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon; Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.
+Lean proposition: ∀ (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),
+  OntologySeparation.LF.theory good →
+    ∀ (epsilon observed : ℝ),
+      0 ≤ epsilon →
+        epsilon ≤ 1 →
+          observed =
+              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +
+                epsilon * OntologySeparation.RealQuantum.genuineLF bad →
+            (observed - 6) / 8 ≤ epsilon
+
+Theorem · see full assumptions:
+∀ (epsilon : ℝ) (h0 : 0 ≤ epsilon) (h1 : epsilon ≤ 1),
+  OntologySeparation.RealQuantum.genuineLF
+      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =
+    6 + 4 * epsilon</pre></details></td></tr><tr><th>P04<br>Coherent experimenter choices</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
+Assumptions: ADDITIONAL LAW: coherent phase control and memory channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
+Assumptions: ADDITIONAL LAW: coherent phase control and memory channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
+Assumptions: ADDITIONAL LAW: coherent phase control and memory channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
+Assumptions: ADDITIONAL LAW: coherent phase control and memory channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2</pre></details></td><td class="exact"><details><summary>0</summary><p>Exact prediction</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=0; Signal phase flip before reversal
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }
+      OntologySeparation.Memory.phaseEcho) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }
+      OntologySeparation.Memory.phaseEcho)</pre></details></td><td class="exact"><details><summary>1/2</summary><p>Exact prediction</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=1; Signal phase flip before reversal
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }
+      OntologySeparation.Memory.phaseEcho) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }
+      OntologySeparation.Memory.phaseEcho)</pre></details></td><td class="exact"><details><summary>1/4</summary><p>Exact prediction</p><pre>Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=1/2; Signal phase flip before reversal
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }
+      OntologySeparation.Memory.phaseEcho) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }
+      OntologySeparation.Memory.phaseEcho)</pre></details></td></tr><tr><th>P05<br>Observer identity and subsystem boundaries</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
 Assumptions: ADDITIONAL LAW, not entailed by Bell-local; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
-Lean: OntologySeparation.Research.restricted_recovery</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Every randomized one-share decoder succeeds with 1/2</summary><p>verifiedConditional</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
+Lean proposition: ∀ (d : Bool → ℚ), OntologySeparation.Research.oneBitRecovery d = 1 / 2
+
+Theorem · see full assumptions:
+∀ (d : Bool → ℝ), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1
+
+Theorem · see full assumptions:
+∀ (f g : Bool → Bool), (∀ (b : Bool), g (f b) = b) → ∀ (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
 Assumptions: ADDITIONAL LAW, not entailed by Local Friendliness; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
-Lean: OntologySeparation.Research.restricted_recovery</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Every randomized one-share decoder succeeds with 1/2</summary><p>verifiedConditional</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
+Lean proposition: ∀ (d : Bool → ℚ), OntologySeparation.Research.oneBitRecovery d = 1 / 2
+
+Theorem · see full assumptions:
+∀ (d : Bool → ℝ), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1
+
+Theorem · see full assumptions:
+∀ (f g : Bool → Bool), (∀ (b : Bool), g (f b) = b) → ∀ (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
 Assumptions: ADDITIONAL LAW, not entailed by No-signaling; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
-Lean: OntologySeparation.Research.restricted_recovery</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Every randomized one-share decoder succeeds with 1/2</summary><p>verifiedConditional</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
+Lean proposition: ∀ (d : Bool → ℚ), OntologySeparation.Research.oneBitRecovery d = 1 / 2
+
+Theorem · see full assumptions:
+∀ (d : Bool → ℝ), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1
+
+Theorem · see full assumptions:
+∀ (f g : Bool → Bool), (∀ (b : Bool), g (f b) = b) → ∀ (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
 Assumptions: ADDITIONAL LAW, not entailed by Quantum singlet; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
-Lean: OntologySeparation.Research.restricted_recovery</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Every randomized one-share decoder succeeds with 1/2</summary><p>verifiedConditional</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
-Assumptions: ADDITIONAL LAW, not entailed by Unitary memory; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
-Lean: OntologySeparation.Research.restricted_recovery</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Every randomized one-share decoder succeeds with 1/2</summary><p>verifiedConditional</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
-Assumptions: ADDITIONAL LAW, not entailed by Dephased memory; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
-Lean: OntologySeparation.Research.restricted_recovery</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Every randomized one-share decoder succeeds with 1/2</summary><p>verifiedConditional</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
-Assumptions: ADDITIONAL LAW, not entailed by Partial dephasing; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
-Lean: OntologySeparation.Research.restricted_recovery</pre></details></td></tr><tr><th>P06<br>Observations with indefinite causal order</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Minus-port probability = 1-p/2</summary><p>verifiedConditional</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
+Lean proposition: ∀ (d : Bool → ℚ), OntologySeparation.Research.oneBitRecovery d = 1 / 2
+
+Theorem · see full assumptions:
+∀ (d : Bool → ℝ), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1
+
+Theorem · see full assumptions:
+∀ (f g : Bool → Bool), (∀ (b : Bool), g (f b) = b) → ∀ (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=0; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
+Lean proposition: ∀ (d : Bool → ℚ), OntologySeparation.Research.oneBitRecovery d = 1 / 2
+
+Theorem · see full assumptions:
+∀ (d : Bool → ℝ), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1
+
+Theorem · see full assumptions:
+∀ (f g : Bool → Bool), (∀ (b : Bool), g (f b) = b) → ∀ (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
+Lean proposition: ∀ (d : Bool → ℚ), OntologySeparation.Research.oneBitRecovery d = 1 / 2
+
+Theorem · see full assumptions:
+∀ (d : Bool → ℝ), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1
+
+Theorem · see full assumptions:
+∀ (f g : Bool → Bool), (∀ (b : Bool), g (f b) = b) → ∀ (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1/2; Two independent fair classical bits; decoder sees only one share; Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.
+Lean proposition: ∀ (d : Bool → ℚ), OntologySeparation.Research.oneBitRecovery d = 1 / 2
+
+Theorem · see full assumptions:
+∀ (d : Bool → ℝ), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1
+
+Theorem · see full assumptions:
+∀ (f g : Bool → Bool), (∀ (b : Bool), g (f b) = b) → ∀ (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)</pre></details></td></tr><tr><th>P06<br>Observations with indefinite causal order</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
 Assumptions: ADDITIONAL LAW, not entailed by Bell-local; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
-Lean: OntologySeparation.Research.noisy_order_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Minus-port probability = 1-p/2</summary><p>verifiedConditional</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
+Lean proposition: ∀ (p : ℚ) (v : OntologySeparation.Research.Vector),
+  OntologySeparation.Research.normSq v = 1 → OntologySeparation.Research.noisyOrder p v = 1 - p / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
 Assumptions: ADDITIONAL LAW, not entailed by Local Friendliness; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
-Lean: OntologySeparation.Research.noisy_order_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Minus-port probability = 1-p/2</summary><p>verifiedConditional</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
+Lean proposition: ∀ (p : ℚ) (v : OntologySeparation.Research.Vector),
+  OntologySeparation.Research.normSq v = 1 → OntologySeparation.Research.noisyOrder p v = 1 - p / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
 Assumptions: ADDITIONAL LAW, not entailed by No-signaling; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
-Lean: OntologySeparation.Research.noisy_order_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Minus-port probability = 1-p/2</summary><p>verifiedConditional</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
+Lean proposition: ∀ (p : ℚ) (v : OntologySeparation.Research.Vector),
+  OntologySeparation.Research.normSq v = 1 → OntologySeparation.Research.noisyOrder p v = 1 - p / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
 Assumptions: ADDITIONAL LAW, not entailed by Quantum singlet; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
-Lean: OntologySeparation.Research.noisy_order_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Minus-port probability = 1-p/2</summary><p>verifiedConditional</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
-Assumptions: ADDITIONAL LAW, not entailed by Unitary memory; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
-Lean: OntologySeparation.Research.noisy_order_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Minus-port probability = 1-p/2</summary><p>verifiedConditional</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
-Assumptions: ADDITIONAL LAW, not entailed by Dephased memory; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
-Lean: OntologySeparation.Research.noisy_order_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Minus-port probability = 1-p/2</summary><p>verifiedConditional</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
-Assumptions: ADDITIONAL LAW, not entailed by Partial dephasing; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
-Lean: OntologySeparation.Research.noisy_order_probability</pre></details></td></tr><tr><th>P07<br>Gravitating records</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Normalized output has determinant -1/2 and is not a product amplitude</summary><p>verifiedConditional</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
+Lean proposition: ∀ (p : ℚ) (v : OntologySeparation.Research.Vector),
+  OntologySeparation.Research.normSq v = 1 → OntologySeparation.Research.noisyOrder p v = 1 - p / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=0; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
+Lean proposition: ∀ (p : ℚ) (v : OntologySeparation.Research.Vector),
+  OntologySeparation.Research.normSq v = 1 → OntologySeparation.Research.noisyOrder p v = 1 - p / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
+Lean proposition: ∀ (p : ℚ) (v : OntologySeparation.Research.Vector),
+  OntologySeparation.Research.normSq v = 1 → OntologySeparation.Research.noisyOrder p v = 1 - p / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1/2; Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p; Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.
+Lean proposition: ∀ (p : ℚ) (v : OntologySeparation.Research.Vector),
+  OntologySeparation.Research.normSq v = 1 → OntologySeparation.Research.noisyOrder p v = 1 - p / 2</pre></details></td></tr><tr><th>P07<br>Gravitating records</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
 Assumptions: ADDITIONAL LAW, not entailed by Bell-local; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
-Lean: OntologySeparation.Research.phase_state_not_complex_product</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Normalized output has determinant -1/2 and is not a product amplitude</summary><p>verifiedConditional</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
+Lean proposition: (∃ a b, ∀ (i j : Bool), a i * b j = ↑(OntologySeparation.Research.phaseState i j)) → False
+
+Theorem · see full assumptions:
+OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +
+        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +
+      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +
+    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =
+  1
+
+Theorem · see full assumptions:
+(∃ a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) → False</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
 Assumptions: ADDITIONAL LAW, not entailed by Local Friendliness; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
-Lean: OntologySeparation.Research.phase_state_not_complex_product</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Normalized output has determinant -1/2 and is not a product amplitude</summary><p>verifiedConditional</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
+Lean proposition: (∃ a b, ∀ (i j : Bool), a i * b j = ↑(OntologySeparation.Research.phaseState i j)) → False
+
+Theorem · see full assumptions:
+OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +
+        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +
+      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +
+    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =
+  1
+
+Theorem · see full assumptions:
+(∃ a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) → False</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
 Assumptions: ADDITIONAL LAW, not entailed by No-signaling; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
-Lean: OntologySeparation.Research.phase_state_not_complex_product</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Normalized output has determinant -1/2 and is not a product amplitude</summary><p>verifiedConditional</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
+Lean proposition: (∃ a b, ∀ (i j : Bool), a i * b j = ↑(OntologySeparation.Research.phaseState i j)) → False
+
+Theorem · see full assumptions:
+OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +
+        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +
+      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +
+    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =
+  1
+
+Theorem · see full assumptions:
+(∃ a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) → False</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
 Assumptions: ADDITIONAL LAW, not entailed by Quantum singlet; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
-Lean: OntologySeparation.Research.phase_state_not_complex_product</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Normalized output has determinant -1/2 and is not a product amplitude</summary><p>verifiedConditional</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
-Assumptions: ADDITIONAL LAW, not entailed by Unitary memory; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
-Lean: OntologySeparation.Research.phase_state_not_complex_product</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Normalized output has determinant -1/2 and is not a product amplitude</summary><p>verifiedConditional</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
-Assumptions: ADDITIONAL LAW, not entailed by Dephased memory; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
-Lean: OntologySeparation.Research.phase_state_not_complex_product</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Normalized output has determinant -1/2 and is not a product amplitude</summary><p>verifiedConditional</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
-Assumptions: ADDITIONAL LAW, not entailed by Partial dephasing; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
-Lean: OntologySeparation.Research.phase_state_not_complex_product</pre></details></td></tr><tr><th>P08<br>Computationally limited objectivity</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Success = 1/2 for every such decoder</summary><p>verifiedConditional</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
+Lean proposition: (∃ a b, ∀ (i j : Bool), a i * b j = ↑(OntologySeparation.Research.phaseState i j)) → False
+
+Theorem · see full assumptions:
+OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +
+        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +
+      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +
+    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =
+  1
+
+Theorem · see full assumptions:
+(∃ a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) → False</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=0; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
+Lean proposition: (∃ a b, ∀ (i j : Bool), a i * b j = ↑(OntologySeparation.Research.phaseState i j)) → False
+
+Theorem · see full assumptions:
+OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +
+        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +
+      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +
+    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =
+  1
+
+Theorem · see full assumptions:
+(∃ a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) → False</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
+Lean proposition: (∃ a b, ∀ (i j : Bool), a i * b j = ↑(OntologySeparation.Research.phaseState i j)) → False
+
+Theorem · see full assumptions:
+OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +
+        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +
+      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +
+    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =
+  1
+
+Theorem · see full assumptions:
+(∃ a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) → False</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1/2; Pure real two-qubit amplitudes; coherent CZ applied to |++&gt;; Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.
+Lean proposition: (∃ a b, ∀ (i j : Bool), a i * b j = ↑(OntologySeparation.Research.phaseState i j)) → False
+
+Theorem · see full assumptions:
+OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +
+        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +
+      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +
+    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =
+  1
+
+Theorem · see full assumptions:
+(∃ a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) → False</pre></details></td></tr><tr><th>P08<br>Computationally limited objectivity</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
 Assumptions: ADDITIONAL LAW, not entailed by Bell-local; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
-Lean: OntologySeparation.Research.random_query_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Success = 1/2 for every such decoder</summary><p>verifiedConditional</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
+Lean proposition: ∀ (q : ℚ) (d e : Bool → ℚ),
+  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
 Assumptions: ADDITIONAL LAW, not entailed by Local Friendliness; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
-Lean: OntologySeparation.Research.random_query_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Success = 1/2 for every such decoder</summary><p>verifiedConditional</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
+Lean proposition: ∀ (q : ℚ) (d e : Bool → ℚ),
+  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
 Assumptions: ADDITIONAL LAW, not entailed by No-signaling; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
-Lean: OntologySeparation.Research.random_query_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Success = 1/2 for every such decoder</summary><p>verifiedConditional</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
+Lean proposition: ∀ (q : ℚ) (d e : Bool → ℚ),
+  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
 Assumptions: ADDITIONAL LAW, not entailed by Quantum singlet; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
-Lean: OntologySeparation.Research.random_query_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Success = 1/2 for every such decoder</summary><p>verifiedConditional</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
-Assumptions: ADDITIONAL LAW, not entailed by Unitary memory; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
-Lean: OntologySeparation.Research.random_query_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Success = 1/2 for every such decoder</summary><p>verifiedConditional</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
-Assumptions: ADDITIONAL LAW, not entailed by Dephased memory; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
-Lean: OntologySeparation.Research.random_query_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: Success = 1/2 for every such decoder</summary><p>verifiedConditional</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
-Assumptions: ADDITIONAL LAW, not entailed by Partial dephasing; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
-Lean: OntologySeparation.Research.random_query_bound</pre></details></td></tr><tr><th>P09<br>Observer versus reversible machine</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With memory-channel law: P(+) = 1-p/2</summary><p>verifiedConditional</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
-Assumptions: ADDED two-qubit |+0&gt; preparation and record/reverse/readout model; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With memory-channel law: P(+) = 1-p/2</summary><p>verifiedConditional</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
-Assumptions: ADDED two-qubit |+0&gt; preparation and record/reverse/readout model; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With memory-channel law: P(+) = 1-p/2</summary><p>verifiedConditional</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
-Assumptions: ADDED two-qubit |+0&gt; preparation and record/reverse/readout model; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>With memory-channel law: P(+) = 1-p/2</summary><p>verifiedConditional</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
-Assumptions: ADDED two-qubit |+0&gt; preparation and record/reverse/readout model; 0 &lt;= p &lt;= 1; column does not fix p
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1</summary><p>verifiedToyPrediction</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
-Assumptions: Initial |+0&gt;; Record dephasing strength p=0
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>1/2</summary><p>verifiedToyPrediction</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
-Assumptions: Initial |+0&gt;; Record dephasing strength p=1
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td><td class="verifiedToyPrediction"><details><summary>3/4</summary><p>verifiedToyPrediction</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
-Assumptions: Initial |+0&gt;; Record dephasing strength p=1/2
-Lean: OntologySeparation.Memory.echo_probability</pre></details></td></tr><tr><th>P10<br>Rules of shared reality</th><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: P(A != C) &lt;= P(A != B) + P(B != C)</summary><p>verifiedConditional</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
+Lean proposition: ∀ (q : ℚ) (d e : Bool → ℚ),
+  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=0; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
+Lean proposition: ∀ (q : ℚ) (d e : Bool → ℚ),
+  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
+Lean proposition: ∀ (q : ℚ) (d e : Bool → ℚ),
+  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1/2; Two fair bits; at most one classical bit query; arbitrary randomized response and query choice; A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.
+Lean proposition: ∀ (q : ℚ) (d e : Bool → ℚ),
+  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2
+
+Theorem · see full assumptions:
+OntologySeparation.Research.jointRecovery Bool.xor = 1</pre></details></td></tr><tr><th>P09<br>Observer versus reversible machine</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
+Assumptions: ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
+Assumptions: ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
+Assumptions: ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
+Assumptions: ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p
+Lean proposition: ∀ (m : OntologySeparation.Memory.Parameters),
+  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2</pre></details></td><td class="exact"><details><summary>1</summary><p>Exact prediction</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=0
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }
+      OntologySeparation.Memory.echo) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;unitary_memory&quot;,
+                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }
+      OntologySeparation.Memory.echo)</pre></details></td><td class="exact"><details><summary>1/2</summary><p>Exact prediction</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=1
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }
+      OntologySeparation.Memory.echo) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;dephased_memory&quot;,
+                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }
+      OntologySeparation.Memory.echo)</pre></details></td><td class="exact"><details><summary>3/4</summary><p>Exact prediction</p><pre>Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.
+Assumptions: Initial |+0&gt;; rational two-qubit memory dynamics; Record dephasing p=1/2
+Lean proposition: ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }
+      OntologySeparation.Memory.echo) =
+  ↑(OntologySeparation.Memory.probability
+      {
+        strength :=
+          (&quot;partial_memory&quot;,
+                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,
+                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }
+      OntologySeparation.Memory.echo)</pre></details></td></tr><tr><th>P10<br>Rules of shared reality</th><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
 Assumptions: ADDITIONAL LAW, not entailed by Bell-local; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
-Lean: OntologySeparation.Research.public_error_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: P(A != C) &lt;= P(A != B) + P(B != C)</summary><p>verifiedConditional</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
+Lean proposition: ∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.2)) ≤
+    (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.1)) +
+      d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.2.1 v.2.2)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
 Assumptions: ADDITIONAL LAW, not entailed by Local Friendliness; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
-Lean: OntologySeparation.Research.public_error_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: P(A != C) &lt;= P(A != B) + P(B != C)</summary><p>verifiedConditional</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
+Lean proposition: ∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.2)) ≤
+    (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.1)) +
+      d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.2.1 v.2.2)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
 Assumptions: ADDITIONAL LAW, not entailed by No-signaling; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
-Lean: OntologySeparation.Research.public_error_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: P(A != C) &lt;= P(A != B) + P(B != C)</summary><p>verifiedConditional</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
+Lean proposition: ∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.2)) ≤
+    (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.1)) +
+      d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.2.1 v.2.2)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
 Assumptions: ADDITIONAL LAW, not entailed by Quantum singlet; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
-Lean: OntologySeparation.Research.public_error_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: P(A != C) &lt;= P(A != B) + P(B != C)</summary><p>verifiedConditional</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
-Assumptions: ADDITIONAL LAW, not entailed by Unitary memory; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
-Lean: OntologySeparation.Research.public_error_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: P(A != C) &lt;= P(A != B) + P(B != C)</summary><p>verifiedConditional</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
-Assumptions: ADDITIONAL LAW, not entailed by Dephased memory; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
-Lean: OntologySeparation.Research.public_error_bound</pre></details></td><td class="verifiedConditional"><strong>Additional laws required</strong><br><details><summary>IF added law: P(A != C) &lt;= P(A != B) + P(B != C)</summary><p>verifiedConditional</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
-Assumptions: ADDITIONAL LAW, not entailed by Partial dephasing; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
-Lean: OntologySeparation.Research.public_error_bound</pre></details></td></tr></tbody></table></div>
+Lean proposition: ∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.2)) ≤
+    (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.1)) +
+      d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.2.1 v.2.2)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=0; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
+Lean proposition: ∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.2)) ≤
+    (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.1)) +
+      d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.2.1 v.2.2)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
+Lean proposition: ∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.2)) ≤
+    (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.1)) +
+      d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.2.1 v.2.2)</pre></details></td><td class="theorem"><strong>Additional laws required</strong><br><details><summary>Checked theorem — expand for full statement</summary><p>Theorem · see full assumptions</p><pre>Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.
+Assumptions: ADDITIONAL LAW, not entailed by Memory dephasing p=1/2; A single joint distribution over three public binary records A,B,C; Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.
+Lean proposition: ∀ (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),
+  (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.2)) ≤
+    (d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.1 v.2.1)) +
+      d.mean fun v =&gt; ↑(OntologySeparation.Research.mismatch v.2.1 v.2.2)</pre></details></td></tr></tbody></table></div>
 <p><a href="index.html">Experiment and ontology views</a></p><h2>Assumption profiles</h2><p>All 16 binary profiles are expressible. Their physical realizability is not asserted. False means negation; unspecified adds no constraint.</p></html>

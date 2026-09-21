@@ -7,22 +7,25 @@ physical theory, describe an experiment, and prove which predictions distinguish
 it from another theory. Physical assumptions remain explicit; Lean's logic and
 proof checker stay fixed.
 
-## Make your first checked comparison
+## Start here
 
-1. [Open the worked recipe table](examples/recipe-comparison.html) locally.
-2. Follow [the short setup guide](docs/START_HERE.md).
-3. Generate a study, edit its laws or procedures, and export it:
+**[Getting started →](docs/START_HERE.md)** — setup, your first checked experiment,
+and one parameter change. No user-written proof is needed for supported recipes.
 
-```sh
-ontology-separation new-scenario MyStudy -o examples/MyStudy.lean
-ontology-separation scenario-report examples/MyStudy.lean -o examples/my-study.html
-```
+## Explore the HTML views
 
-For supported qubit recipes, the framework derives **both predictions and their
-proofs**. Labels come from the actual parameters and operations. Reports rebuild
-edited dependencies before checking, and fail without publishing if a proof fails.
-See [the glossary](docs/GLOSSARY.md) for terminology, or the
-[advanced interface](docs/ADD_A_SCENARIO.md) for new physical mechanisms.
+| View | What you can explore |
+|---|---|
+| [Recipe comparison](examples/recipe-comparison.html) | Three dephasing laws × four procedures; the simplest worked example. |
+| [Full experiment matrix](examples/matrix.html) | All 14 scenarios across seven model classes, with proof-derived results. |
+| [Bell assumptions](examples/B01.html) | All sixteen assumption combinations and two-axis comparisons. |
+| [Local Friendliness assumptions](examples/B02.html) | The same ontology views for the LF experiment. |
+| [Experimental evidence](examples/evidence.html) | Published measurements, their assumptions, and what they challenge. |
+
+[All HTML examples](examples/index.html) · [Bell law package and exclusion](examples/bell-law-study.html)
+
+GitHub displays HTML as source. Clone or download the repository, then open these
+files in your browser; the views work offline without installing Lean or Python.
 
 ## Scope of the reference catalog
 
@@ -32,17 +35,6 @@ formal reference examples. All later scenarios now have checked restricted subpr
 The matrix has 24 native results and 74 results requiring explicitly added laws;
 it is not 98 unconditional predictions from seven complete physical universes.
 It does not claim ten new beyond-LF discoveries or a simulator for arbitrary physics.
-
-## Browse without installing
-
-Open [examples/index.html](examples/index.html) locally after cloning or downloading.
-It links the full matrix, fourteen per-experiment ontology views (all sixteen
-profiles and every two-axis slice), and a sourced experimental evidence ledger.
-GitHub displays HTML source; download it to use the interactive controls.
-
-Conditional cells explicitly state their added laws. Ontology coloring is a
-conditional preview until a vocabulary-to-theorem `ProfileBridge` is proved.
-Published measurements are separated from calculated witnesses.
 
 ## Browse the bundled catalog
 
@@ -139,7 +131,8 @@ friend-record laws now connect to checked bounds. Composable classical channels
 and restricted qubit procedures reuse normalization proofs.
 [Operational results](examples/operational-results.html) display actual theorem
 types; [ruled-out models](examples/ruled-out-models.html) separate empirical evidence
-from mathematical exclusions. The legacy matrix remains a curated snapshot.
+from mathematical exclusions. The matrix, recipes and theorem reports share the same proof-bearing claim format.
+Values and evidence categories are derived from the claims; offline snapshots are generated views.
 
 For a complete experiment → models → proofs → table workflow, see
 [Add a scenario](docs/ADD_A_SCENARIO.md). The example lives in a separate adopter package.

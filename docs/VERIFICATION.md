@@ -1,7 +1,7 @@
 # Verification scope
 
 Run `sh scripts/check.sh` in a checkout with the pinned Lean toolchain available.
-The check builds the library and executable, checks mathematical and documentation
+The check builds the library, checks mathematical and documentation
 examples, audits transitive theorem axioms, regenerates the snapshot from Lean,
 and tests the Python client and report contracts.
 
@@ -43,7 +43,7 @@ consciousness, gravity, thermodynamic costs or indefinite causal order.
 
 No general solver determines all assumption-profile consistency questions. A
 boolean profile alone cannot supply a physical realization. The seven formerly empty advanced protocols have checked restricted subproblems.
-Their `verifiedConditional` cells require additional laws and do not settle the
+Their additional-law cells require additional laws and do not settle the
 broader physical ambitions. All sixteen-profile UI mappings remain conditional
 until a physical vocabulary bridge is proved; checkbox selection is not proof.
 
@@ -57,15 +57,13 @@ It cannot authenticate the proofs behind arbitrary imported JSON. Rebuild truste
 source with Lean when mathematical assurance is required.
 
 
-## Schema 2 and conditional evidence
+## One reporting standard
 
-Schema version 2 adds `extensions` with required laws, contrast and scope, and
-`verifiedConditional` for theorems that need laws beyond the model column.
-`requiresExtension` remains available for future unsupported cases. Schema 1
-snapshots are intentionally rejected instead of silently relabeling old gaps.
-Every ClaimId is resolved to a proof; the resolver's transitive axioms are audited.
-A registered name does not formally check arbitrary English prose: theorem statements
-and premises are the authoritative claims. The generated HTML is a presentation.
+Catalog schema 3 and scenario schema v2 share `Core.Claim`. Numeric values and
+result categories are derived from proofs; symbolic results carry the actual
+proposition. Native bounds in the catalog carry matching existence witnesses.
+Every export audits its transitive dependencies. Earlier schemas are rejected,
+not kept as a weaker reporting route. See [the design](design/UNIFIED_REPORTING.md).
 
 Published Hensen/Bong records are sourced literature summaries, not imported raw
 data. No statistical confidence analysis is verified in Lean here. The generic
@@ -89,7 +87,7 @@ imported law without a manual rebuild to verify fresh predictions and labels, th
 makes that law invalid to test rejection despite a pre-existing compiled module.
 It also rejects eleven malformed laws, recipes and proof exports. Python tests
 cover atomic writes, source protection, nested project selection and CLI isolation
-from the legacy snapshot. These checks run in the normal CI gate.
+from the bundled snapshot. These checks run in the normal CI gate.
 
 The report commands build current imports using `lake lean`, with implicit parameter
 insertion disabled for the checked source. Imported modules retain their own Lean

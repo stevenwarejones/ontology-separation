@@ -25,8 +25,8 @@ class ScaffoldTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'Lake project'):create_scenario('Good',output)
             with self.assertRaisesRegex(ValueError,'.lean'):create_scenario('Good',Path(d)/'README.md')
             self.assertFalse(output.exists())
-    def test_cli_no_legacy_registry(self):
+    def test_cli_no_bundled_catalog(self):
         with patch('ontology_separation.scaffold.create_scenario',return_value=Path('Study.lean')) as create, \
-             patch('ontology_separation.cli.load_report',side_effect=AssertionError('legacy lookup')):
+             patch('ontology_separation.cli.load_report',side_effect=AssertionError('bundled lookup')):
             self.assertEqual(main(['new-scenario','MyStudy','-o','Study.lean']),0)
             create.assert_called_once_with('MyStudy',Path('Study.lean'))

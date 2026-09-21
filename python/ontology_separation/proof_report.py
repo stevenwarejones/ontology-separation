@@ -1,4 +1,4 @@
-"""Export actual Lean theorem types from trusted local source to offline HTML.
+"""Export actual Lean claim propositions from trusted local source to offline HTML.
 Usage: python -m ontology_separation.proof_report examples/Publish.lean -o report.html
 An HTML/JSON snapshot is not an authenticated proof; recheck the Lean source.
 """
@@ -9,7 +9,8 @@ import json
 from pathlib import Path
 from .checked_source import run_lean, validate_output, atomic_write_html
 
-PREFIX = "ONTOLOGY_THEOREM "
+PREFIX = "ONTOLOGY_CLAIM "
+from .evidence import validate_claim, evidence_label, result_text
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 AXES = ("realism", "globalTruth", "locality", "measurementIndependent")
 
@@ -20,18 +21,18 @@ def parse_exports(stdout: str) -> list[dict]:
         if not line.startswith(PREFIX):
             continue
         r = json.loads(line[len(PREFIX):])
-        if (not isinstance(r, dict) or r.get('kind') != 'theorem'
-                or not isinstance(r.get('declaration'), str)
-                or not isinstance(r.get('statement'), str) or not r['statement'].strip()
+        if (not isinstance(r, dict) or not isinstance(r.get('declaration'), str)
                 or not isinstance(r.get('axioms'), list)
                 or any(not isinstance(a, str) or a not in ALLOWED_AXIOMS for a in r['axioms'])):
-            raise ValueError('Invalid theorem export')
+            raise ValueError('Invalid claim export')
+        validate_claim(r.get('claim'))
+        r['statement'] = r['claim']['statement']
         if r['declaration'] in seen:
             raise ValueError('Duplicate theorem export')
         seen.add(r['declaration'])
         records.append(r)
     if not records:
-        raise ValueError('No theorems exported; add #export_theorem Your.theorem')
+        raise ValueError('No claims exported; add #export_claim Your.claim or #export_theorem Your.theorem')
     return records
 
 
@@ -80,7 +81,7 @@ An unclassified cell does not establish compatibility.</p>
 
 def render(records: list[dict], source: str, profiles: list[dict] | None = None) -> str:
     esc = html.escape
-    rows = ''.join('<tr><td><code>'+esc(r['declaration'])+'</code></td><td><pre>'+esc(r['statement'])+
+    rows = ''.join('<tr><td><code>'+esc(r['declaration'])+'</code><br>'+esc(evidence_label(r['claim']))+'</td><td><pre>'+esc(r['statement'])+
                    '</pre></td><td>'+esc(', '.join(r['axioms']) or 'None')+'</td></tr>' for r in records)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Operational results — Ontology Separation</title><style>
@@ -113,7 +114,7 @@ def main() -> None:
         count = write_report(args.source, args.output)
     except (ValueError, OSError) as exc:
         parser.exit(2, str(exc) + '\n')
-    print(f'Exported {count} theorem statements to {args.output}')
+    print(f'Exported {count} checked claims to {args.output}')
 
 if __name__ == '__main__':
     main()

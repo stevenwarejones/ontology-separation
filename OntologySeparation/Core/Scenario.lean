@@ -1,4 +1,4 @@
-import OntologySeparation.Core.Certified
+import OntologySeparation.Core.Claim
 import Mathlib.Data.Rat.Cast.Defs
 
 /-! A shared experimental question, explicit interpretations, and exact table cells.
@@ -16,6 +16,10 @@ structure ExactPredictions (s : Scenario M P) where
 def ExactPredictions.prediction {s : Scenario M P} (r : ExactPredictions s)
     (m : M) (p : P) : Prediction s.question (s.interpret m p) :=
   ⟨(r.value m p : ℝ), r.correct m p⟩
+/-- The same claim representation is used by scenario and catalog exports. -/
+def ExactPredictions.claim {s : Scenario M P} (r : ExactPredictions s)
+    (m : M) (p : P) : Claim :=
+  .exact (s.question.score (s.interpret m p)) (r.value m p) (r.correct m p)
 /-- A selected, nonempty grid; every selected cell has the indexed proof above. -/
 structure Comparison (s : Scenario M P) where
   title : String

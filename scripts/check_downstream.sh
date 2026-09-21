@@ -6,4 +6,4 @@ MATHLIB_NO_CACHE_ON_UPDATE=1 lake update
 lake build
 lake env lean Publish.lean
 lake env lean Checks.lean
-PYTHONPATH=../../python python3 -m ontology_separation.scenario_report Compare.lean -o ../scenario-comparison.html
+PYTHONPATH=../../python python3 -m ontology_separation.proof_report Publish.lean -o ../bell-law-study.html

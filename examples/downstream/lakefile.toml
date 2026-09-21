@@ -1,6 +1,6 @@
 name = "physicistStudy"
 version = "0.1.0"
-defaultTargets = ["Study", "Coherence"]
+defaultTargets = ["Study"]
 # This bundled example shares the checkout's pinned dependency downloads.
 packagesDir = "../../.lake/packages"
 [[require]]
@@ -8,8 +8,4 @@ name = "ontologySeparation"
 path = "../.."
 [[lean_lib]]
 name = "Study"
-moreLeanArgs = ["-DautoImplicit=false"]
-
-[[lean_lib]]
-name = "Coherence"
 moreLeanArgs = ["-DautoImplicit=false"]

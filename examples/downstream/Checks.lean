@@ -1,13 +1,12 @@
-import Coherence
-open OntologySeparation CoherenceStudy
--- A cell cannot silently move to another procedure or another scenario.
+import Study
+open OntologySeparation MyLaboratory
+example : bellBound.kind = "realizedBound" := rfl
+example : singletExcluded.kind = "exclusion" := rfl
+example : bellBound.statement := bellBound.sound
+example : singletExcluded.statement := singletExcluded.sound
+-- A class bound cannot be relabeled as an exact prediction without a new equality proof.
 example : True := by
   fail_if_success
-    have wrong : scenario.question.score (scenario.interpret .coherent .phaseFlipped) = (1 : ℝ) := by
-      exact comparison.predictions.correct .coherent .direct
-  fail_if_success
-    have wrongValue : Scenario.ExactPredictions scenario :=
-      ⟨fun _ _ => 0, predictions_correct⟩
+    have wrong : Bell.score ClassicalWorld.constantWorld.operational.behavior = (0 : ℝ) :=
+      ClassicalWorld.chsh_bound ClassicalWorld.constantWorld
   trivial
-example : predicted .partiallyDephased .repeated = 5/8 := by norm_num [predicted, strength]
-example : predicted .dephased .shielded = 1 := by norm_num [predicted]

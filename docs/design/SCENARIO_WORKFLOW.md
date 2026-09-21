@@ -40,7 +40,7 @@ the whole grid. There is no silent fallback to the old curated matrix.
 
 The complete example lives in an independent Lake package under
 `examples/downstream`, including the model laws, procedures, proof family, grid,
-and export commands. Adding it does not change `ClaimId` or the legacy registry.
+and export commands. Adding it does not require editing the bundled catalog. Each cell exports through `Core.Claim`.
 Negative tests check wrong predictions/procedures and rejection of invented or
 unfinished proofs. Python tests check dimensions, exact arithmetic, escaping,
 CLI routing, and preservation of previous output on failure.

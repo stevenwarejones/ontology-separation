@@ -1,5 +1,5 @@
 import OntologySeparation
-import OntologySeparation.Catalog.Evidence
+import OntologySeparation.Catalog.Matrix
 import OntologySeparation.Core.Assumptions
 
 -- Selected audit roots and their transitive dependencies; not a census of all declarations.
@@ -25,8 +25,8 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.LF.Component.read_charlie
 #print axioms OntologySeparation.LF.Component.read_debbie
 
-#print axioms OntologySeparation.Catalog.resolve
-#print axioms OntologySeparation.Catalog.claim_reference_consistent
+#print axioms OntologySeparation.Claim.sound
+#print axioms OntologySeparation.Catalog.matrix
 #print axioms OntologySeparation.Memory.registered_parameters_valid
 #print axioms OntologySeparation.quantum_operator_bound
 #print axioms OntologySeparation.profileTheory_empty

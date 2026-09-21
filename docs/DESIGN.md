@@ -57,7 +57,7 @@ This release does not promise automatic theorem discovery or a universal simulat
   and explicit dephasing dynamics. Interpretation names do not constitute dynamics.
 - `OntologySeparation/Experiments`: Bell, genuine LF, memory/control benchmarks.
 - `OntologySeparation/Catalog`: all named protocols, requirements, open obligations, matrix.
-- `Main.lean`: JSON export of the registered matrix.
+- `Reporting/Claim.lean` and `Reporting/Catalog.lean`: checked export of claims and the model matrix.
 - `python/`: standard-library CLI client and Markdown/HTML rendering.
 - `python_tests/`: mathematical examples and report-contract tests, including negative cases.
 - `docs/`: sources, assumptions, limitations, contribution instructions.
@@ -134,31 +134,21 @@ implies another, Lean can prove the corresponding conflicting profiles empty.
 Profile existence and experiment separation are different obligations. No demo
 assigns a speculative physical theory to a profile merely from its name.
 
-## Architecture revision after implementation feedback
+## Current reporting architecture
 
-Native compilation exposed an adoption problem: importing the proof registry into
-the report executable asked Lake to compile thousands of unnecessary native mathlib
-objects. The executable now imports only Lean/Core metadata, the rational memory
-engine, and a finite `ClaimId` type. `Catalog/Evidence.resolve` exhaustively maps
-every ClaimId to a proof-bearing proposition and proves the displayed declaration
-reference is consistent. The default build still checks the proof library.
+`Core.Claim` connects numerical values, bounds, witnesses and exclusions to their
+proofs. `Reporting.Claim` supplies the common exporter used by recipes, standalone
+results and the bundled catalog. Data is extracted by kernel reduction; the
+reporting pipeline does not natively execute real-valued mathematical models.
+See [unified reporting](design/UNIFIED_REPORTING.md).
 
-Memory operations live in `Runtime/Memory.lean`, shared verbatim with the proofs
-in `Models/Memory.lean`. The raw runtime `Parameters` type is internal and can
-represent arbitrary rational strengths. The public mathematical `Memory.Model`
-requires 0 <= p <= 1 and coerces to those parameters. Registered runtime examples
-have a separate physical-range theorem. This separation avoids both duplicate
-numeric implementations and native linkage of the proof infrastructure.
+Memory operations live in `Runtime/Memory.lean`, shared with `Models/Memory.lean`.
+The internal rational engine has a public `Memory.Model` wrapper requiring strength
+in [0,1]. Catalog memory claims take that checked model. The model list supplies
+both parameter labels and interpretation dispatch, avoiding duplicated parameters.
 
-The runtime registry is a curated demonstration client; its family dispatch is
-not the extension API. The generic `Theory`, `Interpreter`, `profileTheory`,
-`Bound`, `Witness` and `Separation` interfaces remain open. Reports are a view
-of checked mathematics, and arbitrary JSON is never authenticated by its labels.
-
-
-## Matrix-completion revision
-
-The current design and evidence semantics are detailed in [MATRIX_COMPLETION.md](MATRIX_COMPLETION.md).
-Schema 2 distinguishes native results from additional-law conditional results;
-all HTML views are generated under examples/. The initial missing-law inventory
-is preserved above as historical design context.
+The catalog is a client of the open `Theory`, `Interpreter`, `Scenario`, `Bound`,
+`Witness` and `Separation` interfaces. It uses actual claims, not a second theorem
+registry. Catalog schema 3 and scenario schema v2 share the claim contract; earlier
+schemas are rejected. All HTML views are generated under examples/. Proof scope
+and applicability to physical systems remain distinct review obligations.

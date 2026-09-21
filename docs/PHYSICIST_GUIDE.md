@@ -132,7 +132,7 @@ To export your own theorem, no central claim enumeration needs editing:
 
 ```lean
 import OntologySeparation
-import OntologySeparation.Reporting.Export
+import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.FriendRecords.bound
 ```
 
@@ -153,7 +153,8 @@ unfinished proofs, and unsupported proof dependencies cannot be published by thi
 command. Physical interpretation text is commentary, not an extra inferred theorem.
 HTML and JSON remain editable snapshots. Recheck trusted local source with Lean;
 this command executes that source and does not authenticate arbitrary third-party
-JSON. The legacy 98-cell report still has a weaker, curated presentation contract.
+JSON. The 98-cell catalog uses the same claim exporter. Its five bound cells now each
+carry a satisfying model; added-law applicability is marked separately.
 
 ## Setup
 

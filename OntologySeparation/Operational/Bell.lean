@@ -1,7 +1,7 @@
 import OntologySeparation.Adapters.Shared
 import OntologySeparation.Core.Certified
 
-/-! The legacy realism slot specializes to outcome independence here. It is not
+/-! The realism slot specializes to outcome independence here. It is not
 an identification of philosophical realism with one probability equation. -/
 namespace OntologySeparation.OperationalBell
 noncomputable section

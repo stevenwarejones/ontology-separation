@@ -24,11 +24,11 @@ def validate_output(source: Path, output: Path) -> None:
         raise ValueError('Choose an .html output file; reports cannot overwrite Lean or project files')
 
 
-def run_lean(source: Path) -> str:
+def run_lean(source: Path, lake: str = "lake") -> str:
     project = project_for(source)
     # Unlike `lake env lean`, `lake lean` builds imported modules from current source.
     try:
-        result = subprocess.run(['lake', 'lean', str(source.resolve()), '--', '-DautoImplicit=false'], cwd=project,
+        result = subprocess.run([lake, 'lean', str(source.resolve()), '--', '-DautoImplicit=false'], cwd=project,
                                 capture_output=True, text=True)
     except FileNotFoundError as exc:
         raise ValueError('lake was not found. Install Lean with Elan and add $HOME/.elan/bin to PATH') from exc

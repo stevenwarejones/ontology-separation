@@ -1,5 +1,5 @@
 import OntologySeparation
-import OntologySeparation.Reporting.Export
+import OntologySeparation.Reporting.Claim
 
 #export_theorem OntologySeparation.OperationalBell.chsh_bound
 #export_theorem OntologySeparation.OperationalBell.singlet_excludes

@@ -22,7 +22,7 @@ import OntologySeparation.Operational.Qubit
 import OntologySeparation.Operational.Countermodels
 import OntologySeparation.Operational.ProfileMatrix
 import OntologySeparation.Operational.ClassicalWorld
-import OntologySeparation.Reporting.Export
+import OntologySeparation.Reporting.Claim
 
 import OntologySeparation.Core.Scenario
 import OntologySeparation.Reporting.Scenario

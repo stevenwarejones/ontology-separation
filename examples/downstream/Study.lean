@@ -1,22 +1,23 @@
-import OntologySeparation.Operational.Qubit
+import OntologySeparation.Operational.ClassicalWorld
+import OntologySeparation.Core.Claim
+
+/-! Extend the general framework with a Bell law package. Unlike qubit recipes,
+this proves a bound for a class of hidden-state models, not one probability. -/
 namespace MyLaboratory
 open OntologySeparation
 noncomputable section
-structure TwoStageModel where
-  first : Qubit.Noise
-  second : Qubit.Noise
-def predict (m : TwoStageModel) : Behavior binaryInterface :=
-  (Qubit.experiment ((Qubit.dephase m.first).thenDo (Qubit.dephase m.second))).behavior
-def FullyCoherent (m : TwoStageModel) : Prop := m.first.strength = 0 ∧ m.second.strength = 0
-theorem coherent_prediction (m : TwoStageModel) (h : FullyCoherent m) : (predict m).prob () true = 1 := by
-  unfold predict
-  rw [Qubit.twice_dephased, h.1, h.2]
-  norm_num
-def fullyDephased : TwoStageModel := ⟨⟨1, by norm_num, by norm_num⟩, ⟨1, by norm_num, by norm_num⟩⟩
-theorem dephased_prediction : (predict fullyDephased).prob () true = 1/2 := by
-  unfold predict
-  rw [Qubit.twice_dephased]
-  norm_num [fullyDephased]
-def result : Prediction Qubit.question (predict fullyDephased) := ⟨1/2, dephased_prediction⟩
+
+def admissible (m : OperationalBell.Model Unit) : Prop :=
+  OperationalBell.screeningOffProfile.Satisfied OperationalBell.vocabulary m
+
+def bellBound : Claim := .realizedBound admissible (fun m => Bell.score m.behavior) 2
+  (fun m h => OperationalBell.certified.valid m h)
+  ClassicalWorld.constantWorld.operational ClassicalWorld.realizedBound.satisfies
+
+-- Exclusion uses the same class definition and the actual calculated singlet behavior.
+def singletExcluded : Claim := .exclusion
+  (profileTheory (OperationalBell.vocabulary (Λ := Unit))
+    OperationalBell.screeningOffProfile OperationalBell.Model.behavior)
+  Bell.singletBehavior OperationalBell.singlet_excludes
 end
 end MyLaboratory

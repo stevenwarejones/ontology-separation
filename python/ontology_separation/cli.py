@@ -43,7 +43,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "theorem-report":
             from .proof_report import write_report
             count = write_report(args.source, args.output)
-            print(f"Exported {count} theorem statements to {args.output}")
+            print(f"Exported {count} checked claims to {args.output}")
             return 0
         report = build_report(args.repo) if args.command == "verify" else load_report(args.report)
         if args.command in ("list", "verify"):

@@ -1,100 +1,100 @@
-# Add a new physical mechanism with the advanced interface
+# Add experiments and new physical laws
 
-**For the supported qubit operations, start with [checked recipes](START_HERE.md).**
-That route generates labels and proves predictions automatically. Use this guide
-when you need a new law, operation, state space, or measurement outside that backend.
-`Scenario.Comparison.ofLists` can construct comparisons without manual nonempty-list
-proofs; you still supply the new interpreter and its prediction theorem.
+Start with [checked recipes](START_HERE.md) for the supported real-qubit operations.
+For a law package outside that backend, open
+[Study.lean](../examples/downstream/Study.lean). It uses Bell's finite hidden-state
+models and exports both a non-vacuous bound and a mathematical exclusion through
+the same claim representation used by the matrix and recipes.
 
+## Worked example: a Bell law package
 
-Start with [the rendered comparison](../examples/scenario-comparison.html), then
-open [Coherence.lean](../examples/downstream/Coherence.lean). This is the complete
-source, in its own Lake package. You can copy it without editing the upstream catalog.
-
-## The physical question
-
-Prepare |+>, apply a procedure, and measure X. What is the probability of +?
-Each model specifies the law of an exposure: `(x,z) ↦ ((1-p)x,z)` in the real Bloch
-disk. The alternatives are p=0, p=1/2, and p=1. Their labels mean precisely those
-channel laws, not entire philosophical ontologies.
-
-| Physical model | One exposure | Phase flip, exposure | H, exposure, H | Two exposures |
-|---|---:|---:|---:|---:|
-| Preserved coherence, p=0 | 1 | 0 | 1 | 1 |
-| Partial dephasing, p=1/2 | 3/4 | 1/4 | 1 | 5/8 |
-| Complete dephasing, p=1 | 1/2 | 1/2 | 1 | 1/2 |
-
-The first procedure separates these predictions. The protected procedure maps the
-prepared state into a dephasing eigenstate and back, so this statistic is identical
-for all three laws. Two exposures compose the specified channel twice. These are
-exact calculated probabilities; an individual trial is still random where the
-probability lies strictly between zero and one.
-
-## Run it
-
-From the repository, after installing the pinned Lean toolchain:
-
-```sh
-lake exe cache get
-lake build
-cd examples/downstream
-lake update
-lake build
-PYTHONPATH=../../python python3 -m ontology_separation.scenario_report Compare.lean -o ../scenario-comparison.html
-```
-
-Open `examples/scenario-comparison.html` from the repository root. If the Python
-client is installed, the last command can instead be:
-
-```sh
-ontology-separation scenario-report Compare.lean -o ../scenario-comparison.html
-```
-
-The command checks the source with Lean before writing the table. `Compare.lean`
-contains the entire publishing step:
+The example defines `admissible m` by requiring outcome independence, parameter
+independence and measurement independence in `OperationalBell.vocabulary`.
+The meaning is a conjunction of those actual predicates, not an interpretation name.
 
 ```lean
-import Coherence
-import OntologySeparation.Reporting.Scenario
-#export_scenario CoherenceStudy.comparison
-#export_theorem CoherenceStudy.predictions_correct
-#export_theorem CoherenceStudy.direct_separates
-#export_theorem CoherenceStudy.protected_equal
+def admissible (m : OperationalBell.Model Unit) : Prop :=
+  OperationalBell.screeningOffProfile.Satisfied OperationalBell.vocabulary m
+
+def bellBound : Claim := .realizedBound admissible (fun m => Bell.score m.behavior) 2
+  (fun m h => OperationalBell.certified.valid m h)
+  ClassicalWorld.constantWorld.operational ClassicalWorld.realizedBound.satisfies
 ```
 
-## What you edit
+Read this as:
 
-1. **Model laws.** `Model` lists alternatives; `strength` specifies the exposure
-   parameter for each. `noise` proves each parameter is physically admissible.
-2. **Procedures.** `Protocol` lists the four procedures; `procedure` composes actual
-   physical operations. Every branch uses the same preparation and X readout.
-3. **Question and interpretation.** `scenario` connects each model/procedure pair
-   to a normalized public behavior, and selects the + probability as the statistic.
-4. **Predictions.** `predicted` proposes rational values. `predictions_correct`
-   proves they follow from the physical interpretation, reusing the channel lemmas.
-5. **Presentation.** `comparison` selects models and procedures and supplies their
-   labels. Its `predictions` field contains the values together with their proof.
+1. `admissible` defines exactly which models the result covers. This worked example
+   uses `Unit` as its hidden-state space. The library's general Bell theorem permits
+   any finite hidden-state space; this example does not silently assert that generality.
+2. The score is CHSH on the model's observable behavior.
+3. The proposed ceiling is 2. The following proof must establish **that ceiling**
+   for every admissible model; changing the number alone cannot produce a new result.
+4. `constantWorld.operational` supplies an actual member of this class.
+5. `realizedBound.satisfies` proves membership under these exact laws.
 
-As a first exercise, change the partial-dephasing strength from `1/2` to `1/4` in
-`strength`. The same proof script handles this admissible rational parameter, and
-the table becomes `7/8, 1/8, 1, 25/32` for that model. Update its display label too:
-Lean verifies equations, not the meaning of English labels. A value outside [0,1]
-fails the physicality obligations. Changing a proposed probability without changing
-its physics fails `predictions_correct`.
+`singletExcluded` separately proves that the specified singlet behavior cannot be
+produced by the same profile theory. A measured estimator alone cannot discharge
+that mathematical exclusion proof or prove a physical interpretation false.
 
-To add a fifth procedure, extend `Protocol`, `procedure`, `predicted`, the proof,
-and the displayed protocol list. Lean reports missing cases and unsatisfied proof
-obligations. You do not add a central claim ID, edit the exporter, or hand-fill HTML.
+The publishing file contains only:
 
-## Your own repository
+```lean
+import Study
+import OntologySeparation.Reporting.Claim
+#export_claim MyLaboratory.bellBound
+#export_claim MyLaboratory.singletExcluded
+```
 
-Copy the downstream package, remove its shared `packagesDir` setting, and replace
-the local `path = "../.."` dependency with a Git dependency pinned to a commit that
-contains this API. Keep the matching `lean-toolchain`. See
-[the package README](../examples/downstream/README.md).
+After [setting up the downstream package](../examples/downstream/README.md), run:
 
-A new kind of physics can use its own model and state types. Reuse this workflow
-when each selected procedure has an explicit interpretation and a rational exact
-prediction. General real-valued results and bounds use the existing theorem-report
-API. New physical operations still need validity proofs; the framework supplies
-composition and reporting, not the missing physical law.
+```sh
+ontology-separation theorem-report examples/downstream/Publish.lean -o examples/bell-law-study.html
+```
+
+The report command selects the source's Lake project and builds its current imports.
+Open [the generated example](../examples/bell-law-study.html) locally.
+
+## Choose the evidence your experiment supports
+
+All paths use `Core.Claim` and the same checked exporter and Python renderer:
+
+| Constructor | Required evidence | What appears in reports |
+|---|---|---|
+| `Claim.exact` | An expression, rational value, equality proof | Exact value from that equality |
+| `Claim.bound` | A class, score, rational ceiling, universal inequality | Bound; existence not certified |
+| `Claim.realizedBound` | The same bound plus a member and membership proof | Bound + satisfying model |
+| `Claim.witness` | A class member, membership proof and exact score | Realized witness with proved value |
+| `Claim.exclusion` | A model/behavior and proof it is outside a class | Mathematical exclusion |
+| `Claim.theoremResult` | A proposition and its proof | Full theorem, including its assumptions |
+
+`#export_theorem` is a convenience for the last constructor. It uses the same
+exporter, not a separate evidence system. `RealizedProfileBound` remains the
+specialized convenience type for assumption profiles.
+
+## Exact grids for a new backend
+
+For an experiment needing a new state space, dynamics or measurement:
+
+1. Define model and protocol types, their normalized observable behavior, and score.
+2. Define a `Scenario` connecting those interpretations to the experimental question.
+3. Supply `Scenario.ExactPredictions`: a rational evaluator and a proof it equals
+   that question's score for every model and protocol.
+4. Construct a `Scenario.Comparison` and use `#export_scenario`.
+
+Each exported cell becomes `Claim.exact` through `ExactPredictions.claim`. A
+handwritten evaluator is acceptable because its correctness is proved against the
+interpretation; changing it alone invalidates the proof. Generate parameter labels
+from the same model data. Descriptions remain explanatory text, not physical laws.
+
+## Add a bundled catalog entry
+
+Ordinary adopter projects require no catalog edit. For the bundled examples,
+`Catalog.Matrix.evaluate` selects a proof-bearing claim for each model/protocol.
+`Catalog.checked` takes that claim, assumptions and an applicability scope. It has
+**no independent numeric-result or evidence-status argument**. An extension carries
+its actual claim; there is no theorem-ID lookup table or hand-maintained resolver.
+
+Mark additional laws explicitly with `.additional`. A concrete witness under those
+extra laws does not prove that the original column alone entails the result.
+Regenerate with `python3 scripts/export.py`, then run `sh scripts/check.sh`.
+The offline JSON is a generated view, not a second source of predictions.
