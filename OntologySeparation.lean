@@ -30,3 +30,5 @@ import OntologySeparation.Reporting.Scenario
 import OntologySeparation.Recipes
 
 import OntologySeparation.LocalFriendliness
+
+import OntologySeparation.Adapters.FiniteQuantum

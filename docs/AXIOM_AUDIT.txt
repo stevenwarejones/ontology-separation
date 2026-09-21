@@ -117,3 +117,10 @@
 'OntologySeparation.LocalFriendlinessRecipe.fully_dephased_realizes_profile' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.ExperimentAccess.Separator.not_equivalent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ExperimentAccess.Equivalent.statistic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FiniteQuantum.Test.normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FiniteQuantum.Test.prepend_prob' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FiniteQuantum.local_behavior_eq' depends on axioms: [propext, Classical.choice, Quot.sound]

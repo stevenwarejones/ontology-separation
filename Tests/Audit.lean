@@ -123,3 +123,13 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.LocalFriendlinessRecipe.charlie_noise_threshold
 #print axioms OntologySeparation.LocalFriendlinessRecipe.coherent_excludes_profile
 #print axioms OntologySeparation.LocalFriendlinessRecipe.fully_dephased_realizes_profile
+
+#print axioms OntologySeparation.ExperimentAccess.Separator.not_equivalent
+
+#print axioms OntologySeparation.ExperimentAccess.Equivalent.statistic
+
+#print axioms OntologySeparation.FiniteQuantum.Test.normalized
+
+#print axioms OntologySeparation.FiniteQuantum.Test.prepend_prob
+
+#print axioms OntologySeparation.FiniteQuantum.local_behavior_eq
