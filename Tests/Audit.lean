@@ -2,7 +2,11 @@ import OntologySeparation
 import OntologySeparation.Catalog.Evidence
 import OntologySeparation.Core.Assumptions
 
--- CI checks the transitive axioms of every proof-bearing report claim and core result.
+-- Selected audit roots and their transitive dependencies; not a census of all declarations.
+-- Each #export_theorem / #export_scenario also automatically audits its own dependencies.
+#print axioms OntologySeparation.RealizedProfileBound.realizable
+#print axioms OntologySeparation.RealizedProfileBound.valid
+#print axioms OntologySeparation.ClassicalWorld.realizedBound
 #print axioms OntologySeparation.Separation.excludes
 #print axioms OntologySeparation.Behavior.prob_le_one
 #print axioms OntologySeparation.Behavior.mix
@@ -88,3 +92,7 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.Countermodels.rejected_records_realized
 
 #print axioms OntologySeparation.Scenario.ExactPredictions.prediction
+
+#print axioms OntologySeparation.Recipes.probability_correct
+#print axioms OntologySeparation.Recipes.probability_bounds
+#print axioms OntologySeparation.Recipes.compare

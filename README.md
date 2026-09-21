@@ -7,6 +7,25 @@ physical theory, describe an experiment, and prove which predictions distinguish
 it from another theory. Physical assumptions remain explicit; Lean's logic and
 proof checker stay fixed.
 
+## Make your first checked comparison
+
+1. [Open the worked recipe table](examples/recipe-comparison.html) locally.
+2. Follow [the short setup guide](docs/START_HERE.md).
+3. Generate a study, edit its laws or procedures, and export it:
+
+```sh
+ontology-separation new-scenario MyStudy -o examples/MyStudy.lean
+ontology-separation scenario-report examples/MyStudy.lean -o examples/my-study.html
+```
+
+For supported qubit recipes, the framework derives **both predictions and their
+proofs**. Labels come from the actual parameters and operations. Reports rebuild
+edited dependencies before checking, and fail without publishing if a proof fails.
+See [the glossary](docs/GLOSSARY.md) for terminology, or the
+[advanced interface](docs/ADD_A_SCENARIO.md) for new physical mechanisms.
+
+## Scope of the reference catalog
+
 This is an initial research framework. It includes **14 scenario descriptions**
 and a **7-model comparison matrix**. Bell and genuine Local Friendliness have
 formal reference examples. All later scenarios now have checked restricted subproblems or conditional extensions.
@@ -25,7 +44,7 @@ Conditional cells explicitly state their added laws. Ontology coloring is a
 conditional preview until a vocabulary-to-theorem `ProfileBridge` is proved.
 Published measurements are separated from calculated witnesses.
 
-## Start here
+## Browse the bundled catalog
 
 ```sh
 python -m pip install -e .

@@ -74,3 +74,32 @@ passing an observed estimator alone would not discharge that premise.
 
 The Python runner fails if it discovers zero tests. Tests verify case-fold-safe
 paths so Mac extraction cannot collapse Lean and Python test directories again.
+
+## Checked recipes and adoption safeguards
+
+`Recipes.probability_correct` connects the exact rational evaluator to normalized
+real-qubit experiment semantics for every law and operation list. The evaluator's
+outputs are not treated as proofs in their own right. Tests exercise operation
+order, both preparations/readouts, repeated exposure, and fixed channels independent
+of the selected law. `probability_bounds` follows from the normalized behavior.
+
+`scripts/check_recipes.py` builds an independent adopter package, generates a study
+with the public scaffolder, and checks all twelve starter cells. It changes an
+imported law without a manual rebuild to verify fresh predictions and labels, then
+makes that law invalid to test rejection despite a pre-existing compiled module.
+It also rejects eleven malformed laws, recipes and proof exports. Python tests
+cover atomic writes, source protection, nested project selection and CLI isolation
+from the legacy snapshot. These checks run in the normal CI gate.
+
+The report commands build current imports using `lake lean`, with implicit parameter
+insertion disabled for the checked source. Imported modules retain their own Lean
+options. Neither this option nor the axiom audit establishes that the author's
+physical definitions are appropriate. Generated labels prevent parameter drift in
+the recipe API; free-form descriptions in the advanced API remain reviewable prose.
+
+The manual `Tests/Audit.lean` file identifies selected roots and audits their
+transitive dependencies. It is not a census of all project or adopter declarations.
+Each `#export_scenario` and `#export_theorem` separately audits its dependencies,
+including user-defined results not on that list. Editing raw JSON or emitting
+lookalike text does not produce an authenticated proof: reports assume trusted
+local source and tooling. Review definitions and recheck the source.

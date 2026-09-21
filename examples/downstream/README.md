@@ -1,5 +1,25 @@
 # Your own laboratory project
 
+## Easiest entry point
+
+After the package setup below, `RecipeStudy.lean` imports the one-file recipe API.
+From this directory, run:
+
+```sh
+PYTHONPATH=../../python python3 -m ontology_separation.cli scenario-report RecipeStudy.lean -o ../recipe-comparison.html
+```
+
+This builds current imports automatically. To create another complete study:
+
+```sh
+PYTHONPATH=../../python python3 -m ontology_separation.cli new-scenario MyStudy -o MyStudy.lean
+PYTHONPATH=../../python python3 -m ontology_separation.cli scenario-report MyStudy.lean -o ../my-study.html
+```
+
+See [the walkthrough](../../docs/START_HERE.md). The `Coherence`/`Compare` example
+below shows the advanced interface for implementing physics beyond this backend.
+
+
 This independent Lake package imports only the qubit backend and adds a parameterized model, an operational coherence
 law, a composed experiment, and predictions without editing the upstream registry.
 From this directory, run `lake update`, `lake build`, then `lake env lean Publish.lean`.

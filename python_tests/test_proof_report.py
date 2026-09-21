@@ -30,6 +30,7 @@ class ProofReportTests(unittest.TestCase):
         page=profile_table(parse_profiles('ONTOLOGY_PROFILES '+json.dumps(rows)))
         self.assertEqual(page.count('S ≤ 2'),16)
         self.assertIn('different named vocabularies',page)
+        self.assertEqual(page.count('existence not certified for this row'),16)
         rows[1]=rows[0]
         with self.assertRaises(ValueError):parse_profiles('ONTOLOGY_PROFILES '+json.dumps(rows))
     def test_lean_failure_preserves_previous_report(self):
@@ -41,10 +42,13 @@ class ProofReportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             output=Path(directory)/'report.html'
             output.write_text('previous checked report')
+            source=Path(directory)/'Broken.lean'
+            source.write_text('')
+            (Path(directory)/'lakefile.toml').write_text('')
             result=subprocess.CompletedProcess([],1,'error: proof failed','')
-            with patch('ontology_separation.proof_report.subprocess.run',return_value=result):
+            with patch('ontology_separation.checked_source.subprocess.run',return_value=result):
                 with self.assertRaisesRegex(ValueError,'proof failed'):
-                    write_report(Path('Broken.lean'),output)
+                    write_report(source,output)
             self.assertEqual(output.read_text(),'previous checked report')
     def test_theorem_cli_does_not_load_legacy_snapshot(self):
         from unittest.mock import patch

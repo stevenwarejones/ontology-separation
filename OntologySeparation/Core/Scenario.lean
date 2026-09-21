@@ -25,5 +25,11 @@ structure Comparison (s : Scenario M P) where
   models_nonempty : models ≠ []
   protocols_nonempty : protocols ≠ []
   predictions : ExactPredictions s
+/-- Default proof automation removes routine nonempty-selection obligations. -/
+def Comparison.ofLists {s : Scenario M P} (title description : String)
+    (models : List (String × M)) (protocols : List (String × P))
+    (predictions : ExactPredictions s) (hm : models ≠ [] := by simp)
+    (hp : protocols ≠ [] := by simp) : Comparison s :=
+  ⟨title, description, models, protocols, hm, hp, predictions⟩
 end Scenario
 end OntologySeparation

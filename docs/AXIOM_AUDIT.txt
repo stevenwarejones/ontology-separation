@@ -1,3 +1,6 @@
+'OntologySeparation.RealizedProfileBound.realizable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.RealizedProfileBound.valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ClassicalWorld.realizedBound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.Separation.excludes' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.Behavior.prob_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.Behavior.mix' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -76,3 +79,6 @@
 'OntologySeparation.Countermodels.quantumFriend_not_readable' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.Countermodels.rejected_records_realized' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.Scenario.ExactPredictions.prediction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.Recipes.probability_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.Recipes.probability_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.Recipes.compare' depends on axioms: [propext, Classical.choice, Quot.sound]

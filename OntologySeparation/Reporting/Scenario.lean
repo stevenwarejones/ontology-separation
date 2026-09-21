@@ -3,10 +3,18 @@ import OntologySeparation.Reporting.Export
 
 open Lean Elab Command Meta
 namespace OntologySeparation.ScenarioExport
+private partial def characters (e : Expr) : MetaM (List Char) := do
+  let e ← whnf e
+  if e.isAppOf ``List.nil then return []
+  unless e.isAppOfArity ``List.cons 3 do
+    throwError "Expected reducible characters in a generated label"
+  let args := e.getAppArgs
+  let some code ← getNatValue? (← whnf (← mkAppM ``Char.toNat #[args[1]!]))
+    | throwError "Expected a reducible character in a generated label"
+  return Char.ofNat code :: (← characters args[2]!)
 private def stringValue (e : Expr) : MetaM String := do
-  let some s := getStringValue? (← whnf e)
-    | throwError "Expected a reducible string label"
-  return s
+  if let some s := getStringValue? (← whnf e) then return s
+  return String.ofList (← characters (← mkAppM ``String.toList #[e]))
 private partial def entries (e : Expr) : MetaM (Array (String × Expr)) := do
   let e ← whnf e
   if e.isAppOf ``List.nil then return #[]
@@ -16,12 +24,22 @@ private partial def entries (e : Expr) : MetaM (Array (String × Expr)) := do
   let label ← stringValue (← mkAppM ``Prod.fst #[args[1]!])
   let value ← mkAppM ``Prod.snd #[args[1]!]
   return #[(label, value)] ++ (← entries args[2]!)
+private def validateLabels (axis : String) (items : Array (String × Expr)) : MetaM Unit := do
+  if items.isEmpty then throwError "A comparison needs at least one {axis}"
+  let mut seen : Array String := #[]
+  for (label, _) in items do
+    if label.trimAscii.toString.isEmpty then throwError "Empty {axis} label"
+    let normalized := label.trimAscii.toString
+    if seen.contains normalized then throwError "Duplicate {axis} label: {label}"
+    seen := seen.push normalized
 /-- Project only checked rational data; never execute the real-valued interpretation. -/
 def comparisonJson (table : Expr) : MetaM Json := withTransparency .all do
   let title ← stringValue (← mkAppM ``Scenario.Comparison.title #[table])
   let description ← stringValue (← mkAppM ``Scenario.Comparison.description #[table])
   let models ← entries (← mkAppM ``Scenario.Comparison.models #[table])
   let protocols ← entries (← mkAppM ``Scenario.Comparison.protocols #[table])
+  validateLabels "model" models
+  validateLabels "procedure" protocols
   let predictions ← mkAppM ``Scenario.Comparison.predictions #[table]
   let mut rows : Array Json := #[]
   for (_, m) in models do

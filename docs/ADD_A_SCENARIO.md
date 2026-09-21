@@ -1,4 +1,11 @@
-# Add a scenario and compare physical models
+# Add a new physical mechanism with the advanced interface
+
+**For the supported qubit operations, start with [checked recipes](START_HERE.md).**
+That route generates labels and proves predictions automatically. Use this guide
+when you need a new law, operation, state space, or measurement outside that backend.
+`Scenario.Comparison.ofLists` can construct comparisons without manual nonempty-list
+proofs; you still supply the new interpreter and its prediction theorem.
+
 
 Start with [the rendered comparison](../examples/scenario-comparison.html), then
 open [Coherence.lean](../examples/downstream/Coherence.lean). This is the complete

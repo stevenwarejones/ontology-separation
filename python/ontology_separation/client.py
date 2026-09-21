@@ -94,7 +94,8 @@ class Report:
                 detail = c["limitation"] + "\nAssumptions: " + "; ".join(c["assumptions"])
                 if c["declaration"]:
                     detail += "\nLean: " + c["declaration"]
-                cols.append(f'<td class="{esc(c["status"])}"><details><summary>{esc(c["result"])}</summary>'
+                badge = '<strong>Additional laws required</strong><br>' if c['status'] == 'verifiedConditional' else ''
+                cols.append(f'<td class="{esc(c["status"])}">{badge}<details><summary>{esc(c["result"])}</summary>'
                             f'<p>{esc(c["status"])}</p><pre>{esc(detail)}</pre></details></td>')
             rows.append(f'<tr><th>{esc(s["id"])}<br>{esc(s["title"])}</th>{"".join(cols)}</tr>')
         heads = "".join(f'<th>{esc(m["title"])}<small>{esc(m["kind"])}</small></th>' for m in self.data["models"])
@@ -107,6 +108,7 @@ small{{display:block;font-weight:normal;margin-top:5px}}thead th{{background:#17
 .verifiedConditional{{background:#fff6df}}.requiresExtension{{background:#f3f4f5;color:#56616b}}
 pre{{white-space:pre-wrap;font:13px system-ui}}summary{{cursor:pointer}}button{{padding:8px}}
 </style><h1>Ontology Separation</h1><p>Physical theories, explicit assumptions, Lean-checked mathematics.</p>
+<p><strong>These cells are not unconditional predictions from complete physical universes.</strong> A conditional cell needs its stated additional laws; a bound alone does not prove a model exists.</p>
 <p>{esc(self.provenance)}</p><p>Green: native bound or witness. Blue: native toy prediction. Amber: theorem under ADDITIONAL laws, not a prediction entailed by the column alone. Gray: missing extension. Expand a cell for assumptions and limitations.</p>
 <div class="wrap"><table><thead><tr><th>Experiment</th>{heads}</tr></thead><tbody>{"".join(rows)}</tbody></table></div>
 {nav}<h2>Assumption profiles</h2><p>All 16 binary profiles are expressible. Their physical realizability is not asserted. False means negation; unspecified adds no constraint.</p></html>'''

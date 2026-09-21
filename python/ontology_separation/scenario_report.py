@@ -6,7 +6,7 @@ import html
 import json
 from pathlib import Path
 import re
-import subprocess
+from .checked_source import run_lean, validate_output, atomic_write_html
 from .proof_report import parse_exports
 
 PREFIX = 'ONTOLOGY_SCENARIO '
@@ -29,7 +29,7 @@ def parse_comparison(stdout: str) -> dict:
         labels = c.get(axis)
         if (not isinstance(labels, list) or not labels
                 or any(not isinstance(x, str) or not x.strip() for x in labels)
-                or len(set(labels)) != len(labels)):
+                or len({' '.join(x.split()) for x in labels}) != len(labels)):
             raise ValueError('Model and protocol labels must be nonempty and unique')
     values = c.get('values')
     if not isinstance(values, list) or len(values) != len(c['models']):
@@ -80,15 +80,13 @@ This editable HTML is a snapshot, not a proof certificate. Regenerate it from tr
 
 
 def write_report(source: Path, output: Path) -> int:
-    result = subprocess.run(['lake', 'env', 'lean', str(source)], capture_output=True, text=True)
-    if result.returncode:
-        raise ValueError('Lean rejected the comparison:\n'+result.stdout+result.stderr)
-    record = parse_comparison(result.stdout)
+    validate_output(source, output)
+    stdout = run_lean(source)
+    record = parse_comparison(stdout)
     # Additional theorem explanations are optional; the Comparison already carries its cell proofs.
-    proofs = parse_exports(result.stdout) if any(x.startswith('ONTOLOGY_THEOREM ') for x in result.stdout.splitlines()) else []
+    proofs = parse_exports(stdout) if any(x.startswith('ONTOLOGY_THEOREM ') for x in stdout.splitlines()) else []
     document = render(record, str(source), proofs)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(document, encoding='utf-8')
+    atomic_write_html(output, document)
     c = record['comparison']
     return len(c['models'])*len(c['protocols'])
 
