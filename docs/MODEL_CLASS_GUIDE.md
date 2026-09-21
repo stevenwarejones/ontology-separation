@@ -1,5 +1,11 @@
 # Check a whole model class
 
+> **Two layers.** This advanced guide covers general behavior certificates, with a complex-quantum research example.
+> To run or compare supported experiments, start with the [recipe guides](RECIPE_GUIDE.md).
+> Recipes have exact rational evaluators; the general complex-quantum semantics are noncomputable.
+> Both layers use normalized behaviors and audited reports, but no checked recipe-to-quantum equivalence bridge exists yet.
+> The class API is theory-independent; see the [documentation index](README.md) for the beginner path.
+
 A single inequality is a useful exclusion test. Passing it does **not** prove
 compatibility. This API makes the two conclusions require different evidence.
 
