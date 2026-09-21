@@ -19,3 +19,5 @@ import Tests.FriendProtocol
 import Tests.ExperimentAccess
 
 import Tests.RecordAccess
+
+import Tests.FiniteModels

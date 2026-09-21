@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'python'))
 from ontology_separation.scaffold import create_scenario
 from ontology_separation.scenario_report import write_report
+from ontology_separation.proof_report import write_report as write_claim_report
 
 with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as directory:
     project = Path(directory)
@@ -49,6 +50,25 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     assert values == expected, values
     assert 'fully_dephased_realizes_profile' in friend_output.read_text()
     print('LF starter: eight cells and profile proof provenance checked in an adopter project', flush=True)
+
+    # Copy public examples into an independent Lake project: no repository-local imports.
+    for filename, count in [('RecordAccessStudy.lean', 6), ('ModelClassStudy.lean', 6)]:
+        study = project / filename
+        study.write_text((ROOT / 'examples' / filename).read_text())
+        assert write_claim_report(study, project / (filename + '.html')) == count
+    study = project / 'ModelClassStudy.lean'
+    checked_output = project / 'ModelClassStudy.lean.html'
+    before = checked_output.read_bytes()
+    study.write_text(study.read_text().replace(
+        'if bit then 1/3 else 2/3', 'if bit then 1/2 else 1/2', 1))
+    try:
+        write_claim_report(study, checked_output)
+    except ValueError as error:
+        assert 'reproduces' in str(error) or 'unsolved goals' in str(error), str(error)
+    else:
+        raise AssertionError('Incorrect whole-table membership was accepted')
+    assert checked_output.read_bytes() == before
+    print('Access and model-class adopters checked; mismatched weights rejected without overwriting output', flush=True)
 
     model = project/'FixtureModel.lean'
     reporter = project/'Publish.lean'

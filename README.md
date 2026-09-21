@@ -154,3 +154,7 @@ For general finite complex quantum tests and restricted-access equivalence, see
 
 See [record-access separation](docs/RECORD_ACCESS_GUIDE.md) for a complete example
 of models that agree on every local test and differ under joint recovery.
+
+To prove membership in, or exclusion from, a specified finite convex model class,
+see [the model-class guide](docs/MODEL_CLASS_GUIDE.md) and
+[checked examples](examples/model-classes.html).

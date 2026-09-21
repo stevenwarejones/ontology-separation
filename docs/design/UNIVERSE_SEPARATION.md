@@ -73,3 +73,17 @@ and includes negative tests for the new proof boundary. Public examples compile
 and export using the same audited exporter as existing reports. The final stack
 runs the repository gate and checks regenerated artifacts are stable. Only
 propext, Classical.choice and Quot.sound are permitted by the audit.
+
+## Implemented entry points
+
+| Question | Entry point | Scope checked |
+|---|---|---|
+| Do all permitted experiments agree? | `ExperimentAccess.Equivalent` | Every allowed protocol/setting/outcome |
+| Does extra access separate models? | `RecordAccess.separator` | An explicit coherent/dephased record experiment |
+| Can a class reproduce a whole behavior? | `FiniteModels.Membership` | The supplied finite convex hull |
+| Can one measurement exclude a whole class? | `ModelCompatibility.recordClassExclusion` | All mixtures of the two correlated dephased preparations |
+
+The public studies are `examples/RecordAccessStudy.lean` and
+`examples/ModelClassStudy.lean`. Both are compiled again in an independent adopter
+project by `scripts/check_recipes.py`. The latter changes the weights without
+changing the target and checks that publication fails without overwriting output.
