@@ -132,3 +132,25 @@ Circuit export uses a local, finite reduction-depth budget of at least 4096;
 adopters do not need to add resource options to the starter. This does not change
 the logic, axiom whitelist, or proof obligations. Large mixture trees can still
 exceed resource limits and fail the report command without overwriting its output.
+
+## Explicit Local Friendliness protocol
+
+`Operational.FriendProtocol` defines four-register copy and inverse permutations,
+record Z, local rotations and branch-specific readout with hidden registers summed
+out. Norm, record agreement, reversal and reduction to the exact evaluator are
+proved. `Recipes.LocalFriendliness` connects this protocol to normalized behaviors,
+no signaling, the genuine LF statistic and the operational assumption bridge.
+
+`Experiments.FriendProtocol` checks all 36 ideal probabilities against the existing
+LF witness and proves the exact Charlie-dephasing threshold. It also supplies an
+explicit four-record-pair classical model, proves its readable records/locality/
+independent preparation, and matches all fully dephased probabilities. The positive
+profile conclusion is therefore witnessed, not inferred from a small score.
+
+The reference-probability and fully-dephased bridge checks use finite rational
+case proofs; those two declarations have explicit finite heartbeat budgets. They
+can take several minutes on a first build, then reuse compiled proofs. Adopters
+write no such proofs for supported recipes. The independent adopter test checks
+eight LF cells and exported profile conclusions. New negative cases reject invalid
+record noise, zero measurement directions, reassigned read indices and
+law-dependent preparation. These tests and all new audit roots run in the full gate.

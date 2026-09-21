@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>FriendStudy: read or reverse the friends</title>
+<style>body{font:17px system-ui;color:#182635;background:#f6f8fb;max-width:1100px;margin:3rem auto;padding:0 1rem}
+p{line-height:1.6;max-width:90ch}table{border-collapse:collapse;width:100%;background:white}
+th,td{border:1px solid #cbd3dd;padding:1rem;text-align:left}td{font-size:1.3rem;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}details{padding:1rem;background:white;margin:.8rem 0}summary{cursor:pointer;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}code{overflow-wrap:anywhere}</style></head>
+<body><h1>FriendStudy: read or reverse the friends</h1><p>Genuine three-setting LF score G (ceiling 6 for the LF assumption class). Two systems and two coherent qubit records: copy in Z, apply record noise, then read the record (setting 0) or reverse its copy and measure the system (settings 1,2). Unreported registers are summed out, without postselection. Exact real-amplitude model predictions, not laboratory results or claims about conscious observers. Above 6 excludes the conjunction of absolute readable records, conditional locality and independent preparation; below 6 does not prove that conjunction.</p>
+<div class="scroll"><table><thead><tr><th scope="col">Physical model</th><th scope="col">source ray(-3,4,-4,-3); setting 0: read record; reverse/read A1=basis(3,-4), A2=basis(1,0), B1=basis(4,3), B2=basis(84,13)</th><th scope="col">source ray(1,0,0,0); setting 0: read record; reverse/read A1=basis(3,-4), A2=basis(1,0), B1=basis(4,3), B2=basis(84,13)</th></tr></thead>
+<tbody><tr><th scope="row">Record Z-dephasing: Charlie p=0, Debbie p=0</th><td>1214656/180625</td><td>-744738/180625</td></tr><tr><th scope="row">Record Z-dephasing: Charlie p=1/4, Debbie p=0</th><td>1095424/180625</td><td>-744738/180625</td></tr><tr><th scope="row">Record Z-dephasing: Charlie p=1/2, Debbie p=0</th><td>976192/180625</td><td>-744738/180625</td></tr><tr><th scope="row">Record Z-dephasing: Charlie p=1, Debbie p=1</th><td>2684416/4515625</td><td>-744738/180625</td></tr></tbody></table></div>
+<p>Entries are exact calculated values of the scenario's observable. Every cell is bound to its model,
+procedure, and observable by a Lean equality proof. Identical entries establish equality of this statistic;
+they do not establish equivalence of entire models. Distinct entries describe different distributions or
+statistics, not a guarantee that a finite experimental sample will identify the model.</p>
+<h2>Proof provenance</h2><p>Checked source: <code>examples/downstream/FriendStudy.lean</code>.<br>
+Comparison declaration: <code>FriendStudy.comparison</code>.</p><pre>OntologySeparation.LocalFriendlinessRecipe.scenario.Comparison</pre>
+<p>Model names and descriptions are commentary. Definitions give them physical meaning.
+This editable HTML is a snapshot, not a proof certificate. Regenerate it from trusted Lean source.</p>
+<details><summary>OntologySeparation.LocalFriendlinessRecipe.coherent_excludes_LF</summary><pre>OntologySeparation.LF.theory
+    (OntologySeparation.LocalFriendlinessRecipe.interpret OntologySeparation.LocalFriendlinessRecipe.Law.coherent
+      OntologySeparation.LocalFriendlinessRecipe.reference) →
+  False</pre></details><details><summary>OntologySeparation.LocalFriendlinessRecipe.coherent_excludes_profile</summary><pre>∀ {Λ : Type} [inst : Fintype Λ],
+  ¬OntologySeparation.profileTheory OntologySeparation.FriendRecords.vocabulary OntologySeparation.FriendRecords.profile
+      OntologySeparation.FriendRecords.Model.behavior
+      (OntologySeparation.LocalFriendlinessRecipe.interpret OntologySeparation.LocalFriendlinessRecipe.Law.coherent
+        OntologySeparation.LocalFriendlinessRecipe.reference)</pre></details><details><summary>OntologySeparation.LocalFriendlinessRecipe.fully_dephased_realizes_profile</summary><pre>∃ m,
+  OntologySeparation.FriendRecords.profile.Satisfied OntologySeparation.FriendRecords.vocabulary m ∧
+    m.behavior =
+      OntologySeparation.LocalFriendlinessRecipe.interpret
+        (OntologySeparation.LocalFriendlinessRecipe.Law.recordDephasing 1 1 1 ⋯ ⋯ ⋯)
+        OntologySeparation.LocalFriendlinessRecipe.reference</pre></details></body></html>

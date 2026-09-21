@@ -14,4 +14,5 @@ sh scripts/check_downstream.sh
 python3 scripts/check_scenario_export.py
 PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downstream/RecipeStudy.lean -o examples/recipe-comparison.html
 PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downstream/TwoQubitStudy.lean -o examples/two-qubit-comparison.html
+PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downstream/FriendStudy.lean -o examples/local-friendliness-protocol.html
 python3 scripts/check_recipes.py

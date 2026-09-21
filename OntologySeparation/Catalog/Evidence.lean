@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.FriendProtocol
 import OntologySeparation.Models.DephasedSinglet
 import OntologySeparation.Experiments.Research
 import OntologySeparation.Adapters.Shared
@@ -44,8 +45,10 @@ def bellPRClaim : Claim := .witness Bell.noSignalingTheory Bell.score Bell.prWit
 def lfBoundClaim : Claim := .realizedBound LF.theory RealQuantum.genuineLF 6
   LF.genuineBound.valid Shared.saturatingModel.behavior Shared.saturating_is_LF
 def lfQuantumClaim : Claim := .witness (RealQuantum.singletTheory 3) RealQuantum.genuineLF
-  RealQuantum.lfBehavior RealQuantum.lfBehavior_realized (1214656/180625)
-  (by simpa using RealQuantum.lfBehavior_value)
+  (LocalFriendlinessRecipe.interpret LocalFriendlinessRecipe.Law.coherent LocalFriendlinessRecipe.reference)
+  (by rw [LocalFriendlinessRecipe.reference_behavior]; exact RealQuantum.lfBehavior_realized)
+  (1214656/180625)
+  (by rw [LocalFriendlinessRecipe.reference_behavior]; simpa using RealQuantum.lfBehavior_value)
 def nsLFClaim : Claim := .realizedBound Shared.NoSignaling RealQuantum.genuineLF 10
   Shared.LF_noSignaling_bound Shared.nsExtreme Shared.nsExtreme_noSignaling
 
@@ -95,7 +98,12 @@ def contaminationClaim : Claim := .theoremResult _ Shared.LF_contamination_requi
 def nsFractionClaim : Claim := .theoremResult _ Shared.LF_NS_fraction_required
 
 def lfExclusionClaim : Claim :=
-  .exclusion LF.theory RealQuantum.lfBehavior LF.quantumSeparation.excludes
+  .exclusion LF.theory
+    (LocalFriendlinessRecipe.interpret LocalFriendlinessRecipe.Law.coherent LocalFriendlinessRecipe.reference)
+    LocalFriendlinessRecipe.coherent_excludes_LF
+
+def lfProtocolBridgeClaim : Claim := .theoremResult _ LocalFriendlinessRecipe.reference_behavior
+def lfDephasedProfileClaim : Claim := .theoremResult _ LocalFriendlinessRecipe.fully_dephased_realizes_profile
 def nsAttainmentClaim : Claim := .exact (RealQuantum.genuineLF Shared.nsExtreme) 10
   (by simpa using Shared.nsExtreme_score)
 

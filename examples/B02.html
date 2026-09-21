@@ -25,10 +25,29 @@ code{overflow-wrap:anywhere}small{display:block;margin-top:6px}details{margin:12
   ∃ m, OntologySeparation.Shared.NoSignaling m
 
 Exact prediction:
-OntologySeparation.RealQuantum.genuineLF OntologySeparation.Shared.nsExtreme = ↑10</small></td></tr><tr><th>real_singlet</th><td>Realized witness</td><td>1214656/180625</td><td>Normalized singlet; ideal friend reversal; specified bases<small>Ideal reversible friend model; no claim that a qubit is a cognitive observer.</small><small>Lean: ∃ m, OntologySeparation.RealQuantum.singletTheory 3 m ∧ OntologySeparation.RealQuantum.genuineLF m = ↑(1214656 / 180625)
+OntologySeparation.RealQuantum.genuineLF OntologySeparation.Shared.nsExtreme = ↑10</small></td></tr><tr><th>real_singlet</th><td>Realized witness</td><td>1214656/180625</td><td>Explicit two-system/two-record protocol; coherent records; read or reverse; specified local bases<small>Ideal reversible friend model; no claim that a qubit is a cognitive observer.</small><small>Lean: ∃ m, OntologySeparation.RealQuantum.singletTheory 3 m ∧ OntologySeparation.RealQuantum.genuineLF m = ↑(1214656 / 180625)
 
 Mathematical exclusion:
-OntologySeparation.LF.theory OntologySeparation.RealQuantum.lfBehavior → False</small></td></tr><tr><th>unitary_memory</th><td>Exact prediction · Additional laws</td><td>1214656/180625</td><td>ADDITIONAL LAW: singlet preparation, specified LF bases and ideal friend reversal; Z dephasing p=0<small>Ideal reversible friend model; no claim that a qubit is a cognitive observer.</small><small>Lean: OntologySeparation.RealQuantum.genuineLF
+OntologySeparation.LF.theory
+    (OntologySeparation.LocalFriendlinessRecipe.interpret OntologySeparation.LocalFriendlinessRecipe.Law.coherent
+      OntologySeparation.LocalFriendlinessRecipe.reference) →
+  False
+
+Theorem · see full assumptions:
+OntologySeparation.LocalFriendlinessRecipe.interpret OntologySeparation.LocalFriendlinessRecipe.Law.coherent
+    OntologySeparation.LocalFriendlinessRecipe.reference =
+  OntologySeparation.RealQuantum.lfBehavior
+
+Theorem · see full assumptions:
+∃ m,
+  OntologySeparation.FriendRecords.profile.Satisfied OntologySeparation.FriendRecords.vocabulary m ∧
+    m.behavior =
+      OntologySeparation.LocalFriendlinessRecipe.interpret
+        (OntologySeparation.LocalFriendlinessRecipe.Law.recordDephasing 1 1 1
+          OntologySeparation.Catalog.lfDephasedProfileClaim._proof_1
+          OntologySeparation.Catalog.lfDephasedProfileClaim._proof_2
+          OntologySeparation.Catalog.lfDephasedProfileClaim._proof_2)
+        OntologySeparation.LocalFriendlinessRecipe.reference</small></td></tr><tr><th>unitary_memory</th><td>Exact prediction · Additional laws</td><td>1214656/180625</td><td>ADDITIONAL LAW: singlet preparation, specified LF bases and ideal friend reversal; Z dephasing p=0<small>Ideal reversible friend model; no claim that a qubit is a cognitive observer.</small><small>Lean: OntologySeparation.RealQuantum.genuineLF
     (OntologySeparation.DephasedSinglet.behavior OntologySeparation.RealQuantum.lfAlice
       OntologySeparation.RealQuantum.lfBob
       ↑(&quot;unitary_memory&quot;,

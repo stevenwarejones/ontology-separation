@@ -28,3 +28,5 @@ import OntologySeparation.Core.Scenario
 import OntologySeparation.Reporting.Scenario
 
 import OntologySeparation.Recipes
+
+import OntologySeparation.LocalFriendliness

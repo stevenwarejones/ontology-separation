@@ -93,3 +93,27 @@
 'OntologySeparation.TwoQubit.compare' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.TwoQubit.singlet_matches_reference' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.TwoQubit.prepare_singlet_circuit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FriendProtocol.encode_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FriendProtocol.record_agreement' depends on axioms: [propext, Quot.sound]
+'OntologySeparation.FriendProtocol.undo_friends' depends on axioms: [propext, Quot.sound]
+'OntologySeparation.FriendProtocol.recordZ_encoded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FriendProtocol.output_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FriendProtocol.pure_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FriendProtocol.probability_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LocalFriendlinessRecipe.probability_correct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LocalFriendlinessRecipe.no_signaling' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LocalFriendlinessRecipe.score_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LocalFriendlinessRecipe.matches_reference' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LocalFriendlinessRecipe.charlie_noise_threshold' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LocalFriendlinessRecipe.coherent_excludes_profile' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LocalFriendlinessRecipe.fully_dephased_realizes_profile' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -48,3 +48,13 @@ class ScaffoldTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'backend'):
                 create_scenario('Bad', root/'Bad.lean', backend='three-qubit')
             self.assertFalse((root/'Bad.lean').exists())
+
+    def test_lf_scaffold(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'lakefile.toml').touch()
+            output=root/'Friends.lean'
+            create_scenario('Friends',output,backend='local-friendliness')
+            text=output.read_text()
+            self.assertIn('import OntologySeparation.LocalFriendliness',text)
+            self.assertIn('fully_dephased_realizes_profile',text)
+            self.assertNotIn('sorry',text)

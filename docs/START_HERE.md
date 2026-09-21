@@ -6,7 +6,7 @@ Create a small experiment, compare three physical laws, and get a table of
 ## Browse first — no Lean required
 
 Open the [online explorer](https://stevenwarejones.github.io/ontology-separation/)
-(after its first Pages deployment), or download this repository and open
+or download this repository and open
 `examples/index.html`. No installation is needed to view exported results.
 
 With Python alone, you can install the client, browse bundled results with
@@ -65,6 +65,7 @@ If checking fails, it leaves the previous report intact and warns that it may be
 ## Where to go next
 
 - [Understand every line and its physical meaning](RECIPE_GUIDE.md).
+- [Build the explicit Local Friendliness protocol](LF_PROTOCOL_GUIDE.md).
 - [Build a two-qubit Bell experiment](TWO_QUBIT_GUIDE.md).
 - [Define a new law package: the Bell example](ADD_A_SCENARIO.md).
 - [Browse the HTML examples](../examples/index.html) or [look up a term](GLOSSARY.md).
