@@ -101,3 +101,11 @@ Each `#export_scenario` and `#export_theorem` separately audits its dependencies
 including user-defined results not on that list. Editing raw JSON or emitting
 lookalike text does not produce an authenticated proof: reports assume trusted
 local source and tooling. Review definitions and recheck the source.
+
+## Python version compatibility
+
+The client supports Python 3.10 and later. CI separately installs the package,
+compiles the Python sources and scripts, runs the complete Python test suite, and
+smoke-tests the CLI on Python 3.10, 3.11 and 3.12. The full Lean verification gate
+runs on Python 3.12. This checks the declared minimum without repeating the Lean
+build for every Python interpreter.

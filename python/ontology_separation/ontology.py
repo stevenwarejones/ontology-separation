@@ -76,7 +76,16 @@ def experiment_html(report, scenario):
         rows.append(f'<tr><td>{k+1:02d}</td>{bits}<td>{esc(entry["rule"])}</td></tr>')
     table = '<table id="all-profiles"><thead><tr><th>Profile</th>' + ''.join(f'<th>{x}</th>' for x in LABELS) + '<th>Conditional consequence</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table>'
     cell_rows = ''.join('<tr><th>'+esc(c['model'])+'</th><td>'+esc(evidence_label(c['claim'])) + (' · Additional laws' if c['applicability'] == 'additional' else '')+'</td><td>'+esc(c['result'])+'</td><td>'+esc('; '.join(c['assumptions']))+'<small>'+esc(c['limitation'])+'</small><small>Lean: '+esc((c['claim']['statement'] if c['claim'] else 'No interpretation supplied') + ''.join('\n\n'+evidence_label(extra)+':\n'+extra['statement'] for extra in c['supporting']))+'</small></td></tr>' for c in cells)
-    ext_html = ''.join(f'<article class="card"><h3>{esc(e["title"])}</h3><p><b>Added law:</b> {esc(e["requiredLaw"])}</p><p>{esc(e["result"])}</p><p>{esc(' '.join(claim['statement'] for claim in e['supporting']))}</p><p>{esc(e["scope"])}</p><code>{esc(e["declaration"])}</code></article>' for e in entries)
+    extension_cards = []
+    for entry in entries:
+        supporting_text = ' '.join(claim['statement'] for claim in entry['supporting'])
+        extension_cards.append(
+            f'<article class="card"><h3>{esc(entry["title"])}</h3>'
+            f'<p><b>Added law:</b> {esc(entry["requiredLaw"])}</p>'
+            f'<p>{esc(entry["result"])}</p><p>{esc(supporting_text)}</p>'
+            f'<p>{esc(entry["scope"])}</p><code>{esc(entry["declaration"])}</code></article>'
+        )
+    ext_html = ''.join(extension_cards)
     measured = [e for e in EVIDENCE if e['scenario'] == sid]
     evidence = ''.join(f'<article class="card"><h3><a href="{esc(e["url"], quote=True)}">{esc(e["title"])}</a></h3><p>{esc(e["result"])}</p><p>{esc(e["interpretation"])}</p><p>{esc(e["scope"])}</p></article>' for e in measured)
     if not measured:
