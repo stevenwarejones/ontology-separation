@@ -148,3 +148,6 @@ Values and evidence categories are derived from the claims; offline snapshots ar
 
 For a complete experiment → models → proofs → table workflow, see
 [Add a scenario](docs/ADD_A_SCENARIO.md). The example lives in a separate adopter package.
+
+For general finite complex quantum tests and restricted-access equivalence, see
+[Experiment access](docs/EXPERIMENT_ACCESS.md).
