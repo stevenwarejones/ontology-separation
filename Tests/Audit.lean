@@ -133,3 +133,15 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.FiniteQuantum.Test.prepend_prob
 
 #print axioms OntologySeparation.FiniteQuantum.local_behavior_eq
+
+#print axioms OntologySeparation.RecordAccess.dephased_entry
+
+#print axioms OntologySeparation.RecordAccess.all_local_tests
+
+#print axioms OntologySeparation.RecordAccess.recovery_isometry
+
+#print axioms OntologySeparation.RecordAccess.coherent_recovery
+
+#print axioms OntologySeparation.RecordAccess.dephased_recovery
+
+#print axioms OntologySeparation.RecordAccess.joint_not_equivalent
