@@ -19,7 +19,7 @@ def Amplitudes.normSq (v : Amplitudes) : ℚ := v.a^2 + v.b^2 + v.c^2 + v.d^2
   vector : Amplitudes
   positive : 0 < vector.normSq
 
-def Pure.of (a b c d : ℚ) (valid : 0 < Amplitudes.normSq ⟨a,b,c,d⟩ := by norm_num [Amplitudes.normSq]) : Pure :=
+def Pure.of (a b c d : ℚ) (valid : 0 < Amplitudes.normSq ⟨a,b,c,d⟩ := by norm_num [OntologySeparation.TwoQubit.Amplitudes.normSq]) : Pure :=
   ⟨⟨a,b,c,d⟩, valid⟩
 inductive Wire where
   | alice | bob

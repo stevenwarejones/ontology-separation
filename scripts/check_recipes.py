@@ -40,6 +40,16 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     assert values == expected, values
     print('Two-qubit starter: 12 cells checked in an independent adopter project', flush=True)
 
+    friend = create_scenario('FriendStarter', project/'FriendStarter.lean', backend='local-friendliness')
+    friend_output = project/'friends.html'
+    assert write_report(friend, friend_output) == 8
+    values = re.findall(r'<td>([^<]+)</td>', friend_output.read_text())
+    expected = [cell for value in ['1214656/180625', '1095424/180625', '976192/180625', '2684416/4515625']
+                for cell in [value, '-744738/180625']]
+    assert values == expected, values
+    assert 'fully_dephased_realizes_profile' in friend_output.read_text()
+    print('LF starter: eight cells and profile proof provenance checked in an adopter project', flush=True)
+
     model = project/'FixtureModel.lean'
     reporter = project/'Publish.lean'
     reporter.write_text('import FixtureModel\n#export_scenario current\n')
@@ -66,7 +76,7 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     assert output.read_bytes() == previous
     print('Edited import: rebuilt prediction and label; invalid edit rejected without overwriting output',flush=True)
 
-    header='import OntologySeparation.Recipes\nopen OntologySeparation OntologySeparation.Recipes\n'
+    header='import OntologySeparation.Recipes\nimport OntologySeparation.LocalFriendliness\nopen OntologySeparation OntologySeparation.Recipes\n'
     recipe='{ prepare := .plus, steps := [.expose], measure := .x }'
     cases = [
         ('zero denominator','def bad := Law.dephasing 0 0\n','positive'),
@@ -96,6 +106,12 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
          'def fake := TwoQubit.Pure.of 0 0 0 0 (by sorry)\n'
          'def bad := TwoQubit.compare "Bad" [TwoQubit.Law.ideal] [{ TwoQubit.singletRecipe with prepare := .custom fake }]\n'
          '#export_scenario bad\n', 'sorryAx'),
+    ]
+    cases += [
+        ('LF invalid record rate', 'def bad := LocalFriendlinessRecipe.Law.recordDephasing 0 2 1\n', 'debbieBound'),
+        ('LF zero direction', 'def bad : LocalFriendlinessRecipe.Alternatives := ⟨TwoQubit.Basis.of 0 0, .z⟩\n', 'valid'),
+        ('LF read index cannot be reassigned', 'def bad : LocalFriendlinessRecipe.Alternatives := { first := .z, second := .z, readIndex := 1 }\n', 'readIndex'),
+        ('LF source cannot depend on law', 'def bad : LocalFriendlinessRecipe.Recipe := { LocalFriendlinessRecipe.reference with source := fun (_ : LocalFriendlinessRecipe.Law) => TwoQubit.Pure.of 1 0 0 0 }\n', 'error'),
     ]
     fixture=project/'Mistake.lean'
     for label, body, expected in cases:

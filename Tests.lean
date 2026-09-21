@@ -13,3 +13,5 @@ import Tests.Realized
 import Tests.Claims
 
 import Tests.TwoQubit
+
+import Tests.FriendProtocol

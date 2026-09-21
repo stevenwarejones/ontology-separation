@@ -103,7 +103,7 @@ def evaluate (s : Scenario) (m : ModelInfo) : Cell :=
   else if s.family == .lf && m.id == "local_friendliness" then
     checked s m lfBoundClaim ["Conditional no-signaling, actual friend records, setting-independent prior"]
   else if s.family == .lf && m.id == "real_singlet" then
-    checked s m lfQuantumClaim ["Normalized singlet; ideal friend reversal; specified bases"] .native [lfExclusionClaim]
+    checked s m lfQuantumClaim ["Explicit two-system/two-record protocol; coherent records; read or reverse; specified local bases"] .native [lfExclusionClaim, lfProtocolBridgeClaim, lfDephasedProfileClaim]
   else if s.family == .lfControl && m.id == "bell_local" then
     checked s m bellLocalClaim ["Bell-local interface for the two non-friend settings"]
   else if s.family == .lfControl && m.id == "no_signaling" then

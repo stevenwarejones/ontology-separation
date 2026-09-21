@@ -108,3 +108,18 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.TwoQubit.compare
 #print axioms OntologySeparation.TwoQubit.singlet_matches_reference
 #print axioms OntologySeparation.TwoQubit.prepare_singlet_circuit
+
+#print axioms OntologySeparation.FriendProtocol.encode_norm
+#print axioms OntologySeparation.FriendProtocol.record_agreement
+#print axioms OntologySeparation.FriendProtocol.undo_friends
+#print axioms OntologySeparation.FriendProtocol.recordZ_encoded
+#print axioms OntologySeparation.FriendProtocol.output_norm
+#print axioms OntologySeparation.FriendProtocol.pure_normalized
+#print axioms OntologySeparation.FriendProtocol.probability_bridge
+#print axioms OntologySeparation.LocalFriendlinessRecipe.probability_correct
+#print axioms OntologySeparation.LocalFriendlinessRecipe.no_signaling
+#print axioms OntologySeparation.LocalFriendlinessRecipe.score_correct
+#print axioms OntologySeparation.LocalFriendlinessRecipe.matches_reference
+#print axioms OntologySeparation.LocalFriendlinessRecipe.charlie_noise_threshold
+#print axioms OntologySeparation.LocalFriendlinessRecipe.coherent_excludes_profile
+#print axioms OntologySeparation.LocalFriendlinessRecipe.fully_dephased_realizes_profile

@@ -329,7 +329,7 @@
     {
       "applicability": "native",
       "assumptions": [
-        "Normalized singlet; ideal friend reversal; specified bases"
+        "Explicit two-system/two-record protocol; coherent records; read or reverse; specified local bases"
       ],
       "claim": {
         "kind": "witness",
@@ -346,7 +346,17 @@
         {
           "kind": "exclusion",
           "quantity": null,
-          "statement": "OntologySeparation.LF.theory OntologySeparation.RealQuantum.lfBehavior \u2192 False"
+          "statement": "OntologySeparation.LF.theory\n    (OntologySeparation.LocalFriendlinessRecipe.interpret OntologySeparation.LocalFriendlinessRecipe.Law.coherent\n      OntologySeparation.LocalFriendlinessRecipe.reference) \u2192\n  False"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.LocalFriendlinessRecipe.interpret OntologySeparation.LocalFriendlinessRecipe.Law.coherent\n    OntologySeparation.LocalFriendlinessRecipe.reference =\n  OntologySeparation.RealQuantum.lfBehavior"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2203 m,\n  OntologySeparation.FriendRecords.profile.Satisfied OntologySeparation.FriendRecords.vocabulary m \u2227\n    m.behavior =\n      OntologySeparation.LocalFriendlinessRecipe.interpret\n        (OntologySeparation.LocalFriendlinessRecipe.Law.recordDephasing 1 1 1\n          OntologySeparation.Catalog.lfDephasedProfileClaim._proof_1\n          OntologySeparation.Catalog.lfDephasedProfileClaim._proof_2\n          OntologySeparation.Catalog.lfDephasedProfileClaim._proof_2)\n        OntologySeparation.LocalFriendlinessRecipe.reference"
         }
       ],
       "status": "witness",

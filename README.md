@@ -16,8 +16,11 @@ proof checker stay fixed.
 | Build a Bell–CHSH experiment | [Two-qubit guide](docs/TWO_QUBIT_GUIDE.md) | Python + Lean |
 | Define new physical laws or a backend | [General scenario interface](docs/ADD_A_SCENARIO.md) · [Extension guide](docs/EXTENDING.md) | Lean |
 
-The online explorer publishes verified snapshots from `main` after the one-time
-[Pages setup](docs/PAGES.md). Until its first deployment, use the offline views.
+The online explorer publishes verified snapshots from `main`; each page links to
+its source revision. [Deployment details](docs/PAGES.md).
+
+**[Local Friendliness protocol guide](docs/LF_PROTOCOL_GUIDE.md)** — explicit friend
+records, read-or-reverse choices, and checked LF/profile conclusions.
 
 ## Explore the HTML views
 
@@ -25,6 +28,7 @@ The online explorer publishes verified snapshots from `main` after the one-time
 |---|---|
 | [Recipe comparison](examples/recipe-comparison.html) | Three dephasing laws × four procedures; the simplest worked example. |
 | [Two-qubit Bell recipes](examples/two-qubit-comparison.html) | Four noise laws × direct singlet, gate-built singlet, and product preparation. |
+| [LF read-or-reverse protocol](examples/local-friendliness-protocol.html) | Four record-noise laws × entangled and product preparations. |
 | [Full experiment matrix](examples/matrix.html) | All 14 scenarios across seven model classes, with proof-derived results. |
 | [Bell assumptions](examples/B01.html) | All sixteen assumption combinations and two-axis comparisons. |
 | [Local Friendliness assumptions](examples/B02.html) | The same ontology views for the LF experiment. |
