@@ -6,3 +6,6 @@ build/
 dist/
 /matrix.html
 !docs/matrix.html
+
+/examples/downstream/lake-manifest.json
+/examples/downstream/results.html

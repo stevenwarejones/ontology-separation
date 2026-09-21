@@ -55,3 +55,36 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.Shared.LF_NS_contamination_attained
 #print axioms OntologySeparation.Shared.LF_NS_fraction_required
 #print axioms OntologySeparation.Shared.saturating_is_LF
+#print axioms OntologySeparation.OperationalBell.chsh_bound
+#print axioms OntologySeparation.OperationalBell.singlet_excludes
+#print axioms OntologySeparation.FriendRecords.probability_preserved
+#print axioms OntologySeparation.FriendRecords.bound
+#print axioms OntologySeparation.FriendRecords.singlet_excludes
+#print axioms OntologySeparation.Qubit.twice_dephased
+#print axioms OntologySeparation.Qubit.phase_then_dephase
+#print axioms OntologySeparation.Qubit.hadamard_twice
+#print axioms OntologySeparation.Qubit.density_invariants
+#print axioms OntologySeparation.Channel.andThen_assoc
+#print axioms OntologySeparation.Countermodels.signaling_score
+#print axioms OntologySeparation.Countermodels.signaling_not_local
+#print axioms OntologySeparation.Countermodels.dependent_score
+#print axioms OntologySeparation.Countermodels.dependent_not_independent
+#print axioms OntologySeparation.Qubit.protected_dephasing
+#print axioms OntologySeparation.OperationalProfiles.bell_bound
+#print axioms OntologySeparation.OperationalProfiles.lf_bound
+#print axioms OntologySeparation.OperationalProfiles.bell_supported_count
+#print axioms OntologySeparation.OperationalProfiles.lf_supported_count
+#print axioms OntologySeparation.ClassicalWorld.chsh_bound
+#print axioms OntologySeparation.ClassicalWorld.cannot_reproduce_singlet
+#print axioms OntologySeparation.ClassicalWorld.constant_score
+#print axioms OntologySeparation.Channel.andThen
+#print axioms OntologySeparation.Channel.parallel
+#print axioms OntologySeparation.Experiment.same_evolution
+#print axioms OntologySeparation.ProfileBound.valid
+#print axioms OntologySeparation.ProfileBound.under
+#print axioms OntologySeparation.Qubit.dephase
+
+#print axioms OntologySeparation.Countermodels.quantumFriend_not_readable
+#print axioms OntologySeparation.Countermodels.rejected_records_realized
+
+#print axioms OntologySeparation.Scenario.ExactPredictions.prediction

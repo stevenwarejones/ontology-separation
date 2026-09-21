@@ -143,4 +143,22 @@ def write_examples(report, directory):
     (directory/'matrix.html').write_text(report.html(index_href='index.html'), encoding='utf-8')
     ledger = ''.join(f'<article class="card"><h2><a href="{e["url"]}">{html.escape(e["title"])}</a></h2><p>{html.escape(e["kind"]+": "+e["result"])}</p><p>{html.escape(e["interpretation"])}</p><p>{html.escape(e["scope"])}</p></article>' for e in EVIDENCE)
     (directory/'evidence.html').write_text(shell('Experimental evidence', '<a href="index.html">All views</a><h1>Evidence ledger</h1><p>Published measurements are separate from Lean-calculated witnesses. Compatibility never proves an ontology true. No raw-data reanalysis is claimed.</p>'+ledger), encoding='utf-8')
-    (directory/'index.html').write_text(shell('Ontology Separation examples', '<h1>Ontology Separation · examples</h1><p>Open these files locally; no server, network, or package installation is needed.</p><p><a href="matrix.html">14 × 7 model matrix</a> · <a href="evidence.html">Experimental evidence ledger</a></p><div class="notice">Native model results and conditional extensions are separate. A populated cell is not necessarily a prediction from its column alone. All sixteen ontology profiles are visible for each experiment; physical realizability is not presumed.</div><h2>Experiment and ontology views</h2><ul>'+''.join(links)+'</ul>'), encoding='utf-8')
+    (directory/'index.html').write_text(shell('Ontology Separation examples', '<h1>Ontology Separation · examples</h1><p>Open these files locally; no server, network, or package installation is needed.</p><p><a href="matrix.html">14 × 7 model matrix</a> · <a href="evidence.html">Experimental evidence ledger</a></p><div class="notice">Native model results and conditional extensions are separate. A populated cell is not necessarily a prediction from its column alone. All sixteen ontology profiles are visible for each experiment; physical realizability is not presumed.</div><h2>Build your own experiment</h2><p><a href="scenario-comparison.html">Worked scenario comparison</a> · <a href="../docs/ADD_A_SCENARIO.md">Add your own scenario</a> · <a href="../docs/PHYSICIST_GUIDE.md">Physicist guide</a> · <a href="operational-results.html">Operational assumptions and formal results</a> · <a href="ruled-out-models.html">Ruled-out model classes</a> · <a href="PhysicistWorkflow.lean">Editable experiments</a></p><h2>Experiment and ontology views</h2><ul>'+''.join(links)+'</ul>'), encoding='utf-8')
+
+    write_ruled_out(directory)
+
+
+def write_ruled_out(directory):
+    """Historical evidence summaries remain distinct from theorem exports."""
+    esc = html.escape
+    rows = [
+        ("Predetermined local responses + independent preparation", "ClassicalWorld.Model", "S ≤ 2", "Bell-local null: statistically rejected under test assumptions"),
+        ("Screening-off + conditional locality + independent preparation", "OperationalBell.screeningOffProfile", "S ≤ 2", "Same Bell-local test, not an independent discovery"),
+        ("Joint local counterfactual assignments", "OperationalBell.jointProfile", "S ≤ 2", "Equivalent Bell-local correlation class in this finite setting"),
+        ("Readable fixed friend records + conditional locality + independent preparation", "FriendRecords.profile", "G ≤ 6", "Photonic proxy evidence only; observer-scale interpretation is conditional"),
+    ]
+    table = '<div class="scroll"><table><thead><tr><th>Law package</th><th>Lean definition</th><th>Mathematical ceiling</th><th>Published evidence</th></tr></thead><tbody>'
+    table += ''.join('<tr>'+''.join('<td>'+esc(c)+'</td>' for c in row)+'</tr>' for row in rows)+'</tbody></table></div>'
+    evidence = ''.join('<article class="card"><h2><a href="'+esc(e['url'],quote=True)+'">'+esc(e['title'])+'</a></h2><p>'+esc(e['result'])+'</p><p>'+esc(e['interpretation'])+'</p><p>'+esc(e['scope'])+'</p></article>' for e in EVIDENCE)
+    body = '<nav><a href="index.html">All examples</a> · <a href="operational-results.html">Formal results</a></nav><h1>Ruled-out model classes</h1><div class="notice">Experimental rejection is statistical and assumes the stated testing conditions. Mathematical exclusion of a calculated probability table is different. No entire interpretation is proved false or ontology proved true here.</div><p>These law packages remain reusable reference worlds. A constant-output classical world exists and attains S=2; the class is not empty.</p>'+table+evidence+'<p><a href="../docs/RULED_OUT_MODELS.md">Definitions and evidence limits</a></p>'
+    (directory/'ruled-out-models.html').write_text(shell('Ruled-out model classes',body),encoding='utf-8')

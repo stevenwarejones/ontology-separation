@@ -24,7 +24,6 @@ Install Lean using the official instructions at https://lean-lang.org/install/.
 The repository's `lean-toolchain` selects the pinned version automatically.
 
 ```sh
-lake update
 lake exe cache get
 lake build
 lake build Tests
@@ -72,3 +71,5 @@ for cell in report.compare(["B02"], ["local_friendliness", "real_singlet"]):
 ```
 
 The full development gate also uses Node.js (18+) for the dependency-free HTML widget logic test. The Python client and offline HTML do not require Node.
+
+See [the physicist guide](PHYSICIST_GUIDE.md) for operational laws and composed experiments.
