@@ -12,11 +12,15 @@ proof checker stay fixed.
 **[Getting started →](docs/START_HERE.md)** — setup, your first checked experiment,
 and one parameter change. No user-written proof is needed for supported recipes.
 
+**[Two-qubit Bell guide →](docs/TWO_QUBIT_GUIDE.md)** — prepare entanglement with gates,
+change local noise and measurements, and compare checked CHSH scores.
+
 ## Explore the HTML views
 
 | View | What you can explore |
 |---|---|
 | [Recipe comparison](examples/recipe-comparison.html) | Three dephasing laws × four procedures; the simplest worked example. |
+| [Two-qubit Bell recipes](examples/two-qubit-comparison.html) | Four noise laws × direct singlet, gate-built singlet, and product preparation. |
 | [Full experiment matrix](examples/matrix.html) | All 14 scenarios across seven model classes, with proof-derived results. |
 | [Bell assumptions](examples/B01.html) | All sixteen assumption combinations and two-axis comparisons. |
 | [Local Friendliness assumptions](examples/B02.html) | The same ontology views for the LF experiment. |

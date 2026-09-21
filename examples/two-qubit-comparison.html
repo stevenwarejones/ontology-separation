@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>BellStudy: two-qubit Bell experiment</title>
+<style>body{font:17px system-ui;color:#182635;background:#f6f8fb;max-width:1100px;margin:3rem auto;padding:0 1rem}
+p{line-height:1.6;max-width:90ch}table{border-collapse:collapse;width:100%;background:white}
+th,td{border:1px solid #cbd3dd;padding:1rem;text-align:left}td{font-size:1.3rem;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}details{padding:1rem;background:white;margin:.8rem 0}summary{cursor:pointer;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}code{overflow-wrap:anywhere}</style></head>
+<body><h1>BellStudy: two-qubit Bell experiment</h1><p>Exact CHSH E00+E01+E10-E11 from normalized two-qubit Born probabilities (false=+1, true=-1). Real amplitudes and local projective measurements. Gates prepare the state before separated setting choices. Only explicit exposure steps vary with the row&#x27;s local Z-dephasing law; p=1 is full dephasing. The Bell-local ceiling is 2; a larger calculated value excludes that class for this mathematical behavior, not from laboratory data.</p>
+<div class="scroll"><table><thead><tr><th scope="col">Physical model</th><th scope="col">singlet |Psi-&gt;; expose(Alice); A0=basis(4,-3), A1=basis(3,-4); B0=basis(4,3), B1=basis(0,1)</th><th scope="col">product |00&gt;; H(Alice); CNOT(control=Alice); X(Bob); Z(Alice); expose(Alice); A0=basis(4,-3), A1=basis(3,-4); B0=basis(4,3), B1=basis(0,1)</th><th scope="col">product |01&gt;; expose(Alice); A0=basis(4,-3), A1=basis(3,-4); B0=basis(4,3), B1=basis(0,1)</th></tr></thead>
+<tbody><tr><th scope="row">Z dephasing per exposure: Alice p=0, Bob p=0</th><td>1502/625</td><td>1502/625</td><td>14/25</td></tr><tr><th scope="row">Z dephasing per exposure: Alice p=1/8, Bob p=0</th><td>1358/625</td><td>1358/625</td><td>14/25</td></tr><tr><th scope="row">Z dephasing per exposure: Alice p=1/4, Bob p=0</th><td>1214/625</td><td>1214/625</td><td>14/25</td></tr><tr><th scope="row">Z dephasing per exposure: Alice p=1, Bob p=0</th><td>14/25</td><td>14/25</td><td>14/25</td></tr></tbody></table></div>
+<p>Entries are exact calculated values of the scenario's observable. Every cell is bound to its model,
+procedure, and observable by a Lean equality proof. Identical entries establish equality of this statistic;
+they do not establish equivalence of entire models. Distinct entries describe different distributions or
+statistics, not a guarantee that a finite experimental sample will identify the model.</p>
+<h2>Proof provenance</h2><p>Checked source: <code>examples/downstream/TwoQubitStudy.lean</code>.<br>
+Comparison declaration: <code>BellStudy.comparison</code>.</p><pre>OntologySeparation.TwoQubit.scenario.Comparison</pre>
+<p>Model names and descriptions are commentary. Definitions give them physical meaning.
+This editable HTML is a snapshot, not a proof certificate. Regenerate it from trusted Lean source.</p>
+</body></html>

@@ -22,7 +22,12 @@ private def validateLabels (axis : String) (items : Array (String × Expr)) : Me
     if seen.contains normalized then throwError "Duplicate {axis} label: {label}"
     seen := seen.push normalized
 /-- Project only checked rational data; never execute the real-valued interpretation. -/
-def comparisonJson (table : Expr) : MetaM Json := withTransparency .all do
+-- Circuit expressions need more reduction depth than scalar recipes. Keep this
+-- budget local to export, finite, and at least as large as an explicit user setting.
+-- This only changes resource limits: proofs and the axiom whitelist are unchanged.
+def comparisonJson (table : Expr) : MetaM Json :=
+    withOptions (fun opts => maxRecDepth.set opts (max 4096 (maxRecDepth.get opts))) <|
+    withTransparency .all do
   let title ← stringValue (← mkAppM ``Scenario.Comparison.title #[table])
   let description ← stringValue (← mkAppM ``Scenario.Comparison.description #[table])
   let models ← entries (← mkAppM ``Scenario.Comparison.models #[table])

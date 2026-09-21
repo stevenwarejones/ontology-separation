@@ -11,3 +11,5 @@ import Tests.Recipes
 import Tests.Realized
 
 import Tests.Claims
+
+import Tests.TwoQubit

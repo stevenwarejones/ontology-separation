@@ -50,6 +50,7 @@ If checking fails, it leaves the previous report intact and warns that it may be
 ## Where to go next
 
 - [Understand every line and its physical meaning](RECIPE_GUIDE.md).
+- [Build a two-qubit Bell experiment](TWO_QUBIT_GUIDE.md).
 - [Define a new law package: the Bell example](ADD_A_SCENARIO.md).
 - [Browse the HTML examples](../examples/index.html) or [look up a term](GLOSSARY.md).
 

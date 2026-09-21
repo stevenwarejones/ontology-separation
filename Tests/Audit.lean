@@ -96,3 +96,15 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.Recipes.probability_correct
 #print axioms OntologySeparation.Recipes.probability_bounds
 #print axioms OntologySeparation.Recipes.compare
+
+#print axioms OntologySeparation.TwoQubit.Gate.normSq
+#print axioms OntologySeparation.TwoQubit.Pure.born
+#print axioms OntologySeparation.TwoQubit.Pure.amplitude_normalized
+#print axioms OntologySeparation.TwoQubit.State.normalized
+#print axioms OntologySeparation.TwoQubit.no_signaling_alice
+#print axioms OntologySeparation.TwoQubit.no_signaling_bob
+#print axioms OntologySeparation.TwoQubit.chsh_correct
+#print axioms OntologySeparation.TwoQubit.excludes_local
+#print axioms OntologySeparation.TwoQubit.compare
+#print axioms OntologySeparation.TwoQubit.singlet_matches_reference
+#print axioms OntologySeparation.TwoQubit.prepare_singlet_circuit
