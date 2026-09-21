@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Coherence: one recipe, several physical laws</title>
+<style>body{font:17px system-ui;color:#182635;background:#f6f8fb;max-width:1100px;margin:3rem auto;padding:0 1rem}
+p{line-height:1.6;max-width:90ch}table{border-collapse:collapse;width:100%;background:white}
+th,td{border:1px solid #cbd3dd;padding:1rem;text-align:left}td{font-size:1.3rem;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}details{padding:1rem;background:white;margin:.8rem 0}summary{cursor:pointer;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}code{overflow-wrap:anywhere}</style></head>
+<body><h1>Coherence: one recipe, several physical laws</h1><p>Exact probability of the + outcome for the stated preparation, ordered operations and readout. Only exposure uses the row&#x27;s law: (x,z) maps to ((1-p)x,z). Fixed operations do not vary between rows. These are effective real-qubit channel models, not classifications of entire quantum interpretations.</p>
+<div class="scroll"><table><thead><tr><th scope="col">Physical model</th><th scope="col">prepare |+&gt;; exposure; P(X=+)</th><th scope="col">prepare |+&gt;; phase flip (Z); exposure; P(X=+)</th><th scope="col">prepare |+&gt;; H; exposure; H; P(X=+)</th><th scope="col">prepare |+&gt;; exposure; exposure; P(X=+)</th></tr></thead>
+<tbody><tr><th scope="row">Exposure dephasing p=0</th><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><th scope="row">Exposure dephasing p=1/2</th><td>3/4</td><td>1/4</td><td>1</td><td>5/8</td></tr><tr><th scope="row">Exposure dephasing p=1</th><td>1/2</td><td>1/2</td><td>1</td><td>1/2</td></tr></tbody></table></div>
+<p>Entries are exact calculated values of the scenario's observable. Every cell is bound to its model,
+procedure, and observable by a Lean equality proof. Identical entries establish equality of this statistic;
+they do not establish equivalence of entire models. Distinct entries describe different distributions or
+statistics, not a guarantee that a finite experimental sample will identify the model.</p>
+<h2>Proof provenance</h2><p>Checked source: <code>examples/downstream/RecipeStudy.lean</code>.<br>
+Comparison declaration: <code>recipeStudy</code>.</p><pre>OntologySeparation.Recipes.scenario.Comparison</pre>
+<p>Model names and descriptions are commentary. Definitions give them physical meaning.
+This editable HTML is a snapshot, not a proof certificate. Regenerate it from trusted Lean source.</p>
+</body></html>

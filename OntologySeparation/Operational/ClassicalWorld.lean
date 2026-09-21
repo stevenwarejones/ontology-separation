@@ -33,6 +33,18 @@ theorem cannot_reproduce_singlet (m : Model Λ) : m.operational.behavior ≠ Bel
   rw [h, Bell.singlet_score] at hb
   norm_num at hb
 def constantWorld : Model Unit := ⟨Countermodels.unitPrior, fun _ _ => false, fun _ _ => false⟩
+/-- The screening-off Bell bound is non-vacuous: a concrete world satisfies its laws. -/
+def realizedBound : RealizedProfileBound OperationalBell.question
+    (OperationalBell.vocabulary (Λ := Unit)) OperationalBell.screeningOffProfile
+    OperationalBell.Model.behavior where
+  result := OperationalBell.certified
+  model := constantWorld.operational
+  satisfies := ⟨screened constantWorld, True.intro, localResponses constantWorld,
+    independent constantWorld⟩
+
+theorem screeningOff_realizable : OperationalBell.screeningOffProfile.Realizable
+    (OperationalBell.vocabulary (Λ := Unit)) := realizedBound.realizable
+
 theorem constant_score : Bell.score constantWorld.operational.behavior = 2 := by
   norm_num [Bell.score, Bell.correlator, constantWorld, Model.operational,
     OperationalBell.Model.behavior, Countermodels.unitPrior, Countermodels.deterministic,

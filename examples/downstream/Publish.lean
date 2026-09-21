@@ -1,4 +1,4 @@
 import Study
-import OntologySeparation.Reporting.Export
-#export_theorem MyLaboratory.coherent_prediction
-#export_theorem MyLaboratory.dephased_prediction
+import OntologySeparation.Reporting.Claim
+#export_claim MyLaboratory.bellBound
+#export_claim MyLaboratory.singletExcluded

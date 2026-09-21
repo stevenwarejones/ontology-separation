@@ -1,7 +1,7 @@
 # Extending the framework
 
 Start with [the physicist guide](PHYSICIST_GUIDE.md) for the new operational laws,
-composition, and theorem exports. New reports do not require the legacy ClaimId registry.
+composition, and theorem exports. All reports use `Core.Claim`; there is no separate theorem registry.
 
 ## Add a theory without changing the core
 
@@ -94,12 +94,6 @@ admissible base behavior and a separately specified experimental sector.
 realize any binary probability; it must not be read as a theorem about every
 physically coupled extension of the original model.
 
-For conditional experimental laws, add an `ExtensionInfo` and a `ClaimId` with a
-proof in `Catalog.Evidence.resolve`. Use `verifiedConditional` when the column's
-native assumptions do not entail those laws. Keep its physical scope visible.
-Run `python scripts/export.py` after building to regenerate every examples page.
-
-To transfer a result to an ontology profile, construct `ProfileBridge` with a
-proof of `.sound` for your explicit vocabulary and predictor. Then
-`ProfileBridge.excludes` transfers a model exclusion. The HTML's optional bridge
-preview is an explanatory conditional and never manufactures this Lean proof.
+For conditional experimental laws, add an `ExtensionInfo` carrying the actual
+`Claim`, and mark the cell's applicability `.additional`. Values and evidence kinds
+come from that claim. See [the extension guide](ADD_A_SCENARIO.md).

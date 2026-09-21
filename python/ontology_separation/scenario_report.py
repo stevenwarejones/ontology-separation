@@ -1,13 +1,12 @@
 """Check a trusted Lean comparison and render exact, proof-indexed predictions."""
 from __future__ import annotations
 import argparse
-from fractions import Fraction
 import html
 import json
 from pathlib import Path
-import re
-import subprocess
+from .checked_source import run_lean, validate_output, atomic_write_html
 from .proof_report import parse_exports
+from .evidence import validate_claim, result_text
 
 PREFIX = 'ONTOLOGY_SCENARIO '
 
@@ -21,7 +20,7 @@ def parse_comparison(stdout: str) -> dict:
                                          for k in ('declaration', 'type')):
         raise ValueError('Missing comparison provenance')
     c = record.get('comparison')
-    if not isinstance(c, dict) or c.get('schema') != 'ontology-scenario-v1':
+    if not isinstance(c, dict) or c.get('schema') != 'ontology-scenario-v2':
         raise ValueError('Unsupported scenario schema')
     if any(not isinstance(c.get(k), str) for k in ('title', 'description')):
         raise ValueError('Invalid scenario description')
@@ -29,7 +28,7 @@ def parse_comparison(stdout: str) -> dict:
         labels = c.get(axis)
         if (not isinstance(labels, list) or not labels
                 or any(not isinstance(x, str) or not x.strip() for x in labels)
-                or len(set(labels)) != len(labels)):
+                or len({' '.join(x.split()) for x in labels}) != len(labels)):
             raise ValueError('Model and protocol labels must be nonempty and unique')
     values = c.get('values')
     if not isinstance(values, list) or len(values) != len(c['models']):
@@ -38,13 +37,9 @@ def parse_comparison(stdout: str) -> dict:
         if not isinstance(row, list) or len(row) != len(c['protocols']):
             raise ValueError('Missing or extra protocol cells')
         for cell in row:
-            if not isinstance(cell, dict):
-                raise ValueError('Invalid rational cell')
-            n, d = cell.get('numerator'), cell.get('denominator')
-            if (not isinstance(n, str) or not re.fullmatch(r'-?[0-9]+', n)
-                    or not isinstance(d, str) or not re.fullmatch(r'[0-9]+', d)
-                    or int(d) <= 0):
-                raise ValueError('Cells require integer strings and a positive denominator')
+            validate_claim(cell)
+            if cell['kind'] != 'exact':
+                raise ValueError('A scenario comparison requires exact prediction claims')
     return record
 
 
@@ -54,7 +49,7 @@ def render(record: dict, source: str, theorems: list[dict]) -> str:
     head = ''.join('<th scope="col">'+esc(p)+'</th>' for p in c['protocols'])
     rows = []
     for label, values in zip(c['models'], c['values']):
-        cells = ''.join('<td>'+str(Fraction(int(v['numerator']), int(v['denominator'])))+'</td>' for v in values)
+        cells = ''.join('<td>'+esc(result_text(v))+'</td>' for v in values)
         rows.append('<tr><th scope="row">'+esc(label)+'</th>'+cells+'</tr>')
     proofs = ''.join('<details><summary>'+esc(t['declaration'])+'</summary><pre>'+esc(t['statement'])+
                      '</pre></details>' for t in theorems)
@@ -80,15 +75,13 @@ This editable HTML is a snapshot, not a proof certificate. Regenerate it from tr
 
 
 def write_report(source: Path, output: Path) -> int:
-    result = subprocess.run(['lake', 'env', 'lean', str(source)], capture_output=True, text=True)
-    if result.returncode:
-        raise ValueError('Lean rejected the comparison:\n'+result.stdout+result.stderr)
-    record = parse_comparison(result.stdout)
+    validate_output(source, output)
+    stdout = run_lean(source)
+    record = parse_comparison(stdout)
     # Additional theorem explanations are optional; the Comparison already carries its cell proofs.
-    proofs = parse_exports(result.stdout) if any(x.startswith('ONTOLOGY_THEOREM ') for x in result.stdout.splitlines()) else []
+    proofs = parse_exports(stdout) if any(x.startswith('ONTOLOGY_CLAIM ') for x in stdout.splitlines()) else []
     document = render(record, str(source), proofs)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(document, encoding='utf-8')
+    atomic_write_html(output, document)
     c = record['comparison']
     return len(c['models'])*len(c['protocols'])
 

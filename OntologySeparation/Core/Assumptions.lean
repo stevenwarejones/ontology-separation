@@ -25,6 +25,19 @@ structure AssumptionProfile where
   measurementIndependent : Stance := .unspecified
   deriving Repr, BEq, Lean.ToJson, Lean.FromJson
 
+/-- Choose every stance explicitly. `.unspecified` is unconstrained, not negation.
+The selected vocabulary, not these slot names, determines the physical laws. -/
+def AssumptionProfile.select (realism globalTruth locality measurementIndependent : Stance) :
+    AssumptionProfile := ⟨realism, globalTruth, locality, measurementIndependent⟩
+
+/-- Require all four predicates in the selected vocabulary; does not prove existence. -/
+def AssumptionProfile.requireAll : AssumptionProfile :=
+  .select .require .require .require .require
+
+/-- Impose no laws. This does not assert that any law fails. -/
+def AssumptionProfile.unconstrained : AssumptionProfile :=
+  .select .unspecified .unspecified .unspecified .unspecified
+
 def Stance.Holds : Stance → Prop → Prop
   | .require, p => p
   | .reject, p => ¬ p

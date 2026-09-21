@@ -99,1306 +99,2474 @@
   ],
   "cells": [
     {
+      "applicability": "native",
       "assumptions": [
-        "Local response mixture",
-        "Setting-independent mixture weights"
+        "Finite local response mixtures with setting-independent weights"
       ],
-      "declaration": "QIT.Bell.CHSH.value_le_two_of_isLocal",
+      "claim": {
+        "kind": "realizedBound",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "2"
+        },
+        "statement": "(\u2200 (m : OntologySeparation.Behavior OntologySeparation.Bell.interface),\n    OntologySeparation.Bell.localTheory m \u2192 OntologySeparation.Bell.score m \u2264 \u21912) \u2227\n  \u2203 m, OntologySeparation.Bell.localTheory m"
+      },
       "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "bell_local",
-      "result": "S <= 2",
       "scenario": "B01",
-      "status": "verifiedBound"
+      "supporting": [],
+      "status": "realizedBound",
+      "result": "\u2264 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "LF conditional PR component",
-        "Restrict to the two non-friend settings"
+        "LF component with actual records; two non-friend settings"
       ],
-      "declaration": "OntologySeparation.Shared.lf_inner_PR",
+      "claim": {
+        "kind": "witness",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "4"
+        },
+        "statement": "\u2203 m, (fun q => OntologySeparation.LF.componentScore q \u2264 6) m \u2227 OntologySeparation.LF.innerCHSH m = \u21914"
+      },
       "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "local_friendliness",
-      "result": "Inner-setting CHSH = 4",
       "scenario": "B01",
-      "status": "verifiedWitness"
+      "supporting": [],
+      "status": "witness",
+      "result": "4",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "No-signaling behavior class"
+        "Normalized two-setting no-signaling behaviors"
       ],
-      "declaration": "OntologySeparation.Catalog.bellPREvidence",
+      "claim": {
+        "kind": "witness",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "4"
+        },
+        "statement": "\u2203 m, OntologySeparation.Bell.noSignalingTheory m \u2227 OntologySeparation.Bell.score m = \u21914"
+      },
       "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "no_signaling",
-      "result": "PR witness S = 4",
       "scenario": "B01",
-      "status": "verifiedWitness"
+      "supporting": [],
+      "status": "witness",
+      "result": "4",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Normalized singlet",
-        "Specified rational projective measurement bases"
+        "Normalized singlet and specified rational measurement bases"
       ],
-      "declaration": "OntologySeparation.Catalog.bellQuantumEvidence",
+      "claim": {
+        "kind": "witness",
+        "quantity": {
+          "denominator": "625",
+          "numerator": "1502"
+        },
+        "statement": "\u2203 m, OntologySeparation.RealQuantum.singletTheory 2 m \u2227 OntologySeparation.Bell.score m = \u2191(1502 / 625)"
+      },
       "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "real_singlet",
-      "result": "S = 1502/625 > 2",
       "scenario": "B01",
-      "status": "verifiedWitness"
+      "supporting": [
+        {
+          "kind": "exclusion",
+          "quantity": null,
+          "statement": "OntologySeparation.Bell.localTheory OntologySeparation.Bell.singletBehavior \u2192 False"
+        }
+      ],
+      "status": "witness",
+      "result": "1502/625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation",
-        "Z dephasing weight p=0",
-        "Use the specified Bell projective bases; same two non-friend settings for B03"
+        "ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases",
+        "Z dephasing p=0"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "625",
+          "numerator": "1502"
+        },
+        "statement": "OntologySeparation.Bell.score\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob\n      \u2191(\"unitary_memory\",\n              { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1502 -\n        1152 *\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength) /\n      625)"
+      },
       "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "unitary_memory",
-      "result": "With dephased-singlet preparation: S = 1502/625",
       "scenario": "B01",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "1502/625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation",
-        "Z dephasing weight p=1",
-        "Use the specified Bell projective bases; same two non-friend settings for B03"
+        "ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases",
+        "Z dephasing p=1"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "25",
+          "numerator": "14"
+        },
+        "statement": "OntologySeparation.Bell.score\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob\n      \u2191(\"dephased_memory\",\n              { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1502 -\n        1152 *\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength) /\n      625)"
+      },
       "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "dephased_memory",
-      "result": "With dephased-singlet preparation: S = 14/25",
       "scenario": "B01",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "14/25",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation",
-        "Z dephasing weight p=1/2",
-        "Use the specified Bell projective bases; same two non-friend settings for B03"
+        "ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases",
+        "Z dephasing p=1/2"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "625",
+          "numerator": "926"
+        },
+        "statement": "OntologySeparation.Bell.score\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob\n      \u2191(\"partial_memory\",\n              { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1502 -\n        1152 *\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength) /\n      625)"
+      },
       "limitation": "Close laboratory loopholes separately from the ideal theorem.",
       "model": "partial_memory",
-      "result": "With dephased-singlet preparation: S = 926/625",
       "scenario": "B01",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "926/625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Three-setting finite deterministic local response mixtures",
-        "Setting-independent weights"
+        "Three-setting local mixtures with setting-independent weights"
       ],
-      "declaration": "OntologySeparation.Shared.local_three_LF_bound",
+      "claim": {
+        "kind": "realizedBound",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "6"
+        },
+        "statement": "(\u2200 (m : OntologySeparation.Behavior OntologySeparation.LF.interface),\n    OntologySeparation.Catalog.localThreeTheory m \u2192 OntologySeparation.RealQuantum.genuineLF m \u2264 \u21916) \u2227\n  \u2203 m, OntologySeparation.Catalog.localThreeTheory m"
+      },
       "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "bell_local",
-      "result": "G <= 6",
       "scenario": "B02",
-      "status": "verifiedBound"
+      "supporting": [],
+      "status": "realizedBound",
+      "result": "\u2264 6",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Conditional no-signaling",
-        "Actual friend records",
-        "Setting-independent prior"
+        "Conditional no-signaling, actual friend records, setting-independent prior"
       ],
-      "declaration": "OntologySeparation.Catalog.lfBoundEvidence",
+      "claim": {
+        "kind": "realizedBound",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "6"
+        },
+        "statement": "(\u2200 (m : OntologySeparation.Behavior OntologySeparation.LF.interface),\n    OntologySeparation.LF.theory m \u2192 OntologySeparation.RealQuantum.genuineLF m \u2264 \u21916) \u2227\n  \u2203 m, OntologySeparation.LF.theory m"
+      },
       "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "local_friendliness",
-      "result": "G <= 6",
       "scenario": "B02",
-      "status": "verifiedBound"
+      "supporting": [],
+      "status": "realizedBound",
+      "result": "\u2264 6",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Three-setting normalized no-signaling probabilities",
-        "Explicit extremal box attains 10"
+        "Three-setting no-signaling behaviors"
       ],
-      "declaration": "OntologySeparation.Shared.LF_ns_sharp",
+      "claim": {
+        "kind": "realizedBound",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "10"
+        },
+        "statement": "(\u2200 (m : OntologySeparation.Behavior (OntologySeparation.RealQuantum.interface 3)),\n    OntologySeparation.Shared.NoSignaling m \u2192 OntologySeparation.RealQuantum.genuineLF m \u2264 \u219110) \u2227\n  \u2203 m, OntologySeparation.Shared.NoSignaling m"
+      },
       "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "no_signaling",
-      "result": "G <= 10 (attained)",
       "scenario": "B02",
-      "status": "verifiedBound"
+      "supporting": [
+        {
+          "kind": "exact",
+          "quantity": {
+            "denominator": "1",
+            "numerator": "10"
+          },
+          "statement": "OntologySeparation.RealQuantum.genuineLF OntologySeparation.Shared.nsExtreme = \u219110"
+        }
+      ],
+      "status": "realizedBound",
+      "result": "\u2264 10",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Normalized singlet",
-        "Ideal coherent friend reversal",
-        "Specified bases"
+        "Normalized singlet; ideal friend reversal; specified bases"
       ],
-      "declaration": "OntologySeparation.Catalog.lfQuantumEvidence",
+      "claim": {
+        "kind": "witness",
+        "quantity": {
+          "denominator": "180625",
+          "numerator": "1214656"
+        },
+        "statement": "\u2203 m, OntologySeparation.RealQuantum.singletTheory 3 m \u2227 OntologySeparation.RealQuantum.genuineLF m = \u2191(1214656 / 180625)"
+      },
       "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "real_singlet",
-      "result": "G = 1214656/180625 > 6",
       "scenario": "B02",
-      "status": "verifiedWitness"
+      "supporting": [
+        {
+          "kind": "exclusion",
+          "quantity": null,
+          "statement": "OntologySeparation.LF.theory OntologySeparation.RealQuantum.lfBehavior \u2192 False"
+        }
+      ],
+      "status": "witness",
+      "result": "1214656/180625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation and ideal friend reversal",
-        "Z dephasing weight p=0",
-        "Use the specified LF bases"
+        "ADDITIONAL LAW: singlet preparation, specified LF bases and ideal friend reversal",
+        "Z dephasing p=0"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.LF_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "180625",
+          "numerator": "1214656"
+        },
+        "statement": "OntologySeparation.RealQuantum.genuineLF\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.RealQuantum.lfAlice\n      OntologySeparation.RealQuantum.lfBob\n      \u2191(\"unitary_memory\",\n              { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1214656 -\n        476928 *\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength) /\n      180625)"
+      },
       "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "unitary_memory",
-      "result": "With dephased-singlet preparation: G = 1214656/180625",
       "scenario": "B02",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "1214656/180625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation and ideal friend reversal",
-        "Z dephasing weight p=1",
-        "Use the specified LF bases"
+        "ADDITIONAL LAW: singlet preparation, specified LF bases and ideal friend reversal",
+        "Z dephasing p=1"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.LF_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "180625",
+          "numerator": "737728"
+        },
+        "statement": "OntologySeparation.RealQuantum.genuineLF\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.RealQuantum.lfAlice\n      OntologySeparation.RealQuantum.lfBob\n      \u2191(\"dephased_memory\",\n              { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1214656 -\n        476928 *\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength) /\n      180625)"
+      },
       "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "dephased_memory",
-      "result": "With dephased-singlet preparation: G = 737728/180625",
       "scenario": "B02",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "737728/180625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation and ideal friend reversal",
-        "Z dephasing weight p=1/2",
-        "Use the specified LF bases"
+        "ADDITIONAL LAW: singlet preparation, specified LF bases and ideal friend reversal",
+        "Z dephasing p=1/2"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.LF_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "180625",
+          "numerator": "976192"
+        },
+        "statement": "OntologySeparation.RealQuantum.genuineLF\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.RealQuantum.lfAlice\n      OntologySeparation.RealQuantum.lfBob\n      \u2191(\"partial_memory\",\n              { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1214656 -\n        476928 *\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength) /\n      180625)"
+      },
       "limitation": "Ideal reversible friend model; no claim that a qubit is a cognitive observer.",
       "model": "partial_memory",
-      "result": "With dephased-singlet preparation: G = 976192/180625",
       "scenario": "B02",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "976192/180625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Two non-friend settings use the Bell local interface",
-        "Setting restriction preserves local response mixtures"
+        "Bell-local interface for the two non-friend settings"
       ],
-      "declaration": "QIT.Bell.CHSH.value_le_two_of_isLocal",
+      "claim": {
+        "kind": "realizedBound",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "2"
+        },
+        "statement": "(\u2200 (m : OntologySeparation.Behavior OntologySeparation.Bell.interface),\n    OntologySeparation.Bell.localTheory m \u2192 OntologySeparation.Bell.score m \u2264 \u21912) \u2227\n  \u2203 m, OntologySeparation.Bell.localTheory m"
+      },
       "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "bell_local",
-      "result": "Inner CHSH <= 2",
       "scenario": "B03",
-      "status": "verifiedBound"
+      "supporting": [],
+      "status": "realizedBound",
+      "result": "\u2264 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Fixed friend records",
-        "Conditional PR inner box"
+        "Fixed friend records and a conditional PR inner box"
       ],
-      "declaration": "OntologySeparation.LF.exists_bell_violation_within_LF",
+      "claim": {
+        "kind": "witness",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "4"
+        },
+        "statement": "\u2203 m, (fun q => OntologySeparation.LF.componentScore q \u2264 6) m \u2227 OntologySeparation.LF.innerCHSH m = \u21914"
+      },
       "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "local_friendliness",
-      "result": "Inner CHSH = 4 while genuine LF bound holds",
       "scenario": "B03",
-      "status": "verifiedWitness"
+      "supporting": [],
+      "status": "witness",
+      "result": "4",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "LF PR component is no-signaling (Shared.lf_noSignaling)",
-        "Same non-friend setting restriction"
+        "No-signaling LF component restricted to non-friend settings"
       ],
-      "declaration": "OntologySeparation.Shared.lf_inner_PR",
+      "claim": {
+        "kind": "witness",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "4"
+        },
+        "statement": "\u2203 m,\n  (fun q => OntologySeparation.Shared.NoSignaling q.behavior) m \u2227\n    (fun q => OntologySeparation.Bell.score (OntologySeparation.Shared.inner q.behavior)) m = \u21914"
+      },
       "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "no_signaling",
-      "result": "Inner CHSH = 4",
       "scenario": "B03",
-      "status": "verifiedWitness"
+      "supporting": [],
+      "status": "witness",
+      "result": "4",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Assign the Bell singlet bases to the two non-friend settings",
-        "No assertion that this witness is LF-compatible"
+        "Bell singlet bases assigned to the non-friend settings; no LF membership claim"
       ],
-      "declaration": "OntologySeparation.Catalog.bellQuantumEvidence",
+      "claim": {
+        "kind": "witness",
+        "quantity": {
+          "denominator": "625",
+          "numerator": "1502"
+        },
+        "statement": "\u2203 m, OntologySeparation.RealQuantum.singletTheory 2 m \u2227 OntologySeparation.Bell.score m = \u2191(1502 / 625)"
+      },
       "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "real_singlet",
-      "result": "Inner CHSH = 1502/625 > 2",
       "scenario": "B03",
-      "status": "verifiedWitness"
+      "supporting": [],
+      "status": "witness",
+      "result": "1502/625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation",
-        "Z dephasing weight p=0",
-        "Use the specified Bell projective bases; same two non-friend settings for B03"
+        "ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases",
+        "Z dephasing p=0"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "625",
+          "numerator": "1502"
+        },
+        "statement": "OntologySeparation.Bell.score\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob\n      \u2191(\"unitary_memory\",\n              { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1502 -\n        1152 *\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength) /\n      625)"
+      },
       "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "unitary_memory",
-      "result": "With dephased-singlet preparation: S = 1502/625",
       "scenario": "B03",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "1502/625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation",
-        "Z dephasing weight p=1",
-        "Use the specified Bell projective bases; same two non-friend settings for B03"
+        "ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases",
+        "Z dephasing p=1"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "25",
+          "numerator": "14"
+        },
+        "statement": "OntologySeparation.Bell.score\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob\n      \u2191(\"dephased_memory\",\n              { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1502 -\n        1152 *\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength) /\n      625)"
+      },
       "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "dephased_memory",
-      "result": "With dephased-singlet preparation: S = 14/25",
       "scenario": "B03",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "14/25",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED bipartite singlet preparation",
-        "Z dephasing weight p=1/2",
-        "Use the specified Bell projective bases; same two non-friend settings for B03"
+        "ADDITIONAL LAW: bipartite singlet preparation and specified Bell bases",
+        "Z dephasing p=1/2"
       ],
-      "declaration": "OntologySeparation.DephasedSinglet.bell_score",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "625",
+          "numerator": "926"
+        },
+        "statement": "OntologySeparation.Bell.score\n    (OntologySeparation.DephasedSinglet.behavior OntologySeparation.Bell.alice OntologySeparation.Bell.bob\n      \u2191(\"partial_memory\",\n              { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength\n      \u22ef \u22ef) =\n  \u2191((1502 -\n        1152 *\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength) /\n      625)"
+      },
       "limitation": "This is a postquantum LF-compatible witness, not a quantum implementation.",
       "model": "partial_memory",
-      "result": "With dephased-singlet preparation: S = 926/625",
       "scenario": "B03",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "exact",
+      "result": "926/625",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2"
+      },
       "limitation": "Two-qubit calibration only.",
       "model": "bell_local",
-      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "B04",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2"
+      },
       "limitation": "Two-qubit calibration only.",
       "model": "local_friendliness",
-      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "B04",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2"
+      },
       "limitation": "Two-qubit calibration only.",
       "model": "no_signaling",
-      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "B04",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2"
+      },
       "limitation": "Two-qubit calibration only.",
       "model": "real_singlet",
-      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "B04",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Record dephasing strength p=0"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=0"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }\n      OntologySeparation.Memory.echo) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }\n      OntologySeparation.Memory.echo)"
+      },
       "limitation": "Two-qubit calibration only.",
       "model": "unitary_memory",
+      "scenario": "B04",
+      "supporting": [],
+      "status": "exact",
       "result": "1",
-      "scenario": "B04",
-      "status": "verifiedToyPrediction"
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Record dephasing strength p=1"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=1"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "2",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }\n      OntologySeparation.Memory.echo) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }\n      OntologySeparation.Memory.echo)"
+      },
       "limitation": "Two-qubit calibration only.",
       "model": "dephased_memory",
-      "result": "1/2",
       "scenario": "B04",
-      "status": "verifiedToyPrediction"
+      "supporting": [],
+      "status": "exact",
+      "result": "1/2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Record dephasing strength p=1/2"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=1/2"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "4",
+          "numerator": "3"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }\n      OntologySeparation.Memory.echo) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }\n      OntologySeparation.Memory.echo)"
+      },
       "limitation": "Two-qubit calibration only.",
       "model": "partial_memory",
-      "result": "3/4",
       "scenario": "B04",
-      "status": "verifiedToyPrediction"
+      "supporting": [],
+      "status": "exact",
+      "result": "3/4",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Bell-local",
         "A single setting-independent joint distribution over three binary records",
         "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
       ],
-      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False"
+      },
       "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "bell_local",
-      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.triangle v)) \u2264 2"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Local Friendliness",
         "A single setting-independent joint distribution over three binary records",
         "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
       ],
-      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False"
+      },
       "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "local_friendliness",
-      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.triangle v)) \u2264 2"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by No-signaling",
         "A single setting-independent joint distribution over three binary records",
         "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
       ],
-      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False"
+      },
       "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "no_signaling",
-      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.triangle v)) \u2264 2"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Quantum singlet",
         "A single setting-independent joint distribution over three binary records",
         "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
       ],
-      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False"
+      },
       "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "real_singlet",
-      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.triangle v)) \u2264 2"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=0",
         "A single setting-independent joint distribution over three binary records",
         "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
       ],
-      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False"
+      },
       "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "unitary_memory",
-      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.triangle v)) \u2264 2"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1",
         "A single setting-independent joint distribution over three binary records",
         "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
       ],
-      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False"
+      },
       "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "dephased_memory",
-      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.triangle v)) \u2264 2"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1/2",
         "A single setting-independent joint distribution over three binary records",
         "Abstract contextual probability model; not a demonstrated quantum or friend implementation."
       ],
-      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False"
+      },
       "limitation": "Checked three-record gluing subproblem is available. A feasible quantum/friend intervention and the broader cross-view composition claim remain open.",
       "model": "partial_memory",
-      "result": "IF added law: Expected number of disagreeing edges <= 2",
       "scenario": "P01",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.triangle v)) \u2264 2"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit memory model and complete record leakage before reversal"
+        "ADDITIONAL LAW: two-qubit memory and complete inaccessible leakage"
       ],
-      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2"
+      },
       "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "bell_local",
-      "result": "With complete inaccessible leakage: P(+) = 1/2",
       "scenario": "P02",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit memory model and complete record leakage before reversal"
+        "ADDITIONAL LAW: two-qubit memory and complete inaccessible leakage"
       ],
-      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2"
+      },
       "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "local_friendliness",
-      "result": "With complete inaccessible leakage: P(+) = 1/2",
       "scenario": "P02",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit memory model and complete record leakage before reversal"
+        "ADDITIONAL LAW: two-qubit memory and complete inaccessible leakage"
       ],
-      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2"
+      },
       "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "no_signaling",
-      "result": "With complete inaccessible leakage: P(+) = 1/2",
       "scenario": "P02",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit memory model and complete record leakage before reversal"
+        "ADDITIONAL LAW: two-qubit memory and complete inaccessible leakage"
       ],
-      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2"
+      },
       "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "real_singlet",
-      "result": "With complete inaccessible leakage: P(+) = 1/2",
       "scenario": "P02",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.leakedEcho = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Complete inaccessible memory leakage before reversal"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=0",
+        "Complete inaccessible leakage before reversal"
       ],
-      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "2",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }\n      OntologySeparation.Memory.leakedEcho) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }\n      OntologySeparation.Memory.leakedEcho)"
+      },
       "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "unitary_memory",
-      "result": "1/2",
       "scenario": "P02",
-      "status": "verifiedToyPrediction"
+      "supporting": [],
+      "status": "exact",
+      "result": "1/2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Complete inaccessible memory leakage before reversal"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=1",
+        "Complete inaccessible leakage before reversal"
       ],
-      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "2",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }\n      OntologySeparation.Memory.leakedEcho) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }\n      OntologySeparation.Memory.leakedEcho)"
+      },
       "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "dephased_memory",
-      "result": "1/2",
       "scenario": "P02",
-      "status": "verifiedToyPrediction"
+      "supporting": [],
+      "status": "exact",
+      "result": "1/2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Complete inaccessible memory leakage before reversal"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=1/2",
+        "Complete inaccessible leakage before reversal"
       ],
-      "declaration": "OntologySeparation.Memory.leakedEcho_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "2",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }\n      OntologySeparation.Memory.leakedEcho) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }\n      OntologySeparation.Memory.leakedEcho)"
+      },
       "limitation": "Exact leakage toy is included; conserved charge, reference-frame resources and the radical claim remain unformalized.",
       "model": "partial_memory",
-      "result": "1/2",
       "scenario": "P02",
-      "status": "verifiedToyPrediction"
+      "supporting": [],
+      "status": "exact",
+      "result": "1/2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Bell-local",
         "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
         "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
       ],
-      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon"
+      },
       "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "bell_local",
-      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (epsilon : \u211d) (h0 : 0 \u2264 epsilon) (h1 : epsilon \u2264 1),\n  OntologySeparation.RealQuantum.genuineLF\n      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =\n    6 + 4 * epsilon"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Local Friendliness",
         "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
         "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
       ],
-      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon"
+      },
       "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "local_friendliness",
-      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (epsilon : \u211d) (h0 : 0 \u2264 epsilon) (h1 : epsilon \u2264 1),\n  OntologySeparation.RealQuantum.genuineLF\n      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =\n    6 + 4 * epsilon"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW: mixture of an LF sector and a normalized no-signaling sector",
-        "0 <= epsilon <= 1; epsilon >= (G-6)/4",
-        "Sharpness: Shared.LF_NS_contamination_attained; not a communication-cost theorem"
+        "ADDITIONAL LAW: LF + normalized no-signaling mixture",
+        "0 \u2264 epsilon \u2264 1; not a communication-cost theorem"
       ],
-      "declaration": "OntologySeparation.Shared.LF_NS_fraction_required",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    OntologySeparation.Shared.NoSignaling bad \u2192\n      \u2200 (epsilon observed : \u211d),\n        0 \u2264 epsilon \u2192\n          epsilon \u2264 1 \u2192\n            observed =\n                (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                  epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n              (observed - 6) / 4 \u2264 epsilon"
+      },
       "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "no_signaling",
-      "result": "IF LF + NS contamination: G <= 6+4 epsilon (sharp)",
       "scenario": "P03",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (epsilon : \u211d) (h0 : 0 \u2264 epsilon) (h1 : epsilon \u2264 1),\n  OntologySeparation.RealQuantum.genuineLF\n      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =\n    6 + 4 * epsilon"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    OntologySeparation.Shared.NoSignaling bad \u2192\n      \u2200 (epsilon observed : \u211d),\n        0 \u2264 epsilon \u2192\n          epsilon \u2264 1 \u2192\n            observed =\n                (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                  epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n              (observed - 6) / 4 \u2264 epsilon",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Quantum singlet",
         "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
         "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
       ],
-      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon"
+      },
       "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "real_singlet",
-      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (epsilon : \u211d) (h0 : 0 \u2264 epsilon) (h1 : epsilon \u2264 1),\n  OntologySeparation.RealQuantum.genuineLF\n      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =\n    6 + 4 * epsilon"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=0",
         "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
         "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
       ],
-      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon"
+      },
       "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "unitary_memory",
-      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (epsilon : \u211d) (h0 : 0 \u2264 epsilon) (h1 : epsilon \u2264 1),\n  OntologySeparation.RealQuantum.genuineLF\n      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =\n    6 + 4 * epsilon"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1",
         "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
         "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
       ],
-      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon"
+      },
       "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "dephased_memory",
-      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (epsilon : \u211d) (h0 : 0 \u2264 epsilon) (h1 : epsilon \u2264 1),\n  OntologySeparation.RealQuantum.genuineLF\n      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =\n    6 + 4 * epsilon"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1/2",
         "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
         "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric."
       ],
-      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon"
+      },
       "limitation": "Checked LF contamination tradeoff is available. A non-LF mixture fraction is not a signaling, communication, or causal-influence metric.",
       "model": "partial_memory",
-      "result": "IF added law: G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (epsilon : \u211d) (h0 : 0 \u2264 epsilon) (h1 : epsilon \u2264 1),\n  OntologySeparation.RealQuantum.genuineLF\n      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =\n    6 + 4 * epsilon"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED coherent control and memory channel",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: coherent phase control and memory channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2"
+      },
       "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "bell_local",
-      "result": "With phase-echo channel law: P(+) = p/2",
       "scenario": "P04",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED coherent control and memory channel",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: coherent phase control and memory channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2"
+      },
       "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "local_friendliness",
-      "result": "With phase-echo channel law: P(+) = p/2",
       "scenario": "P04",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED coherent control and memory channel",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: coherent phase control and memory channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2"
+      },
       "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "no_signaling",
-      "result": "With phase-echo channel law: P(+) = p/2",
       "scenario": "P04",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED coherent control and memory channel",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: coherent phase control and memory channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2"
+      },
       "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "real_singlet",
-      "result": "With phase-echo channel law: P(+) = p/2",
       "scenario": "P04",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.phaseEcho = m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Signal phase flip",
-        "p=0"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=0",
+        "Signal phase flip before reversal"
       ],
-      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }\n      OntologySeparation.Memory.phaseEcho) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }\n      OntologySeparation.Memory.phaseEcho)"
+      },
       "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "unitary_memory",
+      "scenario": "P04",
+      "supporting": [],
+      "status": "exact",
       "result": "0",
-      "scenario": "P04",
-      "status": "verifiedToyPrediction"
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Signal phase flip",
-        "p=1"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=1",
+        "Signal phase flip before reversal"
       ],
-      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "2",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }\n      OntologySeparation.Memory.phaseEcho) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }\n      OntologySeparation.Memory.phaseEcho)"
+      },
       "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "dephased_memory",
-      "result": "1/2",
       "scenario": "P04",
-      "status": "verifiedToyPrediction"
+      "supporting": [],
+      "status": "exact",
+      "result": "1/2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Signal phase flip",
-        "p=1/2"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=1/2",
+        "Signal phase flip before reversal"
       ],
-      "declaration": "OntologySeparation.Memory.phaseEcho_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "4",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }\n      OntologySeparation.Memory.phaseEcho) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }\n      OntologySeparation.Memory.phaseEcho)"
+      },
       "limitation": "Exact coherent-control toy; a full choice-absoluteness theorem requires a separate protocol and assumptions.",
       "model": "partial_memory",
+      "scenario": "P04",
+      "supporting": [],
+      "status": "exact",
       "result": "1/4",
-      "scenario": "P04",
-      "status": "verifiedToyPrediction"
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Bell-local",
         "Two independent fair classical bits; decoder sees only one share",
         "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
       ],
-      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2"
+      },
       "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "bell_local",
-      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : Bool \u2192 \u211d), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (f g : Bool \u2192 Bool), (\u2200 (b : Bool), g (f b) = b) \u2192 \u2200 (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Local Friendliness",
         "Two independent fair classical bits; decoder sees only one share",
         "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
       ],
-      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2"
+      },
       "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "local_friendliness",
-      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : Bool \u2192 \u211d), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (f g : Bool \u2192 Bool), (\u2200 (b : Bool), g (f b) = b) \u2192 \u2200 (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by No-signaling",
         "Two independent fair classical bits; decoder sees only one share",
         "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
       ],
-      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2"
+      },
       "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "no_signaling",
-      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : Bool \u2192 \u211d), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (f g : Bool \u2192 Bool), (\u2200 (b : Bool), g (f b) = b) \u2192 \u2200 (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Quantum singlet",
         "Two independent fair classical bits; decoder sees only one share",
         "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
       ],
-      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2"
+      },
       "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "real_singlet",
-      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : Bool \u2192 \u211d), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (f g : Bool \u2192 Bool), (\u2200 (b : Bool), g (f b) = b) \u2192 \u2200 (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=0",
         "Two independent fair classical bits; decoder sees only one share",
         "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
       ],
-      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2"
+      },
       "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "unitary_memory",
-      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : Bool \u2192 \u211d), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (f g : Bool \u2192 Bool), (\u2200 (b : Bool), g (f b) = b) \u2192 \u2200 (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1",
         "Two independent fair classical bits; decoder sees only one share",
         "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
       ],
-      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2"
+      },
       "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "dephased_memory",
-      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : Bool \u2192 \u211d), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (f g : Bool \u2192 Bool), (\u2200 (b : Bool), g (f b) = b) \u2192 \u2200 (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1/2",
         "Two independent fair classical bits; decoder sees only one share",
         "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim."
       ],
-      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2"
+      },
       "limitation": "Checked one-share versus joint classical parity recovery and passive-relabel invariance. Quantum subsystem factorization and recovery require a further access-map model.",
       "model": "partial_memory",
-      "result": "IF added law: Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : Bool \u2192 \u211d), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (f g : Bool \u2192 Bool), (\u2200 (b : Bool), g (f b) = b) \u2192 \u2200 (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Bell-local",
         "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
         "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
       ],
-      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2"
+      },
       "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "bell_local",
-      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Local Friendliness",
         "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
         "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
       ],
-      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2"
+      },
       "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "local_friendliness",
-      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by No-signaling",
         "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
         "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
       ],
-      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2"
+      },
       "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "no_signaling",
-      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Quantum singlet",
         "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
         "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
       ],
-      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2"
+      },
       "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "real_singlet",
-      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=0",
         "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
         "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
       ],
-      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2"
+      },
       "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "unitary_memory",
-      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1",
         "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
         "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
       ],
-      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2"
+      },
       "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "dephased_memory",
-      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1/2",
         "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
         "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness."
       ],
-      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2"
+      },
       "limitation": "Checked X/Z order-interference calibration only. A process-matrix witness with friend correlations remains open; a known-gate fixed-order circuit can imitate this statistic.",
       "model": "partial_memory",
-      "result": "IF added law: Minus-port probability = 1-p/2",
       "scenario": "P06",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Bell-local",
         "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
         "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
       ],
-      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False"
+      },
       "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "bell_local",
-      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +\n        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +\n      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +\n    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =\n  1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "(\u2203 a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) \u2192 False"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Local Friendliness",
         "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
         "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
       ],
-      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False"
+      },
       "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "local_friendliness",
-      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +\n        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +\n      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +\n    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =\n  1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "(\u2203 a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) \u2192 False"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by No-signaling",
         "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
         "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
       ],
-      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False"
+      },
       "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "no_signaling",
-      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +\n        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +\n      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +\n    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =\n  1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "(\u2203 a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) \u2192 False"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Quantum singlet",
         "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
         "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
       ],
-      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False"
+      },
       "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "real_singlet",
-      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +\n        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +\n      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +\n    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =\n  1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "(\u2203 a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) \u2192 False"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=0",
         "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
         "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
       ],
-      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False"
+      },
       "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "unitary_memory",
-      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +\n        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +\n      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +\n    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =\n  1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "(\u2203 a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) \u2192 False"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1",
         "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
         "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
       ],
-      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False"
+      },
       "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "dephased_memory",
-      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +\n        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +\n      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +\n    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =\n  1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "(\u2203 a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) \u2192 False"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1/2",
         "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
         "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion."
       ],
-      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False"
+      },
       "limitation": "Checked controlled-phase pure-state entanglement subproblem. Gravity dynamics, coupling/time/noise parameters, mixed-state witness and a competing classical mediator remain open.",
       "model": "partial_memory",
-      "result": "IF added law: Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +\n        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +\n      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +\n    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =\n  1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "(\u2203 a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) \u2192 False"
+        }
+      ],
+      "status": "theorem",
+      "result": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Bell-local",
         "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
         "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
       ],
-      "declaration": "OntologySeparation.Research.random_query_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2"
+      },
       "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "bell_local",
-      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Local Friendliness",
         "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
         "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
       ],
-      "declaration": "OntologySeparation.Research.random_query_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2"
+      },
       "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "local_friendliness",
-      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by No-signaling",
         "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
         "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
       ],
-      "declaration": "OntologySeparation.Research.random_query_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2"
+      },
       "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "no_signaling",
-      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Quantum singlet",
         "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
         "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
       ],
-      "declaration": "OntologySeparation.Research.random_query_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2"
+      },
       "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "real_singlet",
-      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=0",
         "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
         "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
       ],
-      "declaration": "OntologySeparation.Research.random_query_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2"
+      },
       "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "unitary_memory",
-      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1",
         "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
         "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
       ],
-      "declaration": "OntologySeparation.Research.random_query_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2"
+      },
       "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "dephased_memory",
-      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1/2",
         "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
         "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries."
       ],
-      "declaration": "OntologySeparation.Research.random_query_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2"
+      },
       "limitation": "Checked two-bit parity obstruction for one classical query, including randomized responses. No asymptotic or coherent-quantum query lower bound.",
       "model": "partial_memory",
-      "result": "IF added law: Success = 1/2 for every such decoder",
       "scenario": "P08",
-      "status": "verifiedConditional"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        }
+      ],
+      "status": "theorem",
+      "result": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2"
+      },
       "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "bell_local",
-      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "P09",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2"
+      },
       "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "local_friendliness",
-      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "P09",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2"
+      },
       "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "no_signaling",
-      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "P09",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDED two-qubit |+0> preparation and record/reverse/readout model",
-        "0 <= p <= 1; column does not fix p"
+        "ADDITIONAL LAW: two-qubit record/reverse/readout channel; column does not fix p"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2"
+      },
       "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "real_singlet",
-      "result": "With memory-channel law: P(+) = 1-p/2",
       "scenario": "P09",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (m : OntologySeparation.Memory.Parameters),\n  OntologySeparation.Memory.probability m OntologySeparation.Memory.echo = 1 - m.strength / 2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Record dephasing strength p=0"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=0"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }\n      OntologySeparation.Memory.echo) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"unitary_memory\",\n                { strength := 0, nonneg := OntologySeparation.Catalog.memoryModels._proof_1,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_2 }).2.strength }\n      OntologySeparation.Memory.echo)"
+      },
       "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "unitary_memory",
+      "scenario": "P09",
+      "supporting": [],
+      "status": "exact",
       "result": "1",
-      "scenario": "P09",
-      "status": "verifiedToyPrediction"
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Record dephasing strength p=1"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=1"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "2",
+          "numerator": "1"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }\n      OntologySeparation.Memory.echo) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"dephased_memory\",\n                { strength := 1, nonneg := OntologySeparation.Catalog.memoryModels._proof_2,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_3 }).2.strength }\n      OntologySeparation.Memory.echo)"
+      },
       "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "dephased_memory",
-      "result": "1/2",
       "scenario": "P09",
-      "status": "verifiedToyPrediction"
+      "supporting": [],
+      "status": "exact",
+      "result": "1/2",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "native",
       "assumptions": [
-        "Initial |+0>",
-        "Record dephasing strength p=1/2"
+        "Initial |+0>; rational two-qubit memory dynamics",
+        "Record dephasing p=1/2"
       ],
-      "declaration": "OntologySeparation.Memory.echo_probability",
+      "claim": {
+        "kind": "exact",
+        "quantity": {
+          "denominator": "4",
+          "numerator": "3"
+        },
+        "statement": "\u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }\n      OntologySeparation.Memory.echo) =\n  \u2191(OntologySeparation.Memory.probability\n      {\n        strength :=\n          (\"partial_memory\",\n                { strength := 1 / 2, nonneg := OntologySeparation.Catalog.memoryModels._proof_4,\n                  atMostOne := OntologySeparation.Catalog.memoryModels._proof_5 }).2.strength }\n      OntologySeparation.Memory.echo)"
+      },
       "limitation": "Same exact memory toy as calibration; cognition, consciousness and functioning observers are not modeled.",
       "model": "partial_memory",
-      "result": "3/4",
       "scenario": "P09",
-      "status": "verifiedToyPrediction"
+      "supporting": [],
+      "status": "exact",
+      "result": "3/4",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Bell-local",
         "A single joint distribution over three public binary records A,B,C",
         "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
       ],
-      "declaration": "OntologySeparation.Research.public_error_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)"
+      },
       "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "bell_local",
-      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Local Friendliness",
         "A single joint distribution over three public binary records A,B,C",
         "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
       ],
-      "declaration": "OntologySeparation.Research.public_error_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)"
+      },
       "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "local_friendliness",
-      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by No-signaling",
         "A single joint distribution over three public binary records A,B,C",
         "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
       ],
-      "declaration": "OntologySeparation.Research.public_error_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)"
+      },
       "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "no_signaling",
-      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
         "ADDITIONAL LAW, not entailed by Quantum singlet",
         "A single joint distribution over three public binary records A,B,C",
         "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
       ],
-      "declaration": "OntologySeparation.Research.public_error_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)"
+      },
       "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "real_singlet",
-      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Unitary memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=0",
         "A single joint distribution over three public binary records A,B,C",
         "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
       ],
-      "declaration": "OntologySeparation.Research.public_error_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)"
+      },
       "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "unitary_memory",
-      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Dephased memory",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1",
         "A single joint distribution over three public binary records A,B,C",
         "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
       ],
-      "declaration": "OntologySeparation.Research.public_error_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)"
+      },
       "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "dephased_memory",
-      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)",
+      "declaration": "OntologySeparation.Catalog.matrix"
     },
     {
+      "applicability": "additional",
       "assumptions": [
-        "ADDITIONAL LAW, not entailed by Partial dephasing",
+        "ADDITIONAL LAW, not entailed by Memory dephasing p=1/2",
         "A single joint distribution over three public binary records A,B,C",
         "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise."
       ],
-      "declaration": "OntologySeparation.Research.public_error_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)"
+      },
       "limitation": "Checked disagreement composition under a common public joint distribution. Composition of inaccessible observer-relative facts remains open.",
       "model": "partial_memory",
-      "result": "IF added law: P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
-      "status": "verifiedConditional"
+      "supporting": [],
+      "status": "theorem",
+      "result": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)",
+      "declaration": "OntologySeparation.Catalog.matrix"
     }
   ],
   "extensions": [
     {
-      "contrast": "Three separately anticorrelated, fair contexts give 3 and have no joint extension",
-      "declaration": "OntologySeparation.Research.no_pairwise_gluing",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False"
+      },
       "requiredLaw": "A single setting-independent joint distribution over three binary records",
-      "result": "Expected number of disagreeing edges <= 2",
       "scenario": "P01",
       "scope": "Abstract contextual probability model; not a demonstrated quantum or friend implementation.",
-      "title": "Three-record gluing test"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.triangle v)) \u2264 2"
+        }
+      ],
+      "title": "Three-record gluing test",
+      "result": "(\u2203 d, OntologySeparation.Research.GluesPairwise d) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.extensions"
     },
     {
-      "contrast": "If the bad sector is also no-signaling: G <= 6+4 epsilon, attained; epsilon >= (G-6)/4. See Shared.LF_NS_fraction_required and Shared.LF_NS_contamination_attained.",
-      "declaration": "OntologySeparation.Shared.LF_contamination_required",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon"
+      },
       "requiredLaw": "Mixture of an LF behavior and an arbitrary normalized behavior; outside fraction epsilon",
-      "result": "G <= 6 + 8 epsilon; epsilon >= (G-6)/8",
       "scenario": "P03",
       "scope": "Conservative arbitrary-behavior bound. Fraction of non-LF runs is not communication, signaling strength, or a causal influence metric.",
-      "title": "LF contamination budget"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (epsilon : \u211d) (h0 : 0 \u2264 epsilon) (h1 : epsilon \u2264 1),\n  OntologySeparation.RealQuantum.genuineLF\n      (OntologySeparation.Shared.nsExtreme.mix OntologySeparation.Shared.saturatingModel.behavior epsilon h0 h1) =\n    6 + 4 * epsilon"
+        }
+      ],
+      "title": "LF contamination budget",
+      "result": "\u2200 (good bad : OntologySeparation.Behavior OntologySeparation.LF.interface),\n  OntologySeparation.LF.theory good \u2192\n    \u2200 (epsilon observed : \u211d),\n      0 \u2264 epsilon \u2192\n        epsilon \u2264 1 \u2192\n          observed =\n              (1 - epsilon) * OntologySeparation.RealQuantum.genuineLF good +\n                epsilon * OntologySeparation.RealQuantum.genuineLF bad \u2192\n            (observed - 6) / 8 \u2264 epsilon",
+      "declaration": "OntologySeparation.Catalog.extensions"
     },
     {
-      "contrast": "Joint access and parity decoder succeeds with 1",
-      "declaration": "OntologySeparation.Research.restricted_recovery",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2"
+      },
       "requiredLaw": "Two independent fair classical bits; decoder sees only one share",
-      "result": "Every randomized one-share decoder succeeds with 1/2",
       "scenario": "P05",
       "scope": "Operational access changes. Passive invertible relabeling leaves predictions unchanged; no quantum subsystem-recovery claim.",
-      "title": "Access to a parity-encoded record"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (d : Bool \u2192 \u211d), (1 - d Bool.false + d Bool.false + d Bool.true + (1 - d Bool.true)) / 4 = 1 / 2"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "\u2200 (f g : Bool \u2192 Bool), (\u2200 (b : Bool), g (f b) = b) \u2192 \u2200 (a b : Bool), (g (f a) ^^ g (f b)) = (a ^^ b)"
+        }
+      ],
+      "title": "Access to a parity-encoded record",
+      "result": "\u2200 (d : Bool \u2192 \u211a), OntologySeparation.Research.oneBitRecovery d = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.extensions"
     },
     {
-      "contrast": "p=0: 1; p=1/2: 3/4; p=1: 1/2",
-      "declaration": "OntologySeparation.Research.noisy_order_probability",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2"
+      },
       "requiredLaw": "Normalized real target; coherently superpose XZ and ZX; dephase order control with strength p",
-      "result": "Minus-port probability = 1-p/2",
       "scenario": "P06",
       "scope": "Gate-specific calibration. A known-gate fixed-order circuit can imitate this statistic; not a causal-nonseparability or friend-order witness.",
-      "title": "Pauli-order interference"
+      "supporting": [],
+      "title": "Pauli-order interference",
+      "result": "\u2200 (p : \u211a) (v : OntologySeparation.Research.Vector),\n  OntologySeparation.Research.normSq v = 1 \u2192 OntologySeparation.Research.noisyOrder p v = 1 - p / 2",
+      "declaration": "OntologySeparation.Catalog.extensions"
     },
     {
-      "contrast": "Every pure real product amplitude has determinant zero",
-      "declaration": "OntologySeparation.Research.phase_state_not_complex_product",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False"
+      },
       "requiredLaw": "Pure real two-qubit amplitudes; coherent CZ applied to |++>",
-      "result": "Normalized output has determinant -1/2 and is not a product amplitude",
       "scenario": "P07",
       "scope": "Pure-state calculation; requires purity and state reconstruction. No gravity model, coupling scale, mixed-state separability theorem, or generic classical-mediator exclusion.",
-      "title": "Controlled-phase product-state test"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.phaseState Bool.false Bool.false ^ 2 +\n        OntologySeparation.Research.phaseState Bool.false Bool.true ^ 2 +\n      OntologySeparation.Research.phaseState Bool.true Bool.false ^ 2 +\n    OntologySeparation.Research.phaseState Bool.true Bool.true ^ 2 =\n  1"
+        },
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "(\u2203 a b, OntologySeparation.Research.product a b = OntologySeparation.Research.phaseState) \u2192 False"
+        }
+      ],
+      "title": "Controlled-phase product-state test",
+      "result": "(\u2203 a b, \u2200 (i j : Bool), a i * b j = \u2191(OntologySeparation.Research.phaseState i j)) \u2192 False",
+      "declaration": "OntologySeparation.Catalog.extensions"
     },
     {
-      "contrast": "Two classical queries allow success 1",
-      "declaration": "OntologySeparation.Research.random_query_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2"
+      },
       "requiredLaw": "Two fair bits; at most one classical bit query; arbitrary randomized response and query choice",
-      "result": "Success = 1/2 for every such decoder",
       "scenario": "P08",
       "scope": "A small exact algorithm-class obstruction, not an asymptotic complexity result or a bound on coherent quantum queries.",
-      "title": "Classical query-budget recovery"
+      "supporting": [
+        {
+          "kind": "theorem",
+          "quantity": null,
+          "statement": "OntologySeparation.Research.jointRecovery Bool.xor = 1"
+        }
+      ],
+      "title": "Classical query-budget recovery",
+      "result": "\u2200 (q : \u211a) (d e : Bool \u2192 \u211a),\n  q * OntologySeparation.Research.oneBitRecovery d + (1 - q) * OntologySeparation.Research.oneBitRecovery e = 1 / 2",
+      "declaration": "OntologySeparation.Catalog.extensions"
     },
     {
-      "contrast": "Zero adjacent disagreement forces zero end-to-end disagreement",
-      "declaration": "OntologySeparation.Research.public_error_bound",
+      "claim": {
+        "kind": "theorem",
+        "quantity": null,
+        "statement": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)"
+      },
       "requiredLaw": "A single joint distribution over three public binary records A,B,C",
-      "result": "P(A != C) <= P(A != B) + P(B != C)",
       "scenario": "P10",
       "scope": "Does not compose inaccessible observer-relative records; the common joint distribution is an explicit premise.",
-      "title": "Public agreement composition"
+      "supporting": [],
+      "title": "Public agreement composition",
+      "result": "\u2200 (d : OntologySeparation.FiniteDistribution OntologySeparation.Research.Triple),\n  (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.2)) \u2264\n    (d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.1 v.2.1)) +\n      d.mean fun v => \u2191(OntologySeparation.Research.mismatch v.2.1 v.2.2)",
+      "declaration": "OntologySeparation.Catalog.extensions"
     }
   ],
-  "independent_extension_theorem": "OntologySeparation.independent_sector_underdetermined",
   "models": [
     {
       "id": "bell_local",
@@ -1427,23 +2595,23 @@
     {
       "id": "unitary_memory",
       "kind": "concrete toy dynamics",
-      "scope": "Two-qubit records; p=0",
-      "title": "Unitary memory"
+      "scope": "Two-qubit record channel p=0",
+      "title": "Memory dephasing p=0"
     },
     {
       "id": "dephased_memory",
       "kind": "concrete toy dynamics",
-      "scope": "Two-qubit records; p=1",
-      "title": "Dephased memory"
+      "scope": "Two-qubit record channel p=1",
+      "title": "Memory dephasing p=1"
     },
     {
       "id": "partial_memory",
       "kind": "concrete toy dynamics",
-      "scope": "Two-qubit records; p=1/2",
-      "title": "Partial dephasing"
+      "scope": "Two-qubit record channel p=1/2",
+      "title": "Memory dephasing p=1/2"
     }
   ],
-  "profile_notice": "Sixteen expressible profiles; physical realizability requires an explicit vocabulary and witness.",
+  "profile_notice": "Sixteen expressible profiles; physical realizability requires a vocabulary and a satisfying model.",
   "scenarios": [
     {
       "family": "bell",
@@ -2179,5 +3347,5 @@
       "title": "Rules of shared reality"
     }
   ],
-  "schema_version": 2
+  "schema_version": 3
 }

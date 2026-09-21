@@ -1,8 +1,13 @@
 # From physical assumptions to predictions
 
-Start with [PhysicistWorkflow.lean](../examples/PhysicistWorkflow.lean). It contains
-complete experiments whose parameters and operations you can edit. For a separate
-project, use [the downstream example](../examples/downstream/README.md).
+For your first edit, [create a checked recipe](START_HERE.md): choose laws, describe
+operations, export a table. No manual prediction formula is needed. The
+[glossary](GLOSSARY.md) explains the shared vocabulary and the distinction between
+an unconstrained law and a rejected one.
+
+For Bell/LF or new physical mechanisms, this guide explains the operational
+assumptions. [PhysicistWorkflow.lean](../examples/PhysicistWorkflow.lean) contains
+editable lower-level examples.
 
 ## Begin with a physical question
 
@@ -127,7 +132,7 @@ To export your own theorem, no central claim enumeration needs editing:
 
 ```lean
 import OntologySeparation
-import OntologySeparation.Reporting.Export
+import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.FriendRecords.bound
 ```
 
@@ -148,7 +153,8 @@ unfinished proofs, and unsupported proof dependencies cannot be published by thi
 command. Physical interpretation text is commentary, not an extra inferred theorem.
 HTML and JSON remain editable snapshots. Recheck trusted local source with Lean;
 this command executes that source and does not authenticate arbitrary third-party
-JSON. The legacy 98-cell report still has a weaker, curated presentation contract.
+JSON. The 98-cell catalog uses the same claim exporter. Its five bound cells now each
+carry a satisfying model; added-law applicability is marked separately.
 
 ## Setup
 
@@ -174,3 +180,20 @@ substantive adapter/research work.
 
 For a complete experiment → models → proofs → table workflow, see
 [Add a scenario](ADD_A_SCENARIO.md). The example lives in a separate adopter package.
+
+## Bounds versus possible worlds
+
+A `ProfileBound` is conditional on satisfaction of its exact profile. It does not
+establish that there is a model satisfying it. `RealizedProfileBound` adds that
+model and proof, and exposes `.realizable`, `.witness`, and `.valid`.
+`ClassicalWorld.realizedBound` is a complete Bell example: it pairs the screening-off
+bound with a constant-output local model. The separate `constant_score` theorem
+also proves that model attains S=2.
+
+The sixteen-profile coverage table intentionally marks conditional bounds in
+amber with “existence not certified for this row.” A witness for a weaker profile
+does not automatically witness each stronger row. Empty classes can satisfy
+bounds vacuously, so an inhabited claim needs its own proof.
+
+When adding a vocabulary, use [the equation checklist](GLOSSARY.md#review-a-new-vocabulary).
+The four field names alone do not fix their physical meanings.

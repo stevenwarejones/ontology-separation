@@ -10,7 +10,7 @@ The new API has four layers:
    permitted in the ambient Bell and friend-record model spaces.
 2. **Operational laws:** explicit equations for outcome independence, conditional
    parameter independence, independent preparation, and readable fixed records.
-   Named vocabularies state which meaning each legacy profile slot has.
+   Named vocabularies state which meaning each profile slot has.
 3. **Experiment composition:** finite classical channels compose with normalization
    proofs. State-map procedures compose separately, avoiding a classical hidden-state
    interpretation of quantum state vectors or density operators. Preparation and

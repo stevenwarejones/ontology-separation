@@ -5,3 +5,9 @@ import Tests.Documentation
 
 import Tests.Research
 import Tests.Operational
+
+import Tests.Recipes
+
+import Tests.Realized
+
+import Tests.Claims

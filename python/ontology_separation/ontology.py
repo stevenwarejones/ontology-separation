@@ -4,6 +4,7 @@ The four-axis vocabulary is user supplied in Lean. The UI's optional operational
 bridge is a conditional reading guide, NOT a registered proof for those labels.
 """
 from __future__ import annotations
+from .evidence import evidence_label
 import html
 import itertools
 import json
@@ -74,8 +75,17 @@ def experiment_html(report, scenario):
         bits = ''.join(f'<td>{"Require" if entry["values"][a] else "Reject"}</td>' for a in AXES)
         rows.append(f'<tr><td>{k+1:02d}</td>{bits}<td>{esc(entry["rule"])}</td></tr>')
     table = '<table id="all-profiles"><thead><tr><th>Profile</th>' + ''.join(f'<th>{x}</th>' for x in LABELS) + '<th>Conditional consequence</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table>'
-    cell_rows = ''.join('<tr><th>'+esc(c['model'])+'</th><td>'+esc(c['status'])+'</td><td>'+esc(c['result'])+'</td><td>'+esc('; '.join(c['assumptions']))+'<small>'+esc(c['limitation'])+'</small><small>Lean: '+esc(c['declaration'] or 'none')+'</small></td></tr>' for c in cells)
-    ext_html = ''.join(f'<article class="card"><h3>{esc(e["title"])}</h3><p><b>Added law:</b> {esc(e["requiredLaw"])}</p><p>{esc(e["result"])}</p><p>{esc(e["contrast"])}</p><p>{esc(e["scope"])}</p><code>{esc(e["declaration"])}</code></article>' for e in entries)
+    cell_rows = ''.join('<tr><th>'+esc(c['model'])+'</th><td>'+esc(evidence_label(c['claim'])) + (' · Additional laws' if c['applicability'] == 'additional' else '')+'</td><td>'+esc(c['result'])+'</td><td>'+esc('; '.join(c['assumptions']))+'<small>'+esc(c['limitation'])+'</small><small>Lean: '+esc((c['claim']['statement'] if c['claim'] else 'No interpretation supplied') + ''.join('\n\n'+evidence_label(extra)+':\n'+extra['statement'] for extra in c['supporting']))+'</small></td></tr>' for c in cells)
+    extension_cards = []
+    for entry in entries:
+        supporting_text = ' '.join(claim['statement'] for claim in entry['supporting'])
+        extension_cards.append(
+            f'<article class="card"><h3>{esc(entry["title"])}</h3>'
+            f'<p><b>Added law:</b> {esc(entry["requiredLaw"])}</p>'
+            f'<p>{esc(entry["result"])}</p><p>{esc(supporting_text)}</p>'
+            f'<p>{esc(entry["scope"])}</p><code>{esc(entry["declaration"])}</code></article>'
+        )
+    ext_html = ''.join(extension_cards)
     measured = [e for e in EVIDENCE if e['scenario'] == sid]
     evidence = ''.join(f'<article class="card"><h3><a href="{esc(e["url"], quote=True)}">{esc(e["title"])}</a></h3><p>{esc(e["result"])}</p><p>{esc(e["interpretation"])}</p><p>{esc(e["scope"])}</p></article>' for e in measured)
     if not measured:
@@ -90,7 +100,7 @@ def experiment_html(report, scenario):
 <p><label><input id="closure" type="checkbox"> Additionally assume realism implies global truth</label></p>
 <p>Amber: conditional bound. Green: contradiction under the selected extra premise. Red: relevant published statistical evidence, conditional on the bridge. Gray: unclassified. No color means an ontology is proved true.</p>
 <div id="slices" class="grid"></div><details><summary>All sixteen profiles (available without JavaScript)</summary><div class="scroll">{table}</div></details>
-<h2>Model-by-experiment results</h2><p>“verifiedConditional” means a proved result under explicitly ADDED laws. It is not inferred from the model column alone.</p>
+<h2>Model-by-experiment results</h2><p>Values and evidence categories are derived from proof-bearing claims. Additional laws are flagged separately. A general theorem retains its full assumptions.</p>
 <div class="scroll"><table><thead><tr><th>Model</th><th>Evidence</th><th>Result</th><th>Assumptions and scope</th></tr></thead><tbody>{cell_rows}</tbody></table></div>
 <h2>Concrete experimental extensions</h2>{ext_html or '<p>See the exact protocol and additional channel assumptions in the model table above.</p>'}
 <h2>Published experimental evidence</h2>{evidence}<p><b>Remaining ambition:</b> {esc(scenario['obligations'])}</p>'''
@@ -143,7 +153,7 @@ def write_examples(report, directory):
     (directory/'matrix.html').write_text(report.html(index_href='index.html'), encoding='utf-8')
     ledger = ''.join(f'<article class="card"><h2><a href="{e["url"]}">{html.escape(e["title"])}</a></h2><p>{html.escape(e["kind"]+": "+e["result"])}</p><p>{html.escape(e["interpretation"])}</p><p>{html.escape(e["scope"])}</p></article>' for e in EVIDENCE)
     (directory/'evidence.html').write_text(shell('Experimental evidence', '<a href="index.html">All views</a><h1>Evidence ledger</h1><p>Published measurements are separate from Lean-calculated witnesses. Compatibility never proves an ontology true. No raw-data reanalysis is claimed.</p>'+ledger), encoding='utf-8')
-    (directory/'index.html').write_text(shell('Ontology Separation examples', '<h1>Ontology Separation · examples</h1><p>Open these files locally; no server, network, or package installation is needed.</p><p><a href="matrix.html">14 × 7 model matrix</a> · <a href="evidence.html">Experimental evidence ledger</a></p><div class="notice">Native model results and conditional extensions are separate. A populated cell is not necessarily a prediction from its column alone. All sixteen ontology profiles are visible for each experiment; physical realizability is not presumed.</div><h2>Build your own experiment</h2><p><a href="scenario-comparison.html">Worked scenario comparison</a> · <a href="../docs/ADD_A_SCENARIO.md">Add your own scenario</a> · <a href="../docs/PHYSICIST_GUIDE.md">Physicist guide</a> · <a href="operational-results.html">Operational assumptions and formal results</a> · <a href="ruled-out-models.html">Ruled-out model classes</a> · <a href="PhysicistWorkflow.lean">Editable experiments</a></p><h2>Experiment and ontology views</h2><ul>'+''.join(links)+'</ul>'), encoding='utf-8')
+    (directory/'index.html').write_text(shell('Ontology Separation examples', '<h1>Ontology Separation · examples</h1><p>Open these files locally; no server, network, or package installation is needed.</p><p><a href="matrix.html">14 × 7 model matrix</a> · <a href="evidence.html">Experimental evidence ledger</a></p><div class="notice">Native model results and conditional extensions are separate. A populated cell is not necessarily a prediction from its column alone. All sixteen ontology profiles are visible for each experiment; physical realizability is not presumed.</div><h2>Build your own experiment</h2><p><a href="recipe-comparison.html">Checked recipe comparison</a> · <a href="../docs/START_HERE.md">Create your first experiment</a> · <a href="../docs/GLOSSARY.md">Glossary</a> · <a href="bell-law-study.html">Bell law package and exclusion</a> · <a href="../docs/ADD_A_SCENARIO.md">Add your own scenario</a> · <a href="../docs/PHYSICIST_GUIDE.md">Physicist guide</a> · <a href="operational-results.html">Operational assumptions and formal results</a> · <a href="ruled-out-models.html">Ruled-out model classes</a> · <a href="PhysicistWorkflow.lean">Editable experiments</a></p><h2>Experiment and ontology views</h2><ul>'+''.join(links)+'</ul>'), encoding='utf-8')
 
     write_ruled_out(directory)
 

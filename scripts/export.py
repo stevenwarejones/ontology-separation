@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate the snapshot from the already-built Lean executable."""
+"""Regenerate every catalog view through the checked claim exporter."""
 from pathlib import Path
 import json
 import subprocess
@@ -7,12 +7,11 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "python"))
-from ontology_separation.client import Report
+from ontology_separation.client import parse_catalog
+from ontology_separation.checked_source import run_lean
 from ontology_separation.ontology import write_examples
 
-binary = ROOT / ".lake/build/bin/ontology-separation"
-result = subprocess.run([str(binary)], cwd=ROOT, capture_output=True, text=True, check=True)
-report = Report(json.loads(result.stdout), "Snapshot exported from the Lean executable; recheck with lake build Tests")
+report = parse_catalog(run_lean(ROOT / 'examples/Catalog.lean'))
 out = ROOT / "python/ontology_separation/data/report.json"
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(json.dumps(report.data, indent=2) + "\n")

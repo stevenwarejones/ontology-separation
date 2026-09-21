@@ -1,6 +1,0 @@
-import Coherence
-import OntologySeparation.Reporting.Scenario
-#export_scenario CoherenceStudy.comparison
-#export_theorem CoherenceStudy.predictions_correct
-#export_theorem CoherenceStudy.direct_separates
-#export_theorem CoherenceStudy.protected_equal

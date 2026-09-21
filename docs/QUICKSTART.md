@@ -15,8 +15,8 @@ ontology-separation html matrix.html
 
 A bundled snapshot is convenient for browsing. Loading its JSON validates the
 report format; it does **not** independently check its mathematical proofs.
-Expand a cell in the HTML report to see assumptions, limitations and its Lean
-declaration. Gray cells mean outside the selected adapter's scope, never zero.
+Expand a cell in the HTML report to see assumptions, limitations and its actual Lean
+proposition. Gray cells mean outside the selected adapter's scope, never zero.
 
 ## Recheck the mathematics
 
@@ -67,7 +67,7 @@ from ontology_separation import load_report
 
 report = load_report()
 for cell in report.compare(["B02"], ["local_friendliness", "real_singlet"]):
-    print(cell["status"], cell["result"], cell["declaration"])
+    print(cell["applicability"], cell["status"], cell["result"])
 ```
 
 The full development gate also uses Node.js (18+) for the dependency-free HTML widget logic test. The Python client and offline HTML do not require Node.

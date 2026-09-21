@@ -1,6 +1,6 @@
 name = "ontologySeparation"
 version = "0.1.0"
-defaultTargets = ["OntologySeparation", "ontology-separation"]
+defaultTargets = ["OntologySeparation"]
 
 [[require]]
 name = "QIT"
@@ -10,10 +10,6 @@ rev = "c1d59b133b56e3d79efb11ee46a728d290f761f5"
 [[lean_lib]]
 name = "OntologySeparation"
 moreLeanArgs = ["-DautoImplicit=false"]
-
-[[lean_exe]]
-name = "ontology-separation"
-root = "Main"
 
 [[lean_lib]]
 name = "Tests"

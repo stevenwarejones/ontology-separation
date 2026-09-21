@@ -26,8 +26,15 @@ def main(argv: list[str] | None = None) -> int:
     scenario = sub.add_parser("scenario-report", help="Check a Lean scenario and compare its proved predictions")
     scenario.add_argument("source", type=Path)
     scenario.add_argument("-o", "--output", type=Path, required=True)
+    new = sub.add_parser("new-scenario", help="Create a working recipe study without overwriting existing source")
+    new.add_argument("name", help="Lean namespace, e.g. MyStudy")
+    new.add_argument("-o", "--output", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == "new-scenario":
+            from .scaffold import create_scenario
+            print(create_scenario(args.name, args.output))
+            return 0
         if args.command == "scenario-report":
             from .scenario_report import write_report
             count = write_report(args.source, args.output)
@@ -36,7 +43,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "theorem-report":
             from .proof_report import write_report
             count = write_report(args.source, args.output)
-            print(f"Exported {count} theorem statements to {args.output}")
+            print(f"Exported {count} checked claims to {args.output}")
             return 0
         report = build_report(args.repo) if args.command == "verify" else load_report(args.report)
         if args.command in ("list", "verify"):

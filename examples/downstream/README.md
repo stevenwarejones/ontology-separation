@@ -1,32 +1,35 @@
-# Your own laboratory project
+# A separate adopter project
 
-This independent Lake package imports only the qubit backend and adds a parameterized model, an operational coherence
-law, a composed experiment, and predictions without editing the upstream registry.
-From this directory, run `lake update`, `lake build`, then `lake env lean Publish.lean`.
-After installing the Python client, run:
+This Lake package demonstrates both supported recipes and an independent Bell law
+package. Neither requires editing the parent catalog or registering theorem names.
 
-```sh
-python3 -m ontology_separation.proof_report Publish.lean -o results.html
-```
-
-The local path dependency and shared `packagesDir` are for this checkout. The
-example has its own manifest and build; it reuses the parent's pinned dependency
-downloads. In a separate repository remove `packagesDir` and replace
-`path` with `git = "https://github.com/stevenwarejones/ontology-separation.git"` and
-`rev = "<full commit containing this API>"`. Retain the pinned toolchain and manifest.
-`FullyCoherent` is a channel law; equating it with a foundational ontology predicate
-requires an additional definition and proof.
-
-## Complete scenario comparison
-
-`Coherence.lean` adds three explicit coherence laws, four procedures, the shared
-observable, and all twelve exact predictions. `Compare.lean` publishes the table
-and its supporting theorem statements. Run after `lake build`:
+From this directory, with the pinned Lean toolchain available:
 
 ```sh
-PYTHONPATH=../../python python3 -m ontology_separation.scenario_report Compare.lean -o ../scenario-comparison.html
+lake update
+lake build
+PYTHONPATH=../../python python3 -m ontology_separation.cli scenario-report RecipeStudy.lean -o ../recipe-comparison.html
+PYTHONPATH=../../python python3 -m ontology_separation.cli theorem-report Publish.lean -o ../bell-law-study.html
 ```
 
-For an installed client use `ontology-separation scenario-report` with the same
-arguments. See [the walkthrough](../../docs/ADD_A_SCENARIO.md). The comparison
-requires no edit to the upstream registry.
+- `RecipeStudy.lean`: choose rates and experimental procedures; predictions and
+  proofs come from the general recipe soundness theorem.
+- `Study.lean`: define a Bell law package, supply its bound and a satisfying model,
+  and prove exclusion of a singlet behavior. This uses the general interface.
+- `Publish.lean`: export the Bell claims with the common checked exporter.
+- `Checks.lean`: check the public contract and reject a mismatched proof.
+
+See [the recipe walkthrough](../../docs/START_HERE.md) and
+[the Bell example line by line](../../docs/ADD_A_SCENARIO.md).
+
+To create another recipe study:
+
+```sh
+PYTHONPATH=../../python python3 -m ontology_separation.cli new-scenario MyStudy -o MyStudy.lean
+PYTHONPATH=../../python python3 -m ontology_separation.cli scenario-report MyStudy.lean -o ../my-study.html
+```
+
+For your own repository, require `ontologySeparation` from its Git URL at an explicit
+commit revision instead of the bundled `path = "../.."`, and omit this example's
+shared `packagesDir`. Use the same `lean-toolchain`. The first `lake update`/cache
+setup downloads dependencies; later report commands rebuild changed imports.

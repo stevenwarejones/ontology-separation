@@ -31,11 +31,11 @@ class ReportTests(unittest.TestCase):
         self.assertEqual({c["result"] for c in echo}, {"1", "1/2", "3/4"})
         leaked = self.report.compare(["P02"], models)
         self.assertEqual({c["result"] for c in leaked}, {"1/2"})
-        self.assertTrue(all(c["status"] == "verifiedToyPrediction" for c in leaked))
+        self.assertTrue(all(c["status"] == "exact" for c in leaked))
 
     def test_research_extensions_are_not_native_predictions(self):
         for cell in self.report.compare(["P01", "P03", "P05", "P06", "P07", "P08", "P10"]):
-            self.assertEqual(cell["status"], "verifiedConditional")
+            self.assertEqual(cell["applicability"], "additional")
             self.assertTrue(cell["declaration"])
             self.assertTrue(any("ADDITIONAL LAW" in a for a in cell["assumptions"]))
             self.assertTrue(cell["limitation"])
@@ -58,9 +58,9 @@ class ReportTests(unittest.TestCase):
 
     def test_verified_label_requires_reference_but_json_does_not_prove_it(self):
         data = deepcopy(self.report.data)
-        cell = next(c for c in data["cells"] if c["status"].startswith("verified"))
+        cell = next(c for c in data["cells"] if c["claim"] is not None)
         cell["declaration"] = None
-        with self.assertRaisesRegex(ValueError, "declaration reference"):
+        with self.assertRaisesRegex(ValueError, "does not match"):
             Report(data)
         self.assertIn("not proof verification", self.report.provenance)
 
@@ -82,7 +82,7 @@ class ReportTests(unittest.TestCase):
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             self.assertEqual(main(["compare", "B02", "--models", "local_friendliness"]), 0)
-        self.assertIn("G <= 6", out.getvalue())
+        self.assertIn("≤ 6", out.getvalue())
         with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as error:
             main(["compare", "B99"])
         self.assertEqual(error.exception.code, 2)

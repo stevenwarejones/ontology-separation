@@ -1,5 +1,5 @@
 import OntologySeparation
-import OntologySeparation.Reporting.Export
+import OntologySeparation.Reporting.Claim
 
 #export_theorem OntologySeparation.OperationalBell.chsh_bound
 #export_theorem OntologySeparation.OperationalBell.singlet_excludes
@@ -23,6 +23,7 @@ import OntologySeparation.Reporting.Export
 #export_theorem OntologySeparation.ClassicalWorld.chsh_bound
 #export_theorem OntologySeparation.ClassicalWorld.cannot_reproduce_singlet
 #export_theorem OntologySeparation.ClassicalWorld.constant_score
+#export_theorem OntologySeparation.ClassicalWorld.screeningOff_realizable
 #eval IO.println ("ONTOLOGY_PROFILES " ++ OntologySeparation.OperationalProfiles.rows.compress)
 
 #export_theorem OntologySeparation.Countermodels.quantumFriend_not_readable
