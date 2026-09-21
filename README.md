@@ -110,3 +110,17 @@ quantum-agent thought experiments; this project does not claim that comparison o
 physical theories is a new idea.
 
 No package-registry name has been reserved. Apache-2.0 license.
+
+## Operational onboarding
+
+Start with [the physicist guide](docs/PHYSICIST_GUIDE.md),
+[editable experiments](examples/PhysicistWorkflow.lean), or
+[the independent Lake package](examples/downstream/README.md). Explicit Bell and
+friend-record laws now connect to checked bounds. Composable classical channels
+and restricted qubit procedures reuse normalization proofs.
+[Operational results](examples/operational-results.html) display actual theorem
+types; [ruled-out models](examples/ruled-out-models.html) separate empirical evidence
+from mathematical exclusions. The legacy matrix remains a curated snapshot.
+
+For a complete experiment → models → proofs → table workflow, see
+[Add a scenario](docs/ADD_A_SCENARIO.md). The example lives in a separate adopter package.

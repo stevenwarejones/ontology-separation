@@ -1,0 +1,29 @@
+import OntologySeparation
+import OntologySeparation.Reporting.Export
+
+#export_theorem OntologySeparation.OperationalBell.chsh_bound
+#export_theorem OntologySeparation.OperationalBell.singlet_excludes
+#export_theorem OntologySeparation.FriendRecords.probability_preserved
+#export_theorem OntologySeparation.FriendRecords.bound
+#export_theorem OntologySeparation.FriendRecords.singlet_excludes
+#export_theorem OntologySeparation.Qubit.twice_dephased
+#export_theorem OntologySeparation.Qubit.phase_then_dephase
+#export_theorem OntologySeparation.Qubit.hadamard_twice
+#export_theorem OntologySeparation.Qubit.density_invariants
+#export_theorem OntologySeparation.Channel.andThen_assoc
+#export_theorem OntologySeparation.Countermodels.signaling_score
+#export_theorem OntologySeparation.Countermodels.signaling_not_local
+#export_theorem OntologySeparation.Countermodels.dependent_score
+#export_theorem OntologySeparation.Countermodels.dependent_not_independent
+#export_theorem OntologySeparation.Qubit.protected_dephasing
+#export_theorem OntologySeparation.OperationalProfiles.bell_bound
+#export_theorem OntologySeparation.OperationalProfiles.lf_bound
+#export_theorem OntologySeparation.OperationalProfiles.bell_supported_count
+#export_theorem OntologySeparation.OperationalProfiles.lf_supported_count
+#export_theorem OntologySeparation.ClassicalWorld.chsh_bound
+#export_theorem OntologySeparation.ClassicalWorld.cannot_reproduce_singlet
+#export_theorem OntologySeparation.ClassicalWorld.constant_score
+#eval IO.println ("ONTOLOGY_PROFILES " ++ OntologySeparation.OperationalProfiles.rows.compress)
+
+#export_theorem OntologySeparation.Countermodels.quantumFriend_not_readable
+#export_theorem OntologySeparation.Countermodels.rejected_records_realized

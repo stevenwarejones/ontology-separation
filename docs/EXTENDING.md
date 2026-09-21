@@ -1,5 +1,8 @@
 # Extending the framework
 
+Start with [the physicist guide](PHYSICIST_GUIDE.md) for the new operational laws,
+composition, and theorem exports. New reports do not require the legacy ClaimId registry.
+
 ## Add a theory without changing the core
 
 Choose a public `Interface`, then define a predicate on its normalized behaviors.

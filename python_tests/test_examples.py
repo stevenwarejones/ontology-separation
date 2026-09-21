@@ -61,7 +61,10 @@ class ExamplesTests(unittest.TestCase):
         with TemporaryDirectory() as d:
             write_examples(report,d)
             files=list(Path(d).glob('*.html'))
-            self.assertEqual(len(files),17)
+            self.assertEqual(len(files),18)
+            historical=(Path(d)/"ruled-out-models.html").read_text()
+            self.assertIn("statistical",historical)
+            self.assertIn("Photonic proxy",historical)
             for s in report.data['scenarios']:
                 content=(Path(d)/(s['id']+'.html')).read_text()
                 self.assertIn('all-profiles',content)
