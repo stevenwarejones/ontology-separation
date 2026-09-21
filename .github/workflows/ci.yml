@@ -16,6 +16,29 @@ jobs:
       - run: python -m pip install -e .
       - run: sh scripts/check.sh
       - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
+      - name: Stage verified Pages snapshot
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: python scripts/build_pages.py _site
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: _site
+
+  pages:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [verify, python-compatibility]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
 
   python-compatibility:
     name: Python ${{ matrix.python-version }}

@@ -7,13 +7,17 @@ physical theory, describe an experiment, and prove which predictions distinguish
 it from another theory. Physical assumptions remain explicit; Lean's logic and
 proof checker stay fixed.
 
-## Start here
+## Choose your path
 
-**[Getting started →](docs/START_HERE.md)** — setup, your first checked experiment,
-and one parameter change. No user-written proof is needed for supported recipes.
+| I want to… | Start here | Installation |
+|---|---|---|
+| Browse results | [Online explorer](https://stevenwarejones.github.io/ontology-separation/) · [offline views](examples/index.html) | None |
+| Change a parameter | [Getting started](docs/START_HERE.md) | Python; Lean to check new predictions |
+| Build a Bell–CHSH experiment | [Two-qubit guide](docs/TWO_QUBIT_GUIDE.md) | Python + Lean |
+| Define new physical laws or a backend | [General scenario interface](docs/ADD_A_SCENARIO.md) · [Extension guide](docs/EXTENDING.md) | Lean |
 
-**[Two-qubit Bell guide →](docs/TWO_QUBIT_GUIDE.md)** — prepare entanglement with gates,
-change local noise and measurements, and compare checked CHSH scores.
+The online explorer publishes verified snapshots from `main` after the one-time
+[Pages setup](docs/PAGES.md). Until its first deployment, use the offline views.
 
 ## Explore the HTML views
 

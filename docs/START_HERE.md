@@ -3,6 +3,19 @@
 Create a small experiment, compare three physical laws, and get a table of
 **Lean-checked predictions**. You do not need to write a proof for the supported recipes.
 
+## Browse first — no Lean required
+
+Open the [online explorer](https://stevenwarejones.github.io/ontology-separation/)
+(after its first Pages deployment), or download this repository and open
+`examples/index.html`. No installation is needed to view exported results.
+
+With Python alone, you can install the client, browse bundled results with
+`ontology-separation compare B01 B02`, and create a starter file with `new-scenario`
+inside a checkout. **Checking that file or generating new verified predictions
+requires Lean.** Reading a snapshot does not recheck its proofs.
+
+![From physical recipe to checked claim](images/recipe-flow.svg)
+
 ## 1. Set up once
 
 You need Git, Python 3.10+, and [Lean installed through Elan](https://lean-lang.org/install/).
@@ -18,7 +31,9 @@ lake exe cache get
 ```
 
 Already cloned it? Start with `cd` into that checkout. The first Lean/cache download
-can be substantial; subsequent runs reuse it. If `lake` is missing, add
+can take tens of minutes depending on downloads and hardware; subsequent runs reuse it.
+Run `ontology-separation doctor` to inspect setup without triggering a build or download.
+It checks tool availability and a sample cache file, not live build progress. If `lake` is missing, add
 `$HOME/.elan/bin` to your `PATH` and reopen the terminal.
 
 ## 2. Create and run an experiment

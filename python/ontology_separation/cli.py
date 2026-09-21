@@ -31,8 +31,14 @@ def main(argv: list[str] | None = None) -> int:
     new.add_argument("-o", "--output", type=Path, required=True)
     new.add_argument("--backend", choices=["qubit", "two-qubit"], default="qubit",
                      help="Choose a single-qubit probability or two-qubit Bell study")
+    doctor = sub.add_parser("doctor", help="Check local setup without building or downloading")
+    doctor.add_argument("directory", type=Path, nargs="?", default=Path.cwd())
     args = parser.parse_args(argv)
     try:
+        if args.command == "doctor":
+            from .doctor import diagnose
+            print(diagnose(args.directory))
+            return 0
         if args.command == "new-scenario":
             from .scaffold import create_scenario
             if args.backend == "qubit":
