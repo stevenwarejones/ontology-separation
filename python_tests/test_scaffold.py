@@ -30,3 +30,21 @@ class ScaffoldTests(unittest.TestCase):
              patch('ontology_separation.cli.load_report',side_effect=AssertionError('bundled lookup')):
             self.assertEqual(main(['new-scenario','MyStudy','-o','Study.lean']),0)
             create.assert_called_once_with('MyStudy',Path('Study.lean'))
+
+    def test_two_qubit_starter_and_cli(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root/'lakefile.toml').write_text('')
+            target = root/'Bell.lean'
+            self.assertEqual(main(['new-scenario', 'BellStudy', '--backend', 'two-qubit',
+                                   '-o', str(target)]), 0)
+            source = target.read_text()
+            self.assertIn('open OntologySeparation.TwoQubit', source)
+            self.assertIn('#export_scenario BellStudy.comparison', source)
+            self.assertIn('.cnot .alice', source)
+            self.assertNotIn('sorry', source)
+            with self.assertRaisesRegex(ValueError, 'overwrite'):
+                create_scenario('BellStudy', target, backend='two-qubit')
+            with self.assertRaisesRegex(ValueError, 'backend'):
+                create_scenario('Bad', root/'Bad.lean', backend='three-qubit')
+            self.assertFalse((root/'Bad.lean').exists())

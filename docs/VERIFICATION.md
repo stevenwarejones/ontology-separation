@@ -85,7 +85,7 @@ of the selected law. `probability_bounds` follows from the normalized behavior.
 with the public scaffolder, and checks all twelve starter cells. It changes an
 imported law without a manual rebuild to verify fresh predictions and labels, then
 makes that law invalid to test rejection despite a pre-existing compiled module.
-It also rejects eleven malformed laws, recipes and proof exports. Python tests
+It also rejects malformed laws, recipes and proof exports for both backends. Python tests
 cover atomic writes, source protection, nested project selection and CLI isolation
 from the bundled snapshot. These checks run in the normal CI gate.
 
@@ -109,3 +109,26 @@ compiles the Python sources and scripts, runs the complete Python test suite, an
 smoke-tests the CLI on Python 3.10, 3.11 and 3.12. The full Lean verification gate
 runs on Python 3.12. This checks the declared minimum without repeating the Lean
 build for every Python interpreter.
+
+## Two-qubit recipes
+
+`TwoQubit.Pure.born` and `amplitude_normalized` connect rational ray readout to
+normalized real Born amplitudes. `Gate.normSq` proves the explicit gate formulas
+scale the squared norm by a strictly positive factor independent of the state.
+Convex ensembles preserve normalization. Local readout commutes, and neither
+party's setting affects the other's marginal, universally over supported recipes.
+`chsh_correct` connects the evaluator to the existing Bell statistic;
+`excludes_local` reuses the existing local-model bound. Named bridge theorems
+identify the gate-built singlet and all sixteen reference singlet probabilities.
+These statements are included in the transitive axiom audit.
+
+Tests exercise entanglement, directed CNOT, operation order, repeated and two-wire
+noise, and scores on both sides of 2. The public two-qubit scaffold is exported
+inside an independent adopter package, with all twelve expected cells asserted. Negative
+cases reject zero states/bases, invalid rates/denominators, nonexistent wires,
+extra CNOT targets, model-dependent steps, duplicate rows and unfinished proofs.
+
+Circuit export uses a local, finite reduction-depth budget of at least 4096;
+adopters do not need to add resource options to the starter. This does not change
+the logic, axiom whitelist, or proof obligations. Large mixture trees can still
+exceed resource limits and fail the report command without overwriting its output.

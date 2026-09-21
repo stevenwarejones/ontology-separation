@@ -3,6 +3,7 @@
 from pathlib import Path
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -29,6 +30,15 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     assert write_report(starter,output) == 12
     assert '<td>5/8</td>' in output.read_text()
     print('Generated starter: all 12 cells checked', flush=True)
+
+    bell = create_scenario('BellStarter', project/'BellStarter.lean', backend='two-qubit')
+    bell_output = project/'bell.html'
+    assert write_report(bell, bell_output) == 12
+    values = re.findall(r'<td>([^<]+)</td>', bell_output.read_text())
+    expected = [cell for value in ['1502/625', '1358/625', '1214/625', '14/25']
+                for cell in [value, value, '14/25']]
+    assert values == expected, values
+    print('Two-qubit starter: 12 cells checked in an independent adopter project', flush=True)
 
     model = project/'FixtureModel.lean'
     reporter = project/'Publish.lean'
@@ -70,6 +80,22 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
         ('duplicate recipes',f'def bad := compare "Duplicate" [Law.dephasing 0 1] [{recipe}, {recipe}]\n#export_scenario bad\n','Duplicate'),
         ('unfinished proof',f'def fake : Law := ⟨⟨2, by norm_num, by sorry⟩⟩\ndef bad := compare "Fake" [fake] [{recipe}]\n#export_scenario bad\n','sorryAx'),
         ('invented premise',f'axiom invented : False\ndef fake : Law := ⟨⟨2, by norm_num, False.elim invented⟩⟩\ndef bad := compare "Fake" [fake] [{recipe}]\n#export_scenario bad\n','unsupported proof dependency'),
+    ]
+    cases += [
+        ('zero state', 'def bad := TwoQubit.Pure.of 0 0 0 0\n', 'valid'),
+        ('zero measurement direction', 'def bad := TwoQubit.Basis.of 0 0\n', 'valid'),
+        ('invalid two-qubit rate', 'def bad := TwoQubit.Law.dephasing 0 2 1\n', 'bobBound'),
+        ('zero two-qubit denominator', 'def bad := TwoQubit.Law.dephasing 0 0 0\n', 'positive'),
+        ('nonexistent wire', 'def bad : TwoQubit.Operation := .h .charlie\n', 'charlie'),
+        ('same CNOT control/target', 'def bad : TwoQubit.Operation := .cnot .alice .alice\n', 'error'),
+        ('model-dependent two-qubit recipe',
+         'def bad : TwoQubit.Recipe := { TwoQubit.singletRecipe with steps := fun (_ : TwoQubit.Law) => [] }\n', 'error'),
+        ('duplicate two-qubit laws',
+         'def bad := TwoQubit.compare "Bad" [TwoQubit.Law.ideal, TwoQubit.Law.dephasing 0 0 2] [TwoQubit.singletRecipe]\n#export_scenario bad\n', 'Duplicate'),
+        ('two-qubit unfinished state proof',
+         'def fake := TwoQubit.Pure.of 0 0 0 0 (by sorry)\n'
+         'def bad := TwoQubit.compare "Bad" [TwoQubit.Law.ideal] [{ TwoQubit.singletRecipe with prepare := .custom fake }]\n'
+         '#export_scenario bad\n', 'sorryAx'),
     ]
     fixture=project/'Mistake.lean'
     for label, body, expected in cases:

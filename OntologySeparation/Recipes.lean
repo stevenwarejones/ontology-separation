@@ -1,3 +1,4 @@
+import OntologySeparation.Recipes.TwoQubit
 import OntologySeparation.Recipes.Qubit
 import OntologySeparation.Reporting.Scenario
 
