@@ -151,3 +151,6 @@ For a complete experiment → models → proofs → table workflow, see
 
 For general finite complex quantum tests and restricted-access equivalence, see
 [Experiment access](docs/EXPERIMENT_ACCESS.md).
+
+See [record-access separation](docs/RECORD_ACCESS_GUIDE.md) for a complete example
+of models that agree on every local test and differ under joint recovery.
