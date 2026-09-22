@@ -2,6 +2,7 @@ import OntologySeparation.Recipes
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.LocalFriendliness
 import OntologySeparation.Core.ExperimentAccess
+import OntologySeparation.Core.RegisterAccess
 import OntologySeparation.Core.Comparison
 import OntologySeparation.Core.ExactFinite
 import OntologySeparation.Core.ExactFiniteChecker
@@ -12,6 +13,7 @@ import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Experiments.PartialLeakage
 import OntologySeparation.Experiments.PartialLeakageRobustness
 import OntologySeparation.Adapters.FiniteCircuit
+import OntologySeparation.Adapters.NamedFiniteQuantum
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
 import OntologySeparation.Reporting.Comparison
