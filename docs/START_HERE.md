@@ -87,6 +87,7 @@ physical definitions and proofs; switching imports never silently changes semant
 ## Where to go next
 
 - [Understand every line and its physical meaning](RECIPE_GUIDE.md).
+- [Build an editable scoped separation study](SEPARATION_STUDY.md).
 - [Build the explicit Local Friendliness protocol](LF_PROTOCOL_GUIDE.md).
 - [Build a two-qubit Bell experiment](TWO_QUBIT_GUIDE.md).
 - [Define a new law package: the Bell example](ADD_A_SCENARIO.md).
