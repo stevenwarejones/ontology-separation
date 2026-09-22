@@ -35,3 +35,5 @@ import Tests.ExactFiniteChecker
 import Tests.OneStepFinite
 
 import Tests.FiniteCircuit
+
+import Tests.AutomaticGrid
