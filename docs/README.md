@@ -24,6 +24,7 @@ Framework authors can use `import OntologySeparation.Extension` when the require
 physics is outside the supported component set. These are import façades, not new
 backends or alternate semantics.
 
+
 | Guide | Purpose |
 |---|---|
 | [Recipe guide](RECIPE_GUIDE.md) | Understand the editable one-qubit example |
@@ -42,6 +43,7 @@ this layer, but there is no checked recipe-to-quantum equivalence bridge yet.
 | Guide | Purpose |
 |---|---|
 | [Experiment access](EXPERIMENT_ACCESS.md) | Prove equivalence over an access family or supply a separator |
+| [Scoped comparison results](COMPARISON_RESULTS.md) | Package agreement or separation without losing model/access scope |
 | [Record access](RECORD_ACCESS_GUIDE.md) | Follow a complete local-equivalence/joint-separation proof |
 | [Model classes](MODEL_CLASS_GUIDE.md) | Certify whole-table membership or exclusion from a finite convex hull |
 
