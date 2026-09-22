@@ -73,3 +73,5 @@ implemented capability; use each guide's stated scope and checked examples.
 - [Finite channel circuits](FINITE_CIRCUITS.md) — sequential CPTP steps followed by a complete POVM.
 
 - [Automatic covered finite families](AUTOMATIC_COVERED_GRIDS.md) — derive complete discrete grids from nonempty protocol lists; continuous thresholds remain symbolic theorems.
+
+- [Partial leakage and recovery](PARTIAL_LEAKAGE_RECOVERY.md) — mechanistic visibility/recovery model and exact recovery probabilities.
