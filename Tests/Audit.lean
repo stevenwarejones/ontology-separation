@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.RecordEnvironment
 import OntologySeparation.Experiments.LFReadout
 import OntologySeparation.Experiments.LFJoint
 import OntologySeparation.Experiments.LFAssumptionAtlas
@@ -249,3 +250,12 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.FiniteQuantum.Named.left_allowed_iff
 #print axioms OntologySeparation.FiniteQuantum.Named.both_allowed
 #print axioms OntologySeparation.FiniteQuantum.Named.left_equivalent
+
+#print axioms OntologySeparation.RecordEnvironment.copyEnvironment_isometry
+#print axioms OntologySeparation.RecordEnvironment.preparation_is_copy
+#print axioms OntologySeparation.RecordEnvironment.collapsed_entry
+#print axioms OntologySeparation.RecordEnvironment.laboratory_state
+#print axioms OntologySeparation.RecordEnvironment.same_laboratory_state
+#print axioms OntologySeparation.RecordEnvironment.every_laboratory_test
+#print axioms OntologySeparation.RecordEnvironment.laboratory_equivalent
+#print axioms OntologySeparation.RecordEnvironment.global_states_differ
