@@ -42,8 +42,9 @@ class ProofReportTests(unittest.TestCase):
             claim=claim)
         item = dict(declaration='Study.report', axioms=[], report=report)
         comparisons = parse_comparisons(COMPARISON_PREFIX + json.dumps(item))
-        page = render([exported('Study.claim', 'separator theorem', [], 'separation')],
-                      'Study.lean', comparisons=comparisons)
+        claims = parse_exports(PREFIX + json.dumps(
+            exported('Study.claim', 'separator theorem', [], 'separation')))
+        page = render(claims, 'Study.lean', comparisons=comparisons)
         self.assertIn('Checked model comparisons', page)
         self.assertIn('Exposure dephasing p=1/2', page)
         self.assertIn('exact gap:</strong> 1/4', page)
