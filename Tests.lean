@@ -33,3 +33,5 @@ import Tests.ExactFinite
 import Tests.ExactFiniteChecker
 
 import Tests.OneStepFinite
+
+import Tests.FiniteCircuit
