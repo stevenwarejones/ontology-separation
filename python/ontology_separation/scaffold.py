@@ -111,6 +111,8 @@ open OntologySeparation.Recipes
 open OntologySeparation.RecipeSeparation
 open OntologySeparation.Comparison
 
+noncomputable section
+
 -- The calibration probe prepares |0>, exposes once, and reads Z. Every supported
 -- exposure-dephasing law agrees on its full Boolean outcome distribution.
 -- The coherence probe prepares |+>, exposes once, and reads X.
@@ -131,11 +133,22 @@ def expanded :
 def restrictedClaim : Claim := restricted.claim
 def expandedClaim : Claim := expanded.claim
 
--- This exact checked quantity visibly changes when you edit the noisy law.
+-- These exact checked quantities make the physical edit visible in the report.
+def noisyExposureClaim : Claim :=
+  .exact (noisy.exposure.value : ℝ) noisy.exposure.value (by norm_num)
+
+def separatorGapClaim : Claim :=
+  .exact expandedSeparator.gap
+    ((noisy.exposure.value - reference.exposure.value) / 2)
+    (by rfl)
+
 def noisyCoherenceClaim : Claim := coherenceClaim noisy
+end
 end {name}
 
 #export_claim {name}.restrictedClaim
 #export_claim {name}.expandedClaim
+#export_claim {name}.noisyExposureClaim
+#export_claim {name}.separatorGapClaim
 #export_claim {name}.noisyCoherenceClaim
 '''
