@@ -14,16 +14,6 @@ open Recipes
 
 abbrev predict : Predictions Law Recipe binaryInterface := interpret
 
-/-- The single-qubit recipe backend exposes exact rational probabilities for
-both Boolean outcomes, proved against the same Behavior semantics. -/
-def exactBackend : ExactFinite.Backend Law Recipe binaryInterface where
-  predict := predict
-  probability := fun m r _ o => outcomeProbability m r o
-  correct := by
-    intro m r s o
-    cases s
-    exact outcomeProbability_correct m r o
-
 /-- Exact probability for either Boolean outcome. The existing recipe evaluator
 computes P(+); normalization supplies the complementary outcome. -/
 def outcomeProbability (m : Law) (r : Recipe) (o : Bool) : ℚ :=
@@ -42,6 +32,17 @@ theorem outcomeProbability_correct (m : Law) (r : Recipe) (o : Bool) :
       linarith
   | true =>
       simpa [predict, outcomeProbability] using probability_correct m r
+
+
+/-- The single-qubit recipe backend exposes exact rational probabilities for
+both Boolean outcomes, proved against the same Behavior semantics. -/
+def exactBackend : ExactFinite.Backend Law Recipe binaryInterface where
+  predict := predict
+  probability := fun m r _ o => outcomeProbability m r o
+  correct := by
+    intro m r s o
+    cases s
+    exact outcomeProbability_correct m r o
 
 /-- Equality of the exact Boolean distribution is enough to obtain the common
 behavior-level equivalence used by ExperimentAccess. -/
