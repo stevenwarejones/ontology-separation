@@ -2,6 +2,7 @@ import OntologySeparation
 import OntologySeparation.Catalog.Matrix
 import OntologySeparation.Core.Assumptions
 import OntologySeparation.Core.ExactFiniteChecker
+import OntologySeparation.Core.AutomaticGrid
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.Adapters.FiniteCircuit
 
@@ -174,3 +175,8 @@ import OntologySeparation.Adapters.FiniteCircuit
 #print axioms OntologySeparation.FiniteQuantum.measureAfterIsometry_prob_eq_lift
 #print axioms OntologySeparation.FiniteCircuit.Circuit.apply_cons
 #print axioms OntologySeparation.FiniteCircuit.test_normalized
+
+
+-- Automatically derived finite-family coverage roots.
+#print axioms OntologySeparation.ExactFinite.mem_entriesForProtocol
+#print axioms OntologySeparation.ExactFinite.entry_protocol_mem
