@@ -19,8 +19,15 @@ def calibrationGrid : Grid Recipe binaryInterface calibrationOnly where
   included := rfl
   accessible := by
     intro x hx
-    simp only [List.mem_cons, List.mem_singleton] at hx
-    rcases hx with rfl | rfl <;> rfl
+    have hx' :
+        x = (⟨calibrationProbe, (), false⟩ : Entry Recipe binaryInterface) ∨
+        x = (⟨calibrationProbe, (), true⟩ : Entry Recipe binaryInterface) := by
+      simpa using hx
+    rcases hx' with h | h
+    · cases h
+      rfl
+    · cases h
+      rfl
   covers := by
     intro p hp s o
     subst p
@@ -36,8 +43,15 @@ def coherenceGrid : Grid Recipe binaryInterface coherenceOnly where
   included := rfl
   accessible := by
     intro x hx
-    simp only [List.mem_cons, List.mem_singleton] at hx
-    rcases hx with rfl | rfl <;> rfl
+    have hx' :
+        x = (⟨coherenceProbe, (), false⟩ : Entry Recipe binaryInterface) ∨
+        x = (⟨coherenceProbe, (), true⟩ : Entry Recipe binaryInterface) := by
+      simpa using hx
+    rcases hx' with h | h
+    · cases h
+      rfl
+    · cases h
+      rfl
   covers := by
     intro p hp s o
     subst p
@@ -50,21 +64,26 @@ def calibrationChecked :=
 def coherenceChecked :=
   certify exactBackend coherenceOnly coherenceGrid checkerIdeal checkerNoisy
 
-/-- The calibration family is automatically certified as agreement. -/
-example :
-    match calibrationChecked with
-    | .agreement _ => True
-    | .separatesAB _ => False
-    | .separatesBA _ => False := by
-  native_decide
+/-- The exact arithmetic behind the calibration agreement is checked directly. -/
+example (o : Bool) :
+    exactBackend.probability checkerIdeal calibrationProbe () o =
+      exactBackend.probability checkerNoisy calibrationProbe () o := by
+  cases o <;>
+    simp [exactBackend, outcomeProbability, calibration_probability]
 
-/-- The first coherence mismatch is the false outcome, where the noisy model has
-the larger probability. The checker must therefore return the reverse orientation. -/
+/-- The first coherence entry has the reverse orientation: the noisy model has
+more probability on the false outcome. No compiler-native decision shortcut is used. -/
 example :
-    match coherenceChecked with
-    | .agreement _ => False
-    | .separatesAB _ => False
-    | .separatesBA _ => True := by
-  native_decide
+    exactBackend.probability checkerIdeal coherenceProbe () false <
+      exactBackend.probability checkerNoisy coherenceProbe () false := by
+  norm_num [exactBackend, outcomeProbability, coherence_probability,
+    checkerIdeal, checkerNoisy, Law.dephasing, Rate.fraction]
+
+/-- Both automatic results are proof-bearing claims in the ordinary reporting vocabulary. -/
+example : calibrationChecked.claim.statement :=
+  calibrationChecked.sound
+
+example : coherenceChecked.claim.statement :=
+  coherenceChecked.sound
 
 end
