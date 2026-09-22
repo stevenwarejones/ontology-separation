@@ -16,9 +16,10 @@ equal to execution order. A final complete POVM is attached with
 - every resulting test is normalized.
 
 The regression suite uses two distinct physical measurement channels on the
-record-access registers: coordinate dephasing first, followed by the recovery
-POVM measurement. The expected expression fixes that execution order, providing
-a stronger cross-check than repeating the same channel twice.
+record-access registers: coordinate dephasing and the recovery POVM measurement.
+It proves an observable order effect on the same coherent input and final coordinate
+outcome: dephase→recovery gives `337/625`, while recovery→dephase gives `1`.
+Thus the regression checks physical execution order rather than merely syntax.
 
 ## Current boundary
 
