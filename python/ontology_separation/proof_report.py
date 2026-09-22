@@ -81,7 +81,7 @@ An unclassified cell does not establish compatibility.</p>
 
 def render(records: list[dict], source: str, profiles: list[dict] | None = None) -> str:
     esc = html.escape
-    rows = ''.join('<tr><td><code>'+esc(r['declaration'])+'</code><br>'+esc(evidence_label(r['claim']))+'</td><td>'+esc(result_text(r['claim']))+'</td><td><pre>'+esc(r['statement'])+
+    rows = ''.join('<tr><td><code>'+esc(r['declaration'])+'</code><br>'+esc(evidence_label(r['claim']))+'</td><td>'+esc(result_text(r['claim']) if r['claim'].get('quantity') is not None else evidence_label(r['claim']))+'</td><td><pre>'+esc(r['statement'])+
                    '</pre></td><td>'+esc(', '.join(r['axioms']) or 'None')+'</td></tr>' for r in records)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Operational results — Ontology Separation</title><style>
