@@ -21,7 +21,7 @@ def ProtocolFamily.allowed [DecidableEq P] (family : ProtocolFamily P) (p : P) :
   p ∈ family.protocols
 
 variable [DecidableEq P] [Fintype E.Setting] [DecidableEq E.Setting]
-  [DecidableEq E.Outcome]
+  [Fintype E.Outcome] [DecidableEq E.Outcome]
 
 def entriesForProtocol (p : P) : List (Entry P E) :=
   (Finset.univ : Finset E.Setting).toList.flatMap fun s =>
