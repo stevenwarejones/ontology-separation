@@ -39,7 +39,7 @@ example :
   FiniteQuantum.Named.both_allowed _ _
 
 example :
-    ExperimentAccess.Equivalent FiniteQuantum.Named.predict
+    ExperimentAccess.Equivalent (FiniteQuantum.Named.predict (C := Bool) (O := Bool))
       (RegisterAccess.Allowed
         (FiniteQuantum.Named.footprint genericNames)
         (FiniteQuantum.Named.leftPolicy genericNames))

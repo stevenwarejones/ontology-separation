@@ -155,9 +155,10 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     # Edit the physical mechanism and the exact point claims together. The
     # checked report must be regenerated from the changed source, not reused.
     edited = leakage.read_text()
-    edited = edited.replace('Rate.fraction 3 4', 'Rate.fraction 1 2', 1)
-    edited = edited.replace('(3 / 4)', '(1 / 2)', 1)
-    edited = edited.replace('(3 / 16)', '(1 / 8)', 1)
+    for old, new in [('Rate.fraction 3 4', 'Rate.fraction 1 2'),
+                     ('(3 / 4)', '(1 / 2)'), ('(3 / 16)', '(1 / 8)')]:
+        assert edited.count(old) == 1, old
+        edited = edited.replace(old, new, 1)
     leakage.write_text(edited)
     assert write_claim_report(leakage, leakage_output) == 4
     edited_stdout = run_lean(leakage)
@@ -171,8 +172,12 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     edited_recovery = next(r['report'] for r in edited_comparisons
                            if r['declaration'].endswith('recoveryReport'))
     assert edited_calibration['verdict'] == 'agreement', edited_calibration
+    assert edited_calibration['covered_protocols'] == calibration_view['covered_protocols']
+    assert edited_recovery['verdict'] == 'separation', edited_recovery
     assert edited_recovery['gap'] == {'numerator': '1', 'denominator': '8'}, edited_recovery
     edited_page = leakage_output.read_text()
+    assert 'agreement across these supplied experiments' in edited_page
+    assert 'exact gap:</strong> 1/8' in edited_page
     assert '>1/8<' in edited_page
     assert '>3/16<' not in edited_page
     print('Partial leakage adopter: calibration agreement, parameter edit, exact point and symbolic theorem checked',

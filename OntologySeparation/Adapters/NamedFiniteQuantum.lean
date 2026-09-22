@@ -55,7 +55,7 @@ theorem left_allowed_iff (names : Names R) (p : Protocol A B C O) :
     RegisterAccess.Allowed (footprint names) (leftPolicy names) p ↔ p.localOnly := by
   cases p <;>
     simp [RegisterAccess.Allowed, footprint, protocolRegisters, leftPolicy,
-      Protocol.localOnly, names.distinct]
+      Protocol.localOnly, Finset.subset_iff, names.distinct, Ne.symm names.distinct]
 
 theorem both_allowed (names : Names R) (p : Protocol A B C O) :
     RegisterAccess.Allowed (footprint names) (bothPolicy names) p := by
@@ -73,7 +73,7 @@ def predict (ρ : QIT.State (A × B)) :
 left-register policy. Joint protocols are rejected before quantum evaluation. -/
 theorem left_equivalent (names : Names R) (ρ σ : QIT.State (A × B))
     (h : ρ.marginalA = σ.marginalA) :
-    ExperimentAccess.Equivalent predict
+    ExperimentAccess.Equivalent (predict (C := C) (O := O))
       (RegisterAccess.Allowed (footprint names) (leftPolicy names)) ρ σ := by
   intro p hp s o
   cases p with

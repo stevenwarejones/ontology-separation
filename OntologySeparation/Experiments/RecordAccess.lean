@@ -128,7 +128,7 @@ theorem systemOnly_allowed_iff (p : Protocol) :
     RegisterAccess.Allowed registerFootprint systemOnly p ↔ p.localOnly := by
   cases p <;>
     simp [RegisterAccess.Allowed, registerFootprint, protocolRegisters,
-      systemOnly, Protocol.localOnly]
+      systemOnly, Protocol.localOnly, Finset.subset_iff]
 
 theorem fullRegisterAccess_allowed (p : Protocol) :
     RegisterAccess.Allowed registerFootprint systemAndRecord p :=

@@ -17,6 +17,7 @@ import OntologySeparation.Adapters.NamedFiniteQuantum
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
 import OntologySeparation.Reporting.Comparison
+import OntologySeparation.Reporting.Search
 
 /-! Stable imports for adopters building supported checked studies.
 
