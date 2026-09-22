@@ -45,6 +45,7 @@ this layer, but there is no checked recipe-to-quantum equivalence bridge yet.
 |---|---|
 | [Experiment access](EXPERIMENT_ACCESS.md) | Prove equivalence over an access family or supply a separator |
 | [Named register access](NAMED_REGISTER_ACCESS.md) | Derive allowed protocols from checked physical register footprints |
+| [Typed named quantum registers](NAMED_QUANTUM_REGISTERS.md) | Bind named access to typed local and joint quantum tests |
 | [Scoped comparison results](COMPARISON_RESULTS.md) | Package agreement or separation without losing model/access scope |
 | [Record access](RECORD_ACCESS_GUIDE.md) | Follow a complete local-equivalence/joint-separation proof |
 | [Model classes](MODEL_CLASS_GUIDE.md) | Certify whole-table membership or exclusion from a finite convex hull |
