@@ -10,6 +10,7 @@ python3 scripts/check_export.py
 python3 scripts/export.py
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/RecordAccessStudy.lean -o examples/record-access.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/ModelClassStudy.lean -o examples/model-classes.html
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PartialLeakageStudy.lean -o examples/partial-leakage.html
 python3 scripts/test.py
 node scripts/check_examples.cjs
 sh scripts/check_downstream.sh

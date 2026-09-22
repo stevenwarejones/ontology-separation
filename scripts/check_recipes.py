@@ -129,6 +129,60 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     print('Automatic comparison adopter: covered agreement and oriented separator exported',
           flush=True)
 
+    leakage = project / 'PartialLeakageStudy.lean'
+    leakage.write_text((ROOT / 'examples' / 'PartialLeakageStudy.lean').read_text())
+    leakage_output = project / 'partial-leakage.html'
+    assert write_claim_report(leakage, leakage_output) == 4
+    leakage_stdout = run_lean(leakage)
+    leakage_records = parse_exports(leakage_stdout)
+    leakage_comparisons = parse_comparisons(leakage_stdout)
+    gap = next(r['claim'] for r in leakage_records if r['declaration'].endswith('pointGapClaim'))
+    assert gap['quantity'] == {'numerator': '3', 'denominator': '16'}, gap
+    theorem = next(r['claim'] for r in leakage_records if r['declaration'].endswith('robustnessClaim'))
+    assert theorem['kind'] == 'theorem', theorem
+    calibration_view = next(r['report'] for r in leakage_comparisons
+                            if r['declaration'].endswith('calibrationReport'))
+    recovery_view = next(r['report'] for r in leakage_comparisons
+                         if r['declaration'].endswith('recoveryReport'))
+    assert calibration_view['verdict'] == 'agreement', calibration_view
+    assert recovery_view['verdict'] == 'separation', recovery_view
+    assert recovery_view['gap'] == {'numerator': '3', 'denominator': '16'}, recovery_view
+    leakage_page = leakage_output.read_text()
+    assert 'agreement across these supplied experiments' in leakage_page
+    assert 'Checked model comparisons' in leakage_page
+    assert '>3/16<' in leakage_page
+
+    # Edit the physical mechanism and the exact point claims together. The
+    # checked report must be regenerated from the changed source, not reused.
+    edited = leakage.read_text()
+    for old, new in [('Rate.fraction 3 4', 'Rate.fraction 1 2'),
+                     ('(3 / 4)', '(1 / 2)'), ('(3 / 16)', '(1 / 8)')]:
+        assert edited.count(old) == 1, old
+        edited = edited.replace(old, new, 1)
+    leakage.write_text(edited)
+    assert write_claim_report(leakage, leakage_output) == 4
+    edited_stdout = run_lean(leakage)
+    edited_records = parse_exports(edited_stdout)
+    edited_comparisons = parse_comparisons(edited_stdout)
+    edited_gap = next(r['claim'] for r in edited_records
+                      if r['declaration'].endswith('pointGapClaim'))
+    assert edited_gap['quantity'] == {'numerator': '1', 'denominator': '8'}, edited_gap
+    edited_calibration = next(r['report'] for r in edited_comparisons
+                              if r['declaration'].endswith('calibrationReport'))
+    edited_recovery = next(r['report'] for r in edited_comparisons
+                           if r['declaration'].endswith('recoveryReport'))
+    assert edited_calibration['verdict'] == 'agreement', edited_calibration
+    assert edited_calibration['covered_protocols'] == calibration_view['covered_protocols']
+    assert edited_recovery['verdict'] == 'separation', edited_recovery
+    assert edited_recovery['gap'] == {'numerator': '1', 'denominator': '8'}, edited_recovery
+    edited_page = leakage_output.read_text()
+    assert 'agreement across these supplied experiments' in edited_page
+    assert 'exact gap:</strong> 1/8' in edited_page
+    assert '>1/8<' in edited_page
+    assert '>3/16<' not in edited_page
+    print('Partial leakage adopter: calibration agreement, parameter edit, exact point and symbolic theorem checked',
+          flush=True)
+
     # Copy public examples into an independent Lake project: no repository-local imports.
     for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6)]:
         study = project / filename
