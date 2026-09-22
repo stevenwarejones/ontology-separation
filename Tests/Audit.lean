@@ -6,6 +6,7 @@ import OntologySeparation.Core.AutomaticGrid
 import OntologySeparation.Core.SeparatorSearch
 import OntologySeparation.Reporting.Search
 import OntologySeparation.Core.RegisterAccess
+import OntologySeparation.Adapters.NamedFiniteQuantum
 import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.Adapters.FiniteCircuit
@@ -219,3 +220,8 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.RecordAccess.named_locally_equivalent
 #print axioms OntologySeparation.RecordAccess.namedSeparator
 #print axioms OntologySeparation.RecordAccess.named_joint_not_equivalent
+
+-- Typed two-register quantum adapter trust roots.
+#print axioms OntologySeparation.FiniteQuantum.Named.left_allowed_iff
+#print axioms OntologySeparation.FiniteQuantum.Named.both_allowed
+#print axioms OntologySeparation.FiniteQuantum.Named.left_equivalent

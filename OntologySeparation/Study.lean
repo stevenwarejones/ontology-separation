@@ -13,6 +13,7 @@ import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Experiments.PartialLeakage
 import OntologySeparation.Experiments.PartialLeakageRobustness
 import OntologySeparation.Adapters.FiniteCircuit
+import OntologySeparation.Adapters.NamedFiniteQuantum
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
 import OntologySeparation.Reporting.Comparison
