@@ -168,3 +168,5 @@ For the research layer, use the advanced paths above or the
 [documentation index](docs/README.md).
 
 [Research milestones](docs/research/PROGRAM.md) · [Checked LF assumption correspondence](docs/research/LF_ASSUMPTIONS.md)
+
+For the LF paper-to-code correspondence, see [the LF joint-event walkthrough](docs/research/LF_PAPER_GUIDE.md) and its [checked HTML report](examples/lf-paper.html).

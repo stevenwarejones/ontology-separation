@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.LFJoint
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
@@ -205,3 +206,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.LFAssumptionAtlas.operational_iff_lf
 #print axioms OntologySeparation.LFAssumptionAtlas.outcome_independence_not_required
 #print axioms OntologySeparation.LFAssumptionAtlas.quantum_excludes_operational
+
+#print axioms OntologySeparation.LFJoint.conditional_reconstruct
+#print axioms OntologySeparation.LFJoint.conditional_probability
+#print axioms OntologySeparation.LFJoint.local_iff_conditional
+#print axioms OntologySeparation.LFJoint.joint_iff_lf
+#print axioms OntologySeparation.LFJoint.bound
+#print axioms OntologySeparation.LFJoint.quantum_excluded
