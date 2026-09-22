@@ -2,6 +2,7 @@ import OntologySeparation.Recipes
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.LocalFriendliness
 import OntologySeparation.Core.ExperimentAccess
+import OntologySeparation.Core.RegisterAccess
 import OntologySeparation.Core.Comparison
 import OntologySeparation.Core.ExactFinite
 import OntologySeparation.Core.ExactFiniteChecker
@@ -15,7 +16,6 @@ import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
 import OntologySeparation.Reporting.Comparison
-import OntologySeparation.Reporting.Search
 
 /-! Stable imports for adopters building supported checked studies.
 
