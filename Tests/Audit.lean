@@ -5,6 +5,7 @@ import OntologySeparation.Core.ExactFiniteChecker
 import OntologySeparation.Core.AutomaticGrid
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.Adapters.FiniteCircuit
+import OntologySeparation.Experiments.PartialLeakage
 
 -- Selected audit roots and their transitive dependencies; not a census of all declarations.
 -- Each #export_theorem / #export_scenario also automatically audits its own dependencies.
@@ -180,3 +181,9 @@ import OntologySeparation.Adapters.FiniteCircuit
 -- Automatically derived finite-family coverage roots.
 #print axioms OntologySeparation.ExactFinite.mem_entriesForProtocol
 #print axioms OntologySeparation.ExactFinite.entry_protocol_mem
+
+
+-- Mechanistic partial-leakage showcase roots.
+#print axioms OntologySeparation.PartialLeakage.recovery_probability
+#print axioms OntologySeparation.PartialLeakage.sequential_attenuation
+#print axioms OntologySeparation.PartialLeakage.recovery_gap
