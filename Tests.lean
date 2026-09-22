@@ -49,3 +49,5 @@ import Tests.SeparatorSearch
 import Tests.NamedFiniteQuantum
 
 import Tests.RecordEnvironment
+
+import Tests.EnvironmentDiscrimination

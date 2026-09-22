@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/EnvironmentDiscriminationStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>OntologySeparation.RecordEnvironment.laboratory_error</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {B : Type} [inst : Fintype B] [inst_1 : DecidableEq B]
+  (t : OntologySeparation.FiniteQuantum.Test OntologySeparation.RecordEnvironment.Laboratory B Bool),
+  OntologySeparation.QuantumDiscrimination.error OntologySeparation.RecordEnvironment.coherent.marginalA
+      OntologySeparation.RecordEnvironment.collapsed.marginalA t =
+    1 / 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordEnvironment.full_error_bound</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {B : Type} [inst : Fintype B] [inst_1 : DecidableEq B]
+  (t : OntologySeparation.FiniteQuantum.Test OntologySeparation.RecordEnvironment.Registers B Bool),
+  OntologySeparation.QuantumDiscrimination.minimumError OntologySeparation.RecordEnvironment.coherent
+      OntologySeparation.RecordEnvironment.collapsed ≤
+    OntologySeparation.QuantumDiscrimination.error OntologySeparation.RecordEnvironment.coherent
+      OntologySeparation.RecordEnvironment.collapsed t</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordEnvironment.full_optimum_attained</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.QuantumDiscrimination.error OntologySeparation.RecordEnvironment.coherent
+    OntologySeparation.RecordEnvironment.collapsed OntologySeparation.RecordEnvironment.fullOptimal =
+  OntologySeparation.QuantumDiscrimination.minimumError OntologySeparation.RecordEnvironment.coherent
+    OntologySeparation.RecordEnvironment.collapsed</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordEnvironment.full_beats_laboratory</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>Real.wrapped✝.1
+  (OntologySeparation.QuantumDiscrimination.error OntologySeparation.RecordEnvironment.coherent
+    OntologySeparation.RecordEnvironment.collapsed OntologySeparation.RecordEnvironment.fullOptimal)
+  (1 / 2)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordEnvironment.returnCoherentClaim</code><br>Exact prediction</td><td>1</td><td><pre>OntologySeparation.RecordEnvironment.returnTest.prob OntologySeparation.RecordEnvironment.coherent Bool.true = ↑1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordEnvironment.returnCollapsedClaim</code><br>Exact prediction</td><td>337/625</td><td><pre>OntologySeparation.RecordEnvironment.returnTest.prob OntologySeparation.RecordEnvironment.collapsed Bool.true =
+  ↑(337 / 625)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordEnvironment.returnSeparationClaim</code><br>Verified separating experiment</td><td>Verified separating experiment</td><td><pre>¬OntologySeparation.ExperimentAccess.Equivalent OntologySeparation.FiniteQuantum.Named.predict
+      (OntologySeparation.RegisterAccess.Allowed
+        (OntologySeparation.FiniteQuantum.Named.footprint OntologySeparation.RecordEnvironment.names)
+        (OntologySeparation.FiniteQuantum.Named.bothPolicy OntologySeparation.RecordEnvironment.names))
+      OntologySeparation.RecordEnvironment.coherent OntologySeparation.RecordEnvironment.collapsed ∧
+  OntologySeparation.RegisterAccess.Allowed
+      (OntologySeparation.FiniteQuantum.Named.footprint OntologySeparation.RecordEnvironment.names)
+      (OntologySeparation.FiniteQuantum.Named.bothPolicy OntologySeparation.RecordEnvironment.names)
+      OntologySeparation.RecordEnvironment.returnSeparator.protocol ∧
+    0 &lt; OntologySeparation.RecordEnvironment.returnSeparator.gap ∧
+      (OntologySeparation.FiniteQuantum.Named.predict OntologySeparation.RecordEnvironment.coherent
+                OntologySeparation.RecordEnvironment.returnSeparator.protocol).prob
+            OntologySeparation.RecordEnvironment.returnSeparator.setting
+            OntologySeparation.RecordEnvironment.returnSeparator.outcome -
+          (OntologySeparation.FiniteQuantum.Named.predict OntologySeparation.RecordEnvironment.collapsed
+                OntologySeparation.RecordEnvironment.returnSeparator.protocol).prob
+            OntologySeparation.RecordEnvironment.returnSeparator.setting
+            OntologySeparation.RecordEnvironment.returnSeparator.outcome =
+        OntologySeparation.RecordEnvironment.returnSeparator.gap</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
