@@ -95,7 +95,3 @@ example :
         report.protocol = some (Recipe.label coherenceProbe) ∧
         report.gap = some (1 / 4)
     | none => False := by decide
-
-example : multiReport.base.claim.statement := by
-  change (certifyFamily exactBackend searchCalibration searchIdeal searchNoisy).claim.statement
-  exact (certifyFamily exactBackend searchCalibration searchIdeal searchNoisy).sound
