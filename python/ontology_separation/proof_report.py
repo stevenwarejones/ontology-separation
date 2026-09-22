@@ -10,6 +10,7 @@ from pathlib import Path
 from .checked_source import run_lean, validate_output, atomic_write_html
 
 PREFIX = "ONTOLOGY_CLAIM "
+COMPARISON_PREFIX = "ONTOLOGY_COMPARISON "
 from .evidence import validate_claim, evidence_label, result_text
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 AXES = ("realism", "globalTruth", "locality", "measurementIndependent")
@@ -35,6 +36,79 @@ def parse_exports(stdout: str) -> list[dict]:
         raise ValueError('No claims exported; add #export_claim Your.claim or #export_theorem Your.theorem')
     return records
 
+
+
+def _rational_text(value: dict | None) -> str:
+    if value is None:
+        return ''
+    from fractions import Fraction
+    return str(Fraction(int(value['numerator']), int(value['denominator'])))
+
+
+def parse_comparisons(stdout: str) -> list[dict]:
+    rows = []
+    for line in stdout.splitlines():
+        if not line.startswith(COMPARISON_PREFIX):
+            continue
+        item = json.loads(line[len(COMPARISON_PREFIX):])
+        report = item.get('report') if isinstance(item, dict) else None
+        if (not isinstance(item.get('declaration'), str) or not isinstance(item.get('axioms'), list)
+                or any(not isinstance(a, str) or a not in ALLOWED_AXIOMS for a in item['axioms'])
+                or not isinstance(report, dict)):
+            raise ValueError('Invalid structured comparison export')
+        if report.get('verdict') not in {'agreement', 'separation'}:
+            raise ValueError('Invalid comparison verdict')
+        if not isinstance(report.get('left_model'), str) or not isinstance(report.get('right_model'), str):
+            raise ValueError('Comparison models must be derived labels')
+        if (not isinstance(report.get('covered_protocols'), list)
+                or not report['covered_protocols']
+                or any(not isinstance(p, str) or not p for p in report['covered_protocols'])):
+            raise ValueError('Comparison needs a nonempty covered protocol family')
+        validate_claim(report.get('claim'))
+        numeric = ('left_probability', 'right_probability', 'gap')
+        if report['verdict'] == 'agreement':
+            if any(report.get(k) is not None for k in numeric + ('protocol', 'setting', 'outcome')):
+                raise ValueError('Agreement cannot acquire separator fields')
+            if report['claim']['kind'] != 'agreement':
+                raise ValueError('Agreement presentation must carry an agreement claim')
+        else:
+            if report['claim']['kind'] != 'separation':
+                raise ValueError('Separation presentation must carry a separation claim')
+            if any(not isinstance(report.get(k), str) or not report[k]
+                   for k in ('protocol', 'setting', 'outcome')):
+                raise ValueError('Separation needs checked witness labels')
+            for key in numeric:
+                q = report.get(key)
+                if (not isinstance(q, dict) or not isinstance(q.get('numerator'), str)
+                        or not isinstance(q.get('denominator'), str)
+                        or int(q['denominator']) <= 0):
+                    raise ValueError('Separation needs exact rational probabilities and gap')
+        rows.append(item)
+    return rows
+
+
+def comparison_cards(comparisons: list[dict]) -> str:
+    if not comparisons:
+        return ''
+    esc = html.escape
+    cards = []
+    for item in comparisons:
+        r = item['report']
+        scope = ', '.join(esc(p) for p in r['covered_protocols'])
+        if r['verdict'] == 'agreement':
+            detail = ('<p><strong>Checked conclusion:</strong> agreement across these supplied experiments.</p>'
+                      '<p><strong>Covered family:</strong> '+scope+'</p>')
+        else:
+            detail = ('<p><strong>Checked conclusion:</strong> separating experiment found.</p>'
+                      '<p><strong>Covered family:</strong> '+scope+'</p>'
+                      '<p><strong>Separator:</strong> '+esc(r['protocol'])+
+                      ' · '+esc(r['setting'])+' · outcome '+esc(r['outcome'])+'</p>'
+                      '<p><strong>'+esc(r['left_model'])+':</strong> '+esc(_rational_text(r['left_probability']))+
+                      ' &nbsp; <strong>'+esc(r['right_model'])+':</strong> '+esc(_rational_text(r['right_probability']))+
+                      ' &nbsp; <strong>exact gap:</strong> '+esc(_rational_text(r['gap']))+'</p>')
+        cards.append('<section class="comparison"><h3>'+esc(r['left_model'])+
+                     ' vs '+esc(r['right_model'])+'</h3>'+detail+'</section>')
+    return '<h2>Checked model comparisons</h2>'+''.join(cards)
 
 def parse_profiles(stdout: str) -> list[dict] | None:
     lines = [s[len('ONTOLOGY_PROFILES '):] for s in stdout.splitlines() if s.startswith('ONTOLOGY_PROFILES ')]
@@ -79,7 +153,7 @@ An unclassified cell does not establish compatibility.</p>
 <div class="scroll"><table><thead><tr><th>OI</th><th>G (vocabulary-specific)</th><th>PI</th><th>MI</th><th>Bell vocabulary</th><th>Friend-record vocabulary</th></tr></thead><tbody>''' + ''.join(rows) + '</tbody></table></div>'
 
 
-def render(records: list[dict], source: str, profiles: list[dict] | None = None) -> str:
+def render(records: list[dict], source: str, profiles: list[dict] | None = None, comparisons: list[dict] | None = None) -> str:
     esc = html.escape
     rows = ''.join('<tr><td><code>'+esc(r['declaration'])+'</code><br>'+esc(evidence_label(r['claim']))+'</td><td>'+esc(result_text(r['claim']) if r['claim'].get('quantity') is not None else evidence_label(r['claim']))+'</td><td><pre>'+esc(r['statement'])+
                    '</pre></td><td>'+esc(', '.join(r['axioms']) or 'None')+'</td></tr>' for r in records)
@@ -89,19 +163,21 @@ body{{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}}p{{max-w
 table{{border-collapse:collapse;width:100%;background:white}}td,th{{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}}
 pre{{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}}code{{overflow-wrap:anywhere}}
 .bound{{background:#fff3d6}}.open{{background:#eef0f3;color:#52606c}}.scroll{{overflow-x:auto}}
+.comparison{{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}}
+.comparison p{{margin:.45rem 0}}
 @media(max-width:700px){{body{{margin:.7rem}}td,th{{padding:.4rem}}}}
 </style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>{esc(source)}</code>.
 Each row states exactly what its proof establishes. The definitions determine its physical meaning.
 This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
 These are mathematical results, not statistical claims about experimental data.</p>
-{profile_table(profiles)}<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody>{rows}</tbody></table></div></body></html>'''
+{profile_table(profiles)}{comparison_cards(comparisons or [])}<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody>{rows}</tbody></table></div></body></html>'''
 
 
 def write_report(source: Path, output: Path) -> int:
     validate_output(source, output)
     stdout = run_lean(source)
     records = parse_exports(stdout)
-    atomic_write_html(output, render(records, str(source), parse_profiles(stdout)))
+    atomic_write_html(output, render(records, str(source), parse_profiles(stdout), parse_comparisons(stdout)))
     return len(records)
 
 
