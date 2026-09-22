@@ -15,11 +15,13 @@ example :
 example :
     (measureAfterIsometry (QIT.POVM.coordinate Registers) recovery recovery_isometry).prob
         coherent (false, false) = 1 := by
-  simpa using coherent_recovery
+  change recoveryTest.prob coherent (false, false) = 1
+  exact coherent_recovery
 
 example :
     (measureAfterIsometry (QIT.POVM.coordinate Registers) recovery recovery_isometry).prob
         dephased (false, false) = 337 / 625 := by
-  simpa using dephased_recovery
+  change recoveryTest.prob dephased (false, false) = 337 / 625
+  exact dephased_recovery
 
 end
