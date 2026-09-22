@@ -1,5 +1,6 @@
 import OntologySeparation.Adapters.FiniteQuantum
 import OntologySeparation.Core.Claim
+import OntologySeparation.Core.Comparison
 import QIT.Core.Pure
 import Mathlib.Tactic.NormNum
 
@@ -127,6 +128,19 @@ def separator : ExperimentAccess.Separator predict (fun _ => True) .coherent .de
 theorem joint_not_equivalent :
     ¬ ExperimentAccess.Equivalent predict (fun _ => True) .coherent .dephased :=
   separator.not_equivalent
+
+/-- Same model pair and prediction semantics, reported over local-only access. -/
+def localComparison :
+    Comparison.Result predict Protocol.localOnly .coherent .dephased :=
+  .agreement ⟨locally_equivalent⟩
+
+/-- Enlarged access admits the checked recovery separator. -/
+def jointComparison :
+    Comparison.Result predict (fun _ => True) .coherent .dephased :=
+  .separation separator
+
+def localComparisonClaim : Claim := localComparison.claim
+def jointComparisonClaim : Claim := jointComparison.claim
 
 def coherentClaim : Claim := .exact (recoveryTest.prob coherent (false,false)) 1
   (by simpa using coherent_recovery)
