@@ -6,6 +6,7 @@ import OntologySeparation.Core.AutomaticGrid
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.PartialLeakage
+import OntologySeparation.Experiments.PartialLeakageRobustness
 
 -- Selected audit roots and their transitive dependencies; not a census of all declarations.
 -- Each #export_theorem / #export_scenario also automatically audits its own dependencies.
@@ -185,5 +186,10 @@ import OntologySeparation.Experiments.PartialLeakage
 
 -- Mechanistic partial-leakage showcase roots.
 #print axioms OntologySeparation.PartialLeakage.recovery_probability
-#print axioms OntologySeparation.PartialLeakage.sequential_attenuation
 #print axioms OntologySeparation.PartialLeakage.recovery_gap
+
+
+-- Continuous partial-leakage robustness roots.
+#print axioms OntologySeparation.PartialLeakage.realGap_positive_iff
+#print axioms OntologySeparation.PartialLeakage.exact_gap_eq_realGap
+#print axioms OntologySeparation.PartialLeakage.wigner_exposure_lt_friend
