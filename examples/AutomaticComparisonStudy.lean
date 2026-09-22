@@ -1,5 +1,4 @@
 import OntologySeparation.Study
-import Mathlib.Tactic
 
 namespace AutomaticComparisonStudy
 
@@ -13,55 +12,19 @@ noncomputable section
 def ideal : Law := Law.dephasing 0 1
 def noisy : Law := Law.dephasing 1 2
 
-def calibrationGrid : Grid Recipe binaryInterface calibrationOnly where
-  entries := [⟨calibrationProbe, (), false⟩, ⟨calibrationProbe, (), true⟩]
-  protocol := calibrationProbe
-  included := rfl
-  accessible := by
-    intro x hx
-    have hx' :
-        x = (⟨calibrationProbe, (), false⟩ : Entry Recipe binaryInterface) ∨
-        x = (⟨calibrationProbe, (), true⟩ : Entry Recipe binaryInterface) := by
-      simpa using hx
-    rcases hx' with h | h
-    · cases h
-      rfl
-    · cases h
-      rfl
-  covers := by
-    intro p hp s o
-    subst p
-    cases s
-    cases o <;> simp
+/-- The adopter supplies only nonempty experiment lists. Setting/outcome coverage
+is derived automatically from their finite interface. -/
+def calibrationFamily : ProtocolFamily Recipe :=
+  ⟨calibrationProbe, []⟩
 
-def coherenceOnly (r : Recipe) : Prop := r = coherenceProbe
-
-def coherenceGrid : Grid Recipe binaryInterface coherenceOnly where
-  entries := [⟨coherenceProbe, (), false⟩, ⟨coherenceProbe, (), true⟩]
-  protocol := coherenceProbe
-  included := rfl
-  accessible := by
-    intro x hx
-    have hx' :
-        x = (⟨coherenceProbe, (), false⟩ : Entry Recipe binaryInterface) ∨
-        x = (⟨coherenceProbe, (), true⟩ : Entry Recipe binaryInterface) := by
-      simpa using hx
-    rcases hx' with h | h
-    · cases h
-      rfl
-    · cases h
-      rfl
-  covers := by
-    intro p hp s o
-    subst p
-    cases s
-    cases o <;> simp
+def coherenceFamily : ProtocolFamily Recipe :=
+  ⟨coherenceProbe, []⟩
 
 def calibrationResult :=
-  certify exactBackend calibrationOnly calibrationGrid ideal noisy
+  certifyFamily exactBackend calibrationFamily ideal noisy
 
 def coherenceResult :=
-  certify exactBackend coherenceOnly coherenceGrid ideal noisy
+  certifyFamily exactBackend coherenceFamily ideal noisy
 
 def calibrationClaim : Claim := calibrationResult.claim
 def coherenceClaim : Claim := coherenceResult.claim
