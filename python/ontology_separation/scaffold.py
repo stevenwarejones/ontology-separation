@@ -4,8 +4,8 @@ import re
 
 
 def create_scenario(name: str, output: Path, backend: str = "qubit") -> Path:
-    if backend not in {"qubit", "two-qubit", "local-friendliness"}:
-        raise ValueError("Choose backend qubit, two-qubit or local-friendliness")
+    if backend not in {"qubit", "two-qubit", "local-friendliness", "separation"}:
+        raise ValueError("Choose backend qubit, two-qubit, local-friendliness or separation")
     if not re.fullmatch(r'[A-Z][A-Za-z0-9_]*', name) or name in {'Type', 'Sort', 'Prop'}:
         raise ValueError('Choose a Lean study name starting with a capital letter, e.g. MyStudy')
     if output.suffix != '.lean':
@@ -34,6 +34,8 @@ end {name}
         source = _two_qubit_source(name)
     if backend == "local-friendliness":
         source = _lf_source(name)
+    if backend == "separation":
+        source = _separation_source(name)
     output.parent.mkdir(parents=True, exist_ok=True)
     try:
         with output.open('x', encoding='utf-8') as f:
@@ -97,4 +99,43 @@ end {name}
 #export_theorem OntologySeparation.LocalFriendlinessRecipe.coherent_excludes_LF
 #export_theorem OntologySeparation.LocalFriendlinessRecipe.coherent_excludes_profile
 #export_theorem OntologySeparation.LocalFriendlinessRecipe.fully_dephased_realizes_profile
+'''
+
+
+def _separation_source(name: str) -> str:
+    return f'''import OntologySeparation.Study
+
+namespace {name}
+open OntologySeparation
+open OntologySeparation.Recipes
+open OntologySeparation.RecipeSeparation
+open OntologySeparation.Comparison
+
+-- The calibration probe prepares |0>, exposes once, and reads Z. Every supported
+-- exposure-dephasing law agrees on its full Boolean outcome distribution.
+-- The coherence probe prepares |+>, exposes once, and reads X.
+def reference : Law := Law.dephasing 0 1
+def noisy : Law := Law.dephasing 1 2
+
+theorem exposure_order : reference.exposure.value < noisy.exposure.value := by
+  norm_num [reference, noisy, Law.dephasing, Rate.fraction]
+
+def restricted :
+    Result predict calibrationOnly reference noisy :=
+  .agreement ⟨restricted_equivalent reference noisy⟩
+
+def expanded :
+    Result predict calibrationAndCoherence reference noisy :=
+  .separation (expandedSeparator reference noisy exposure_order)
+
+def restrictedClaim : Claim := restricted.claim
+def expandedClaim : Claim := expanded.claim
+
+-- This exact checked quantity visibly changes when you edit the noisy law.
+def noisyCoherenceClaim : Claim := coherenceClaim noisy
+end {name}
+
+#export_claim {name}.restrictedClaim
+#export_claim {name}.expandedClaim
+#export_claim {name}.noisyCoherenceClaim
 '''
