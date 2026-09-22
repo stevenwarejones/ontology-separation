@@ -159,7 +159,6 @@
 'OntologySeparation.PartialLeakage.recovery_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PartialLeakage.sequential_attenuation' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PartialLeakage.recovery_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
-
 'OntologySeparation.PartialLeakage.realGap_positive_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PartialLeakage.exact_gap_eq_realGap' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PartialLeakage.wigner_exposure_lt_friend' depends on axioms: [propext, Classical.choice, Quot.sound]
