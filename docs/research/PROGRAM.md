@@ -18,14 +18,14 @@ export a reproducible report. Every milestone must improve that same workflow.
 
 ## Inventory: merged and open work
 
-Repository state inspected on 2026-09-22. Open branches are implemented work under
+Repository state inspected on 2026-09-22; main refreshed to `d90ce67` after #22 merged. Open branches are implemented work under
 review, not merged guarantees. Inspect their current heads before integration.
 
 | Location | Already implemented | Boundary / how this program builds on it |
 |---|---|---|
 | main at `4ac299e` | Bell operational laws, an LF bound and quantum witness, FriendRecords-to-LF bridge, real-QM/QIT adapters, scoped claims and exact grids | LF is one finite 3×3 binary scenario and one genuine inequality, not a complete formalization of every LF facet or observer model |
 | merged #21 | continuous leakage gap and real-channel bridge, exact boundary-law equality | effective attenuation model; no finite-shot inference |
-| open #22, `f5405ff` | leakage public study, committed HTML pipeline, edited-parameter downstream test | reuse its publication/adoption pattern; do not recreate it |
+| merged #22, main `d90ce67` | leakage public study, committed HTML pipeline, edited-parameter downstream test | reuse its publication/adoption pattern; do not recreate it |
 | open #24, `1aae819` | finite separator search, proof-linked search report/export, multi-candidate public example and downstream checks | finite enumeration is not an impossibility theorem for all physically allowed protocols |
 | open #25, `68f9f52` | named register footprints, subset-based permissions, explicit record-access connections | a generic footprint function still requires a trusted physical interpretation |
 | open #26, `6a25785` | typed local/joint two-register quantum protocols and equal-marginal local equivalence | only the left local factor or both factors; no arbitrary many-register reductions or general multi-round strategies |
