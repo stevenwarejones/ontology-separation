@@ -1,4 +1,5 @@
 import OntologySeparation.Recipes
+import OntologySeparation.Recipes.Separation
 import OntologySeparation.LocalFriendliness
 import OntologySeparation.Core.ExperimentAccess
 import OntologySeparation.Core.Comparison
@@ -12,4 +13,3 @@ import OntologySeparation.Reporting.Claim
 This module intentionally exposes the existing recipe workflows and comparison
 certificates without requiring adopters to know the internal directory layout.
 It does not add a new semantics or broaden the scope of any theorem. -/
-
