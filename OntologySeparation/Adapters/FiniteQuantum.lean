@@ -67,6 +67,17 @@ def measureAfterIsometry (readout : QIT.POVM O B) (V : Matrix B A ℂ)
       ((readout.compressByIsometry V isometry).prob ρ o : ℝ) := by
   simp [measureAfterIsometry]
 
+/-- The helper has the intended physical semantics: it gives exactly the Born
+probability obtained by first lifting the state through the isometry and then
+measuring the original POVM. -/
+theorem measureAfterIsometry_prob_eq_lift (readout : QIT.POVM O B)
+    (V : Matrix B A ℂ) (isometry : Matrix.conjTranspose V * V = 1)
+    (ρ : QIT.State A) (o : O) :
+    (measureAfterIsometry readout V isometry).prob ρ o =
+      (readout.prob (QIT.POVM.isometryLiftState ρ V isometry) o : ℝ) := by
+  rw [measureAfterIsometry_prob]
+  exact QIT.POVM.compressByIsometry_prob_eq readout ρ V isometry o
+
 @[simp] theorem measure_prob (readout : QIT.POVM O A) (ρ : QIT.State A) (o : O) :
     (measure readout).prob ρ o = (readout.prob ρ o : ℝ) := by
   simp [measure, Test.prob, QIT.State.idChannel_applyState]
