@@ -90,6 +90,25 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     print('Separation starter: scoped claims, editable exact value, and stale-output guard checked',
           flush=True)
 
+    automatic = project / 'AutomaticComparisonStudy.lean'
+    automatic.write_text((ROOT / 'examples' / 'AutomaticComparisonStudy.lean').read_text())
+    automatic_output = project / 'automatic-comparison.html'
+    assert write_claim_report(automatic, automatic_output) == 2
+    automatic_records = parse_exports(run_lean(automatic))
+    calibration_record = next(r for r in automatic_records
+                              if r['declaration'].endswith('calibrationClaim'))
+    coherence_record = next(r for r in automatic_records
+                            if r['declaration'].endswith('coherenceClaim'))
+    assert calibration_record['claim']['kind'] == 'agreement', calibration_record
+    assert coherence_record['claim']['kind'] == 'separation', coherence_record
+    statement = coherence_record['claim']['statement']
+    assert statement.find('AutomaticComparisonStudy.noisy') < statement.find('AutomaticComparisonStudy.ideal'), statement
+    automatic_page = automatic_output.read_text()
+    assert 'Agreement over stated access domain' in automatic_page
+    assert 'Verified separating experiment' in automatic_page
+    print('Automatic comparison adopter: covered agreement and oriented separator exported',
+          flush=True)
+
     # Copy public examples into an independent Lake project: no repository-local imports.
     for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6)]:
         study = project / filename

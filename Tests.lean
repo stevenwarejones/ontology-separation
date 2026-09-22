@@ -27,3 +27,11 @@ import Tests.PublicImports
 import Tests.Comparison
 
 import Tests.RecipeSeparation
+
+import Tests.ExactFinite
+
+import Tests.ExactFiniteChecker
+
+import Tests.OneStepFinite
+
+import Tests.FiniteCircuit

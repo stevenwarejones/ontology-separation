@@ -47,6 +47,7 @@ this layer, but there is no checked recipe-to-quantum equivalence bridge yet.
 | [Scoped comparison results](COMPARISON_RESULTS.md) | Package agreement or separation without losing model/access scope |
 | [Record access](RECORD_ACCESS_GUIDE.md) | Follow a complete local-equivalence/joint-separation proof |
 | [Model classes](MODEL_CLASS_GUIDE.md) | Certify whole-table membership or exclusion from a finite convex hull |
+| [Exact finite comparison](EXACT_FINITE_COMPARISON.md) | Connect exact rational evaluators to scoped automatic comparison |
 
 ## Design and implementation reference
 
@@ -65,3 +66,7 @@ implemented capability; use each guide's stated scope and checked examples.
 | [Scenario workflow](design/SCENARIO_WORKFLOW.md) | Adopter scenario contract |
 | [Unified reporting](design/UNIFIED_REPORTING.md) | Common evidence contract |
 | [Universe separation](design/UNIVERSE_SEPARATION.md) | Implemented foundations and next milestones |
+
+- [One-step finite quantum tests](ONE_STEP_FINITE_TESTS.md) — explicit channel/isometry plus POVM experiments using the existing Lean-QIT semantics.
+
+- [Finite channel circuits](FINITE_CIRCUITS.md) — sequential CPTP steps followed by a complete POVM.

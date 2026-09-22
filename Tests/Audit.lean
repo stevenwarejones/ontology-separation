@@ -1,6 +1,9 @@
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
 import OntologySeparation.Core.Assumptions
+import OntologySeparation.Core.ExactFiniteChecker
+import OntologySeparation.Recipes.Separation
+import OntologySeparation.Adapters.FiniteCircuit
 
 -- Selected audit roots and their transitive dependencies; not a census of all declarations.
 -- Each #export_theorem / #export_scenario also automatically audits its own dependencies.
@@ -159,3 +162,15 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.ModelCompatibility.coherent_excludes_dephased_class
 
 #print axioms OntologySeparation.ModelCompatibility.recordBoundClaim
+
+
+-- Automatic exact comparison and finite-intervention trust roots.
+#print axioms OntologySeparation.ExactFinite.equivalent_iff_exact
+#print axioms OntologySeparation.ExactFinite.domainAgreementOfExact
+#print axioms OntologySeparation.ExactFinite.CheckedResult.sound
+#print axioms OntologySeparation.RecipeSeparation.outcomeProbability_correct
+#print axioms OntologySeparation.RecipeSeparation.coherenceSeparator
+#print axioms OntologySeparation.RecipeSeparation.expandedSeparator
+#print axioms OntologySeparation.FiniteQuantum.measureAfterIsometry_prob_eq_lift
+#print axioms OntologySeparation.FiniteCircuit.Circuit.apply_cons
+#print axioms OntologySeparation.FiniteCircuit.test_normalized
