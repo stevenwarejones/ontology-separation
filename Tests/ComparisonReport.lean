@@ -20,6 +20,8 @@ def physicalReport : ComparisonReport :=
   CheckedResult.report exactBackend reportFamily reportIdeal reportNoisy
     Law.label Recipe.label reportSetting reportOutcome reportResult
 
-example : physicalReport.claim.statement := reportResult.sound
+example : physicalReport.claim.statement := by
+  change reportResult.claim.statement
+  exact reportResult.sound
 
 end
