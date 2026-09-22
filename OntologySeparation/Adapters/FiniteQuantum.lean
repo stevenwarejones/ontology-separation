@@ -87,6 +87,18 @@ theorem measureAfterIsometry_prob_eq_lift (readout : QIT.POVM O B)
     (readout.prob ρ o : ℝ)
   rw [QIT.State.idChannel_applyState]
 
+/-- Measuring a classical outcome register again in its coordinate basis reads
+back the original POVM probability. -/
+theorem coordinate_after_measure (readout : QIT.POVM O A) (ρ : QIT.State A) (o : O) :
+    ((QIT.POVM.coordinate O).prob
+      ((QIT.Channel.measure readout).applyState ρ) o : ℝ) =
+      (readout.prob ρ o : ℝ) := by
+  unfold QIT.POVM.prob
+  have h := QIT.Channel.measure_map_state_diagonal (QIT.POVM.coordinate O)
+    ((QIT.Channel.measure readout).applyState ρ)
+  have ho := congrArg (fun X => Complex.re (X o o)) h
+  simpa [Matrix.diagonal] using ho
+
 /-- Every local test agrees if the accessible reduced density matrices agree.
 This quantifies over arbitrary local CPTP evolution and arbitrary finite POVMs. -/
 theorem local_test_eq (ρ σ : QIT.State (A × B)) (h : ρ.marginalA = σ.marginalA)
