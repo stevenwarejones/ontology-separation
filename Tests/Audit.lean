@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
 import OntologySeparation.Core.Assumptions
@@ -205,6 +206,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PartialLeakage.zero_visibility_law
 #print axioms OntologySeparation.PartialLeakage.zero_recovery_law
 
+-- Exact finite LF operational correspondence and constructive non-implication.
+#print axioms OntologySeparation.LFAssumptionAtlas.operational_iff_lf
+#print axioms OntologySeparation.LFAssumptionAtlas.outcome_independence_not_required
+#print axioms OntologySeparation.LFAssumptionAtlas.quantum_excludes_operational
 
 -- Finite separator-search trust roots.
 #print axioms OntologySeparation.ExactFinite.search

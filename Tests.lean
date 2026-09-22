@@ -44,6 +44,7 @@ import Tests.PartialLeakage
 
 import Tests.PartialLeakageRobustness
 
+import Tests.LFAssumptionAtlas
 import Tests.SeparatorSearch
 
 import Tests.NamedFiniteQuantum
