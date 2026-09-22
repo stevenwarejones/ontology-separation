@@ -1,7 +1,8 @@
 import json
 import unittest
 from itertools import product
-from ontology_separation.proof_report import parse_exports, parse_profiles, profile_table, render, PREFIX
+from ontology_separation.proof_report import (parse_exports, parse_profiles, parse_comparisons,
+    profile_table, render, PREFIX, COMPARISON_PREFIX)
 def exported(declaration, statement, axioms, kind):
     return dict(declaration=declaration, axioms=axioms,
                 claim=dict(kind=kind, statement=statement, quantity=None))
@@ -24,6 +25,39 @@ class ProofReportTests(unittest.TestCase):
         self.assertIn('<th>Checked result</th>', page)
         self.assertIn('<td>3/4</td>', page)
         self.assertIn('x = ↑(3 / 4)', page)
+
+    def test_structured_comparison_renders_checked_physics(self):
+        claim = dict(kind='separation', statement='separator theorem', quantity=None)
+        report = dict(
+            left_model='Exposure dephasing p=1/2',
+            right_model='Exposure dephasing p=0',
+            covered_protocols=['prepare |+>; exposure; P(X=+)'],
+            verdict='separation',
+            protocol='prepare |+>; exposure; P(X=+)',
+            setting='single setting',
+            outcome='-',
+            left_probability={'numerator': '1', 'denominator': '4'},
+            right_probability={'numerator': '0', 'denominator': '1'},
+            gap={'numerator': '1', 'denominator': '4'},
+            claim=claim)
+        item = dict(declaration='Study.report', axioms=[], report=report)
+        comparisons = parse_comparisons(COMPARISON_PREFIX + json.dumps(item))
+        page = render([exported('Study.claim', 'separator theorem', [], 'separation')],
+                      'Study.lean', comparisons=comparisons)
+        self.assertIn('Checked model comparisons', page)
+        self.assertIn('Exposure dephasing p=1/2', page)
+        self.assertIn('exact gap:</strong> 1/4', page)
+        self.assertIn('agreement across these supplied experiments', page.lower() if False else
+                      'agreement across these supplied experiments')
+
+    def test_structured_comparison_rejects_mismatched_claim_kind(self):
+        item = dict(declaration='Study.report', axioms=[], report=dict(
+            left_model='A', right_model='B', covered_protocols=['p'],
+            verdict='agreement', protocol=None, setting=None, outcome=None,
+            left_probability=None, right_probability=None, gap=None,
+            claim=dict(kind='separation', statement='False', quantity=None)))
+        with self.assertRaises(ValueError):
+            parse_comparisons(COMPARISON_PREFIX + json.dumps(item))
 
     def test_missing_exports_fail(self):
         with self.assertRaises(ValueError): parse_exports('Build successful')
