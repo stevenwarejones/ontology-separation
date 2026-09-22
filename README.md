@@ -9,18 +9,33 @@ proof checker stay fixed.
 
 ## Choose your path
 
+### Getting started
+
 | I want to… | Start here | Installation |
 |---|---|---|
 | Browse results | [Online explorer](https://stevenwarejones.github.io/ontology-separation/) · [offline views](examples/index.html) | None |
 | Change a parameter | [Getting started](docs/START_HERE.md) | Python; Lean to check new predictions |
 | Build a Bell–CHSH experiment | [Two-qubit guide](docs/TWO_QUBIT_GUIDE.md) | Python + Lean |
-| Define new physical laws or a backend | [General scenario interface](docs/ADD_A_SCENARIO.md) · [Extension guide](docs/EXTENDING.md) | Lean |
 
 The online explorer publishes verified snapshots from `main`; each page links to
 its source revision. [Deployment details](docs/PAGES.md).
 
 **[Local Friendliness protocol guide](docs/LF_PROTOCOL_GUIDE.md)** — explicit friend
 records, read-or-reverse choices, and checked LF/profile conclusions.
+
+### Advanced — the separation framework (research)
+
+| I want to… | Start here | Installation |
+|---|---|---|
+| Compare every permitted experiment | [Experiment access](docs/EXPERIMENT_ACCESS.md) | Lean |
+| Find what extra access separates two models | [Record access](docs/RECORD_ACCESS_GUIDE.md) | Lean |
+| Prove whole-table membership or class exclusion | [Model classes](docs/MODEL_CLASS_GUIDE.md) | Lean |
+| Define new physical laws or a backend | [General scenario interface](docs/ADD_A_SCENARIO.md) · [Extension guide](docs/EXTENDING.md) | Lean |
+
+The recipes use fast exact rational evaluators; the general complex-quantum
+semantics are noncomputable. They share normalized behaviors and audited reporting,
+but there is no checked recipe-to-quantum equivalence bridge yet.
+[Documentation index](docs/README.md) · [Separation roadmap](docs/design/UNIVERSE_SEPARATION.md#next-milestones).
 
 ## Explore the HTML views
 
@@ -149,8 +164,5 @@ Values and evidence categories are derived from the claims; offline snapshots ar
 For a complete experiment → models → proofs → table workflow, see
 [Add a scenario](docs/ADD_A_SCENARIO.md). The example lives in a separate adopter package.
 
-For general finite complex quantum tests and restricted-access equivalence, see
-[Experiment access](docs/EXPERIMENT_ACCESS.md).
-
-See [record-access separation](docs/RECORD_ACCESS_GUIDE.md) for a complete example
-of models that agree on every local test and differ under joint recovery.
+For the research layer, use the advanced paths above or the
+[documentation index](docs/README.md).
