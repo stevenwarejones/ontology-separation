@@ -39,9 +39,44 @@ theorem Test.prepend_prob (t : Test B C O) (channel : QIT.Channel A B)
     (t.prepend channel).prob ρ o = t.prob (channel.applyState ρ) o := by
   simp only [Test.prob, Test.prepend, QIT.Channel.applyState_comp]
 
+/-- A named constructor for one explicit physical evolution followed by one
+complete POVM readout. This is the supported one-step intervention shape; it is
+still exactly the existing Test semantics rather than a parallel model. -/
+def oneStep (evolution : QIT.Channel A B) (readout : QIT.POVM O B) : Test A B O :=
+  ⟨evolution, readout⟩
+
+@[simp] theorem oneStep_prob (evolution : QIT.Channel A B) (readout : QIT.POVM O B)
+    (ρ : QIT.State A) (o : O) :
+    (oneStep evolution readout).prob ρ o =
+      (readout.prob (evolution.applyState ρ) o : ℝ) := rfl
+
 /-- Direct measurement is a test with identity evolution. -/
 def measure (readout : QIT.POVM O A) : Test A A O :=
-  ⟨QIT.Channel.idChannel A, readout⟩
+  oneStep (QIT.Channel.idChannel A) readout
+
+/-- An isometry followed by a POVM can be represented exactly by pulling the
+POVM back along the isometry. The isometry proof is part of the constructor. -/
+def measureAfterIsometry (readout : QIT.POVM O B) (V : Matrix B A ℂ)
+    (isometry : Matrix.conjTranspose V * V = 1) : Test A A O :=
+  measure (readout.compressByIsometry V isometry)
+
+@[simp] theorem measureAfterIsometry_prob (readout : QIT.POVM O B)
+    (V : Matrix B A ℂ) (isometry : Matrix.conjTranspose V * V = 1)
+    (ρ : QIT.State A) (o : O) :
+    (measureAfterIsometry readout V isometry).prob ρ o =
+      ((readout.compressByIsometry V isometry).prob ρ o : ℝ) := by
+  simp [measureAfterIsometry]
+
+/-- The helper has the intended physical semantics: it gives exactly the Born
+probability obtained by first lifting the state through the isometry and then
+measuring the original POVM. -/
+theorem measureAfterIsometry_prob_eq_lift (readout : QIT.POVM O B)
+    (V : Matrix B A ℂ) (isometry : Matrix.conjTranspose V * V = 1)
+    (ρ : QIT.State A) (o : O) :
+    (measureAfterIsometry readout V isometry).prob ρ o =
+      (readout.prob (QIT.POVM.isometryLiftState ρ V isometry) o : ℝ) := by
+  rw [measureAfterIsometry_prob]
+  exact QIT.POVM.compressByIsometry_prob_eq readout ρ V isometry o
 
 @[simp] theorem measure_prob (readout : QIT.POVM O A) (ρ : QIT.State A) (o : O) :
     (measure readout).prob ρ o = (readout.prob ρ o : ℝ) := by
