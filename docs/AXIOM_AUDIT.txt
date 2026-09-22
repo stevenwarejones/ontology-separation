@@ -130,3 +130,14 @@
 'OntologySeparation.RecordAccess.coherent_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.RecordAccess.dephased_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.RecordAccess.joint_not_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FiniteModels.score_mixture' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FiniteModels.compatible_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FiniteModels.Exclusion.excludes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FiniteModels.no_conflicting_certificates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ModelCompatibility.passes_one_bound_but_excluded' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ModelCompatibility.coherent_excludes_dephased_class' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ModelCompatibility.recordBoundClaim' depends on axioms: [propext, Classical.choice, Quot.sound]
