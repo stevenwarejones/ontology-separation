@@ -4,6 +4,8 @@ import OntologySeparation.Catalog.Matrix
 import OntologySeparation.Core.Assumptions
 import OntologySeparation.Core.ExactFiniteChecker
 import OntologySeparation.Core.AutomaticGrid
+import OntologySeparation.Core.SeparatorSearch
+import OntologySeparation.Reporting.Search
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.PartialLeakage
@@ -205,3 +207,7 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.LFAssumptionAtlas.operational_iff_lf
 #print axioms OntologySeparation.LFAssumptionAtlas.outcome_independence_not_required
 #print axioms OntologySeparation.LFAssumptionAtlas.quantum_excludes_operational
+
+-- Finite separator-search trust roots.
+#print axioms OntologySeparation.ExactFinite.search
+#print axioms OntologySeparation.ExactFinite.SearchResult.report
