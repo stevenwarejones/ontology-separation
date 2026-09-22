@@ -68,3 +68,5 @@ implemented capability; use each guide's stated scope and checked examples.
 | [Universe separation](design/UNIVERSE_SEPARATION.md) | Implemented foundations and next milestones |
 
 - [One-step finite quantum tests](ONE_STEP_FINITE_TESTS.md) — explicit channel/isometry plus POVM experiments using the existing Lean-QIT semantics.
+
+- [Finite channel circuits](FINITE_CIRCUITS.md) — sequential CPTP steps followed by a complete POVM.
