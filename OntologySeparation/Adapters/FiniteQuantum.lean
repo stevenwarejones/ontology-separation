@@ -94,12 +94,12 @@ theorem coordinate_after_measure (readout : QIT.POVM O A) (ρ : QIT.State A) (o 
       ((QIT.Channel.measure readout).applyState ρ) o : ℝ) =
       (readout.prob ρ o : ℝ) := by
   rw [QIT.POVM.prob_eq_trace_re, QIT.POVM.prob_eq_trace_re]
-  have hdiag := congrArg (fun X => X o o)
-    (QIT.Channel.measure_map_state_diagonal readout ρ)
-  change Complex.re ((((QIT.Channel.measure readout).applyState ρ).matrix *
+  change Complex.re ((((QIT.Channel.measure readout).map ρ.matrix) *
     Matrix.single o o (1 : ℂ)).trace) =
     Complex.re ((ρ.matrix * readout.effects o).trace)
   rw [Matrix.trace_mul_single]
+  have hdiag := congrArg (fun X => X o o)
+    (QIT.Channel.measure_map_state_diagonal readout ρ)
   simpa [Matrix.diagonal] using congrArg Complex.re hdiag
 
 /-- Every local test agrees if the accessible reduced density matrices agree.
