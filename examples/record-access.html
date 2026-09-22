@@ -16,7 +16,21 @@ These are mathematical results, not statistical claims about experimental data.<
   p.localOnly →
     OntologySeparation.ObservationallyEquivalent
       (OntologySeparation.RecordAccess.predict OntologySeparation.RecordAccess.Law.coherent p)
+      (OntologySeparation.RecordAccess.predict OntologySeparation.RecordAccess.Law.dephased p)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordAccess.localComparisonClaim</code><br>Agreement over stated access domain</td><td><pre>∀ (p : OntologySeparation.RecordAccess.Protocol),
+  p.localOnly →
+    OntologySeparation.ObservationallyEquivalent
+      (OntologySeparation.RecordAccess.predict OntologySeparation.RecordAccess.Law.coherent p)
       (OntologySeparation.RecordAccess.predict OntologySeparation.RecordAccess.Law.dephased p)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordAccess.coherentClaim</code><br>Exact prediction</td><td><pre>OntologySeparation.RecordAccess.recoveryTest.prob OntologySeparation.RecordAccess.coherent (Bool.false, Bool.false) = ↑1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordAccess.dephasedClaim</code><br>Exact prediction</td><td><pre>OntologySeparation.RecordAccess.recoveryTest.prob OntologySeparation.RecordAccess.dephased (Bool.false, Bool.false) =
   ↑(337 / 625)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordAccess.joint_not_equivalent</code><br>Theorem · see full assumptions</td><td><pre>OntologySeparation.ExperimentAccess.Equivalent OntologySeparation.RecordAccess.predict (fun x =&gt; True)
     OntologySeparation.RecordAccess.Law.coherent OntologySeparation.RecordAccess.Law.dephased →
-  False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
+  False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.RecordAccess.jointComparisonClaim</code><br>Verified separating experiment</td><td><pre>¬OntologySeparation.ExperimentAccess.Equivalent OntologySeparation.RecordAccess.predict (fun x =&gt; True)
+      OntologySeparation.RecordAccess.Law.coherent OntologySeparation.RecordAccess.Law.dephased ∧
+  (fun x =&gt; True) OntologySeparation.RecordAccess.separator.protocol ∧
+    0 &lt; OntologySeparation.RecordAccess.separator.gap ∧
+      (OntologySeparation.RecordAccess.predict OntologySeparation.RecordAccess.Law.coherent
+                OntologySeparation.RecordAccess.separator.protocol).prob
+            OntologySeparation.RecordAccess.separator.setting OntologySeparation.RecordAccess.separator.outcome -
+          (OntologySeparation.RecordAccess.predict OntologySeparation.RecordAccess.Law.dephased
+                OntologySeparation.RecordAccess.separator.protocol).prob
+            OntologySeparation.RecordAccess.separator.setting OntologySeparation.RecordAccess.separator.outcome =
+        OntologySeparation.RecordAccess.separator.gap</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
