@@ -65,7 +65,10 @@ def measureAfterIsometry (readout : QIT.POVM O B) (V : Matrix B A ℂ)
     (ρ : QIT.State A) (o : O) :
     (measureAfterIsometry readout V isometry).prob ρ o =
       ((readout.compressByIsometry V isometry).prob ρ o : ℝ) := by
-  simp [measureAfterIsometry]
+  change ((readout.compressByIsometry V isometry).prob
+    ((QIT.Channel.idChannel A).applyState ρ) o : ℝ) =
+      ((readout.compressByIsometry V isometry).prob ρ o : ℝ)
+  rw [QIT.State.idChannel_applyState]
 
 /-- The helper has the intended physical semantics: it gives exactly the Born
 probability obtained by first lifting the state through the isometry and then
@@ -80,7 +83,9 @@ theorem measureAfterIsometry_prob_eq_lift (readout : QIT.POVM O B)
 
 @[simp] theorem measure_prob (readout : QIT.POVM O A) (ρ : QIT.State A) (o : O) :
     (measure readout).prob ρ o = (readout.prob ρ o : ℝ) := by
-  simp [measure, Test.prob, QIT.State.idChannel_applyState]
+  change (readout.prob ((QIT.Channel.idChannel A).applyState ρ) o : ℝ) =
+    (readout.prob ρ o : ℝ)
+  rw [QIT.State.idChannel_applyState]
 
 /-- Every local test agrees if the accessible reduced density matrices agree.
 This quantifies over arbitrary local CPTP evolution and arbitrary finite POVMs. -/
