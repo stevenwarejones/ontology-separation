@@ -1,4 +1,4 @@
-import Mathlib.Data.Finset.Basic
+import Mathlib.Data.Fintype.Basic
 
 /-! Theory-independent named-register access policies.
 

@@ -62,6 +62,8 @@ class ExamplesTests(unittest.TestCase):
             write_examples(report,d)
             files=list(Path(d).glob('*.html'))
             self.assertEqual(len(files),18)
+            index = (Path(d)/'index.html').read_text()
+            self.assertIn('href="partial-leakage.html"', index)
             historical=(Path(d)/"ruled-out-models.html").read_text()
             self.assertIn("statistical",historical)
             self.assertIn("Photonic proxy",historical)
