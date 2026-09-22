@@ -1,5 +1,4 @@
 import OntologySeparation.Core.AutomaticGrid
-import OntologySeparation.Reporting.Comparison
 
 /-! Exact search for an additional separating protocol after a checked base family.
 
@@ -53,49 +52,5 @@ def search (backend : Backend predict) (base candidates : ProtocolFamily P)
           .foundAB baseAgreement certificate
       | .separatesBA certificate =>
           .foundBA baseAgreement certificate
-
-/-- Publication adapter for search. The base report is always present. Candidate
-evidence is present only when the candidate family was actually scanned. -/
-structure SearchReport where
-  status : String
-  base : ComparisonReport
-  candidate : Option ComparisonReport
-
-/-- Convert every search branch to the ordinary proof-linked comparison report
-objects. Base agreement and candidate separation remain separate checked claims,
-and reverse orientation is preserved by `CheckedResult.report`. -/
-def SearchResult.report (backend : Backend predict) (base candidates : ProtocolFamily P)
-    (a b : M) (modelLabel : M → String) (protocolLabel : P → String)
-    (settingLabel : E.Setting → String) (outcomeLabel : E.Outcome → String)
-    (result : SearchResult backend base candidates a b) : SearchReport :=
-  match result with
-  | .baseSeparatesAB certificate =>
-      { status := "base-separates"
-        base := CheckedResult.report backend base a b modelLabel protocolLabel
-          settingLabel outcomeLabel (.separatesAB certificate)
-        candidate := none }
-  | .baseSeparatesBA certificate =>
-      { status := "base-separates"
-        base := CheckedResult.report backend base a b modelLabel protocolLabel
-          settingLabel outcomeLabel (.separatesBA certificate)
-        candidate := none }
-  | .noCandidate baseAgreement candidateAgreement =>
-      { status := "no-candidate"
-        base := CheckedResult.report backend base a b modelLabel protocolLabel
-          settingLabel outcomeLabel (.agreement baseAgreement)
-        candidate := some (CheckedResult.report backend candidates a b modelLabel protocolLabel
-          settingLabel outcomeLabel (.agreement candidateAgreement)) }
-  | .foundAB baseAgreement certificate =>
-      { status := "found"
-        base := CheckedResult.report backend base a b modelLabel protocolLabel
-          settingLabel outcomeLabel (.agreement baseAgreement)
-        candidate := some (CheckedResult.report backend candidates a b modelLabel protocolLabel
-          settingLabel outcomeLabel (.separatesAB certificate)) }
-  | .foundBA baseAgreement certificate =>
-      { status := "found"
-        base := CheckedResult.report backend base a b modelLabel protocolLabel
-          settingLabel outcomeLabel (.agreement baseAgreement)
-        candidate := some (CheckedResult.report backend candidates a b modelLabel protocolLabel
-          settingLabel outcomeLabel (.separatesBA certificate)) }
 
 end OntologySeparation.ExactFinite
