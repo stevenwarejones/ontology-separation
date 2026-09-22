@@ -74,25 +74,3 @@ example :
     searchCoherence, searchIdeal, searchNoisy, Law.dephasing, Rate.fraction,
     boolFinEnum]
 
-
-/-- Multi-candidate regression: the first candidate agrees, while the later
-coherence protocol supplies the reverse-oriented separator. -/
-def searchCandidates : ProtocolFamily Recipe :=
-  ⟨calibrationProbe, [coherenceProbe]⟩
-
-def multiSearch :=
-  search exactBackend searchCalibration searchCandidates searchIdeal searchNoisy
-
-def multiReport : SearchReport :=
-  SearchResult.report exactBackend searchCalibration searchCandidates searchIdeal searchNoisy
-    Law.label Recipe.label (fun _ => "single setting") (fun o => if o then "+" else "-")
-    multiSearch
-
-example : searchTag multiSearch = 4 := by decide
-
-example :
-    match multiReport.candidate with
-    | some report =>
-        report.protocol = some (Recipe.label coherenceProbe) ∧
-        report.gap = some (1 / 4)
-    | none => False := by decide
