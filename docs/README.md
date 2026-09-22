@@ -77,3 +77,5 @@ implemented capability; use each guide's stated scope and checked examples.
 - [Partial leakage and recovery](PARTIAL_LEAKAGE_RECOVERY.md) — mechanistic visibility/recovery model and exact recovery probabilities.
 
 - [Partial leakage robustness](PARTIAL_LEAKAGE_ROBUSTNESS.md) — symbolic two-parameter separation region, distinct from finite scans.
+
+- [Certified partial-leakage study](PARTIAL_LEAKAGE_STUDY.md) — exact point comparison and separate symbolic robustness theorem.
