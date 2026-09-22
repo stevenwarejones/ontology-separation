@@ -150,6 +150,23 @@ expected distinguishing power subject to physically motivated resource/noise
 constraints, and issue a prospective analysis protocol for external review.
 Lean cannot certify apparatus calibration or data authenticity from a CSV alone.
 
+## Reuse infrastructure before extending it
+
+Before adding linear algebra, finite quantum states, POVMs, channels, or tensor
+operations, inspect the pinned mathlib and Lean-QIT sources and check relevant
+upstream work, including Lean-Quantum. Record the searched declarations, version,
+and any missing capability in the implementation PR. Prefer an existing theorem
+or a thin adapter. A different upstream name or representation is not by itself
+a reason to duplicate the mathematics.
+
+New local infrastructure needs a concrete gap: for example, a computable exact
+evaluator with a proved connection to upstream semantics. Keep such code small
+and explain why adaptation is insufficient. Compare dependency compatibility,
+proof assumptions, maintenance and migration cost before adding another library;
+do not silently upgrade the pinned Lean/mathlib toolchain. Our focus is physical
+assumptions, access-relative comparison, experiment search and scoped reporting.
+This gate does not require rewriting already checked code without a benefit.
+
 ## Engineering and review gates for every increment
 
 - One short adopter example using public imports and the normal audited exporter.
@@ -175,4 +192,6 @@ Lean cannot certify apparatus calibration or data authenticity from a CSV alone.
   local realism*, https://arxiv.org/abs/1108.2468 — established memory-aware
   analysis to build on, with assumptions that must be re-established for LF.
 
+See [Prior art and reuse decisions](PRIOR_ART.md) for the additional literature
+assessment and the distinction between verified sources and unverified leads.
 These references establish precedents, not an exhaustive novelty search.
