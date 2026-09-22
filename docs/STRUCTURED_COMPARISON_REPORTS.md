@@ -35,3 +35,16 @@ This reporting layer is also deliberately distinct from future continuous
 robustness theorems. A finite comparison says what was checked over a supplied
 finite family. A symbolic threshold will need a separate claim saying what is
 proved for every parameter in a region.
+
+
+## Proof connection and labels
+
+`ComparisonReport` retains the backend, compared models, finite family and its
+indexed `CheckedResult`. Probabilities, gap, verdict and coverage are derived
+getters, not editable fields that can be paired with a different proof. Each
+HTML card displays its own embedded formal claim. A source exporting only
+`#export_comparison` is supported; separate `#export_claim` lines are optional.
+
+Label functions remain user-supplied descriptions. Lean checks the underlying
+objects and claims; it cannot prove that arbitrary English labels correctly
+name physical operations. Review custom label functions as part of the study.
