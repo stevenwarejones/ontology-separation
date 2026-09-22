@@ -47,8 +47,7 @@ class ProofReportTests(unittest.TestCase):
         self.assertIn('Checked model comparisons', page)
         self.assertIn('Exposure dephasing p=1/2', page)
         self.assertIn('exact gap:</strong> 1/4', page)
-        self.assertIn('agreement across these supplied experiments', page.lower() if False else
-                      'agreement across these supplied experiments')
+        self.assertIn('prepare |+&gt;; exposure; P(X=+)', page)
 
     def test_structured_comparison_rejects_mismatched_claim_kind(self):
         item = dict(declaration='Study.report', axioms=[], report=dict(
