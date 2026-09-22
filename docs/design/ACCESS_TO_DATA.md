@@ -4,6 +4,14 @@ This sequence builds on main after #25–26. The independent LF assumption and
 readout-error stack (#27–29) should retain its own review order; these experiments
 must not silently reinterpret its joint-event assumptions.
 
+The three stages now have public examples: [physical access](../../examples/EnvironmentAccessStudy.lean),
+[discrimination](../../examples/EnvironmentDiscriminationStudy.lean), and
+[finite-shot design](../../examples/FiniteShotStudy.lean). The first two use
+full complex-QM semantics; the statistical stage uses normalized finite joint
+outcome distributions and explicit calibration/history premises. The full-state
+Helstrom optimum remains symbolic, and the finite-shot rule is the conservative
+all-successes rule described below.
+
 ## 1. Physical contract
 
 Implement `RecordEnvironment`: three distinct qubits, tensor order
