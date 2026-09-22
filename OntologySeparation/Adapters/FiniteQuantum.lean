@@ -95,6 +95,9 @@ theorem coordinate_after_measure (readout : QIT.POVM O A) (ρ : QIT.State A) (o 
       ((QIT.Channel.measure readout).applyState ρ) o : ℝ) =
       (readout.prob ρ o : ℝ) := by
   rw [QIT.POVM.prob_eq_trace_re, QIT.POVM.prob_eq_trace_re]
+  change Complex.re ((((QIT.Channel.measure readout).map ρ.matrix) *
+    (QIT.POVM.coordinate O).effects o).trace) =
+    Complex.re ((ρ.matrix * readout.effects o).trace)
   rw [QIT.Channel.measure_map_state_diagonal]
   simp [Matrix.trace, Matrix.mul_apply, QIT.POVM.coordinate]
 
