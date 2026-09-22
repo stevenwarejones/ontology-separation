@@ -1,4 +1,5 @@
 import OntologySeparation.Core.Certified
+import OntologySeparation.Core.ExperimentAccess
 import Mathlib.Data.Rat.Cast.Defs
 
 /-! One evidence contract for all numerical and theorem reports. Constructors carry
@@ -14,6 +15,12 @@ inductive Claim : Type 1 where
   | witness {M : Type} (admissible : M → Prop) (score : M → ℝ) (model : M)
       (satisfies : admissible model) (value : ℚ) (correct : score model = (value : ℝ))
   | exclusion {M : Type} (admissible : M → Prop) (model : M) (excluded : ¬ admissible model)
+  | agreement {P M : Type} {E : Interface}
+      (predict : ExperimentAccess.Predictions M P E) (allowed : P → Prop) (a b : M)
+      (proof : ExperimentAccess.Equivalent predict allowed a b)
+  | separation {P M : Type} {E : Interface}
+      (predict : ExperimentAccess.Predictions M P E) (allowed : P → Prop) (a b : M)
+      (witness : ExperimentAccess.Separator predict allowed a b)
   | theoremResult (statement : Prop) (proof : statement)
 
 /-- The proposition displayed by the exporter is derived from the claim, never entered as text. -/
@@ -23,6 +30,8 @@ def Claim.statement : Claim → Prop
   | .realizedBound a s v _ _ _ => (∀ m, a m → s m ≤ (v : ℝ)) ∧ ∃ m, a m
   | .witness a s _ _ v _ => ∃ m, a m ∧ s m = (v : ℝ)
   | .exclusion a m _ => ¬ a m
+  | .agreement predict allowed a b _ => ExperimentAccess.Equivalent predict allowed a b
+  | .separation predict allowed a b _ => ¬ ExperimentAccess.Equivalent predict allowed a b
   | .theoremResult p _ => p
 
 theorem Claim.sound (c : Claim) : c.statement := by
@@ -32,6 +41,8 @@ theorem Claim.sound (c : Claim) : c.statement := by
   | realizedBound _ _ _ h m hm => exact ⟨h, m, hm⟩
   | witness _ _ m hm _ h => exact ⟨m, hm, h⟩
   | exclusion _ _ h => exact h
+  | agreement _ _ _ _ h => exact h
+  | separation _ _ _ _ w => exact w.not_equivalent
   | theoremResult _ h => exact h
 
 /-- Rendering metadata follows the constructor; there is no independent status argument. -/
@@ -41,6 +52,8 @@ def Claim.kind : Claim → String
   | .realizedBound .. => "realizedBound"
   | .witness .. => "witness"
   | .exclusion .. => "exclusion"
+  | .agreement .. => "agreement"
+  | .separation .. => "separation"
   | .theoremResult .. => "theorem"
 def Claim.quantity : Claim → Option ℚ
   | .exact _ v _ => some v
