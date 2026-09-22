@@ -21,3 +21,6 @@ PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downst
 python3 scripts/check_recipes.py
 
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFAssumptionStudy.lean -o examples/lf-assumptions.html
+
+python3 scripts/check_external_certificate.py
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/ExternalCertificateStudy.lean -o examples/external-certificate.html

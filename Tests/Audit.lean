@@ -1,3 +1,4 @@
+import OntologySeparation.Certificates.ForcedSignaling
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
@@ -230,3 +231,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.FiniteQuantum.Named.left_allowed_iff
 #print axioms OntologySeparation.FiniteQuantum.Named.both_allowed
 #print axioms OntologySeparation.FiniteQuantum.Named.left_equivalent
+
+-- External finite-LP feasibility spike; no physical representation theorem claimed.
+#print axioms OntologySeparation.ForcedSignaling.dual_feasible
+#print axioms OntologySeparation.ForcedSignaling.bound
+#print axioms OntologySeparation.ForcedSignaling.zeroBudget
+#print axioms OntologySeparation.ForcedSignaling.zeroBudget_score

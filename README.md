@@ -168,3 +168,5 @@ For the research layer, use the advanced paths above or the
 [documentation index](docs/README.md).
 
 [Research milestones](docs/research/PROGRAM.md) · [Checked LF assumption correspondence](docs/research/LF_ASSUMPTIONS.md)
+
+[Flagship decision spike](docs/research/TRADEOFF_DECISION_SPIKE.md) · [Checked external LP certificate](examples/external-certificate.html)
