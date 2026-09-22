@@ -21,3 +21,5 @@ import Tests.ExperimentAccess
 import Tests.RecordAccess
 
 import Tests.FiniteModels
+
+import Tests.PublicImports
