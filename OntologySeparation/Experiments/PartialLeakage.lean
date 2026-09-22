@@ -4,8 +4,8 @@ import Mathlib.Tactic
 /-! A mechanistic partial-information-leakage model for the single-qubit
 Wigner/friend showcase.
 
-The primitive parameters are not an arbitrary interpolation of final
-probabilities. Visibility is the coherence/which-outcome visibility retained
+The product law is an explicit modeling assumption, realized below by
+sequential dephasing channels. Visibility is the coherence/which-outcome visibility retained
 after information leaks from the friend's record, while recovery is the
 fraction of that retained coherence accessible to the superobserver's reversal.
 Their product determines the recoverable coherence. -/
@@ -35,13 +35,13 @@ structure Mechanism where
   recovery : Rate
 
 def Mechanism.recoverableCoherence (m : Mechanism) : Rate :=
-  m.visibility.mul m.recovery
+  Rate.mul m.visibility m.recovery
 
 /-- The existing dephasing law sees the complement of recoverable coherence as
 effective exposure. This connects the mechanism to the already-proved physical
 real-qubit recipe semantics rather than defining a new probability rule. -/
 def Mechanism.wignerLaw (m : Mechanism) : Law :=
-  ⟨m.recoverableCoherence.complement⟩
+  ⟨Rate.complement m.recoverableCoherence⟩
 
 /-- The friend's collapsed prediction is the fully dephased law. -/
 def friendLaw : Law := Law.dephasing 1 1
@@ -78,6 +78,16 @@ theorem recovery_gap (m : Mechanism) :
     probability m.wignerLaw coherenceProbe - probability friendLaw coherenceProbe =
       (m.visibility.value * m.recovery.value) / 2 := by
   rw [recovery_probability, friend_probability]
+  ring
+
+/-- Explicit realization of the assumed product law as two sequential dephasing
+channels. This models coherence attenuation, not an optimized recovery protocol. -/
+theorem sequential_attenuation (m : Mechanism) :
+    (Qubit.experiment ((Qubit.dephase (Rate.complement m.visibility).toNoise).thenDo
+      (Qubit.dephase (Rate.complement m.recovery).toNoise))).behavior.prob () true =
+      (probability m.wignerLaw coherenceProbe : ℝ) := by
+  rw [Qubit.twice_dephased, recovery_probability]
+  simp [Rate.complement, Recipes.Rate.toNoise]
   ring
 
 /-- No information leakage and perfect recovery reproduce the coherent limit. -/
