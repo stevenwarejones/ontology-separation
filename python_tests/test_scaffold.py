@@ -49,6 +49,20 @@ class ScaffoldTests(unittest.TestCase):
                 create_scenario('Bad', root/'Bad.lean', backend='three-qubit')
             self.assertFalse((root/'Bad.lean').exists())
 
+    def test_separation_scaffold(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'lakefile.toml').touch()
+            output=root/'Separation.lean'
+            create_scenario('SeparationStudy',output,backend='separation')
+            text=output.read_text()
+            self.assertIn('RecipeSeparation',text)
+            self.assertIn('restrictedClaim',text)
+            self.assertIn('expandedClaim',text)
+            self.assertIn('noisyCoherenceClaim',text)
+            self.assertNotIn('sorry',text)
+            self.assertEqual(main(['new-scenario','OtherSeparation','--backend','separation',
+                                   '-o',str(root/'Other.lean')]),0)
+
     def test_lf_scaffold(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);(root/'lakefile.toml').touch()
