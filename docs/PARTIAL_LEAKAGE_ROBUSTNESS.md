@@ -11,14 +11,22 @@ The real-valued theorem proves, for nonnegative physical parameters,
 
 `Δ(v,r) > 0 ↔ v > 0 ∧ r > 0`.
 
-Thus the separating region is the positive interior of the visibility/recovery
-square. The exact rational backend is proved to embed into that real formula,
+Within the physical square `[0,1]²`, the separating region is `(0,1] × (0,1]`.
+It includes the upper edges and the ideal corner; it is not the open interior. The exact rational backend is proved to embed into that real formula,
 and every exact point with positive visibility and recovery receives the
 existing proof-bearing separator certificate.
 
-At `v=0` or `r=0`, this particular recovery witness has zero gap. The theorem
-does **not** claim that the two broader model classes are globally equivalent on
-those boundaries; another experiment could in principle distinguish them.
+At `v=0` or `r=0`, the recovery witness has zero gap. In this particular
+effective-law family, `zero_visibility_law` and `zero_recovery_law` prove the
+stronger fact that the two laws are equal, so every recipe in this backend
+agrees there. This does not identify broader physical ontologies or models
+with extra degrees of freedom.
+
+`real_channel_gap` connects the formula to actual real-qubit dephasing
+semantics for every real `v,r ∈ [0,1]`. The real theorem is therefore not
+just extrapolation from rational samples. This remains an ideal exact
+separation condition: it gives no finite-shot sample complexity or tolerance
+to uncertainty in measured probabilities.
 
 ## Why this is not a finite scan
 
