@@ -73,8 +73,8 @@ namespace OntologySeparation.ComparisonReportExport
 
 private partial def stringList (e : Expr) : MetaM (List String) := do
   let e ← whnf e
-  if e.isAppOf \`\`List.nil then return []
-  unless e.isAppOfArity \`\`List.cons 3 do
+  if e.isAppOf ``List.nil then return []
+  unless e.isAppOfArity ``List.cons 3 do
     throwError "Expected a reducible list of comparison labels"
   let args := e.getAppArgs
   let head ← ClaimExport.stringValue args[1]!
@@ -82,30 +82,30 @@ private partial def stringList (e : Expr) : MetaM (List String) := do
 
 private def optionString (e : Expr) : MetaM Json := do
   let e ← whnf e
-  if e.isAppOfArity \`\`Option.none 1 then return Json.null
-  unless e.isAppOfArity \`\`Option.some 2 do
+  if e.isAppOfArity ``Option.none 1 then return Json.null
+  unless e.isAppOfArity ``Option.some 2 do
     throwError "Expected a reducible optional comparison label"
   return toJson (← ClaimExport.stringValue e.getAppArgs[1]!)
 
 private def optionRat (e : Expr) : MetaM Json := do
   let e ← whnf e
-  if e.isAppOfArity \`\`Option.none 1 then return Json.null
-  unless e.isAppOfArity \`\`Option.some 2 do
+  if e.isAppOfArity ``Option.none 1 then return Json.null
+  unless e.isAppOfArity ``Option.some 2 do
     throwError "Expected a reducible optional exact probability"
   ClaimExport.rationalJson e.getAppArgs[1]!
 
 def reportJson (report : Expr) : MetaM Json := withTransparency .all do
-  let left ← ClaimExport.stringValue (← mkAppM \`\`ExactFinite.ComparisonReport.leftModel #[report])
-  let right ← ClaimExport.stringValue (← mkAppM \`\`ExactFinite.ComparisonReport.rightModel #[report])
-  let protocols ← stringList (← mkAppM \`\`ExactFinite.ComparisonReport.coveredProtocols #[report])
-  let verdict ← ClaimExport.stringValue (← mkAppM \`\`ExactFinite.ComparisonReport.verdict #[report])
-  let protocol ← optionString (← mkAppM \`\`ExactFinite.ComparisonReport.protocol #[report])
-  let setting ← optionString (← mkAppM \`\`ExactFinite.ComparisonReport.setting #[report])
-  let outcome ← optionString (← mkAppM \`\`ExactFinite.ComparisonReport.outcome #[report])
-  let leftP ← optionRat (← mkAppM \`\`ExactFinite.ComparisonReport.leftProbability #[report])
-  let rightP ← optionRat (← mkAppM \`\`ExactFinite.ComparisonReport.rightProbability #[report])
-  let gap ← optionRat (← mkAppM \`\`ExactFinite.ComparisonReport.gap #[report])
-  let claimExpr ← mkAppM \`\`ExactFinite.ComparisonReport.claim #[report]
+  let left ← ClaimExport.stringValue (← mkAppM ``ExactFinite.ComparisonReport.leftModel #[report])
+  let right ← ClaimExport.stringValue (← mkAppM ``ExactFinite.ComparisonReport.rightModel #[report])
+  let protocols ← stringList (← mkAppM ``ExactFinite.ComparisonReport.coveredProtocols #[report])
+  let verdict ← ClaimExport.stringValue (← mkAppM ``ExactFinite.ComparisonReport.verdict #[report])
+  let protocol ← optionString (← mkAppM ``ExactFinite.ComparisonReport.protocol #[report])
+  let setting ← optionString (← mkAppM ``ExactFinite.ComparisonReport.setting #[report])
+  let outcome ← optionString (← mkAppM ``ExactFinite.ComparisonReport.outcome #[report])
+  let leftP ← optionRat (← mkAppM ``ExactFinite.ComparisonReport.leftProbability #[report])
+  let rightP ← optionRat (← mkAppM ``ExactFinite.ComparisonReport.rightProbability #[report])
+  let gap ← optionRat (← mkAppM ``ExactFinite.ComparisonReport.gap #[report])
+  let claimExpr ← mkAppM ``ExactFinite.ComparisonReport.claim #[report]
   let claim ← ClaimExport.claimJson claimExpr
   return Json.mkObj [
     ("left_model", toJson left), ("right_model", toJson right),
@@ -118,14 +118,14 @@ end OntologySeparation.ComparisonReportExport
 
 syntax (name := exportComparison) "#export_comparison " ident : command
 elab_rules : command
-  | \`(#export_comparison $id:ident) => do
+  | `(#export_comparison $id:ident) => do
     let name ← liftCoreM <| realizeGlobalConstNoOverloadWithInfo id
     let info ← getConstInfo name
-    unless ← liftTermElabM (isDefEq info.type (mkConst \`\`OntologySeparation.ExactFinite.ComparisonReport)) do
+    unless ← liftTermElabM (isDefEq info.type (mkConst ``OntologySeparation.ExactFinite.ComparisonReport)) do
       throwError "Expected a structured ComparisonReport"
     let axioms ← collectAxioms name
     for ax in axioms do
-      unless #[\`propext, \`Classical.choice, \`Quot.sound].contains ax do
+      unless #[`propext, `Classical.choice, `Quot.sound].contains ax do
         throwError "Cannot publish comparison: unsupported proof dependency {ax}"
     let report ← liftTermElabM <|
       OntologySeparation.ComparisonReportExport.reportJson (mkConst name)
