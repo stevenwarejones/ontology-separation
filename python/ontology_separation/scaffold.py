@@ -135,10 +135,10 @@ def expandedClaim : Claim := expanded.claim
 
 -- These exact checked quantities make the physical edit visible in the report.
 def noisyExposureClaim : Claim :=
-  .exact (noisy.exposure.value : ℝ) noisy.exposure.value (by norm_num)
+  .exact (noisy.exposure.value : ℝ) noisy.exposure.value (by rfl)
 
 def separatorGapClaim : Claim :=
-  .exact expandedSeparator.gap
+  .exact (expandedSeparator reference noisy exposure_order).gap
     ((noisy.exposure.value - reference.exposure.value) / 2)
     (by rfl)
 
