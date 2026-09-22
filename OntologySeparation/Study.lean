@@ -7,6 +7,7 @@ import OntologySeparation.Core.ExactFinite
 import OntologySeparation.Core.ExactFiniteChecker
 import OntologySeparation.Core.FiniteModels
 import OntologySeparation.Experiments.RecordAccess
+import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
 
