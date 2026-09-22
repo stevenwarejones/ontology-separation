@@ -2,11 +2,12 @@
 from fractions import Fraction
 import re
 
-KINDS = {'exact', 'bound', 'realizedBound', 'witness', 'exclusion', 'theorem'}
+KINDS = {'exact', 'bound', 'realizedBound', 'witness', 'exclusion', 'agreement', 'separation', 'theorem'}
 NUMERIC = {'exact', 'bound', 'realizedBound', 'witness'}
 LABELS = {'exact': 'Exact prediction', 'bound': 'Conditional bound · existence not certified',
           'realizedBound': 'Bound + satisfying model', 'witness': 'Realized witness',
-          'exclusion': 'Mathematical exclusion', 'theorem': 'Theorem · see full assumptions'}
+          'exclusion': 'Mathematical exclusion', 'agreement': 'Agreement over stated access domain',
+          'separation': 'Verified separating experiment', 'theorem': 'Theorem · see full assumptions'}
 
 
 def validate_claim(claim: dict) -> None:
@@ -17,7 +18,7 @@ def validate_claim(claim: dict) -> None:
     quantity = claim.get('quantity')
     if claim['kind'] not in NUMERIC:
         if quantity is not None:
-            raise ValueError('A theorem or exclusion cannot acquire a numerical value without an equality proof')
+            raise ValueError('A non-numeric proof claim cannot acquire a numerical value without an equality proof')
         return
     if not isinstance(quantity, dict):
         raise ValueError('A numerical claim needs its proved rational quantity')

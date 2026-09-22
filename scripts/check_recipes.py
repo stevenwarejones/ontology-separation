@@ -52,7 +52,7 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     print('LF starter: eight cells and profile proof provenance checked in an adopter project', flush=True)
 
     # Copy public examples into an independent Lake project: no repository-local imports.
-    for filename, count in [('RecordAccessStudy.lean', 6), ('ModelClassStudy.lean', 6)]:
+    for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6)]:
         study = project / filename
         study.write_text((ROOT / 'examples' / filename).read_text())
         assert write_claim_report(study, project / (filename + '.html')) == count

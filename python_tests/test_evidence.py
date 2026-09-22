@@ -41,6 +41,16 @@ class EvidenceTests(unittest.TestCase):
         realized = dict(claim, kind='realizedBound', statement='(∀ x, P x → f x ≤ 2) ∧ ∃ x, P x')
         self.assertEqual(evidence_label(realized), 'Bound + satisfying model')
 
+    def test_comparison_kinds_are_symbolic_and_distinct(self):
+        agreement = dict(kind='agreement', statement='Equivalent predict allowed a b', quantity=None)
+        separation = dict(kind='separation', statement='¬ Equivalent predict allowed a b', quantity=None)
+        validate_claim(agreement)
+        validate_claim(separation)
+        self.assertEqual(evidence_label(agreement), 'Agreement over stated access domain')
+        self.assertEqual(evidence_label(separation), 'Verified separating experiment')
+        self.assertEqual(result_text(agreement), agreement['statement'])
+        self.assertEqual(result_text(separation), separation['statement'])
+
     def test_missing_proposition_or_quantity_fails(self):
         for claim in [dict(kind='exact', statement='', quantity=dict(numerator='1', denominator='1')),
                       dict(kind='exact', statement='f x = 1', quantity=None)]:

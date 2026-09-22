@@ -74,3 +74,11 @@ This example is a fully checked *minimal record-access separation*. It is not ye
 a parameterized LF leakage experiment, a universal collapse test, a new laboratory
 result, or an automated search for optimal experiments. The general quantum
 adapter and access certificates are reusable foundations for those next questions.
+
+
+## Proof-bearing comparison view
+
+The same result is also packaged through the common comparison layer. See
+[scoped comparison results](COMPARISON_RESULTS.md). `localComparison` binds the
+local-only agreement proof to this model pair and prediction semantics;
+`jointComparison` binds the recovery separator to the full-access predicate.
