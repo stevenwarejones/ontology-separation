@@ -43,3 +43,7 @@ import Tests.ComparisonReport
 import Tests.PartialLeakage
 
 import Tests.PartialLeakageRobustness
+
+import Tests.SeparatorSearch
+
+import Tests.NamedFiniteQuantum
