@@ -154,3 +154,5 @@
  Quot.sound]
 'OntologySeparation.FiniteCircuit.Circuit.apply_cons' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.FiniteCircuit.test_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ExactFinite.mem_entriesForProtocol' depends on axioms: [propext, Quot.sound]
+'OntologySeparation.ExactFinite.entry_protocol_mem' depends on axioms: [propext, Quot.sound]
