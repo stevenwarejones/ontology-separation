@@ -62,6 +62,28 @@ Refresh the HTML. The parameter label becomes **p=1/4**; one exposure gives **7/
 and two exposures give **25/32**. The command rebuilds changed imports automatically.
 If checking fails, it leaves the previous report intact and warns that it may be stale.
 
+## Use the stable Lean entry points
+
+For supported checked studies, prefer the public facade:
+
+```lean
+import OntologySeparation.Study
+```
+
+It exposes the shipped recipe workflows plus the existing proof-bearing access and
+model-class certificates. It does not broaden the physical scope of those APIs.
+
+If the preparation, operation, measurement, or access policy you need is not expressible
+with the supported components, extend the framework instead:
+
+```lean
+import OntologySeparation.Extension
+```
+
+That facade exposes the generic behavior, experiment-access, finite-model, claim, and
+finite-quantum adapter APIs. Choosing the extension path means supplying the missing
+physical definitions and proofs; switching imports never silently changes semantics.
+
 ## Where to go next
 
 - [Understand every line and its physical meaning](RECIPE_GUIDE.md).
