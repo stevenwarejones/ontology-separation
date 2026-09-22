@@ -145,3 +145,17 @@ import OntologySeparation.Core.Assumptions
 #print axioms OntologySeparation.RecordAccess.dephased_recovery
 
 #print axioms OntologySeparation.RecordAccess.joint_not_equivalent
+
+#print axioms OntologySeparation.FiniteModels.score_mixture
+
+#print axioms OntologySeparation.FiniteModels.compatible_bound
+
+#print axioms OntologySeparation.FiniteModels.Exclusion.excludes
+
+#print axioms OntologySeparation.FiniteModels.no_conflicting_certificates
+
+#print axioms OntologySeparation.ModelCompatibility.passes_one_bound_but_excluded
+
+#print axioms OntologySeparation.ModelCompatibility.coherent_excludes_dephased_class
+
+#print axioms OntologySeparation.ModelCompatibility.recordBoundClaim

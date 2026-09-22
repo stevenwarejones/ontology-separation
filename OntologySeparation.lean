@@ -34,3 +34,5 @@ import OntologySeparation.LocalFriendliness
 import OntologySeparation.Adapters.FiniteQuantum
 
 import OntologySeparation.Experiments.RecordAccess
+
+import OntologySeparation.Experiments.ModelCompatibility

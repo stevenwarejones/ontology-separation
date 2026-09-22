@@ -1,10 +1,16 @@
 # Which experiments can separate two models?
 
+> **Two layers.** This advanced guide covers the separation framework and its general complex-quantum adapter.
+> To run or compare supported experiments, start with the [recipe guides](RECIPE_GUIDE.md).
+> Recipes have exact rational evaluators; the general complex-quantum semantics are noncomputable.
+> Both layers use normalized behaviors and audited reports, but no checked recipe-to-quantum equivalence bridge exists yet.
+> Custom research models require Lean proofs; see the [documentation index](README.md) for the beginner path.
+
 Start with the access question: **what can the experimenter actually control or
 read?** A comparison without that boundary can make two models appear different
 using a measurement that the experimenter cannot perform.
 
-The library now has two reusable layers. `ExperimentAccess.Equivalent` says two
+The access API has two certificate forms. `ExperimentAccess.Equivalent` says two
 models agree on every allowed protocol, setting and outcome. `Separator` supplies
 one allowed protocol and a proved positive probability gap. It is impossible to
 supply both for the same family. Restricting access preserves equivalence;

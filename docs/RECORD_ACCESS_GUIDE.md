@@ -1,5 +1,11 @@
 # Recover information by gaining access to a record
 
+> **Two layers.** This advanced guide uses the general complex-quantum research layer.
+> To run or compare supported experiments, start with the [recipe guides](RECIPE_GUIDE.md).
+> Recipes have exact rational evaluators; the general complex-quantum semantics are noncomputable.
+> Both layers use normalized behaviors and audited reports, but no checked recipe-to-quantum equivalence bridge exists yet.
+> Custom research models require Lean proofs; see the [documentation index](README.md) for the beginner path.
+
 **Question:** two models give the same statistics for every local experiment.
 What new control lets us tell them apart?
 

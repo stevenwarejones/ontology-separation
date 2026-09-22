@@ -72,3 +72,13 @@ If checking fails, it leaves the previous report intact and warns that it may be
 
 Lean checks the mathematics relative to your definitions. Choosing definitions
 that describe the intended physical experiment remains part of the scientific work.
+
+## Advanced — separation research
+
+These optional guides require Lean and work beyond the starter recipe workflow.
+The general complex-quantum semantics and rational recipes share reporting, but
+do not yet have a checked equivalence bridge. See the [documentation index](README.md).
+
+- [Find what extra access separates two models](RECORD_ACCESS_GUIDE.md).
+- [Check a whole model class](MODEL_CLASS_GUIDE.md).
+- [Use general complex quantum states and channels](EXPERIMENT_ACCESS.md).
