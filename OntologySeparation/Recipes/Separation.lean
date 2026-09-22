@@ -1,5 +1,6 @@
 import OntologySeparation.Recipes.Qubit
 import OntologySeparation.Core.Comparison
+import OntologySeparation.Core.ExactFinite
 
 /-! Operational adapter from the exact single-qubit recipe backend into the
 common access-relative comparison vocabulary. This uses the backend's existing
@@ -12,6 +13,16 @@ open Comparison
 open Recipes
 
 abbrev predict : Predictions Law Recipe binaryInterface := interpret
+
+/-- The single-qubit recipe backend exposes exact rational probabilities for
+both Boolean outcomes, proved against the same Behavior semantics. -/
+def exactBackend : ExactFinite.Backend Law Recipe binaryInterface where
+  predict := predict
+  probability := fun m r _ o => outcomeProbability m r o
+  correct := by
+    intro m r s o
+    cases s
+    exact outcomeProbability_correct m r o
 
 /-- Exact probability for either Boolean outcome. The existing recipe evaluator
 computes P(+); normalization supplies the complementary outcome. -/
