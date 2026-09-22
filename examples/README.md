@@ -21,3 +21,5 @@ committed pages are deterministic, self-contained and work offline. A static
 16-profile table remains available when JavaScript is disabled.
 
 - `partial-leakage.html`: checked exact-point comparison plus the symbolic partial-leakage robustness theorem.
+
+- `SeparatorSearchStudy.lean`: public multi-candidate search example; the first candidate agrees and a later candidate supplies the checked separator.
