@@ -110,7 +110,8 @@ def certify (backend : Backend predict) (family : P → Prop)
         positive := by exact_mod_cast sub_pos.mpr hlt
         difference := by
           rw [backend.correct, backend.correct]
-          push_cast }
+          push_cast
+          rfl }
   | .separatesBA x hx hlt =>
       .separatesBA {
         protocol := x.protocol
@@ -122,6 +123,7 @@ def certify (backend : Backend predict) (family : P → Prop)
         positive := by exact_mod_cast sub_pos.mpr hlt
         difference := by
           rw [backend.correct, backend.correct]
-          push_cast }
+          push_cast
+          rfl }
 
 end OntologySeparation.ExactFinite
