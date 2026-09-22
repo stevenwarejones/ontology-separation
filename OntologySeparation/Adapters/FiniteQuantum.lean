@@ -94,12 +94,12 @@ theorem coordinate_after_measure (readout : QIT.POVM O A) (ρ : QIT.State A) (o 
     ((QIT.POVM.coordinate O).prob
       ((QIT.Channel.measure readout).applyState ρ) o : ℝ) =
       (readout.prob ρ o : ℝ) := by
-  rw [QIT.POVM.prob_eq_trace_re, QIT.POVM.prob_eq_trace_re]
-  change Complex.re ((((QIT.Channel.measure readout).map ρ.matrix) *
-    (QIT.POVM.coordinate O).effects o).trace) =
-    Complex.re ((ρ.matrix * readout.effects o).trace)
-  rw [QIT.Channel.measure_map_state_diagonal]
-  simp [Matrix.trace, Matrix.mul_apply, QIT.POVM.coordinate]
+  unfold QIT.POVM.prob
+  change Complex.re (((QIT.Channel.measure (QIT.POVM.coordinate O)).map
+    ((QIT.Channel.measure readout).map ρ.matrix)) o o) =
+    Complex.re (((QIT.Channel.measure readout).map ρ.matrix) o o)
+  rw [QIT.Channel.measure_map]
+  simp [QIT.POVM.coordinate, Matrix.trace, Matrix.mul_apply]
 
 /-- Every local test agrees if the accessible reduced density matrices agree.
 This quantifies over arbitrary local CPTP evolution and arbitrary finite POVMs. -/
