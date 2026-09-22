@@ -39,3 +39,5 @@ import Tests.FiniteCircuit
 import Tests.AutomaticGrid
 
 import Tests.ComparisonReport
+
+import Tests.PartialLeakage
