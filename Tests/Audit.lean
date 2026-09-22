@@ -5,6 +5,8 @@ import OntologySeparation.Core.ExactFiniteChecker
 import OntologySeparation.Core.AutomaticGrid
 import OntologySeparation.Core.SeparatorSearch
 import OntologySeparation.Reporting.Search
+import OntologySeparation.Core.RegisterAccess
+import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.PartialLeakage
@@ -206,3 +208,14 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 -- Finite separator-search trust roots.
 #print axioms OntologySeparation.ExactFinite.search
 #print axioms OntologySeparation.ExactFinite.SearchResult.report
+
+-- Named-register policy and record-access trust roots.
+#print axioms OntologySeparation.RegisterAccess.allowed_mono
+#print axioms OntologySeparation.RegisterAccess.allowed_full
+#print axioms OntologySeparation.RegisterAccess.allowed_empty_iff
+#print axioms OntologySeparation.RegisterAccess.not_allowed_of_missing
+#print axioms OntologySeparation.RecordAccess.systemOnly_allowed_iff
+#print axioms OntologySeparation.RecordAccess.fullRegisterAccess_allowed
+#print axioms OntologySeparation.RecordAccess.named_locally_equivalent
+#print axioms OntologySeparation.RecordAccess.namedSeparator
+#print axioms OntologySeparation.RecordAccess.named_joint_not_equivalent
