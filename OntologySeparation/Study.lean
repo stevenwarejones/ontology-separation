@@ -3,6 +3,7 @@ import OntologySeparation.Recipes.Separation
 import OntologySeparation.LocalFriendliness
 import OntologySeparation.Core.ExperimentAccess
 import OntologySeparation.Core.Comparison
+import OntologySeparation.Core.ExactFinite
 import OntologySeparation.Core.FiniteModels
 import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Experiments.ModelCompatibility
