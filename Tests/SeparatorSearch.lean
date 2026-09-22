@@ -27,21 +27,48 @@ def searchTag {backend : ExactFinite.Backend RecipeSeparation.predict}
 because false is the first Boolean outcome. -/
 example :
     searchTag (search exactBackend searchCalibration searchCoherence
-      searchIdeal searchNoisy) = 4 := by decide
+      searchIdeal searchNoisy) = 4 := by
+  generalize_proofs
+  norm_num [searchTag, search, certifyFamily, ProtocolFamily.grid,
+    ProtocolFamily.entries, ProtocolFamily.protocols, entriesForProtocol,
+    certify, scan, compareEntry, exactBackend, outcomeProbability,
+    calibration_probability, coherence_probability, searchCalibration,
+    searchCoherence, searchIdeal, searchNoisy, Law.dephasing, Rate.fraction,
+    boolFinEnum]
 
 /-- Reversing model order exercises the AB separator branch. -/
 example :
     searchTag (search exactBackend searchCalibration searchCoherence
-      searchNoisy searchIdeal) = 3 := by decide
+      searchNoisy searchIdeal) = 3 := by
+  generalize_proofs
+  norm_num [searchTag, search, certifyFamily, ProtocolFamily.grid,
+    ProtocolFamily.entries, ProtocolFamily.protocols, entriesForProtocol,
+    certify, scan, compareEntry, exactBackend, outcomeProbability,
+    calibration_probability, coherence_probability, searchCalibration,
+    searchCoherence, searchIdeal, searchNoisy, Law.dephasing, Rate.fraction,
+    boolFinEnum]
 
 /-- Exhausting a candidate family that also agrees produces a checked negative
 search result for that supplied family, not a global no-separator claim. -/
 example :
     searchTag (search exactBackend searchCalibration searchCalibration
-      searchIdeal searchNoisy) = 2 := by decide
+      searchIdeal searchNoisy) = 2 := by
+  generalize_proofs
+  norm_num [searchTag, search, certifyFamily, ProtocolFamily.grid,
+    ProtocolFamily.entries, ProtocolFamily.protocols, entriesForProtocol,
+    certify, scan, compareEntry, exactBackend, outcomeProbability,
+    calibration_probability, searchCalibration, searchIdeal, searchNoisy,
+    Law.dephasing, Rate.fraction, boolFinEnum]
 
 /-- If the base family already separates, search reports that failed premise
 rather than pretending an additional intervention was needed. -/
 example :
     searchTag (search exactBackend searchCoherence searchCalibration
-      searchIdeal searchNoisy) = 1 := by decide
+      searchIdeal searchNoisy) = 1 := by
+  generalize_proofs
+  norm_num [searchTag, search, certifyFamily, ProtocolFamily.grid,
+    ProtocolFamily.entries, ProtocolFamily.protocols, entriesForProtocol,
+    certify, scan, compareEntry, exactBackend, outcomeProbability,
+    calibration_probability, coherence_probability, searchCalibration,
+    searchCoherence, searchIdeal, searchNoisy, Law.dephasing, Rate.fraction,
+    boolFinEnum]
