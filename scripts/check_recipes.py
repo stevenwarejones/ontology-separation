@@ -129,6 +129,28 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     print('Automatic comparison adopter: covered agreement and oriented separator exported',
           flush=True)
 
+    leakage = project / 'PartialLeakageStudy.lean'
+    leakage.write_text((ROOT / 'examples' / 'PartialLeakageStudy.lean').read_text())
+    leakage_output = project / 'partial-leakage.html'
+    assert write_claim_report(leakage, leakage_output) == 2
+    leakage_stdout = run_lean(leakage)
+    leakage_records = parse_exports(leakage_stdout)
+    leakage_views = parse_comparisons(leakage_stdout)
+    assert len(leakage_views) == 1, leakage_views
+    view = leakage_views[0]['report']
+    assert view['verdict'] == 'separation', view
+    assert view['left_probability'] == {'numerator': '11', 'denominator': '16'}, view
+    assert view['right_probability'] == {'numerator': '1', 'denominator': '2'}, view
+    assert view['gap'] == {'numerator': '3', 'denominator': '16'}, view
+    robustness = next(r for r in leakage_records
+                      if r['declaration'].endswith('robustnessClaim'))
+    assert robustness['claim']['kind'] == 'theorem', robustness
+    page = leakage_output.read_text()
+    assert 'exact gap:</strong> 3/16' in page
+    assert 'Formal theorem statements' in page
+    print('Partial-leakage study: exact point and symbolic region exported separately',
+          flush=True)
+
     # Copy public examples into an independent Lake project: no repository-local imports.
     for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6)]:
         study = project / filename
