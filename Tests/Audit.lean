@@ -1,4 +1,7 @@
 import OntologySeparation.Certificates.ForcedSignaling
+import OntologySeparation.Experiments.RecordEnvironment
+import OntologySeparation.Experiments.LFReadout
+import OntologySeparation.Experiments.LFJoint
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
@@ -212,6 +215,23 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.LFAssumptionAtlas.outcome_independence_not_required
 #print axioms OntologySeparation.LFAssumptionAtlas.quantum_excludes_operational
 
+#print axioms OntologySeparation.LFJoint.conditional_reconstruct
+#print axioms OntologySeparation.LFJoint.conditional_probability
+#print axioms OntologySeparation.LFJoint.local_iff_conditional
+#print axioms OntologySeparation.LFJoint.joint_iff_lf
+#print axioms OntologySeparation.LFJoint.bound
+#print axioms OntologySeparation.LFJoint.quantum_excluded
+
+#print axioms OntologySeparation.LFReadout.response_bound
+#print axioms OntologySeparation.LFReadout.joint_bound
+#print axioms OntologySeparation.LFReadout.sharp_total_budget
+#print axioms OntologySeparation.LFReadout.required_mismatch
+#print axioms OntologySeparation.LFReadout.quantum_required_error
+#print axioms OntologySeparation.LFReadout.mismatchA_remote
+#print axioms OntologySeparation.LFReadout.mismatchB_remote
+#print axioms OntologySeparation.LFReadout.budgetClaim
+#print axioms OntologySeparation.LFReadout.attainingClaim
+#print axioms OntologySeparation.LFReadout.exclusionClaim
 -- Finite separator-search trust roots.
 #print axioms OntologySeparation.ExactFinite.search
 #print axioms OntologySeparation.ExactFinite.SearchResult.report
@@ -237,3 +257,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignaling.bound
 #print axioms OntologySeparation.ForcedSignaling.zeroBudget
 #print axioms OntologySeparation.ForcedSignaling.zeroBudget_score
+#print axioms OntologySeparation.RecordEnvironment.copyEnvironment_isometry
+#print axioms OntologySeparation.RecordEnvironment.preparation_is_copy
+#print axioms OntologySeparation.RecordEnvironment.collapsed_entry
+#print axioms OntologySeparation.RecordEnvironment.laboratory_state
+#print axioms OntologySeparation.RecordEnvironment.same_laboratory_state
+#print axioms OntologySeparation.RecordEnvironment.every_laboratory_test
+#print axioms OntologySeparation.RecordEnvironment.laboratory_equivalent
+#print axioms OntologySeparation.RecordEnvironment.global_states_differ

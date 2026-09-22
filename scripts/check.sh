@@ -20,7 +20,11 @@ PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downst
 PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downstream/FriendStudy.lean -o examples/local-friendliness-protocol.html
 python3 scripts/check_recipes.py
 
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/EnvironmentAccessStudy.lean -o examples/environment-access.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFAssumptionStudy.lean -o examples/lf-assumptions.html
 
 python3 scripts/check_external_certificate.py
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/ExternalCertificateStudy.lean -o examples/external-certificate.html
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFPaperStudy.lean -o examples/lf-paper.html
+
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFReadoutStudy.lean -o examples/lf-readout.html

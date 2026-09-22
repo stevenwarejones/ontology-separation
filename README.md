@@ -28,6 +28,7 @@ records, read-or-reverse choices, and checked LF/profile conclusions.
 | I want to… | Start here | Installation |
 |---|---|---|
 | Compare every permitted experiment | [Experiment access](docs/EXPERIMENT_ACCESS.md) | Lean |
+| Separate the laboratory from its environment | [Three-register guide](docs/ENVIRONMENT_ACCESS_GUIDE.md) · [report](examples/environment-access.html) | Lean |
 | Find what extra access separates two models | [Record access](docs/RECORD_ACCESS_GUIDE.md) | Lean |
 | Prove whole-table membership or class exclusion | [Model classes](docs/MODEL_CLASS_GUIDE.md) | Lean |
 | Define new physical laws or a backend | [General scenario interface](docs/ADD_A_SCENARIO.md) · [Extension guide](docs/EXTENDING.md) | Lean |
@@ -170,3 +171,6 @@ For the research layer, use the advanced paths above or the
 [Research milestones](docs/research/PROGRAM.md) · [Checked LF assumption correspondence](docs/research/LF_ASSUMPTIONS.md)
 
 [Flagship decision spike](docs/research/TRADEOFF_DECISION_SPIKE.md) · [Checked external LP certificate](examples/external-certificate.html)
+For the LF paper-to-code correspondence, see [the LF joint-event walkthrough](docs/research/LF_PAPER_GUIDE.md) and its [checked HTML report](examples/lf-paper.html).
+
+Explore imperfect friend readout with [the sharp error-budget study](docs/research/LF_READOUT_GUIDE.md) and its [checked HTML report](examples/lf-readout.html).
