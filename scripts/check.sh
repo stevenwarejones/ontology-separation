@@ -25,3 +25,5 @@ PYTHONPATH=python python3 -m ontology_separation.proof_report examples/Environme
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/EnvironmentDiscriminationStudy.lean -o examples/environment-discrimination.html
 
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/FiniteShotStudy.lean -o examples/finite-shot.html
+
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PartialEnvironmentStudy.lean -o examples/partial-environment.html

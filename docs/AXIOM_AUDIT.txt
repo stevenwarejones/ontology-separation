@@ -217,3 +217,19 @@
 'OntologySeparation.ReturnStatistics.powerClaim' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.FiniteShot.Plan.rejectionProbability_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.FiniteShot.Plan.false_rejection_control' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.QuantumDiscrimination.error_eq_probability_gap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumDiscrimination.probability_gap_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.coherent_entry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.distance_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.every_test_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.resolves_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.no_test_resolves' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.optimal_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.no_fragment_test' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.uniform_threshold' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.worst_case' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PartialEnvironment.Study.uniformly_resolves' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

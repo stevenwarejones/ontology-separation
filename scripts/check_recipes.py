@@ -86,6 +86,35 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
         assert finite_shot_output.read_bytes() == previous_finite_shot
     print('Finite-shot adopter: exact risk edit and four invalid designs rejected', flush=True)
 
+    partial = project / 'PartialEnvironmentStudy.lean'
+    original_partial = (ROOT / 'examples/PartialEnvironmentStudy.lean').read_text()
+    partial.write_text(original_partial)
+    partial_output = project / 'partial-environment.html'
+    assert write_claim_report(partial, partial_output) == 8
+    page = partial_output.read_text()
+    assert '>36/125<' in page and '>99/500<' in page and '>197/250<' in page
+    partial.write_text(original_partial.replace('design (3/5)', 'design (4/5)', 1))
+    assert write_claim_report(partial, partial_output) == 8
+    page = partial_output.read_text()
+    assert '>48/125<' in page and '>147/500<' in page
+    previous_partial = partial_output.read_bytes()
+    for invalid, expected_error in [
+        ('design (1/10) (1/20) (1/25)', 'fits'),
+        ('design (6/5) (1/20) (1/25)', 'overlapLeOne'),
+        ('design (3/5) (-1/20) (1/25)', 'lossNonneg'),
+        ('design (3/5) (1/20) (-1/25)', 'slackNonneg'),
+    ]:
+        partial.write_text(original_partial.replace(
+            'design (3/5) (1/20) (1/25)', invalid, 1))
+        try:
+            write_claim_report(partial, partial_output)
+        except ValueError as error:
+            assert expected_error in str(error), str(error)
+        else:
+            raise AssertionError('Invalid partial-access study accepted: ' + invalid)
+        assert partial_output.read_bytes() == previous_partial
+    print('Partial-access adopter: exact parameter edit and four invalid studies rejected', flush=True)
+
     starter = create_scenario('Starter',project/'Starter.lean')
     output = project/'report.html'
     assert write_report(starter,output) == 12
