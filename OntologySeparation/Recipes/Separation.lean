@@ -1,5 +1,6 @@
 import OntologySeparation.Recipes.Qubit
 import OntologySeparation.Core.Comparison
+import OntologySeparation.Core.FiniteComparison
 
 /-! Operational adapter from the exact single-qubit recipe backend into the
 common access-relative comparison vocabulary. This uses the backend's existing
@@ -86,5 +87,39 @@ in editable studies because its quantity visibly changes when the law changes. -
 def coherenceClaim (m : Law) : Claim :=
   .exact ((predict m coherenceProbe).prob () true) (probability m coherenceProbe)
     (by simpa [predict] using probability_correct m coherenceProbe)
+
+/-- Finite supported menu for the automatic exact checker. The enum is the
+protocol type; its mapping to physical recipes is explicit and total. -/
+inductive Probe where
+  | calibration
+  | coherence
+  deriving DecidableEq, Fintype
+
+def Probe.recipe : Probe → Recipe
+  | .calibration => calibrationProbe
+  | .coherence => coherenceProbe
+
+def finitePredict (m : Law) (p : Probe) : Behavior binaryInterface :=
+  predict m p.recipe
+
+def finiteOutcomeProbability (m : Law) (p : Probe) (s : Unit) (o : Bool) : ℚ :=
+  outcomeProbability m p.recipe o
+
+def finiteEvaluator : FiniteComparison.ExactEvaluator finitePredict where
+  value := finiteOutcomeProbability
+  correct := by
+    intro m p s o
+    exact outcomeProbability_correct m p.recipe o
+
+def allProbes (_ : Probe) : Prop := True
+
+def allProbesNonempty : ∃ p, allProbes p := ⟨.calibration, trivial⟩
+
+def automaticComparison (a b : Law) :
+    FiniteComparison.Result finitePredict allProbes a b :=
+  FiniteComparison.compare finiteEvaluator allProbes a b
+
+def automaticClaim (a b : Law) : Claim :=
+  (automaticComparison a b).claim allProbesNonempty
 
 end OntologySeparation.RecipeSeparation
