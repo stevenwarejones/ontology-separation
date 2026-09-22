@@ -1,6 +1,7 @@
 import OntologySeparation.Adapters.FiniteQuantum
 import OntologySeparation.Core.Claim
 import OntologySeparation.Core.Comparison
+import OntologySeparation.Core.RegisterAccess
 import QIT.Core.Pure
 import Mathlib.Tactic.NormNum
 
@@ -97,9 +98,42 @@ inductive Protocol where
   | localTest (test : FiniteQuantum.Test Bool Registers Registers)
   | jointTest (test : FiniteQuantum.Test Registers Registers Registers)
 
+/-- Physical register names for the record-access experiment. The tensor index
+remains `Bool × Bool`; these names control which protocol constructors are
+operationally available. -/
+inductive Register where
+  | system
+  | record
+  deriving DecidableEq, Fintype
+
+def protocolRegisters : Protocol → Finset Register
+  | .localTest _ => { .system }
+  | .jointTest _ => { .system, .record }
+
+def registerFootprint : RegisterAccess.Footprint Register Protocol :=
+  ⟨protocolRegisters⟩
+
+def systemOnly : RegisterAccess.Policy Register :=
+  ⟨{ .system }⟩
+
+def systemAndRecord : RegisterAccess.Policy Register :=
+  RegisterAccess.fullPolicy
+
+
 def Protocol.localOnly : Protocol → Prop
   | .localTest _ => True
   | .jointTest _ => False
+
+theorem systemOnly_allowed_iff (p : Protocol) :
+    RegisterAccess.Allowed registerFootprint systemOnly p ↔ p.localOnly := by
+  cases p <;>
+    simp [RegisterAccess.Allowed, registerFootprint, protocolRegisters,
+      systemOnly, Protocol.localOnly, Finset.subset_iff]
+
+theorem fullRegisterAccess_allowed (p : Protocol) :
+    RegisterAccess.Allowed registerFootprint systemAndRecord p :=
+  RegisterAccess.allowed_full registerFootprint p
+
 
 def predict (law : Law) : Protocol → Behavior { Setting := Unit, Outcome := Registers }
   | .localTest t => FiniteQuantum.behavior law.state.marginalA (fun _ => t)
@@ -128,6 +162,24 @@ def separator : ExperimentAccess.Separator predict (fun _ => True) .coherent .de
 theorem joint_not_equivalent :
     ¬ ExperimentAccess.Equivalent predict (fun _ => True) .coherent .dephased :=
   separator.not_equivalent
+
+/-- The original local/joint theorem now also uses a policy derived from named
+register footprints rather than a manually entered access label. -/
+theorem named_locally_equivalent :
+    ExperimentAccess.Equivalent predict
+      (RegisterAccess.Allowed registerFootprint systemOnly) .coherent .dephased := by
+  intro p hp s o
+  exact locally_equivalent p ((systemOnly_allowed_iff p).mp hp) s o
+
+def namedSeparator :
+    ExperimentAccess.Separator predict
+      (RegisterAccess.Allowed registerFootprint systemAndRecord) .coherent .dephased :=
+  { separator with accessible := fullRegisterAccess_allowed separator.protocol }
+
+theorem named_joint_not_equivalent :
+    ¬ ExperimentAccess.Equivalent predict
+      (RegisterAccess.Allowed registerFootprint systemAndRecord) .coherent .dephased :=
+  namedSeparator.not_equivalent
 
 /-- Same model pair and prediction semantics, reported over local-only access. -/
 def localComparison :

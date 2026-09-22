@@ -2,6 +2,7 @@ import OntologySeparation.Recipes
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.LocalFriendliness
 import OntologySeparation.Core.ExperimentAccess
+import OntologySeparation.Core.RegisterAccess
 import OntologySeparation.Core.Comparison
 import OntologySeparation.Core.ExactFinite
 import OntologySeparation.Core.ExactFiniteChecker
