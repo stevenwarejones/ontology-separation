@@ -81,7 +81,7 @@ An unclassified cell does not establish compatibility.</p>
 
 def render(records: list[dict], source: str, profiles: list[dict] | None = None) -> str:
     esc = html.escape
-    rows = ''.join('<tr><td><code>'+esc(r['declaration'])+'</code><br>'+esc(evidence_label(r['claim']))+'</td><td><pre>'+esc(r['statement'])+
+    rows = ''.join('<tr><td><code>'+esc(r['declaration'])+'</code><br>'+esc(evidence_label(r['claim']))+'</td><td>'+esc(result_text(r['claim']))+'</td><td><pre>'+esc(r['statement'])+
                    '</pre></td><td>'+esc(', '.join(r['axioms']) or 'None')+'</td></tr>' for r in records)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Operational results — Ontology Separation</title><style>
@@ -94,7 +94,7 @@ pre{{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}}code{{overflow-
 Each row states exactly what its proof establishes. The definitions determine its physical meaning.
 This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
 These are mathematical results, not statistical claims about experimental data.</p>
-{profile_table(profiles)}<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody>{rows}</tbody></table></div></body></html>'''
+{profile_table(profiles)}<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody>{rows}</tbody></table></div></body></html>'''
 
 
 def write_report(source: Path, output: Path) -> int:
