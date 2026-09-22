@@ -11,11 +11,10 @@ import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
+import OntologySeparation.Reporting.Comparison
 
 /-! Stable imports for adopters building supported checked studies.
 
 This module intentionally exposes the existing recipe workflows and comparison
 certificates without requiring adopters to know the internal directory layout.
 It does not add a new semantics or broaden the scope of any theorem. -/
-
-import OntologySeparation.Reporting.Comparison
