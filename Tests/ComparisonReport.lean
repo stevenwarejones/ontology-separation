@@ -24,4 +24,16 @@ example : physicalReport.claim.statement := by
   change reportResult.claim.statement
   exact reportResult.sound
 
+-- Presentation fields are derived getters, not editable record inputs.
+example : True := by
+  fail_if_success
+    have forged : ComparisonReport := { physicalReport with gap := some 1 }
+  fail_if_success
+    have forged : ComparisonReport := { physicalReport with leftProbability := some 1 }
+  fail_if_success
+    have forged : ComparisonReport := { physicalReport with verdict := "agreement" }
+  fail_if_success
+    have forged : ComparisonReport := { physicalReport with coveredProtocols := ["all experiments"] }
+  trivial
+
 end
