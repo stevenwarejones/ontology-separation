@@ -25,3 +25,5 @@ import Tests.FiniteModels
 import Tests.PublicImports
 
 import Tests.Comparison
+
+import Tests.RecipeSeparation
