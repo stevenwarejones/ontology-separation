@@ -4,6 +4,7 @@ import OntologySeparation.LocalFriendliness
 import OntologySeparation.Core.ExperimentAccess
 import OntologySeparation.Core.Comparison
 import OntologySeparation.Core.ExactFinite
+import OntologySeparation.Core.ExactFiniteChecker
 import OntologySeparation.Core.FiniteModels
 import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Experiments.ModelCompatibility
