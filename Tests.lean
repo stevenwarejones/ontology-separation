@@ -27,3 +27,5 @@ import Tests.PublicImports
 import Tests.Comparison
 
 import Tests.RecipeSeparation
+
+import Tests.FiniteComparison
