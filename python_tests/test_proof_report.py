@@ -59,6 +59,44 @@ class ProofReportTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             parse_comparisons(COMPARISON_PREFIX + json.dumps(item))
 
+    def test_structured_report_rejects_malformed_records(self):
+        for value in ([], None, 4):
+            with self.assertRaises(ValueError):
+                parse_comparisons(COMPARISON_PREFIX + json.dumps(value))
+
+    def test_structured_report_checks_probability_arithmetic_and_scope(self):
+        def rational(n, d=1): return dict(numerator=str(n), denominator=str(d))
+        report = dict(left_model='B', right_model='A', covered_protocols=['probe'],
+                      verdict='separation', protocol='probe', setting='one', outcome='minus',
+                      left_probability=rational(1,4), right_probability=rational(0), gap=rational(1,4),
+                      claim=dict(kind='separation', statement='its own theorem', quantity=None))
+        for edit in (dict(gap=rational(1)), dict(left_probability=rational(2)),
+                     dict(gap=rational(0)), dict(protocol='outside')):
+            item = dict(declaration='study', axioms=[], report=dict(report, **edit))
+            with self.assertRaises(ValueError):
+                parse_comparisons(COMPARISON_PREFIX + json.dumps(item))
+        line = COMPARISON_PREFIX + json.dumps(dict(declaration='study', axioms=[], report=report))
+        with self.assertRaises(ValueError):
+            parse_comparisons(line + '\n' + line)
+        page = render([], 'Study.lean', comparisons=parse_comparisons(line))
+        self.assertIn('its own theorem', page)
+
+    def test_comparison_only_source_can_publish(self):
+        from unittest.mock import patch
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        from ontology_separation.proof_report import write_report
+        report = dict(left_model='A', right_model='B', covered_protocols=['probe'],
+                      verdict='agreement', claim=dict(kind='agreement',
+                      statement='the comparison own proposition', quantity=None))
+        stdout = COMPARISON_PREFIX + json.dumps(dict(declaration='study', axioms=[], report=report))
+        with TemporaryDirectory() as directory:
+            source, output = Path(directory)/'Study.lean', Path(directory)/'report.html'
+            source.write_text('')
+            with patch('ontology_separation.proof_report.run_lean', return_value=stdout):
+                self.assertEqual(write_report(source, output), 1)
+            self.assertIn('the comparison own proposition', output.read_text())
+
     def test_missing_exports_fail(self):
         with self.assertRaises(ValueError): parse_exports('Build successful')
     def test_unknown_axioms_fail(self):
