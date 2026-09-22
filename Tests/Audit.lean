@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.EnvironmentDiscrimination
 import OntologySeparation.Experiments.RecordEnvironment
 import OntologySeparation.Experiments.LFReadout
 import OntologySeparation.Experiments.LFJoint
@@ -259,3 +260,15 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.RecordEnvironment.every_laboratory_test
 #print axioms OntologySeparation.RecordEnvironment.laboratory_equivalent
 #print axioms OntologySeparation.RecordEnvironment.global_states_differ
+
+#print axioms OntologySeparation.QuantumDiscrimination.every_test
+#print axioms OntologySeparation.QuantumDiscrimination.attained
+#print axioms OntologySeparation.QuantumDiscrimination.same_state_error
+#print axioms OntologySeparation.QuantumDiscrimination.strict_improvement
+#print axioms OntologySeparation.RecordEnvironment.laboratory_error
+#print axioms OntologySeparation.RecordEnvironment.full_error_bound
+#print axioms OntologySeparation.RecordEnvironment.full_optimum_attained
+#print axioms OntologySeparation.RecordEnvironment.full_beats_laboratory
+#print axioms OntologySeparation.RecordEnvironment.return_coherent
+#print axioms OntologySeparation.RecordEnvironment.return_collapsed
+#print axioms OntologySeparation.RecordEnvironment.returnSeparator

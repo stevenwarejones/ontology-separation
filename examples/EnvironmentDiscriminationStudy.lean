@@ -1,0 +1,12 @@
+import OntologySeparation.Environment
+
+-- Physical models and access: docs/ENVIRONMENT_ACCESS_GUIDE.md.
+-- Decision objective and measurement: docs/ENVIRONMENT_DISCRIMINATION_GUIDE.md.
+#export_theorem OntologySeparation.RecordEnvironment.laboratory_error
+#export_theorem OntologySeparation.RecordEnvironment.full_error_bound
+#export_theorem OntologySeparation.RecordEnvironment.full_optimum_attained
+#export_theorem OntologySeparation.RecordEnvironment.full_beats_laboratory
+#export_claim OntologySeparation.RecordEnvironment.returnCoherentClaim
+#export_claim OntologySeparation.RecordEnvironment.returnCollapsedClaim
+#export_claim OntologySeparation.RecordEnvironment.returnSeparationClaim
+#export_claim OntologySeparation.RecordEnvironment.returnGapClaim
