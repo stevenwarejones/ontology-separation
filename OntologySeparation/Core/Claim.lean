@@ -31,7 +31,11 @@ def Claim.statement : Claim → Prop
   | .witness a s _ _ v _ => ∃ m, a m ∧ s m = (v : ℝ)
   | .exclusion a m _ => ¬ a m
   | .agreement predict allowed a b _ => ExperimentAccess.Equivalent predict allowed a b
-  | .separation predict allowed a b _ => ¬ ExperimentAccess.Equivalent predict allowed a b
+  | .separation predict allowed a b w =>
+      (¬ ExperimentAccess.Equivalent predict allowed a b) ∧
+      allowed w.protocol ∧ 0 < w.gap ∧
+      (predict a w.protocol).prob w.setting w.outcome -
+        (predict b w.protocol).prob w.setting w.outcome = w.gap
   | .theoremResult p _ => p
 
 theorem Claim.sound (c : Claim) : c.statement := by
@@ -42,7 +46,8 @@ theorem Claim.sound (c : Claim) : c.statement := by
   | witness _ _ m hm _ h => exact ⟨m, hm, h⟩
   | exclusion _ _ h => exact h
   | agreement _ _ _ _ h => exact h
-  | separation _ _ _ _ w => exact w.not_equivalent
+  | separation _ _ _ _ w =>
+      exact ⟨w.not_equivalent, w.accessible, w.positive, w.difference⟩
   | theoremResult _ h => exact h
 
 /-- Rendering metadata follows the constructor; there is no independent status argument. -/
