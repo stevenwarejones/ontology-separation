@@ -12,9 +12,7 @@ The real-valued theorem proves, for nonnegative physical parameters,
 `Δ(v,r) > 0 ↔ v > 0 ∧ r > 0`.
 
 Within the physical square `[0,1]²`, the separating region is `(0,1] × (0,1]`.
-It includes the upper edges and the ideal corner; it is not the open interior. The exact rational backend is proved to embed into that real formula,
-and every exact point with positive visibility and recovery receives the
-existing proof-bearing separator certificate.
+It includes the upper edges and the ideal corner; it is not the open interior. The theorem `real_channel_gap` derives the same formula directly from the existing real-qubit dephasing-channel/Born-rule semantics across the full physical square. The exact rational backend is then proved to embed into that real formula, and every exact point with positive visibility and recovery receives the existing proof-bearing separator certificate.
 
 At `v=0` or `r=0`, the recovery witness has zero gap. In this particular
 effective-law family, `zero_visibility_law` and `zero_recovery_law` prove the
