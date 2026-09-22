@@ -27,7 +27,10 @@ the finite comparison cards.
 
 The independent downstream adoption gate copies this public file into a separate
 Lake project and requires both the exact 3/16 point result and the symbolic
-theorem export to survive outside the repository source tree.
+theorem export to survive outside the repository source tree. It explicitly checks
+calibration agreement, then changes recovery efficiency to 1/2, updates the exact
+claims, and regenerates the report. Calibration must still agree and the recovery
+gap must become 1/8, with no stale 3/16 point result in the rendered report.
 
 ## Scientific status
 
