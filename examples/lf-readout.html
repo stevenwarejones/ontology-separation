@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/LFReadoutStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>LFReadoutStudy.ceiling</code><br>Bound + satisfying model</td><td>≤ 13/2</td><td><pre>(∀ (m : OntologySeparation.LFJoint.Table),
+    OntologySeparation.LFReadout.withinBudget (↑LFReadoutStudy.budget) m →
+      (fun j =&gt; OntologySeparation.RealQuantum.genuineLF j.behavior) m ≤ ↑(6 + 4 * LFReadoutStudy.budget)) ∧
+  ∃ m, OntologySeparation.LFReadout.withinBudget (↑LFReadoutStudy.budget) m</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>LFReadoutStudy.attainingModel</code><br>Realized witness</td><td>13/2</td><td><pre>∃ m,
+  OntologySeparation.LFReadout.withinBudget (↑LFReadoutStudy.budget) m ∧
+    (fun j =&gt; OntologySeparation.RealQuantum.genuineLF j.behavior) m = ↑(6 + 4 * LFReadoutStudy.budget)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>LFReadoutStudy.quantumExclusion</code><br>Mathematical exclusion</td><td>Mathematical exclusion</td><td><pre>OntologySeparation.LFReadout.budgetTheory (↑LFReadoutStudy.budget) OntologySeparation.RealQuantum.lfBehavior → False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.LFReadout.sharp_total_budget</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (t : ℝ),
+  0 ≤ t →
+    t ≤ 1 →
+      (∀ (j : OntologySeparation.LFJoint.Table),
+          OntologySeparation.LFJoint.Local j →
+            OntologySeparation.LFJoint.IndependentRecords j →
+              OntologySeparation.LFReadout.mismatchA j + OntologySeparation.LFReadout.mismatchB j ≤ t →
+                OntologySeparation.RealQuantum.genuineLF j.behavior ≤ 6 + 4 * t) ∧
+        ∃ j,
+          OntologySeparation.LFJoint.Local j ∧
+            OntologySeparation.LFJoint.IndependentRecords j ∧
+              OntologySeparation.LFReadout.mismatchA j + OntologySeparation.LFReadout.mismatchB j = t ∧
+                OntologySeparation.RealQuantum.genuineLF j.behavior = 6 + 4 * t</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.LFReadout.required_mismatch</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j : OntologySeparation.LFJoint.Table),
+  OntologySeparation.LFJoint.Local j →
+    OntologySeparation.LFJoint.IndependentRecords j →
+      (OntologySeparation.RealQuantum.genuineLF j.behavior - 6) / 4 ≤
+        OntologySeparation.LFReadout.mismatchA j + OntologySeparation.LFReadout.mismatchB j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>

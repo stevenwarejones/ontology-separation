@@ -1,5 +1,8 @@
 import OntologySeparation.Experiments.EnvironmentDiscrimination
 import OntologySeparation.Experiments.RecordEnvironment
+import OntologySeparation.Experiments.LFReadout
+import OntologySeparation.Experiments.LFJoint
+import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
 import OntologySeparation.Core.Assumptions
@@ -207,7 +210,28 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PartialLeakage.zero_visibility_law
 #print axioms OntologySeparation.PartialLeakage.zero_recovery_law
 
+-- Exact finite LF operational correspondence and constructive non-implication.
+#print axioms OntologySeparation.LFAssumptionAtlas.operational_iff_lf
+#print axioms OntologySeparation.LFAssumptionAtlas.outcome_independence_not_required
+#print axioms OntologySeparation.LFAssumptionAtlas.quantum_excludes_operational
 
+#print axioms OntologySeparation.LFJoint.conditional_reconstruct
+#print axioms OntologySeparation.LFJoint.conditional_probability
+#print axioms OntologySeparation.LFJoint.local_iff_conditional
+#print axioms OntologySeparation.LFJoint.joint_iff_lf
+#print axioms OntologySeparation.LFJoint.bound
+#print axioms OntologySeparation.LFJoint.quantum_excluded
+
+#print axioms OntologySeparation.LFReadout.response_bound
+#print axioms OntologySeparation.LFReadout.joint_bound
+#print axioms OntologySeparation.LFReadout.sharp_total_budget
+#print axioms OntologySeparation.LFReadout.required_mismatch
+#print axioms OntologySeparation.LFReadout.quantum_required_error
+#print axioms OntologySeparation.LFReadout.mismatchA_remote
+#print axioms OntologySeparation.LFReadout.mismatchB_remote
+#print axioms OntologySeparation.LFReadout.budgetClaim
+#print axioms OntologySeparation.LFReadout.attainingClaim
+#print axioms OntologySeparation.LFReadout.exclusionClaim
 -- Finite separator-search trust roots.
 #print axioms OntologySeparation.ExactFinite.search
 #print axioms OntologySeparation.ExactFinite.SearchResult.report

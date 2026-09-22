@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/LFAssumptionStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>OntologySeparation.LFAssumptionAtlas.operational_iff_lf</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p : OntologySeparation.Behavior OntologySeparation.LF.interface),
+  OntologySeparation.LFAssumptionAtlas.OperationalLF p ↔ OntologySeparation.LF.theory p</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.LFAssumptionAtlas.outcome_independence_not_required</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∃ m,
+  OntologySeparation.FriendRecords.ReadableRecords m ∧
+    OntologySeparation.FriendRecords.ConditionalLocality m ∧
+      OntologySeparation.FriendRecords.IndependentPreparation m ∧ ¬OntologySeparation.FriendRecords.OutcomeIndependent m</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.LFAssumptionAtlas.quantum_excludes_operational</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.LFAssumptionAtlas.OperationalLF OntologySeparation.RealQuantum.lfBehavior → False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
