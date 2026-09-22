@@ -79,3 +79,5 @@ implemented capability; use each guide's stated scope and checked examples.
 - [Partial leakage robustness](PARTIAL_LEAKAGE_ROBUSTNESS.md) — symbolic two-parameter separation region, distinct from finite scans.
 
 - [End-to-end partial leakage study](PARTIAL_LEAKAGE_STUDY.md) — pointwise exact comparison plus a separately scoped symbolic robustness theorem.
+
+- [Exact separator search](SEPARATOR_SEARCH.md) — certify base agreement, then search an explicit finite candidate family for an oriented separator.
