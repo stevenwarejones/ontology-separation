@@ -186,6 +186,7 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 
 -- Mechanistic partial-leakage showcase roots.
 #print axioms OntologySeparation.PartialLeakage.recovery_probability
+#print axioms OntologySeparation.PartialLeakage.sequential_attenuation
 #print axioms OntologySeparation.PartialLeakage.recovery_gap
 
 
