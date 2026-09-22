@@ -1,5 +1,5 @@
 import OntologySeparation.Core.Comparison
-import Mathlib.Tactic.ExactModCast
+import Mathlib.Tactic
 
 /-! Exact rational prediction semantics for finite-comparison backends.
 
