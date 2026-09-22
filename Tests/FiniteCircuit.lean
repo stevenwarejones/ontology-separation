@@ -30,8 +30,8 @@ example :
   rw [dephaseThenRecovery, Circuit.apply_cons, Circuit.apply_cons, Circuit.apply_nil]
   change ((QIT.POVM.coordinate Registers).prob
     (recoveryMeasure.applyState dephased) (false, false) : ℝ) = 337 / 625
-  rw [FiniteQuantum.coordinate_after_measure]
-  exact dephased_recovery
+  rw [recoveryMeasure, FiniteQuantum.coordinate_after_measure]
+  simpa only [recoveryTest, FiniteQuantum.measure_prob] using dephased_recovery
 
 /-- Reversing the same two channels gives probability one for the same final
 coordinate outcome, so the regression would fail if execution order were reversed. -/
@@ -43,9 +43,9 @@ example :
   change ((QIT.POVM.coordinate Registers).prob
     (recordDephase.applyState (recoveryMeasure.applyState coherent))
     (false, false) : ℝ) = 1
-  rw [FiniteQuantum.coordinate_after_measure]
-  rw [FiniteQuantum.coordinate_after_measure]
-  exact coherent_recovery
+  rw [recordDephase, FiniteQuantum.coordinate_after_measure]
+  rw [recoveryMeasure, FiniteQuantum.coordinate_after_measure]
+  simpa only [recoveryTest, FiniteQuantum.measure_prob] using coherent_recovery
 
 /-- Any compiled multi-step circuit followed by a complete POVM remains a
 normalized experiment through the existing FiniteQuantum semantics. -/
