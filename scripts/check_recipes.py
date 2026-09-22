@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT/'python'))
 from ontology_separation.scaffold import create_scenario
 from ontology_separation.scenario_report import write_report
 from ontology_separation.proof_report import (write_report as write_claim_report,
-    parse_exports, parse_comparisons)
+    parse_exports, parse_comparisons, parse_searches)
 from ontology_separation.checked_source import run_lean
 
 with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as directory:
@@ -182,6 +182,23 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     assert '>3/16<' not in edited_page
     print('Partial leakage adopter: calibration agreement, parameter edit, exact point and symbolic theorem checked',
           flush=True)
+
+    search_study = project / 'SeparatorSearchStudy.lean'
+    search_study.write_text((ROOT / 'examples' / 'SeparatorSearchStudy.lean').read_text())
+    search_output = project / 'separator-search.html'
+    assert write_claim_report(search_study, search_output) == 1
+    search_rows = parse_searches(run_lean(search_study))
+    assert len(search_rows) == 1, search_rows
+    search_view = search_rows[0]['report']
+    assert search_view['status'] == 'found', search_view
+    assert search_view['base']['verdict'] == 'agreement', search_view
+    assert search_view['candidate']['verdict'] == 'separation', search_view
+    assert search_view['candidate']['covered_protocols'] == [
+        'prepare |0>; exposure; P(Z=+)', 'prepare |+>; exposure; P(X=+)'], search_view
+    assert search_view['candidate']['protocol'] == 'prepare |+>; exposure; P(X=+)', search_view
+    assert search_view['candidate']['gap'] == {'numerator': '1', 'denominator': '4'}, search_view
+    assert 'Checked separator searches' in search_output.read_text()
+    print('Separator search adopter: base agreement and later candidate exported', flush=True)
 
     # Copy public examples into an independent Lake project: no repository-local imports.
     for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6),

@@ -178,3 +178,5 @@
 'OntologySeparation.LFJoint.joint_iff_lf' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.LFJoint.bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.LFJoint.quantum_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ExactFinite.search' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ExactFinite.SearchResult.report' depends on axioms: [propext, Classical.choice, Quot.sound]
