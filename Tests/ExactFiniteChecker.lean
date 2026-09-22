@@ -64,6 +64,34 @@ def calibrationChecked :=
 def coherenceChecked :=
   certify exactBackend coherenceOnly coherenceGrid checkerIdeal checkerNoisy
 
+
+def scanTag {entries : List (Entry Recipe binaryInterface)} :
+    ScanResult exactBackend checkerIdeal checkerNoisy entries → Nat
+  | .agreement _ => 0
+  | .separatesAB _ _ _ => 1
+  | .separatesBA _ _ _ => 2
+
+/-- Exercise the scanner itself: the covered calibration list takes the agreement branch. -/
+example :
+    scanTag (scan exactBackend checkerIdeal checkerNoisy calibrationGrid.entries) = 0 := by
+  norm_num [scanTag, scan, compareEntry, calibrationGrid, exactBackend,
+    outcomeProbability, calibration_probability, checkerIdeal, checkerNoisy,
+    Law.dephasing, Rate.fraction]
+
+/-- A single true coherence entry has A>B, exercising the AB branch. -/
+example :
+    scanTag (scan exactBackend checkerIdeal checkerNoisy
+      [⟨coherenceProbe, (), true⟩]) = 1 := by
+  norm_num [scanTag, scan, compareEntry, exactBackend, outcomeProbability,
+    coherence_probability, checkerIdeal, checkerNoisy, Law.dephasing, Rate.fraction]
+
+/-- With the false coherence entry first, the full coherence grid exercises BA. -/
+example :
+    scanTag (scan exactBackend checkerIdeal checkerNoisy coherenceGrid.entries) = 2 := by
+  norm_num [scanTag, scan, compareEntry, coherenceGrid, exactBackend,
+    outcomeProbability, coherence_probability, checkerIdeal, checkerNoisy,
+    Law.dephasing, Rate.fraction]
+
 /-- The exact arithmetic behind the calibration agreement is checked directly. -/
 example (o : Bool) :
     exactBackend.probability checkerIdeal calibrationProbe () o =
