@@ -12,6 +12,19 @@ class ProofReportTests(unittest.TestCase):
         self.assertIn('&lt;script&gt;', page)
         self.assertNotIn('<script>', page)
         self.assertIn('source&lt;.lean', page)
+    def test_numeric_claim_renders_checked_quantity(self):
+        record = dict(
+            declaration='My.exact',
+            axioms=[],
+            claim=dict(
+                kind='exact',
+                statement='x = ↑(3 / 4)',
+                quantity={'numerator': '3', 'denominator': '4'}))
+        page = render(parse_exports(PREFIX+json.dumps(record)), 'Study.lean')
+        self.assertIn('<th>Checked result</th>', page)
+        self.assertIn('<td>3/4</td>', page)
+        self.assertIn('x = ↑(3 / 4)', page)
+
     def test_missing_exports_fail(self):
         with self.assertRaises(ValueError): parse_exports('Build successful')
     def test_unknown_axioms_fail(self):

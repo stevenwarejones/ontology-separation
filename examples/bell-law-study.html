@@ -9,9 +9,9 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wra
 Each row states exactly what its proof establishes. The definitions determine its physical meaning.
 This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
 These are mathematical results, not statistical claims about experimental data.</p>
-<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>MyLaboratory.bellBound</code><br>Bound + satisfying model</td><td><pre>(∀ (m : OntologySeparation.OperationalBell.Model Unit),
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>MyLaboratory.bellBound</code><br>Bound + satisfying model</td><td>≤ 2</td><td><pre>(∀ (m : OntologySeparation.OperationalBell.Model Unit),
     MyLaboratory.admissible m → (fun m =&gt; OntologySeparation.Bell.score m.behavior) m ≤ ↑2) ∧
-  ∃ m, MyLaboratory.admissible m</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>MyLaboratory.singletExcluded</code><br>Mathematical exclusion</td><td><pre>OntologySeparation.profileTheory OntologySeparation.OperationalBell.vocabulary
+  ∃ m, MyLaboratory.admissible m</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>MyLaboratory.singletExcluded</code><br>Mathematical exclusion</td><td>Mathematical exclusion</td><td><pre>OntologySeparation.profileTheory OntologySeparation.OperationalBell.vocabulary
     OntologySeparation.OperationalBell.screeningOffProfile OntologySeparation.OperationalBell.Model.behavior
     OntologySeparation.Bell.singletBehavior →
   False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
