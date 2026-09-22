@@ -166,3 +166,5 @@ For a complete experiment → models → proofs → table workflow, see
 
 For the research layer, use the advanced paths above or the
 [documentation index](docs/README.md).
+
+[Research milestones](docs/research/PROGRAM.md) · [Checked LF assumption correspondence](docs/research/LF_ASSUMPTIONS.md)

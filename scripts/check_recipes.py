@@ -130,10 +130,26 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
           flush=True)
 
     # Copy public examples into an independent Lake project: no repository-local imports.
-    for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6)]:
+    for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6),
+                            ('LFAssumptionStudy.lean', 3)]:
         study = project / filename
         study.write_text((ROOT / 'examples' / filename).read_text())
         assert write_claim_report(study, project / (filename + '.html')) == count
+    atlas = project / 'LFAssumptionStudy.lean'
+    atlas_output = project / 'LFAssumptionStudy.lean.html'
+    atlas_before = atlas_output.read_bytes()
+    atlas.write_text(atlas.read_text() + "\nexample : "
+        "OntologySeparation.FriendRecords.OutcomeIndependent "
+        "OntologySeparation.LFAssumptionAtlas.prOperational := by norm_num\n")
+    try:
+        write_claim_report(atlas, atlas_output)
+    except ValueError as error:
+        assert 'unsolved goals' in str(error), str(error)
+    else:
+        raise AssertionError('False LF-to-outcome-independence edit was accepted')
+    assert atlas_output.read_bytes() == atlas_before
+    print('LF assumption adopter: three audited claims; false strengthening rejected', flush=True)
+
     study = project / 'ModelClassStudy.lean'
     checked_output = project / 'ModelClassStudy.lean.html'
     before = checked_output.read_bytes()
