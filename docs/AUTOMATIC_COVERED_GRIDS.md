@@ -4,7 +4,7 @@ For a finite/discrete operational interface, adopters should not have to handwri
 the routine `Grid.covers` proof.
 
 `ExactFinite.ProtocolFamily` is a nonempty supplied list of protocols.
-When settings and outcomes have `Fintype` and decidable-equality instances,
+When settings and outcomes have Mathlib `FinEnum` instances,
 `ProtocolFamily.grid` enumerates the complete
 
 `protocol × setting × outcome`
@@ -13,6 +13,36 @@ grid and derives the coverage proof from that enumeration.
 
 `certifyFamily backend family a b` then runs the existing exact checker and
 returns its ordinary proof-bearing `CheckedResult`.
+
+`FinEnum` provides an explicit finite enumeration together with a proof that it
+covers the type. This is stronger data than an unordered `Fintype`: the list
+must also reduce inside Lean so the audited exporter can inspect the checked
+result. `Finset.toList` is noncomputable, and a compiled-only enumeration is
+not sufficient for this exporter.
+
+Protocols are visited in supplied list order; settings and outcomes follow
+their `FinEnum` order. This makes the first reported separator deterministic
+for those enumerations. Enumeration order does not change agreement over the
+complete supplied family and is not a physical assumption.
+
+Mathlib supplies instances for `Unit`, `Fin n`, products and sums. This module
+supplies Boolean enumeration `[false, true]`. No decidable equality instance
+is required for the protocol type.
+
+For a new finite setting or outcome type, supply the enumeration once:
+
+```lean
+inductive Setting where | first | second
+  deriving DecidableEq
+
+instance : FinEnum Setting :=
+  FinEnum.ofList [.first, .second] (by intro s; cases s <;> simp)
+```
+
+Lean checks that every constructor is included. The framework still derives
+the entire protocol × setting × outcome coverage proof; adopters do not write
+`Grid.covers`. Use concrete, kernel-reducible enumeration data rather than
+classical choice when the result will be automatically exported.
 
 ## Scope discipline
 
