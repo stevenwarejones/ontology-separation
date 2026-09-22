@@ -8,6 +8,7 @@ import OntologySeparation.Core.ExactFiniteChecker
 import OntologySeparation.Core.AutomaticGrid
 import OntologySeparation.Core.FiniteModels
 import OntologySeparation.Experiments.RecordAccess
+import OntologySeparation.Experiments.PartialLeakage
 import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
