@@ -23,3 +23,5 @@ import Tests.RecordAccess
 import Tests.FiniteModels
 
 import Tests.PublicImports
+
+import Tests.Comparison
