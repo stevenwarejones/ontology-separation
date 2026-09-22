@@ -5,7 +5,7 @@ unchanged between steps. Composition uses Lean-QIT channels directly. -/
 namespace OntologySeparation.FiniteCircuit
 noncomputable section
 
-variable {A O : Type} [Fintype A] [DecidableEq A] [Fintype O]
+variable {A O : Type} [Fintype A] [DecidableEq A] [Fintype O] [DecidableEq O]
 
 /-- A sequential circuit on one finite register space. Each step is a proved
 CPTP channel from the same register type back to itself. -/
@@ -21,7 +21,7 @@ def Circuit.channel : Circuit A → QIT.Channel A A
     Circuit.channel ([] : Circuit A) = QIT.Channel.idChannel A := rfl
 
 theorem Circuit.apply_nil (ρ : QIT.State A) :
-    Circuit.channel ([] : Circuit A) |>.applyState ρ = ρ := by
+    (Circuit.channel ([] : Circuit A)).applyState ρ = ρ := by
   exact QIT.State.idChannel_applyState ρ
 
 theorem Circuit.apply_cons (step : QIT.Channel A A) (rest : Circuit A)
