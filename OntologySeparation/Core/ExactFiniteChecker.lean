@@ -17,7 +17,6 @@ structure Entry (P : Type) (E : Interface) where
   protocol : P
   setting : E.Setting
   outcome : E.Outcome
-  deriving DecidableEq
 
 structure Grid (P : Type) (E : Interface) (family : P → Prop) where
   entries : List (Entry P E)
