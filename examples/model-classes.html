@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/ModelClassStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>MyModelClassStudy.compatibleClaim</code><br>Theorem · see full assumptions</td><td><pre>∃ weights,
+  OntologySeparation.ObservationallyEquivalent
+    (OntologySeparation.FiniteModels.mixture OntologySeparation.ModelCompatibility.fixed weights)
+    MyModelClassStudy.target</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ModelCompatibility.fairClaim</code><br>Theorem · see full assumptions</td><td><pre>∃ weights,
+  OntologySeparation.ObservationallyEquivalent
+    (OntologySeparation.FiniteModels.mixture OntologySeparation.ModelCompatibility.fixed weights)
+    OntologySeparation.ModelCompatibility.fair</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ModelCompatibility.echoClaim</code><br>Mathematical exclusion</td><td><pre>OntologySeparation.FiniteModels.Compatible OntologySeparation.ModelCompatibility.fixed
+    OntologySeparation.ModelCompatibility.settingEcho →
+  False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ModelCompatibility.passes_one_bound_but_excluded</code><br>Theorem · see full assumptions</td><td><pre>(∀ (bit : Bool),
+    OntologySeparation.FiniteModels.score OntologySeparation.ModelCompatibility.oppositeContrast
+        (OntologySeparation.ModelCompatibility.fixed bit) ≤
+      0) ∧
+  OntologySeparation.FiniteModels.score OntologySeparation.ModelCompatibility.oppositeContrast
+        OntologySeparation.ModelCompatibility.settingEcho ≤
+      0 ∧
+    ¬OntologySeparation.FiniteModels.Compatible OntologySeparation.ModelCompatibility.fixed
+        OntologySeparation.ModelCompatibility.settingEcho</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ModelCompatibility.recordClassClaim</code><br>Mathematical exclusion</td><td><pre>OntologySeparation.FiniteModels.Compatible OntologySeparation.ModelCompatibility.recordGenerator
+    OntologySeparation.ModelCompatibility.recordTarget →
+  False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ModelCompatibility.recordBoundClaim</code><br>Bound + satisfying model</td><td><pre>(∀ (m : OntologySeparation.Behavior OntologySeparation.ModelCompatibility.recordInterface),
+    OntologySeparation.FiniteModels.Compatible OntologySeparation.ModelCompatibility.recordGenerator m →
+      OntologySeparation.FiniteModels.score OntologySeparation.ModelCompatibility.recoveryCoefficient m ≤ ↑(16 / 25)) ∧
+  ∃ m, OntologySeparation.FiniteModels.Compatible OntologySeparation.ModelCompatibility.recordGenerator m</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
