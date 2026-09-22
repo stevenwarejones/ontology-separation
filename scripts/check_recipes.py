@@ -55,7 +55,7 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     separation = create_scenario('SeparationStarter', project/'SeparationStarter.lean',
                                  backend='separation')
     separation_output = project/'separation.html'
-    assert write_claim_report(separation, separation_output) == 3
+    assert write_claim_report(separation, separation_output) == 5
     records = parse_exports(run_lean(separation))
     exact = next(r['claim'] for r in records if r['declaration'].endswith('noisyCoherenceClaim'))
     assert exact['kind'] == 'exact'
@@ -63,12 +63,20 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     page = separation_output.read_text()
     assert 'Agreement over stated access domain' in page
     assert 'Verified separating experiment' in page
+    assert '>1/2<' in page, page
+    assert '>1/4<' in page, page
+    assert '>3/4<' in page, page
 
     separation.write_text(separation.read_text().replace('Law.dephasing 1 2', 'Law.dephasing 1 4', 1))
-    assert write_claim_report(separation, separation_output) == 3
+    assert write_claim_report(separation, separation_output) == 5
     records = parse_exports(run_lean(separation))
     exact = next(r['claim'] for r in records if r['declaration'].endswith('noisyCoherenceClaim'))
     assert exact['quantity'] == {'numerator': '7', 'denominator': '8'}, exact
+    page = separation_output.read_text()
+    assert '>1/4<' in page, page
+    assert '>1/8<' in page, page
+    assert '>7/8<' in page, page
+    assert '>3/4<' not in page, page
     previous_separation = separation_output.read_bytes()
 
     separation.write_text(separation.read_text().replace('Law.dephasing 1 4', 'Law.dephasing 0 1', 1))
