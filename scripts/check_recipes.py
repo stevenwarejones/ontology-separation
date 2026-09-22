@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'python'))
 from ontology_separation.scaffold import create_scenario
 from ontology_separation.scenario_report import write_report
-from ontology_separation.proof_report import write_report as write_claim_report
+from ontology_separation.proof_report import write_report as write_claim_report, parse_exports
+from ontology_separation.checked_source import run_lean
 
 with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as directory:
     project = Path(directory)
@@ -50,6 +51,44 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     assert values == expected, values
     assert 'fully_dephased_realizes_profile' in friend_output.read_text()
     print('LF starter: eight cells and profile proof provenance checked in an adopter project', flush=True)
+
+    separation = create_scenario('SeparationStarter', project/'SeparationStarter.lean',
+                                 backend='separation')
+    separation_output = project/'separation.html'
+    assert write_claim_report(separation, separation_output) == 5
+    records = parse_exports(run_lean(separation))
+    exact = next(r['claim'] for r in records if r['declaration'].endswith('noisyCoherenceClaim'))
+    assert exact['kind'] == 'exact'
+    assert exact['quantity'] == {'numerator': '3', 'denominator': '4'}, exact
+    page = separation_output.read_text()
+    assert 'Agreement over stated access domain' in page
+    assert 'Verified separating experiment' in page
+    assert '>1/2<' in page, page
+    assert '>1/4<' in page, page
+    assert '>3/4<' in page, page
+
+    separation.write_text(separation.read_text().replace('Law.dephasing 1 2', 'Law.dephasing 1 4', 1))
+    assert write_claim_report(separation, separation_output) == 5
+    records = parse_exports(run_lean(separation))
+    exact = next(r['claim'] for r in records if r['declaration'].endswith('noisyCoherenceClaim'))
+    assert exact['quantity'] == {'numerator': '7', 'denominator': '8'}, exact
+    page = separation_output.read_text()
+    assert '>1/4<' in page, page
+    assert '>1/8<' in page, page
+    assert '>7/8<' in page, page
+    assert '>3/4<' not in page, page
+    previous_separation = separation_output.read_bytes()
+
+    separation.write_text(separation.read_text().replace('Law.dephasing 1 4', 'Law.dephasing 0 1', 1))
+    try:
+        write_claim_report(separation, separation_output)
+    except ValueError as error:
+        assert 'exposure_order' in str(error) or 'unsolved goals' in str(error), str(error)
+    else:
+        raise AssertionError('Zero-gap separation edit was accepted')
+    assert separation_output.read_bytes() == previous_separation
+    print('Separation starter: scoped claims, editable exact value, and stale-output guard checked',
+          flush=True)
 
     # Copy public examples into an independent Lake project: no repository-local imports.
     for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6)]:
