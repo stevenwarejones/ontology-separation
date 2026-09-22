@@ -47,6 +47,7 @@ this layer, but there is no checked recipe-to-quantum equivalence bridge yet.
 | [Scoped comparison results](COMPARISON_RESULTS.md) | Package agreement or separation without losing model/access scope |
 | [Record access](RECORD_ACCESS_GUIDE.md) | Follow a complete local-equivalence/joint-separation proof |
 | [Model classes](MODEL_CLASS_GUIDE.md) | Certify whole-table membership or exclusion from a finite convex hull |
+| [Exact finite comparison](EXACT_FINITE_COMPARISON.md) | Connect exact rational evaluators to scoped automatic comparison |
 
 ## Design and implementation reference
 
