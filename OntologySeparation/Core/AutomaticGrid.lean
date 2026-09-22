@@ -59,4 +59,11 @@ def ProtocolFamily.grid (family : ProtocolFamily P) :
     simp only [ProtocolFamily.entries, List.mem_flatMap]
     exact ⟨p, hp, mem_entriesForProtocol p s o⟩
 
+/-- One-call comparison for a nonempty supplied protocol list. No handwritten
+coverage proof is accepted: `family.grid` discharges it by finite enumeration. -/
+def certifyFamily {M : Type} {predict : ExperimentAccess.Predictions M P E}
+    (backend : Backend predict) (family : ProtocolFamily P) (a b : M) :
+    CheckedResult backend family.allowed a b :=
+  certify backend family.allowed family.grid a b
+
 end OntologySeparation.ExactFinite
