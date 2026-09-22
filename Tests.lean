@@ -43,3 +43,5 @@ import Tests.ComparisonReport
 import Tests.PartialLeakage
 
 import Tests.PartialLeakageRobustness
+
+import Tests.SeparatorSearch
