@@ -6,6 +6,7 @@ import OntologySeparation.Core.Comparison
 import OntologySeparation.Core.ExactFinite
 import OntologySeparation.Core.ExactFiniteChecker
 import OntologySeparation.Core.AutomaticGrid
+import OntologySeparation.Core.SeparatorSearch
 import OntologySeparation.Core.FiniteModels
 import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Experiments.PartialLeakage
