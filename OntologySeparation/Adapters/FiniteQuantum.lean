@@ -87,20 +87,6 @@ theorem measureAfterIsometry_prob_eq_lift (readout : QIT.POVM O B)
     (readout.prob ρ o : ℝ)
   rw [QIT.State.idChannel_applyState]
 
-/-- Reading the coordinate basis after a measurement channel returns the original
-POVM outcome probabilities. This makes order-sensitive channel regressions
-observable without introducing a second probability semantics. -/
-theorem coordinate_after_measure (readout : QIT.POVM O A) (ρ : QIT.State A) (o : O) :
-    ((QIT.POVM.coordinate O).prob
-      ((QIT.Channel.measure readout).applyState ρ) o : ℝ) =
-      (readout.prob ρ o : ℝ) := by
-  unfold QIT.POVM.prob
-  change Complex.re (((QIT.Channel.measure (QIT.POVM.coordinate O)).map
-    ((QIT.Channel.measure readout).map ρ.matrix)) o o) =
-    Complex.re (((QIT.Channel.measure readout).map ρ.matrix) o o)
-  rw [QIT.Channel.measure_map]
-  simp [QIT.POVM.coordinate, Matrix.trace, Matrix.mul_apply]
-
 /-- Every local test agrees if the accessible reduced density matrices agree.
 This quantifies over arbitrary local CPTP evolution and arbitrary finite POVMs. -/
 theorem local_test_eq (ρ σ : QIT.State (A × B)) (h : ρ.marginalA = σ.marginalA)
