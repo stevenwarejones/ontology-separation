@@ -36,7 +36,7 @@ theorem outcomeProbability_correct (m : Law) (r : Recipe) (o : Bool) :
 
 /-- The single-qubit recipe backend exposes exact rational probabilities for
 both Boolean outcomes, proved against the same Behavior semantics. -/
-def exactBackend : ExactFinite.Backend Law Recipe binaryInterface where
+def exactBackend : ExactFinite.Backend predict where
   predict := predict
   probability := fun m r _ o => outcomeProbability m r o
   correct := by
