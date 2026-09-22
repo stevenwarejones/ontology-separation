@@ -15,9 +15,10 @@ equal to execution order. A final complete POVM is attached with
 - a compiled circuit plus POVM uses the ordinary Born probability;
 - every resulting test is normalized.
 
-The regression suite includes a two-step circuit consisting of two explicit
-coordinate-measurement channels on the record-access registers and proves that
-the compiled channel applies those two physical steps in sequence.
+The regression suite uses two distinct physical measurement channels on the
+record-access registers: coordinate dephasing first, followed by the recovery
+POVM measurement. The expected expression fixes that execution order, providing
+a stronger cross-check than repeating the same channel twice.
 
 ## Current boundary
 
