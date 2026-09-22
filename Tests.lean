@@ -37,3 +37,5 @@ import Tests.OneStepFinite
 import Tests.FiniteCircuit
 
 import Tests.AutomaticGrid
+
+import Tests.ComparisonReport

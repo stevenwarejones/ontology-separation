@@ -48,6 +48,7 @@ this layer, but there is no checked recipe-to-quantum equivalence bridge yet.
 | [Record access](RECORD_ACCESS_GUIDE.md) | Follow a complete local-equivalence/joint-separation proof |
 | [Model classes](MODEL_CLASS_GUIDE.md) | Certify whole-table membership or exclusion from a finite convex hull |
 | [Exact finite comparison](EXACT_FINITE_COMPARISON.md) | Connect exact rational evaluators to scoped automatic comparison |
+| [Structured comparison reports](STRUCTURED_COMPARISON_REPORTS.md) | Read checked models, covered experiments, separator probabilities and exact gap |
 
 ## Design and implementation reference
 

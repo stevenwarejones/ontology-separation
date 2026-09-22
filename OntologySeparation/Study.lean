@@ -11,6 +11,7 @@ import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
+import OntologySeparation.Reporting.Comparison
 
 /-! Stable imports for adopters building supported checked studies.
 
