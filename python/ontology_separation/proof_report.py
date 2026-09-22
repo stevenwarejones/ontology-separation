@@ -16,7 +16,7 @@ ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 AXES = ("realism", "globalTruth", "locality", "measurementIndependent")
 
 
-def parse_exports(stdout: str) -> list[dict]:
+def parse_exports(stdout: str, *, allow_empty: bool = False) -> list[dict]:
     records, seen = [], set()
     for line in stdout.splitlines():
         if not line.startswith(PREFIX):
@@ -32,7 +32,7 @@ def parse_exports(stdout: str) -> list[dict]:
             raise ValueError('Duplicate theorem export')
         seen.add(r['declaration'])
         records.append(r)
-    if not records:
+    if not records and not allow_empty:
         raise ValueError('No claims exported; add #export_claim Your.claim or #export_theorem Your.theorem')
     return records
 
@@ -46,19 +46,23 @@ def _rational_text(value: dict | None) -> str:
 
 
 def parse_comparisons(stdout: str) -> list[dict]:
-    rows = []
+    rows, seen = [], set()
     for line in stdout.splitlines():
         if not line.startswith(COMPARISON_PREFIX):
             continue
         item = json.loads(line[len(COMPARISON_PREFIX):])
         report = item.get('report') if isinstance(item, dict) else None
-        if (not isinstance(item.get('declaration'), str) or not isinstance(item.get('axioms'), list)
+        if (not isinstance(item, dict) or not isinstance(item.get('declaration'), str) or not isinstance(item.get('axioms'), list)
                 or any(not isinstance(a, str) or a not in ALLOWED_AXIOMS for a in item['axioms'])
                 or not isinstance(report, dict)):
             raise ValueError('Invalid structured comparison export')
+        if item['declaration'] in seen:
+            raise ValueError('Duplicate comparison export')
+        seen.add(item['declaration'])
         if report.get('verdict') not in {'agreement', 'separation'}:
             raise ValueError('Invalid comparison verdict')
-        if not isinstance(report.get('left_model'), str) or not isinstance(report.get('right_model'), str):
+        if any(not isinstance(report.get(k), str) or not report[k].strip()
+               for k in ('left_model', 'right_model')):
             raise ValueError('Comparison models must be derived labels')
         if (not isinstance(report.get('covered_protocols'), list)
                 or not report['covered_protocols']
@@ -83,6 +87,13 @@ def parse_comparisons(stdout: str) -> list[dict]:
                         or not isinstance(q.get('denominator'), str)
                         or int(q['denominator']) <= 0):
                     raise ValueError('Separation needs exact rational probabilities and gap')
+            from fractions import Fraction
+            pa, pb, gap = (Fraction(int(report[k]['numerator']), int(report[k]['denominator']))
+                           for k in numeric)
+            if not (0 <= pa <= 1 and 0 <= pb <= 1 and gap > 0 and pa - pb == gap):
+                raise ValueError('Invalid oriented probability gap')
+            if report['protocol'] not in report['covered_protocols']:
+                raise ValueError('Separator is outside the displayed family')
         rows.append(item)
     return rows
 
@@ -107,7 +118,9 @@ def comparison_cards(comparisons: list[dict]) -> str:
                       ' &nbsp; <strong>'+esc(r['right_model'])+':</strong> '+esc(_rational_text(r['right_probability']))+
                       ' &nbsp; <strong>exact gap:</strong> '+esc(_rational_text(r['gap']))+'</p>')
         cards.append('<section class="comparison"><h3>'+esc(r['left_model'])+
-                     ' vs '+esc(r['right_model'])+'</h3>'+detail+'</section>')
+                     ' vs '+esc(r['right_model'])+'</h3>'+detail+
+                     '<details><summary>Formal claim for this comparison</summary><pre>'+
+                     esc(r['claim']['statement'])+'</pre></details></section>')
     return '<h2>Checked model comparisons</h2>'+''.join(cards)
 
 def parse_profiles(stdout: str) -> list[dict] | None:
@@ -176,9 +189,10 @@ These are mathematical results, not statistical claims about experimental data.<
 def write_report(source: Path, output: Path) -> int:
     validate_output(source, output)
     stdout = run_lean(source)
-    records = parse_exports(stdout)
-    atomic_write_html(output, render(records, str(source), parse_profiles(stdout), parse_comparisons(stdout)))
-    return len(records)
+    comparisons = parse_comparisons(stdout)
+    records = parse_exports(stdout, allow_empty=bool(comparisons))
+    atomic_write_html(output, render(records, str(source), parse_profiles(stdout), comparisons))
+    return len(records) or len(comparisons)
 
 
 def main() -> None:
