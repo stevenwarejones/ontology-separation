@@ -4,11 +4,15 @@ This is the execution boundary for automatic finite comparison.
 
 ## Contract
 
-`ExactFinite.Backend M P E` contains:
+`ExactFinite.Backend predict` is parameterized by the already-selected normalized
+`ExperimentAccess.Predictions M P E` semantics and contains:
 
-- the ordinary normalized `ExperimentAccess.Predictions M P E`;
 - an exact rational probability function for every model, protocol, setting and outcome;
-- a proof that every rational value equals the corresponding `Behavior` probability.
+- a proof that every rational value equals the corresponding probability from that exact `predict` semantics.
+
+For example, the recipe adapter constructs `exactBackend : ExactFinite.Backend predict`,
+where `predict` is definitionally the existing recipe `interpret` semantics. The backend
+therefore cannot silently substitute a different physical prediction function.
 
 `ExactFinite.EquivalentQ` states equality of those rational probabilities over an
 explicit access predicate. The checked theorem
@@ -29,9 +33,9 @@ layer does not introduce a second physical semantics.
 The two-qubit, Local Friendliness, and general complex-quantum layers are not
 silently covered by this adapter.
 
-## Next step
+## Automatic checker
 
-The dependent checker PR will enumerate an explicitly supplied finite domain and
+The accompanying checker enumerates an explicitly supplied finite domain and
 return one of:
 
 1. agreement over that exact domain;
