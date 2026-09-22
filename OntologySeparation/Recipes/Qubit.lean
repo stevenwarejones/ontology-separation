@@ -136,6 +136,25 @@ def compare (title : String) (laws : List Law) (recipes : List Recipe)
   models_nonempty := by simpa using hm
   protocols_nonempty := by simpa using hp
   predictions := predictions
+/-- A calibration probe that is insensitive to exposure dephasing:
+prepare |0>, expose once, then read Z. -/
+def calibrationProbe : Recipe :=
+  { prepare := .zero, steps := [.expose], measure := .z }
+
+/-- A coherence probe whose X signal decreases with exposure dephasing:
+prepare |+>, expose once, then read X. -/
+def coherenceProbe : Recipe :=
+  { prepare := .plus, steps := [.expose], measure := .x }
+
+theorem calibration_probability (m : Law) :
+    probability m calibrationProbe = 1 := by
+  simp [probability, run, step, initial, calibrationProbe]
+
+theorem coherence_probability (m : Law) :
+    probability m coherenceProbe = 1 - m.exposure.value / 2 := by
+  simp [probability, run, step, initial, coherenceProbe]
+  ring
+
 /-- Optional exact assertion tactic; ordinary studies need no user-written proof. -/
 macro "recipe_check" : tactic =>
   `(tactic| norm_num [probability, run, step, initial, Law.dephasing, Rate.fraction, Rate.of])
