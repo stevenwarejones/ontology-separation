@@ -1,6 +1,9 @@
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
 import OntologySeparation.Core.Assumptions
+import OntologySeparation.Core.ExactFiniteChecker
+import OntologySeparation.Recipes.Separation
+import OntologySeparation.Adapters.FiniteCircuit
 
 -- Selected audit roots and their transitive dependencies; not a census of all declarations.
 -- Each #export_theorem / #export_scenario also automatically audits its own dependencies.
