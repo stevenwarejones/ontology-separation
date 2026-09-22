@@ -1,8 +1,8 @@
 import json
 import unittest
 from itertools import product
-from ontology_separation.proof_report import (parse_exports, parse_profiles, parse_comparisons,
-    profile_table, render, PREFIX, COMPARISON_PREFIX)
+from ontology_separation.proof_report import (parse_exports, parse_profiles, parse_comparisons, parse_searches,
+    profile_table, render, PREFIX, COMPARISON_PREFIX, SEARCH_PREFIX)
 def exported(declaration, statement, axioms, kind):
     return dict(declaration=declaration, axioms=axioms,
                 claim=dict(kind=kind, statement=statement, quantity=None))
@@ -96,6 +96,26 @@ class ProofReportTests(unittest.TestCase):
             with patch('ontology_separation.proof_report.run_lean', return_value=stdout):
                 self.assertEqual(write_report(source, output), 1)
             self.assertIn('the comparison own proposition', output.read_text())
+
+    def test_search_report_preserves_base_and_candidate_evidence(self):
+        agreement = dict(left_model='A', right_model='B', covered_protocols=['base'],
+                         verdict='agreement', protocol=None, setting=None, outcome=None,
+                         left_probability=None, right_probability=None, gap=None,
+                         claim=dict(kind='agreement', statement='base agrees', quantity=None))
+        separation = dict(left_model='B', right_model='A', covered_protocols=['first','later'],
+                          verdict='separation', protocol='later', setting='one', outcome='-',
+                          left_probability={'numerator':'1','denominator':'4'},
+                          right_probability={'numerator':'0','denominator':'1'},
+                          gap={'numerator':'1','denominator':'4'},
+                          claim=dict(kind='separation', statement='later separates', quantity=None))
+        item = dict(declaration='Search.report', axioms=[], report=dict(
+            status='found', base=agreement, candidate=separation))
+        searches = parse_searches(SEARCH_PREFIX + json.dumps(item))
+        self.assertEqual(searches[0]['report']['candidate']['protocol'], 'later')
+        page = render([], 'Search.lean', searches=searches)
+        self.assertIn('Checked separator searches', page)
+        self.assertIn('base agrees', page)
+        self.assertIn('later separates', page)
 
     def test_missing_exports_fail(self):
         with self.assertRaises(ValueError): parse_exports('Build successful')
