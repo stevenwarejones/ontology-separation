@@ -29,3 +29,5 @@ import Tests.Comparison
 import Tests.RecipeSeparation
 
 import Tests.ExactFinite
+
+import Tests.ExactFiniteChecker
