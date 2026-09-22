@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.LFReadout
 import OntologySeparation.Experiments.LFJoint
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
@@ -218,6 +219,17 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.LFJoint.joint_iff_lf
 #print axioms OntologySeparation.LFJoint.bound
 #print axioms OntologySeparation.LFJoint.quantum_excluded
+
+#print axioms OntologySeparation.LFReadout.response_bound
+#print axioms OntologySeparation.LFReadout.joint_bound
+#print axioms OntologySeparation.LFReadout.sharp_total_budget
+#print axioms OntologySeparation.LFReadout.required_mismatch
+#print axioms OntologySeparation.LFReadout.quantum_required_error
+#print axioms OntologySeparation.LFReadout.mismatchA_remote
+#print axioms OntologySeparation.LFReadout.mismatchB_remote
+#print axioms OntologySeparation.LFReadout.budgetClaim
+#print axioms OntologySeparation.LFReadout.attainingClaim
+#print axioms OntologySeparation.LFReadout.exclusionClaim
 -- Finite separator-search trust roots.
 #print axioms OntologySeparation.ExactFinite.search
 #print axioms OntologySeparation.ExactFinite.SearchResult.report

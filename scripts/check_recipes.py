@@ -206,6 +206,37 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
         study = project / filename
         study.write_text((ROOT / 'examples' / filename).read_text())
         assert write_claim_report(study, project / (filename + '.html')) == count
+    readout = project / 'LFReadoutStudy.lean'
+    readout.write_text((ROOT / 'examples' / 'LFReadoutStudy.lean').read_text())
+    readout_output = project / 'lf-readout.html'
+    assert write_claim_report(readout, readout_output) == 5
+    readout_records = parse_exports(run_lean(readout))
+    for suffix, kind in [('ceiling', 'realizedBound'), ('attainingModel', 'witness')]:
+        claim = next(r['claim'] for r in readout_records if r['declaration'].endswith('.' + suffix))
+        assert claim['kind'] == kind, claim
+        assert claim['quantity'] == {'numerator': '13', 'denominator': '2'}, claim
+    assert next(r['claim'] for r in readout_records
+                if r['declaration'].endswith('.quantumExclusion'))['kind'] == 'exclusion'
+    original_readout = readout.read_text()
+    assert original_readout.count('1 / 8') == 1
+    readout.write_text(original_readout.replace('1 / 8', '1 / 10'))
+    assert write_claim_report(readout, readout_output) == 5
+    edited_readout = parse_exports(run_lean(readout))
+    for suffix in ['ceiling', 'attainingModel']:
+        claim = next(r['claim'] for r in edited_readout if r['declaration'].endswith('.' + suffix))
+        assert claim['quantity'] == {'numerator': '32', 'denominator': '5'}, claim
+    previous_readout = readout_output.read_bytes()
+    # At 1/4 the claimed quantum exclusion is no longer justified by this bound.
+    readout.write_text(original_readout.replace('1 / 8', '1 / 4'))
+    try:
+        write_claim_report(readout, readout_output)
+    except ValueError as error:
+        assert 'unsolved goals' in str(error), str(error)
+    else:
+        raise AssertionError('Unsupported readout-budget exclusion was accepted')
+    assert readout_output.read_bytes() == previous_readout
+    print('LF readout adopter: derived bound/witness updated; unsupported exclusion rejected', flush=True)
+
     atlas = project / 'LFAssumptionStudy.lean'
     atlas_output = project / 'LFAssumptionStudy.lean.html'
     atlas_before = atlas_output.read_bytes()
