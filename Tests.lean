@@ -48,3 +48,5 @@ import Tests.LFAssumptionAtlas
 
 import Tests.LFJoint
 import Tests.SeparatorSearch
+
+import Tests.NamedFiniteQuantum
