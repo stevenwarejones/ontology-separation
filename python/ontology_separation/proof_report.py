@@ -10,7 +10,7 @@ from pathlib import Path
 from .checked_source import run_lean, validate_output, atomic_write_html
 
 PREFIX = "ONTOLOGY_CLAIM "
-COMPARISON_PREFIX = "ONTOLOGY_COMPARISON "
+COMPARISON_PREFIX = "ONTOLOGY_COMPARISON "\nSEARCH_PREFIX = "ONTOLOGY_SEARCH "
 from .evidence import validate_claim, evidence_label, result_text
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 AXES = ("realism", "globalTruth", "locality", "measurementIndependent")
@@ -98,6 +98,56 @@ def parse_comparisons(stdout: str) -> list[dict]:
     return rows
 
 
+
+def parse_searches(stdout: str) -> list[dict]:
+    rows, seen = [], set()
+    for line in stdout.splitlines():
+        if not line.startswith(SEARCH_PREFIX):
+            continue
+        item = json.loads(line[len(SEARCH_PREFIX):])
+        report = item.get('report') if isinstance(item, dict) else None
+        if (not isinstance(item, dict) or not isinstance(item.get('declaration'), str)
+                or not isinstance(item.get('axioms'), list)
+                or any(not isinstance(a, str) or a not in ALLOWED_AXIOMS for a in item['axioms'])
+                or not isinstance(report, dict) or report.get('status') not in
+                {'base-separates', 'no-candidate', 'found'}):
+            raise ValueError('Invalid structured search export')
+        if item['declaration'] in seen:
+            raise ValueError('Duplicate search export')
+        seen.add(item['declaration'])
+        base = report.get('base')
+        candidate = report.get('candidate')
+        base_item = parse_comparisons(COMPARISON_PREFIX + json.dumps(
+            {'declaration': item['declaration']+'.base', 'axioms': item['axioms'], 'report': base}))[0]
+        candidate_item = None if candidate is None else parse_comparisons(
+            COMPARISON_PREFIX + json.dumps({'declaration': item['declaration']+'.candidate',
+            'axioms': item['axioms'], 'report': candidate}))[0]
+        status = report['status']
+        if status == 'base-separates' and (base['verdict'] != 'separation' or candidate is not None):
+            raise ValueError('Base-separates search has inconsistent evidence')
+        if status == 'no-candidate' and (base['verdict'] != 'agreement' or candidate is None
+                                         or candidate['verdict'] != 'agreement'):
+            raise ValueError('No-candidate search has inconsistent evidence')
+        if status == 'found' and (base['verdict'] != 'agreement' or candidate is None
+                                  or candidate['verdict'] != 'separation'):
+            raise ValueError('Found search has inconsistent evidence')
+        rows.append({'declaration': item['declaration'], 'axioms': item['axioms'],
+                     'report': report, 'base_item': base_item, 'candidate_item': candidate_item})
+    return rows
+
+def search_cards(searches: list[dict]) -> str:
+    if not searches:
+        return ''
+    cards = []
+    for item in searches:
+        evidence = [item['base_item']]
+        if item['candidate_item'] is not None:
+            evidence.append(item['candidate_item'])
+        cards.append('<section class="search"><h3>Finite separator search: '+
+                     html.escape(item['report']['status'])+'</h3>'+
+                     comparison_cards(evidence)+'</section>')
+    return '<h2>Checked separator searches</h2>'+''.join(cards)
+
 def comparison_cards(comparisons: list[dict]) -> str:
     if not comparisons:
         return ''
@@ -166,7 +216,7 @@ An unclassified cell does not establish compatibility.</p>
 <div class="scroll"><table><thead><tr><th>OI</th><th>G (vocabulary-specific)</th><th>PI</th><th>MI</th><th>Bell vocabulary</th><th>Friend-record vocabulary</th></tr></thead><tbody>''' + ''.join(rows) + '</tbody></table></div>'
 
 
-def render(records: list[dict], source: str, profiles: list[dict] | None = None, comparisons: list[dict] | None = None) -> str:
+def render(records: list[dict], source: str, profiles: list[dict] | None = None, comparisons: list[dict] | None = None, searches: list[dict] | None = None) -> str:
     esc = html.escape
     rows = ''.join('<tr><td><code>'+esc(r['declaration'])+'</code><br>'+esc(evidence_label(r['claim']))+'</td><td>'+esc(result_text(r['claim']) if r['claim'].get('quantity') is not None else evidence_label(r['claim']))+'</td><td><pre>'+esc(r['statement'])+
                    '</pre></td><td>'+esc(', '.join(r['axioms']) or 'None')+'</td></tr>' for r in records)
@@ -177,22 +227,23 @@ table{{border-collapse:collapse;width:100%;background:white}}td,th{{border:1px s
 pre{{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}}code{{overflow-wrap:anywhere}}
 .bound{{background:#fff3d6}}.open{{background:#eef0f3;color:#52606c}}.scroll{{overflow-x:auto}}
 .comparison{{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}}
-.comparison p{{margin:.45rem 0}}
+.comparison p{{margin:.45rem 0}}.search{{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}}
 @media(max-width:700px){{body{{margin:.7rem}}td,th{{padding:.4rem}}}}
 </style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>{esc(source)}</code>.
 Each row states exactly what its proof establishes. The definitions determine its physical meaning.
 This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
 These are mathematical results, not statistical claims about experimental data.</p>
-{profile_table(profiles)}{comparison_cards(comparisons or [])}<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody>{rows}</tbody></table></div></body></html>'''
+{profile_table(profiles)}{search_cards(searches or [])}{comparison_cards(comparisons or [])}<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody>{rows}</tbody></table></div></body></html>'''
 
 
 def write_report(source: Path, output: Path) -> int:
     validate_output(source, output)
     stdout = run_lean(source)
     comparisons = parse_comparisons(stdout)
-    records = parse_exports(stdout, allow_empty=bool(comparisons))
-    atomic_write_html(output, render(records, str(source), parse_profiles(stdout), comparisons))
-    return len(records) or len(comparisons)
+    searches = parse_searches(stdout)
+    records = parse_exports(stdout, allow_empty=bool(comparisons or searches))
+    atomic_write_html(output, render(records, str(source), parse_profiles(stdout), comparisons, searches))
+    return len(records) or len(comparisons) or len(searches)
 
 
 def main() -> None:
