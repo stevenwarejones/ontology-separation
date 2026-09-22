@@ -45,3 +45,13 @@ return one of:
 The orientation is explicit so the implementation never assumes the first
 difference has the desired sign. A failed/incomplete search must never become an
 agreement certificate.
+
+
+## Compiling adopter example
+
+`examples/AutomaticComparisonStudy.lean` uses only the public `OntologySeparation.Study`
+surface. It defines two laws, two explicitly covered finite experiment families, runs
+`certify`, converts both automatic results to ordinary audited `Claim` values, and
+exports them through the standard proof report path. The downstream adoption gate copies
+that file into a separate Lake project and requires the calibration result to export as
+agreement and the coherence result to export as a reverse-oriented separator.
