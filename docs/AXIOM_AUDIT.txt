@@ -156,7 +156,6 @@
 'OntologySeparation.FiniteCircuit.test_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ExactFinite.mem_entriesForProtocol' depends on axioms: [propext, Quot.sound]
 'OntologySeparation.ExactFinite.entry_protocol_mem' depends on axioms: [propext, Quot.sound]
-
 'OntologySeparation.PartialLeakage.recovery_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PartialLeakage.sequential_attenuation' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PartialLeakage.recovery_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
