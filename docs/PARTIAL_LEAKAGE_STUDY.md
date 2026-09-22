@@ -36,3 +36,12 @@ effective attenuation model. The product law is realized by sequential
 dephasing channels; it is not claimed to model every imperfect reversal. It is not presented as a new experimental
 falsification result, a finite-shot statistical threshold, or a theorem about
 all Wigner/friend models.
+
+
+## Browse the committed report
+
+The normal repository gate regenerates
+[`examples/partial-leakage.html`](../examples/partial-leakage.html). That
+committed snapshot is linked from the examples index and is therefore published
+with the other GitHub Pages examples. Re-running the gate rechecks the Lean
+source before replacing the snapshot.
