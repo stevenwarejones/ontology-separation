@@ -19,3 +19,5 @@ with a result never proves an ontology true.
 Regenerate HTML from the built executable with `python scripts/export.py`. The
 committed pages are deterministic, self-contained and work offline. A static
 16-profile table remains available when JavaScript is disabled.
+
+- `partial-leakage.html`: checked exact-point comparison plus the symbolic partial-leakage robustness theorem.
