@@ -1,3 +1,4 @@
+import OntologySeparation.Signaling
 import OntologySeparation.Certificates.ForcedSignaling
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
@@ -237,3 +238,20 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignaling.bound
 #print axioms OntologySeparation.ForcedSignaling.zeroBudget
 #print axioms OntologySeparation.ForcedSignaling.zeroBudget_score
+
+-- Physical response model, LP correspondence, sharp optimum and adopter contracts.
+#print axioms OntologySeparation.HiddenInfluence.Model.behavior
+#print axioms OntologySeparation.HiddenInfluence.strategy_output
+#print axioms OntologySeparation.HiddenInfluence.Model.fromStrategies
+#print axioms OntologySeparation.HiddenInfluence.Model.toLP
+#print axioms OntologySeparation.HiddenInfluence.lp_score
+#print axioms OntologySeparation.HiddenInfluence.no_signaling_B
+#print axioms OntologySeparation.HiddenInfluence.no_signaling_C
+#print axioms OntologySeparation.HiddenInfluence.Sharp.score_exact
+#print axioms OntologySeparation.HiddenInfluence.Sharp.signaling_exact
+#print axioms OntologySeparation.HiddenInfluence.sharp_tradeoff
+#print axioms OntologySeparation.HiddenInfluence.coefficient_optimal
+#print axioms OntologySeparation.SharpOptimum.sound
+#print axioms OntologySeparation.SignalingStudy.Study.boundClaim
+#print axioms OntologySeparation.SignalingStudy.Study.attainmentClaim
+#print axioms OntologySeparation.SignalingStudy.Study.signalingClaim

@@ -11,6 +11,14 @@ tradeoffs, not whether their formulas can be made to look alike. This increment
 checks one actual external certificate and records what would have to be proved
 to establish a shared reason.
 
+## Follow-up implementation
+
+The [signaling guide](../SIGNALING_GUIDE.md) now documents the physical
+response-model → LP bridge and an attaining model for every nonnegative budget.
+It proves fixed-completion sharpness in the stated finite response class. The
+certificate-only findings below remain the historical scope of this spike;
+cluster-state marginal matching and the broader unification remain open.
+
 ## Exact sources and stack
 
 These pins, rather than repository names or current default branches, identify

@@ -29,6 +29,7 @@ backends or alternate semantics.
 |---|---|
 | [Recipe guide](RECIPE_GUIDE.md) | Understand the editable one-qubit example |
 | [Separation study](SEPARATION_STUDY.md) | Edit a scoped agreement/separation study using checked qubit recipes |
+| [Signaling guide](SIGNALING_GUIDE.md) | Bound and attain a whole-class score at an allowed signaling budget |
 | [Two-qubit guide](TWO_QUBIT_GUIDE.md) | Build a Bell–CHSH experiment |
 | [LF protocol guide](LF_PROTOCOL_GUIDE.md) | Model explicit friend records and read-or-reverse choices |
 | [Add a scenario](ADD_A_SCENARIO.md) | Introduce a law package and export checked results |
