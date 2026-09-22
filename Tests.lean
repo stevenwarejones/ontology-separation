@@ -31,3 +31,5 @@ import Tests.RecipeSeparation
 import Tests.ExactFinite
 
 import Tests.ExactFiniteChecker
+
+import Tests.OneStepFinite
