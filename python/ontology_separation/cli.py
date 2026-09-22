@@ -29,8 +29,8 @@ def main(argv: list[str] | None = None) -> int:
     new = sub.add_parser("new-scenario", help="Create a working recipe study without overwriting existing source")
     new.add_argument("name", help="Lean namespace, e.g. MyStudy")
     new.add_argument("-o", "--output", type=Path, required=True)
-    new.add_argument("--backend", choices=["qubit", "two-qubit", "local-friendliness"], default="qubit",
-                     help="Choose a single-qubit, Bell, or Local Friendliness study")
+    new.add_argument("--backend", choices=["qubit", "two-qubit", "local-friendliness", "separation"], default="qubit",
+                     help="Choose a single-qubit, Bell, Local Friendliness, or scoped separation study")
     doctor = sub.add_parser("doctor", help="Check local setup without building or downloading")
     doctor.add_argument("directory", type=Path, nargs="?", default=Path.cwd())
     args = parser.parse_args(argv)
