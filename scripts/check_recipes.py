@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'python'))
 from ontology_separation.scaffold import create_scenario
 from ontology_separation.scenario_report import write_report
-from ontology_separation.proof_report import write_report as write_claim_report, parse_exports
+from ontology_separation.proof_report import (write_report as write_claim_report,
+    parse_exports, parse_comparisons)
 from ontology_separation.checked_source import run_lean
 
 with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as directory:
@@ -94,7 +95,23 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     automatic.write_text((ROOT / 'examples' / 'AutomaticComparisonStudy.lean').read_text())
     automatic_output = project / 'automatic-comparison.html'
     assert write_claim_report(automatic, automatic_output) == 2
-    automatic_records = parse_exports(run_lean(automatic))
+    automatic_stdout = run_lean(automatic)
+    automatic_records = parse_exports(automatic_stdout)
+    automatic_comparisons = parse_comparisons(automatic_stdout)
+    assert len(automatic_comparisons) == 2, automatic_comparisons
+    calibration_view = next(r['report'] for r in automatic_comparisons
+                            if r['declaration'].endswith('calibrationReport'))
+    coherence_view = next(r['report'] for r in automatic_comparisons
+                          if r['declaration'].endswith('coherenceReport'))
+    assert calibration_view['verdict'] == 'agreement', calibration_view
+    assert calibration_view['covered_protocols'] == ['prepare |0>; exposure; P(Z=+)'], calibration_view
+    assert coherence_view['verdict'] == 'separation', coherence_view
+    assert coherence_view['left_model'] == 'Exposure dephasing p=1/2', coherence_view
+    assert coherence_view['right_model'] == 'Exposure dephasing p=0', coherence_view
+    assert coherence_view['protocol'] == 'prepare |+>; exposure; P(X=+)', coherence_view
+    assert coherence_view['left_probability'] == {'numerator': '1', 'denominator': '4'}, coherence_view
+    assert coherence_view['right_probability'] == {'numerator': '0', 'denominator': '1'}, coherence_view
+    assert coherence_view['gap'] == {'numerator': '1', 'denominator': '4'}, coherence_view
     calibration_record = next(r for r in automatic_records
                               if r['declaration'].endswith('calibrationClaim'))
     coherence_record = next(r for r in automatic_records
@@ -106,6 +123,9 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     automatic_page = automatic_output.read_text()
     assert 'Agreement over stated access domain' in automatic_page
     assert 'Verified separating experiment' in automatic_page
+    assert 'Checked model comparisons' in automatic_page
+    assert 'exact gap:</strong> 1/4' in automatic_page
+    assert 'Exposure dephasing p=1/2' in automatic_page
     print('Automatic comparison adopter: covered agreement and oriented separator exported',
           flush=True)
 
