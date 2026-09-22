@@ -10,7 +10,8 @@ from pathlib import Path
 from .checked_source import run_lean, validate_output, atomic_write_html
 
 PREFIX = "ONTOLOGY_CLAIM "
-COMPARISON_PREFIX = "ONTOLOGY_COMPARISON "\nSEARCH_PREFIX = "ONTOLOGY_SEARCH "
+COMPARISON_PREFIX = "ONTOLOGY_COMPARISON "
+SEARCH_PREFIX = "ONTOLOGY_SEARCH "
 from .evidence import validate_claim, evidence_label, result_text
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 AXES = ("realism", "globalTruth", "locality", "measurementIndependent")
