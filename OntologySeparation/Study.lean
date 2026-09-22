@@ -3,8 +3,11 @@ import OntologySeparation.Recipes.Separation
 import OntologySeparation.LocalFriendliness
 import OntologySeparation.Core.ExperimentAccess
 import OntologySeparation.Core.Comparison
+import OntologySeparation.Core.ExactFinite
+import OntologySeparation.Core.ExactFiniteChecker
 import OntologySeparation.Core.FiniteModels
 import OntologySeparation.Experiments.RecordAccess
+import OntologySeparation.Adapters.FiniteCircuit
 import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Reporting.Claim
 
