@@ -55,3 +55,5 @@ import Tests.NamedFiniteQuantum
 
 import Tests.TradeoffSpike
 import Tests.RecordEnvironment
+
+import Tests.EnvironmentDiscrimination
