@@ -38,7 +38,7 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     discrimination = project / 'EnvironmentDiscriminationStudy.lean'
     discrimination.write_text((ROOT / 'examples/EnvironmentDiscriminationStudy.lean').read_text())
     discrimination_output = project / 'discrimination.html'
-    assert write_claim_report(discrimination, discrimination_output) == 7
+    assert write_claim_report(discrimination, discrimination_output) == 8
     page = discrimination_output.read_text()
     assert '>337/625<' in page and '>288/625<' in page
     print('Discrimination: full-family theorems and explicit witness checked', flush=True)

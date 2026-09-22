@@ -9,3 +9,4 @@ import OntologySeparation.Environment
 #export_claim OntologySeparation.RecordEnvironment.returnCoherentClaim
 #export_claim OntologySeparation.RecordEnvironment.returnCollapsedClaim
 #export_claim OntologySeparation.RecordEnvironment.returnSeparationClaim
+#export_claim OntologySeparation.RecordEnvironment.returnGapClaim

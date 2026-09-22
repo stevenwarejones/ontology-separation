@@ -88,5 +88,8 @@ def returnCoherentClaim : Claim := .exact (returnTest.prob coherent true) 1 (by 
 
 def returnCollapsedClaim : Claim := .exact (returnTest.prob collapsed true) (337/625)
   (by convert return_collapsed using 1 <;> norm_num)
+def returnGapClaim : Claim := .exact
+  (returnTest.prob coherent true - returnTest.prob collapsed true) (288/625)
+  (by rw [return_coherent, return_collapsed]; norm_num)
 end
 end OntologySeparation.RecordEnvironment
