@@ -70,3 +70,5 @@ implemented capability; use each guide's stated scope and checked examples.
 - [One-step finite quantum tests](ONE_STEP_FINITE_TESTS.md) — explicit channel/isometry plus POVM experiments using the existing Lean-QIT semantics.
 
 - [Finite channel circuits](FINITE_CIRCUITS.md) — sequential CPTP steps followed by a complete POVM.
+
+- [Automatic covered finite families](AUTOMATIC_COVERED_GRIDS.md) — derive complete discrete grids from nonempty protocol lists; continuous thresholds remain symbolic theorems.
