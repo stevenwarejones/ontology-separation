@@ -37,3 +37,21 @@ minimality by checking all weaker families.
 
 The search remains an exact finite engine. Continuous parameter regions continue
 to use the symbolic theorem path demonstrated by the partial-leakage study.
+
+
+## Public report workflow
+
+`SearchResult.report` converts every search branch into proof-linked structured
+comparison reports. The base result is always present. Candidate evidence is
+present only when the candidate family was actually scanned. A found result
+therefore publishes both the checked base agreement and the checked candidate
+separator, including reverse orientation.
+
+`examples/SeparatorSearchStudy.lean` uses only the public
+`OntologySeparation.Study` import. Its candidate list is intentionally
+multi-element: calibration is visited first and agrees; the later coherence
+protocol separates. The downstream adoption gate requires that later witness
+and its exact `1/4` gap to survive export and HTML rendering.
+
+The `#export_search` command audits the report dependencies with the same axiom
+policy as the existing claim/comparison exporters.
