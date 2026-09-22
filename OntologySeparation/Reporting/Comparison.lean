@@ -11,7 +11,34 @@ namespace OntologySeparation.ExactFinite
 
 variable {P M : Type} {E : Interface} {predict : ExperimentAccess.Predictions M P E}
 
+/-- Source data and its indexed certificate. Rendered numerical fields are not
+independent inputs and cannot be overwritten beside an unrelated proof. -/
 structure ComparisonReport where
+  P : Type
+  M : Type
+  E : Interface
+  predict : ExperimentAccess.Predictions M P E
+  backend : Backend predict
+  family : ProtocolFamily P
+  a : M
+  b : M
+  result : CheckedResult backend family.allowed a b
+  modelLabel : M → String
+  protocolLabel : P → String
+  settingLabel : E.Setting → String
+  outcomeLabel : E.Outcome → String
+
+/-- Preserve the public constructor while retaining its checked source. -/
+def CheckedResult.report (backend : Backend predict) (family : ProtocolFamily P)
+    (a b : M) (modelLabel : M → String) (protocolLabel : P → String)
+    (settingLabel : E.Setting → String) (outcomeLabel : E.Outcome → String)
+    (result : CheckedResult backend family.allowed a b) : ComparisonReport :=
+  ⟨P, M, E, predict, backend, family, a, b, result,
+    modelLabel, protocolLabel, settingLabel, outcomeLabel⟩
+
+def ComparisonReport.claim (r : ComparisonReport) : Claim := r.result.claim
+
+private structure ComparisonView where
   leftModel : String
   rightModel : String
   coveredProtocols : List String
@@ -24,12 +51,16 @@ structure ComparisonReport where
   gap : Option ℚ := none
   claim : Claim
 
-/-- Derive presentation data from the checked result. Reverse separators swap
-model order and probabilities to match the separator actually proved. -/
-def CheckedResult.report (backend : Backend predict) (family : ProtocolFamily P)
-    (a b : M) (modelLabel : M → String) (protocolLabel : P → String)
-    (settingLabel : E.Setting → String) (outcomeLabel : E.Outcome → String)
-    (result : CheckedResult backend family.allowed a b) : ComparisonReport :=
+private def ComparisonReport.view (r : ComparisonReport) : ComparisonView :=
+  let backend := r.backend
+  let family := r.family
+  let a := r.a
+  let b := r.b
+  let modelLabel := r.modelLabel
+  let protocolLabel := r.protocolLabel
+  let settingLabel := r.settingLabel
+  let outcomeLabel := r.outcomeLabel
+  let result := r.result
   match result with
   | .agreement _ =>
       { leftModel := modelLabel a
@@ -65,6 +96,17 @@ def CheckedResult.report (backend : Backend predict) (family : ProtocolFamily P)
         rightProbability := some pa
         gap := some (pb - pa)
         claim := result.claim }
+
+def ComparisonReport.leftModel (r : ComparisonReport) : String := r.view.leftModel
+def ComparisonReport.rightModel (r : ComparisonReport) : String := r.view.rightModel
+def ComparisonReport.coveredProtocols (r : ComparisonReport) : List String := r.view.coveredProtocols
+def ComparisonReport.verdict (r : ComparisonReport) : String := r.view.verdict
+def ComparisonReport.protocol (r : ComparisonReport) : Option String := r.view.protocol
+def ComparisonReport.setting (r : ComparisonReport) : Option String := r.view.setting
+def ComparisonReport.outcome (r : ComparisonReport) : Option String := r.view.outcome
+def ComparisonReport.leftProbability (r : ComparisonReport) : Option ℚ := r.view.leftProbability
+def ComparisonReport.rightProbability (r : ComparisonReport) : Option ℚ := r.view.rightProbability
+def ComparisonReport.gap (r : ComparisonReport) : Option ℚ := r.view.gap
 
 end OntologySeparation.ExactFinite
 
