@@ -74,6 +74,8 @@ def scanTag {entries : List (Entry Recipe binaryInterface)} :
 /-- Exercise the scanner itself: the covered calibration list takes the agreement branch. -/
 example :
     scanTag (scan exactBackend checkerIdeal checkerNoisy calibrationGrid.entries) = 0 := by
+  change scanTag (scan exactBackend checkerIdeal checkerNoisy
+    [⟨calibrationProbe, (), false⟩, ⟨calibrationProbe, (), true⟩]) = 0
   norm_num [scanTag, scan, compareEntry, calibrationGrid, exactBackend,
     outcomeProbability, calibration_probability, checkerIdeal, checkerNoisy,
     Law.dephasing, Rate.fraction]
@@ -88,6 +90,8 @@ example :
 /-- With the false coherence entry first, the full coherence grid exercises BA. -/
 example :
     scanTag (scan exactBackend checkerIdeal checkerNoisy coherenceGrid.entries) = 2 := by
+  change scanTag (scan exactBackend checkerIdeal checkerNoisy
+    [⟨coherenceProbe, (), false⟩, ⟨coherenceProbe, (), true⟩]) = 2
   norm_num [scanTag, scan, compareEntry, coherenceGrid, exactBackend,
     outcomeProbability, coherence_probability, checkerIdeal, checkerNoisy,
     Law.dephasing, Rate.fraction]
