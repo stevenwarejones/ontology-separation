@@ -28,6 +28,13 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     updated = subprocess.run(['lake','update'],cwd=project,env=env,capture_output=True,text=True)
     if updated.returncode:
         raise SystemExit(updated.stdout+updated.stderr)
+    environment = project / 'EnvironmentAccessStudy.lean'
+    environment.write_text((ROOT / 'examples/EnvironmentAccessStudy.lean').read_text())
+    environment_output = project / 'environment.html'
+    assert write_claim_report(environment, environment_output) == 4
+    assert 'Agreement over stated access domain' in environment_output.read_text()
+    print('Environment access: public import and scoped report checked', flush=True)
+
     starter = create_scenario('Starter',project/'Starter.lean')
     output = project/'report.html'
     assert write_report(starter,output) == 12

@@ -179,3 +179,13 @@
 'OntologySeparation.FiniteQuantum.Named.left_allowed_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.FiniteQuantum.Named.both_allowed' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.FiniteQuantum.Named.left_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.RecordEnvironment.copyEnvironment_isometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.RecordEnvironment.preparation_is_copy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.RecordEnvironment.collapsed_entry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.RecordEnvironment.laboratory_state' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.RecordEnvironment.same_laboratory_state' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.RecordEnvironment.every_laboratory_test' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.RecordEnvironment.laboratory_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.RecordEnvironment.global_states_differ' depends on axioms: [propext, Classical.choice, Quot.sound]
