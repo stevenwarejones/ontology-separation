@@ -2,6 +2,7 @@ import OntologySeparation
 import OntologySeparation.Catalog.Matrix
 import OntologySeparation.Core.Assumptions
 import OntologySeparation.Core.ExactFiniteChecker
+import OntologySeparation.Core.AutomaticGrid
 import OntologySeparation.Recipes.Separation
 import OntologySeparation.Adapters.FiniteCircuit
 
