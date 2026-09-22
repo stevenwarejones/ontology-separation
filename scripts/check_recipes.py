@@ -202,7 +202,7 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
 
     # Copy public examples into an independent Lake project: no repository-local imports.
     for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6),
-                            ('LFAssumptionStudy.lean', 3)]:
+                            ('LFAssumptionStudy.lean', 3), ('LFPaperStudy.lean', 4)]:
         study = project / filename
         study.write_text((ROOT / 'examples' / filename).read_text())
         assert write_claim_report(study, project / (filename + '.html')) == count

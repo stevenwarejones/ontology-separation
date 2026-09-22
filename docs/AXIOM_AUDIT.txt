@@ -172,6 +172,12 @@
 'OntologySeparation.LFAssumptionAtlas.quantum_excludes_operational' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.LFJoint.conditional_reconstruct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LFJoint.conditional_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LFJoint.local_iff_conditional' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LFJoint.joint_iff_lf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LFJoint.bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LFJoint.quantum_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ExactFinite.search' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ExactFinite.SearchResult.report' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.RegisterAccess.allowed_mono' depends on axioms: [propext, Quot.sound]
