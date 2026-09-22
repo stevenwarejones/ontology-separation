@@ -18,7 +18,7 @@ example :
   cases o <;> simp [exactBackend, outcomeProbability, calibration_probability]
 
 example :
-    Equivalent exactBackend.predict calibrationOnly exactIdeal exactNoisy :=
+    Equivalent predict calibrationOnly exactIdeal exactNoisy :=
   ExactFinite.equivalent_of_exact exactBackend calibrationOnly exactIdeal exactNoisy (by
     intro r hr s o
     subst r
@@ -26,7 +26,7 @@ example :
     cases o <;> simp [exactBackend, outcomeProbability, calibration_probability])
 
 example (a b : Law)
-    (h : Equivalent exactBackend.predict calibrationOnly a b) :
+    (h : Equivalent predict calibrationOnly a b) :
     ExactFinite.EquivalentQ exactBackend calibrationOnly a b :=
   ExactFinite.exact_of_equivalent exactBackend calibrationOnly a b h
 
