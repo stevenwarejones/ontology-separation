@@ -1,9 +1,11 @@
 import OntologySeparation.Core.ExactFiniteChecker
+import Mathlib.Data.FinEnum
 
 /-! Automatic complete grids for explicitly supplied finite protocol families.
 
 Coverage is derived from finite enumeration; it is never accepted as an
-assumption. This layer is only for discrete Fintype-backed settings/outcomes. -/
+assumption. This layer uses Mathlib FinEnum data for kernel-reducible finite
+enumeration. The enumeration order chooses traversal, not physical semantics. -/
 namespace OntologySeparation.ExactFinite
 
 variable {P : Type} {E : Interface}
@@ -17,15 +19,19 @@ structure ProtocolFamily (P : Type) where
 def ProtocolFamily.protocols (family : ProtocolFamily P) : List P :=
   family.head :: family.tail
 
-def ProtocolFamily.allowed [DecidableEq P] (family : ProtocolFamily P) (p : P) : Prop :=
+def ProtocolFamily.allowed (family : ProtocolFamily P) (p : P) : Prop :=
   p ∈ family.protocols
 
-variable [DecidableEq P] [Fintype E.Setting] [DecidableEq E.Setting]
-  [Fintype E.Outcome] [DecidableEq E.Outcome]
+/-- Mathlib supplies Unit, Fin n, product and sum enumerations. Use false first
+for Boolean outcomes, preserving the public comparison example's orientation. -/
+instance boolFinEnum : FinEnum Bool :=
+  FinEnum.ofList [false, true] (by intro b; cases b <;> simp)
+
+variable [FinEnum E.Setting] [FinEnum E.Outcome]
 
 def entriesForProtocol (p : P) : List (Entry P E) :=
-  (Finset.univ : Finset E.Setting).toList.flatMap fun s =>
-    (Finset.univ : Finset E.Outcome).toList.map fun o => ⟨p, s, o⟩
+  (FinEnum.toList E.Setting).flatMap fun s =>
+    (FinEnum.toList E.Outcome).map fun o => ⟨p, s, o⟩
 
 def ProtocolFamily.entries (family : ProtocolFamily P) : List (Entry P E) :=
   family.protocols.flatMap entriesForProtocol
@@ -45,7 +51,7 @@ theorem entry_protocol_mem {family : ProtocolFamily P} {x : Entry P E}
   simpa [hprotocol] using hp
 
 /-- Build the complete protocol × setting × outcome grid. The coverage proof is
-derived from enumeration of both Fintype dimensions. -/
+derived from complete FinEnum data for both interface dimensions. -/
 def ProtocolFamily.grid (family : ProtocolFamily P) :
     Grid P E family.allowed where
   entries := family.entries
