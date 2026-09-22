@@ -86,6 +86,21 @@ inductive CheckedResult (backend : Backend predict) (family : P → Prop) (a b :
   | separatesAB (certificate : Separator predict family a b)
   | separatesBA (certificate : Separator predict family b a)
 
+/-- Convert every automatic result into the repository's existing audited claim
+vocabulary. Reverse-orientation separators preserve the model order they prove. -/
+def CheckedResult.claim {backend : Backend predict} {family : P → Prop} {a b : M} :
+    CheckedResult backend family a b → Claim
+  | .agreement certificate =>
+      .agreement predict family a b certificate.proof
+  | .separatesAB certificate =>
+      .separation predict family a b certificate
+  | .separatesBA certificate =>
+      .separation predict family b a certificate
+
+theorem CheckedResult.sound {backend : Backend predict} {family : P → Prop} {a b : M}
+    (result : CheckedResult backend family a b) : result.claim.statement :=
+  result.claim.sound
+
 def certify (backend : Backend predict) (family : P → Prop)
     (grid : Grid P E family) (a b : M) :
     CheckedResult backend family a b :=
