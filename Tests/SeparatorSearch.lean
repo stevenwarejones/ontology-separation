@@ -1,4 +1,5 @@
 import OntologySeparation.Core.SeparatorSearch
+import OntologySeparation.Reporting.Search
 import OntologySeparation.Recipes.Separation
 import Mathlib.Tactic
 
