@@ -20,7 +20,7 @@ finite CPTP preprocessing channel followed by every binary POVM.
 `optimalTest ρ σ` attains it, using the upstream Helstrom spectral projector.
 Thus the optimization is over an entire class, not a finite circuit search.
 The theorem is a mathematical optimum, not certification of hardware capable of
-implementing an arbitrary spectral measurement. This PR leaves the full-state
+implementing an arbitrary spectral measurement. The current theorem leaves the full-state
 trace distance symbolic; it does not report a numerically evaluated optimum.
 
 | Access | Best decision error | Scope |
@@ -46,8 +46,7 @@ are retained. It is a complete measurement, not postselection on recovery.
 The exact signed gap is 288/625. `returnSeparator` checks full-register access
 and the model order. The theorem proves the POVM probabilities; a physical gate
 compilation and instrument calibration are separate requirements. This specific
-measurement is **not claimed optimal**. It is useful for the next finite-shot
-protocol because its null probability and ideal power are explicit.
+measurement is **not claimed optimal**. It is used in the [finite-shot protocol](FINITE_SHOT_GUIDE.md) because its null probability and ideal power are explicit.
 
 ## Use the general interface
 

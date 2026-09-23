@@ -24,10 +24,10 @@ freedom. The friend is a readable qubit record, not a conscious observer.
 
 ## Choose access before choosing the measurement
 
-| Access | Permitted operations | Result in this PR |
+| Access | Permitted operations | Result |
 |---|---|---|
 | Laboratory | Any finite CPTP channel on system **and** friend record, then any finite POVM | All outcome probabilities agree |
-| Laboratory and environment | Joint operations on all three modeled qubits | The states differ; optimal discrimination follows in the next PR |
+| Laboratory and environment | Joint operations on all three modeled qubits | The states differ; see the attained optimum in the [discrimination guide](ENVIRONMENT_DISCRIMINATION_GUIDE.md) |
 
 `laboratory_state` identifies the reduced state with the existing checked
 dephased two-register state. `same_laboratory_state` proves equality of the two
@@ -56,12 +56,13 @@ a practical recovery circuit nor finite-shot statistical significance.
 
 ## How this fits the ambitious program
 
-1. **This PR:** make the physical comparison and inaccessible information precise.
-2. **Next:** connect accessible states to the existing Lean-QIT Helstrom theorem,
-   proving an attained optimum over all binary measurements, with a checked
-   laboratory impossibility result. Add an explicit implementable witness.
-3. **Then:** connect a chosen witness and explicit calibration/trial assumptions
-   to a verified prospective finite-shot rejection rule.
+1. **Define access:** make the physical comparison and inaccessible information precise.
+2. **Compare every test:** the [discrimination guide](ENVIRONMENT_DISCRIMINATION_GUIDE.md)
+   connects accessible states to Lean-QIT Helstrom optimality and a specified
+   return measurement. Its physical gate compilation remains a separate task.
+3. **Plan the decision:** the [finite-shot guide](FINITE_SHOT_GUIDE.md) connects
+   that witness and explicit calibration/trial assumptions to a verified
+   prospective rejection rule.
 
 These are known discrimination/decoherence baselines that the framework must
 get right before attempting restricted-control optimization or new foundations

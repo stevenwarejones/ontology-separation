@@ -23,6 +23,8 @@ python3 scripts/check_recipes.py
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/EnvironmentAccessStudy.lean -o examples/environment-access.html
 
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/EnvironmentDiscriminationStudy.lean -o examples/environment-discrimination.html
+
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/FiniteShotStudy.lean -o examples/finite-shot.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFAssumptionStudy.lean -o examples/lf-assumptions.html
 
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFPaperStudy.lean -o examples/lf-paper.html
