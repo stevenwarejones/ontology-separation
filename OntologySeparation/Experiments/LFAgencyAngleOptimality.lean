@@ -70,6 +70,26 @@ theorem chshNumerator_le (a0 a1 b0 b1 : RealQuantum.Basis) :
   have h2 := sq_nonneg (s*a0y - (b1y-b0y))
   have h3 := sq_nonneg (s*a1x + (b0x+b1x))
   have h4 := sq_nonneg (s*a1y + (b0y+b1y))
+  have hA :
+      2*s*(a0x*(b1x-b0x) + a0y*(b1y-b0y)) ≤
+        2 + (b1x-b0x)^2 + (b1y-b0y)^2 := by
+    nlinarith
+  have hB :
+      -2*s*(a1x*(b0x+b1x) + a1y*(b0y+b1y)) ≤
+        2 + (b0x+b1x)^2 + (b0y+b1y)^2 := by
+    nlinarith
+  have hBob :
+      (b1x-b0x)^2 + (b1y-b0y)^2 +
+        (b0x+b1x)^2 + (b0y+b1y)^2 = 4 := by
+    nlinarith
+  have htotal :
+      2*s*(a0x*(b1x-b0x) + a0y*(b1y-b0y) -
+        a1x*(b0x+b1x) - a1y*(b0y+b1y)) ≤ 8 := by
+    nlinarith
+  have hspos : 0 < s := by
+    have : (0 : ℝ) < 2 := by norm_num
+    dsimp [s]
+    exact Real.sqrt_pos.2 this
   have hc :
       chshNumerator a0 a1 b0 b1 =
         a0x*(b1x-b0x) + a0y*(b1y-b0y) -
