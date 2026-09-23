@@ -304,3 +304,89 @@
 'OntologySeparation.LFAgencyRelaxation.local_recordRevealedWithin_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.OperationalFriendlinessBenchmark.constant_local' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.OperationalFriendlinessBenchmark.dropAbsolute_not_absolute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.OperationalFriendlinessBenchmark.dropAgency_not_agency' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.OperationalFriendlinessBenchmark.exact_core' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeFriendliness.response_chsh_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeFriendliness.score_as_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeFriendliness.factorized_chsh_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeFriendliness.singlet_score_violates_factorized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeFriendliness.unitModel_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.correlator_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.score_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.chsh_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.dropStable_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.dropAlice_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.dropBob_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.exact_minimal_core' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeBellCollapse.outcomeProb_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeBellCollapse.productResponse_noSignaling' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeBellCollapse.productResponse_outcomeIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeBellCollapse.response_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeBellCollapse.score_preserved' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeBellCollapse.embeds_screening_off' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderAdversary.zGate_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.CausalOrderAdversary.xGate_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.CausalOrderAdversary.fixed_order_mimics_current_statistic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderAdversary.no_input_separates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.CausalOrderAdversary.definite_order_countermodel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderTwoSetting.xxMinus_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.CausalOrderTwoSetting.old_setting_still_mimicked' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderTwoSetting.xx_setting_separates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderTwoSetting.two_setting_not_equivalent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderUnrestricted.every_scalar_table_mimicked' does not depend on any axioms
+'OntologySeparation.CausalOrderUnrestricted.coherent_table_mimicked' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderUnrestricted.no_scalar_separator_against_unrestricted' does not depend on any axioms
+'OntologySeparation.CausalOrderUnrestricted.two_setting_not_witness_against_unrestricted' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.NestedFriendliness.theory_iff_operational' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.NestedFriendliness.theory_iff_lf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.NestedFriendliness.quantum_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.NestedFriendliness.depth_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LocalityFreeFriendliness.antiAB_matches' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LocalityFreeFriendliness.antiBC_matches' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LocalityFreeFriendliness.antiAC_matches' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.LocalityFreeFriendliness.shared_and_faithful_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LocalityFreeFriendliness.locality_free_core_minimal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
