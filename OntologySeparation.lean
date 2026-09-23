@@ -45,3 +45,5 @@ import OntologySeparation.Experiments.ConsensusAccess
 import OntologySeparation.Experiments.FriendshipMonogamy
 
 import OntologySeparation.Experiments.QuantumAccessMonogamy
+
+import OntologySeparation.Experiments.QuantumTwoObserverMonogamy
