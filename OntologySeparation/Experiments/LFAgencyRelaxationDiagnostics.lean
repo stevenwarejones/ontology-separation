@@ -60,7 +60,7 @@ def RecordRevealedWithin (j : AbsoluteEventTable) (delta : ℝ) : Prop :=
   (∀ x y y', recordTVAlice j x y y' ≤ delta) ∧
   (∀ x x' y, recordTVBob j x x' y ≤ delta)
 
-/-- The blind-pair law implies zero record-revealed signaling. -/
+/-- Exact conditional Local Agency implies zero record-revealed TV. -/
 theorem local_recordRevealedWithin_zero (j : AbsoluteEventTable) (hl : LFJoint.Local j) :
     RecordRevealedWithin j 0 := by
   constructor
