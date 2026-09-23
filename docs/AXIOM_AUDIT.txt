@@ -269,3 +269,16 @@
 'OntologySeparation.ConsensusRecords.perfect_record_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ConsensusRecords.gap_is_physical' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ConsensusRecords.perfect_record_core' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FriendshipMonogamy.residual_zero_of_perfect_inaccessible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamy.disjoint_access_monogamy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamy.sharedPerfect_target' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.FriendshipMonogamy.disjointNoPerfect_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamy.access_monogamy_minimal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
