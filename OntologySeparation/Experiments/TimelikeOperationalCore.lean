@@ -54,6 +54,9 @@ theorem correlator_base (m : Model)
     (x y : Fin 2) :
     correlator m x y =
       (m.hidden (0,0)).mean (fun l => m.alice l x 0 * m.bob l 0 y) := by
+  change (∀ s t l, (m.hidden s).mass l = (m.hidden t).mass l) at hs
+  change (∀ l x y y', m.alice l x y = m.alice l x y') at ha
+  change (∀ l x x' y, m.bob l x y = m.bob l x' y) at hb
   unfold correlator FiniteDistribution.mean
   apply Finset.sum_congr rfl
   intro l _
