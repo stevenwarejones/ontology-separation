@@ -48,12 +48,26 @@ theorem recordTVBob_nonnegative (j : AbsoluteEventTable) (x x' y : Fin 3) :
 /-- Conditional locality kills every record-revealed Alice TV exactly. -/
 theorem recordTVAlice_zero_of_local (j : AbsoluteEventTable) (hl : LFJoint.Local j)
     (x y y' : Fin 3) : recordTVAlice j x y y' = 0 := by
-  simp [recordTVAlice, recordAlice, hl.1]
+  unfold recordTVAlice
+  have hzero : ∀ r : Record, ∀ a : Bool,
+      recordAlice j x y r a - recordAlice j x y' r a = 0 := by
+    intro r a
+    unfold recordAlice
+    rw [hl.1 r x y y' a]
+    ring
+  simp [hzero]
 
 /-- Conditional locality kills every record-revealed Bob TV exactly. -/
 theorem recordTVBob_zero_of_local (j : AbsoluteEventTable) (hl : LFJoint.Local j)
     (x x' y : Fin 3) : recordTVBob j x x' y = 0 := by
-  simp [recordTVBob, recordBob, hl.2]
+  unfold recordTVBob
+  have hzero : ∀ r : Record, ∀ b : Bool,
+      recordBob j x y r b - recordBob j x' y r b = 0 := by
+    intro r b
+    unfold recordBob
+    rw [hl.2 r x x' y b]
+    ring
+  simp [hzero]
 
 /-- Uniform ceiling on every record-revealed remote-setting comparison. -/
 def RecordRevealedWithin (j : AbsoluteEventTable) (delta : ℝ) : Prop :=
