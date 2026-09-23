@@ -74,3 +74,7 @@ Compare each target against known Helstrom/data-processing and recovery results
 before making novelty claims. Scope the theorem to a reviewable physical class,
 and seek outside review of that translation; Lean certifies the stated premises,
 not the adequacy of a chosen laboratory model.
+
+The next scoped benchmark and the remaining non-textbook target are tracked in
+[the partial-access flagship contract](PARTIAL_ACCESS_FLAGSHIP.md), informed by
+[the LF readout/recovery literature audit](../research/LF_READOUT_LITERATURE.md).

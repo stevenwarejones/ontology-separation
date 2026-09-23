@@ -16,6 +16,19 @@ def error (rho sigma : QIT.State A) (t : FiniteQuantum.Test A B Bool) : ℝ :=
   (QIT.BinaryHypothesisTest.equalPriorError t.readout (t.evolution.applyState rho)
     (t.evolution.applyState sigma) : ℝ)
 
+/-- The binary decision error uses the same Born probabilities as reports. -/
+theorem error_eq_probability_gap (rho sigma : QIT.State A)
+    (t : FiniteQuantum.Test A B Bool) :
+    error rho sigma t = (1 - (t.prob rho true - t.prob sigma true)) / 2 := by
+  have hn := t.normalized rho
+  simp only [Fintype.sum_bool] at hn
+  unfold error QIT.BinaryHypothesisTest.equalPriorError
+    QIT.BinaryHypothesisTest.typeIError QIT.BinaryHypothesisTest.typeIIError
+    QIT.BinaryHypothesisTest.rejectProb QIT.BinaryHypothesisTest.acceptProb
+  simp only [NNReal.coe_div, NNReal.coe_add, NNReal.coe_ofNat]
+  change (t.prob rho false + t.prob sigma true) / 2 = _
+  linarith
+
 /-- Arbitrary finite CPTP preprocessing and binary readout cannot improve the
 accessible states' Helstrom optimum. Reuses upstream data processing. -/
 theorem every_test (rho sigma : QIT.State A) (t : FiniteQuantum.Test A B Bool) :
@@ -24,6 +37,14 @@ theorem every_test (rho sigma : QIT.State A) (t : FiniteQuantum.Test A B Bool) :
     t.readout (t.evolution.applyState rho) (t.evolution.applyState sigma)
   have hd := t.evolution.normalizedTraceDistance_applyState_le rho sigma
   unfold minimumError error
+  linarith
+
+theorem probability_gap_le (rho sigma : QIT.State A)
+    (t : FiniteQuantum.Test A B Bool) :
+    t.prob rho true - t.prob sigma true ≤ rho.normalizedTraceDistance sigma := by
+  have h := every_test rho sigma t
+  rw [error_eq_probability_gap] at h
+  unfold minimumError at h
   linarith
 
 /-- A proof-bearing mathematical optimum, not an assertion that a given device
