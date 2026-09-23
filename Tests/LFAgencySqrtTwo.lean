@@ -16,3 +16,5 @@ end OntologySeparation.Tests.LFAgencySqrtTwo
 
 #print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.sum_recordTV_lower_bound
 #print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.explicit_angle_bound
+
+-- Explicit-angle theorem is intentionally local in angle space.
