@@ -140,10 +140,34 @@ Cavalcanti and Wiseman,
 Entropy 23, 925 (2021), explicitly discuss the option of giving up or relaxing
 Local Agency.
 
-A focused literature search found these closely related relaxation programs but
-did not establish that the exact total-variation optimization used in this PR
-has already been published.  That novelty question should be resolved before
-turning the `(sqrt(2)-1)/2` angle result into a separate note.
+A focused literature search was then run specifically for relaxations of
+Local Agency / parameter independence in extended Wigner-friend scenarios,
+including searches combining those terms with total variation.
+
+The closest matches found were:
+
+- Moreno et al. quantify relaxations of **AOE** while retaining parameter
+  independence; their Eq. (3) is the same fixed-record conditional-independence
+  structure that this repository calls conditional Local Agency, but the
+  relaxed quantity in that paper is disagreement with the friend records, not
+  total-variation violation of parameter independence.
+- Cavalcanti and Wiseman explicitly identify the relevant LF locality principle
+  with parameter independence / Local Agency and discuss the conceptual option
+  of giving it up, but do not introduce the record-revealed TV optimization used
+  here.
+- Later Wigner-friend/objectivity work located in the search likewise relaxes
+  objectivity/readout assumptions rather than this exact TV measure of Local
+  Agency.
+
+No paper matching the exact optimization in this PR was found in that focused
+search.  This is **not** a novelty claim: the search is finite and terminology
+varies across the causal-inference and Wigner-friend literature.
+
+Because this branch is being retired as a negative result, this PR also
+**defers** a Lean proof of the explicit-angle `(sqrt(2)-1)/2` value.  If that
+quantity is revisited later, the right formal target is only the explicit-angle
+lower bound with exact `sqrt 2` arithmetic.  The statement that no measurement
+angles do better remains numerical unless a separate analytic proof is found.
 
 ## Why this does not yield operational superluminal signaling
 
@@ -193,13 +217,15 @@ track.
 
 ## Reproducibility
 
-Run:
+Install the research extras and run the benchmark checker:
 
 ```bash
-python research/lf_hidden_local_agency.py
+python -m pip install -e ".[research]"
+python research/lf_hidden_local_agency.py --check
 ```
 
-with `numpy` and `scipy` installed.
+The main GitHub `verify` job runs this same `--check` command, so changes that
+move any documented benchmark beyond tolerance fail CI.
 
 It reproduces:
 
