@@ -108,7 +108,7 @@ private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
   change (∑ o : Bool × Bool,
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (0,0) r o) =
-    ∑ r : Record, recCorr r * j.mass (0,0) r
+    ∑ r : Record, recCorr r * j.mass (0,0) r)
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -123,7 +123,7 @@ private theorem corr02_as_recordBob (j : AbsoluteEventTable) (hr : Readable j) :
   change (∑ o : Bool × Bool,
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (0,2) r o) =
-    ∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b
+    ∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b)
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -138,7 +138,7 @@ private theorem corr20_as_recordAlice (j : AbsoluteEventTable) (hr : Readable j)
   change (∑ o : Bool × Bool,
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (2,0) r o) =
-    ∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a
+    ∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a)
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -155,7 +155,7 @@ private theorem corr22_as_joint (j : AbsoluteEventTable) :
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (2,2) r o) =
     ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
-      outCorr a b * j.prob (2,2) r (a,b)
+      outCorr a b * j.prob (2,2) r (a,b))
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
