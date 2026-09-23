@@ -1,0 +1,35 @@
+{
+  "repository": "https://github.com/stevenwarejones/forced-signaling",
+  "commit": "bae83b865ea60b1fbc4b808e66dc9bbaf7da2d4b",
+  "source_files": {
+    "paper/verify_K8.py": "9fa247310544dff3af58c8bd1df628441a529a84b0af9e1cb9473284eba84209",
+    "paper/K8_certificate.json": "8fbf9ab31ace9b441a2a9e8ba7483f2e1ffafc0c4a6dbc80c98970c46fae20d3"
+  },
+  "encoding": "UTF-8 JSON integer arrays, separators comma/colon, no whitespace or trailing newline",
+  "shapes": {
+    "objective": [
+      384
+    ],
+    "constraints": [
+      272,
+      384
+    ],
+    "normalization": [
+      4,
+      384
+    ],
+    "support": [
+      36
+    ],
+    "normalizationDual": [
+      4
+    ]
+  },
+  "sha256": {
+    "objective": "9cd5499a5af317877e47424b1521edd9e6790c9cca0dc1f03311ead68e4a5186",
+    "constraints": "99b3aad46616c02b7de574acf5d0e816f40ee1269aca4fa9fb50d368e1a3524a",
+    "normalization": "a52dccbc93c019cade5b3bea0ebb4ed3f6274a66836cda58d667df37897e8d49",
+    "support": "603a4ae98f14b2b800ba3583c62e5cdfc10315f6c0189487d378ef93efa531e6",
+    "normalizationDual": "bb5464ceb73d42d54d15865ef30ed358b4ef1df1f50f056bb9620eb012939d61"
+  }
+}

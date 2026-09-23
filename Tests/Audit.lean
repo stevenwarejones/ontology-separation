@@ -1,3 +1,5 @@
+import OntologySeparation.Signaling
+import OntologySeparation.Certificates.ForcedSignaling
 import OntologySeparation.PartialEnvironment
 import OntologySeparation.Statistics
 import OntologySeparation.Experiments.EnvironmentDiscrimination
@@ -254,6 +256,28 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.FiniteQuantum.Named.both_allowed
 #print axioms OntologySeparation.FiniteQuantum.Named.left_equivalent
 
+-- External finite-LP feasibility spike; no physical representation theorem claimed.
+#print axioms OntologySeparation.ForcedSignaling.dual_feasible
+#print axioms OntologySeparation.ForcedSignaling.bound
+#print axioms OntologySeparation.ForcedSignaling.zeroBudget
+#print axioms OntologySeparation.ForcedSignaling.zeroBudget_score
+
+-- Physical response model, LP correspondence, sharp optimum and adopter contracts.
+#print axioms OntologySeparation.HiddenInfluence.Model.behavior
+#print axioms OntologySeparation.HiddenInfluence.strategy_output
+#print axioms OntologySeparation.HiddenInfluence.Model.fromStrategies
+#print axioms OntologySeparation.HiddenInfluence.Model.toLP
+#print axioms OntologySeparation.HiddenInfluence.lp_score
+#print axioms OntologySeparation.HiddenInfluence.no_signaling_B
+#print axioms OntologySeparation.HiddenInfluence.no_signaling_C
+#print axioms OntologySeparation.HiddenInfluence.Sharp.score_exact
+#print axioms OntologySeparation.HiddenInfluence.Sharp.signaling_exact
+#print axioms OntologySeparation.HiddenInfluence.sharp_tradeoff
+#print axioms OntologySeparation.HiddenInfluence.coefficient_optimal
+#print axioms OntologySeparation.SharpOptimum.sound
+#print axioms OntologySeparation.SignalingStudy.Study.boundClaim
+#print axioms OntologySeparation.SignalingStudy.Study.attainmentClaim
+#print axioms OntologySeparation.SignalingStudy.Study.signalingClaim
 #print axioms OntologySeparation.RecordEnvironment.copyEnvironment_isometry
 #print axioms OntologySeparation.RecordEnvironment.preparation_is_copy
 #print axioms OntologySeparation.RecordEnvironment.collapsed_entry
