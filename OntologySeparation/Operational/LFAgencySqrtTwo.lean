@@ -317,7 +317,7 @@ theorem explicit_angle_quantum_bound (j : AbsoluteEventTable) (hr : Readable j)
       AngleOptimality.explicit_chshNumerator
   rw [hval] at hchsh
   by_contra hn
-  push_neg at hn
+  push Not at hn
   unfold sqrtTwoDelta at hn
   linarith
 
