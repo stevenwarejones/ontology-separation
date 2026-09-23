@@ -107,21 +107,17 @@ def certificate : MinimalCore Holds Target core where
     | faithfulAwareness =>
         refine ⟨unawareAdversary, ?_, trivial⟩
         intro kept hkept
-        have hk : kept = Law.remoteDependentChange ∨ kept = Law.noSignalingAwareness := by
-          simp [core] at hkept
-          exact hkept
-        rcases hk with rfl | rfl
-        · exact unaware_dependent
-        · exact unaware_nosignaling
+        cases kept with
+        | remoteDependentChange => exact unaware_dependent
+        | faithfulAwareness => simp [core] at hkept
+        | noSignalingAwareness => exact unaware_nosignaling
     | noSignalingAwareness =>
         refine ⟨signalingAwarenessAdversary, ?_, trivial⟩
         intro kept hkept
-        have hk : kept = Law.remoteDependentChange ∨ kept = Law.faithfulAwareness := by
-          simp [core] at hkept
-          exact hkept
-        rcases hk with rfl | rfl
-        · exact signalingAwareness_dependent
-        · exact signalingAwareness_faithful
+        cases kept with
+        | remoteDependentChange => exact signalingAwareness_dependent
+        | faithfulAwareness => exact signalingAwareness_faithful
+        | noSignalingAwareness => simp [core] at hkept
 
 theorem memory_awareness_core_minimal :
     (∀ m, Satisfies Holds core m → ¬ Target m) ∧
