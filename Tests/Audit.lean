@@ -317,3 +317,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ConsensusRecords.perfect_record_zero
 #print axioms OntologySeparation.ConsensusRecords.gap_is_physical
 #print axioms OntologySeparation.ConsensusRecords.perfect_record_core
+
+-- Consensus subset-access accounting roots.
+#print axioms OntologySeparation.ConsensusAccess.residual_before_eq_overlap_mul_after
+#print axioms OntologySeparation.ConsensusAccess.gap_before_eq_overlap_mul_after
+#print axioms OntologySeparation.ConsensusAccess.inaccessible_perfect_record_zero
+#print axioms OntologySeparation.ConsensusAccess.recover_last_perfect_record
+#print axioms OntologySeparation.ConsensusAccess.perfect_hidden_positive_iff_empty
+#print axioms OntologySeparation.ConsensusAccess.perfect_hidden_gap_positive_implies_empty
