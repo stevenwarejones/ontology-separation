@@ -89,10 +89,6 @@ theorem chshNumerator_le (a0 a1 b0 b1 : RealQuantum.Basis) :
       2*s*(a0x*(b1x-b0x) + a0y*(b1y-b0y) -
         a1x*(b0x+b1x) - a1y*(b0y+b1y)) ≤ 8 := by
     nlinarith
-  have hspos : 0 < s := by
-    have : (0 : ℝ) < 2 := by norm_num
-    dsimp [s]
-    exact Real.sqrt_pos.2 this
   have hc :
       chshNumerator a0 a1 b0 b1 =
         a0x*(b1x-b0x) + a0y*(b1y-b0y) -
