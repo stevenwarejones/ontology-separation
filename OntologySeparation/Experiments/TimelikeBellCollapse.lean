@@ -122,6 +122,9 @@ theorem response_score (m : Model) (l : Bool) :
       m.alice l 0 0 * m.bob l 0 1 +
       m.alice l 1 0 * m.bob l 0 0 -
       m.alice l 1 0 * m.bob l 0 1 := by
+  change Bell.score (productResponse
+    (fun x => m.alice l x 0) (fun y => m.bob l 0 y)
+    (fun x => m.alice_bounds l x 0) (fun y => m.bob_bounds l 0 y)) = _
   unfold Bell.score
   rw [productResponse_correlator, productResponse_correlator,
     productResponse_correlator, productResponse_correlator]
@@ -140,6 +143,8 @@ theorem score_preserved (m : Model)
   apply Finset.sum_congr rfl
   intro l _
   rw [response_score]
+  change (m.hidden (0,0)).mass l * _ = (m.hidden (0,0)).mass l * _
+  rfl
 
 /-- The reduced timelike core therefore embeds in the ordinary Bell
 screening-off assumptions used elsewhere in this repository. -/
