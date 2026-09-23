@@ -347,3 +347,12 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.MemoryAwarenessWitness.sqrt_two_gt_seven_fifths
 #print axioms OntologySeparation.MemoryAwarenessWitness.requiredNoSignalQ_negative
 #print axioms OntologySeparation.MemoryAwarenessWitness.no_probability_realizes_requiredNoSignalQ
+
+-- Baumann--Brukner concrete protocol bridge roots.
+#print axioms OntologySeparation.BaumannBruknerProtocol.sqrtTwo_sq
+#print axioms OntologySeparation.BaumannBruknerProtocol.computational_after_from_wigner
+#print axioms OntologySeparation.BaumannBruknerProtocol.rotated_after_from_wigner
+#print axioms OntologySeparation.BaumannBruknerProtocol.computational_flip_bridge
+#print axioms OntologySeparation.BaumannBruknerProtocol.rotated_flip_bridge
+#print axioms OntologySeparation.BaumannBruknerProtocol.exact_setting_dependence
+#print axioms OntologySeparation.BaumannBruknerProtocol.flip_rates_differ
