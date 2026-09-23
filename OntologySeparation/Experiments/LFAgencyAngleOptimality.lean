@@ -103,6 +103,17 @@ theorem chshNumerator_le (a0 a1 b0 b1 : RealQuantum.Basis) :
 def anchoredWitness (a0 a1 b0 b1 : RealQuantum.Basis) : ℝ :=
   (chshNumerator a0 a1 b0 b1 - 2) / 4
 
+/-- The certificate normalization is exactly the relaxed-CHSH statement
+`S_CHSH ≤ 2 + 4*δ`. This is the formal bridge to the established
+parameter-independence/signaling-relaxation literature. -/
+theorem anchoredWitness_le_iff_relaxed_chsh
+    (a0 a1 b0 b1 : RealQuantum.Basis) (delta : ℝ) :
+    anchoredWitness a0 a1 b0 b1 ≤ delta ↔
+      chshNumerator a0 a1 b0 b1 ≤ 2 + 4 * delta := by
+  unfold anchoredWitness
+  constructor <;> intro h <;> linarith
+
+
 theorem anchoredWitness_le_sqrtTwoDelta (a0 a1 b0 b1 : RealQuantum.Basis) :
     anchoredWitness a0 a1 b0 b1 ≤ sqrtTwoDelta := by
   have h := chshNumerator_le a0 a1 b0 b1
