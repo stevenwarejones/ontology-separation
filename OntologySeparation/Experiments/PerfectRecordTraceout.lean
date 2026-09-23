@@ -29,9 +29,14 @@ def copyIsometry (branch : A → Bool) : Matrix (A × Bool) A ℂ := fun o i =>
 
 theorem copyIsometry_isometry (branch : A → Bool) :
     Matrix.conjTranspose (copyIsometry branch) * copyIsometry branch = 1 := by
+  classical
   ext i j
-  simp [copyIsometry, Matrix.mul_apply, Matrix.conjTranspose_apply,
-    Fintype.sum_prod_type, Matrix.one_apply]
+  simp only [Matrix.mul_apply, Matrix.conjTranspose_apply, copyIsometry,
+    Fintype.sum_prod_type, star_ite, star_one, star_zero, Matrix.one_apply]
+  by_cases hij : i = j
+  · subst j
+    cases hb : branch i <;> simp [hb]
+  · cases hi : branch i <;> cases hj : branch j <;> simp [hi, hj, hij]
 
 def copiedState (branch : A → Bool) (rho : QIT.State A) :
     QIT.State (A × Bool) :=
@@ -42,11 +47,14 @@ def copiedState (branch : A → Bool) (rho : QIT.State A) :
 theorem marginal_entry (branch : A → Bool) (rho : QIT.State A) (i j : A) :
     (copiedState branch rho).marginalA.matrix i j =
       if branch i = branch j then rho.matrix i j else 0 := by
+  classical
   change
     (∑ e : Bool, (copiedState branch rho).matrix (i,e) (j,e)) =
       if branch i = branch j then rho.matrix i j else 0
-  simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
-    Matrix.mul_apply, Matrix.conjTranspose_apply, Fintype.sum_prod_type]
+  simp only [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
+    Matrix.mul_apply, Matrix.conjTranspose_apply, Fintype.sum_bool,
+    star_ite, star_one, star_zero]
+  cases hi : branch i <;> cases hj : branch j <;> simp [hi, hj]
 
 /-- Cross-branch coherence is exactly zero after tracing one inaccessible perfect
 record, independently of the dimension and internal structure of A. -/
@@ -72,6 +80,7 @@ theorem inaccessible_copy_changes_coherent_state
     (copiedState branch rho).marginalA ≠ rho := by
   intro h
   have hij := congrArg (fun s : QIT.State A => s.matrix i j) h
+  change (copiedState branch rho).marginalA.matrix i j = rho.matrix i j at hij
   rw [cross_branch_zero branch rho i j hbranch] at hij
   exact hcoh hij.symm
 
