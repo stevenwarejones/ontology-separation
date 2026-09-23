@@ -41,3 +41,5 @@ import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Experiments.ConsensusRecords
 
 import OntologySeparation.Experiments.ConsensusAccess
+
+import OntologySeparation.Experiments.FriendshipMonogamy
