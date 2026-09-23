@@ -60,7 +60,10 @@ theorem correlator_base (m : Model)
   unfold correlator FiniteDistribution.mean
   apply Finset.sum_congr rfl
   intro l _
-  rw [hs (x,y) (0,0) l, ha l x y 0, hb l x 0 y]
+  rw [hs (x,y) (0,0) l]
+  change (m.hidden (0,0)).mass l * (m.alice l x y * m.bob l x y) =
+    (m.hidden (0,0)).mass l * (m.alice l x 0 * m.bob l 0 y)
+  rw [ha l x y 0, hb l x 0 y]
 
 theorem score_base (m : Model)
     (hs : Holds .stablePseudoEvents m)
