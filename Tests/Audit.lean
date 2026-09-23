@@ -311,3 +311,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.AdversarySearch.satisfies_mono
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
+
+-- P06 fixed-order adversary roots.
+#print axioms OntologySeparation.CausalOrderAdversary.zGate_norm
+#print axioms OntologySeparation.CausalOrderAdversary.xGate_norm
+#print axioms OntologySeparation.CausalOrderAdversary.fixed_order_mimics_current_statistic
+#print axioms OntologySeparation.CausalOrderAdversary.no_input_separates
+#print axioms OntologySeparation.CausalOrderAdversary.definite_order_countermodel
