@@ -126,27 +126,25 @@ def certificate : MinimalCore (Holds (ι := WitnessIndex)) Target core where
       hm .disjointCoherentAccess (by simp [core])
     have hz := disjoint_access_monogamy m hp hd
     rcases hz with hA | hB
-    · exact (not_lt_of_eq hA.symm) ht.1
-    · exact (not_lt_of_eq hB.symm) ht.2
+    · rw [hA] at ht
+      exact (lt_irrefl 0) ht.1
+    · rw [hB] at ht
+      exact (lt_irrefl 0) ht.2
   deletionAdversary := by
     intro law hlaw
     cases law with
     | perfectDurableRecord =>
         refine ⟨disjointNoPerfect, ?_, disjointNoPerfect_target⟩
         intro kept hkept
-        have hk : kept = Law.disjointCoherentAccess := by
-          simp [core] at hkept
-          exact hkept
-        subst kept
-        exact disjointNoPerfect_disjoint
+        cases kept with
+        | perfectDurableRecord => simp [core] at hkept
+        | disjointCoherentAccess => exact disjointNoPerfect_disjoint
     | disjointCoherentAccess =>
         refine ⟨sharedPerfect, ?_, sharedPerfect_target⟩
         intro kept hkept
-        have hk : kept = Law.perfectDurableRecord := by
-          simp [core] at hkept
-          exact hkept
-        subst kept
-        exact sharedPerfect_has_perfect
+        cases kept with
+        | perfectDurableRecord => exact sharedPerfect_has_perfect
+        | disjointCoherentAccess => simp [core] at hkept
 
 theorem access_monogamy_minimal :
     (∀ m, Satisfies (Holds (ι := WitnessIndex)) core m → ¬ Target m) ∧
