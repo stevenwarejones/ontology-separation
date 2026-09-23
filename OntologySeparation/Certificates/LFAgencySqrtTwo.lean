@@ -18,7 +18,7 @@ def fixedZeroIndex (k : Fin 7) : Fin 144 :=
 
 def objective (j : Column) : ℤ := if j.val < 144 then 0 else 1
 
-private def rawEqCoeff (i : Fin 75) (j : Column) : ℤ :=
+def rawEqCoeff (i : Fin 75) (j : Column) : ℤ :=
   if j.val < 144 then
     let q := j.val
     let x := q / 48
