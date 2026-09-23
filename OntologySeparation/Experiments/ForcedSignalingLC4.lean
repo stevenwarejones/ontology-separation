@@ -33,13 +33,13 @@ def qmul (x y : Q2) : Q2 :=
   (x.1*y.1 + 2*x.2*y.2, x.1*y.2 + x.2*y.1)
 
 @[simp] theorem qrat_zero : qrat 0 = 0 := rfl
-@[simp] theorem qrat_one : qrat 1 = 1 := rfl
 
 noncomputable def Q2.toReal (x : Q2) : ℝ :=
   (x.1 : ℝ) + (x.2 : ℝ) * Real.sqrt 2
 
 @[simp] theorem toReal_zero : Q2.toReal 0 = 0 := by simp [Q2.toReal]
-@[simp] theorem toReal_one : Q2.toReal 1 = 1 := by simp [Q2.toReal]
+@[simp] theorem toReal_qrat (r : ℚ) : Q2.toReal (qrat r) = (r : ℝ) := by
+  simp [Q2.toReal, qrat]
 @[simp] theorem toReal_add (x y : Q2) :
     Q2.toReal (x+y) = Q2.toReal x + Q2.toReal y := by
   simp [Q2.toReal]
@@ -48,13 +48,22 @@ noncomputable def Q2.toReal (x : Q2) : ℝ :=
 theorem toReal_qmul (x y : Q2) :
     Q2.toReal (qmul x y) = Q2.toReal x * Q2.toReal y := by
   have hs := Real.sq_sqrt (show (0:ℝ) ≤ 2 by norm_num)
-  simp [Q2.toReal, qmul]
-  nlinarith
+  simp only [Q2.toReal, qmul, Rat.cast_add, Rat.cast_mul, Rat.cast_ofNat]
+  ring_nf
+  rw [hs]
+  ring
+
+theorem toReal_sum_finset {α : Type} (s : Finset α) (f : α → Q2) :
+    Q2.toReal (∑ i in s, f i) = ∑ i in s, Q2.toReal (f i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp [Q2.toReal]
+  | @insert a s ha ih =>
+      simp [ha, toReal_add, ih]
 
 theorem toReal_sum {α : Type} [Fintype α] (f : α → Q2) :
     Q2.toReal (∑ i, f i) = ∑ i, Q2.toReal (f i) := by
-  classical
-  simp [Q2.toReal, Finset.sum_add_distrib, Finset.sum_mul]
+  simpa using toReal_sum_finset (Finset.univ : Finset α) f
 
 abbrev Basis4 := Bool × Bool × Bool × Bool
 
@@ -75,13 +84,14 @@ def clusterAmp (i : Basis4) : Q2 :=
 
 set_option maxRecDepth 100000 in
 theorem cluster_normalized :
-    ∑ i : Basis4, qmul (clusterAmp i) (clusterAmp i) = 1 := by
-  decide
+    ∑ i : Basis4, qmul (clusterAmp i) (clusterAmp i) = qrat 1 := by
+  norm_num [clusterAmp, clusterParity, bnat, bitA, bitB, bitC, bitD,
+    qmul, qrat, Fintype.sum_prod_type, Fintype.sum_bool]
 
 def outSign (o : Bool) : ℚ := if o then -1 else 1
 
 def zEffect (o i j : Bool) : Q2 :=
-  if i = j ∧ i = o then 1 else 0
+  if i = j ∧ i = o then qrat 1 else 0
 
 def xEffect (o i j : Bool) : Q2 :=
   if i = j then qrat (1/2)
@@ -107,12 +117,12 @@ def dEffect (setting outcome i j : Bool) : Q2 :=
 def fullProb
     (x y z w a b c d : Bool) : Q2 :=
   ∑ i : Basis4, ∑ j : Basis4,
-    qmul (qmul (qmul (qmul (qmul
+    qmul (qmul (qmul (qmul
       (qmul (clusterAmp i) (clusterAmp j))
       (aEffect x a (bitA i) (bitA j)))
       (bEffect y b (bitB i) (bitB j)))
       (cEffect z c (bitC i) (bitC j)))
-      (dEffect w d (bitD i) (bitD j))) 1
+      (dEffect w d (bitD i) (bitD j))
 
 def abd (x y w a b d : Bool) : Q2 :=
   fullProb x y false w a b false d +
@@ -122,26 +132,8 @@ def acd (x z w a c d : Bool) : Q2 :=
   fullProb x false z w a false c d +
   fullProb x false z w a true c d
 
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
-theorem full_normalized :
-    ∀ x y z w, ∑ a : Bool, ∑ b : Bool, ∑ c : Bool, ∑ d : Bool,
-      fullProb x y z w a b c d = 1 := by
-  decide
-
-/-- The two no-blind-pair marginal families have the 64+64 entries used by
-the Sigma LP: ABD at z=0 and ACD at y=0. -/
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
-theorem abd_normalized :
-    ∀ x y w, ∑ a : Bool, ∑ b : Bool, ∑ d : Bool, abd x y w a b d = 1 := by
-  decide
-
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
-theorem acd_normalized :
-    ∀ x z w, ∑ a : Bool, ∑ c : Bool, ∑ d : Bool, acd x z w a c d = 1 := by
-  decide
+/-- The two no-blind-pair marginal families used by the Sigma program are
+ABD at z=0 and ACD at y=0. -/
 
 def corr2 (x y z w : Bool) (pa pb : Bool) : Q2 :=
   ∑ a : Bool, ∑ b : Bool, ∑ c : Bool, ∑ d : Bool,
@@ -165,10 +157,14 @@ def score : Q2 :=
   qmul (qrat 2) (corrACD false false true true)
 
 /-- Exact LC4 value S4 = 4 + 2 sqrt(2), derived from the state/projectors. -/
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+
 theorem score_exact : score = q 4 2 := by
-  decide
+  norm_num [score, corr2, corrABD, corrACD, fullProb,
+    clusterAmp, clusterParity, bnat, bitA, bitB, bitC, bitD,
+    aEffect, bEffect, cEffect, dEffect, xEffect, zEffect, outSign,
+    qmul, qrat, q, Fintype.sum_prod_type, Fintype.sum_bool]
 
 theorem score_exact_real :
     Q2.toReal score = 4 + 2 * Real.sqrt 2 := by
