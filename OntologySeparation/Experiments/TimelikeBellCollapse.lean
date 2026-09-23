@@ -33,10 +33,8 @@ def productResponse (alice : Fin 2 → ℝ) (bob : Fin 2 → ℝ)
     (outcomeProb_nonneg _ (ha s.1) o.1)
     (outcomeProb_nonneg _ (hb s.2) o.2)
   normalized s := by
-    rw [Fintype.sum_prod_type]
-    simp_rw [← Finset.mul_sum]
-    rw [outcomeProb_sum]
-    simp [outcomeProb_sum]
+    simp [Fintype.sum_prod_type, outcomeProb, RealQuantum.sign]
+    ring
 
 theorem productResponse_marginalA
     (alice : Fin 2 → ℝ) (bob : Fin 2 → ℝ)
@@ -45,7 +43,7 @@ theorem productResponse_marginalA
     (x y : Fin 2) (a : Bool) :
     ∑ b, (productResponse alice bob ha hb).prob (x,y) (a,b) =
       outcomeProb (alice x) a := by
-  simp [productResponse, ← Finset.mul_sum, outcomeProb_sum]
+  cases a <;> simp [productResponse, outcomeProb, RealQuantum.sign, Fintype.sum_bool] <;> ring
 
 theorem productResponse_marginalB
     (alice : Fin 2 → ℝ) (bob : Fin 2 → ℝ)
@@ -54,10 +52,7 @@ theorem productResponse_marginalB
     (x y : Fin 2) (b : Bool) :
     ∑ a, (productResponse alice bob ha hb).prob (x,y) (a,b) =
       outcomeProb (bob y) b := by
-  rw [show (∑ a, (productResponse alice bob ha hb).prob (x,y) (a,b)) =
-    (∑ a, outcomeProb (alice x) a) * outcomeProb (bob y) b by
-      simp [productResponse, Finset.sum_mul]]
-  rw [outcomeProb_sum, one_mul]
+  cases b <;> simp [productResponse, outcomeProb, RealQuantum.sign, Fintype.sum_bool] <;> ring
 
 theorem productResponse_noSignaling
     (alice : Fin 2 → ℝ) (bob : Fin 2 → ℝ)
@@ -122,7 +117,7 @@ theorem toOperationalBell_screened (m : Model) :
 /-- Each hidden Bell response has exactly the conditional CHSH expression
 used by the timelike score decomposition. -/
 theorem response_score (m : Model) (l : Bool) :
-    Bell.score (toOperationalBell m).response l =
+    Bell.score ((toOperationalBell m).response l) =
       m.alice l 0 0 * m.bob l 0 0 +
       m.alice l 0 0 * m.bob l 0 1 +
       m.alice l 1 0 * m.bob l 0 0 -
