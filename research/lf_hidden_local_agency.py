@@ -92,7 +92,7 @@ def _normalization_rows(n: int) -> tuple[list[np.ndarray], list[float]]:
 
 
 def solve_score_lp(*, unread_records: bool, target_score: float | None = None,
-                   delta_fixed: float | None = None):
+                   delta_fixed: float | None = None, exact_readout: bool = True):
     """Solve the score surrogate with either observed or unread early records."""
     cells = 4 if unread_records else 8
     nslack = 16 * cells
@@ -183,19 +183,22 @@ def solve_score_lp(*, unread_records: bool, target_score: float | None = None,
                 add_context(coeffs)
 
     bounds = [(0.0, None)] * n
-    if unread_records:
+    if unread_records and exact_readout:
         for j in range(256):
             if j not in READOUT_CONSISTENT:
                 bounds[j] = (0.0, 0.0)
     if delta_fixed is not None:
         bounds[delta] = (float(delta_fixed), float(delta_fixed))
 
-    return linprog(
+    result = linprog(
         objective,
         A_ub=np.asarray(aub), b_ub=np.asarray(bub),
         A_eq=np.asarray(aeq), b_eq=np.asarray(beq),
         bounds=bounds, method="highs",
     )
+    if not result.success:
+        raise RuntimeError(result.message)
+    return result
 
 
 def singlet_probs(a_angles: list[float], b_angles: list[float]) -> np.ndarray:
@@ -351,12 +354,16 @@ def main() -> None:
     observed0 = solve_score_lp(unread_records=False, delta_fixed=0)
     unread8 = solve_score_lp(unread_records=True, target_score=8)
     unread0 = solve_score_lp(unread_records=True, delta_fixed=0)
+    unread_no_readout8 = solve_score_lp(
+        unread_records=True, target_score=8, exact_readout=False
+    )
 
     print("score surrogate")
     print(f"  observed: min TV at score 8 = {observed8.fun:.12g}")
     print(f"  observed: zero-TV score max = {-observed0.fun:.12g}")
     print(f"  unread+readout: min TV at score 8 = {unread8.fun:.12g}")
     print(f"  unread+readout: zero-TV score max = {-unread0.fun:.12g}")
+    print(f"  unread without readout: min TV at score 8 = {unread_no_readout8.fun:.12g}")
 
     rational_a = [0.0, math.atan2(-4, 3), 0.0]
     rational_b = [math.atan2(-3, 4), 0.0, math.atan2(-8, 15)]
@@ -381,6 +388,7 @@ def main() -> None:
             ("observed zero-TV score", -observed0.fun, 6),
             ("unread score-8 TV", unread8.fun, 1/8),
             ("unread zero-TV score", -unread0.fun, 22/3),
+            ("unread no-readout score-8 TV", unread_no_readout8.fun, 0),
             ("rational-angle full-table TV", rational, 63/625),
             ("pi/8-grid full-table TV", angle_target, radical),
         ]
