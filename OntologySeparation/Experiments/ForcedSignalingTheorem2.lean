@@ -82,21 +82,20 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem marginalCoeff_eq_scoreCoeff : ∀ j : Atom,
     marginalCoeff j = scoreCoeff j := by
-  decide
+  with_unfolding_all decide +kernel
 
 theorem marginalScore_eq_score (m : Model) :
     marginalScore m = score m.behavior := by
   rw [score_eq]
   unfold marginalScore modelABD modelACD
-  simp only [Finset.mul_sum, Finset.sum_mul, Finset.sum_add_distrib]
-  rw [Finset.sum_comm]
-  simp only [mul_ite, mul_one, mul_zero]
-  change
-    (∑ j : Atom, (marginalCoeff j : ℝ) * m.weight j) =
-      ∑ j : Atom, (scoreCoeff j : ℝ) * m.weight j
+  simp only [Fintype.sum_bool, Finset.mul_sum,
+    ← Finset.sum_add_distrib, ← Finset.sum_sub_distrib]
   apply Finset.sum_congr rfl
   intro j _
-  rw [marginalCoeff_eq_scoreCoeff]
+  rw [← marginalCoeff_eq_scoreCoeff]
+  simp only [marginalCoeff, Fintype.sum_bool, Int.cast_add, Int.cast_sub,
+    Int.cast_mul, Int.cast_ofNat, Int.cast_ite, Int.cast_zero, Int.cast_one]
+  ring
 
 def targetMarginalScoreQ2 : Q2 :=
   (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
@@ -122,22 +121,22 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem targetMarginalScore_exact :
     targetMarginalScoreQ2 = ForcedSignalingLC4.score := by
-  decide
+  with_unfolding_all decide +kernel
+
+private theorem toReal_sub (a b : Q2) :
+    Q2.toReal (a - b) = Q2.toReal a - Q2.toReal b := by
+  simp [Q2.toReal]
+  ring
 
 theorem matches_score {m : Model} (h : MatchesCluster m) :
     score m.behavior = 4 + 2 * Real.sqrt 2 := by
   rw [← marginalScore_eq_score]
   unfold marginalScore
   simp_rw [h.abd, h.acd]
-  have hq := congrArg Q2.toReal targetMarginalScore_exact
-  rw [score_exact] at hq
-  simp only [Q2.toReal, q] at hq
+  have hq : Q2.toReal targetMarginalScoreQ2 = 4 + 2 * Real.sqrt 2 := by
+    rw [targetMarginalScore_exact, score_exact_real]
   rw [← hq]
-  unfold targetMarginalScoreQ2
-  simp_rw [toReal_add]
-  simp_rw [toReal_qmul]
-  simp [Q2.toReal, qrat]
-  ring
+  simp [targetMarginalScoreQ2, toReal_add, toReal_sub, toReal_qmul, toReal_sum]
 
 theorem lower_bound {m : Model} (h : MatchesCluster m) :
     ForcedSignalingLC4Witness.targetDelta ≤ m.signaling := by
@@ -153,22 +152,28 @@ theorem witness_matches : MatchesCluster ForcedSignalingLC4Witness.model where
   abd := ForcedSignalingLC4Witness.model_abd_matches
   acd := ForcedSignalingLC4Witness.model_acd_matches
 
+/-- The existing `SharpOptimum` interface maximizes its observable, so the
+minimum signaling is represented by maximizing negative signaling. -/
 def optimum :
     OntologySeparation.SharpOptimum
       (fun m : Model => MatchesCluster m)
-      (fun m => m.signaling)
-      ForcedSignalingLC4Witness.targetDelta where
-  upper := fun m hm => lower_bound hm
+      (fun m => -m.signaling)
+      (-ForcedSignalingLC4Witness.targetDelta) where
+  upper := fun _ hm => neg_le_neg (lower_bound hm)
   model := ForcedSignalingLC4Witness.model
   satisfies := witness_matches
-  attains := ForcedSignalingLC4Witness.signaling_exact
+  attains := congrArg Neg.neg ForcedSignalingLC4Witness.signaling_exact
 
 theorem exact_forced_signaling :
     (∀ m : Model, MatchesCluster m →
       ForcedSignalingLC4Witness.targetDelta ≤ m.signaling) ∧
     ∃ m : Model, MatchesCluster m ∧
-      m.signaling = ForcedSignalingLC4Witness.targetDelta :=
-  optimum.sound
+      m.signaling = ForcedSignalingLC4Witness.targetDelta := by
+  obtain ⟨hbound, m, hm, hattains⟩ := optimum.sound
+  constructor
+  · intro m hm
+    exact neg_le_neg_iff.mp (hbound m hm)
+  · exact ⟨m, hm, neg_injective hattains⟩
 
 theorem targetDelta_value :
     ForcedSignalingLC4Witness.targetDelta =

@@ -58,13 +58,13 @@ theorem sqrtTwo_le_two : Real.sqrt 2 ≤ (2 : ℝ) := by
   nlinarith
 
 set_option maxRecDepth 100000 in
-private theorem weight_cases (k : Seed) :
+private theorem weight_cases : ∀ k : Seed,
     weightQ2 k = qrat (1/8) ∨
     weightQ2 k = q (-1/8) (1/8) ∨
     weightQ2 k = q (1/8) (-1/16) ∨
     weightQ2 k = q 0 (1/16) ∨
     weightQ2 k = qrat (1/16) := by
-  decide
+  with_unfolding_all decide +kernel
 
 theorem weight_nonnegative (k : Seed) : 0 ≤ Q2.toReal (weightQ2 k) := by
   rcases weight_cases k with h | h | h | h | h <;> rw [h] <;>
@@ -75,7 +75,7 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem totalsQ2 : ∀ e : Early,
     (∑ k : Seed, if early (atoms k) = e then weightQ2 k else 0) = qrat 1 := by
-  decide
+  with_unfolding_all decide +kernel
 
 noncomputable def model : Model :=
   Model.ofAtoms atoms (fun k => Q2.toReal (weightQ2 k))
@@ -83,7 +83,7 @@ noncomputable def model : Model :=
     (fun e => by
       have h := congrArg Q2.toReal (totalsQ2 e)
       rw [toReal_sum] at h
-      simpa [Q2.toReal] using h)
+      simpa [Q2.toReal, qrat, apply_ite] using h)
 
 def earlyOf (x w : Bool) : Early :=
   ⟨2*x.toNat + w.toNat, by
@@ -115,13 +115,13 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem seed_abd_matches :
     ∀ x y w a b d, seedABD x y w a b d = ForcedSignalingLC4.abd x y w a b d := by
-  decide
+  with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem seed_acd_matches :
     ∀ x z w a c d, seedACD x z w a c d = ForcedSignalingLC4.acd x z w a c d := by
-  decide
+  with_unfolding_all decide +kernel
 
 noncomputable def modelABD (m : Model) (x y w a b d : Bool) : ℝ :=
   ∑ j : Atom,
@@ -142,18 +142,24 @@ theorem model_abd_matches (x y w a b d : Bool) :
       Q2.toReal (ForcedSignalingLC4.abd x y w a b d) := by
   unfold modelABD model
   rw [HiddenInfluence.atomWeights_sum]
-  rw [← ForcedSignalingLC4.toReal_sum]
-  rw [seed_abd_matches]
-  rfl
+  rw [← seed_abd_matches]
+  unfold seedABD
+  rw [ForcedSignalingLC4.toReal_sum]
+  apply Finset.sum_congr rfl
+  intro k _
+  split_ifs <;> simp_all
 
 theorem model_acd_matches (x z w a c d : Bool) :
     modelACD model x z w a c d =
       Q2.toReal (ForcedSignalingLC4.acd x z w a c d) := by
   unfold modelACD model
   rw [HiddenInfluence.atomWeights_sum]
-  rw [← ForcedSignalingLC4.toReal_sum]
-  rw [seed_acd_matches]
-  rfl
+  rw [← seed_acd_matches]
+  unfold seedACD
+  rw [ForcedSignalingLC4.toReal_sum]
+  apply Finset.sum_congr rfl
+  intro k _
+  split_ifs <;> simp_all
 
 def diffQ2 (c : Context) (o : Recipient) : Q2 :=
   ∑ k : Seed,
@@ -164,16 +170,14 @@ def diffQ2 (c : Context) (o : Recipient) : Q2 :=
 theorem difference_exact (c : Context) (o : Recipient) :
     difference model.behavior c o = Q2.toReal (diffQ2 c o) := by
   rw [model, HiddenInfluence.ofAtoms_difference]
-  rw [← ForcedSignalingLC4.toReal_sum]
-  apply congrArg ForcedSignalingLC4.Q2.toReal
-  rfl
+  simp [diffQ2, ForcedSignalingLC4.toReal_sum, ForcedSignalingLC4.toReal_qmul]
 
 def epsilonQ2 : Q2 := q (-1/16) (1/16)
 
 set_option maxRecDepth 100000 in
 private theorem diff_shape : ∀ c o,
     diffQ2 c o = 0 ∨ diffQ2 c o = epsilonQ2 ∨ diffQ2 c o = -epsilonQ2 := by
-  decide
+  with_unfolding_all decide +kernel
 
 theorem epsilon_nonnegative : 0 ≤ Q2.toReal epsilonQ2 := by
   simp [epsilonQ2, Q2.toReal, q]

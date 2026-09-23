@@ -1,4 +1,9 @@
-import Mathlib
+import Mathlib.Data.Real.Sqrt
+import Mathlib.Data.Fintype.BigOperators
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.FinCases
 
 /-!
 # Exact LC4 target for forced signaling
@@ -152,16 +157,30 @@ def score : Q2 :=
   corr2 false true false true true true +
   corrABD true false false false -
   corrABD true true false false +
-  qmul (qrat 2) (corr2 true false false false false true) +
+  qmul (qrat 2) (corr2 true false false false false false) +
   qmul (qrat 2) (corrACD false false true true)
 
 set_option maxRecDepth 100000
 set_option maxHeartbeats 0
 
-/-- Exact LC4 value S4 = 4 + 2 sqrt(2), derived from the state/projectors. -/
+-- Separate correlators keep the kernel computations small and reusable.
+private theorem ab0_exact : corr2 false false false true true true = q 0 (1/2) := by
+  decide +kernel
+private theorem ab1_exact : corr2 false true false true true true = q 0 (1/2) := by
+  decide +kernel
+private theorem abd0_exact : corrABD true false false false = q 0 (1/2) := by
+  decide +kernel
+private theorem abd1_exact : corrABD true true false false = q 0 (-1/2) := by
+  decide +kernel
+private theorem cd_exact : corr2 true false false false false false = qrat 1 := by
+  decide +kernel
+private theorem acd_exact : corrACD false false true true = qrat 1 := by
+  decide +kernel
 
+/-- Exact LC4 value S4 = 4 + 2 sqrt(2), derived from the state/projectors. -/
 theorem score_exact : score = q 4 2 := by
-  decide
+  rw [score, ab0_exact, ab1_exact, abd0_exact, abd1_exact, cd_exact, acd_exact]
+  norm_num [qmul, qrat, q]
 
 theorem score_exact_real :
     Q2.toReal score = 4 + 2 * Real.sqrt 2 := by
