@@ -119,31 +119,32 @@ theorem toOperationalBell_screened (m : Model) :
     (fun x => m.alice_bounds l x 0)
     (fun y => m.bob_bounds l 0 y) x y a b
 
-/-- The visible correlators of the Bell screening-off embedding equal the
-timelike model's correlators whenever the screening laws hold. -/
-theorem correlator_preserved (m : Model)
-    (hs : Holds .stablePseudoEvents m)
-    (ha : Holds .aliceScreened m)
-    (hb : Holds .bobScreened m)
-    (x y : Fin 2) :
-    Bell.correlator (toOperationalBell m).behavior x y = correlator m x y := by
-  rw [TimelikeOperationalCore.correlator_base m hs ha hb]
-  unfold OperationalBell.Model.behavior FiniteDistribution.mean
-  simp_rw [hs (x,y) (0,0)]
-  rw [Finset.sum_congr rfl]
-  intro l _
-  rw [productResponse_correlator]
-  rfl
+/-- Each hidden Bell response has exactly the conditional CHSH expression
+used by the timelike score decomposition. -/
+theorem response_score (m : Model) (l : Bool) :
+    Bell.score (toOperationalBell m).response l =
+      m.alice l 0 0 * m.bob l 0 0 +
+      m.alice l 0 0 * m.bob l 0 1 +
+      m.alice l 1 0 * m.bob l 0 0 -
+      m.alice l 1 0 * m.bob l 0 1 := by
+  unfold Bell.score
+  rw [productResponse_correlator, productResponse_correlator,
+    productResponse_correlator, productResponse_correlator]
 
-/-- Consequently the CHSH score is preserved exactly. -/
+/-- The CHSH score of the Bell screening-off embedding equals the reduced
+timelike score exactly whenever the three operational laws hold. -/
 theorem score_preserved (m : Model)
     (hs : Holds .stablePseudoEvents m)
     (ha : Holds .aliceScreened m)
     (hb : Holds .bobScreened m) :
     Bell.score (toOperationalBell m).behavior = score m := by
-  unfold Bell.score TimelikeOperationalCore.score
-  rw [correlator_preserved m hs ha hb, correlator_preserved m hs ha hb,
-    correlator_preserved m hs ha hb, correlator_preserved m hs ha hb]
+  have hi := toOperationalBell_independent m hs
+  rw [OperationalBell.score_mixture (toOperationalBell m) hi]
+  rw [TimelikeOperationalCore.score_base m hs ha hb]
+  unfold FiniteDistribution.mean
+  apply Finset.sum_congr rfl
+  intro l _
+  rw [response_score]
 
 /-- The reduced timelike core therefore embeds in the ordinary Bell
 screening-off assumptions used elsewhere in this repository. -/
