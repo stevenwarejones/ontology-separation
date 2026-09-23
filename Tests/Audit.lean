@@ -394,3 +394,24 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.LocalityFreeFriendliness.antiAC_matches
 #print axioms OntologySeparation.LocalityFreeFriendliness.shared_and_faithful_impossible
 #print axioms OntologySeparation.LocalityFreeFriendliness.locality_free_core_minimal
+
+-- Exact LC4 physical target for forced signaling.
+#print axioms OntologySeparation.ForcedSignalingLC4.cluster_normalized
+#print axioms OntologySeparation.ForcedSignalingLC4.score_exact
+#print axioms OntologySeparation.ForcedSignalingLC4.score_exact_real
+
+-- Exact LC4 hidden-influence witness roots.
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.seed_abd_matches
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.seed_acd_matches
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.model_abd_matches
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.model_acd_matches
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.tv_exact
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.signaling_exact
+
+-- Exact physical forced-signaling Theorem 2 roots.
+#print axioms OntologySeparation.ForcedSignalingTheorem2.marginalCoeff_eq_scoreCoeff
+#print axioms OntologySeparation.ForcedSignalingTheorem2.marginalScore_eq_score
+#print axioms OntologySeparation.ForcedSignalingTheorem2.matches_score
+#print axioms OntologySeparation.ForcedSignalingTheorem2.lower_bound
+#print axioms OntologySeparation.ForcedSignalingTheorem2.exact_forced_signaling
+#print axioms OntologySeparation.ForcedSignalingTheorem2.targetDelta_value
