@@ -99,11 +99,11 @@ set_option maxHeartbeats 0 in
 theorem dual_feasible : ∀ j : Column,
     (∑ i : EqRow, eqDual i * eqCoeff i j) +
       ∑ i : IneqRow, ineqDual i * ineqCoeff i j ≤ objective j := by
-  native_decide
+  decide
 
 set_option maxRecDepth 100000 in
 theorem ineqDual_nonpos : ∀ i : IneqRow, ineqDual i ≤ 0 := by
-  native_decide
+  decide
 
 noncomputable def rhs (i : EqRow) : ℝ :=
   if h : i.val < 36 then
