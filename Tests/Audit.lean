@@ -324,3 +324,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.CausalOrderTwoSetting.old_setting_still_mimicked
 #print axioms OntologySeparation.CausalOrderTwoSetting.xx_setting_separates
 #print axioms OntologySeparation.CausalOrderTwoSetting.two_setting_not_equivalent
+
+-- Unrestricted definite-order reporting adversary roots.
+#print axioms OntologySeparation.CausalOrderUnrestricted.every_scalar_table_mimicked
+#print axioms OntologySeparation.CausalOrderUnrestricted.coherent_table_mimicked
+#print axioms OntologySeparation.CausalOrderUnrestricted.no_scalar_separator_against_unrestricted
+#print axioms OntologySeparation.CausalOrderUnrestricted.two_setting_not_witness_against_unrestricted
