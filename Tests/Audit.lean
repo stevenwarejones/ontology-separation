@@ -481,3 +481,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.FriendshipMonogamyQuantum.every_observerA_test
 #print axioms OntologySeparation.FriendshipMonogamyQuantum.every_observerB_test
 #print axioms OntologySeparation.FriendshipMonogamyQuantum.two_copy_access_obstruction
+
+-- Finite stochastic conditional-local representation completeness.
+#print axioms OntologySeparation.HiddenInfluence.strategyAtom_atomStrategy
+#print axioms OntologySeparation.HiddenInfluence.atomStrategy_strategyAtom
+#print axioms OntologySeparation.HiddenInfluence.Model.fromStrategies_toStrategies
+#print axioms OntologySeparation.HiddenInfluence.StochasticModel.selected_probability
+#print axioms OntologySeparation.HiddenInfluence.StochasticModel.toStrategies_ofStrategies
+#print axioms OntologySeparation.HiddenInfluence.Model.stochastic_roundtrip
