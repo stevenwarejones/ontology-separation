@@ -1,56 +1,77 @@
-import OntologySeparation.Certificates.LFAgencySqrtTwo
+import OntologySeparation.Experiments.LFAgencyAngleOptimality
+import Mathlib.Tactic
+
+/-!
+# Direct physical bridge for the relaxed-CHSH Local-Agency bound
+
+The certificate behind the sqrt(2) result is a relaxed CHSH inequality.  Rather
+than re-encoding an LF joint table into a large finite LP, this module proves the
+physical statement directly from:
+
+* exact friend readout;
+* setting-independent absolute records;
+* the two record-revealed total-variation distances.
+
+For the readout setting 0 and Wigner setting 2,
+
+  CHSH <= 2 + 2 (TV_A + TV_B).
+
+Hence if both TVs are at most delta, CHSH <= 2 + 4 delta.
+-/
 
 namespace OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical
 noncomputable section
+
 open LFJoint
 open scoped BigOperators
-open SqrtTwoCertificate
 
-private def bitBool (n : ℕ) : Bool := if n % 2 = 0 then false else true
+private def sgn (b : Bool) : ℝ := RealQuantum.sign b
 
-private def qX (q : Fin 144) : Fin 3 := ⟨q.val / 48, by omega⟩
-private def qY (q : Fin 144) : Fin 3 := ⟨q.val / 16 % 3, Nat.mod_lt _ (by omega)⟩
-private def qR (q : Fin 144) : Record :=
-  let r := q.val / 4 % 4
-  (bitBool (r / 2), bitBool r)
-private def qA (q : Fin 144) : Bool := bitBool (q.val / 2)
-private def qB (q : Fin 144) : Bool := bitBool q.val
+private def recCorr (r : Record) : ℝ := sgn r.1 * sgn r.2
+private def recBobCorr (r : Record) (b : Bool) : ℝ := sgn r.1 * sgn b
+private def aliceRecCorr (r : Record) (a : Bool) : ℝ := sgn a * sgn r.2
+private def outCorr (a b : Bool) : ℝ := sgn a * sgn b
 
-private def qWeight (j : AbsoluteEventTable) (q : Fin 144) : ℝ :=
-  j.prob (qX q, qY q) (qR q) (qA q, qB q)
+private theorem sign_abs (b : Bool) : |sgn b| = 1 := by
+  cases b <;> simp [sgn, RealQuantum.sign]
 
-private def uWeight (j : AbsoluteEventTable) (k : Fin 16) : ℝ :=
-  if h : k.val < 8 then
-    let r : Record := (bitBool (k.val / 2 / 2), bitBool (k.val / 2))
-    let a := bitBool k.val
-    |recordAlice j 2 0 r a - recordAlice j 2 2 r a|
-  else
-    let kk := k.val - 8
-    let r : Record := (bitBool (kk / 2 / 2), bitBool (kk / 2))
-    let b := bitBool kk
-    |recordBob j 0 2 r b - recordBob j 2 2 r b|
+private theorem corr_abs_rec (r : Record) : |recCorr r| = 1 := by
+  rcases r with ⟨c,d⟩
+  simp [recCorr, sign_abs]
 
-def weights (j : AbsoluteEventTable) (c : Column) : ℝ :=
-  Fin.addCases (motive := fun _ => ℝ) (qWeight j) (uWeight j) c
+private theorem corr_abs_rb (r : Record) (b : Bool) : |recBobCorr r b| = 1 := by
+  rcases r with ⟨c,d⟩
+  cases c <;> cases d <;> cases b <;> simp [recBobCorr, sgn, RealQuantum.sign]
 
-theorem weights_nonnegative (j : AbsoluteEventTable) (c : Column) :
-    0 ≤ weights j c := by
-  unfold weights
-  refine Fin.addCases (m := 144) (n := 16) (fun q => ?_) (fun k => ?_) c
-  · exact j.nonneg _ _
-  · unfold uWeight
-    split <;> positivity
+private theorem corr_abs_ar (r : Record) (a : Bool) : |aliceRecCorr r a| = 1 := by
+  rcases r with ⟨c,d⟩
+  cases c <;> cases d <;> cases a <;> simp [aliceRecCorr, sgn, RealQuantum.sign]
 
-private theorem public_eq (j : AbsoluteEventTable) (hp : j.behavior = sqrtTwoBehavior)
-    (x y : Fin 3) (a b : Bool) :
-    (∑ r : Record, j.prob (x,y) r (a,b)) = sqrtTwoBehavior.prob (x,y) (a,b) := by
-  have h := congrArg (fun p : Behavior LF.interface => p.prob (x,y) (a,b)) hp
-  simpa [LFJoint.Table.behavior] using h
+private theorem corr_abs_out (a b : Bool) : |outCorr a b| = 1 := by
+  cases a <;> cases b <;> simp [outCorr, sgn, RealQuantum.sign]
 
-private theorem record_eq (j : AbsoluteEventTable) (hi : IndependentRecords j)
-    (x y : Fin 3) (r : Record) :
-    (∑ o, j.prob (x,y) r o) = ∑ o, j.prob (0,0) r o := by
-  exact hi (x,y) (0,0) r
+/-- A bounded observable changes by at most twice total variation. -/
+theorem weighted_difference_le_tv
+    {α : Type} [Fintype α] (p q f : α → ℝ)
+    (hf : ∀ x, |f x| ≤ 1) :
+    (∑ x, f x * p x) - (∑ x, f x * q x) ≤
+      ∑ x, |p x - q x| := by
+  calc
+    (∑ x, f x * p x) - (∑ x, f x * q x)
+        = ∑ x, f x * (p x - q x) := by
+            simp only [Finset.sum_sub_distrib]
+            apply Finset.sum_congr rfl
+            intro x _
+            ring
+    _ ≤ ∑ x, |p x - q x| := by
+      apply Finset.sum_le_sum
+      intro x _
+      calc
+        f x * (p x - q x) ≤ |f x * (p x - q x)| := le_abs_self _
+        _ = |f x| * |p x - q x| := abs_mul _ _
+        _ ≤ 1 * |p x - q x| := by
+          exact mul_le_mul_of_nonneg_right (hf x) (abs_nonneg _)
+        _ = |p x - q x| := one_mul _
 
 private theorem wrongA_zero (j : AbsoluteEventTable) (hr : Readable j)
     (r : Record) (y : Fin 3) (b : Bool) :
@@ -60,7 +81,8 @@ private theorem wrongA_zero (j : AbsoluteEventTable) (hr : Readable j)
   have hn1 := j.nonneg (0,y) r (!r.1,true)
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;> cases b <;>
-    simp [LFJoint.Table.mass, Fintype.sum_prod_type] at hread hn0 hn1 ⊢ <;> linarith
+    simp [LFJoint.Table.mass, Fintype.sum_prod_type] at hread hn0 hn1 ⊢ <;>
+    linarith
 
 private theorem wrongB_zero (j : AbsoluteEventTable) (hr : Readable j)
     (r : Record) (x : Fin 3) (a : Bool) :
@@ -70,86 +92,211 @@ private theorem wrongB_zero (j : AbsoluteEventTable) (hr : Readable j)
   have hn1 := j.nonneg (x,0) r (true,!r.2)
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;> cases a <;>
-    simp [LFJoint.Table.mass, Fintype.sum_prod_type] at hread hn0 hn1 ⊢ <;> linarith
+    simp [LFJoint.Table.mass, Fintype.sum_prod_type] at hread hn0 hn1 ⊢ <;>
+    linarith
 
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
-theorem physical_objective (j : AbsoluteEventTable) :
-    SqrtTwoCertificate.pairing SqrtTwoCertificate.objective (weights j) =
-      2 * recordTVAlice j 2 0 2 + 2 * recordTVBob j 0 2 2 := by
-  unfold SqrtTwoCertificate.pairing weights
-  rw [Fin.sum_univ_add (a := 144) (b := 16)]
-  norm_num [SqrtTwoCertificate.objective, uWeight, recordTVAlice, recordTVBob,
-    recordAlice, recordBob, bitBool, Fintype.sum_prod_type, Fin.sum_univ_succ]
-  ring
+private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
+    RealQuantum.correlator j.behavior 0 0 =
+      ∑ r : Record, recCorr r * j.mass (0,0) r := by
+  unfold RealQuantum.correlator LFJoint.Table.behavior
+  rw [Finset.sum_comm]
+  apply Finset.sum_congr rfl
+  intro r _
+  rcases r with ⟨c,d⟩
+  cases c <;> cases d <;>
+    simp [recCorr, sgn, RealQuantum.sign, LFJoint.Table.mass,
+      Fintype.sum_prod_type, wrongA_zero j hr, wrongB_zero j hr] <;> ring
 
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
-theorem physical_equations (j : AbsoluteEventTable) (hr : Readable j)
-    (hi : IndependentRecords j) (hp : j.behavior = sqrtTwoBehavior) :
-    ∀ i : EqRow, SqrtTwoCertificate.pairing (SqrtTwoCertificate.eqCoeff i) (weights j) =
-      SqrtTwoCertificate.rhs i := by
-  intro i
-  have hpub := public_eq j hp
-  have hrec := record_eq j hi
-  have hwa := wrongA_zero j hr
-  have hwb := wrongB_zero j hr
-  fin_cases i <;>
-    norm_num [SqrtTwoCertificate.pairing, weights, qWeight, uWeight,
-      SqrtTwoCertificate.eqCoeff, SqrtTwoCertificate.rawEqCoeff,
-      SqrtTwoCertificate.rhs, SqrtTwoCertificate.rawRhs,
-      SqrtTwoCertificate.rawEq, SqrtTwoCertificate.fixedZeroIndex,
-      qX, qY, qR, qA, qB, bitBool,
-      Fin.sum_univ_succ] <;>
-    simp_all [Fintype.sum_prod_type, LFJoint.Table.mass]
+private theorem corr02_as_recordBob (j : AbsoluteEventTable) (hr : Readable j) :
+    RealQuantum.correlator j.behavior 0 2 =
+      ∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b := by
+  unfold RealQuantum.correlator LFJoint.Table.behavior recordBob
+  rw [Finset.sum_comm]
+  apply Finset.sum_congr rfl
+  intro r _
+  rcases r with ⟨c,d⟩
+  cases c <;> cases d <;>
+    simp [recBobCorr, sgn, RealQuantum.sign, Fintype.sum_prod_type,
+      wrongA_zero j hr] <;> ring
 
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
-theorem physical_inequalities (j : AbsoluteEventTable) :
-    ∀ i : IneqRow,
-      SqrtTwoCertificate.pairing (SqrtTwoCertificate.ineqCoeff i) (weights j) ≤ 0 := by
-  intro i
-  fin_cases i <;>
-    norm_num [SqrtTwoCertificate.pairing, weights, qWeight, uWeight,
-      SqrtTwoCertificate.ineqCoeff, qX, qY, qR, qA, qB, bitBool,
-      recordAlice, recordBob, Fin.sum_univ_succ] <;>
-    apply sub_nonpos.mpr <;>
-    first | exact le_abs_self _ | exact neg_le_abs _
+private theorem corr20_as_recordAlice (j : AbsoluteEventTable) (hr : Readable j) :
+    RealQuantum.correlator j.behavior 2 0 =
+      ∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a := by
+  unfold RealQuantum.correlator LFJoint.Table.behavior recordAlice
+  rw [Finset.sum_comm]
+  apply Finset.sum_congr rfl
+  intro r _
+  rcases r with ⟨c,d⟩
+  cases c <;> cases d <;>
+    simp [aliceRecCorr, sgn, RealQuantum.sign, Fintype.sum_prod_type,
+      wrongB_zero j hr] <;> ring
 
-def toFeasible (j : AbsoluteEventTable) (hr : Readable j)
-    (hi : IndependentRecords j) (hp : j.behavior = sqrtTwoBehavior) :
-    SqrtTwoCertificate.Feasible where
-  weight := weights j
-  nonnegative := weights_nonnegative j
-  equations := physical_equations j hr hi hp
-  inequalities := physical_inequalities j
+private theorem corr22_as_joint (j : AbsoluteEventTable) :
+    RealQuantum.correlator j.behavior 2 2 =
+      ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
+        outCorr a b * j.prob (2,2) r (a,b) := by
+  unfold RealQuantum.correlator LFJoint.Table.behavior
+  rw [Finset.sum_comm]
+  simp [outCorr, Fintype.sum_prod_type]
 
-theorem sum_recordTV_lower_bound (j : AbsoluteEventTable) (hr : Readable j)
-    (hi : IndependentRecords j) (hp : j.behavior = sqrtTwoBehavior) :
-    Real.sqrt 2 - 1 ≤ recordTVAlice j 2 0 2 + recordTVBob j 0 2 2 := by
-  have h := SqrtTwoCertificate.bound (toFeasible j hr hi hp)
-  rw [physical_objective] at h
+private theorem record_mass_at_22 (j : AbsoluteEventTable)
+    (hi : IndependentRecords j) (r : Record) :
+    j.mass (0,0) r = j.mass (2,2) r := by
+  exact hi (0,0) (2,2) r
+
+private theorem recordBob22_mass (j : AbsoluteEventTable) (r : Record) :
+    ∑ b : Bool, recordBob j 2 2 r b = j.mass (2,2) r := by
+  unfold recordBob LFJoint.Table.mass
+  rw [Finset.sum_comm]
+
+private theorem recordAlice22_mass (j : AbsoluteEventTable) (r : Record) :
+    ∑ a : Bool, recordAlice j 2 2 r a = j.mass (2,2) r := by
+  unfold recordAlice LFJoint.Table.mass
+  rfl
+
+private theorem reference_chsh_le_two (j : AbsoluteEventTable) :
+    (∑ r : Record, recCorr r * j.mass (2,2) r) -
+      (∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 2 2 r b) +
+      (∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 2 r a) +
+      RealQuantum.correlator j.behavior 2 2 ≤ 2 := by
+  rw [corr22_as_joint]
+  unfold LFJoint.Table.mass recordBob recordAlice
+  rw [show (∑ r : Record, recCorr r * ∑ o : Outcome, j.prob (2,2) r o) =
+      ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
+        recCorr r * j.prob (2,2) r (a,b) by
+    apply Finset.sum_congr rfl
+    intro r _
+    simp [Fintype.sum_prod_type]
+    ring]
+  rw [show (∑ r : Record, ∑ b : Bool,
+      recBobCorr r b * ∑ a : Bool, j.prob (2,2) r (a,b)) =
+      ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
+        recBobCorr r b * j.prob (2,2) r (a,b) by
+    apply Finset.sum_congr rfl
+    intro r _
+    rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl
+    intro a _
+    ring]
+  rw [show (∑ r : Record, ∑ a : Bool,
+      aliceRecCorr r a * ∑ b : Bool, j.prob (2,2) r (a,b)) =
+      ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
+        aliceRecCorr r a * j.prob (2,2) r (a,b) by
+    apply Finset.sum_congr rfl
+    intro r _
+    apply Finset.sum_congr rfl
+    intro a _
+    ring]
+  have hpoint (r : Record) (a b : Bool) :
+      recCorr r - recBobCorr r b + aliceRecCorr r a + outCorr a b ≤ 2 := by
+    rcases r with ⟨c,d⟩
+    cases c <;> cases d <;> cases a <;> cases b <;>
+      norm_num [recCorr, recBobCorr, aliceRecCorr, outCorr, sgn, RealQuantum.sign]
+  have hnon := j.nonneg
+  calc
+    _ = ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
+        (recCorr r - recBobCorr r b + aliceRecCorr r a + outCorr a b) *
+          j.prob (2,2) r (a,b) := by
+          simp only [Finset.sum_sub_distrib, Finset.sum_add_distrib]
+          apply Finset.sum_congr rfl
+          intro r _
+          apply Finset.sum_congr rfl
+          intro a _
+          apply Finset.sum_congr rfl
+          intro b _
+          ring
+    _ ≤ ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
+        2 * j.prob (2,2) r (a,b) := by
+          apply Finset.sum_le_sum
+          intro r _
+          apply Finset.sum_le_sum
+          intro a _
+          apply Finset.sum_le_sum
+          intro b _
+          exact mul_le_mul_of_nonneg_right (hpoint r a b) (hnon (2,2) r (a,b))
+    _ = 2 := by
+          rw [← Finset.mul_sum]
+          rw [← Finset.sum_mul]
+          rw [← Finset.sum_mul]
+          rw [j.normalized]
+          norm_num
+
+private theorem bob_transport (j : AbsoluteEventTable) :
+    -(∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b) ≤
+      -(∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 2 2 r b) +
+        2 * recordTVBob j 0 2 2 := by
+  have h := weighted_difference_le_tv
+    (p := fun rb : Record × Bool => recordBob j 2 2 rb.1 rb.2)
+    (q := fun rb : Record × Bool => recordBob j 0 2 rb.1 rb.2)
+    (f := fun rb : Record × Bool => recBobCorr rb.1 rb.2)
+    (by intro rb; simpa [corr_abs_rb])
+  unfold recordTVBob
+  simp [Fintype.sum_prod_type] at h ⊢
   linarith
 
-theorem explicit_angle_bound (j : AbsoluteEventTable) (hr : Readable j)
-    (hi : IndependentRecords j) (hp : j.behavior = sqrtTwoBehavior) :
-    sqrtTwoDelta ≤ recordTVAlice j 2 0 2 ∨
-      sqrtTwoDelta ≤ recordTVBob j 0 2 2 := by
-  have h := sum_recordTV_lower_bound j hr hi hp
-  by_contra hn
-  push_neg at hn
-  unfold sqrtTwoDelta at hn
+private theorem alice_transport (j : AbsoluteEventTable) :
+    (∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a) ≤
+      (∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 2 r a) +
+        2 * recordTVAlice j 2 0 2 := by
+  have h := weighted_difference_le_tv
+    (p := fun ra : Record × Bool => recordAlice j 2 0 ra.1 ra.2)
+    (q := fun ra : Record × Bool => recordAlice j 2 2 ra.1 ra.2)
+    (f := fun ra : Record × Bool => aliceRecCorr ra.1 ra.2)
+    (by intro ra; simpa [corr_abs_ar])
+  unfold recordTVAlice
+  simpa [Fintype.sum_prod_type] using h
+
+/-- Direct Hall-type relaxed-CHSH theorem for readable absolute friend records. -/
+theorem relaxed_chsh_bound (j : AbsoluteEventTable) (hr : Readable j)
+    (hi : IndependentRecords j) :
+    RealQuantum.correlator j.behavior 0 0 -
+      RealQuantum.correlator j.behavior 0 2 +
+      RealQuantum.correlator j.behavior 2 0 +
+      RealQuantum.correlator j.behavior 2 2
+      ≤ 2 + 2 * (recordTVAlice j 2 0 2 + recordTVBob j 0 2 2) := by
+  rw [corr00_as_records j hr, corr02_as_recordBob j hr, corr20_as_recordAlice j hr]
+  have h00 :
+      (∑ r : Record, recCorr r * j.mass (0,0) r) =
+        ∑ r : Record, recCorr r * j.mass (2,2) r := by
+    apply Finset.sum_congr rfl
+    intro r _
+    rw [record_mass_at_22 j hi r]
+  rw [h00]
+  have href := reference_chsh_le_two j
+  have hb := bob_transport j
+  have ha := alice_transport j
   linarith
 
-/-- Final explicit-angle theorem stated directly for the concrete singlet
-measurement bases, rather than the intermediate exact probability table. -/
+theorem relaxed_chsh_uniform (j : AbsoluteEventTable) (hr : Readable j)
+    (hi : IndependentRecords j) {delta : ℝ}
+    (ha : recordTVAlice j 2 0 2 ≤ delta)
+    (hb : recordTVBob j 0 2 2 ≤ delta) :
+    RealQuantum.correlator j.behavior 0 0 -
+      RealQuantum.correlator j.behavior 0 2 +
+      RealQuantum.correlator j.behavior 2 0 +
+      RealQuantum.correlator j.behavior 2 2 ≤ 2 + 4 * delta := by
+  have h := relaxed_chsh_bound j hr hi
+  linarith
+
 theorem explicit_angle_quantum_bound (j : AbsoluteEventTable) (hr : Readable j)
     (hi : IndependentRecords j)
     (hp : j.behavior = RealQuantum.behavior explicitAlice explicitBob) :
     sqrtTwoDelta ≤ recordTVAlice j 2 0 2 ∨
       sqrtTwoDelta ≤ recordTVBob j 0 2 2 := by
-  apply explicit_angle_bound j hr hi
-  exact hp.trans explicit_quantum_matches
+  have hchsh := relaxed_chsh_bound j hr hi
+  have hval :
+      RealQuantum.correlator j.behavior 0 0 -
+        RealQuantum.correlator j.behavior 0 2 +
+        RealQuantum.correlator j.behavior 2 0 +
+        RealQuantum.correlator j.behavior 2 2 = 2 * Real.sqrt 2 := by
+    rw [hp]
+    simpa [AngleOptimality.chshNumerator, AngleOptimality.correlator_behavior] using
+      AngleOptimality.explicit_chshNumerator
+  rw [hval] at hchsh
+  by_contra hn
+  push_neg at hn
+  unfold sqrtTwoDelta at hn
+  linarith
 
 end
 end OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical
