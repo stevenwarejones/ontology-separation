@@ -31,12 +31,15 @@ theorem copyIsometry_isometry (branch : A → Bool) :
     Matrix.conjTranspose (copyIsometry branch) * copyIsometry branch = 1 := by
   classical
   ext i j
-  simp only [Matrix.mul_apply, Matrix.conjTranspose_apply, copyIsometry,
-    Fintype.sum_prod_type, star_ite, star_one, star_zero, Matrix.one_apply]
   by_cases hij : i = j
   · subst j
-    cases hb : branch i <;> simp [hb]
-  · cases hi : branch i <;> cases hj : branch j <;> simp [hi, hj, hij]
+    cases hb : branch i <;>
+      simp [copyIsometry, Matrix.mul_apply, Matrix.conjTranspose_apply,
+        Fintype.sum_prod_type, Matrix.one_apply, hb]
+  · have hji : j ≠ i := Ne.symm hij
+    cases hi : branch i <;> cases hj : branch j <;>
+      simp [copyIsometry, Matrix.mul_apply, Matrix.conjTranspose_apply,
+        Fintype.sum_prod_type, Matrix.one_apply, hij, hji, hi, hj]
 
 def copiedState (branch : A → Bool) (rho : QIT.State A) :
     QIT.State (A × Bool) :=
@@ -52,9 +55,9 @@ theorem marginal_entry (branch : A → Bool) (rho : QIT.State A) (i j : A) :
     (∑ e : Bool, (copiedState branch rho).matrix (i,e) (j,e)) =
       if branch i = branch j then rho.matrix i j else 0
   simp only [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
-    Matrix.mul_apply, Matrix.conjTranspose_apply, Fintype.sum_bool,
-    star_ite, star_one, star_zero]
-  cases hi : branch i <;> cases hj : branch j <;> simp [hi, hj]
+    Matrix.mul_apply, Matrix.conjTranspose_apply, Fintype.sum_bool]
+  cases hi : branch i <;> cases hj : branch j <;>
+    simp [hi, hj, eq_comm]
 
 /-- Cross-branch coherence is exactly zero after tracing one inaccessible perfect
 record, independently of the dimension and internal structure of A. -/
