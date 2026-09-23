@@ -53,17 +53,48 @@ theorem copied_entry (branch : A → Bool) (rho : QIT.State A)
     (copiedState branch rho).matrix (i,e) (j,f) =
       if e = branch i ∧ f = branch j then rho.matrix i j else 0 := by
   classical
-  by_cases he : e = branch i <;> by_cases hf : f = branch j
-  · subst e
-    subst f
-    simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
-      Matrix.mul_apply, Matrix.conjTranspose_apply]
-  · simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
-      Matrix.mul_apply, Matrix.conjTranspose_apply, hf]
-  · simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
-      Matrix.mul_apply, Matrix.conjTranspose_apply, he]
-  · simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
-      Matrix.mul_apply, Matrix.conjTranspose_apply, he, hf]
+  simp only [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
+    Matrix.mul_apply, Matrix.conjTranspose_apply]
+  by_cases he : e = branch i
+  · by_cases hf : f = branch j
+    · simp only [he, hf, and_self, ↓reduceIte]
+      rw [Finset.sum_eq_single j]
+      · simp only [eq_self, he, hf, and_self, ↓reduceIte]
+        rw [Finset.sum_eq_single i]
+        · simp
+        · intro x _ hxi
+          have hix : i ≠ x := Ne.symm hxi
+          simp [hix]
+        · simp
+      · intro x _ hxj
+        have hjx : j ≠ x := Ne.symm hxj
+        simp [hjx]
+      · simp
+    · simp only [he, hf, and_false, ↓reduceIte]
+      apply Finset.sum_eq_zero
+      intro x _
+      by_cases hx : x = j
+      · subst x
+        simp [hf]
+      · have hjx : j ≠ x := Ne.symm hx
+        simp [hjx]
+  · simp only [he, false_and, ↓reduceIte]
+    apply Finset.sum_eq_zero
+    intro x _
+    by_cases hx : x = j
+    · subst x
+      by_cases hfb : f = branch j
+      · simp only [eq_self, hfb, and_self, ↓reduceIte]
+        apply Finset.sum_eq_zero
+        intro x₁ _
+        by_cases hxi : x₁ = i
+        · subst x₁
+          simp [he]
+        · have hix : i ≠ x₁ := Ne.symm hxi
+          simp [hix]
+      · simp [hfb]
+    · have hjx : j ≠ x := Ne.symm hx
+      simp [hjx]
 
 /-- Exact reduced-state formula after the perfect copy is lost. -/
 theorem marginal_entry (branch : A → Bool) (rho : QIT.State A) (i j : A) :
