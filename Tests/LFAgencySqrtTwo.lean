@@ -21,6 +21,7 @@ end OntologySeparation.Tests.LFAgencySqrtTwo
 
 #print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.basisCorr_formula
 #print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.chshNumerator_le
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_le_iff_relaxed_chsh
 #print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_le_sqrtTwoDelta
 #print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.explicit_anchoredWitness
 #print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_global_optimum
