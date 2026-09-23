@@ -8,6 +8,9 @@ import OntologySeparation.Experiments.LFReadout
 import OntologySeparation.Experiments.LFJoint
 import OntologySeparation.Experiments.LFAgencyRelaxation
 import OntologySeparation.Experiments.LFAgencyRelaxationDiagnostics
+import OntologySeparation.Operational.LFAgencySqrtTwo
+import OntologySeparation.Certificates.LFAgencySqrtTwo
+import OntologySeparation.Experiments.LFAgencyAngleOptimality
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
@@ -415,3 +418,18 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignalingTheorem2.lower_bound
 #print axioms OntologySeparation.ForcedSignalingTheorem2.exact_forced_signaling
 #print axioms OntologySeparation.ForcedSignalingTheorem2.targetDelta_value
+
+
+-- Exact sqrt(2) Local-Agency bound and global angle optimization of its witness.
+#print axioms OntologySeparation.LFAgencyRelaxation.Correlation.basisCorr_formula
+#print axioms OntologySeparation.LFAgencyRelaxation.Correlation.probability_eq_corr
+#print axioms OntologySeparation.LFAgencyRelaxation.explicit_quantum_realized
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.dual_feasible
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.bound
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.weighted_difference_le_tv
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.relaxed_chsh_bound
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.relaxed_chsh_uniform
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.explicit_angle_quantum_bound
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.chshNumerator_le
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_le_iff_relaxed_chsh
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_global_optimum

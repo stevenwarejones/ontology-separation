@@ -1,0 +1,31 @@
+import OntologySeparation.Operational.LFAgencySqrtTwo
+import OntologySeparation.Certificates.LFAgencySqrtTwo
+import OntologySeparation.Experiments.LFAgencyAngleOptimality
+
+namespace OntologySeparation.Tests.LFAgencySqrtTwo
+open OntologySeparation.LFAgencyRelaxation
+open OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate
+noncomputable section
+
+example : 0 < sqrtTwoDelta := sqrtTwoDelta_positive
+example : Shared.NoSignaling sqrtTwoBehavior := sqrtTwoBehavior_public_noSignaling
+example : RealQuantum.singletTheory 3 sqrtTwoBehavior := explicit_quantum_realized
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.dual_feasible
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.bound
+
+end
+end OntologySeparation.Tests.LFAgencySqrtTwo
+
+
+
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.basisCorr_formula
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.chshNumerator_le
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_le_iff_relaxed_chsh
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_le_sqrtTwoDelta
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.explicit_anchoredWitness
+#print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_global_optimum
+
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.weighted_difference_le_tv
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.relaxed_chsh_bound
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.relaxed_chsh_uniform
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.explicit_angle_quantum_bound
