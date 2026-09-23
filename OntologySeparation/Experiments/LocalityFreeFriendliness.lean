@@ -109,14 +109,10 @@ theorem shared_and_faithful_impossible (m : Model)
     (hs : Holds .sharedFacts m) (hf : Holds .faithfulContexts m) : False := by
   rcases hs with ⟨hab, hbc⟩
   rcases hf with ⟨hAB, hBC, hAC⟩
+  rw [← hab] at hBC
+  rw [← hbc, ← hab] at hAC
   have hglue : GluesPairwise m.abFacts := by
-    constructor
-    · exact hAB
-    constructor
-    · simpa [hab] using hBC
-    · have hacEq : m.acFacts = m.abFacts := by
-        rw [← hbc, ← hab]
-      simpa [hacEq] using hAC
+    exact ⟨hAB, hBC, hAC⟩
   exact Research.no_pairwise_gluing ⟨m.abFacts, hglue⟩
 
 /-- The locality-free two-premise core is deletion-minimal. -/
@@ -132,19 +128,15 @@ def certificate : MinimalCore Holds Target core where
     | sharedFacts =>
         refine ⟨contextualAdversary, ?_, trivial⟩
         intro kept hkept
-        have hk : kept = Law.faithfulContexts := by
-          simp [core] at hkept
-          exact hkept
-        subst kept
-        exact contextualAdversary_faithful
+        cases kept with
+        | sharedFacts => simp [core] at hkept
+        | faithfulContexts => exact contextualAdversary_faithful
     | faithfulContexts =>
         refine ⟨sharedAdversary, ?_, trivial⟩
         intro kept hkept
-        have hk : kept = Law.sharedFacts := by
-          simp [core] at hkept
-          exact hkept
-        subst kept
-        exact sharedAdversary_shared
+        cases kept with
+        | sharedFacts => exact sharedAdversary_shared
+        | faithfulContexts => simp [core] at hkept
 
 theorem locality_free_core_minimal :
     (∀ m, Satisfies Holds core m → ¬ Target m) ∧
