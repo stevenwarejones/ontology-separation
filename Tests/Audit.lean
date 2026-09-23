@@ -394,3 +394,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.LocalityFreeFriendliness.antiAC_matches
 #print axioms OntologySeparation.LocalityFreeFriendliness.shared_and_faithful_impossible
 #print axioms OntologySeparation.LocalityFreeFriendliness.locality_free_core_minimal
+
+-- Exact LC4 physical target for forced signaling.
+#print axioms OntologySeparation.ForcedSignalingLC4.cluster_normalized
+#print axioms OntologySeparation.ForcedSignalingLC4.full_normalized
+#print axioms OntologySeparation.ForcedSignalingLC4.abd_normalized
+#print axioms OntologySeparation.ForcedSignalingLC4.acd_normalized
+#print axioms OntologySeparation.ForcedSignalingLC4.score_exact
+#print axioms OntologySeparation.ForcedSignalingLC4.score_exact_real
