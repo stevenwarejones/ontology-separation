@@ -188,66 +188,62 @@ private theorem reference_chsh_le_two (j : AbsoluteEventTable) :
       (∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 2 r a) +
       RealQuantum.correlator j.behavior 2 2 ≤ 2 := by
   rw [corr22_as_joint]
-  unfold LFJoint.Table.mass recordBob recordAlice
-  rw [show (∑ r : Record, recCorr r * ∑ o : Outcome, j.prob (2,2) r o) =
-      ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
-        recCorr r * j.prob (2,2) r (a,b) by
-    apply Finset.sum_congr rfl
-    intro r _
-    simp [Fintype.sum_prod_type]
-    ring]
-  rw [show (∑ r : Record, ∑ b : Bool,
-      recBobCorr r b * ∑ a : Bool, j.prob (2,2) r (a,b)) =
-      ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
-        recBobCorr r b * j.prob (2,2) r (a,b) by
-    apply Finset.sum_congr rfl
-    intro r _
-    rw [Finset.sum_comm]
-    apply Finset.sum_congr rfl
-    intro a _
-    ring]
-  rw [show (∑ r : Record, ∑ a : Bool,
-      aliceRecCorr r a * ∑ b : Bool, j.prob (2,2) r (a,b)) =
-      ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
-        aliceRecCorr r a * j.prob (2,2) r (a,b) by
-    apply Finset.sum_congr rfl
-    intro r _
-    apply Finset.sum_congr rfl
-    intro a _
-    ring]
-  have hpoint (r : Record) (a b : Bool) :
-      recCorr r - recBobCorr r b + aliceRecCorr r a + outCorr a b ≤ 2 := by
+  have hrecord (r : Record) :
+      recCorr r * j.mass (2,2) r -
+        (∑ b : Bool, recBobCorr r b * recordBob j 2 2 r b) +
+        (∑ a : Bool, aliceRecCorr r a * recordAlice j 2 2 r a) +
+        (∑ a : Bool, ∑ b : Bool, outCorr a b * j.prob (2,2) r (a,b))
+        ≤ 2 * j.mass (2,2) r := by
     rcases r with ⟨c,d⟩
-    cases c <;> cases d <;> cases a <;> cases b <;>
-      norm_num [recCorr, recBobCorr, aliceRecCorr, outCorr, sgn, RealQuantum.sign]
-  have hnon := j.nonneg
-  calc
-    _ = ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
-        (recCorr r - recBobCorr r b + aliceRecCorr r a + outCorr a b) *
-          j.prob (2,2) r (a,b) := by
-          simp only [Finset.sum_sub_distrib, Finset.sum_add_distrib]
-          apply Finset.sum_congr rfl
-          intro r _
-          apply Finset.sum_congr rfl
-          intro a _
-          apply Finset.sum_congr rfl
-          intro b _
-          ring
-    _ ≤ ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
-        2 * j.prob (2,2) r (a,b) := by
-          apply Finset.sum_le_sum
-          intro r _
-          apply Finset.sum_le_sum
-          intro a _
-          apply Finset.sum_le_sum
-          intro b _
-          exact mul_le_mul_of_nonneg_right (hpoint r a b) (hnon (2,2) r (a,b))
-    _ = 2 := by
-          rw [← Finset.mul_sum]
-          rw [← Finset.sum_mul]
-          rw [← Finset.sum_mul]
-          rw [j.normalized]
-          norm_num
+    cases c <;> cases d <;>
+      simp only [LFJoint.Table.mass, recordBob, recordAlice, Fintype.sum_prod_type,
+        Fintype.sum_bool, recCorr, recBobCorr, aliceRecCorr, outCorr, sgn,
+        RealQuantum.sign] <;>
+      have hff := j.nonneg (2,2) (false,false) (false,false) <;>
+      have hft := j.nonneg (2,2) (false,false) (false,true) <;>
+      have htf := j.nonneg (2,2) (false,false) (true,false) <;>
+      have htt := j.nonneg (2,2) (false,false) (true,true) <;>
+      have hff' := j.nonneg (2,2) (false,true) (false,false) <;>
+      have hft' := j.nonneg (2,2) (false,true) (false,true) <;>
+      have htf' := j.nonneg (2,2) (false,true) (true,false) <;>
+      have htt' := j.nonneg (2,2) (false,true) (true,true) <;>
+      have hff'' := j.nonneg (2,2) (true,false) (false,false) <;>
+      have hft'' := j.nonneg (2,2) (true,false) (false,true) <;>
+      have htf'' := j.nonneg (2,2) (true,false) (true,false) <;>
+      have htt'' := j.nonneg (2,2) (true,false) (true,true) <;>
+      have hff''' := j.nonneg (2,2) (true,true) (false,false) <;>
+      have hft''' := j.nonneg (2,2) (true,true) (false,true) <;>
+      have htf''' := j.nonneg (2,2) (true,true) (true,false) <;>
+      have htt''' := j.nonneg (2,2) (true,true) (true,true) <;>
+      linarith
+  have hsum :
+      (∑ r : Record,
+        (recCorr r * j.mass (2,2) r -
+          (∑ b : Bool, recBobCorr r b * recordBob j 2 2 r b) +
+          (∑ a : Bool, aliceRecCorr r a * recordAlice j 2 2 r a) +
+          (∑ a : Bool, ∑ b : Bool, outCorr a b * j.prob (2,2) r (a,b)))) ≤
+      ∑ r : Record, 2 * j.mass (2,2) r := by
+    exact Finset.sum_le_sum (fun r _ => hrecord r)
+  have hmass : (∑ r : Record, j.mass (2,2) r) = 1 := by
+    simpa [LFJoint.Table.mass] using j.normalized (2,2)
+  have hleft :
+      (∑ r : Record,
+        (recCorr r * j.mass (2,2) r -
+          (∑ b : Bool, recBobCorr r b * recordBob j 2 2 r b) +
+          (∑ a : Bool, aliceRecCorr r a * recordAlice j 2 2 r a) +
+          (∑ a : Bool, ∑ b : Bool, outCorr a b * j.prob (2,2) r (a,b)))) =
+      (∑ r : Record, recCorr r * j.mass (2,2) r) -
+        (∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 2 2 r b) +
+        (∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 2 r a) +
+        (∑ r : Record, ∑ a : Bool, ∑ b : Bool,
+          outCorr a b * j.prob (2,2) r (a,b)) := by
+    simp only [Finset.sum_sub_distrib, Finset.sum_add_distrib]
+  rw [hleft] at hsum
+  have hright : (∑ r : Record, 2 * j.mass (2,2) r) = 2 := by
+    rw [← Finset.mul_sum, hmass]
+    norm_num
+  rw [hright] at hsum
+  exact hsum
 
 private theorem bob_transport (j : AbsoluteEventTable) :
     -(∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b) ≤
