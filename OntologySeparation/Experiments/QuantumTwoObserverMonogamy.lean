@@ -113,6 +113,7 @@ theorem full_policy_can_separate : CanSeparate fullPolicy := by
     simpa [footprint, fullPolicy] using hr
   · unfold Separates probability
     intro h
+    simp only at h
     have hg := QuantumAccessMonogamy.joint_return_gap
     rw [h] at hg
     norm_num at hg
