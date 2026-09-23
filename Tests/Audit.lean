@@ -6,6 +6,8 @@ import OntologySeparation.Experiments.EnvironmentDiscrimination
 import OntologySeparation.Experiments.RecordEnvironment
 import OntologySeparation.Experiments.LFReadout
 import OntologySeparation.Experiments.LFJoint
+import OntologySeparation.Experiments.LFAgencyRelaxation
+import OntologySeparation.Experiments.LFAgencyRelaxationDiagnostics
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
@@ -335,3 +337,15 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.AdversarySearch.satisfies_mono
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
+
+-- Local-Agency relaxation with unread friend records.
+#print axioms OntologySeparation.LFAgencyRelaxation.bound
+#print axioms OntologySeparation.LFAgencyRelaxation.quantum_gap
+#print axioms OntologySeparation.LFAgencyRelaxation.quantum_public_noSignaling
+#print axioms OntologySeparation.LFAgencyRelaxation.quantum_excluded
+#print axioms OntologySeparation.LFAgencyRelaxation.feasibility
+#print axioms OntologySeparation.LFAgencyRelaxation.recordTVAlice_nonnegative
+#print axioms OntologySeparation.LFAgencyRelaxation.recordTVBob_nonnegative
+#print axioms OntologySeparation.LFAgencyRelaxation.recordTVAlice_zero_of_local
+#print axioms OntologySeparation.LFAgencyRelaxation.recordTVBob_zero_of_local
+#print axioms OntologySeparation.LFAgencyRelaxation.local_recordRevealedWithin_zero
