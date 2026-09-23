@@ -423,3 +423,39 @@
 'OntologySeparation.ForcedSignalingTheorem2.targetDelta_value' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.Correlation.basisCorr_formula' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.Correlation.probability_eq_corr' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.explicit_quantum_realized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.dual_feasible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.weighted_difference_le_tv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.relaxed_chsh_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.relaxed_chsh_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.explicit_angle_quantum_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.AngleOptimality.chshNumerator_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_le_iff_relaxed_chsh' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_global_optimum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

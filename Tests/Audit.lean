@@ -9,6 +9,7 @@ import OntologySeparation.Experiments.LFJoint
 import OntologySeparation.Experiments.LFAgencyRelaxation
 import OntologySeparation.Experiments.LFAgencyRelaxationDiagnostics
 import OntologySeparation.Operational.LFAgencySqrtTwo
+import OntologySeparation.Certificates.LFAgencySqrtTwo
 import OntologySeparation.Experiments.LFAgencyAngleOptimality
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation

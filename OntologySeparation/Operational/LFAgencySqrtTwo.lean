@@ -109,9 +109,12 @@ private theorem mass00_eq_matching (j : AbsoluteEventTable) (hr : Readable j)
   have haT := wrongA_zero j hr r 0 true
   have hbF := wrongB_zero j hr r 0 false
   have hbT := wrongB_zero j hr r 0 true
+  unfold LFJoint.Table.mass
+  rw [Fintype.sum_prod_type]
+  simp only [Fintype.sum_bool]
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;>
-    simp [LFJoint.Table.mass, Fintype.sum_prod_type] at haF haT hbF hbT ⊢ <;>
+    simp at haF haT hbF hbT ⊢ <;>
     linarith
 
 private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
@@ -120,16 +123,21 @@ private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
   change (∑ o : Bool × Bool,
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (0,0) r o) =
-    ∑ r : Record, recCorr r * j.mass (0,0) r)
+    ∑ r : Record, recCorr r * j.mass (0,0) r
   simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
   rw [mass00_eq_matching j hr r]
+  have haF := wrongA_zero j hr r 0 false
+  have haT := wrongA_zero j hr r 0 true
+  have hbF := wrongB_zero j hr r 0 false
+  have hbT := wrongB_zero j hr r 0 true
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;>
-    simp [recCorr, sgn, RealQuantum.sign, Fintype.sum_prod_type,
-      wrongA_zero j hr, wrongB_zero j hr]
+    simp [recCorr, sgn, RealQuantum.sign, Fintype.sum_prod_type]
+      at haF haT hbF hbT ⊢ <;>
+    linarith
 
 private theorem corr02_as_recordBob (j : AbsoluteEventTable) (hr : Readable j) :
     RealQuantum.correlator j.behavior 0 2 =
