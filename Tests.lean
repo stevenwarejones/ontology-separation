@@ -68,3 +68,5 @@ import Tests.PartialEnvironment
 import Tests.AdversarySearch
 
 import Tests.LFAgencySqrtTwo
+
+import Tests.HiddenInfluenceStochastic
