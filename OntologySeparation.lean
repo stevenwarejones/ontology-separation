@@ -37,3 +37,13 @@ import OntologySeparation.Adapters.FiniteQuantum
 import OntologySeparation.Experiments.RecordAccess
 
 import OntologySeparation.Experiments.ModelCompatibility
+
+import OntologySeparation.Experiments.OperationalFriendlinessBenchmark
+import OntologySeparation.Experiments.TimelikeFriendliness
+import OntologySeparation.Experiments.TimelikeOperationalCore
+import OntologySeparation.Experiments.TimelikeBellCollapse
+import OntologySeparation.Experiments.CausalOrderAdversary
+import OntologySeparation.Experiments.CausalOrderTwoSetting
+import OntologySeparation.Experiments.CausalOrderUnrestricted
+import OntologySeparation.Experiments.NestedFriendliness
+import OntologySeparation.Experiments.LocalityFreeFriendliness
