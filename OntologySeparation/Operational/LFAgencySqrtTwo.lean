@@ -246,12 +246,22 @@ private theorem bob_transport (j : AbsoluteEventTable) :
       ∑ r : Record, ∑ b : Bool,
         |recordBob j 2 2 r b - recordBob j 0 2 r b| := by
     simpa only [Fintype.sum_prod_type] using h
+  have hs :
+      (∑ r : Record, ∑ b : Bool,
+        |recordBob j 2 2 r b - recordBob j 0 2 r b|) =
+      ∑ r : Record, ∑ b : Bool,
+        |recordBob j 0 2 r b - recordBob j 2 2 r b| := by
+    apply Finset.sum_congr rfl
+    intro r _
+    apply Finset.sum_congr rfl
+    intro b _
+    exact abs_sub_comm _ _
   have htv :
       (∑ r : Record, ∑ b : Bool,
         |recordBob j 2 2 r b - recordBob j 0 2 r b|) =
         2 * recordTVBob j 0 2 2 := by
+    rw [hs]
     unfold recordTVBob
-    simp_rw [abs_sub_comm (recordBob j 2 2 _ _) (recordBob j 0 2 _ _)]
     ring
   rw [htv] at h'
   linarith
