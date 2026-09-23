@@ -402,3 +402,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignalingLC4.acd_normalized
 #print axioms OntologySeparation.ForcedSignalingLC4.score_exact
 #print axioms OntologySeparation.ForcedSignalingLC4.score_exact_real
+
+-- Exact LC4 hidden-influence witness roots.
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.seed_abd_matches
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.seed_acd_matches
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.model_abd_matches
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.model_acd_matches
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.tv_exact
+#print axioms OntologySeparation.ForcedSignalingLC4Witness.signaling_exact
