@@ -6,6 +6,7 @@ import OntologySeparation.Experiments.EnvironmentDiscrimination
 import OntologySeparation.Experiments.RecordEnvironment
 import OntologySeparation.Experiments.LFReadout
 import OntologySeparation.Experiments.LFJoint
+import OntologySeparation.Experiments.LFFiniteSpeed
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
@@ -330,3 +331,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PartialEnvironment.uniform_threshold
 #print axioms OntologySeparation.PartialEnvironment.worst_case
 #print axioms OntologySeparation.PartialEnvironment.Study.uniformly_resolves
+
+
+-- Finite-speed Local Friendliness feasibility roots.
+#print axioms OntologySeparation.LFFiniteSpeed.bound
+#print axioms OntologySeparation.LFFiniteSpeed.quantum_gap
+#print axioms OntologySeparation.LFFiniteSpeed.quantum_public_noSignaling
+#print axioms OntologySeparation.LFFiniteSpeed.quantum_excluded
+#print axioms OntologySeparation.LFFiniteSpeed.feasibility
