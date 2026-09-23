@@ -4,6 +4,14 @@ This sequence builds on main after #25–26. The independent LF assumption and
 readout-error stack (#27–29) should retain its own review order; these experiments
 must not silently reinterpret its joint-event assumptions.
 
+The three stages now have public examples: [physical access](../../examples/EnvironmentAccessStudy.lean),
+[discrimination](../../examples/EnvironmentDiscriminationStudy.lean), and
+[finite-shot design](../../examples/FiniteShotStudy.lean). The first two use
+full complex-QM semantics; the statistical stage uses normalized finite joint
+outcome distributions and explicit calibration/history premises. The full-state
+Helstrom optimum remains symbolic, and the finite-shot rule is the conservative
+all-successes rule described below.
+
 ## 1. Physical contract
 
 Implement `RecordEnvironment`: three distinct qubits, tensor order
@@ -66,3 +74,7 @@ Compare each target against known Helstrom/data-processing and recovery results
 before making novelty claims. Scope the theorem to a reviewable physical class,
 and seek outside review of that translation; Lean certifies the stated premises,
 not the adequacy of a chosen laboratory model.
+
+The next scoped benchmark and the remaining non-textbook target are tracked in
+[the partial-access flagship contract](PARTIAL_ACCESS_FLAGSHIP.md), informed by
+[the LF readout/recovery literature audit](../research/LF_READOUT_LITERATURE.md).

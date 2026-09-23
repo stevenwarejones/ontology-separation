@@ -1,4 +1,6 @@
 import OntologySeparation.Certificates.ForcedSignaling
+import OntologySeparation.PartialEnvironment
+import OntologySeparation.Statistics
 import OntologySeparation.Experiments.EnvironmentDiscrimination
 import OntologySeparation.Experiments.RecordEnvironment
 import OntologySeparation.Experiments.LFReadout
@@ -278,3 +280,35 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.RecordEnvironment.return_coherent
 #print axioms OntologySeparation.RecordEnvironment.return_collapsed
 #print axioms OntologySeparation.RecordEnvironment.returnSeparator
+
+#print axioms OntologySeparation.FiniteShot.prefix_zero
+#print axioms OntologySeparation.FiniteShot.prefix_nonneg
+#print axioms OntologySeparation.FiniteShot.prefix_bound
+#print axioms OntologySeparation.FiniteShot.false_rejection_bound
+#print axioms OntologySeparation.FiniteShot.power_bound
+#print axioms OntologySeparation.FiniteShot.prefix_point
+#print axioms OntologySeparation.FiniteShot.always_failure_null
+#print axioms OntologySeparation.FiniteShot.always_success_alternative
+#print axioms OntologySeparation.FiniteShot.Plan.rejects_iff
+#print axioms OntologySeparation.FiniteShot.Plan.valid
+#print axioms OntologySeparation.FiniteShot.Plan.riskClaim
+#print axioms OntologySeparation.ReturnStatistics.calibrated_null
+#print axioms OntologySeparation.ReturnStatistics.recovery_power
+#print axioms OntologySeparation.ReturnStatistics.calibrated_valid
+#print axioms OntologySeparation.ReturnStatistics.powerClaim
+
+#print axioms OntologySeparation.FiniteShot.Plan.rejectionProbability_eq
+#print axioms OntologySeparation.FiniteShot.Plan.false_rejection_control
+
+#print axioms OntologySeparation.QuantumDiscrimination.error_eq_probability_gap
+#print axioms OntologySeparation.QuantumDiscrimination.probability_gap_le
+#print axioms OntologySeparation.PartialEnvironment.coherent_entry
+#print axioms OntologySeparation.PartialEnvironment.distance_exact
+#print axioms OntologySeparation.PartialEnvironment.every_test_bound
+#print axioms OntologySeparation.PartialEnvironment.resolves_iff
+#print axioms OntologySeparation.PartialEnvironment.no_test_resolves
+#print axioms OntologySeparation.PartialEnvironment.optimal_error
+#print axioms OntologySeparation.PartialEnvironment.no_fragment_test
+#print axioms OntologySeparation.PartialEnvironment.uniform_threshold
+#print axioms OntologySeparation.PartialEnvironment.worst_case
+#print axioms OntologySeparation.PartialEnvironment.Study.uniformly_resolves

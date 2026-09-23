@@ -57,3 +57,7 @@ import Tests.TradeoffSpike
 import Tests.RecordEnvironment
 
 import Tests.EnvironmentDiscrimination
+
+import Tests.FiniteShot
+
+import Tests.PartialEnvironment

@@ -28,6 +28,8 @@ records, read-or-reverse choices, and checked LF/profile conclusions.
 | I want to… | Start here | Installation |
 |---|---|---|
 | Compare every permitted experiment | [Experiment access](docs/EXPERIMENT_ACCESS.md) | Lean |
+| Study partial environment access | [Partial-access guide](docs/PARTIAL_ENVIRONMENT_GUIDE.md) · [report](examples/partial-environment.html) | Lean; specified overlap and probability allowances |
+| Plan a finite-shot rejection test | [Finite-shot guide](docs/FINITE_SHOT_GUIDE.md) · [report](examples/finite-shot.html) | Lean; explicit calibration premises |
 | Bound every allowed binary measurement | [Discrimination guide](docs/ENVIRONMENT_DISCRIMINATION_GUIDE.md) · [report](examples/environment-discrimination.html) | Lean |
 | Separate the laboratory from its environment | [Three-register guide](docs/ENVIRONMENT_ACCESS_GUIDE.md) · [report](examples/environment-access.html) | Lean |
 | Find what extra access separates two models | [Record access](docs/RECORD_ACCESS_GUIDE.md) | Lean |

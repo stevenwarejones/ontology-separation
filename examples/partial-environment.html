@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/PartialEnvironmentStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>capacity</code><br>Exact prediction</td><td>36/125</td><td><pre>(OntologySeparation.PartialEnvironment.coherent study.worstModel).normalizedTraceDistance
+    (OntologySeparation.PartialEnvironment.collapsed study.worstModel) =
+  ↑(12 / 25 * study.overlapFloor)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>coherentProbability</code><br>Exact prediction</td><td>197/250</td><td><pre>OntologySeparation.PartialEnvironment.test.prob (OntologySeparation.PartialEnvironment.coherent study.worstModel)
+    Bool.true =
+  ↑(1 / 2 + 12 / 25 * study.overlapFloor)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>collapsedProbability</code><br>Exact prediction</td><td>1/2</td><td><pre>OntologySeparation.PartialEnvironment.test.prob (OntologySeparation.PartialEnvironment.collapsed study.worstModel)
+    Bool.true =
+  ↑(1 / 2)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>margin</code><br>Exact prediction</td><td>99/500</td><td><pre>OntologySeparation.PartialEnvironment.test.prob (OntologySeparation.PartialEnvironment.coherent study.worstModel)
+        Bool.true -
+      ↑study.loss -
+    (OntologySeparation.PartialEnvironment.test.prob (OntologySeparation.PartialEnvironment.collapsed study.worstModel)
+        Bool.true +
+      ↑study.slack) =
+  ↑(12 / 25 * study.overlapFloor - study.loss - study.slack)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>allTestsBound</code><br>Bound + satisfying model</td><td>≤ 36/125</td><td><pre>(∀
+    (m :
+      OntologySeparation.FiniteQuantum.Test OntologySeparation.PartialEnvironment.Accessible
+        OntologySeparation.PartialEnvironment.Accessible Bool),
+    (fun x =&gt; True) m →
+      (fun t =&gt;
+            t.prob (OntologySeparation.PartialEnvironment.coherent study.worstModel) Bool.true -
+              t.prob (OntologySeparation.PartialEnvironment.collapsed study.worstModel) Bool.true)
+          m ≤
+        ↑(12 / 25 * study.overlapFloor)) ∧
+  ∃ m, (fun x =&gt; True) m</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PartialEnvironment.uniform_threshold</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r loss slack : ℝ),
+  0 ≤ r →
+    r ≤ 1 →
+      ((∃ t,
+          ∀ (m : OntologySeparation.PartialEnvironment.Leakage),
+            r ≤ m.overlap → OntologySeparation.PartialEnvironment.Resolves m t loss slack) ↔
+        loss + slack &lt; 12 / 25 * r)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PartialEnvironment.worst_case</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r loss slack : ℝ),
+  0 ≤ r →
+    r ≤ 1 →
+      12 / 25 * r ≤ loss + slack →
+        ∀ {B : Type} [inst : Fintype B] [inst_1 : DecidableEq B]
+          (t : OntologySeparation.FiniteQuantum.Test OntologySeparation.PartialEnvironment.Accessible B Bool),
+          ∃ m, r ≤ m.overlap ∧ ¬OntologySeparation.PartialEnvironment.Resolves m t loss slack</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PartialEnvironment.no_fragment_test</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (m : OntologySeparation.PartialEnvironment.Leakage) {B O : Type} [inst : Fintype B] [inst_1 : DecidableEq B]
+  [inst_2 : Fintype O] [inst_3 : DecidableEq O] (t : OntologySeparation.FiniteQuantum.Test Bool B O) (o : O),
+  t.prob (OntologySeparation.PartialEnvironment.coherent m).marginalA o =
+    t.prob (OntologySeparation.PartialEnvironment.collapsed m).marginalA o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
