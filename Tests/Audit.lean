@@ -311,3 +311,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.AdversarySearch.satisfies_mono
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
+
+-- Consensus-record adversary benchmark.
+#print axioms OntologySeparation.ConsensusRecords.aggregateVisibility_append
+#print axioms OntologySeparation.ConsensusRecords.perfect_record_zero
+#print axioms OntologySeparation.ConsensusRecords.gap_is_physical
+#print axioms OntologySeparation.ConsensusRecords.perfect_record_core
