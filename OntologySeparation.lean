@@ -39,3 +39,5 @@ import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Experiments.ModelCompatibility
 
 import OntologySeparation.Experiments.MemoryAwareness
+
+import OntologySeparation.Experiments.MemoryAwarenessWitness
