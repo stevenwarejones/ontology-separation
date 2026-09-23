@@ -47,3 +47,8 @@ import OntologySeparation.Experiments.CausalOrderTwoSetting
 import OntologySeparation.Experiments.CausalOrderUnrestricted
 import OntologySeparation.Experiments.NestedFriendliness
 import OntologySeparation.Experiments.LocalityFreeFriendliness
+
+import OntologySeparation.Experiments.QuantumAccessMonogamy
+import OntologySeparation.Experiments.QuantumTwoObserverMonogamy
+import OntologySeparation.Experiments.TwoRecordEnvironment
+import OntologySeparation.Experiments.PerfectRecordTraceout
