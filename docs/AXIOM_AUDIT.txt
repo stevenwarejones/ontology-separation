@@ -459,3 +459,46 @@
 'OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_global_optimum' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.MemoryAwareness.core_inconsistent' depends on axioms: [propext, Quot.sound]
+'OntologySeparation.MemoryAwareness.memory_awareness_core_minimal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.sqrtTwo_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.computational_after_from_wigner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.rotated_after_from_wigner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.computational_flip_bridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.rotated_flip_bridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.exact_setting_dependence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.flip_rates_differ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.BaumannBruknerQITSource.s_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.BaumannBruknerQITSource.computational_conditional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerQITSource.rotated_conditional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerQITSource.computational_branch_data' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerQITSource.rotated_branch_data' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerQITWigner.computational_after_qit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerQITWigner.rotated_after_qit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerQITWigner.qit_setting_dependence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
