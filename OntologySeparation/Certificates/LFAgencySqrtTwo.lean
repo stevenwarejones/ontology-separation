@@ -94,7 +94,7 @@ theorem ineqDual_nonpos : ∀ i : IneqRow, ineqDual i ≤ 0 := by
   decide
 
 noncomputable def rawRhs (i : Fin 75) : ℝ :=
-  if i.val < 36 then
+  if h : i.val < 36 then
     let x : Fin 3 := ⟨i.val / 12, by omega⟩
     let y : Fin 3 := ⟨i.val / 4 % 3, by omega⟩
     let a : Bool := if i.val / 2 % 2 = 0 then false else true
