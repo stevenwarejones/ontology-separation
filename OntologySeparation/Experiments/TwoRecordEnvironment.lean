@@ -78,7 +78,7 @@ theorem global_states_differ : coherent ≠ collapsed := by
 strictly better than chance at discriminating the two laws. -/
 theorem full_access_strictly_distinguishes :
     QuantumDiscrimination.minimumError coherent collapsed < 1 / 2 := by
-  exact QuantumDiscrimination.minimumError_lt_half coherent collapsed global_states_differ
+  exact QuantumDiscrimination.strict_improvement coherent collapsed global_states_differ
 
 end
 end OntologySeparation.TwoRecordEnvironment
