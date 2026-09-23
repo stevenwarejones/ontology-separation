@@ -96,8 +96,10 @@ theorem physical_equations (j : AbsoluteEventTable) (hr : Readable j)
   have hwb := wrongB_zero j hr
   fin_cases i <;>
     norm_num [SqrtTwoCertificate.pairing, weights, qWeight, uWeight,
-      SqrtTwoCertificate.eqCoeff, SqrtTwoCertificate.rhs,
-      SqrtTwoCertificate.fixedZeroIndex, qX, qY, qR, qA, qB, bitBool,
+      SqrtTwoCertificate.eqCoeff, SqrtTwoCertificate.rawEqCoeff,
+      SqrtTwoCertificate.rhs, SqrtTwoCertificate.rawRhs,
+      SqrtTwoCertificate.rawEq, SqrtTwoCertificate.fixedZeroIndex,
+      qX, qY, qR, qA, qB, bitBool,
       Fin.sum_univ_succ] <;>
     simp_all [Fintype.sum_prod_type, LFJoint.Table.mass]
 
