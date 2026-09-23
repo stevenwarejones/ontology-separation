@@ -1,7 +1,6 @@
 import OntologySeparation.Experiments.LFAgencyRelaxationDiagnostics
 import Mathlib.Tactic.FinCases
 import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NativeDecide
 
 /-!
 # Exact sqrt(2) Local-Agency relaxation bound
