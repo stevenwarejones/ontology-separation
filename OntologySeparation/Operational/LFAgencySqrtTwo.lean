@@ -117,10 +117,12 @@ private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
   have haT := wrongA_zero j hr r 0 true
   have hbF := wrongB_zero j hr r 0 false
   have hbT := wrongB_zero j hr r 0 true
+  unfold LFJoint.Table.mass
+  rw [Fintype.sum_prod_type]
+  simp only [Fintype.sum_bool]
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;>
-    simp [recCorr, sgn, RealQuantum.sign, LFJoint.Table.mass,
-      Fintype.sum_prod_type] at haF haT hbF hbT ⊢ <;>
+    simp [recCorr, sgn, RealQuantum.sign] at haF haT hbF hbT ⊢ <;>
     linarith
 
 private theorem corr02_as_recordBob (j : AbsoluteEventTable) (hr : Readable j) :
@@ -208,7 +210,7 @@ private theorem reference_chsh_le_two (j : AbsoluteEventTable) :
     have htt := mul_le_mul_of_nonneg_right (hpoint r true true)
       (j.nonneg (2,2) r (true,true))
     unfold LFJoint.Table.mass recordBob recordAlice
-    simp_rw [Fintype.sum_prod_type]
+    rw [Fintype.sum_prod_type]
     simp only [Fintype.sum_bool]
     linarith
   have hsum := Finset.sum_le_sum (fun r (_ : r ∈ Finset.univ) => hrecord r)
