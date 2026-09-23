@@ -45,6 +45,12 @@ def bind {α β : Type} [Fintype α] [Fintype β]
     (d : FiniteDistribution α) (k : α → FiniteDistribution β) (y : β) :
     (bind d k).mass y = ∑ x, d.mass x * (k x).mass y := rfl
 
+@[simp] theorem bind_pure_mass {α β : Type} [Fintype α] [Fintype β]
+    [DecidableEq α] (x : α) (k : α → FiniteDistribution β) (y : β) :
+    (bind (pure x) k).mass y = (k x).mass y := by
+  classical
+  simp [bind, pure]
+
 end FiniteKernel
 
 private def responseBit (n k : ℕ) : Bool := decide (n / (2^k) % 2 = 1)
@@ -206,14 +212,19 @@ def StochasticModel.ofStrategies (q : Early → FiniteDistribution Strategy) :
   b _ s y := FiniteKernel.pure (if y = 0 then s.b0 else s.b1)
   c _ s z := FiniteKernel.pure (if z = 0 then s.c0 else s.c1)
 
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
+private theorem StochasticModel.strategyGiven_ofStrategies_mass
+    (q : Early → FiniteDistribution Strategy) (e : Early) (s t : Strategy) :
+    ((StochasticModel.ofStrategies q).strategyGiven e s).mass t =
+      if t = s then 1 else 0 := by
+  rcases s with ⟨a, d, b0, b1, c0, c1⟩
+  simp [StochasticModel.strategyGiven, StochasticModel.ofStrategies,
+    FiniteKernel.pure]
+
 theorem StochasticModel.toStrategies_ofStrategies
     (q : Early → FiniteDistribution Strategy) (e : Early) (s : Strategy) :
     ((StochasticModel.ofStrategies q).toStrategies e).mass s = (q e).mass s := by
-  classical
-  simp [StochasticModel.toStrategies, StochasticModel.strategyGiven,
-    StochasticModel.ofStrategies, FiniteKernel.bind, FiniteKernel.pure]
+  rw [StochasticModel.toStrategies]
+  simp [FiniteKernel.bind, StochasticModel.strategyGiven_ofStrategies_mass]
 
 /-- Determinizing the stochastic embedding of a deterministic strategy mixture
 returns the same response-table weights. -/
@@ -224,6 +235,15 @@ theorem StochasticModel.determinize_ofStrategies_weight
   unfold StochasticModel.determinize Model.fromStrategies Model.ofAtoms atomWeights
   simp_rw [StochasticModel.toStrategies_ofStrategies]
 
+theorem StochasticModel.determinize_ofStrategies_observational
+    (q : Early → FiniteDistribution Strategy) :
+    ObservationallyEquivalent
+      ((StochasticModel.ofStrategies q).determinize).behavior
+      (Model.fromStrategies q).behavior := by
+  intro s o
+  unfold Model.behavior
+  simp_rw [StochasticModel.determinize_ofStrategies_weight]
+
 /-- Every packed `Model` has a stochastic conditional-local representative and
 the round trip preserves all observable probabilities. Together with
 `StochasticModel.determinize`, this gives both directions of the finite
@@ -233,9 +253,11 @@ theorem Model.stochastic_roundtrip (m : Model) :
       ((StochasticModel.ofStrategies m.toStrategies).determinize).behavior
       m.behavior := by
   intro s o
-  unfold StochasticModel.determinize Model.behavior
-  simp_rw [StochasticModel.determinize_ofStrategies_weight,
-    m.fromStrategies_toStrategies_weight]
+  calc
+    ((StochasticModel.ofStrategies m.toStrategies).determinize).behavior.prob s o =
+        (Model.fromStrategies m.toStrategies).behavior.prob s o :=
+      StochasticModel.determinize_ofStrategies_observational m.toStrategies s o
+    _ = m.behavior.prob s o := m.fromStrategies_toStrategies s o
 
 end
 end OntologySeparation.HiddenInfluence
