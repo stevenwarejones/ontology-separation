@@ -265,3 +265,28 @@
 'OntologySeparation.CausalOrderAdversary.definite_order_countermodel' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.AdversarySearch.satisfies_mono' depends on axioms: [propext, Quot.sound]
+'OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderTwoSetting.xxMinus_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.CausalOrderTwoSetting.old_setting_still_mimicked' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderTwoSetting.xx_setting_separates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderTwoSetting.two_setting_not_equivalent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderUnrestricted.every_scalar_table_mimicked' does not depend on any axioms
+'OntologySeparation.CausalOrderUnrestricted.coherent_table_mimicked' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderUnrestricted.no_scalar_separator_against_unrestricted' does not depend on any axioms
+'OntologySeparation.CausalOrderUnrestricted.two_setting_not_witness_against_unrestricted' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
