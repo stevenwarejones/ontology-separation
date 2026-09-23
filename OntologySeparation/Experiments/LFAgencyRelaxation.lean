@@ -27,19 +27,17 @@ open LFJoint
 two Wigner outcomes for every Wigner setting pair. -/
 abbrev AbsoluteEventTable := LFJoint.Table
 
-/-- Geometric content of the finite-speed layout after Alice and Bob have been
-placed outside one another's v-cones: at fixed absolute friend records, neither
-late choice changes the other late marginal. -/
-def BlindLatePair (j : AbsoluteEventTable) : Prop := LFJoint.Local j
+/-- Local Agency at fixed absolute friend records: a remote late setting does
+not change the opposite late marginal once the record pair is conditioned on. -/
+def ConditionalLocalAgency (j : AbsoluteEventTable) : Prop := LFJoint.Local j
 
-/-- The first-pass finite-speed LF class: exact friend readout (AOE records are
-operationally recoverable), no-superdeterministic record preparation, and a
-late pair that is blind at the chosen finite influence speed. -/
+/-- AOE with exact friend readout, setting-independent records, and conditional
+Local Agency at fixed records. -/
 def Compatible (j : AbsoluteEventTable) : Prop :=
-  LFJoint.Readable j ∧ BlindLatePair j ∧ LFJoint.IndependentRecords j
+  LFJoint.Readable j ∧ ConditionalLocalAgency j ∧ LFJoint.IndependentRecords j
 
-/-- Observable behaviors admitting the finite-speed/AOE joint extension for the
-blind-pair layout. -/
+/-- Observable behaviors admitting this AOE + conditional-Local-Agency joint
+extension. -/
 def theory (p : Behavior LF.interface) : Prop :=
   ∃ j : AbsoluteEventTable, Compatible j ∧ j.behavior = p
 
@@ -51,8 +49,8 @@ theorem theory_iff_joint (p : Behavior LF.interface) :
     theory p ↔ LFJoint.theory p := by
   rfl
 
-/-- The blind-pair finite-speed specialization has exactly the genuine LF
-ceiling. No numerical optimizer is trusted here. -/
+/-- This exact conditional-Local-Agency class has the genuine LF ceiling.
+No numerical optimizer is trusted here. -/
 theorem bound (j : AbsoluteEventTable) (h : Compatible j) :
     RealQuantum.genuineLF j.behavior ≤ 6 := by
   exact LFJoint.bound j h
@@ -74,14 +72,14 @@ theorem quantum_public_noSignaling :
     Shared.NoSignaling RealQuantum.lfBehavior := by
   exact Shared.singlet_noSignaling RealQuantum.lfAlice RealQuantum.lfBob
 
-/-- No AOE + exact-readout + setting-independent-record model with a finite-speed
-blind late pair reproduces the project quantum LF target. -/
+/-- No AOE + exact-readout + setting-independent-record model satisfying
+conditional Local Agency reproduces the project quantum LF target. -/
 theorem quantum_excluded : ¬ theory RealQuantum.lfBehavior := by
   rw [theory_iff_joint]
   exact LFJoint.quantum_excluded
 
-/-- The cheapest feasibility test in one theorem: the quantum target is publicly
-no-signaling but has no compatible blind-pair finite-speed AOE extension. -/
+/-- The quantum target is publicly no-signaling but has no compatible
+AOE + conditional-Local-Agency extension. -/
 theorem feasibility :
     Shared.NoSignaling RealQuantum.lfBehavior ∧
       ¬ ∃ j : AbsoluteEventTable, Compatible j ∧ j.behavior = RealQuantum.lfBehavior := by
