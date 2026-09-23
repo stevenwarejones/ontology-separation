@@ -5,8 +5,9 @@ import Mathlib.Tactic.Linarith
 /-!
 # Exact sqrt(2) Local-Agency relaxation bound
 
-This module proves the explicit-angle result deferred by PR #46.  It does not
-claim global optimality over measurement angles.
+This module proves the exact explicit-angle Local-Agency relaxation bound.
+Global optimality of the associated anchored witness is proved separately in
+`LFAgencyAngleOptimality`.
 
 The target public table is the singlet table for the pi/8-grid choice
 
