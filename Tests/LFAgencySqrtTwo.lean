@@ -15,8 +15,6 @@ example : RealQuantum.singletTheory 3 sqrtTwoBehavior := explicit_quantum_realiz
 end
 end OntologySeparation.Tests.LFAgencySqrtTwo
 
-#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.sum_recordTV_lower_bound
-#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.explicit_angle_bound
 
 
 #print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.basisCorr_formula
@@ -26,4 +24,7 @@ end OntologySeparation.Tests.LFAgencySqrtTwo
 #print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.explicit_anchoredWitness
 #print axioms OntologySeparation.LFAgencyRelaxation.AngleOptimality.anchoredWitness_global_optimum
 
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.weighted_difference_le_tv
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.relaxed_chsh_bound
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.relaxed_chsh_uniform
 #print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.explicit_angle_quantum_bound
