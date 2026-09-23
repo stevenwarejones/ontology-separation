@@ -49,3 +49,5 @@ import OntologySeparation.Experiments.NestedFriendliness
 import OntologySeparation.Experiments.LocalityFreeFriendliness
 
 import OntologySeparation.Experiments.ForcedSignalingLC4
+
+import OntologySeparation.Experiments.ForcedSignalingLC4Witness
