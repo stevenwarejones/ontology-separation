@@ -51,6 +51,11 @@ theorem toReal_qmul (x y : Q2) :
   simp [Q2.toReal, qmul]
   nlinarith
 
+theorem toReal_sum {α : Type} [Fintype α] (f : α → Q2) :
+    Q2.toReal (∑ i, f i) = ∑ i, Q2.toReal (f i) := by
+  classical
+  simp [Q2.toReal, Finset.sum_add_distrib, Finset.sum_mul]
+
 abbrev Basis4 := Bool × Bool × Bool × Bool
 
 def bitA (i : Basis4) : Bool := i.1
