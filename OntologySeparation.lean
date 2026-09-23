@@ -47,3 +47,5 @@ import OntologySeparation.Experiments.FriendshipMonogamy
 import OntologySeparation.Experiments.QuantumAccessMonogamy
 
 import OntologySeparation.Experiments.QuantumTwoObserverMonogamy
+
+import OntologySeparation.Experiments.TwoRecordEnvironment
