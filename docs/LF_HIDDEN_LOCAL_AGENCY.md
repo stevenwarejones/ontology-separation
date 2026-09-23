@@ -98,10 +98,11 @@ There are now three carefully separated statements:
    `(E00 - E0y + Ex0 + Exy - 2)/4`.  An elementary Tsirelson proof in Lean
    shows that no real projective qubit measurement angles can make this witness
    exceed `(sqrt(2)-1)/2`, and the pi/8-grid bases attain equality.
-3. **Global optimum of the full multi-comparison LP — numerical only.**  The
-   exploratory angle search over the complete LP returns the same value, but the
-   theorem in this follow-up does not identify every facet of that larger
-   piecewise-linear optimization problem.
+3. **Full multi-comparison LP cross-check — exploratory, outside this theorem.**
+   The complete LP search independently returns the same value.  This is kept as
+   a reproducibility cross-check rather than treated as an additional theorem;
+   the proved claim in this PR is the exact anchored witness and its global
+   angle optimum.
 
 The arbitrary rational-angle value `63/625` is therefore not promoted to a
 theorem.
