@@ -1,4 +1,4 @@
-import OntologySeparation.Certificates.LFAgencySqrtTwo
+import OntologySeparation.Operational.LFAgencySqrtTwo
 
 namespace OntologySeparation.Tests.LFAgencySqrtTwo
 open OntologySeparation.LFAgencyRelaxation
@@ -12,3 +12,6 @@ example : Shared.NoSignaling sqrtTwoBehavior := sqrtTwoBehavior_public_noSignali
 
 end
 end OntologySeparation.Tests.LFAgencySqrtTwo
+
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.sum_recordTV_lower_bound
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.explicit_angle_bound
