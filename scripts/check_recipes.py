@@ -28,6 +28,93 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     updated = subprocess.run(['lake','update'],cwd=project,env=env,capture_output=True,text=True)
     if updated.returncode:
         raise SystemExit(updated.stdout+updated.stderr)
+    environment = project / 'EnvironmentAccessStudy.lean'
+    environment.write_text((ROOT / 'examples/EnvironmentAccessStudy.lean').read_text())
+    environment_output = project / 'environment.html'
+    assert write_claim_report(environment, environment_output) == 4
+    assert 'Agreement over stated access domain' in environment_output.read_text()
+    print('Environment access: public import and scoped report checked', flush=True)
+
+    discrimination = project / 'EnvironmentDiscriminationStudy.lean'
+    discrimination.write_text((ROOT / 'examples/EnvironmentDiscriminationStudy.lean').read_text())
+    discrimination_output = project / 'discrimination.html'
+    assert write_claim_report(discrimination, discrimination_output) == 8
+    page = discrimination_output.read_text()
+    assert '>337/625<' in page and '>288/625<' in page
+    print('Discrimination: full-family theorems and explicit witness checked', flush=True)
+
+    finite_shot = project / 'FiniteShotStudy.lean'
+    finite_shot.write_text((ROOT / 'examples/FiniteShotStudy.lean').read_text())
+    finite_shot_output = project / 'finite-shot.html'
+    assert write_claim_report(finite_shot, finite_shot_output) == 4
+    records = parse_exports(run_lean(finite_shot))
+    first_risk = next(r['claim']['quantity'] for r in records if r['declaration'].endswith('.risk'))
+    assert first_risk == {'numerator': '12628864335244989661982881',
+                          'denominator': '1525878906250000000000000000'}, first_risk
+    finite_shot.write_text(finite_shot.read_text().replace(
+        'design 8 (1/100)', 'design 8 (1/200)', 1))
+    assert write_claim_report(finite_shot, finite_shot_output) == 4
+    records = parse_exports(run_lean(finite_shot))
+    second_risk = next(r['claim']['quantity'] for r in records if r['declaration'].endswith('.risk'))
+    from fractions import Fraction
+    expected_risk = (Fraction(337,625) + Fraction(1,200)) ** 8
+    assert second_risk == {'numerator': str(expected_risk.numerator),
+                           'denominator': str(expected_risk.denominator)}, second_risk
+    previous_finite_shot = finite_shot_output.read_bytes()
+    finite_shot.write_text(finite_shot.read_text().replace(
+        'design 8 (1/200)', 'design 8 (1/5)', 1))
+    try:
+        write_claim_report(finite_shot, finite_shot_output)
+    except ValueError as error:
+        assert 'adequate' in str(error) or 'unsolved goals' in str(error), str(error)
+    else:
+        raise AssertionError('Unsupported finite-shot significance was accepted')
+    assert finite_shot_output.read_bytes() == previous_finite_shot
+    for invalid, expected_error in [
+        ('design 0 (1/100) (1/100)', 'positiveShots'),
+        ('design 8 (-1/100) (1/100)', 'slackNonneg'),
+        ('design 8 (1/100) 0', 'alphaPositive'),
+    ]:
+        finite_shot.write_text((ROOT / 'examples/FiniteShotStudy.lean').read_text().replace(
+            'design 8 (1/100) (1/100)', invalid, 1))
+        try:
+            write_claim_report(finite_shot, finite_shot_output)
+        except ValueError as error:
+            assert expected_error in str(error), str(error)
+        else:
+            raise AssertionError('Invalid finite-shot design accepted: ' + invalid)
+        assert finite_shot_output.read_bytes() == previous_finite_shot
+    print('Finite-shot adopter: exact risk edit and four invalid designs rejected', flush=True)
+
+    partial = project / 'PartialEnvironmentStudy.lean'
+    original_partial = (ROOT / 'examples/PartialEnvironmentStudy.lean').read_text()
+    partial.write_text(original_partial)
+    partial_output = project / 'partial-environment.html'
+    assert write_claim_report(partial, partial_output) == 8
+    page = partial_output.read_text()
+    assert '>36/125<' in page and '>99/500<' in page and '>197/250<' in page
+    partial.write_text(original_partial.replace('design (3/5)', 'design (4/5)', 1))
+    assert write_claim_report(partial, partial_output) == 8
+    page = partial_output.read_text()
+    assert '>48/125<' in page and '>147/500<' in page
+    previous_partial = partial_output.read_bytes()
+    for invalid, expected_error in [
+        ('design (1/10) (1/20) (1/25)', 'fits'),
+        ('design (6/5) (1/20) (1/25)', 'overlapLeOne'),
+        ('design (3/5) (-1/20) (1/25)', 'lossNonneg'),
+        ('design (3/5) (1/20) (-1/25)', 'slackNonneg'),
+    ]:
+        partial.write_text(original_partial.replace(
+            'design (3/5) (1/20) (1/25)', invalid, 1))
+        try:
+            write_claim_report(partial, partial_output)
+        except ValueError as error:
+            assert expected_error in str(error), str(error)
+        else:
+            raise AssertionError('Invalid partial-access study accepted: ' + invalid)
+        assert partial_output.read_bytes() == previous_partial
+    print('Partial-access adopter: exact parameter edit and four invalid studies rejected', flush=True)
+
     starter = create_scenario('Starter',project/'Starter.lean')
     output = project/'report.html'
     assert write_report(starter,output) == 12
@@ -234,10 +321,41 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
 
     # Copy public examples into an independent Lake project: no repository-local imports.
     for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6),
-                            ('LFAssumptionStudy.lean', 3)]:
+                            ('LFAssumptionStudy.lean', 3), ('LFPaperStudy.lean', 4)]:
         study = project / filename
         study.write_text((ROOT / 'examples' / filename).read_text())
         assert write_claim_report(study, project / (filename + '.html')) == count
+    readout = project / 'LFReadoutStudy.lean'
+    readout.write_text((ROOT / 'examples' / 'LFReadoutStudy.lean').read_text())
+    readout_output = project / 'lf-readout.html'
+    assert write_claim_report(readout, readout_output) == 5
+    readout_records = parse_exports(run_lean(readout))
+    for suffix, kind in [('ceiling', 'realizedBound'), ('attainingModel', 'witness')]:
+        claim = next(r['claim'] for r in readout_records if r['declaration'].endswith('.' + suffix))
+        assert claim['kind'] == kind, claim
+        assert claim['quantity'] == {'numerator': '13', 'denominator': '2'}, claim
+    assert next(r['claim'] for r in readout_records
+                if r['declaration'].endswith('.quantumExclusion'))['kind'] == 'exclusion'
+    original_readout = readout.read_text()
+    assert original_readout.count('1 / 8') == 1
+    readout.write_text(original_readout.replace('1 / 8', '1 / 10'))
+    assert write_claim_report(readout, readout_output) == 5
+    edited_readout = parse_exports(run_lean(readout))
+    for suffix in ['ceiling', 'attainingModel']:
+        claim = next(r['claim'] for r in edited_readout if r['declaration'].endswith('.' + suffix))
+        assert claim['quantity'] == {'numerator': '32', 'denominator': '5'}, claim
+    previous_readout = readout_output.read_bytes()
+    # At 1/4 the claimed quantum exclusion is no longer justified by this bound.
+    readout.write_text(original_readout.replace('1 / 8', '1 / 4'))
+    try:
+        write_claim_report(readout, readout_output)
+    except ValueError as error:
+        assert 'unsolved goals' in str(error), str(error)
+    else:
+        raise AssertionError('Unsupported readout-budget exclusion was accepted')
+    assert readout_output.read_bytes() == previous_readout
+    print('LF readout adopter: derived bound/witness updated; unsupported exclusion rejected', flush=True)
+
     atlas = project / 'LFAssumptionStudy.lean'
     atlas_output = project / 'LFAssumptionStudy.lean.html'
     atlas_before = atlas_output.read_bytes()

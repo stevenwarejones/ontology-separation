@@ -199,3 +199,13 @@ This gate does not require rewriting already checked code without a benefit.
 See [Prior art and reuse decisions](PRIOR_ART.md) for the additional literature
 assessment and the distinction between verified sources and unverified leads.
 These references establish precedents, not an exhaustive novelty search.
+
+## Implemented follow-ups to the initial milestone
+
+- #28: joint-event LF correspondence, conditional normalization and impossible records.
+- The readout-error follow-up: whole-class bound and attaining family for a total
+  disagreement budget, with numerical claims derived from that budget. See
+  [LF_READOUT_GUIDE](LF_READOUT_GUIDE.md). The symmetric relaxed bound is known
+  prior art, so this is a verified baseline and adopter workflow, not a claimed
+  new physical theorem. Subsequent work should pursue the access-dependent
+  distinguishability/impossibility targets and a valid finite-statistics layer.

@@ -45,6 +45,10 @@ import Tests.PartialLeakage
 import Tests.PartialLeakageRobustness
 
 import Tests.LFAssumptionAtlas
+
+import Tests.LFJoint
+
+import Tests.LFReadout
 import Tests.SeparatorSearch
 
 import Tests.NamedFiniteQuantum
@@ -52,3 +56,10 @@ import Tests.NamedFiniteQuantum
 import Tests.TradeoffSpike
 
 import Tests.Signaling
+import Tests.RecordEnvironment
+
+import Tests.EnvironmentDiscrimination
+
+import Tests.FiniteShot
+
+import Tests.PartialEnvironment

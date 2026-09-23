@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/FiniteShotStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>FiniteShotStudy.risk</code><br>Bound + satisfying model</td><td>≤ 12628864335244989661982881/1525878906250000000000000000</td><td><pre>(∀ (m : OntologySeparation.FiniteShot.Trials FiniteShotStudy.planned.shots),
+    (fun trials =&gt; OntologySeparation.FiniteShot.NullBound trials ↑FiniteShotStudy.planned.nullCeiling) m →
+      (fun trials =&gt; OntologySeparation.FiniteShot.prefixMass trials FiniteShotStudy.planned.shots) m ≤
+        ↑(FiniteShotStudy.planned.nullCeiling ^ FiniteShotStudy.planned.shots)) ∧
+  ∃ m, (fun trials =&gt; OntologySeparation.FiniteShot.NullBound trials ↑FiniteShotStudy.planned.nullCeiling) m</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>FiniteShotStudy.missedDetection</code><br>Bound + satisfying model</td><td>≤ 772553055720799/10000000000000000</td><td><pre>(∀ (m : OntologySeparation.FiniteShot.Trials FiniteShotStudy.planned.shots),
+    (fun trials =&gt; OntologySeparation.ReturnStatistics.RecoveryGuarantee trials ↑(1 / 100)) m →
+      (fun trials =&gt; 1 - OntologySeparation.FiniteShot.prefixMass trials FiniteShotStudy.planned.shots) m ≤
+        ↑(1 - (1 - 1 / 100) ^ FiniteShotStudy.planned.shots)) ∧
+  ∃ m, (fun trials =&gt; OntologySeparation.ReturnStatistics.RecoveryGuarantee trials ↑(1 / 100)) m</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ReturnStatistics.calibrated_valid</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (shots : ℕ) (slack alpha : ℚ),
+  0 &lt; shots →
+    0 ≤ slack →
+      337 / 625 + slack ≤ 1 →
+        0 &lt; alpha →
+          alpha &lt; 1 →
+            (337 / 625 + slack) ^ shots ≤ alpha →
+              ∀ (trials : OntologySeparation.FiniteShot.Trials shots),
+                OntologySeparation.ReturnStatistics.CalibratedNull trials ↑slack →
+                  OntologySeparation.FiniteShot.prefixMass trials shots ≤ ↑alpha</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.FiniteShot.Plan.false_rejection_control</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p : OntologySeparation.FiniteShot.Plan) (trials : OntologySeparation.FiniteShot.Trials p.shots),
+  OntologySeparation.FiniteShot.NullBound trials ↑p.nullCeiling → p.rejectionProbability trials ≤ ↑p.alpha</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
