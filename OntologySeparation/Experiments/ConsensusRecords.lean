@@ -27,9 +27,14 @@ theorem aggregateVisibility_append (xs ys : List Rate) :
     (aggregateVisibility (xs ++ ys)).value =
       (aggregateVisibility xs).value * (aggregateVisibility ys).value := by
   induction xs with
-  | nil => simp [aggregateVisibility]
+  | nil =>
+      change (aggregateVisibility ys).value = 1 * (aggregateVisibility ys).value
+      ring
   | cons x xs ih =>
-      simp [aggregateVisibility, PartialLeakage.Rate.mul, ih, mul_assoc]
+      change x.value * (aggregateVisibility (xs ++ ys)).value =
+        (x.value * (aggregateVisibility xs).value) * (aggregateVisibility ys).value
+      rw [ih]
+      ring
 
 /-- One perfectly distinguishing inaccessible record kills the residual
 coherence, regardless of all other record qualities. -/
