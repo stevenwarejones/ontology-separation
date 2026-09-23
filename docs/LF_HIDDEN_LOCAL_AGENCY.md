@@ -123,6 +123,62 @@ forces every such TV to zero.
 That is the correct trusted boundary for this PR.  The exploratory optimizer is
 a discovery/reproducibility tool, not part of the kernel proof.
 
+## The radical bound is relaxed CHSH, not a new Bell inequality
+
+The exact dual certificate makes the provenance especially transparent. Its
+public part is
+
+```
+(E00 - E0y + Ex0 + Exy - 2) / 4.
+```
+
+That numerator is simply a CHSH expression built from the friend-readout
+setting `0` and one Wigner setting on each side. Equivalently, if `delta`
+bounds both relevant record-revealed remote-setting TVs, the certificate says
+
+```
+S_CHSH <= 2 + 4 delta.
+```
+
+The role of the LF construction is therefore to make setting `0` a
+friend-readout setting tied to an absolute shared record. Once that reduction is
+made, the inequality itself is a **relaxed Bell / relaxed parameter-independence
+bound**, not a new Bell-theoretic inequality.
+
+This belongs to the established relaxed-Bell literature. In particular:
+
+- Michael J. W. Hall, *Complementary contributions of indeterminism and
+  signalling to quantum correlations*, New J. Phys. 12, 083051 (2010),
+  quantifies generalized Bell/CHSH bounds when signaling is allowed.
+- Michael J. W. Hall, *Relaxed Bell inequalities and Kochen-Specker theorems*
+  (2011), develops a general distance-based framework for relaxed Bell
+  assumptions.
+- Moji Ghadimi, *Parameter Dependence and Bell nonlocality* (2021), explicitly
+  optimizes CHSH under one-way and two-way parameter dependence, using the
+  maximum remote-setting-induced change in an underlying marginal probability.
+
+The normalization of the dependence parameter differs across these papers and
+the present record-revealed-TV convention, so the coefficient should be compared
+only after translating definitions. The structural content is the same:
+bounded failure of parameter independence raises the CHSH ceiling linearly.
+
+This also explains the radical immediately. Combining
+
+```
+S_CHSH <= 2 + 4 delta
+```
+
+with the quantum Tsirelson bound `S_CHSH <= 2 sqrt(2)` gives
+
+```
+delta >= (sqrt(2)-1)/2
+```
+
+for the maximally violating settings. The pi/8-grid construction attains the
+Tsirelson value. The follow-up Lean proof formalizes this reduction and
+attainment; it should be read as a checked LF-to-relaxed-CHSH bridge, **not as a
+novel Bell bound**.
+
 ## Relation to earlier LF relaxation work
 
 This study belongs with **relaxations of LF assumptions**, not with a new
