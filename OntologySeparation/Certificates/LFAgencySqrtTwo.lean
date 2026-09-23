@@ -8,7 +8,7 @@ abbrev Column := Fin 160
 abbrev EqRow := Fin 75
 abbrev IneqRow := Fin 32
 
-private def fixedZeroIndex (k : Fin 7) : Fin 144 :=
+def fixedZeroIndex (k : Fin 7) : Fin 144 :=
   (#[8, 9, 11, 34, 38, 100, 108] : Array (Fin 144))[k.val]
 
 def objective (j : Column) : ℤ := if j.val < 144 then 0 else 1
