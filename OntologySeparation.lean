@@ -41,3 +41,5 @@ import OntologySeparation.Experiments.ModelCompatibility
 import OntologySeparation.Experiments.TimelikeFriendliness
 
 import OntologySeparation.Experiments.TimelikeOperationalCore
+
+import OntologySeparation.Experiments.TimelikeBellCollapse
