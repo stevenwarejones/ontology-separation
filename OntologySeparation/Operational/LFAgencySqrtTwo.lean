@@ -80,8 +80,8 @@ private theorem wrongA_zero (j : AbsoluteEventTable) (hr : Readable j)
   have hread := hr.1 r y
   have hn0 := j.nonneg (0,y) r (!r.1,false)
   have hn1 := j.nonneg (0,y) r (!r.1,true)
-  change (∑ b : Bool, j.prob (0,y) r (r.1,b)) =
-    ∑ a : Bool, ∑ b : Bool, j.prob (0,y) r (a,b) at hread
+  unfold LFJoint.Table.mass at hread
+  rw [Fintype.sum_prod_type] at hread
   simp only [Fintype.sum_bool] at hread
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;> cases b <;>
@@ -94,8 +94,8 @@ private theorem wrongB_zero (j : AbsoluteEventTable) (hr : Readable j)
   have hread := hr.2 r x
   have hn0 := j.nonneg (x,0) r (false,!r.2)
   have hn1 := j.nonneg (x,0) r (true,!r.2)
-  change (∑ a : Bool, j.prob (x,0) r (a,r.2)) =
-    ∑ a : Bool, ∑ b : Bool, j.prob (x,0) r (a,b) at hread
+  unfold LFJoint.Table.mass at hread
+  rw [Fintype.sum_prod_type] at hread
   simp only [Fintype.sum_bool] at hread
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;> cases a <;>
@@ -109,6 +109,7 @@ private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (0,0) r o) =
     ∑ r : Record, recCorr r * j.mass (0,0) r)
+  simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -124,6 +125,7 @@ private theorem corr02_as_recordBob (j : AbsoluteEventTable) (hr : Readable j) :
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (0,2) r o) =
     ∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b)
+  simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -139,6 +141,7 @@ private theorem corr20_as_recordAlice (j : AbsoluteEventTable) (hr : Readable j)
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (2,0) r o) =
     ∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a)
+  simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -156,6 +159,7 @@ private theorem corr22_as_joint (j : AbsoluteEventTable) :
       ∑ r : Record, j.prob (2,2) r o) =
     ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
       outCorr a b * j.prob (2,2) r (a,b))
+  simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
