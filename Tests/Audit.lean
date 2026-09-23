@@ -335,3 +335,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.AdversarySearch.satisfies_mono
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
+
+-- Memory-awareness / no-signaling benchmark roots.
+#print axioms OntologySeparation.MemoryAwareness.core_inconsistent
+#print axioms OntologySeparation.MemoryAwareness.unaware_dependent
+#print axioms OntologySeparation.MemoryAwareness.signalingAwareness_faithful
+#print axioms OntologySeparation.MemoryAwareness.memory_awareness_core_minimal
