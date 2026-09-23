@@ -134,7 +134,7 @@ theorem explicit_pair_corr (x y : Fin 3) :
   rcases root_identities with ⟨hs,hp,hm,hpm⟩
   fin_cases x <;> fin_cases y <;>
     simp [Correlation.basisCorr_formula, Correlation.blochX, Correlation.blochY,
-      explicitAlice, explicitBob, sqrtTwoCorr, rootHalf, rootPlus, rootMinus,
+      explicitAlice, explicitBob, sqrtTwoCorr, rootHalf,
       RealQuantum.zBasis] <;>
     ring_nf <;> nlinarith
 
