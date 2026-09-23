@@ -47,6 +47,7 @@ theorem gap_before_eq_overlap_mul_after
       r.value * gap (recoverOne r visible hidden recovery) := by
   unfold gap
   rw [residual_before_eq_overlap_mul_after]
+  simp [exposeOne, recoverOne]
   ring
 
 /-- A perfectly distinguishing record left outside coherent control kills the
@@ -74,7 +75,7 @@ exactly zero. -/
 theorem before_recover_last_perfect_record :
     gap (exposeOne (Rate.of 0) [] [] (Rate.of 1)) = 0 := by
   norm_num [gap, residualVisibility, exposeOne,
-    ConsensusRecords.aggregateVisibility, Rate.of]
+    ConsensusRecords.aggregateVisibility, PartialLeakage.Rate.mul, Rate.of]
 
 /-- If every inaccessible fragment is a perfect record, positive visibility is
 possible exactly when there are no inaccessible fragments left. -/
@@ -91,7 +92,8 @@ theorem perfect_hidden_positive_iff_empty
         simp [ConsensusRecords.aggregateVisibility, PartialLeakage.Rate.mul, hr] at hpos
   · intro hempty
     subst hidden
-    norm_num [ConsensusRecords.aggregateVisibility]
+    change (0 : ℚ) < 1
+    norm_num
 
 /-- In the perfect-record limit, a positive laboratory fringe requires that the
 inaccessible record list be empty. -/
@@ -102,15 +104,17 @@ theorem perfect_hidden_gap_positive_implies_empty
     (hgap : 0 < gap m) :
     m.inaccessible = [] := by
   have hvis : 0 < residualVisibility m := by
-    unfold gap at hgap
-    unfold residualVisibility
     by_contra hn
-    have hz : (ConsensusRecords.aggregateVisibility m.inaccessible).value = 0 := by
+    have hz : residualVisibility m = 0 := by
+      unfold residualVisibility
       have hnonneg := (ConsensusRecords.aggregateVisibility m.inaccessible).nonneg
-      push_neg at hn
+      have hnpos : ¬ 0 < (ConsensusRecords.aggregateVisibility m.inaccessible).value := by
+        exact hn
       linarith
+    unfold gap at hgap
     rw [hz] at hgap
     norm_num at hgap
+  unfold residualVisibility at hvis
   exact (perfect_hidden_positive_iff_empty m.inaccessible hperfect).mp hvis
 
 end OntologySeparation.ConsensusAccess
