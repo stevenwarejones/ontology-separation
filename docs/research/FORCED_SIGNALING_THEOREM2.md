@@ -12,10 +12,15 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
 
 ## Physical and proof scope
 
-- `HiddenInfluence.Model` consists of **finite deterministic response tables**:
-  early outcomes and complete response tables for the blind pair, with a
-  normalized distribution for each early setting. Equivalence to general
-  conditional-local hidden-variable models is **not formalized**.
+- `HiddenInfluence.Model` uses finite deterministic response tables internally.
+  `HiddenInfluence.StochasticModel` now starts instead from an arbitrary finite
+  hidden state, stochastic A/D outputs, and conditionally independent local B/C
+  response kernels. `selected_probability` proves that sampling both potential
+  B/C responses and refining to deterministic strategies preserves every selected
+  factorized probability; `Model.stochastic_roundtrip` proves the converse packed
+  representation preserves every public probability. This closes the finite
+  stochastic-vs-deterministic representation gap. It does **not** cover infinite
+  hidden spaces or weaken the stated conditional-local factorization.
 - Theorem 1 and this lower-bound argument use **one fixed operational
   completion** of the S4 witness, described in the
   [signaling guide](../SIGNALING_GUIDE.md). The paper's assertion that slope 8
@@ -38,7 +43,11 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
    paper certificate. `model_abd_matches` and `model_acd_matches` check the
    marginals, while `tv_exact` and `signaling_exact` recompute recipient total
    variations. External LP slack variables are not assumed.
-3. [ForcedSignalingTheorem2.lean](../../OntologySeparation/Experiments/ForcedSignalingTheorem2.lean)
+3. [HiddenInfluenceStochastic.lean](../../OntologySeparation/Operational/HiddenInfluenceStochastic.lean)
+   proves finite stochastic conditional-local response kernels admit deterministic
+   refinement without changing selected joint probabilities, and that every packed
+   response model has a stochastic representative with the same observable behavior.
+4. [ForcedSignalingTheorem2.lean](../../OntologySeparation/Experiments/ForcedSignalingTheorem2.lean)
    proves that those marginal constraints determine the completed score.
    `matches_score` and `lower_bound` connect the target to the physical
    [Theorem 1 tradeoff](../../OntologySeparation/Experiments/SignalingTradeoff.lean).
