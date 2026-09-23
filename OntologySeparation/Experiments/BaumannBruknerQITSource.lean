@@ -1,4 +1,5 @@
 import OntologySeparation.Experiments.BaumannBruknerProtocol
+import OntologySeparation.Adapters.FiniteQuantum
 import QIT.Measurements.Projective
 
 /-!
@@ -90,14 +91,18 @@ def rotated : QIT.ProjectiveMeasurement Bool Bool where
   idempotent := by
     intro o
     ext i j
-    cases o <;> cases i <;> cases j <;>
-      norm_num [rotatedEffect, Matrix.mul_apply, Fintype.sum_bool, r] <;>
+    apply Complex.ext <;>
+      cases o <;> cases i <;> cases j <;>
+      norm_num [rotatedEffect, Matrix.mul_apply, Fintype.sum_bool, r,
+        BaumannBruknerProtocol.sqrtTwo] <;>
       nlinarith [BaumannBruknerProtocol.sqrtTwo_sq]
   orthogonal := by
     intro i j hij
     ext a b
-    cases i <;> cases j <;> cases a <;> cases b <;>
-      norm_num [rotatedEffect, Matrix.mul_apply, Fintype.sum_bool, r] at hij ⊢ <;>
+    apply Complex.ext <;>
+      cases i <;> cases j <;> cases a <;> cases b <;>
+      norm_num [rotatedEffect, Matrix.mul_apply, Fintype.sum_bool, r,
+        BaumannBruknerProtocol.sqrtTwo] at hij ⊢ <;>
       nlinarith [BaumannBruknerProtocol.sqrtTwo_sq]
   sum_eq_one := by
     ext i j
@@ -117,6 +122,7 @@ theorem computational_conditional (b f g : Bool) :
       | true,  false, false => 1/2
       | _, _, _ => 0 := by
   cases b <;> cases f <;> cases g <;>
+    apply Complex.ext <;>
     norm_num [conditionalFriend, computational, computationalEffect,
       state, source, QIT.PureVector.state, QIT.rankOneMatrix,
       Matrix.vecMulVec, Fintype.sum_bool, s] <;>
@@ -134,9 +140,11 @@ theorem rotated_conditional (b f g : Bool) :
       | true,  false, true  => -(r : ℂ)/6
       | true,  true,  false => -(r : ℂ)/6 := by
   cases b <;> cases f <;> cases g <;>
+    apply Complex.ext <;>
     norm_num [conditionalFriend, rotated, rotatedEffect,
       state, source, QIT.PureVector.state, QIT.rankOneMatrix,
-      Matrix.vecMulVec, Fintype.sum_bool, s, r] <;>
+      Matrix.vecMulVec, Fintype.sum_bool, s, r,
+      BaumannBruknerProtocol.sqrtTwo] <;>
     nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 2 by norm_num),
       BaumannBruknerProtocol.sqrtTwo_sq]
 
