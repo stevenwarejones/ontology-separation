@@ -287,6 +287,38 @@ with tempfile.TemporaryDirectory(prefix='recipe-adoption-', dir=ROOT/'.lake') as
     assert 'Checked separator searches' in search_output.read_text()
     print('Separator search adopter: base agreement and later candidate exported', flush=True)
 
+    # Sharp physical optimum: edit the allowed budget, not hand-written predictions.
+    signaling = project / 'SignalingStudy.lean'
+    signaling_source = (ROOT / 'examples/SignalingStudy.lean').read_text()
+    signaling_output = project / 'signaling.html'
+    for budget, ceiling, used in [('1/8', '7', '8'), ('1/4', '8', '4'), ('1/2', '8', '4')]:
+        signaling.write_text(signaling_source.replace('design (1/8)', f'design ({budget})'))
+        assert write_claim_report(signaling, signaling_output) == 3
+        rows = parse_exports(run_lean(signaling))
+        assert [r['claim']['kind'] for r in rows] == ['realizedBound', 'witness', 'exact']
+        assert [r['claim']['quantity'] for r in rows] == [
+            {'numerator': ceiling, 'denominator': '1'},
+            {'numerator': ceiling, 'denominator': '1'},
+            {'numerator': '1', 'denominator': used}]
+    before_signaling = signaling_output.read_bytes()
+    signaling_mistakes = [
+        signaling_source.replace('design (1/8)', 'design (-1/8)'),
+        signaling_source + '\ndef bad : OntologySeparation.HiddenInfluence.Strategy := '
+            '{ a := false, d := false, b0 := 2, b1 := false, c0 := false, c1 := false }\n',
+        signaling_source + '\nexample : OntologySeparation.HiddenInfluence.Within '
+            'OntologySeparation.HiddenInfluence.Sharp.model.behavior 0 := by norm_num\n',
+    ]
+    for bad in signaling_mistakes:
+        signaling.write_text(bad)
+        try:
+            write_claim_report(signaling, signaling_output)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError('Accepted an invalid signaling study')
+        assert signaling_output.read_bytes() == before_signaling
+    print('Signaling adopter: three edited budgets, plateau semantics and three rejected mistakes checked', flush=True)
+
     # Copy public examples into an independent Lake project: no repository-local imports.
     for filename, count in [('RecordAccessStudy.lean', 8), ('ModelClassStudy.lean', 6),
                             ('LFAssumptionStudy.lean', 3), ('LFPaperStudy.lean', 4)]:

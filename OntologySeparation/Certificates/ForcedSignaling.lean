@@ -7,8 +7,9 @@ A feasibility port of the K=8 rational dual from stevenwarejones/forced-signalin
 commit bae83b865ea60b1fbc4b808e66dc9bbaf7da2d4b (MIT).
 
 This proves the bound for the explicitly reconstructed finite linear program.
-It does not yet prove the physical conditional-locality → LP representation,
-the matching lower certificate, or the cluster-state signaling optimum.
+The physical response-model → LP bridge and fixed-completion sharpness now live
+in Operational.HiddenInfluenceLP and Experiments.SignalingTradeoff.
+This module itself does not prove those results or the cluster-state optimum.
 -/
 namespace OntologySeparation.ForcedSignaling
 open scoped BigOperators

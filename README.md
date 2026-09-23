@@ -15,6 +15,7 @@ proof checker stay fixed.
 |---|---|---|
 | Browse results | [Online explorer](https://stevenwarejones.github.io/ontology-separation/) · [offline views](examples/index.html) | None |
 | Change a parameter | [Getting started](docs/START_HERE.md) | Python; Lean to check new predictions |
+| Explore a sharp signaling tradeoff | [Signaling guide](docs/SIGNALING_GUIDE.md) · [checked report](examples/signaling-tradeoff.html) | Lean to change the budget |
 | Build a Bell–CHSH experiment | [Two-qubit guide](docs/TWO_QUBIT_GUIDE.md) | Python + Lean |
 
 The online explorer publishes verified snapshots from `main`; each page links to

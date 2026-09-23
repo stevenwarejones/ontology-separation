@@ -31,6 +31,8 @@ PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFAssumpt
 
 python3 scripts/check_external_certificate.py
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/ExternalCertificateStudy.lean -o examples/external-certificate.html
+
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/SignalingStudy.lean -o examples/signaling-tradeoff.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFPaperStudy.lean -o examples/lf-paper.html
 
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFReadoutStudy.lean -o examples/lf-readout.html
