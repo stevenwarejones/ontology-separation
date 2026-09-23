@@ -30,13 +30,17 @@ def certificate : MinimalCore holds target core where
     | leftFalse =>
         refine ⟨(true, false), ?_, Or.inl rfl⟩
         intro kept hkept
-        simp [core] at hkept
-        simpa [holds] using hkept
+        have hk : kept = DemoLaw.rightFalse := by
+          simpa [core] using hkept
+        subst kept
+        rfl
     | rightFalse =>
         refine ⟨(false, true), ?_, Or.inr rfl⟩
         intro kept hkept
-        simp [core] at hkept
-        simpa [holds] using hkept
+        have hk : kept = DemoLaw.leftFalse := by
+          simpa [core] using hkept
+        subst kept
+        rfl
 
 example :
     ¬ (∀ m, Satisfies holds (core.erase DemoLaw.leftFalse) m → ¬ target m) :=
