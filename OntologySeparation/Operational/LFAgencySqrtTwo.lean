@@ -171,17 +171,6 @@ private theorem record_mass_at_22 (j : AbsoluteEventTable)
     j.mass (0,0) r = j.mass (2,2) r := by
   exact hi (0,0) (2,2) r
 
-private theorem recordBob22_mass (j : AbsoluteEventTable) (r : Record) :
-    ∑ b : Bool, recordBob j 2 2 r b = j.mass (2,2) r := by
-  unfold recordBob LFJoint.Table.mass
-  rw [Finset.sum_comm]
-  exact (Fintype.sum_prod_type (fun o : Bool × Bool => j.prob (2,2) r o)).symm
-
-private theorem recordAlice22_mass (j : AbsoluteEventTable) (r : Record) :
-    ∑ a : Bool, recordAlice j 2 2 r a = j.mass (2,2) r := by
-  unfold recordAlice LFJoint.Table.mass
-  exact (Fintype.sum_prod_type (fun o : Bool × Bool => j.prob (2,2) r o)).symm
-
 private theorem reference_chsh_le_two (j : AbsoluteEventTable) :
     (∑ r : Record, recCorr r * j.mass (2,2) r) -
       (∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 2 2 r b) +
@@ -246,6 +235,7 @@ private theorem bob_transport (j : AbsoluteEventTable) :
         |recordBob j 2 2 r b - recordBob j 0 2 r b|) =
         2 * recordTVBob j 0 2 2 := by
     unfold recordTVBob
+    simp_rw [abs_sub_comm (recordBob j 2 2 _ _) (recordBob j 0 2 _ _)]
     ring
   rw [htv] at h
   linarith
