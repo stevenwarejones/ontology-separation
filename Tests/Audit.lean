@@ -311,3 +311,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.AdversarySearch.satisfies_mono
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
+
+-- Locality-free contextual-gluing benchmark roots.
+#print axioms OntologySeparation.LocalityFreeFriendliness.antiAB_matches
+#print axioms OntologySeparation.LocalityFreeFriendliness.antiBC_matches
+#print axioms OntologySeparation.LocalityFreeFriendliness.antiAC_matches
+#print axioms OntologySeparation.LocalityFreeFriendliness.shared_and_faithful_impossible
+#print axioms OntologySeparation.LocalityFreeFriendliness.locality_free_core_minimal
