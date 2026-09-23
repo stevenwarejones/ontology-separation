@@ -332,3 +332,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.FriendshipMonogamy.sharedPerfect_target
 #print axioms OntologySeparation.FriendshipMonogamy.disjointNoPerfect_target
 #print axioms OntologySeparation.FriendshipMonogamy.access_monogamy_minimal
+
+-- Explicit two-copy quantum access-monogamy roots.
+#print axioms OntologySeparation.FriendshipMonogamyQuantum.observerA_state
+#print axioms OntologySeparation.FriendshipMonogamyQuantum.observerB_state
+#print axioms OntologySeparation.FriendshipMonogamyQuantum.disjoint_single_copy_views
+#print axioms OntologySeparation.FriendshipMonogamyQuantum.every_observerA_test
+#print axioms OntologySeparation.FriendshipMonogamyQuantum.every_observerB_test
+#print axioms OntologySeparation.FriendshipMonogamyQuantum.two_copy_access_obstruction
