@@ -150,13 +150,14 @@ This belongs to the established relaxed-Bell literature. In particular:
 
 - Michael J. W. Hall, *Complementary contributions of indeterminism and
   signalling to quantum correlations*, New J. Phys. 12, 083051 (2010),
-  quantifies generalized Bell/CHSH bounds when signaling is allowed.
+  arXiv:1006.3680, quantifies generalized Bell/CHSH bounds when signaling is allowed.
 - Michael J. W. Hall, *Relaxed Bell inequalities and Kochen-Specker theorems*
-  (2011), develops a general distance-based framework for relaxed Bell
-  assumptions.
-- Moji Ghadimi, *Parameter Dependence and Bell nonlocality* (2021), explicitly
-  optimizes CHSH under one-way and two-way parameter dependence, using the
-  maximum remote-setting-induced change in an underlying marginal probability.
+  (2011), arXiv:1102.4467, develops a general distance-based framework for
+  relaxed Bell assumptions.
+- Moji Ghadimi, *Parameter Dependence and Bell nonlocality* (2021),
+  arXiv:2102.06920, explicitly optimizes CHSH under one-way and two-way
+  parameter dependence, using the maximum remote-setting-induced change in an
+  underlying marginal probability.
 
 The normalization of the dependence parameter differs across these papers and
 the present record-revealed-TV convention, so the coefficient should be compared
