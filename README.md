@@ -173,6 +173,7 @@ For the research layer, use the advanced paths above or the
 
 [Research milestones](docs/research/PROGRAM.md) · [Checked LF assumption correspondence](docs/research/LF_ASSUMPTIONS.md)
 
+[Flagship decision spike](docs/research/TRADEOFF_DECISION_SPIKE.md) · [Checked external LP certificate](examples/external-certificate.html)
 For the LF paper-to-code correspondence, see [the LF joint-event walkthrough](docs/research/LF_PAPER_GUIDE.md) and its [checked HTML report](examples/lf-paper.html).
 
 Explore imperfect friend readout with [the sharp error-budget study](docs/research/LF_READOUT_GUIDE.md) and its [checked HTML report](examples/lf-readout.html).

@@ -3,6 +3,10 @@
 Status: staged plan, started 2026-09-22. A milestone below is a research target,
 not a claim that its theorem or software already exists.
 
+## Current decision spike
+
+The [tradeoff decision](TRADEOFF_DECISION_SPIKE.md) updates the implementation inventory through merged #27 and open #28–33. It reconciles four external/internal results and tests an actual rational certificate in Lean before committing to a common physical theorem. The historical inventory below records the program's initial starting point.
+
 ## Goal and measure of success
 
 Discover which operationally defined physical model classes can be distinguished

@@ -83,3 +83,5 @@ implemented capability; use each guide's stated scope and checked examples.
 - [End-to-end partial leakage study](PARTIAL_LEAKAGE_STUDY.md) — pointwise exact comparison plus a separately scoped symbolic robustness theorem.
 
 - [Exact separator search](SEPARATOR_SEARCH.md) — certify base agreement, then search an explicit finite candidate family for an oriented separator.
+
+[Tradeoff reconciliation and flagship decision](research/TRADEOFF_DECISION_SPIKE.md): pinned external results, a checked LP certificate, and the next physical proof obligations.
