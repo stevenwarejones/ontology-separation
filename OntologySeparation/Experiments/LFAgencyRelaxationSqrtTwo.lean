@@ -72,6 +72,86 @@ theorem sqrtTwoBehavior_public_noSignaling : Shared.NoSignaling sqrtTwoBehavior 
     cases b <;> fin_cases x <;> fin_cases x' <;> fin_cases y <;>
       simp [sqrtTwoBehavior, sqrtTwoProb, sqrtTwoCorr, RealQuantum.sign]
 
+
+def rootPlus : ℝ := Real.sqrt (2 + Real.sqrt 2)
+def rootMinus : ℝ := Real.sqrt (2 - Real.sqrt 2)
+
+private theorem root_identities :
+    (Real.sqrt 2)^2 = 2 ∧ rootPlus^2 = 2 + Real.sqrt 2 ∧
+      rootMinus^2 = 2 - Real.sqrt 2 ∧ rootPlus * rootMinus = Real.sqrt 2 := by
+  have hs0 : (0 : ℝ) ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
+  have hs2 : (Real.sqrt 2)^2 = 2 := Real.sq_sqrt (by norm_num)
+  have hsle : Real.sqrt 2 ≤ 2 := sqrt_two_bounds.2
+  have hp0 : (0 : ℝ) ≤ rootPlus := by unfold rootPlus; positivity
+  have hm0 : (0 : ℝ) ≤ rootMinus := by unfold rootMinus; positivity
+  have hp2 : rootPlus^2 = 2 + Real.sqrt 2 := by
+    unfold rootPlus
+    rw [Real.sq_sqrt]
+    linarith
+  have hm2 : rootMinus^2 = 2 - Real.sqrt 2 := by
+    unfold rootMinus
+    rw [Real.sq_sqrt]
+    linarith
+  have hprod2 : (rootPlus * rootMinus)^2 = 2 := by
+    calc
+      (rootPlus * rootMinus)^2 = rootPlus^2 * rootMinus^2 := by ring
+      _ = (2 + Real.sqrt 2) * (2 - Real.sqrt 2) := by rw [hp2, hm2]
+      _ = 2 := by nlinarith
+  have hprod0 : 0 ≤ rootPlus * rootMinus := mul_nonneg hp0 hm0
+  have hprod : rootPlus * rootMinus = Real.sqrt 2 := by
+    nlinarith
+  exact ⟨hs2, hp2, hm2, hprod⟩
+
+def explicitAlice (x : Fin 3) : RealQuantum.Basis :=
+  match x.val with
+  | 0 => RealQuantum.zBasis
+  | 1 => ⟨rootHalf, -rootHalf, by
+      have hs := root_identities.1
+      unfold rootHalf
+      nlinarith⟩
+  | _ => ⟨rootHalf, rootHalf, by
+      have hs := root_identities.1
+      unfold rootHalf
+      nlinarith⟩
+
+def explicitBob (y : Fin 3) : RealQuantum.Basis :=
+  match y.val with
+  | 0 => ⟨rootMinus / 2, -rootPlus / 2, by
+      rcases root_identities with ⟨hs,hp,hm,hpm⟩
+      nlinarith⟩
+  | 1 => ⟨rootHalf, rootHalf, by
+      have hs := root_identities.1
+      unfold rootHalf
+      nlinarith⟩
+  | _ => ⟨rootPlus / 2, -rootMinus / 2, by
+      rcases root_identities with ⟨hs,hp,hm,hpm⟩
+      nlinarith⟩
+
+theorem explicit_quantum_matches :
+    RealQuantum.behavior explicitAlice explicitBob = sqrtTwoBehavior := by
+  have hs0 : (0 : ℝ) ≤ Real.sqrt 2 := Real.sqrt_nonneg 2
+  have hp0 : (0 : ℝ) ≤ rootPlus := by unfold rootPlus; positivity
+  have hm0 : (0 : ℝ) ≤ rootMinus := by unfold rootMinus; positivity
+  rcases root_identities with ⟨hs,hp,hm,hpm⟩
+  have he :
+      (RealQuantum.behavior explicitAlice explicitBob).prob = sqrtTwoBehavior.prob := by
+    funext xy ab
+    rcases xy with ⟨x,y⟩
+    rcases ab with ⟨a,b⟩
+    fin_cases x <;> fin_cases y <;> cases a <;> cases b <;>
+      simp [RealQuantum.behavior, RealQuantum.probability, RealQuantum.Basis.vector,
+        explicitAlice, explicitBob, sqrtTwoBehavior, sqrtTwoProb, sqrtTwoCorr,
+        rootHalf, RealQuantum.zBasis, RealQuantum.sign] <;>
+      ring_nf <;> nlinarith
+  cases ha : RealQuantum.behavior explicitAlice explicitBob
+  cases hb : sqrtTwoBehavior
+  simp only [ha, hb] at he
+  cases he
+  rfl
+
+theorem explicit_quantum_realized : RealQuantum.singletTheory 3 sqrtTwoBehavior :=
+  ⟨explicitAlice, explicitBob, explicit_quantum_matches⟩
+
 def sqrtTwoDelta : ℝ := (Real.sqrt 2 - 1) / 2
 
 theorem sqrtTwoDelta_positive : 0 < sqrtTwoDelta := by
