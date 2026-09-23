@@ -348,3 +348,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.QuantumTwoObserverMonogamy.canSeparate_requires_environment
 #print axioms OntologySeparation.QuantumTwoObserverMonogamy.disjoint_policies_cannot_both_separate
 #print axioms OntologySeparation.QuantumTwoObserverMonogamy.full_policy_can_separate
+
+-- Two-copy explicit quantum record threshold roots.
+#print axioms OntologySeparation.TwoRecordEnvironment.one_copy_missing_state
+#print axioms OntologySeparation.TwoRecordEnvironment.every_one_copy_test
+#print axioms OntologySeparation.TwoRecordEnvironment.global_states_differ
+#print axioms OntologySeparation.TwoRecordEnvironment.full_access_strictly_distinguishes
