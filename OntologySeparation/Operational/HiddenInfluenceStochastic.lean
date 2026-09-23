@@ -217,14 +217,16 @@ private theorem StochasticModel.strategyGiven_ofStrategies_mass
     ((StochasticModel.ofStrategies q).strategyGiven e s).mass t =
       if t = s then 1 else 0 := by
   rcases s with ⟨a, d, b0, b1, c0, c1⟩
-  simp [StochasticModel.strategyGiven, StochasticModel.ofStrategies,
-    FiniteKernel.pure]
+  cases c1 <;>
+    simp [StochasticModel.strategyGiven, StochasticModel.ofStrategies,
+      FiniteKernel.pure]
 
 theorem StochasticModel.toStrategies_ofStrategies
     (q : Early → FiniteDistribution Strategy) (e : Early) (s : Strategy) :
     ((StochasticModel.ofStrategies q).toStrategies e).mass s = (q e).mass s := by
-  rw [StochasticModel.toStrategies]
-  simp [FiniteKernel.bind, StochasticModel.strategyGiven_ofStrategies_mass]
+  unfold StochasticModel.toStrategies FiniteKernel.bind
+  simp [StochasticModel.ofStrategies,
+    StochasticModel.strategyGiven_ofStrategies_mass]
 
 /-- Determinizing the stochastic embedding of a deterministic strategy mixture
 returns the same response-table weights. -/
