@@ -19,28 +19,28 @@ def core : Finset DemoLaw := {.leftFalse, .rightFalse}
 def certificate : MinimalCore holds target core where
   excludes := by
     intro m hm ht
-    have hl := hm .leftFalse (by simp [core])
-    have hr := hm .rightFalse (by simp [core])
+    have hleftMem : DemoLaw.leftFalse ∈ core := by simp [core]
+    have hrightMem : DemoLaw.rightFalse ∈ core := by simp [core]
+    have hl : m.1 = false := hm .leftFalse hleftMem
+    have hr : m.2 = false := hm .rightFalse hrightMem
     rcases ht with ht | ht
-    · exact (by simpa [holds] using hl) ht
-    · exact (by simpa [holds] using hr) ht
+    · simp [hl] at ht
+    · simp [hr] at ht
   deletionAdversary := by
     intro law hlaw
     cases law with
     | leftFalse =>
         refine ⟨(true, false), ?_, Or.inl rfl⟩
         intro kept hkept
-        have hk : kept = DemoLaw.rightFalse := by
-          simpa [core] using hkept
-        subst kept
-        rfl
+        cases kept with
+        | leftFalse => simp [core] at hkept
+        | rightFalse => rfl
     | rightFalse =>
         refine ⟨(false, true), ?_, Or.inr rfl⟩
         intro kept hkept
-        have hk : kept = DemoLaw.leftFalse := by
-          simpa [core] using hkept
-        subst kept
-        rfl
+        cases kept with
+        | leftFalse => rfl
+        | rightFalse => simp [core] at hkept
 
 example :
     ¬ (∀ m, Satisfies holds (core.erase DemoLaw.leftFalse) m → ¬ target m) :=
