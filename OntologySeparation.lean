@@ -49,5 +49,4 @@ import OntologySeparation.Experiments.NestedFriendliness
 import OntologySeparation.Experiments.LocalityFreeFriendliness
 
 import OntologySeparation.Experiments.MemoryAwareness
-import OntologySeparation.Experiments.MemoryAwarenessWitness
 import OntologySeparation.Experiments.BaumannBruknerProtocol
