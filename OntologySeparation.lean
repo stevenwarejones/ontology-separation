@@ -47,3 +47,9 @@ import OntologySeparation.Experiments.CausalOrderTwoSetting
 import OntologySeparation.Experiments.CausalOrderUnrestricted
 import OntologySeparation.Experiments.NestedFriendliness
 import OntologySeparation.Experiments.LocalityFreeFriendliness
+
+import OntologySeparation.Experiments.ForcedSignalingLC4
+
+import OntologySeparation.Experiments.ForcedSignalingLC4Witness
+
+import OntologySeparation.Experiments.ForcedSignalingTheorem2
