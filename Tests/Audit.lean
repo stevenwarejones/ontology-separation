@@ -306,3 +306,8 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PartialEnvironment.uniform_threshold
 #print axioms OntologySeparation.PartialEnvironment.worst_case
 #print axioms OntologySeparation.PartialEnvironment.Study.uniformly_resolves
+
+-- Structured adversary-search trust roots.
+#print axioms OntologySeparation.AdversarySearch.satisfies_mono
+#print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
+#print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
