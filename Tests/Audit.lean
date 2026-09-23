@@ -325,3 +325,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ConsensusAccess.recover_last_perfect_record
 #print axioms OntologySeparation.ConsensusAccess.perfect_hidden_positive_iff_empty
 #print axioms OntologySeparation.ConsensusAccess.perfect_hidden_gap_positive_implies_empty
+
+-- Access-relative friendship-monogamy trust roots.
+#print axioms OntologySeparation.FriendshipMonogamy.residual_zero_of_perfect_inaccessible
+#print axioms OntologySeparation.FriendshipMonogamy.disjoint_access_monogamy
+#print axioms OntologySeparation.FriendshipMonogamy.sharedPerfect_target
+#print axioms OntologySeparation.FriendshipMonogamy.disjointNoPerfect_target
+#print axioms OntologySeparation.FriendshipMonogamy.access_monogamy_minimal
