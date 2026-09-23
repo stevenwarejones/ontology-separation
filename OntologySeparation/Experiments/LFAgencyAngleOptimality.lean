@@ -101,6 +101,8 @@ theorem chshNumerator_le (a0 a1 b0 b1 : RealQuantum.Basis) :
       b0x, b0y, b1x, b1y]
     ring
   rw [hc]
+  change a0x*(b1x-b0x) + a0y*(b1y-b0y) -
+      a1x*(b0x+b1x) - a1y*(b0y+b1y) ≤ 2*s
   nlinarith [h1, h2, h3, h4, hspos]
 
 def anchoredWitness (a0 a1 b0 b1 : RealQuantum.Basis) : ℝ :=
