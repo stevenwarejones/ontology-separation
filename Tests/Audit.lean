@@ -317,3 +317,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.MemoryAwareness.unaware_dependent
 #print axioms OntologySeparation.MemoryAwareness.signalingAwareness_faithful
 #print axioms OntologySeparation.MemoryAwareness.memory_awareness_core_minimal
+
+-- Explicit Baumann--Brukner no-signaling arithmetic witness roots.
+#print axioms OntologySeparation.MemoryAwarenessWitness.wigner_coefficients_normalized
+#print axioms OntologySeparation.MemoryAwarenessWitness.sqrt_two_gt_seven_fifths
+#print axioms OntologySeparation.MemoryAwarenessWitness.requiredNoSignalQ_negative
+#print axioms OntologySeparation.MemoryAwarenessWitness.no_probability_realizes_requiredNoSignalQ
