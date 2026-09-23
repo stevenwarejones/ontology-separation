@@ -6,8 +6,8 @@ import OntologySeparation.Experiments.EnvironmentDiscrimination
 import OntologySeparation.Experiments.RecordEnvironment
 import OntologySeparation.Experiments.LFReadout
 import OntologySeparation.Experiments.LFJoint
-import OntologySeparation.Experiments.LFFiniteSpeed
-import OntologySeparation.Experiments.LFFiniteSpeedDiagnostics
+import OntologySeparation.Experiments.LFAgencyRelaxation
+import OntologySeparation.Experiments.LFAgencyRelaxationDiagnostics
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
@@ -335,16 +335,16 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 
 
 -- Finite-speed Local Friendliness feasibility roots.
-#print axioms OntologySeparation.LFFiniteSpeed.bound
-#print axioms OntologySeparation.LFFiniteSpeed.quantum_gap
-#print axioms OntologySeparation.LFFiniteSpeed.quantum_public_noSignaling
-#print axioms OntologySeparation.LFFiniteSpeed.quantum_excluded
-#print axioms OntologySeparation.LFFiniteSpeed.feasibility
+#print axioms OntologySeparation.LFAgencyRelaxation.bound
+#print axioms OntologySeparation.LFAgencyRelaxation.quantum_gap
+#print axioms OntologySeparation.LFAgencyRelaxation.quantum_public_noSignaling
+#print axioms OntologySeparation.LFAgencyRelaxation.quantum_excluded
+#print axioms OntologySeparation.LFAgencyRelaxation.feasibility
 
 
 -- Trusted record-revealed finite-speed LF diagnostics.
-#print axioms OntologySeparation.LFFiniteSpeed.recordTVAlice_nonnegative
-#print axioms OntologySeparation.LFFiniteSpeed.recordTVBob_nonnegative
-#print axioms OntologySeparation.LFFiniteSpeed.recordTVAlice_zero_of_local
-#print axioms OntologySeparation.LFFiniteSpeed.recordTVBob_zero_of_local
-#print axioms OntologySeparation.LFFiniteSpeed.local_recordRevealedWithin_zero
+#print axioms OntologySeparation.LFAgencyRelaxation.recordTVAlice_nonnegative
+#print axioms OntologySeparation.LFAgencyRelaxation.recordTVBob_nonnegative
+#print axioms OntologySeparation.LFAgencyRelaxation.recordTVAlice_zero_of_local
+#print axioms OntologySeparation.LFAgencyRelaxation.recordTVBob_zero_of_local
+#print axioms OntologySeparation.LFAgencyRelaxation.local_recordRevealedWithin_zero
