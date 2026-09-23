@@ -327,3 +327,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.TimelikeOperationalCore.dropAlice_score
 #print axioms OntologySeparation.TimelikeOperationalCore.dropBob_score
 #print axioms OntologySeparation.TimelikeOperationalCore.exact_minimal_core
+
+-- Timelike 2222 collapse-to-Bell roots.
+#print axioms OntologySeparation.TimelikeBellCollapse.outcomeProb_nonneg
+#print axioms OntologySeparation.TimelikeBellCollapse.productResponse_noSignaling
+#print axioms OntologySeparation.TimelikeBellCollapse.productResponse_outcomeIndependent
+#print axioms OntologySeparation.TimelikeBellCollapse.response_score
+#print axioms OntologySeparation.TimelikeBellCollapse.score_preserved
+#print axioms OntologySeparation.TimelikeBellCollapse.embeds_screening_off
