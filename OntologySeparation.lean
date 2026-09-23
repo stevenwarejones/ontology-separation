@@ -47,3 +47,6 @@ import OntologySeparation.Experiments.CausalOrderTwoSetting
 import OntologySeparation.Experiments.CausalOrderUnrestricted
 import OntologySeparation.Experiments.NestedFriendliness
 import OntologySeparation.Experiments.LocalityFreeFriendliness
+
+import OntologySeparation.Experiments.FriendshipMonogamy
+import OntologySeparation.Experiments.FriendshipMonogamyQuantum
