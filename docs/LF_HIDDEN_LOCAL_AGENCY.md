@@ -87,15 +87,24 @@ delta = (sqrt(2) - 1)/2
 The script reproduces this value numerically.  A broader angle search also
 returns approximately the same optimum.
 
-There are two logically separate statements:
+There are now three carefully separated statements:
 
-1. **At these explicit angles**, the relaxation requires
-   `(sqrt(2)-1)/2`.  This is the only angle result that would be worth
-   kernel-checking, using exact arithmetic over `sqrt 2`.
-2. **No measurement angles do better.**  This remains a numerical optimization
-   claim and is not asserted by Lean.
+1. **Explicit-angle theorem — Lean-certified.**  For the stated pi/8-grid
+   singlet measurements, every AOE joint extension with exact readout and
+   setting-independent friend records has at least one of the two certified
+   record-revealed TVs at least `(sqrt(2)-1)/2`.
+2. **Anchored-witness angle optimum — Lean-certified.**  The public part of the
+   exact LP certificate is a CHSH-type witness
+   `(E00 - E0y + Ex0 + Exy - 2)/4`.  An elementary Tsirelson proof in Lean
+   shows that no real projective qubit measurement angles can make this witness
+   exceed `(sqrt(2)-1)/2`, and the pi/8-grid bases attain equality.
+3. **Global optimum of the full multi-comparison LP — numerical only.**  The
+   exploratory angle search over the complete LP returns the same value, but the
+   theorem in this follow-up does not identify every facet of that larger
+   piecewise-linear optimization problem.
 
-Accordingly, this PR does **not** attempt to certify `63/625`.
+The arbitrary rational-angle value `63/625` is therefore not promoted to a
+theorem.
 
 ## What the Lean code certifies
 
@@ -163,11 +172,11 @@ No paper matching the exact optimization in this PR was found in that focused
 search.  This is **not** a novelty claim: the search is finite and terminology
 varies across the causal-inference and Wigner-friend literature.
 
-Because this branch is being retired as a negative result, this PR also
-**defers** a Lean proof of the explicit-angle `(sqrt(2)-1)/2` value.  If that
-quantity is revisited later, the right formal target is only the explicit-angle
-lower bound with exact `sqrt 2` arithmetic.  The statement that no measurement
-angles do better remains numerical unless a separate analytic proof is found.
+The follow-up proof now kernel-checks the explicit-angle
+`(sqrt(2)-1)/2` lower bound with exact radical arithmetic and separately proves
+global optimality of the associated readout-anchored CHSH witness.  It does not
+turn the broader numerical full-LP angle search into a theorem; that stronger
+claim would require a complete characterization of the other active LP facets.
 
 ## Why this does not yield operational superluminal signaling
 
@@ -203,17 +212,10 @@ and the full public LF table remains exactly no-signaling.
 
 That is enough to close this branch as a useful negative result.
 
-Possible follow-up outside this PR:
-
-- check the literature specifically for a total-variation relaxation of Local
-  Agency;
-- if still useful, kernel-check only the explicit-angle
-  `(sqrt(2)-1)/2` lower bound with exact `sqrt 2` arithmetic;
-- keep the statement that no angles do better as numerical unless a separate
-  analytic proof is found.
-
-After that, return to the forced-signaling program rather than extending this
-track.
+The explicit-angle radical result and its anchored-witness angle optimum are
+now formalized.  No additional Local-Agency branch is proposed here; the
+remaining full-LP angle search is retained as exploratory evidence, and the
+research program returns to forced-signaling.
 
 ## Reproducibility
 
