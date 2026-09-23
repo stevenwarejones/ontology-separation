@@ -502,3 +502,78 @@
 'OntologySeparation.BaumannBruknerQITWigner.qit_setting_dependence' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.PerfectRecordTraceout.copyIsometry_isometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PerfectRecordTraceout.copied_entry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PerfectRecordTraceout.marginal_entry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PerfectRecordTraceout.cross_branch_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PerfectRecordTraceout.same_branch_preserved' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PerfectRecordTraceout.inaccessible_copy_changes_coherent_state' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TwoRecordEnvironment.collapsed_entry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TwoRecordEnvironment.one_copy_missing_state' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TwoRecordEnvironment.every_one_copy_test' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TwoRecordEnvironment.global_states_differ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TwoRecordEnvironment.full_access_strictly_distinguishes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumAccessMonogamy.same_environment_state' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumAccessMonogamy.every_environment_test' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumAccessMonogamy.every_laboratory_test' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumAccessMonogamy.joint_return_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.QuantumAccessMonogamy.disjoint_local_blind_joint_separates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumTwoObserverMonogamy.laboratory_not_separating' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumTwoObserverMonogamy.environment_not_separating' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumTwoObserverMonogamy.separator_requires_joint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumTwoObserverMonogamy.canSeparate_requires_laboratory' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumTwoObserverMonogamy.canSeparate_requires_environment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumTwoObserverMonogamy.disjoint_policies_cannot_both_separate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.QuantumTwoObserverMonogamy.full_policy_can_separate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamyQuantum.observerA_state' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamyQuantum.observerB_state' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamyQuantum.disjoint_single_copy_views' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamyQuantum.every_observerA_test' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamyQuantum.every_observerB_test' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.FriendshipMonogamyQuantum.two_copy_access_obstruction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
