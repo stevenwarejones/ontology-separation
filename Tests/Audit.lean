@@ -354,3 +354,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.TwoRecordEnvironment.every_one_copy_test
 #print axioms OntologySeparation.TwoRecordEnvironment.global_states_differ
 #print axioms OntologySeparation.TwoRecordEnvironment.full_access_strictly_distinguishes
+
+-- Generic perfect-record traceout roots.
+#print axioms OntologySeparation.PerfectRecordTraceout.copyIsometry_isometry
+#print axioms OntologySeparation.PerfectRecordTraceout.marginal_entry
+#print axioms OntologySeparation.PerfectRecordTraceout.cross_branch_zero
+#print axioms OntologySeparation.PerfectRecordTraceout.same_branch_preserved
+#print axioms OntologySeparation.PerfectRecordTraceout.inaccessible_copy_changes_coherent_state
