@@ -282,3 +282,23 @@
 'OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.MemoryAwareness.core_inconsistent' depends on axioms: [propext, Quot.sound]
+'OntologySeparation.MemoryAwareness.unaware_dependent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.MemoryAwareness.signalingAwareness_faithful' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.MemoryAwareness.memory_awareness_core_minimal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.MemoryAwarenessWitness.wigner_coefficients_normalized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.MemoryAwarenessWitness.sqrt_two_gt_seven_fifths' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.MemoryAwarenessWitness.requiredNoSignalQ_negative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.MemoryAwarenessWitness.no_probability_realizes_requiredNoSignalQ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
