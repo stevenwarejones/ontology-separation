@@ -8,6 +8,7 @@ import OntologySeparation.Experiments.LFReadout
 import OntologySeparation.Experiments.LFJoint
 import OntologySeparation.Experiments.LFAgencyRelaxation
 import OntologySeparation.Experiments.LFAgencyRelaxationDiagnostics
+import OntologySeparation.Operational.LFAgencySqrtTwo
 import OntologySeparation.Experiments.LFAssumptionAtlas
 import OntologySeparation
 import OntologySeparation.Catalog.Matrix
@@ -348,3 +349,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.LFAgencyRelaxation.recordTVAlice_zero_of_local
 #print axioms OntologySeparation.LFAgencyRelaxation.recordTVBob_zero_of_local
 #print axioms OntologySeparation.LFAgencyRelaxation.local_recordRevealedWithin_zero
+
+
+-- Exact explicit-angle Local Agency relaxation bound over sqrt(2).
+#print axioms OntologySeparation.LFAgencyRelaxation.explicit_quantum_realized
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.dual_feasible
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.bound
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.sum_recordTV_lower_bound
+#print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoPhysical.explicit_angle_bound
