@@ -318,3 +318,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.CausalOrderAdversary.fixed_order_mimics_current_statistic
 #print axioms OntologySeparation.CausalOrderAdversary.no_input_separates
 #print axioms OntologySeparation.CausalOrderAdversary.definite_order_countermodel
+
+-- P06 two-setting refinement roots.
+#print axioms OntologySeparation.CausalOrderTwoSetting.xxMinus_zero
+#print axioms OntologySeparation.CausalOrderTwoSetting.old_setting_still_mimicked
+#print axioms OntologySeparation.CausalOrderTwoSetting.xx_setting_separates
+#print axioms OntologySeparation.CausalOrderTwoSetting.two_setting_not_equivalent
