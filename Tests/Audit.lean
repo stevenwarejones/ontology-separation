@@ -357,6 +357,7 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 
 -- Generic perfect-record traceout roots.
 #print axioms OntologySeparation.PerfectRecordTraceout.copyIsometry_isometry
+#print axioms OntologySeparation.PerfectRecordTraceout.copied_entry
 #print axioms OntologySeparation.PerfectRecordTraceout.marginal_entry
 #print axioms OntologySeparation.PerfectRecordTraceout.cross_branch_zero
 #print axioms OntologySeparation.PerfectRecordTraceout.same_branch_preserved
