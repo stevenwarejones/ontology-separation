@@ -111,7 +111,8 @@ theorem physical_inequalities (j : AbsoluteEventTable) :
     norm_num [SqrtTwoCertificate.pairing, weights, qWeight, uWeight,
       SqrtTwoCertificate.ineqCoeff, qX, qY, qR, qA, qB, bitBool,
       recordAlice, recordBob, Fin.sum_univ_succ] <;>
-    first | exact sub_abs_self _ | exact neg_sub_abs_le _ _ | linarith [le_abs_self (0:ℝ)]
+    apply sub_nonpos.mpr <;>
+    first | exact le_abs_self _ | exact neg_le_abs _
 
 def toFeasible (j : AbsoluteEventTable) (hr : Readable j)
     (hi : IndependentRecords j) (hp : j.behavior = sqrtTwoBehavior) :
