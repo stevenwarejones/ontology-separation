@@ -343,6 +343,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--search", action="store_true",
                         help="run an additional numerical measurement-angle search")
+    parser.add_argument("--check", action="store_true",
+                        help="fail unless the documented benchmark values are reproduced")
     args = parser.parse_args()
 
     observed8 = solve_score_lp(unread_records=False, target_score=8)
@@ -372,6 +374,30 @@ def main() -> None:
     print(f"  pi/8-grid target angles    = {angle_target:.12g}")
     print(f"  (sqrt(2)-1)/2              = {radical:.12g}")
     print(f"  residual                   = {angle_target-radical:.3g}")
+
+    if args.check:
+        checks = [
+            ("observed score-8 TV", observed8.fun, 1/4),
+            ("observed zero-TV score", -observed0.fun, 6),
+            ("unread score-8 TV", unread8.fun, 1/8),
+            ("unread zero-TV score", -unread0.fun, 22/3),
+            ("rational-angle full-table TV", rational, 63/625),
+            ("pi/8-grid full-table TV", angle_target, radical),
+        ]
+        tol = 5e-9
+        failed = []
+        for name, got, expected in checks:
+            err = abs(got - expected)
+            print(f"  check {name}: error={err:.3g}")
+            if err > tol:
+                failed.append((name, got, expected, err))
+        if failed:
+            details = "; ".join(
+                f"{name}: got {got:.12g}, expected {expected:.12g}, error {err:.3g}"
+                for name, got, expected, err in failed
+            )
+            raise SystemExit(f"benchmark check failed: {details}")
+        print("  benchmark checks passed")
 
     if args.search:
         value, angles = angle_search()
