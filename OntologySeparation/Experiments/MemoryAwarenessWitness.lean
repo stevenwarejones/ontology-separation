@@ -28,7 +28,6 @@ def requiredNoSignalQ : ℝ :=
 
 theorem wigner_coefficients_normalized : a^2 + b^2 = 1 := by
   norm_num [a, b]
-  ring
 
 theorem sqrt_two_gt_seven_fifths : (7 : ℝ) / 5 < Real.sqrt 2 := by
   have hs := Real.sq_sqrt (show (0 : ℝ) ≤ 2 by norm_num)
