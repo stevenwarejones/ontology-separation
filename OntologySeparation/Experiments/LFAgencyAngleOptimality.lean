@@ -98,7 +98,7 @@ theorem explicit_chshNumerator :
       (explicitBob 0) (explicitBob 2) = 2 * Real.sqrt 2 := by
   rw [show explicitAlice 0 = RealQuantum.zBasis by rfl]
   simp [chshNumerator, basisCorr_formula, explicitAlice, explicitBob,
-    blochX, blochY, rootHalf, rootPlus, rootMinus, RealQuantum.zBasis]
+    blochX, blochY, rootHalf, RealQuantum.zBasis]
   rcases root_identities with ⟨hs,hp,hm,hpm⟩
   ring_nf
   nlinarith
