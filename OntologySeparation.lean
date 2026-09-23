@@ -2,6 +2,7 @@ import OntologySeparation.Core.Operational
 import OntologySeparation.Core.Protocol
 import OntologySeparation.Core.Assumptions
 import OntologySeparation.Core.Profiles
+import OntologySeparation.Core.AdversarySearch
 import OntologySeparation.Experiments.Bell
 import OntologySeparation.Adapters.Tsirelson
 import OntologySeparation.Experiments.LocalFriendliness
