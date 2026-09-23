@@ -311,3 +311,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.AdversarySearch.satisfies_mono
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
+
+-- Operational Friendliness score-level adversary benchmark.
+#print axioms OntologySeparation.OperationalFriendlinessBenchmark.constant_local
+#print axioms OntologySeparation.OperationalFriendlinessBenchmark.dropAbsolute_not_absolute
+#print axioms OntologySeparation.OperationalFriendlinessBenchmark.dropAgency_not_agency
+#print axioms OntologySeparation.OperationalFriendlinessBenchmark.exact_core
