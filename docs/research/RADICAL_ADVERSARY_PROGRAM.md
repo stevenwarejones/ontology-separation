@@ -34,21 +34,27 @@ returns to forced-signaling. The next work should therefore build on the existin
 physical hidden-influence / LP correspondence and sharp tradeoff machinery rather
 than opening more parallel speculative tracks.
 
-Priority questions:
+Concrete priorities:
 
-1. identify the strongest unresolved theorem inside the current forced-signaling
-   model class;
-2. tighten the physical bridge between finite-speed / hidden-influence assumptions
-   and the certified LP constraints;
-3. search for stronger sharp tradeoffs or impossibility regions that survive the
-   strongest admissible adversary;
-4. preserve exact readout, causal structure, and operational signaling distinctions
-   explicitly;
-5. only add new spacetime parties or geometry if they answer a theorem-level
-   obstruction already visible in the current model.
+1. **Port forced-signaling Theorem 2 exactly.** Formalize the cluster-state target
+   and its required marginals in Lean, prove the exact radical value
+   `Σ = (sqrt(2) - 1) / 4`, and derive those marginals from an explicit physical
+   quantum-state / measurement definition rather than importing a probability
+   table. Follow the #35 pattern: physical model first, exact operational bridge,
+   then the certified bound.
+2. **Close the end-to-end headline theorem.** Connect that exact cluster target to
+   the existing physical hidden-influence model and recipient-total-variation
+   definitions, prove the target satisfies the score/marginal hypotheses used by
+   the forced-signaling theorem, and conclude the exact nonzero signaling lower
+   bound from the physical model class. Keep the distinction between hidden
+   recipient TV and public no-signaling explicit.
 
-The goal is not another numerical witness. The goal is a physically interpretable,
-kernel-certified theorem that materially extends the current forced-signaling line.
+Only after these two items are kernel-checked should the program search for a
+stronger geometry, additional spacetime parties, or a different completion.
+
+The goal is therefore concrete: machine-check the paper's headline cluster-state
+forced-signaling result end-to-end, starting from a physical model definition and
+ending at the exact radical lower bound.
 
 ## Active Track 2 — Baumann--Brukner physical bridge
 
