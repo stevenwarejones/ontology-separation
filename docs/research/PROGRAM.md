@@ -1,211 +1,171 @@
-# Research program: from explicit assumptions to decisive experiments
+# Research program: post-#73 frontier
 
-Status: staged plan, started 2026-09-22. A milestone below is a research target,
-not a claim that its theorem or software already exists.
+Status: active research plan, refreshed 2026-09-23 from main at
+`76338444ec1ef133806c861485526c5c51adc741` after merged PR #73.
 
-## Current decision spike
+A checked theorem establishes only the proposition and model class stated in its
+Lean declaration. Reproductions remain reproductions; finite search is not a
+class-wide impossibility theorem; and no novelty claim is made without a focused
+prior-art audit and external scientific review.
 
-The [tradeoff decision](TRADEOFF_DECISION_SPIKE.md) updates the implementation inventory through merged #27 and open #28–33. It reconciles four external/internal results and tests an actual rational certificate in Lean before committing to a common physical theorem. The historical inventory below records the program's initial starting point.
+## Goal
 
-## Goal and measure of success
+Use explicit operational assumptions to derive experimentally meaningful
+separations, sharp tradeoffs, or impossibility results. The preferred unit of
+progress is now a physical theorem with a proved scope boundary, not another
+framework layer.
 
-Discover which operationally defined physical model classes can be distinguished
-with specified experimental controls, prove when weaker controls cannot suffice,
-and connect those results to statistically valid experiments. The scientific
-success criterion is an independently reviewed result about distinguishability
-that was not previously known. Verified reproductions are valuable foundations,
-but are labeled as reproductions. No deadline or novel result is guaranteed.
+The scientific success criterion remains an independently reviewed result about
+a physically motivated model class that was not already known. Formalized
+reproductions and adversarial reductions are valuable foundations, but are
+labeled as such.
 
-The adopter's workflow is: choose physical assumptions, choose available systems
-and operations, request comparison/search, inspect the scope and witness, then
-export a reproducible report. Every milestone must improve that same workflow.
+## What main now contains
 
-## Inventory: merged and open work
+The earlier infrastructure program has largely been completed. The relevant
+frontier is:
 
-Repository state inspected on 2026-09-22; main refreshed to `a57ab06` after #22 and #24 merged. Open branches are implemented work under
-review, not merged guarantees. Inspect their current heads before integration.
-
-| Location | Already implemented | Boundary / how this program builds on it |
+| Area | Checked state on main | Explicit remaining boundary |
 |---|---|---|
-| main at `4ac299e` | Bell operational laws, an LF bound and quantum witness, FriendRecords-to-LF bridge, real-QM/QIT adapters, scoped claims and exact grids | LF is one finite 3×3 binary scenario and one genuine inequality, not a complete formalization of every LF facet or observer model |
-| merged #21 | continuous leakage gap and real-channel bridge, exact boundary-law equality | effective attenuation model; no finite-shot inference |
-| merged #22, main `d90ce67` | leakage public study, committed HTML pipeline, edited-parameter downstream test | reuse its publication/adoption pattern; do not recreate it |
-| merged #24, main `a57ab06` | finite separator search, proof-linked search report/export, multi-candidate public example and downstream checks | finite enumeration is not an impossibility theorem for all physically allowed protocols |
-| open #25, `68f9f52` | named register footprints, subset-based permissions, explicit record-access connections | a generic footprint function still requires a trusted physical interpretation |
-| open #26, `6a25785` | typed local/joint two-register quantum protocols and equal-marginal local equivalence | only the left local factor or both factors; no arbitrary many-register reductions or general multi-round strategies |
+| Local Friendliness | finite joint-event correspondence, genuine LF bound and quantum witness, relaxed readout-error bound, exact `sqrt 2` Local Agency result | no complete 3x3 LF-polytope enumeration; no apparatus-level premise certification |
+| Forced signaling | physical LC4 target, exact 59-atom witness, marginal matching, universal fixed-completion lower bound, exact minimum `(sqrt 2 - 1)/4` | deterministic finite response-table class has not been proved equivalent to general finite stochastic conditional-local models; slope-8 optimality over every allowed completion is not in Lean |
+| Quantum record access | perfect-record traceout, two-copy access, local/joint discrimination, two-observer access obstruction, explicit four-qubit friendship-monogamy reproduction | perfect-record results do not characterize imperfect records, arbitrary states, or arbitrary observer access families |
+| Baumann-Brukner | Sec. 3 source, Bob measurements and unread Wigner pinching reconstructed in QIT; setting-dependent flip rates proved | no class-wide channel theorem; identifying the mathematical record change with awareness remains interpretive |
+| Adversarial boundary map | passive nesting collapse, reduced timelike Bell collapse, unrestricted scalar-report adversary, locality-free contextual gluing benchmark | stronger active-intervention formulations remain open |
+| Reporting / access framework | proof-bearing claims, access-relative equivalence and separators, finite model classes, named-register access, exact recipes and adopter checks | software generalization is no longer the highest-priority scientific work |
+| Statistics | exact expectation-level statements and reports | no checked finite-sample rejection analysis for the current flagship physical theorems |
 
-The planned access/discovery work depends on #24–26 and will extend their APIs.
-The first assumption-atlas increment is independent and branches from main.
-No edits to those open branches are part of this increment. Their green CI and
-merge state must be checked before using them as established dependencies.
+There are no open PRs or issues at this refresh point.
 
-## Seven ideas, three milestones
+## Immediate sequence
 
-| Milestone | Ideas combined | Exit criterion |
-|---|---|---|
-| M1: assumptions and credibility | landmark LF formalization; assumption atlas; external review/upstreaming | paper-to-Lean premise map, exact operational encoding, audited implication and countermodel results, one independently reviewed baseline |
-| M2: discovery and accessibility | experiment synthesis plus impossibility proofs; constrained AI autoformalization | one physical research question with a checked witness or class-wide obstruction; an adopter can change a supported premise/control without writing proof plumbing |
-| M3: experiment and evidence | finite-statistics layer; complete design-to-data workflow | a formally justified test of a specified model class, reproducible trial-data analysis, provenance and selection assumptions visible |
+The next increments are intentionally sequential. A later increment should not
+start until the earlier theorem's code, tests, audit roots and documentation are
+complete.
 
-External physics and Lean review runs through all milestones. Outreach requires
-separate explicit authorization; preparing a review packet does not send it.
-Upstream reusable definitions only after they have a stable purpose and external
-maintainers agree that their library is the appropriate home.
+### F1 — close the finite hidden-influence representation gap
 
-## M1: understand precisely what the assumptions buy
+Define a general finite stochastic conditional-local response model with explicit
+normalization and conditional response distributions. Prove that every such model
+can be refined into the deterministic response-table representation already used
+by `HiddenInfluence.Model`, while preserving the observable ABD/ACD marginals and
+recipient signaling total variation. Also prove the converse embedding.
 
-**M1-A — This increment: close the LF encoding loop.** Construct an operational
-FriendRecords model from every finite LF conditional-box mixture; check readable
-records, conditional locality, independent preparation and equality of every
-probability. Combine with the existing forward bridge to prove an iff. Exhibit
-an LF model violating outcome independence, with all retained premises proved.
-Export the iff, countermodel existence and quantum exclusion through normal
-Claim auditing. Scope: the repository's finite encoding, not all mathematical
-formulations of Bong et al. These are known-physics baseline results.
+Exit criterion: an equality/equivalence theorem for the observable model classes,
+not merely a one-way construction. Add negative tests that demonstrate why
+normalization and conditional locality are required. Audit all public roots.
 
-**M1-B — Paper-to-code contract and missing LF implications.** The initial
-[review map](PAPER_CONTRACT.md) records the remaining obligations. Read the full
-Bong et al. paper and supplement. Map AOE, locality, choice independence, observer
-control, conditioning and zero-probability cases to definitions and derivations.
-Distinguish primitive assumptions from parameterization choices. Prove each
-claimed equivalence, or explicitly record an implication-only boundary. Do not
-call four generic Boolean labels a complete ontology. Request a foundations
-review of this map before claiming faithful full-theorem formalization.
+Scientific meaning: this removes a representation restriction from the existing
+forced-signaling theorem. It does not by itself enlarge the physical assumptions
+beyond finite conditional-local hidden-variable models.
 
-**M1-C — Assumption atlas with constructive countermodels.** Within a fixed
-ambient model type, prove implications and non-implications by actual witnesses.
-For each allegedly necessary premise, attempt a model satisfying all remaining
-premises that defeats the conclusion. Where no such model exists, look for a
-weaker theorem. A missing proof is an open cell, not a false premise. A bound
-below threshold alone is not class membership. Class nonemptiness is evidence,
-not a renderer label. Extend to quantified relaxation parameters only after
-their operational meaning and composition rules are clear.
+### F2 — all-completions forced-signaling sharpness
 
-**M1-D — Landmark scope expansion only when scientifically useful.** Select the
-additional inequalities/facets or scenarios needed to test a candidate theorem.
-If claiming a complete finite polytope description, certify completeness as well
-as validity. Reproduce the quantum witness through explicit physical semantics.
-No priority claim ('first') until a focused literature and repository audit.
+Make the operational completion an explicit finite parameter rather than a fixed
+constant. Reconstruct the admissible completion family and certify the full
+completion spectrum needed to prove that the coefficient 8 cannot be improved
+within that family.
 
-### Early discovery question, begun alongside M1
+Exit criterion: a Lean theorem quantifying over every stated completion, plus an
+attaining completion/witness establishing sharpness. External enumeration may
+propose a certificate; the kernel must verify the universal statement. The
+completion family and its cardinality must be defined from semantics, not a
+trusted label.
 
-Can record/environment control expose distinctions that remain invisible to
-all protocols in a weaker operational class? Specify states or model classes,
-allowed channels, accessible registers, ancillary systems, number of rounds,
-classical communication, and noise before optimization. First check whether
-standard equal-marginal or channel-discrimination results already answer it.
-A restriction invented only to make the result nontrivial is not a breakthrough.
+Scientific meaning: this closes the second scope caveat in
+`docs/research/FORCED_SIGNALING_THEOREM2.md`.
 
-## M2: search, obstruction, and the physicist's front door
+### R1 — imperfect quantum record-access tradeoff
 
-**M2-A — Reuse #24–26; separate finite search from physical completeness.** Add a
-precise protocol class and a coverage theorem where a finite search claims
-completeness. Search programs/optimizers are untrusted proposal engines; Lean
-checks witnesses and bounds. A failed search reports its budget and domain.
-It does not become a no-go theorem.
+Move beyond perfect copied records. Introduce a physically explicit one-parameter
+(or otherwise minimal) family of imperfect environment records using QIT states or
+channels, and quantify what two specified observer access policies can
+simultaneously distinguish.
 
-**M2-B — A paired witness/obstruction study.** For a stated resource budget,
-produce a separating experiment and prove no weaker-access experiment can
-separate the models, or prove an optimal gap bound attained by that experiment.
-Include ancillas/adaptation only if covered by the theorem. Minimax separation
-between model classes must quantify over nuisance parameters and establish
-nonempty classes; separation of two selected states is a weaker result.
+Prefer standard operational quantities such as trace distance, fidelity, or
+optimal binary discrimination probability. Do not introduce a custom scalar
+unless it has a proved operational interpretation.
 
-**M2-C — Parameterized physical leakage and recovery.** Extend typed access to
-an explicit system/record/environment channel model, with justified reindexing
-and partial traces. Distinguish inaccessible reversible leakage from an actual
-irreversible channel. Optimize permitted recovery operations rather than simply
-naming an attenuation multiplier 'recovery efficiency'. Check identifiable
-parameters and whether competing classes overlap before promising separation.
+Exit criterion: a continuous upper bound over the stated family and an explicit
+attaining construction, with the perfect-record theorem recovered as a boundary
+case. If the result is a direct instance of a standard trace-distance/fidelity
+identity, present it as a formalized baseline and use it to select the next harder
+access model rather than claiming novelty.
 
-**M2-D — Constrained AI authoring assistant.** Begin with assembly of checked
-components from a documented grammar. Show the interpreted premises, model
-class, access, quantifiers and target observable before certification. Separate
-unsupported input, inconclusive search, proved proposition and counterexample.
-A counterexample refutes a universal statement, not every claim about a model.
-Do not silently introduce axioms or weaken a claim to obtain a proof. Display
-source-to-formalization differences for human semantic review. Evaluate on
-held-out tasks and deliberately ambiguous/incorrect claims, not only demos.
+### N1 — active nested-friend intervention
 
-Exit requires an independent scientific comparison with prior art. If the first
-candidate reduces to a known trace-distance result, publish it as a baseline and
-move to an explicitly motivated harder model. Do not rebrand it as new physics.
+Only after F1/F2/R1 are settled, revisit the post-LF boundary map with a genuinely
+new operation. Passive copies are already proved to add nothing. The next model
+must include an incompatible outer choice such as read, coherent reversal, or
+interference, with any meta-record semantics stated explicitly.
 
-## M3: valid conclusions from finite trials
+Exit criterion: either a checked reduction to a known Bell/contextuality class or
+a new scoped operational constraint with an explicit quantum target and adversary
+analysis. A failed search is not a no-go theorem.
 
-**M3-A — Statistical contract.** Define the null class, setting distribution,
-trial filtration, independence or memory assumptions, detection/event-selection
-rules, stopping rule and nuisance bounds. Start from established Bell statistical
-methods; prove the relevant test-factor or supermartingale conditions for the
-chosen null. Exact probabilities, empirical frequencies and statistical bounds
-must remain distinct types/records.
+### S1 — finite-sample flagship test
 
-**M3-B — Checked analysis.** Certify a computable rejection bound with numerical
-rounding controlled. Handle data-driven experiment/test selection through sample
-splitting or a proved predictable adaptive procedure. Failure to reject is not
-truth or membership. Guarantee concerns type-I error under the null, not the
-posterior probability that an ontology is true. Ordered trials may be required;
-aggregated counts alone do not justify arbitrary memory-sensitive analyses.
+After one physical theorem is stable, add one end-to-end finite-statistics result
+rather than a generic statistics framework. Forced signaling is the preferred
+first target.
 
-**M3-C — Public-data reproduction and prospective design.** Choose a dataset
-with sufficient metadata and permissions, reproduce a published analysis, and
-explain any discrepancy. Record source hashes and preprocessing. Then optimize
-expected distinguishing power subject to physically motivated resource/noise
-constraints, and issue a prospective analysis protocol for external review.
-Lean cannot certify apparatus calibration or data authenticity from a CSV alone.
+Specify the null class, setting distribution, filtration/memory assumptions,
+event-selection rules, stopping rule and calibration nuisance parameters. Reuse
+established Bell-test statistical methods where possible.
 
-## Reuse infrastructure before extending it
+Exit criterion: a checked finite-sample type-I error bound for a named statistic
+under the stated null, together with a reproducible prospective analysis example.
+Observed estimators and exact expectation values remain distinct.
 
-Before adding linear algebra, finite quantum states, POVMs, channels, or tensor
-operations, inspect the pinned mathlib and Lean-QIT sources and check relevant
-upstream work, including Lean-Quantum. Record the searched declarations, version,
-and any missing capability in the implementation PR. Prefer an existing theorem
-or a thin adapter. A different upstream name or representation is not by itself
-a reason to duplicate the mathematics.
+## Work that is deliberately not next
 
-New local infrastructure needs a concrete gap: for example, a computable exact
-evaluator with a proved connection to upstream semantics. Keep such code small
-and explain why adaptation is insufficient. Compare dependency compatibility,
-proof assumptions, maintenance and migration cost before adding another library;
-do not silently upgrade the pinned Lean/mathlib toolchain. Our focus is physical
-assumptions, access-relative comparison, experiment search and scoped reporting.
-This gate does not require rewriting already checked code without a benefit.
+Do not prioritize a new generic `UniverseComparison` hierarchy, broad automatic
+circuit synthesis, another ontology checkbox layer, or additional passive nested
+observer examples. Those may improve ergonomics, but the repository now has
+enough infrastructure to test substantive physical questions.
 
-## Engineering and review gates for every increment
+Likewise, do not pursue a common tradeoff abstraction merely because LF error,
+forced signaling and record accessibility can all be written as inequalities.
+A shared theorem is warranted only if a common physical hypothesis derives at
+least two of them and predicts something new.
 
-- One short adopter example using public imports and the normal audited exporter.
-- Positive edited-input test; negative misleading-input test where relevant.
-- Proof-carrying values, explicit quantification domain, orientation and existence.
-- Full Lean gate and axiom whitelist; no sorry/admit/native_decide or silent axioms.
-- Supported Python versions and committed report regeneration in CI.
-- Record exact base/head and inspect every open dependency before starting a PR.
-- Independent increments branch from main; dependent increments use a short stack.
-  Merge predecessor changes forward, retain tests/docs, and require checks on new heads.
+## Review and verification gates for every research increment
 
-## References and novelty boundaries
+- State the model class, quantifier order, operations and observables in the PR.
+- Reuse mathlib and Lean-QIT before introducing local linear-algebra foundations.
+- Kernel-check every imported finite certificate; external scripts are proposal
+  or transcription checks, never proof rules.
+- Add public theorem roots to the transitive axiom audit.
+- Run the full `sh scripts/check.sh` gate on the final head.
+- Add a negative test for the theorem boundary where meaningful.
+- Update the relevant research guide so its scope caveats match the theorem.
+- Distinguish reproduction, known corollary, scoped extension and novelty claim.
+- Do not start the next increment while CI, audit output, generated reports or
+  documentation are inconsistent with the branch head.
 
-- Bong et al., *A strong no-go theorem on the Wigner's friend paradox*,
-  https://arxiv.org/abs/1907.05607v4 — scientific baseline, not a claim that this
-  first increment formalizes the entire paper.
-- Krenn et al., *Automated Search for new Quantum Experiments*,
-  https://arxiv.org/abs/1509.02749 — automated experiment design already exists.
-- Ren et al., *MerLean: An Agentic Framework for Autoformalization in Quantum
-  Computation*, https://arxiv.org/abs/2602.16554 — agentic quantum autoformalization
-  already exists; scientific semantic fidelity still requires review.
-- Zhang, Glancy and Knill, *Asymptotically optimal data analysis for rejecting
-  local realism*, https://arxiv.org/abs/1108.2468 — established memory-aware
-  analysis to build on, with assumptions that must be re-established for LF.
+## Longer-term directions
 
-See [Prior art and reuse decisions](PRIOR_ART.md) for the additional literature
-assessment and the distinction between verified sources and unverified leads.
-These references establish precedents, not an exhaustive novelty search.
+After the immediate sequence, reconsider:
 
-## Implemented follow-ups to the initial milestone
+- active Wigner-friend interventions beyond ordinary LF/contextuality;
+- channel-class versions of the Baumann-Brukner memory alteration result;
+- robust access/discrimination under unknown phase or correlated noise;
+- complete finite LF-polytope results only if required by a physical theorem;
+- finite statistics with realistic detection and selection assumptions;
+- constrained exact experiment proposal with Lean verification.
 
-- #28: joint-event LF correspondence, conditional normalization and impossible records.
-- The readout-error follow-up: whole-class bound and attaining family for a total
-  disagreement budget, with numerical claims derived from that budget. See
-  [LF_READOUT_GUIDE](LF_READOUT_GUIDE.md). The symmetric relaxed bound is known
-  prior art, so this is a verified baseline and adopter workflow, not a claimed
-  new physical theorem. Subsequent work should pursue the access-dependent
-  distinguishability/impossibility targets and a valid finite-statistics layer.
+The criterion for choosing among them is scientific leverage: prefer the smallest
+additional physical structure that makes a theorem stronger or closes a real
+scope gap.
+
+## References and boundaries
+
+See [Prior art and reuse decisions](PRIOR_ART.md),
+[Adversarial boundary map](ADVERSARIAL_BOUNDARY_MAP.md),
+[Forced-signaling theorem guide](FORCED_SIGNALING_THEOREM2.md),
+[Quantum record access](QUANTUM_RECORD_ACCESS.md), and
+[Baumann-Brukner guide](BAUMANN_BRUKNER_GUIDE.md).
+
+The repository's Lean proofs certify mathematical implications inside stated
+models. They do not certify apparatus calibration, consciousness, philosophical
+interpretations, experimental data authenticity, or scientific priority.
