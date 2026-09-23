@@ -404,3 +404,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.BaumannBruknerProtocol.rotated_flip_bridge
 #print axioms OntologySeparation.BaumannBruknerProtocol.exact_setting_dependence
 #print axioms OntologySeparation.BaumannBruknerProtocol.flip_rates_differ
+
+-- Baumann--Brukner QIT source / Bob-measurement bridge.
+#print axioms OntologySeparation.BaumannBruknerQITSource.s_sq
+#print axioms OntologySeparation.BaumannBruknerQITSource.computational_conditional
+#print axioms OntologySeparation.BaumannBruknerQITSource.rotated_conditional
+#print axioms OntologySeparation.BaumannBruknerQITSource.computational_branch_data
+#print axioms OntologySeparation.BaumannBruknerQITSource.rotated_branch_data
