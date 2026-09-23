@@ -35,7 +35,8 @@ theorem sqrtTwo_pos : 0 < sqrtTwo := by
   exact Real.sqrt_pos.2 (by norm_num)
 
 theorem sqrtTwo_gt_one : 1 < sqrtTwo := by
-  have h0 := Real.sqrt_nonneg (2 : ℝ)
+  have h0 : 0 ≤ sqrtTwo := by
+    exact Real.sqrt_nonneg (2 : ℝ)
   have h2 := sqrtTwo_sq
   nlinarith
 
