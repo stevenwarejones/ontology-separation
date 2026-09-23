@@ -256,3 +256,12 @@
 'OntologySeparation.PartialEnvironment.Study.uniformly_resolves' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.CausalOrderAdversary.zGate_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.CausalOrderAdversary.xGate_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.CausalOrderAdversary.fixed_order_mimics_current_statistic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.CausalOrderAdversary.no_input_separates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.CausalOrderAdversary.definite_order_countermodel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
