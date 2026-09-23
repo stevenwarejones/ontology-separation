@@ -2,25 +2,20 @@ import OntologySeparation.Experiments.LFJoint
 import OntologySeparation.Adapters.Shared
 
 /-!
-# Finite-speed Local Friendliness feasibility test
+# Local-Agency relaxation with unread friend records
 
-This module isolates the first, cheapest finite-speed hidden-influence test for the
-standard two-laboratory Local Friendliness experiment.
+This module isolates a Local-Agency relaxation in the standard two-laboratory
+Local Friendliness experiment.  Finite-speed hidden influences motivated the
+question, but the formal statement below is not a finite-speed theorem.
 
-The spacetime input is deliberately minimal: Charlie and Debbie record outcomes
-before the Wigner-stage choices, while Alice and Bob are chosen late enough and
-far enough apart that they lie outside one another's finite-v influence cones.
-Once that geometric "blind pair" condition holds, a finite-speed model with
-absolute friend records must satisfy conditional no-signaling for the late pair
-at fixed records. In the existing joint-event language this is exactly
-`LFJoint.Local`.
+The setup keeps absolute friend records and asks what follows when the late
+Alice/Bob responses are conditionally local at fixed records.  In the existing
+joint-event language this is exactly `LFJoint.Local`.
 
-This is a feasibility result, not yet a Bancal-style operational-signaling theorem.
-The exact quantum LF target is publicly no-signaling, while no joint table can
-simultaneously satisfy exact friend readout, setting-independent records, and the
-blind-pair condition. Thus the standard LF table by itself forces failure of the
-finite-speed blind-pair law, but an additional spacetime/setting bridge is needed
-to turn that hidden conditional failure into an accessible signaling channel.
+The useful negative result is that unread/reversible friend records can hide
+conditional dependence that is absent from the public Alice/Bob marginals.  Thus
+this module should be read as a relaxation/diagnostic for Local Agency, not as a
+Bancal-style finite-speed operational-signaling theorem.
 -/
 
 namespace OntologySeparation.LFFiniteSpeed
