@@ -318,3 +318,12 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.TimelikeFriendliness.factorized_chsh_bound
 #print axioms OntologySeparation.TimelikeFriendliness.singlet_score_violates_factorized
 #print axioms OntologySeparation.TimelikeFriendliness.unitModel_score
+
+-- Timelike 2222 operational minimal-core roots.
+#print axioms OntologySeparation.TimelikeOperationalCore.correlator_base
+#print axioms OntologySeparation.TimelikeOperationalCore.score_base
+#print axioms OntologySeparation.TimelikeOperationalCore.chsh_bound
+#print axioms OntologySeparation.TimelikeOperationalCore.dropStable_score
+#print axioms OntologySeparation.TimelikeOperationalCore.dropAlice_score
+#print axioms OntologySeparation.TimelikeOperationalCore.dropBob_score
+#print axioms OntologySeparation.TimelikeOperationalCore.exact_minimal_core
