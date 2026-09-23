@@ -46,18 +46,35 @@ def copiedState (branch : A → Bool) (rho : QIT.State A) :
   QIT.POVM.isometryLiftState rho (copyIsometry branch)
     (copyIsometry_isometry branch)
 
+/-- Matrix entries of the lifted state: the copied qubit is pinned to the
+branch label on each side. -/
+theorem copied_entry (branch : A → Bool) (rho : QIT.State A)
+    (i j : A) (e f : Bool) :
+    (copiedState branch rho).matrix (i,e) (j,f) =
+      if e = branch i ∧ f = branch j then rho.matrix i j else 0 := by
+  classical
+  by_cases he : e = branch i <;> by_cases hf : f = branch j
+  · subst e
+    subst f
+    simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
+      Matrix.mul_apply, Matrix.conjTranspose_apply]
+  · simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
+      Matrix.mul_apply, Matrix.conjTranspose_apply, hf]
+  · simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
+      Matrix.mul_apply, Matrix.conjTranspose_apply, he]
+  · simp [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
+      Matrix.mul_apply, Matrix.conjTranspose_apply, he, hf]
+
 /-- Exact reduced-state formula after the perfect copy is lost. -/
 theorem marginal_entry (branch : A → Bool) (rho : QIT.State A) (i j : A) :
     (copiedState branch rho).marginalA.matrix i j =
       if branch i = branch j then rho.matrix i j else 0 := by
-  classical
   change
     (∑ e : Bool, (copiedState branch rho).matrix (i,e) (j,e)) =
       if branch i = branch j then rho.matrix i j else 0
-  simp only [copiedState, QIT.POVM.isometryLiftState_matrix, copyIsometry,
-    Matrix.mul_apply, Matrix.conjTranspose_apply, Fintype.sum_bool]
+  simp_rw [copied_entry]
   cases hi : branch i <;> cases hj : branch j <;>
-    simp [hi, hj, eq_comm]
+    simp [hi, hj, Fintype.sum_bool]
 
 /-- Cross-branch coherence is exactly zero after tracing one inaccessible perfect
 record, independently of the dimension and internal structure of A. -/
