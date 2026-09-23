@@ -83,7 +83,7 @@ noncomputable def model : Model :=
     (fun e => by
       have h := congrArg Q2.toReal (totalsQ2 e)
       rw [toReal_sum] at h
-      simpa [Q2.toReal, qrat, apply_ite] using h)
+      simpa only [apply_ite, toReal_zero, toReal_qrat, Rat.cast_one] using h)
 
 def earlyOf (x w : Bool) : Early :=
   ⟨2*x.toNat + w.toNat, by
@@ -137,29 +137,39 @@ noncomputable def modelACD (m : Model) (x z w a c d : Bool) : ℝ :=
         o.val / 8 = a.toNat ∧ o.val / 2 % 2 = c.toNat ∧ o.val % 2 = d.toNat
      then 1 else 0) * m.weight j
 
+private theorem toReal_indicator (P : Prop) [Decidable P] (w : Q2) :
+    (if P then (1 : ℝ) else 0) * Q2.toReal w = Q2.toReal (if P then w else 0) := by
+  by_cases h : P
+  · rw [if_pos h, if_pos h, one_mul]
+  · rw [if_neg h, if_neg h, zero_mul, toReal_zero]
+
 theorem model_abd_matches (x y w a b d : Bool) :
     modelABD model x y w a b d =
       Q2.toReal (ForcedSignalingLC4.abd x y w a b d) := by
   unfold modelABD model
+  dsimp only [Model.ofAtoms]
   rw [HiddenInfluence.atomWeights_sum]
   rw [← seed_abd_matches]
   unfold seedABD
   rw [ForcedSignalingLC4.toReal_sum]
   apply Finset.sum_congr rfl
   intro k _
-  split_ifs <;> simp_all
+  dsimp only
+  exact toReal_indicator _ _
 
 theorem model_acd_matches (x z w a c d : Bool) :
     modelACD model x z w a c d =
       Q2.toReal (ForcedSignalingLC4.acd x z w a c d) := by
   unfold modelACD model
+  dsimp only [Model.ofAtoms]
   rw [HiddenInfluence.atomWeights_sum]
   rw [← seed_acd_matches]
   unfold seedACD
   rw [ForcedSignalingLC4.toReal_sum]
   apply Finset.sum_congr rfl
   intro k _
-  split_ifs <;> simp_all
+  dsimp only
+  exact toReal_indicator _ _
 
 def diffQ2 (c : Context) (o : Recipient) : Q2 :=
   ∑ k : Seed,
@@ -187,20 +197,44 @@ theorem targetDelta_nonnegative : 0 ≤ targetDelta := by
   simp [targetDelta, targetDeltaQ2, Q2.toReal, q]
   nlinarith [sqrtTwo_ge_one]
 
-/-- The certificate model has exactly the four active comparisons identified by
-the exact Theorem-2 verifier; all other recipient TVs vanish. -/
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
+private theorem diff_active : ∀ c o,
+    if c.val = 5 ∨ c.val = 7 ∨ c.val = 12 ∨ c.val = 14 then
+      diffQ2 c o = epsilonQ2 ∨ diffQ2 c o = -epsilonQ2
+    else diffQ2 c o = 0 := by
+  with_unfolding_all decide +kernel
+
+private theorem abs_difference_exact (c : Context) (o : Recipient) :
+    |difference model.behavior c o| =
+      if c.val = 5 ∨ c.val = 7 ∨ c.val = 12 ∨ c.val = 14
+      then Q2.toReal epsilonQ2 else 0 := by
+  have h := diff_active c o
+  by_cases hc : c.val = 5 ∨ c.val = 7 ∨ c.val = 12 ∨ c.val = 14
+  · simp only [hc, ↓reduceIte] at h ⊢
+    rcases h with h | h
+    · rw [difference_exact, h, abs_of_nonneg epsilon_nonnegative]
+    · rw [difference_exact, h]
+      have hn : Q2.toReal (-epsilonQ2) = -Q2.toReal epsilonQ2 := by
+        simp [Q2.toReal]
+        ring
+      rw [hn, abs_neg, abs_of_nonneg epsilon_nonnegative]
+  · simp only [hc, ↓reduceIte] at h ⊢
+    rw [difference_exact, h]
+    simp
+
+/-- The certificate model has exactly the four active comparisons identified by
+the exact Theorem-2 verifier; all other recipient TVs vanish. -/
 theorem tv_exact (c : Context) :
     tv model.behavior c =
       if c.val = 5 ∨ c.val = 7 ∨ c.val = 12 ∨ c.val = 14
       then targetDelta else 0 := by
-  fin_cases c <;>
-    norm_num [tv, difference_exact, diffQ2, atoms, weightQ2,
-      ForcedSignalingLC4.qmul, ForcedSignalingLC4.qrat,
-      ForcedSignalingLC4.Q2.toReal, targetDelta, targetDeltaQ2, q,
-      Fin.sum_univ_succ, abs_of_nonneg epsilon_nonnegative] <;>
-    nlinarith [sqrtTwo_ge_one]
+  unfold tv
+  simp_rw [abs_difference_exact]
+  by_cases hc : c.val = 5 ∨ c.val = 7 ∨ c.val = 12 ∨ c.val = 14
+  · simp [hc, epsilonQ2, targetDelta, targetDeltaQ2, Q2.toReal, q]
+    ring
+  · simp [hc]
 
 theorem budget : Within model.behavior targetDelta := by
   intro c

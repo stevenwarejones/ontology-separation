@@ -121,6 +121,7 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem targetMarginalScore_exact :
     targetMarginalScoreQ2 = ForcedSignalingLC4.score := by
+  rw [ForcedSignalingLC4.score_exact]
   with_unfolding_all decide +kernel
 
 private theorem toReal_sub (a b : Q2) :

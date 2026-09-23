@@ -390,3 +390,36 @@
 'OntologySeparation.LocalityFreeFriendliness.locality_free_core_minimal' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.ForcedSignalingLC4.cluster_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ForcedSignalingLC4.score_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ForcedSignalingLC4.score_exact_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ForcedSignalingLC4Witness.seed_abd_matches' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingLC4Witness.seed_acd_matches' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingLC4Witness.model_abd_matches' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingLC4Witness.model_acd_matches' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingLC4Witness.tv_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ForcedSignalingLC4Witness.signaling_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.marginalCoeff_eq_scoreCoeff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.marginalScore_eq_score' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.matches_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.exact_forced_signaling' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.targetDelta_value' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
