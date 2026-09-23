@@ -44,3 +44,20 @@ shows that a later access-sensitive bound or minimal assumption core is not alre
 known. Quantum Darwinism already identifies redundant environment records with
 operational consensus, and standard decoherence already relates distinguishable
 environment states to loss of interference.
+
+
+## 2026 novelty collision
+
+A focused follow-up sweep found Maity, Onggadinata and Koh,
+*Exact Tradeoff Between Quantum Error Correction and Quantum Darwinism:
+An Information-Theoretic No-Go Theorem* (arXiv:2608.03944, August 2026).
+They report an exact redundancy--post-recovery-fidelity tradeoff in a solvable
+model and a model-independent information-theoretic no-go theorem.
+
+Accordingly, a later result here must **not** claim novelty merely for showing
+that redundant environmental records trade off against generic recoverability.
+The distinct target is narrower and more foundations-specific: explicit friend
+records, read-versus-reverse controls, typed subset access, and a
+premise-deletion theorem connecting consensus facts to Wigner-style reversible
+interventions.  The prior-art comparison must be repeated once that theorem is
+mathematically fixed.
