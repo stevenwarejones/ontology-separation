@@ -311,3 +311,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.AdversarySearch.satisfies_mono
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
+
+-- Passive nested-observer collapse trust roots.
+#print axioms OntologySeparation.NestedFriendliness.theory_iff_operational
+#print axioms OntologySeparation.NestedFriendliness.theory_iff_lf
+#print axioms OntologySeparation.NestedFriendliness.quantum_excluded
+#print axioms OntologySeparation.NestedFriendliness.depth_invariant
