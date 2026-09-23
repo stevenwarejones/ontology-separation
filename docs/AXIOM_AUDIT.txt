@@ -263,3 +263,23 @@
 'OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.TimelikeFriendliness.response_chsh_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeFriendliness.score_as_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeFriendliness.factorized_chsh_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeFriendliness.singlet_score_violates_factorized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.TimelikeFriendliness.unitModel_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.correlator_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.score_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.chsh_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.dropStable_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.dropAlice_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.dropBob_score' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.TimelikeOperationalCore.exact_minimal_core' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
