@@ -7,6 +7,7 @@ noncomputable section
 
 example : 0 < sqrtTwoDelta := sqrtTwoDelta_positive
 example : Shared.NoSignaling sqrtTwoBehavior := sqrtTwoBehavior_public_noSignaling
+example : RealQuantum.singletTheory 3 sqrtTwoBehavior := explicit_quantum_realized
 #print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.dual_feasible
 #print axioms OntologySeparation.LFAgencyRelaxation.SqrtTwoCertificate.bound
 
