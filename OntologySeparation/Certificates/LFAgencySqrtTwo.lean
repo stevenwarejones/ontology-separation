@@ -5,29 +5,34 @@ noncomputable section
 open scoped BigOperators
 
 abbrev Column := Fin 160
-abbrev EqRow := Fin 75
+abbrev EqRow := Fin 20
 abbrev IneqRow := Fin 32
+
+/-- Only the equality rows with nonzero dual weight are retained. -/
+def rawEq (i : EqRow) : Fin 75 :=
+  (#[2,8,10,24,25,33,34,40,42,43,56,58,59,68,69,70,71,72,73,74] :
+    Array (Fin 75))[i.val]
 
 def fixedZeroIndex (k : Fin 7) : Fin 144 :=
   (#[8, 9, 11, 34, 38, 100, 108] : Array (Fin 144))[k.val]
 
 def objective (j : Column) : ℤ := if j.val < 144 then 0 else 1
 
-def eqCoeff (i : EqRow) (j : Column) : ℤ :=
-  if hq : j.val < 144 then
+private def rawEqCoeff (i : Fin 75) (j : Column) : ℤ :=
+  if j.val < 144 then
     let q := j.val
     let x := q / 48
     let y := q / 16 % 3
     let r := q / 4 % 4
     let a := q / 2 % 2
     let b := q % 2
-    if hp : i.val < 36 then
+    if i.val < 36 then
       let ix := i.val / 12
       let iy := i.val / 4 % 3
       let ia := i.val / 2 % 2
       let ib := i.val % 2
       if x = ix ∧ y = iy ∧ a = ia ∧ b = ib then 1 else 0
-    else if hr : i.val < 68 then
+    else if i.val < 68 then
       let k := i.val - 36
       let flat := k / 4 + 1
       let ix := flat / 3
@@ -39,17 +44,19 @@ def eqCoeff (i : EqRow) (j : Column) : ℤ :=
       if q = (fixedZeroIndex ⟨i.val - 68, by omega⟩).val then 1 else 0
   else 0
 
+def eqCoeff (i : EqRow) (j : Column) : ℤ := rawEqCoeff (rawEq i) j
+
 def ineqCoeff (i : IneqRow) (j : Column) : ℤ :=
   let k := i.val / 2
   let direction : ℤ := if i.val % 2 = 0 then 1 else -1
-  if hq : j.val < 144 then
+  if j.val < 144 then
     let q := j.val
     let x := q / 48
     let y := q / 16 % 3
     let r := q / 4 % 4
     let a := q / 2 % 2
     let b := q % 2
-    if hk : k < 8 then
+    if k < 8 then
       let kr := k / 2
       let ka := k % 2
       if r = kr ∧ a = ka then
@@ -68,27 +75,8 @@ def ineqCoeff (i : IneqRow) (j : Column) : ℤ :=
     if j.val - 144 = k then -1 else 0
 
 def eqDual (i : EqRow) : ℤ :=
-  if i.val = 2 then -4
-  else if i.val = 8 then -2
-  else if i.val = 10 then 2
-  else if i.val = 24 then 2
-  else if i.val = 25 then -2
-  else if i.val = 33 then -2
-  else if i.val = 34 then -2
-  else if i.val = 40 then 1
-  else if i.val = 42 then -2
-  else if i.val = 43 then -1
-  else if i.val = 56 then -1
-  else if i.val = 58 then -2
-  else if i.val = 59 then 1
-  else if i.val = 68 then -4
-  else if i.val = 69 then -4
-  else if i.val = 70 then -4
-  else if i.val = 71 then -4
-  else if i.val = 72 then -2
-  else if i.val = 73 then -2
-  else if i.val = 74 then -4
-  else 0
+  (#[ -4,-2,2,2,-2,-2,-2,1,-2,-1,-1,-2,1,-4,-4,-4,-4,-2,-2,-4 ] :
+    Array ℤ)[i.val]
 
 def ineqDual (i : IneqRow) : ℤ :=
   if i.val = 0 ∨ i.val = 3 ∨ i.val = 13 ∨ i.val = 14 ∨
@@ -105,14 +93,16 @@ set_option maxRecDepth 100000 in
 theorem ineqDual_nonpos : ∀ i : IneqRow, ineqDual i ≤ 0 := by
   decide
 
-noncomputable def rhs (i : EqRow) : ℝ :=
-  if h : i.val < 36 then
+noncomputable def rawRhs (i : Fin 75) : ℝ :=
+  if i.val < 36 then
     let x : Fin 3 := ⟨i.val / 12, by omega⟩
     let y : Fin 3 := ⟨i.val / 4 % 3, by omega⟩
     let a : Bool := if i.val / 2 % 2 = 0 then false else true
     let b : Bool := if i.val % 2 = 0 then false else true
     sqrtTwoBehavior.prob (x,y) (a,b)
   else 0
+
+noncomputable def rhs (i : EqRow) : ℝ := rawRhs (rawEq i)
 
 noncomputable def pairing (a : Column → ℤ) (w : Column → ℝ) : ℝ :=
   ∑ j, (a j : ℝ) * w j
@@ -127,9 +117,8 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem dual_value :
     (∑ i : EqRow, (eqDual i : ℝ) * rhs i) = 2 * (Real.sqrt 2 - 1) := by
-  simp only [eqDual, rhs, sqrtTwoBehavior, sqrtTwoProb, sqrtTwoCorr, rootHalf,
-    RealQuantum.sign]
-  norm_num [Fin.sum_univ_succ]
+  norm_num [eqDual, rhs, rawRhs, rawEq, sqrtTwoBehavior, sqrtTwoProb,
+    sqrtTwoCorr, rootHalf, RealQuantum.sign, Fin.sum_univ_succ]
   ring
 
 set_option maxRecDepth 100000 in
