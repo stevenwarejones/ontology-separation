@@ -55,6 +55,9 @@ theorem chshNumerator_le (a0 a1 b0 b1 : RealQuantum.Basis) :
   have hs0 : 0 ≤ s := by
     dsimp [s]
     exact Real.sqrt_nonneg 2
+  have hspos : 0 < s := by
+    dsimp [s]
+    positivity
   have hs2 : s^2 = 2 := by
     dsimp [s]
     exact Real.sq_sqrt (by norm_num)
@@ -98,7 +101,7 @@ theorem chshNumerator_le (a0 a1 b0 b1 : RealQuantum.Basis) :
       b0x, b0y, b1x, b1y]
     ring
   rw [hc]
-  nlinarith
+  nlinarith [h1, h2, h3, h4, hspos]
 
 def anchoredWitness (a0 a1 b0 b1 : RealQuantum.Basis) : ℝ :=
   (chshNumerator a0 a1 b0 b1 - 2) / 4
