@@ -311,3 +311,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.AdversarySearch.satisfies_mono
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.deletion_necessary
 #print axioms OntologySeparation.AdversarySearch.MinimalCore.erase_not_excluding
+
+-- Causal time-symmetric friendliness factorization benchmark.
+#print axioms OntologySeparation.TimelikeFriendliness.response_chsh_le_two
+#print axioms OntologySeparation.TimelikeFriendliness.score_as_mean
+#print axioms OntologySeparation.TimelikeFriendliness.factorized_chsh_bound
+#print axioms OntologySeparation.TimelikeFriendliness.singlet_score_violates_factorized
+#print axioms OntologySeparation.TimelikeFriendliness.unitModel_score
