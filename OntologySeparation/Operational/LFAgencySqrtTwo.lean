@@ -58,8 +58,9 @@ theorem weighted_difference_le_tv
       ∑ x, |p x - q x| := by
   calc
     (∑ x, f x * p x) - (∑ x, f x * q x)
-        = ∑ x, f x * (p x - q x) := by
-            simp only [Finset.sum_sub_distrib]
+        = ∑ x, (f x * p x - f x * q x) := by
+            rw [Finset.sum_sub_distrib]
+    _ = ∑ x, f x * (p x - q x) := by
             apply Finset.sum_congr rfl
             intro x _
             ring
@@ -79,9 +80,12 @@ private theorem wrongA_zero (j : AbsoluteEventTable) (hr : Readable j)
   have hread := hr.1 r y
   have hn0 := j.nonneg (0,y) r (!r.1,false)
   have hn1 := j.nonneg (0,y) r (!r.1,true)
+  change (∑ b : Bool, j.prob (0,y) r (r.1,b)) =
+    ∑ a : Bool, ∑ b : Bool, j.prob (0,y) r (a,b) at hread
+  simp only [Fintype.sum_bool] at hread
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;> cases b <;>
-    simp [LFJoint.Table.mass, Fintype.sum_prod_type] at hread hn0 hn1 ⊢ <;>
+    simp only [Bool.not_false, Bool.not_true] at hread hn0 hn1 ⊢ <;>
     linarith
 
 private theorem wrongB_zero (j : AbsoluteEventTable) (hr : Readable j)
@@ -90,15 +94,21 @@ private theorem wrongB_zero (j : AbsoluteEventTable) (hr : Readable j)
   have hread := hr.2 r x
   have hn0 := j.nonneg (x,0) r (false,!r.2)
   have hn1 := j.nonneg (x,0) r (true,!r.2)
+  change (∑ a : Bool, j.prob (x,0) r (a,r.2)) =
+    ∑ a : Bool, ∑ b : Bool, j.prob (x,0) r (a,b) at hread
+  simp only [Fintype.sum_bool] at hread
   rcases r with ⟨c,d⟩
   cases c <;> cases d <;> cases a <;>
-    simp [LFJoint.Table.mass, Fintype.sum_prod_type] at hread hn0 hn1 ⊢ <;>
+    simp only [Bool.not_false, Bool.not_true] at hread hn0 hn1 ⊢ <;>
     linarith
 
 private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
     RealQuantum.correlator j.behavior 0 0 =
       ∑ r : Record, recCorr r * j.mass (0,0) r := by
-  unfold RealQuantum.correlator LFJoint.Table.behavior
+  change (∑ o : Bool × Bool,
+    RealQuantum.sign o.1 * RealQuantum.sign o.2 *
+      ∑ r : Record, j.prob (0,0) r o) =
+    ∑ r : Record, recCorr r * j.mass (0,0) r
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -110,7 +120,10 @@ private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
 private theorem corr02_as_recordBob (j : AbsoluteEventTable) (hr : Readable j) :
     RealQuantum.correlator j.behavior 0 2 =
       ∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b := by
-  unfold RealQuantum.correlator LFJoint.Table.behavior recordBob
+  change (∑ o : Bool × Bool,
+    RealQuantum.sign o.1 * RealQuantum.sign o.2 *
+      ∑ r : Record, j.prob (0,2) r o) =
+    ∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -122,7 +135,10 @@ private theorem corr02_as_recordBob (j : AbsoluteEventTable) (hr : Readable j) :
 private theorem corr20_as_recordAlice (j : AbsoluteEventTable) (hr : Readable j) :
     RealQuantum.correlator j.behavior 2 0 =
       ∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a := by
-  unfold RealQuantum.correlator LFJoint.Table.behavior recordAlice
+  change (∑ o : Bool × Bool,
+    RealQuantum.sign o.1 * RealQuantum.sign o.2 *
+      ∑ r : Record, j.prob (2,0) r o) =
+    ∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro r _
@@ -135,9 +151,16 @@ private theorem corr22_as_joint (j : AbsoluteEventTable) :
     RealQuantum.correlator j.behavior 2 2 =
       ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
         outCorr a b * j.prob (2,2) r (a,b) := by
-  unfold RealQuantum.correlator LFJoint.Table.behavior
+  change (∑ o : Bool × Bool,
+    RealQuantum.sign o.1 * RealQuantum.sign o.2 *
+      ∑ r : Record, j.prob (2,2) r o) =
+    ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
+      outCorr a b * j.prob (2,2) r (a,b)
   rw [Finset.sum_comm]
-  simp [outCorr, Fintype.sum_prod_type]
+  apply Finset.sum_congr rfl
+  intro r _
+  rw [Fintype.sum_prod_type]
+  rfl
 
 private theorem record_mass_at_22 (j : AbsoluteEventTable)
     (hi : IndependentRecords j) (r : Record) :
@@ -148,11 +171,12 @@ private theorem recordBob22_mass (j : AbsoluteEventTable) (r : Record) :
     ∑ b : Bool, recordBob j 2 2 r b = j.mass (2,2) r := by
   unfold recordBob LFJoint.Table.mass
   rw [Finset.sum_comm]
+  exact (Fintype.sum_prod_type (fun o : Bool × Bool => j.prob (2,2) r o)).symm
 
 private theorem recordAlice22_mass (j : AbsoluteEventTable) (r : Record) :
     ∑ a : Bool, recordAlice j 2 2 r a = j.mass (2,2) r := by
   unfold recordAlice LFJoint.Table.mass
-  rfl
+  exact (Fintype.sum_prod_type (fun o : Bool × Bool => j.prob (2,2) r o)).symm
 
 private theorem reference_chsh_le_two (j : AbsoluteEventTable) :
     (∑ r : Record, recCorr r * j.mass (2,2) r) -
@@ -230,8 +254,8 @@ private theorem bob_transport (j : AbsoluteEventTable) :
     (q := fun rb : Record × Bool => recordBob j 0 2 rb.1 rb.2)
     (f := fun rb : Record × Bool => recBobCorr rb.1 rb.2)
     (by intro rb; simpa [corr_abs_rb])
+  rw [Fintype.sum_prod_type] at h
   unfold recordTVBob
-  simp [Fintype.sum_prod_type] at h ⊢
   linarith
 
 private theorem alice_transport (j : AbsoluteEventTable) :
@@ -243,8 +267,9 @@ private theorem alice_transport (j : AbsoluteEventTable) :
     (q := fun ra : Record × Bool => recordAlice j 2 2 ra.1 ra.2)
     (f := fun ra : Record × Bool => aliceRecCorr ra.1 ra.2)
     (by intro ra; simpa [corr_abs_ar])
+  rw [Fintype.sum_prod_type] at h
   unfold recordTVAlice
-  simpa [Fintype.sum_prod_type] using h
+  linarith
 
 /-- Direct Hall-type relaxed-CHSH theorem for readable absolute friend records. -/
 theorem relaxed_chsh_bound (j : AbsoluteEventTable) (hr : Readable j)
