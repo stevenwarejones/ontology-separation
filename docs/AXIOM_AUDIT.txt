@@ -269,3 +269,21 @@
 'OntologySeparation.ConsensusRecords.perfect_record_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ConsensusRecords.gap_is_physical' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ConsensusRecords.perfect_record_core' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ConsensusAccess.residual_before_eq_overlap_mul_after' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ConsensusAccess.gap_before_eq_overlap_mul_after' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ConsensusAccess.inaccessible_perfect_record_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ConsensusAccess.recover_last_perfect_record' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ConsensusAccess.perfect_hidden_positive_iff_empty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ConsensusAccess.perfect_hidden_gap_positive_implies_empty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
