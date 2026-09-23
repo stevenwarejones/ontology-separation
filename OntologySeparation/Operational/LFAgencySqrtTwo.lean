@@ -108,7 +108,7 @@ private theorem corr00_as_records (j : AbsoluteEventTable) (hr : Readable j) :
   change (∑ o : Bool × Bool,
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (0,0) r o) =
-    ∑ r : Record, recCorr r * j.mass (0,0) r)
+    ∑ r : Record, recCorr r * j.mass (0,0) r
   simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
@@ -124,7 +124,7 @@ private theorem corr02_as_recordBob (j : AbsoluteEventTable) (hr : Readable j) :
   change (∑ o : Bool × Bool,
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (0,2) r o) =
-    ∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b)
+    ∑ r : Record, ∑ b : Bool, recBobCorr r b * recordBob j 0 2 r b
   simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
@@ -140,7 +140,7 @@ private theorem corr20_as_recordAlice (j : AbsoluteEventTable) (hr : Readable j)
   change (∑ o : Bool × Bool,
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (2,0) r o) =
-    ∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a)
+    ∑ r : Record, ∑ a : Bool, aliceRecCorr r a * recordAlice j 2 0 r a
   simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
@@ -158,7 +158,7 @@ private theorem corr22_as_joint (j : AbsoluteEventTable) :
     RealQuantum.sign o.1 * RealQuantum.sign o.2 *
       ∑ r : Record, j.prob (2,2) r o) =
     ∑ r : Record, ∑ a : Bool, ∑ b : Bool,
-      outCorr a b * j.prob (2,2) r (a,b))
+      outCorr a b * j.prob (2,2) r (a,b)
   simp_rw [Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
@@ -241,7 +241,13 @@ private theorem bob_transport (j : AbsoluteEventTable) :
     (f := fun rb : Record × Bool => recBobCorr rb.1 rb.2)
     (by intro rb; rw [corr_abs_rb]; norm_num)
   rw [Fintype.sum_prod_type] at h
-  unfold recordTVBob
+  have htv :
+      (∑ r : Record, ∑ b : Bool,
+        |recordBob j 2 2 r b - recordBob j 0 2 r b|) =
+        2 * recordTVBob j 0 2 2 := by
+    unfold recordTVBob
+    ring
+  rw [htv] at h
   linarith
 
 private theorem alice_transport (j : AbsoluteEventTable) :
@@ -254,7 +260,13 @@ private theorem alice_transport (j : AbsoluteEventTable) :
     (f := fun ra : Record × Bool => aliceRecCorr ra.1 ra.2)
     (by intro ra; rw [corr_abs_ar]; norm_num)
   rw [Fintype.sum_prod_type] at h
-  unfold recordTVAlice
+  have htv :
+      (∑ r : Record, ∑ a : Bool,
+        |recordAlice j 2 0 r a - recordAlice j 2 2 r a|) =
+        2 * recordTVAlice j 2 0 2 := by
+    unfold recordTVAlice
+    ring
+  rw [htv] at h
   linarith
 
 /-- Direct Hall-type relaxed-CHSH theorem for readable absolute friend records. -/
