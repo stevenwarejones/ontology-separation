@@ -39,3 +39,5 @@ import OntologySeparation.Experiments.RecordAccess
 import OntologySeparation.Experiments.ModelCompatibility
 
 import OntologySeparation.Experiments.CausalOrderAdversary
+
+import OntologySeparation.Experiments.CausalOrderTwoSetting
