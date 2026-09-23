@@ -125,6 +125,7 @@ def certificate : MinimalCore (Holds (ι := WitnessIndex)) Target core where
     have hd : Holds .disjointCoherentAccess m :=
       hm .disjointCoherentAccess (by simp [core])
     have hz := disjoint_access_monogamy m hp hd
+    unfold Target at ht
     rcases hz with hA | hB
     · rw [hA] at ht
       exact (lt_irrefl 0) ht.1
