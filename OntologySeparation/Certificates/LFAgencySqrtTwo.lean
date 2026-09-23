@@ -124,6 +124,7 @@ structure Feasible where
   inequalities : ∀ i, pairing (ineqCoeff i) weight ≤ 0
 
 set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
 theorem dual_value :
     (∑ i : EqRow, (eqDual i : ℝ) * rhs i) = 2 * (Real.sqrt 2 - 1) := by
   simp only [eqDual, rhs, sqrtTwoBehavior, sqrtTwoProb, sqrtTwoCorr, rootHalf,
