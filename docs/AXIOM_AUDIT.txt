@@ -302,3 +302,20 @@
 'OntologySeparation.MemoryAwarenessWitness.no_probability_realizes_requiredNoSignalQ' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.sqrtTwo_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.computational_after_from_wigner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.rotated_after_from_wigner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.computational_flip_bridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.rotated_flip_bridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.exact_setting_dependence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.BaumannBruknerProtocol.flip_rates_differ' depends on axioms: [propext, Classical.choice, Quot.sound]
