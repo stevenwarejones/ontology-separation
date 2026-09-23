@@ -67,115 +67,96 @@ by itself supply the four independently usable spacetime parties/settings in the
 Bancal construction.
 
 
-## Numerical sensitivity checks
+## Trust status
 
-Before adding any more Lean, two independent linear-program checks were run to
-separate three notions that are easy to conflate:
+This repository treats Lean as the source of truth. Solver output may be used to
+discover conjectures and certificates, but a numerical optimum is **not** an
+established result until Lean checks the corresponding exact statement.
 
-1. an early outcome that remains operationally visible;
-2. an absolute friend record that remains real but is unread after a reversible
-   Wigner operation; and
-3. the public late-party statistics after that record is marginalized.
+The current status is:
 
-These are **exploratory numerical results**, not trusted proof objects.
+| statement | status |
+| --- | --- |
+| blind-pair compatibility is the existing LF joint model | **Lean-certified** |
+| every compatible table obeys `G_LF <= 6` | **Lean-certified** |
+| exact quantum LF gap `130906/180625` | **Lean-certified** |
+| public quantum target is exactly no-signaling | **Lean-certified** |
+| record-revealed TV is nonnegative | **Lean-certified** |
+| conditional locality forces every record-revealed TV to zero | **Lean-certified** |
+| reversible-score candidate `delta = 1/8` at score 8 | **numerical candidate only** |
+| reversible-score zero-signal ceiling `22/3` | **numerical candidate only** |
+| full-table record-revealed candidate `63/625` | **numerical candidate only** |
 
-### 1. Rebuild the forced-signaling score with reversible friend records
+The three numerical values are represented in Lean under
+`LFFiniteSpeed.NumericalCandidates`, but **no theorem asserts their optimality**.
 
-The repository forced-signaling atom has the form
-`(x,w,a,d,f_B,f_C)`.  The check was rebuilt directly from the atom decoding,
-without using the Lean LP matrix.
+## Trusted record-revealed diagnostic
 
-For the reversible-record variant:
+`OntologySeparation.Experiments.LFFiniteSpeedDiagnostics` now defines the
+quantity used in the numerical discussion directly in Lean.
 
-- only atoms satisfying exact readout were retained:
-  `B_0 = a` and `C_0 = d`;
-- the recipient signaling TV marginalized the unread friend records `a,d`;
-- the same forced-signaling score was used.
+For a joint AOE table `P(c,d,a,b|x,y)`, it defines:
 
-Exact-readout consistency reduces the 256 response atoms to 64 atoms.
+- the joint distribution of the record pair and Alice's local outcome;
+- the analogous distribution for Bob;
+- total-variation distance under a remote-setting change;
+- a uniform `RecordRevealedWithin` budget.
 
-The resulting optima were stable under HiGHS' default method, dual simplex and
-interior-point solver:
-
-| model | zero-signaling score ceiling | minimum TV budget for score 8 |
-| --- | ---: | ---: |
-| early outcomes operationally observed | 6 | 1/4 |
-| reversible unread friend records + exact readout | 22/3 | 1/8 |
-
-Removing exact readout from the reversible-record model makes score 8 possible
-with zero signaling.  Thus the nonzero `1/8` is not produced merely by hiding
-the early variables; the friend/readout consistency condition is essential.
-
-The independent 64-atom formulation returned `1/8` and `22/3` with all three
-solver algorithms, so the earlier numerical values are reproducible rather than
-an artifact of the original matrix encoding.
-
-### 2. Match the complete LF singlet probability table
-
-The second LP did **not** optimize only the LF score.  It matched every one of
-the 36 public probabilities of the repository's exact rational
-`RealQuantum.lfBehavior`.
-
-Variables were the full joint-event table
-
-`P(c,d,a,b | x,y)`
-
-with:
-
-- nonnegativity and normalization inherited from exact matching of the public
-  table;
-- exact friend readout when `x = 0` or `y = 0`;
-- setting-independent friend-record distribution;
-- all 36 public outcome probabilities fixed to the exact rational singlet
-  target.
-
-Because that target is itself no-signaling, minimizing **public** signaling is
-trivial: the optimum is exactly zero.
-
-The nontrivial diagnostic is therefore the signaling that would become visible
-if the absolute friend records were also revealed.  For each remote-setting
-comparison, the LP minimized the total variation distance of the joint
-distribution of
-
-`(friend-record pair, local late outcome)`.
-
-Across all 18 Alice/Bob remote-setting comparisons, the optimum was
+Lean proves
 
 ```
-delta_record-revealed = 0.1008 = 63/625.
+LFJoint.Local j
+  -> RecordRevealedWithin j 0.
 ```
 
-The same value was returned by HiGHS default, dual-simplex and interior-point
-methods.
+So "record-revealed signaling" now has a precise trusted meaning: it measures
+failure of the same conditional locality law used by the finite-speed blind-pair
+model.  It is still **not** public operational signaling because the friend
+records need not be available after the Wigner reversal.
 
-So the complete LF table supports the same qualitative conclusion as the
-score-only experiment, but not the same numerical constant:
+## Numerical candidate targets
 
-- public signaling: **0**;
-- hidden / record-revealed locality violation: **63/625**;
-- score-surrogate reversible-record optimum at score 8: **1/8**.
+The exploratory LP search suggested three exact rational targets:
 
-This makes the boundary sharper.  AOE plus reversible records can hide a
-positive conditional influence inside sectors that disappear on public
-marginalization.  The standard LF table therefore forces a quantitative hidden
-failure of blind-pair locality without, by itself, converting that failure into
-an operational superluminal channel.
+```
+score-8 reversible-record TV       = 1/8
+zero-signal reversible score       = 22/3
+full-LF-table record-revealed TV   = 63/625
+```
 
-### What the numerics suggest checking next
+These values were stable across multiple HiGHS algorithms, which makes them good
+certificate targets, but solver agreement is not proof.
 
-The next numerical work should target the missing conversion mechanism rather
-than another version of the same LF polytope:
+The full-table theorem obligation is now named in Lean as
 
-1. extract rational dual certificates for the `1/8`, `22/3`, and
-   `63/625` optima;
-2. add an independently variable early friend setting or second spacetime
-   context while keeping one global AOE model;
-3. minimize **public** recipient TV across those contexts;
-4. test asymmetric timings and one-sided readout, to determine the minimal
-   geometry that turns the hidden `63/625` violation into an accessible
-   signal;
-5. only after a positive public optimum survives those checks, port that
-   enlarged physical-model-to-LP bridge into Lean.
+`LFFiniteSpeed.FullTableCandidateStatement`.
+
+It says, in substance: every joint AOE table with exact friend readout,
+setting-independent records, and public behavior equal to the exact repository
+quantum LF target must have at least one record-revealed remote-setting TV of
+`63/625` or larger.
+
+That proposition is intentionally **unproved**.  Once an exact rational dual
+certificate is extracted, the PR should add a kernel-checked proof plus, ideally,
+an attaining table establishing sharpness.
+
+The `1/8` and `22/3` score-surrogate values remain discovery targets rather
+than trusted repository results until the reversible-score LP itself is given a
+fully explicit Lean model and exact certificates.
+
+## Promotion criteria
+
+A numerical candidate is promoted to an established repository result only when
+all of the following are present:
+
+1. the physical/model class is defined in Lean;
+2. the optimized observable is defined in Lean;
+3. an exact rational upper/lower certificate is checked by Lean;
+4. the physical model is bridged to the certificate LP without an unproved
+   encoding assumption;
+5. for a claimed optimum, an explicit attaining model is also checked.
+
+This is the same standard used by the forced-signaling work after PR #35.
 
 ## Next adversary search
 
