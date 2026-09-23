@@ -25,11 +25,9 @@ def DefiniteOrder : Implementation → Prop
 
 theorem zGate_norm (v : Vector) : normSq (zGate v) = normSq v := by
   simp [normSq, zGate]
-  ring
 
 theorem xGate_norm (v : Vector) : normSq (xGate v) = normSq v := by
   simp [normSq, xGate]
-  ring
 
 theorem fixedXZ_probability (v : Vector) :
     probability .fixedXZ v = normSq v := by
