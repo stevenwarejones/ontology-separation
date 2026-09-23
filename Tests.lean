@@ -49,6 +49,7 @@ import Tests.LFAssumptionAtlas
 import Tests.LFJoint
 
 import Tests.LFReadout
+import Tests.LFAgencyRelaxation
 import Tests.SeparatorSearch
 
 import Tests.NamedFiniteQuantum
