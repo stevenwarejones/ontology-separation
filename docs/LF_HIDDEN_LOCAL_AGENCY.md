@@ -87,15 +87,25 @@ delta = (sqrt(2) - 1)/2
 The script reproduces this value numerically.  A broader angle search also
 returns approximately the same optimum.
 
-There are two logically separate statements:
+There are now three carefully separated statements:
 
-1. **At these explicit angles**, the relaxation requires
-   `(sqrt(2)-1)/2`.  This is the only angle result that would be worth
-   kernel-checking, using exact arithmetic over `sqrt 2`.
-2. **No measurement angles do better.**  This remains a numerical optimization
-   claim and is not asserted by Lean.
+1. **Explicit-angle theorem — Lean-certified.**  For the stated pi/8-grid
+   singlet measurements, every AOE joint extension with exact readout and
+   setting-independent friend records has at least one of the two certified
+   record-revealed TVs at least `(sqrt(2)-1)/2`.
+2. **Anchored-witness angle optimum — Lean-certified.**  The public part of the
+   exact LP certificate is a CHSH-type witness
+   `(E00 - E0y + Ex0 + Exy - 2)/4`.  An elementary Tsirelson proof in Lean
+   shows that no real projective qubit measurement angles can make this witness
+   exceed `(sqrt(2)-1)/2`, and the pi/8-grid bases attain equality.
+3. **Full multi-comparison LP cross-check — exploratory, outside this theorem.**
+   The complete LP search independently returns the same value.  This is kept as
+   a reproducibility cross-check rather than treated as an additional theorem;
+   the proved claim in this PR is the exact anchored witness and its global
+   angle optimum.
 
-Accordingly, this PR does **not** attempt to certify `63/625`.
+The arbitrary rational-angle value `63/625` is therefore not promoted to a
+theorem.
 
 ## What the Lean code certifies
 
@@ -113,6 +123,63 @@ forces every such TV to zero.
 
 That is the correct trusted boundary for this PR.  The exploratory optimizer is
 a discovery/reproducibility tool, not part of the kernel proof.
+
+## The radical bound is relaxed CHSH, not a new Bell inequality
+
+The exact dual certificate makes the provenance especially transparent. Its
+public part is
+
+```
+(E00 - E0y + Ex0 + Exy - 2) / 4.
+```
+
+That numerator is simply a CHSH expression built from the friend-readout
+setting `0` and one Wigner setting on each side. Equivalently, if `delta`
+bounds both relevant record-revealed remote-setting TVs, the certificate says
+
+```
+S_CHSH <= 2 + 4 delta.
+```
+
+The role of the LF construction is therefore to make setting `0` a
+friend-readout setting tied to an absolute shared record. Once that reduction is
+made, the inequality itself is a **relaxed Bell / relaxed parameter-independence
+bound**, not a new Bell-theoretic inequality.
+
+This belongs to the established relaxed-Bell literature. In particular:
+
+- Michael J. W. Hall, *Complementary contributions of indeterminism and
+  signalling to quantum correlations*, New J. Phys. 12, 083051 (2010),
+  arXiv:1006.3680, quantifies generalized Bell/CHSH bounds when signaling is allowed.
+- Michael J. W. Hall, *Relaxed Bell inequalities and Kochen-Specker theorems*
+  (2011), arXiv:1102.4467, develops a general distance-based framework for
+  relaxed Bell assumptions.
+- Moji Ghadimi, *Parameter Dependence and Bell nonlocality* (2021),
+  arXiv:2102.06920, explicitly optimizes CHSH under one-way and two-way
+  parameter dependence, using the maximum remote-setting-induced change in an
+  underlying marginal probability.
+
+The normalization of the dependence parameter differs across these papers and
+the present record-revealed-TV convention, so the coefficient should be compared
+only after translating definitions. The structural content is the same:
+bounded failure of parameter independence raises the CHSH ceiling linearly.
+
+This also explains the radical immediately. Combining
+
+```
+S_CHSH <= 2 + 4 delta
+```
+
+with the quantum Tsirelson bound `S_CHSH <= 2 sqrt(2)` gives
+
+```
+delta >= (sqrt(2)-1)/2
+```
+
+for the maximally violating settings. The pi/8-grid construction attains the
+Tsirelson value. The follow-up Lean proof formalizes this reduction and
+attainment; it should be read as a checked LF-to-relaxed-CHSH bridge, **not as a
+novel Bell bound**.
 
 ## Relation to earlier LF relaxation work
 
@@ -163,11 +230,11 @@ No paper matching the exact optimization in this PR was found in that focused
 search.  This is **not** a novelty claim: the search is finite and terminology
 varies across the causal-inference and Wigner-friend literature.
 
-Because this branch is being retired as a negative result, this PR also
-**defers** a Lean proof of the explicit-angle `(sqrt(2)-1)/2` value.  If that
-quantity is revisited later, the right formal target is only the explicit-angle
-lower bound with exact `sqrt 2` arithmetic.  The statement that no measurement
-angles do better remains numerical unless a separate analytic proof is found.
+The follow-up proof now kernel-checks the explicit-angle
+`(sqrt(2)-1)/2` lower bound with exact radical arithmetic and separately proves
+global optimality of the associated readout-anchored CHSH witness.  It does not
+turn the broader numerical full-LP angle search into a theorem; that stronger
+claim would require a complete characterization of the other active LP facets.
 
 ## Why this does not yield operational superluminal signaling
 
@@ -203,17 +270,10 @@ and the full public LF table remains exactly no-signaling.
 
 That is enough to close this branch as a useful negative result.
 
-Possible follow-up outside this PR:
-
-- check the literature specifically for a total-variation relaxation of Local
-  Agency;
-- if still useful, kernel-check only the explicit-angle
-  `(sqrt(2)-1)/2` lower bound with exact `sqrt 2` arithmetic;
-- keep the statement that no angles do better as numerical unless a separate
-  analytic proof is found.
-
-After that, return to the forced-signaling program rather than extending this
-track.
+The explicit-angle radical result and its anchored-witness angle optimum are
+now formalized.  No additional Local-Agency branch is proposed here; the
+remaining full-LP angle search is retained as exploratory evidence, and the
+research program returns to forced-signaling.
 
 ## Reproducibility
 
