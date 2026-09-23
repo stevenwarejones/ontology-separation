@@ -1,312 +1,155 @@
 # Radical foundations program: structured adversary search
 
-This program asks for a Bell -> Local-Friendliness-sized conceptual step without
-treating a larger inequality value as a discovery by itself.
+This program asks for a Bell -> Local-Friendliness-sized conceptual step while
+treating known reductions, benchmark reproductions, and adversarial failures as
+scoping information rather than discoveries.
 
 ## Common discovery contract
 
 Every candidate theorem must pass the same sequence.
 
-1. **Operationalize the assumptions.** Each named premise must be a predicate on
-   an explicit model, process, record, access policy, or intervention structure.
-2. **Define the target behavior before optimization.** Fix settings, outcomes,
-   access, time/order structure and the observable table.
-3. **Build the adversary class first.** Enumerate or otherwise characterize the
-   strongest plausible classical/absolute-fact/definite-order models allowed by
-   the retained assumptions.
-4. **Search for a separator.** Numerical LP/SDP/search may propose a facet,
-   witness or protocol, but search output is not trusted as proof.
-5. **Certify the universal statement in Lean.** Check the bound or exclusion
-   against the full stated class.
-6. **Delete every premise.** For each law in the proposed core, construct an
-   explicit model satisfying all remaining laws and defeating the conclusion.
-   A failed countermodel search is not evidence of necessity.
-7. **Prove the physical bridge.** The witness must arise from an explicit
-   circuit/channel/process semantics, not from a hand-entered probability table.
-8. **Stress-test access and quantifier order.** In particular, distinguish
-   pointwise tests from one test that works uniformly over a model class.
-9. **Audit prior art after the mathematical object is fixed.** Classify the
-   result as reproduction, extension, or candidate-new-core.
-10. **Claim novelty only after an independent re-derivation.**
-
-A successful "breakthrough" PR therefore contains: a universal exclusion, a
-realized witness, deletion adversaries, a physical bridge, an axiom audit, and a
-focused novelty note.
-
----
-
-## Track A — Operational / Noncontextual Friendliness benchmark
-
-**Purpose:** calibrate the adversary machinery against a known post-LF theorem.
-
-### A1. Reduced benchmark
-Use a latent global-event table plus an operational-equivalence lift to the
-visible table. Verify that the exact quantum target is excluded, and delete each
-hinge separately.
-
-### A2. Full friend protocol
-Replace the reduced CHSH/Fine abstraction by explicit preparation procedures,
-friend records, reversible superobserver operations and the operational
-equivalences used in the published theorem.
-
-### A3. Adversary atlas
-Attempt countermodels for:
-- absoluteness of observed events;
-- each operational/noncontextual equivalence;
-- preparation independence assumptions;
-- record readability/persistence assumptions.
-
-**Exit criterion:** reproduce the published no-go theorem with no stronger hidden
-premise than the paper uses. Only then use this machinery for new contextual
-friend scenarios.
-
-**Status:** reproduction track. A reduced benchmark is opened separately.
-
----
-
-## Track B — Timelike / causal time-symmetric friendliness
-
-**Purpose:** make the 2026 timelike theorem a second calibration landmark and then
-search beyond its smallest scenario.
-
-### B1. Paper-faithful assumption layer
-Give distinct predicates for:
-- Absoluteness of Observed Events;
-- Axiological Time Symmetry;
-- No Retrocausality;
-- Screening via the paper's pseudo-event construction.
-
-Do not collapse these into a generic "causality" Boolean.
-
-### B2. Reproduce the finite 2x2x2x2 theorem
-Encode the exact mediator/joint-distribution implication and its inequality.
-Check the quantum violating behavior from an explicit circuit/model.
-
-### B3. Premise deletion
-For each premise, search finite response models for a target-realizing
-countermodel satisfying all other premises. If deletion of one premise still
-forces the theorem, shrink the core.
-
-### B4. Beyond-2222 search
-Enumerate small sequential scenarios with:
-- three settings on one side;
-- asymmetric input alphabets;
-- more than one intermediate pseudo-event;
-- restricted intervention families.
-
-Search for minimal cores that are not equivalent to generalized
-noncontextuality or an already-known Bell/LF core.
-
-**Candidate breakthrough:** a new timelike no-go core in a scenario where the
-known 2222 equivalence no longer captures the admissible models.
-
----
-
-## Track C — Causal-order Friendliness / P06
-
-**Purpose:** test absolute friend records when the order of observer operations is
-itself coherently controlled.
-
-### C0. Kill weak witnesses first
-For every proposed statistic, search the definite-order class for an exact
-mimic. A single fixed-order countermodel rejects the statistic.
-
-### C1. Define the process class
-Specify before searching:
-- allowed definite orders;
-- classical mixtures of orders;
-- ancilla dimensions;
-- adaptive operations;
-- communication;
-- access to the order-control system;
-- friend-record read/reverse choices.
-
-### C2. Expose a full behavior table
-Use multiple settings and outcomes. Do not rely on a single interference fringe.
+1. Operationalize each premise as a predicate on an explicit model, process,
+   record, access policy, or intervention structure.
+2. Fix the target behavior, controls, settings, outcomes, access and timing before
+   optimization.
+3. Define the strongest plausible adversary class first.
+4. Let numerical search propose witnesses/facets, but certify the universal claim
+   in Lean.
+5. Delete every claimed premise and construct a target-realizing adversary whenever
+   that premise is removed.
+6. Prove a physical bridge from an explicit circuit/channel/process semantics.
+7. Stress-test access assumptions, nuisance parameters and quantifier order.
+8. Audit prior art after the mathematical object is fixed.
+9. Label reproductions and scope results as such.
+10. Reserve any novelty claim for a result surviving independent re-derivation and
+    the strongest identified adversary.
+
+A rigorous collapse or impossibility result is preferable to a weak positive claim.
+
+## Benchmarks and scoped-out formulations
+
+The consolidated boundary-map work records several useful non-discovery results.
+They are not active breakthrough tracks:
+
+- **Operational / Noncontextual Friendliness:** retained as the calibration example
+  for the structured-adversary API. The reduced benchmark is reproduction-level;
+  a paper-faithful friend-protocol bridge remains useful infrastructure, not a
+  novelty target by itself.
+- **Reduced timelike 2222 model:** the factorized operational reduction embeds in
+  ordinary Bell screening-off. Further work must retain the distinctive
+  pseudo-event/time-symmetry structure rather than adding settings to the reduced
+  Bell-local abstraction.
+- **Unconstrained scalar causal-order tests:** if setting-dependent reporting is
+  unrestricted, any scalar table is mimicked. Future P06 work must fix shared,
+  calibrated instruments/processes across settings before hull/facet search.
+- **Passive nested observers:** arbitrary finite layers that merely copy friend
+  records leave the public behavior class equal to ordinary LF. Observer depth
+  alone is not a new resource.
+- **Locality-free shared facts + faithful contextual readout:** this is ordinary
+  contextual marginal gluing (Specker-triangle level structure). Future
+  locality-free work must retain friend-specific intervention or record semantics.
+
+These results answer "what must a stronger formulation include"; they are not
+presented as candidate post-LF discoveries.
+
+## Active Track 1 — Paper-faithful memory-awareness bridge
+
+Baumann--Brukner's no-signaling/memory result is known prior art. The repository
+now has a deletion-minimal operational benchmark and an exact arithmetic
+reproduction of a negative B.29 probability.
+
+The remaining useful target is formalization fidelity:
+
+1. encode the entangled source, friend's measurement, Bob's basis choices and
+   Wigner's measurement;
+2. derive the pre/post friend--Bob probability tables internally;
+3. derive the compatibility equations corresponding to B.25--B.29;
+4. recover the published signaling obstruction from the circuit semantics;
+5. compare every formal premise against the paper.
+
+**Exit criterion:** a paper-to-code bridge with no hand-entered physical formula.
+This is a formalization result unless a genuinely weaker/new core emerges.
+
+## Active Track 2 — Calibrated Causal-Order Friendliness
+
+The unconstrained-reporting adversary shows that the next P06 model must share
+physical structure across settings.
+
+1. define a finite calibrated instrument/process family before searching;
+2. specify definite orders, mixtures, allowed ancillas, communication and control
+   access;
+3. require cross-setting consistency of the internal implementation;
+4. enumerate the resulting definite-order hull;
+5. obtain candidate facets and certify them exactly;
+6. add explicit friend records/read-reverse operations only after the calibrated
+   process witness is nontrivial;
+7. run premise deletion against definite order, absolute records, agency and
+   record persistence;
+8. compare against existing quantum-switch/process-matrix causal witnesses.
+
+**Candidate-new target:** a contradiction that genuinely needs both friend-record
+semantics and definite causal order, rather than an ordinary causal witness.
+
+## Active Track 3 — Access-sensitive record monogamy in full quantum mechanics
+
+The effective overlap model gives a useful adversary benchmark, but a zero overlap
+factor making a product vanish is not by itself a substantive monogamy theorem.
+
+Next steps:
+
+1. replace overlap lists with an explicit system + friend + finite environment
+   Hilbert-space state;
+2. define two superobserver access regions as typed register subsets;
+3. quantify over the full allowed local recovery channels, not a selected menu;
+4. include shared ancillas/classical coordination if physically allowed;
+5. derive any recovery tradeoff from the quantum state itself;
+6. prove sharpness and deletion-minimality;
+7. audit against existing LF monogamy and quantum-Darwinism/recovery no-go results.
+
+**Candidate-new target:** a sharp access-sensitive recovery tradeoff not implied by
+known LF monogamy or generic information-disturbance results.
+
+## Active Track 4 — Consensus / redundant records with explicit registers
 
-### C3. Hull/facet search
-Enumerate finite definite-order strategies and obtain candidate facets. Check the
-full coefficient table in Lean.
+The product-overlap base case and access accounting are benchmarks. The open
+question is whether redundant objective records create a sharp operational barrier
+to Wigner-style reversal in a fully explicit register model.
 
-### C4. Add friend facts
-Extend the process model with readable friend records and candidate laws:
-- absolute events;
-- definite causal order;
-- operational agency;
-- record consistency/persistence.
+1. build the N-register branching state;
+2. prove the reduced state after tracing arbitrary inaccessible subsets;
+3. characterize optimal recovery/discrimination with a specified access budget;
+4. identify a sharp redundancy threshold if one exists;
+5. only then introduce a "consensus fact" law and run the adversary deletion test.
 
-### C5. Deletion adversaries
-Demand a target-realizing countermodel after removal of every premise.
+**Candidate-new target:** an access-sensitive theorem quantitatively connecting
+redundant objectivity to reversible interference.
 
-### C6. Quantum process bridge
-Implement the coherent-order friend protocol explicitly and prove its exported
-behavior equals the facet witness.
+## Active Track 5 — Friend-specific contextuality beyond ordinary gluing
 
-**Candidate breakthrough:** a no-go theorem whose contradiction genuinely uses
-both absolute friend facts and definite causal order, and is not merely an
-existing quantum-switch causal witness in different notation.
-
-**Current adversary finding:** the existing P06 scalar X/Z statistic has an exact
-fixed-order mimic; a separate PR certifies that negative result.
-
----
+The simple locality-free benchmark collapses to contextuality and is therefore
+scoped out.
 
-## Track D — Friendliness without spatial locality
-
-**Purpose:** determine the weakest operational/contextual assumptions that make
-absolute friend facts impossible even when spatial nonlocal influences are not
-forbidden.
+Any follow-up must retain operational structure absent from a standard contextual
+marginal problem, such as:
 
-### D1. Reproduce the known contextual friend construction
-Formalize the 5-cycle or Peres-Mermin translation with friend record/undo
-operations and the published commutation-irrelevance-style premise.
+- explicit friend records;
+- read versus reverse choices;
+- persistence under selected interventions;
+- awareness/meta-records;
+- constraints linking a stored event to a later undo.
 
-### D2. Assumption factorization
-Split the semantic hinge into independently deletable laws:
-- absolute observed events;
-- operational equivalence under commuting insertions;
-- non-disturbance/compatibility;
-- record persistence;
-- measurement-choice independence, if actually used.
-
-### D3. Search smaller cores
-Enumerate finite contextuality hypergraphs and ask for the smallest friend
-protocol for which the core remains contradictory after removing all locality
-premises.
-
-### D4. Quantum bridge and controls
-Give an explicit finite circuit, plus classical/contextual controls showing which
-ingredient creates the contradiction.
-
-**Novelty posture:** extension track initially. Published work already shows
-EWFS paradoxes need not use nonlocal correlations, so novelty requires a weaker
-core, a smaller protocol, or a quantitatively new robustness result.
-
----
-
-## Track E — Nested Friendliness
-
-**Purpose:** ask whether adding observer depth creates a strict hierarchy of
-absolute-fact behavior sets.
-
-### E1. Typed observer tree
-Represent depth, record ownership, read access and reversible containment
-explicitly. Avoid informal "friend of a friend" labels.
-
-### E2. Depth-1 baseline
-Recover the existing friend protocol as the first level.
-
-### E3. Depth-2 finite model
-Add a super-friend record and a super-superobserver read/reverse choice.
-
-### E4. Projection test
-Prove every depth-2 absolute-history model projects to depth 1.
-
-### E5. Strictness search
-Search for a quantum behavior admitted by the depth-1 absolute-history class but
-excluded at depth 2. If none appears, search for an equivalence theorem instead.
-
-### E6. Premise deletion
-Challenge:
-- cross-level record composition;
-- persistence through reversals;
-- global truth across observer levels;
-- agency/choice assumptions.
-
-**Candidate breakthrough:** a proved strict hierarchy
-F_(n+1) subsetneq F_n, with an explicit depth-2 witness and deletion-minimal core.
-
-**Risk:** nested Wigner-friend reasoning and infinite/nested constructions already
-exist, so a hierarchy theorem must be clearly distinct from logical-paradox
-repackaging.
-
----
-
-## Track F — Friendliness monogamy / resource sharing
-
-**Purpose:** move beyond known LF monogamy by making *access* or *recoverability*
-the scarce resource.
-
-### F1. Treat existing monogamy results as prior art
-Do not claim "LF has a monogamy relation" as new.
-
-### F2. Two-superobserver access model
-Give Bob and Charlie disjoint or overlapping access to friend/environment
-registers.
-
-### F3. Define operational resources
-Examples:
-- trace-distance recovery advantage;
-- accessible coherence;
-- read-vs-reverse success;
-- LF violation after a specified recovery channel.
-
-### F4. Search sharp tradeoffs
-Seek a bound such as
-  R_AB + R_AC <= C
-for the full allowed channel class, not just a menu of protocols.
-
-### F5. Attainer + deletion adversaries
-Prove sharpness and show which assumptions on disjoint access, record copying or
-no-communication are necessary.
-
-**Candidate breakthrough:** a sharp *access-sensitive* friendliness monogamy law,
-rather than the already-known causal/marginal LF monogamy story.
-
----
-
-## Track G — Consensus Friendliness / redundant records
-
-**Purpose:** connect friend objectivity to the redundant records used by quantum
-Darwinism, but make the claim about operational access and reversible interference.
-
-### G1. Product-overlap base case
-For independent hidden record fragments, prove that residual laboratory
-coherence is the product of their branch overlaps and connect it to the existing
-checked recovery gap.
-
-### G2. Perfect-record adversary
-Show one perfectly distinguishing inaccessible copy kills the laboratory-only
-fringe, and delete that premise with an explicit coherent witness.
-
-### G3. Typed many-register environment
-Replace the effective product law by an explicit system + friend + N environment
-register state.
-
-### G4. Access subsets
-For every subset S of environment fragments, characterize or bound the optimal
-distinguishing/recovery test available on lab + S.
-
-### G5. Redundancy threshold
-Search for a sharp statement of the form: once at least k sufficiently
-distinguishing copies remain inaccessible, no allowed superobserver can recover
-a fringe above epsilon.
-
-### G6. Consensus/no-go layer
-Only after G3-G5, introduce a law saying multiple durable records constitute a
-shared/consensus fact and ask whether that law plus universal quantum control
-has a deletion-minimal contradiction.
-
-**Candidate breakthrough:** an access-sensitive theorem quantitatively connecting
-redundant objectivity to the impossibility of Wigner-style reversal.
-
-**Status:** the product-overlap base case is opened separately and is explicitly
-not claimed as novel.
-
----
+The first task is to search whether these extra friend-specific laws produce a
+minimal core that is not equivalent to an existing contextuality scenario.
 
 ## Priority order
 
-1. Make the structured-adversary core green.
-2. Make the Operational Friendliness benchmark green.
-3. Merge/check the P06 fixed-order rejection: it prevents wasted optimization.
-4. Reproduce the 2026 timelike theorem and run its deletion atlas.
-5. Build the many-register access engine needed by Consensus and
-   access-sensitive Monogamy.
-6. Run the first full P06 definite-order hull search.
-7. Formalize the locality-free contextual benchmark.
-8. Build depth-2 Nested Friendliness only after the access/record API stabilizes.
+1. Merge the structured-adversary infrastructure.
+2. Consolidate benchmark/negative results into one boundary-map PR.
+3. Complete the Baumann--Brukner circuit-to-equations bridge.
+4. Build the calibrated definite-order process class and run the first hull search.
+5. Upgrade access-monogamy/consensus from overlap bookkeeping to explicit
+   many-register quantum semantics.
+6. Revisit friend-specific contextuality only with explicit intervention semantics.
 
-The program should prefer a rigorous negative result over a weak positive claim.
-A candidate is promoted to "breakthrough" only when its strongest plausible
-adversary fails for a *proved reason*, not because the search did not find one.
+A candidate is promoted beyond "benchmark" or "scope result" only when its
+strongest plausible adversary fails for a proved reason.
