@@ -66,3 +66,5 @@ import Tests.FiniteShot
 import Tests.PartialEnvironment
 
 import Tests.AdversarySearch
+
+import Tests.LFAgencySqrtTwo
