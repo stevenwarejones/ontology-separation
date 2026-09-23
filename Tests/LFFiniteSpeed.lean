@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.LFFiniteSpeed
+import OntologySeparation.Experiments.LFFiniteSpeedDiagnostics
 
 namespace OntologySeparation.Tests.LFFiniteSpeed
 open OntologySeparation.LFFiniteSpeed
@@ -19,5 +19,15 @@ example :
       ¬ ∃ j : AbsoluteEventTable, Compatible j ∧ j.behavior = RealQuantum.lfBehavior :=
   feasibility
 
+example (j : AbsoluteEventTable) (hl : LFJoint.Local j) :
+    RecordRevealedWithin j 0 :=
+  local_recordRevealedWithin_zero j hl
+
+example : NumericalCandidates.fullTableRecordTV = (63 : ℚ) / 625 := rfl
+example : NumericalCandidates.scoreEightTV = (1 : ℚ) / 8 := rfl
+example : NumericalCandidates.zeroSignalScore = (22 : ℚ) / 3 := rfl
+
+-- Deliberately no example of FullTableCandidateStatement: that proposition
+-- remains unproved until an exact rational certificate is checked in Lean.
 end
 end OntologySeparation.Tests.LFFiniteSpeed
