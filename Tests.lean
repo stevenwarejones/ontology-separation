@@ -60,3 +60,5 @@ import Tests.EnvironmentDiscrimination
 import Tests.FiniteShot
 
 import Tests.PartialEnvironment
+
+import Tests.AdversarySearch
