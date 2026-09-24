@@ -500,3 +500,10 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignalingTheorem2.stochasticWitness_signaling
 #print axioms OntologySeparation.ForcedSignalingTheorem2.exact_forced_signaling_stochastic
 #print axioms OntologySeparation.ForcedSignalingTheorem2.exact_forced_signaling_stochastic_value
+
+
+-- Completion-independent forced-signaling sharpness.
+#print axioms OntologySeparation.HiddenInfluenceCompletion.completion_count
+#print axioms OntologySeparation.HiddenInfluenceCompletion.operationalScore_eq_marginalScore
+#print axioms OntologySeparation.HiddenInfluenceCompletion.coefficient_lower_bound_all_completions
+#print axioms OntologySeparation.HiddenInfluenceCompletion.optimal_completion_globally_sharp
