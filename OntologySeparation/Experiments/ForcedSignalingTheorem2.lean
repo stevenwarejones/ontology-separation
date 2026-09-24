@@ -240,11 +240,11 @@ theorem stochasticWitness_matches :
     StochasticMatchesCluster stochasticWitness := by
   constructor
   · intro x y w a b d
-    unfold stochasticABD stochasticWitness modelABD
+    unfold stochasticABD modelABD
     simp_rw [stochasticWitness_determinize_weight]
     exact ForcedSignalingLC4Witness.model_abd_matches x y w a b d
   · intro x z w a c d
-    unfold stochasticACD stochasticWitness modelACD
+    unfold stochasticACD modelACD
     simp_rw [stochasticWitness_determinize_weight]
     exact ForcedSignalingLC4Witness.model_acd_matches x z w a c d
 
