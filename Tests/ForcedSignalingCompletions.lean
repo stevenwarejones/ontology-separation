@@ -39,4 +39,12 @@ example (c : Completion) {m : Model}
     operationalScore c m.behavior = 4 + 2 * Real.sqrt 2 :=
   operationalScore_of_matchesCluster c h
 
+
+/-- The all-completions optimum also holds for the finite stochastic class
+formalized in #77. -/
+example :
+    StochasticValidSlope optimalCompletion 8 ∧
+      ∀ c : Completion, ∀ K : ℝ, StochasticValidSlope c K → 8 ≤ K :=
+  stochastic_completion_globally_sharp
+
 end Tests.ForcedSignalingCompletions
