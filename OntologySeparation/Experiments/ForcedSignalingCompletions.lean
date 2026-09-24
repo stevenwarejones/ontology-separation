@@ -325,6 +325,54 @@ theorem optimal_completion_globally_sharp :
       ((HiddenInfluence.signaling_le_iff m m.signaling).mp le_rfl)
   · intro c K hK
     exact coefficient_lower_bound_all_completions c K hK
+/-- Completion-specific tradeoff premise stated directly for the finite stochastic
+conditional-local class. -/
+def StochasticValidSlope (c : Completion) (K : ℝ) : Prop :=
+  ∀ (Ω : Type) [Fintype Ω] (m : StochasticModel Ω),
+    operationalScore c m.behavior ≤ 6 + K * m.signaling
+
+/-- Any deterministic-model tradeoff immediately lifts to the finite stochastic
+class because stochastic behavior and signaling are defined through, and proved
+preserved by, determinization. -/
+theorem validSlope_to_stochastic
+    (c : Completion) (K : ℝ) (h : ValidSlope c K) :
+    StochasticValidSlope c K := by
+  intro Ω _ m
+  simpa [StochasticModel.behavior, StochasticModel.signaling] using
+    h m.determinize
+
+/-- Conversely, a stochastic-class tradeoff applies to every deterministic model
+through the explicit stochastic round-trip representative. -/
+theorem stochasticValidSlope_to_valid
+    (c : Completion) (K : ℝ) (h : StochasticValidSlope c K) :
+    ValidSlope c K := by
+  intro m
+  have hs := h Strategy (StochasticModel.ofStrategies m.toStrategies)
+  rw [m.stochastic_roundtrip_signaling] at hs
+  have hscore :
+      operationalScore c
+        (StochasticModel.ofStrategies m.toStrategies).behavior =
+      operationalScore c m.behavior := by
+    change operationalScore c
+        ((StochasticModel.ofStrategies m.toStrategies).determinize).behavior =
+      operationalScore c m.behavior
+    unfold operationalScore mean
+    simp_rw [m.stochastic_roundtrip]
+  rw [hscore] at hs
+  exact hs
+
+/-- Exact all-completions optimality for finite stochastic conditional-local
+models: no valid completion admits slope below 8, and the certified completion
+achieves slope 8 for the whole stochastic class. -/
+theorem stochastic_completion_globally_sharp :
+    StochasticValidSlope optimalCompletion 8 ∧
+      ∀ c : Completion, ∀ K : ℝ, StochasticValidSlope c K → 8 ≤ K := by
+  constructor
+  · exact validSlope_to_stochastic optimalCompletion 8
+      optimal_completion_globally_sharp.1
+  · intro c K hK
+    exact coefficient_lower_bound_all_completions c K
+      (stochasticValidSlope_to_valid c K hK)
 
 end
 end OntologySeparation.HiddenInfluenceCompletion
