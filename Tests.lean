@@ -70,3 +70,5 @@ import Tests.AdversarySearch
 import Tests.LFAgencySqrtTwo
 
 import Tests.HiddenInfluenceStochastic
+
+import Tests.ForcedSignalingCompletions
