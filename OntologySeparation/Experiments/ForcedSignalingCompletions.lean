@@ -176,11 +176,52 @@ def marginalCoeffAt (c : Completion) (j : Atom) : ℤ :=
         then 1 else 0))
 
 set_option maxRecDepth 100000 in
+theorem parity0_blind_z : ∀ (j : Atom) (z : Bool),
+    parity 0 (output j (lateOf false z)) =
+      parity 0 (output j (lateOf false false)) := by
+  decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem parity1_blind_z : ∀ (j : Atom) (z : Bool),
+    parity 1 (output j (lateOf true z)) =
+      parity 1 (output j (lateOf true false)) := by
+  decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem parity2_blind_z : ∀ (j : Atom) (z : Bool),
+    parity 2 (output j (lateOf false z)) =
+      parity 2 (output j (lateOf false false)) := by
+  decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem parity3_blind_z : ∀ (j : Atom) (z : Bool),
+    parity 3 (output j (lateOf true z)) =
+      parity 3 (output j (lateOf true false)) := by
+  decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem parity4_blind_y : ∀ (j : Atom) (y : Bool),
+    parity 4 (output j (lateOf y false)) =
+      parity 4 (output j (lateOf false false)) := by
+  decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem parity5_blind_y : ∀ (j : Atom) (y : Bool),
+    parity 5 (output j (lateOf y true)) =
+      parity 5 (output j (lateOf false true)) := by
+  decide +kernel
+
+set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem operationalCoeff_eq_marginalCoeffAt :
     ∀ c : Completion, ∀ j : Atom,
       operationalCoeff c j = marginalCoeffAt c j := by
-  with_unfolding_all decide +kernel
+  intro c
+  cases hw1 : c.w1 <;> cases hw2 : c.w2 <;> cases hx5 : c.x5 <;>
+    simp_rw [operationalCoeff, hw1, hw2, hx5,
+      parity0_blind_z, parity1_blind_z, parity2_blind_z,
+      parity3_blind_z, parity4_blind_y, parity5_blind_y] <;>
+    with_unfolding_all decide +kernel
 
 theorem marginalScore_eq_sum (c : Completion) (m : Model) :
     marginalScore c m =
@@ -254,7 +295,11 @@ set_option maxHeartbeats 0 in
 theorem targetMarginalScoreQ2_eq_score :
     ∀ c : Completion,
       targetMarginalScoreQ2 c = ForcedSignalingLC4.score := by
-  with_unfolding_all decide +kernel
+  intro c
+  cases hw1 : c.w1 <;> cases hw2 : c.w2 <;> cases hx5 : c.x5 <;>
+    simp only [targetMarginalScoreQ2, hw1, hw2, hx5] <;>
+    rw [ForcedSignalingLC4.score_exact] <;>
+    with_unfolding_all decide +kernel
 
 private theorem toReal_sub
     (a b : ForcedSignalingLC4.Q2) :
