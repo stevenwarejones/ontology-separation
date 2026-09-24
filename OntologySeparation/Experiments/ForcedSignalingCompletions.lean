@@ -39,6 +39,15 @@ def optimalCompletion : Completion :=
     z3 := false, z4 := false
     x5 := true, y5 := false, y6 := false }
 
+
+/-- The literal all-defaults completion, included because it is a common
+experimental convention and is not slope-optimal. -/
+def defaultCompletion : Completion :=
+  { z1 := false, w1 := false
+    z2 := false, w2 := false
+    z3 := false, z4 := false
+    x5 := false, y5 := false, y6 := false }
+
 /-- Exact completion-dependent signaling slope.
 
 Only the two early-D choices used to complete the AB terms and the early-A
@@ -47,6 +56,9 @@ def Completion.slope (c : Completion) : ℤ :=
   16 - 2 * c.w1.toNat - 2 * c.w2.toNat - 4 * c.x5.toNat
 
 theorem optimalCompletion_slope : optimalCompletion.slope = 8 := by decide
+
+
+theorem defaultCompletion_slope : defaultCompletion.slope = 16 := by decide
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
