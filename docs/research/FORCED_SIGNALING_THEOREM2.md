@@ -37,7 +37,10 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
   `ForcedSignalingCompletionWitness.lean` supplies exact rational attaining
   models, proving that these slopes are optimal rather than merely upper bounds.
   The exact spectrum is `{8,10,12,14,16}` with multiplicities
-  `{64,128,128,128,64}`.
+  `{64,128,128,128,64}`. The source paper reported the finer spectrum numerically
+  from floating-point LP scans; this repository checks the spectrum and sharpness
+  exactly in Lean. The paper's analytic corollary that no completion admits a
+  coefficient below 8 remains the prior conceptual result.
 - Whether this response-table class is the appropriate formalization of
   finite-speed hidden influence is an interpretive question for experts.
 - No human domain expert has reviewed the physical assumptions or results.
