@@ -21,6 +21,12 @@ example : (∀ c : Completion, 8 ≤ c.slope) ∧
     ∃ c : Completion, c.slope = 8 :=
   minimum_completion_slope
 
+example : optimalCompletion.slope = 8 :=
+  optimalCompletion_slope
+
+example : defaultCompletion.slope = 16 :=
+  defaultCompletion_slope
+
 example (m : Model) (c : Completion) (delta : ℝ)
     (h : Within m.behavior delta) :
     completedScore c m.behavior ≤ 6 + (c.slope : ℝ) * delta :=
