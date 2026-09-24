@@ -287,8 +287,9 @@ theorem Model.fromStrategies_prob_eq_selectedMass
     then (Model.fromStrategies q).weight j else 0) =
       ∑ s, if s.visible y z = v then (q e).mass s else 0
   rw [← atomEquiv.sum_comp]
-  simp [atomEquiv, Fintype.sum_prod_type, strategy_early, strategy_visible_output,
-    Model.fromStrategies_weight_strategyAtom, Finset.sum_ite_irrel]
+  simp only [atomEquiv, Fintype.sum_prod_type, strategy_early,
+    strategy_visible_output, Model.fromStrategies_weight_strategyAtom]
+  fin_cases e <;> simp
 
 /-- The observable behavior associated with a stochastic conditional-local
 model is its deterministic refinement. The theorem below shows this definition
@@ -322,7 +323,8 @@ theorem selectedMass_bind {α : Type} [Fintype α]
     (y z : Bool) (v : VisibleOutcome) :
     selectedMass (FiniteKernel.bind d k) y z v =
       ∑ x, d.mass x * selectedMass (k x) y z v := by
-  unfold selectedMass FiniteKernel.bind
+  unfold selectedMass
+  simp only [FiniteKernel.bind_mass]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro x _
@@ -330,6 +332,14 @@ theorem selectedMass_bind {α : Type} [Fintype α]
   apply Finset.sum_congr rfl
   intro s _
   by_cases h : s.visible y z = v <;> simp [h, mul_assoc]
+
+@[simp] theorem selectedMass_pure (s : Strategy) (y z : Bool)
+    (v : VisibleOutcome) :
+    selectedMass (FiniteKernel.pure s) y z v =
+      if s.visible y z = v then 1 else 0 := by
+  classical
+  unfold selectedMass
+  simp [FiniteKernel.pure]
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
@@ -342,10 +352,13 @@ theorem StochasticModel.selectedMass_strategyGiven
       (m.b e ω (boolSetting y)).mass v.b *
       (m.c e ω (boolSetting z)).mass v.c := by
   classical
+  unfold StochasticModel.strategyGiven
+  rw [selectedMass_bind]
+  simp_rw [selectedMass_bind]
+  simp only [selectedMass_pure]
   rcases v with ⟨va,vb,vc,vd⟩
   cases y <;> cases z <;>
-    simp [selectedMass, Strategy.visible, StochasticModel.strategyGiven,
-      FiniteKernel.bind, FiniteKernel.pure, boolSetting, Fintype.sum_bool,
+    simp [Strategy.visible, boolSetting, Fintype.sum_bool,
       (m.a e ω).total, (m.d e ω).total,
       (m.b e ω 0).total, (m.b e ω 1).total,
       (m.c e ω 0).total, (m.c e ω 1).total] <;>
