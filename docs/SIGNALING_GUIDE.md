@@ -62,10 +62,14 @@ single-recipient marginal bounds. `Model.signaling` is their maximum. The two
 remaining sender directions vanish by the no-signaling theorems above.
 
 This is an explicit causal response model, not a formal derivation from a
-spacetime diagram. Equivalence to general hidden-variable conditional-local
-formulations with arbitrary hidden-state spaces is a separate representation
-obligation. No quantum realizability or cluster-state marginal matching is
-asserted for the attaining model.
+spacetime diagram. The finite stochastic conditional-local representation
+equivalence is now proved in Lean: arbitrary finite hidden states with stochastic
+local response kernels determinize without changing the observable behavior or
+signaling. For this finite setting/outcome scenario, the standard Fine/
+Carathéodory convex-hull argument implies arbitrary hidden spaces do not enlarge
+the observable finite behavior class; that extension is documented but not
+formalized. No quantum realizability or cluster-state marginal matching is
+asserted for the generic tradeoff attaining model.
 
 ## Which score?
 
@@ -82,9 +86,19 @@ the otherwise omitted settings matters when signaling is allowed.
 | +2 | CD | (1,0,0,0) |
 | +2 | ACD | (0,0,1,1) |
 
-The sharp slope 8 is proved for **this fixed completion**, with intercept 6.
-It does not establish optimality over all completions, a quantum optimum, a
-measurement of signaling in a laboratory, or a finite-sample hypothesis test.
+The sharp slope 8 is proved for the displayed completion, and Lean also
+formalizes the full nine-bit family of **512 raw operational completions**.
+For conditionally-local models, six blind-party completion bits provably drop
+out, leaving only three effective choices. The LC4 target has score `4 + 2√2`
+under every completion, so any valid completion-specific inequality
+`S₄^op ≤ 6 + K Δ_sig` must satisfy `K ≥ 8`; the displayed completion attains
+`K = 8`. Thus slope 8 is optimal over all completions.
+
+The finer best-slope spectrum `{8,10,12,14,16}` and its multiplicities across
+all 512 completions are still **machine-numerical** in the source repository,
+not kernel-checked Lean results. This guide does not claim a quantum optimum for
+arbitrary states, a laboratory measurement of signaling, or a complete finite-
+sample hypothesis test.
 
 ## Add a response model without touching the LP
 
