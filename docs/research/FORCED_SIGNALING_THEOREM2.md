@@ -23,8 +23,12 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
   by determinization. The converse stochastic embedding preserves response-table
   weights, observable probabilities and signaling. This closes the **finite**
   stochastic-vs-deterministic representation gap for the theorem's observables.
-  It does **not** cover infinite hidden spaces or weaken the stated conditional-
-  local factorization.
+  The Lean construction is stated for finite hidden spaces. For this finite
+  setting/outcome scenario, standard convex-hull reasoning (Fine/Carathéodory-
+  type determinization) implies that allowing arbitrary hidden spaces does not
+  enlarge the observable finite behavior class; that standard extension is not
+  formalized here. The result does not weaken the stated conditional-local
+  factorization.
 - Theorem 1 and this lower-bound argument use **one fixed operational
   completion** of the S4 witness, described in the
   [signaling guide](../SIGNALING_GUIDE.md). The paper's assertion that slope 8
