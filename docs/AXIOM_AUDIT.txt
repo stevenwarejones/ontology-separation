@@ -577,3 +577,51 @@
 'OntologySeparation.FriendshipMonogamyQuantum.two_copy_access_obstruction' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+
+'OntologySeparation.HiddenInfluence.strategyAtom_atomStrategy' depends on axioms: [propext, Quot.sound]
+'OntologySeparation.HiddenInfluence.atomStrategy_strategyAtom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.Model.fromStrategies_toStrategies' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.StochasticModel.selected_probability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.StochasticModel.toStrategies_ofStrategies' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.Model.stochastic_roundtrip' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.Model.fromStrategies_prob_eq_selectedMass' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.lateFromBool_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.HiddenInfluence.VisibleOutcome.toOutcome_surjective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.StochasticModel.behavior_prob_eq_factorized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.Model.stochastic_roundtrip_weight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluence.Model.stochastic_roundtrip_signaling' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.stochastic_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.stochasticWitness_matches' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.stochasticWitness_signaling' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.exact_forced_signaling_stochastic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingTheorem2.exact_forced_signaling_stochastic_value' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
