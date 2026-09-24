@@ -291,18 +291,11 @@ theorem Model.fromStrategies_prob_eq_selectedMass
   simp only [atomEquiv, Fintype.sum_prod_type, strategy_early,
     strategy_visible_output, Model.fromStrategies_weight_strategyAtom,
     VisibleOutcome.toOutcome_eq_iff]
-  have hinner (e' : Early) :
-      (∑ s : Strategy,
-        if e' = e ∧ s.visible y z = v then (q e').mass s else 0) =
-      if e' = e then
-        ∑ s : Strategy, if s.visible y z = v then (q e).mass s else 0
-      else 0 := by
-    by_cases h : e' = e
-    · subst e'
-      simp
-    · simp [h]
-  simp_rw [hinner]
-  simp
+  rw [Finset.sum_eq_single e]
+  · simp
+  · intro e' _ hne
+    simp [hne]
+  · simp
 
 /-- The observable behavior associated with a stochastic conditional-local
 model is its deterministic refinement. The theorem below shows this definition
@@ -339,20 +332,32 @@ theorem selectedMass_bind {α : Type} [Fintype α]
   classical
   unfold selectedMass
   simp_rw [FiniteKernel.bind_mass]
-  rw [Finset.sum_comm]
-  apply Finset.sum_congr rfl
-  intro x _
-  rw [Finset.mul_sum]
-  apply Finset.sum_congr rfl
-  intro s _
-  by_cases h : s.visible y z = v <;> simp [h]
+  calc
+    (∑ s : Strategy,
+        if s.visible y z = v then ∑ x, d.mass x * (k x).mass s else 0) =
+      ∑ s : Strategy, ∑ x,
+        if s.visible y z = v then d.mass x * (k x).mass s else 0 := by
+          apply Finset.sum_congr rfl
+          intro s _
+          by_cases h : s.visible y z = v <;> simp [h]
+    _ = ∑ x, ∑ s : Strategy,
+        if s.visible y z = v then d.mass x * (k x).mass s else 0 := by
+          rw [Finset.sum_comm]
+    _ = ∑ x, d.mass x *
+        ∑ s : Strategy, if s.visible y z = v then (k x).mass s else 0 := by
+          apply Finset.sum_congr rfl
+          intro x _
+          rw [Finset.mul_sum]
+          apply Finset.sum_congr rfl
+          intro s _
+          by_cases h : s.visible y z = v <;> simp [h]
 
 @[simp] theorem selectedMass_pure (s : Strategy) (y z : Bool) (v : VisibleOutcome) :
     selectedMass (FiniteKernel.pure s) y z v =
       if s.visible y z = v then 1 else 0 := by
   classical
   unfold selectedMass
-  simp [FiniteKernel.pure]
+  by_cases h : s.visible y z = v <;> simp [FiniteKernel.pure, h]
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
@@ -367,8 +372,9 @@ theorem StochasticModel.selectedMass_strategyGiven
   classical
   rcases v with ⟨va,vb,vc,vd⟩
   unfold StochasticModel.strategyGiven
-  repeat' rw [selectedMass_bind]
-  simp only [selectedMass_pure]
+  rw [selectedMass_bind]
+  simp_rw [selectedMass_bind]
+  simp_rw [selectedMass_pure]
   cases y <;> cases z <;>
     simp [Strategy.visible, boolSetting, Fintype.sum_bool,
       (m.a e ω).total, (m.d e ω).total,
@@ -387,7 +393,7 @@ theorem StochasticModel.selected_probability {Ω : Type} [Fintype Ω]
   simp_rw [m.selectedMass_strategyGiven]
   apply Finset.sum_congr rfl
   intro ω _
-  ring
+  ring_nf
 /-- The stochastic factorized joint probability and the packed observable
 behavior agree for every early context, late setting and full outcome. -/
 theorem StochasticModel.behavior_prob_eq_factorized
