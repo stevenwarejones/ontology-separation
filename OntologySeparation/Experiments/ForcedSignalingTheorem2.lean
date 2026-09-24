@@ -1,5 +1,6 @@
 import OntologySeparation.Experiments.ForcedSignalingLC4Witness
 import OntologySeparation.Experiments.SignalingTradeoff
+import OntologySeparation.Operational.HiddenInfluenceStochastic
 import OntologySeparation.Core.SharpOptimum
 
 namespace OntologySeparation.ForcedSignalingTheorem2
@@ -182,6 +183,103 @@ theorem targetDelta_value :
   unfold ForcedSignalingLC4Witness.targetDelta
   simp [ForcedSignalingLC4Witness.targetDeltaQ2, Q2.toReal, q]
   ring
+
+
+/-- ABD marginal of a finite stochastic conditional-local model, expressed
+through its proved-equivalent deterministic refinement. The observable
+probability bridge in `HiddenInfluenceStochastic` identifies this with the
+original factorized stochastic kernels. -/
+noncomputable def stochasticABD {Ω : Type} [Fintype Ω]
+    (m : StochasticModel Ω) (x y w a b d : Bool) : ℝ :=
+  modelABD m.determinize x y w a b d
+
+/-- ACD marginal of a finite stochastic conditional-local model. -/
+noncomputable def stochasticACD {Ω : Type} [Fintype Ω]
+    (m : StochasticModel Ω) (x z w a c d : Bool) : ℝ :=
+  modelACD m.determinize x z w a c d
+
+/-- The LC4 marginal-matching premise stated directly for finite stochastic
+conditional-local hidden-influence models. -/
+structure StochasticMatchesCluster {Ω : Type} [Fintype Ω]
+    (m : StochasticModel Ω) : Prop where
+  abd : ∀ x y w a b d,
+    stochasticABD m x y w a b d =
+      Q2.toReal (ForcedSignalingLC4.abd x y w a b d)
+  acd : ∀ x z w a c d,
+    stochasticACD m x z w a c d =
+      Q2.toReal (ForcedSignalingLC4.acd x z w a c d)
+
+/-- A stochastic LC4-matching model determinizes to a model satisfying the
+original Theorem-2 premise. -/
+theorem StochasticMatchesCluster.toMatchesCluster
+    {Ω : Type} [Fintype Ω] {m : StochasticModel Ω}
+    (h : StochasticMatchesCluster m) :
+    MatchesCluster m.determinize where
+  abd := h.abd
+  acd := h.acd
+
+/-- Theorem 2 for the full finite stochastic conditional-local model class. -/
+theorem stochastic_lower_bound
+    {Ω : Type} [Fintype Ω] {m : StochasticModel Ω}
+    (h : StochasticMatchesCluster m) :
+    ForcedSignalingLC4Witness.targetDelta ≤ m.signaling := by
+  simpa [StochasticModel.signaling] using
+    (lower_bound (m := m.determinize) h.toMatchesCluster)
+
+/-- Explicit stochastic representative of the exact LC4 attaining witness. -/
+noncomputable def stochasticWitness :
+    StochasticModel Strategy :=
+  StochasticModel.ofStrategies ForcedSignalingLC4Witness.model.toStrategies
+
+theorem stochasticWitness_determinize_weight (j : Atom) :
+    stochasticWitness.determinize.weight j =
+      ForcedSignalingLC4Witness.model.weight j := by
+  exact ForcedSignalingLC4Witness.model.stochastic_roundtrip_weight j
+
+theorem stochasticWitness_matches :
+    StochasticMatchesCluster stochasticWitness := by
+  constructor
+  · intro x y w a b d
+    unfold stochasticABD stochasticWitness modelABD
+    simp_rw [stochasticWitness_determinize_weight]
+    exact ForcedSignalingLC4Witness.model_abd_matches x y w a b d
+  · intro x z w a c d
+    unfold stochasticACD stochasticWitness modelACD
+    simp_rw [stochasticWitness_determinize_weight]
+    exact ForcedSignalingLC4Witness.model_acd_matches x z w a c d
+
+theorem stochasticWitness_signaling :
+    stochasticWitness.signaling =
+      ForcedSignalingLC4Witness.targetDelta := by
+  unfold stochasticWitness
+  rw [ForcedSignalingLC4Witness.model.stochastic_roundtrip_signaling]
+  exact ForcedSignalingLC4Witness.signaling_exact
+
+/-- Exact forced-signaling theorem over finite stochastic conditional-local
+models: the LC4 marginal constraints force the same minimum, and a stochastic
+model attains it. -/
+theorem exact_forced_signaling_stochastic :
+    (∀ (Ω : Type) [Fintype Ω] (m : StochasticModel Ω),
+      StochasticMatchesCluster m →
+        ForcedSignalingLC4Witness.targetDelta ≤ m.signaling) ∧
+    ∃ m : StochasticModel Strategy,
+      StochasticMatchesCluster m ∧
+        m.signaling = ForcedSignalingLC4Witness.targetDelta := by
+  constructor
+  · intro Ω _ m hm
+    exact stochastic_lower_bound hm
+  · exact ⟨stochasticWitness, stochasticWitness_matches,
+      stochasticWitness_signaling⟩
+
+theorem exact_forced_signaling_stochastic_value :
+    (∀ (Ω : Type) [Fintype Ω] (m : StochasticModel Ω),
+      StochasticMatchesCluster m →
+        (Real.sqrt 2 - 1) / 4 ≤ m.signaling) ∧
+    ∃ m : StochasticModel Strategy,
+      StochasticMatchesCluster m ∧
+        m.signaling = (Real.sqrt 2 - 1) / 4 := by
+  rw [← targetDelta_value]
+  exact exact_forced_signaling_stochastic
 
 end
 end OntologySeparation.ForcedSignalingTheorem2
