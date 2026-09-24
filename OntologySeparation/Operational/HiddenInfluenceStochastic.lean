@@ -217,7 +217,7 @@ private theorem StochasticModel.strategyGiven_ofStrategies_mass
     ((StochasticModel.ofStrategies q).strategyGiven e s).mass t =
       if t = s then 1 else 0 := by
   rcases s with ⟨a, d, b0, b1, c0, c1⟩
-  cases c0 <;> cases c1 <;>
+  cases b1 <;> cases c0 <;> cases c1 <;>
     simp [StochasticModel.strategyGiven, StochasticModel.ofStrategies,
       FiniteKernel.pure]
 
