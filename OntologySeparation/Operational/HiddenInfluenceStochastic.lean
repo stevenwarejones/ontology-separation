@@ -102,8 +102,9 @@ theorem Model.fromStrategies_toStrategies_weight (m : Model) (j : Atom) :
     (Model.fromStrategies m.toStrategies).weight j = m.weight j := by
   change (∑ k : Early × Strategy,
     if atomEquiv k = j then m.weight (atomEquiv k) else 0) = m.weight j
-  rw [atomEquiv.sum_comp]
-  simp
+  have h := atomEquiv.sum_comp
+    (fun j' : Atom => if j' = j then m.weight j' else 0)
+  simpa using h
 
 /-- Packing and unpacking a response model preserves every public probability. -/
 theorem Model.fromStrategies_toStrategies (m : Model) :
@@ -252,15 +253,11 @@ theorem VisibleOutcome.toOutcome_injective :
     Function.Injective VisibleOutcome.toOutcome :=
   visibleOutcomeEquiv.injective
 
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
-theorem strategy_visible_output : ∀ (e : Early) (s : Strategy) (y z : Bool),
+theorem strategy_visible_output (e : Early) (s : Strategy) (y z : Bool) :
     output (strategyAtom e s) (lateFromBool y z) = (s.visible y z).toOutcome := by
-  intro e s y z
   apply Fin.ext
-  rcases s with ⟨a,d,b0,b1,c0,c1⟩
-  cases y <;> cases z <;> cases a <;> cases d <;>
-    cases b0 <;> cases b1 <;> cases c0 <;> cases c1 <;> decide
+  simpa [lateFromBool, Strategy.visible, VisibleOutcome.toOutcome] using
+    strategy_output e s y z
 
 theorem Model.fromStrategies_weight_strategyAtom
     (q : Early → FiniteDistribution Strategy) (e : Early) (s : Strategy) :
