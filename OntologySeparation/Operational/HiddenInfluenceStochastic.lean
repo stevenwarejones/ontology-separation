@@ -253,6 +253,11 @@ theorem VisibleOutcome.toOutcome_injective :
     Function.Injective VisibleOutcome.toOutcome :=
   visibleOutcomeEquiv.injective
 
+
+@[simp] theorem VisibleOutcome.toOutcome_eq_iff (v w : VisibleOutcome) :
+    v.toOutcome = w.toOutcome ↔ v = w :=
+  VisibleOutcome.toOutcome_injective.eq_iff
+
 theorem strategy_visible_output (e : Early) (s : Strategy) (y z : Bool) :
     output (strategyAtom e s) (lateFromBool y z) = (s.visible y z).toOutcome := by
   apply Fin.ext
@@ -282,15 +287,8 @@ theorem Model.fromStrategies_prob_eq_selectedMass
     then (Model.fromStrategies q).weight j else 0) =
       ∑ s, if s.visible y z = v then (q e).mass s else 0
   rw [← atomEquiv.sum_comp]
-  simp only [atomEquiv, strategy_early, strategy_visible_output,
-    Model.fromStrategies_weight_strategyAtom]
-  apply Finset.sum_congr rfl
-  intro k _
-  rcases k with ⟨e',s⟩
-  by_cases he : e' = e
-  · subst e'
-    simp [VisibleOutcome.toOutcome_injective.eq_iff]
-  · simp [he]
+  simp [atomEquiv, Fintype.sum_prod_type, strategy_early, strategy_visible_output,
+    Model.fromStrategies_weight_strategyAtom, Finset.sum_ite_irrel]
 
 /-- The observable behavior associated with a stochastic conditional-local
 model is its deterministic refinement. The theorem below shows this definition
@@ -319,25 +317,49 @@ noncomputable def StochasticModel.signaling {Ω : Type} [Fintype Ω]
     {Ω : Type} [Fintype Ω] (m : StochasticModel Ω) :
     m.signaling = m.determinize.signaling := rfl
 
+theorem selectedMass_bind {α : Type} [Fintype α]
+    (d : FiniteDistribution α) (k : α → FiniteDistribution Strategy)
+    (y z : Bool) (v : VisibleOutcome) :
+    selectedMass (FiniteKernel.bind d k) y z v =
+      ∑ x, d.mass x * selectedMass (k x) y z v := by
+  unfold selectedMass FiniteKernel.bind
+  rw [Finset.sum_comm]
+  apply Finset.sum_congr rfl
+  intro x _
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro s _
+  by_cases h : s.visible y z = v <;> simp [h, mul_assoc]
+
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
+theorem StochasticModel.selectedMass_strategyGiven
+    {Ω : Type} [Fintype Ω] (m : StochasticModel Ω)
+    (e : Early) (ω : Ω) (y z : Bool) (v : VisibleOutcome) :
+    selectedMass (m.strategyGiven e ω) y z v =
+      (m.a e ω).mass v.a *
+      (m.d e ω).mass v.d *
+      (m.b e ω (boolSetting y)).mass v.b *
+      (m.c e ω (boolSetting z)).mass v.c := by
+  classical
+  rcases v with ⟨va,vb,vc,vd⟩
+  cases y <;> cases z <;>
+    simp [selectedMass, Strategy.visible, StochasticModel.strategyGiven,
+      FiniteKernel.bind, FiniteKernel.pure, boolSetting, Fintype.sum_bool,
+      (m.a e ω).total, (m.d e ω).total,
+      (m.b e ω 0).total, (m.b e ω 1).total,
+      (m.c e ω 0).total, (m.c e ω 1).total] <;>
+    ring_nf
+
 /-- Determinization preserves every selected conditional-local joint
 probability. The unchosen B/C potential responses sum to one. -/
 theorem StochasticModel.selected_probability {Ω : Type} [Fintype Ω]
     (m : StochasticModel Ω) (e : Early) (y z : Bool) (v : VisibleOutcome) :
     selectedMass (m.toStrategies e) y z v =
       m.factorizedProbability e y z v := by
-  classical
-  rcases v with ⟨va, vb, vc, vd⟩
-  cases y <;> cases z <;>
-    simp [selectedMass, Strategy.visible, StochasticModel.toStrategies,
-      StochasticModel.strategyGiven, StochasticModel.factorizedProbability,
-      FiniteKernel.bind, FiniteKernel.pure, boolSetting, Fintype.sum_bool,
-      (m.a e _).total, (m.d e _).total,
-      (m.b e _ 0).total, (m.b e _ 1).total,
-      (m.c e _ 0).total, (m.c e _ 1).total] <;>
-    ring_nf
-
+  unfold StochasticModel.toStrategies StochasticModel.factorizedProbability
+  rw [selectedMass_bind]
+  simp_rw [m.selectedMass_strategyGiven]
 /-- The stochastic factorized joint probability and the packed observable
 behavior agree for every early context, late setting and full outcome. -/
 theorem StochasticModel.behavior_prob_eq_factorized
