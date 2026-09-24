@@ -1,4 +1,5 @@
 import OntologySeparation.Operational.HiddenInfluenceStrategies
+import OntologySeparation.Operational.HiddenInfluenceCausality
 
 /-!
 Finite stochastic conditional-local response kernels for the hidden-influence
@@ -182,6 +183,102 @@ def StochasticModel.factorizedProbability {Ω : Type} [Fintype Ω]
     (m.d e ω).mass v.d *
     (m.b e ω (boolSetting y)).mass v.b *
     (m.c e ω (boolSetting z)).mass v.c
+
+
+/-- Pack a selected late-setting pair into the operational late context. -/
+def lateFromBool (y z : Bool) : Late :=
+  ⟨2 * y.toNat + z.toNat, by
+    have hy := Bool.toNat_le y
+    have hz := Bool.toNat_le z
+    omega⟩
+
+/-- Pack the four visible Boolean outcomes into the operational output order
+`abcd`. -/
+def VisibleOutcome.toOutcome (v : VisibleOutcome) : Outcome :=
+  ⟨8 * v.a.toNat + 4 * v.b.toNat + 2 * v.c.toNat + v.d.toNat, by
+    have ha := Bool.toNat_le v.a
+    have hb := Bool.toNat_le v.b
+    have hc := Bool.toNat_le v.c
+    have hd := Bool.toNat_le v.d
+    omega⟩
+
+set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
+/-- The named deterministic strategy probability is exactly the corresponding
+packed `Model.behavior` probability. This is the bridge from the strategy-level
+determinization argument to the observable behavior consumed by Theorem 2. -/
+theorem Model.fromStrategies_prob_eq_selectedMass
+    (q : Early → FiniteDistribution Strategy)
+    (e : Early) (y z : Bool) (v : VisibleOutcome) :
+    (Model.fromStrategies q).behavior.prob
+        (e, lateFromBool y z) v.toOutcome =
+      selectedMass (q e) y z v := by
+  classical
+  unfold Model.behavior Model.fromStrategies Model.ofAtoms atomWeights selectedMass
+  rw [Finset.sum_comm]
+  apply Finset.sum_congr rfl
+  intro k _
+  rcases k with ⟨e', s⟩
+  by_cases he : e' = e
+  · subst e'
+    rw [strategy_early]
+    simp only [true_and, if_pos]
+    have hout : output (strategyAtom e s) (lateFromBool y z) = v.toOutcome ↔
+        s.visible y z = v := by
+      rcases s with ⟨a,d,b0,b1,c0,c1⟩
+      rcases v with ⟨va,vb,vc,vd⟩
+      cases y <;> cases z <;> cases a <;> cases d <;>
+        cases b0 <;> cases b1 <;> cases c0 <;> cases c1 <;>
+        cases va <;> cases vb <;> cases vc <;> cases vd <;>
+        decide
+    by_cases hv : s.visible y z = v
+    · have ho : output (strategyAtom e s) (lateFromBool y z) = v.toOutcome := hout.mpr hv
+      simp [ho, hv]
+    · have ho : output (strategyAtom e s) (lateFromBool y z) ≠ v.toOutcome := by
+        intro h
+        exact hv (hout.mp h)
+      simp [ho, hv]
+  · have hne : early (strategyAtom e' s) ≠ e := by
+      rw [strategy_early]
+      exact he
+    simp [hne, he]
+
+/-- The observable behavior associated with a stochastic conditional-local
+model is its deterministic refinement. The theorem below shows this definition
+is extensionally equal to the original factorized stochastic probabilities. -/
+noncomputable def StochasticModel.behavior {Ω : Type} [Fintype Ω]
+    (m : StochasticModel Ω) : Behavior interface :=
+  m.determinize.behavior
+
+/-- The stochastic factorized joint probability and the packed observable
+behavior agree for every early context, late setting and full outcome. -/
+theorem StochasticModel.behavior_prob_eq_factorized
+    {Ω : Type} [Fintype Ω] (m : StochasticModel Ω)
+    (e : Early) (y z : Bool) (v : VisibleOutcome) :
+    m.behavior.prob (e, lateFromBool y z) v.toOutcome =
+      m.factorizedProbability e y z v := by
+  rw [StochasticModel.behavior, StochasticModel.determinize,
+    Model.fromStrategies_prob_eq_selectedMass, m.selected_probability]
+
+/-- Recipient total variation is preserved exactly by determinization. -/
+theorem StochasticModel.tv_eq_determinize
+    {Ω : Type} [Fintype Ω] (m : StochasticModel Ω) (c : Context) :
+    tv m.behavior c = tv m.determinize.behavior c := rfl
+
+/-- Every signaling budget statement is preserved by determinization. -/
+theorem StochasticModel.within_iff_determinize
+    {Ω : Type} [Fintype Ω] (m : StochasticModel Ω) (delta : ℝ) :
+    Within m.behavior delta ↔ Within m.determinize.behavior delta := Iff.rfl
+
+/-- The maximum recipient signaling strength is preserved exactly by
+determinization. -/
+noncomputable def StochasticModel.signaling {Ω : Type} [Fintype Ω]
+    (m : StochasticModel Ω) : ℝ :=
+  m.determinize.signaling
+
+@[simp] theorem StochasticModel.signaling_eq_determinize
+    {Ω : Type} [Fintype Ω] (m : StochasticModel Ω) :
+    m.signaling = m.determinize.signaling := rfl
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
