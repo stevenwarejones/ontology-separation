@@ -17,10 +17,14 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
   hidden state, stochastic A/D outputs, and conditionally independent local B/C
   response kernels. `selected_probability` proves that sampling both potential
   B/C responses and refining to deterministic strategies preserves every selected
-  factorized probability; `Model.stochastic_roundtrip` proves the converse packed
-  representation preserves every public probability. This closes the finite
-  stochastic-vs-deterministic representation gap. It does **not** cover infinite
-  hidden spaces or weaken the stated conditional-local factorization.
+  factorized probability. `behavior_prob_eq_factorized` then connects those
+  probabilities to the exact packed `Behavior` used by the forced-signaling
+  theorem. Recipient TV, signaling budgets and maximum signaling are preserved
+  by determinization. The converse stochastic embedding preserves response-table
+  weights, observable probabilities and signaling. This closes the **finite**
+  stochastic-vs-deterministic representation gap for the theorem's observables.
+  It does **not** cover infinite hidden spaces or weaken the stated conditional-
+  local factorization.
 - Theorem 1 and this lower-bound argument use **one fixed operational
   completion** of the S4 witness, described in the
   [signaling guide](../SIGNALING_GUIDE.md). The paper's assertion that slope 8
@@ -51,6 +55,11 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
    proves that those marginal constraints determine the completed score.
    `matches_score` and `lower_bound` connect the target to the physical
    [Theorem 1 tradeoff](../../OntologySeparation/Experiments/SignalingTradeoff.lean).
+   `StochasticMatchesCluster`, `stochastic_lower_bound` and
+   `exact_forced_signaling_stochastic_value` lift the result to arbitrary finite
+   stochastic conditional-local hidden states: every LC4-matching stochastic
+   model has signaling at least `(sqrt 2 - 1)/4`, and the explicitly constructed
+   `stochasticWitness` attains equality.
    `exact_forced_signaling` states the universal lower bound and existence of
    an attaining model; `targetDelta_value` identifies the value with
    `(√2 − 1)/4`.
