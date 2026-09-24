@@ -577,7 +577,6 @@
 'OntologySeparation.FriendshipMonogamyQuantum.two_copy_access_obstruction' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-
 'OntologySeparation.HiddenInfluence.strategyAtom_atomStrategy' depends on axioms: [propext, Quot.sound]
 'OntologySeparation.HiddenInfluence.atomStrategy_strategyAtom' depends on axioms: [propext,
  Classical.choice,
