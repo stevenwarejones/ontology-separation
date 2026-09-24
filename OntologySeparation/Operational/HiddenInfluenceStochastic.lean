@@ -282,14 +282,27 @@ theorem Model.fromStrategies_prob_eq_selectedMass
     (Model.fromStrategies q).behavior.prob
         (e, lateFromBool y z) v.toOutcome =
       selectedMass (q e) y z v := by
+  classical
   change (∑ j : Atom,
     if early j = e ∧ output j (lateFromBool y z) = v.toOutcome
     then (Model.fromStrategies q).weight j else 0) =
       ∑ s, if s.visible y z = v then (q e).mass s else 0
   rw [← atomEquiv.sum_comp]
   simp only [atomEquiv, Fintype.sum_prod_type, strategy_early,
-    strategy_visible_output, Model.fromStrategies_weight_strategyAtom]
-  fin_cases e <;> simp
+    strategy_visible_output, Model.fromStrategies_weight_strategyAtom,
+    VisibleOutcome.toOutcome_eq_iff]
+  have hinner (e' : Early) :
+      (∑ s : Strategy,
+        if e' = e ∧ s.visible y z = v then (q e').mass s else 0) =
+      if e' = e then
+        ∑ s : Strategy, if s.visible y z = v then (q e).mass s else 0
+      else 0 := by
+    by_cases h : e' = e
+    · subst e'
+      simp
+    · simp [h]
+  simp_rw [hinner]
+  simp
 
 /-- The observable behavior associated with a stochastic conditional-local
 model is its deterministic refinement. The theorem below shows this definition
@@ -323,18 +336,18 @@ theorem selectedMass_bind {α : Type} [Fintype α]
     (y z : Bool) (v : VisibleOutcome) :
     selectedMass (FiniteKernel.bind d k) y z v =
       ∑ x, d.mass x * selectedMass (k x) y z v := by
+  classical
   unfold selectedMass
-  simp only [FiniteKernel.bind_mass]
+  simp_rw [FiniteKernel.bind_mass]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro x _
   rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro s _
-  by_cases h : s.visible y z = v <;> simp [h, mul_assoc]
+  by_cases h : s.visible y z = v <;> simp [h]
 
-@[simp] theorem selectedMass_pure (s : Strategy) (y z : Bool)
-    (v : VisibleOutcome) :
+@[simp] theorem selectedMass_pure (s : Strategy) (y z : Bool) (v : VisibleOutcome) :
     selectedMass (FiniteKernel.pure s) y z v =
       if s.visible y z = v then 1 else 0 := by
   classical
@@ -352,17 +365,16 @@ theorem StochasticModel.selectedMass_strategyGiven
       (m.b e ω (boolSetting y)).mass v.b *
       (m.c e ω (boolSetting z)).mass v.c := by
   classical
-  unfold StochasticModel.strategyGiven
-  rw [selectedMass_bind]
-  simp_rw [selectedMass_bind]
-  simp only [selectedMass_pure]
   rcases v with ⟨va,vb,vc,vd⟩
+  unfold StochasticModel.strategyGiven
+  repeat' rw [selectedMass_bind]
+  simp only [selectedMass_pure]
   cases y <;> cases z <;>
     simp [Strategy.visible, boolSetting, Fintype.sum_bool,
       (m.a e ω).total, (m.d e ω).total,
       (m.b e ω 0).total, (m.b e ω 1).total,
       (m.c e ω 0).total, (m.c e ω 1).total] <;>
-    ring_nf
+    ring
 
 /-- Determinization preserves every selected conditional-local joint
 probability. The unchosen B/C potential responses sum to one. -/
