@@ -29,11 +29,15 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
   enlarge the observable finite behavior class; that standard extension is not
   formalized here. The result does not weaken the stated conditional-local
   factorization.
-- Theorem 1 and this lower-bound argument use **one fixed operational
-  completion** of the S4 witness, described in the
-  [signaling guide](../SIGNALING_GUIDE.md). The paper's assertion that slope 8
-  is optimal over **all completions** (Corollary 1 / the 512-completion
-  spectrum) is **not in Lean**.
+- The original Theorem 1 certificate uses one operational completion of S4.
+  `ForcedSignalingCompletions.lean` now formalizes all 512 completions.
+  The six unused late-setting choices are proved irrelevant in the
+  conditional-local model; the optimal slope depends only on three early-setting
+  completion bits and equals `16 - 2 w1 - 2 w2 - 4 x5`.
+  `ForcedSignalingCompletionWitness.lean` supplies exact rational attaining
+  models, proving that these slopes are optimal rather than merely upper bounds.
+  The exact spectrum is `{8,10,12,14,16}` with multiplicities
+  `{64,128,128,128,64}`.
 - Whether this response-table class is the appropriate formalization of
   finite-speed hidden influence is an interpretive question for experts.
 - No human domain expert has reviewed the physical assumptions or results.
