@@ -101,10 +101,9 @@ def Model.toStrategies (m : Model) (e : Early) : FiniteDistribution Strategy whe
 theorem Model.fromStrategies_toStrategies_weight (m : Model) (j : Atom) :
     (Model.fromStrategies m.toStrategies).weight j = m.weight j := by
   change (∑ k : Early × Strategy,
-    if strategyAtom k.1 k.2 = j then
-      m.weight (strategyAtom k.1 k.2) else 0) = m.weight j
+    if atomEquiv k = j then m.weight (atomEquiv k) else 0) = m.weight j
   rw [atomEquiv.sum_comp]
-  simp [atomEquiv]
+  simp
 
 /-- Packing and unpacking a response model preserves every public probability. -/
 theorem Model.fromStrategies_toStrategies (m : Model) :
@@ -237,6 +236,39 @@ theorem VisibleOutcome.toOutcome_surjective :
   intro o
   exact ⟨outcomeToVisible o, VisibleOutcome.toOutcome_outcomeToVisible o⟩
 
+
+theorem outcomeToVisible_toOutcome (v : VisibleOutcome) :
+    outcomeToVisible v.toOutcome = v := by
+  rcases v with ⟨a,b,c,d⟩
+  cases a <;> cases b <;> cases c <;> cases d <;> decide
+
+def visibleOutcomeEquiv : VisibleOutcome ≃ Outcome where
+  toFun := VisibleOutcome.toOutcome
+  invFun := outcomeToVisible
+  left_inv := outcomeToVisible_toOutcome
+  right_inv := VisibleOutcome.toOutcome_outcomeToVisible
+
+theorem VisibleOutcome.toOutcome_injective :
+    Function.Injective VisibleOutcome.toOutcome :=
+  visibleOutcomeEquiv.injective
+
+set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
+theorem strategy_visible_output : ∀ (e : Early) (s : Strategy) (y z : Bool),
+    output (strategyAtom e s) (lateFromBool y z) = (s.visible y z).toOutcome := by
+  intro e s y z
+  apply Fin.ext
+  rcases s with ⟨a,d,b0,b1,c0,c1⟩
+  cases y <;> cases z <;> cases a <;> cases d <;>
+    cases b0 <;> cases b1 <;> cases c0 <;> cases c1 <;> decide
+
+theorem Model.fromStrategies_weight_strategyAtom
+    (q : Early → FiniteDistribution Strategy) (e : Early) (s : Strategy) :
+    (Model.fromStrategies q).weight (strategyAtom e s) = (q e).mass s := by
+  change (∑ k : Early × Strategy,
+    if atomEquiv k = atomEquiv (e,s) then (q k.1).mass k.2 else 0) = (q e).mass s
+  simp
+
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 /-- The named deterministic strategy probability is exactly the corresponding
@@ -248,35 +280,20 @@ theorem Model.fromStrategies_prob_eq_selectedMass
     (Model.fromStrategies q).behavior.prob
         (e, lateFromBool y z) v.toOutcome =
       selectedMass (q e) y z v := by
-  classical
-  unfold Model.behavior Model.fromStrategies Model.ofAtoms atomWeights selectedMass
-  rw [Finset.sum_comm]
+  change (∑ j : Atom,
+    if early j = e ∧ output j (lateFromBool y z) = v.toOutcome
+    then (Model.fromStrategies q).weight j else 0) =
+      ∑ s, if s.visible y z = v then (q e).mass s else 0
+  rw [← atomEquiv.sum_comp]
+  simp only [atomEquiv, strategy_early, strategy_visible_output,
+    Model.fromStrategies_weight_strategyAtom]
   apply Finset.sum_congr rfl
   intro k _
-  rcases k with ⟨e', s⟩
+  rcases k with ⟨e',s⟩
   by_cases he : e' = e
   · subst e'
-    rw [strategy_early]
-    simp only [true_and, if_pos]
-    have hout : output (strategyAtom e s) (lateFromBool y z) = v.toOutcome ↔
-        s.visible y z = v := by
-      rcases s with ⟨a,d,b0,b1,c0,c1⟩
-      rcases v with ⟨va,vb,vc,vd⟩
-      cases y <;> cases z <;> cases a <;> cases d <;>
-        cases b0 <;> cases b1 <;> cases c0 <;> cases c1 <;>
-        cases va <;> cases vb <;> cases vc <;> cases vd <;>
-        decide
-    by_cases hv : s.visible y z = v
-    · have ho : output (strategyAtom e s) (lateFromBool y z) = v.toOutcome := hout.mpr hv
-      simp [ho, hv]
-    · have ho : output (strategyAtom e s) (lateFromBool y z) ≠ v.toOutcome := by
-        intro h
-        exact hv (hout.mp h)
-      simp [ho, hv]
-  · have hne : early (strategyAtom e' s) ≠ e := by
-      rw [strategy_early]
-      exact he
-    simp [hne, he]
+    simp [VisibleOutcome.toOutcome_injective.eq_iff]
+  · simp [he]
 
 /-- The observable behavior associated with a stochastic conditional-local
 model is its deterministic refinement. The theorem below shows this definition
@@ -284,16 +301,6 @@ is extensionally equal to the original factorized stochastic probabilities. -/
 noncomputable def StochasticModel.behavior {Ω : Type} [Fintype Ω]
     (m : StochasticModel Ω) : Behavior interface :=
   m.determinize.behavior
-
-/-- The stochastic factorized joint probability and the packed observable
-behavior agree for every early context, late setting and full outcome. -/
-theorem StochasticModel.behavior_prob_eq_factorized
-    {Ω : Type} [Fintype Ω] (m : StochasticModel Ω)
-    (e : Early) (y z : Bool) (v : VisibleOutcome) :
-    m.behavior.prob (e, lateFromBool y z) v.toOutcome =
-      m.factorizedProbability e y z v := by
-  rw [StochasticModel.behavior, StochasticModel.determinize,
-    Model.fromStrategies_prob_eq_selectedMass, m.selected_probability]
 
 /-- Recipient total variation is preserved exactly by determinization. -/
 theorem StochasticModel.tv_eq_determinize
@@ -332,7 +339,17 @@ theorem StochasticModel.selected_probability {Ω : Type} [Fintype Ω]
       (m.a e _).total, (m.d e _).total,
       (m.b e _ 0).total, (m.b e _ 1).total,
       (m.c e _ 0).total, (m.c e _ 1).total] <;>
-    ring
+    ring_nf
+
+/-- The stochastic factorized joint probability and the packed observable
+behavior agree for every early context, late setting and full outcome. -/
+theorem StochasticModel.behavior_prob_eq_factorized
+    {Ω : Type} [Fintype Ω] (m : StochasticModel Ω)
+    (e : Early) (y z : Bool) (v : VisibleOutcome) :
+    m.behavior.prob (e, lateFromBool y z) v.toOutcome =
+      m.factorizedProbability e y z v := by
+  rw [StochasticModel.behavior, StochasticModel.determinize,
+    Model.fromStrategies_prob_eq_selectedMass, m.selected_probability]
 
 /-- A deterministic strategy mixture is a special stochastic conditional-local
 model, using point response kernels. -/
