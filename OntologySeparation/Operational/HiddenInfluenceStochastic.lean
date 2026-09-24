@@ -292,9 +292,12 @@ theorem Model.fromStrategies_prob_eq_selectedMass
     strategy_visible_output, Model.fromStrategies_weight_strategyAtom,
     VisibleOutcome.toOutcome_eq_iff]
   rw [Finset.sum_eq_single e]
-  · simp
+  · simp [strategy_early, strategy_visible_output,
+      Model.fromStrategies_weight_strategyAtom]
   · intro e' _ hne
-    simp [hne]
+    apply Finset.sum_eq_zero
+    intro s _
+    simp [strategy_early, hne]
   · simp
 
 /-- The observable behavior associated with a stochastic conditional-local
@@ -357,7 +360,11 @@ theorem selectedMass_bind {α : Type} [Fintype α]
       if s.visible y z = v then 1 else 0 := by
   classical
   unfold selectedMass
-  by_cases h : s.visible y z = v <;> simp [FiniteKernel.pure, h]
+  rw [Finset.sum_eq_single s]
+  · simp [FiniteKernel.pure]
+  · intro t _ hts
+    simp [FiniteKernel.pure, hts]
+  · simp
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
@@ -376,6 +383,7 @@ theorem StochasticModel.selectedMass_strategyGiven
   simp_rw [selectedMass_bind]
   simp_rw [selectedMass_pure]
   cases y <;> cases z <;>
+    cases va <;> cases vb <;> cases vc <;> cases vd <;>
     simp [Strategy.visible, boolSetting, Fintype.sum_bool,
       (m.a e ω).total, (m.d e ω).total,
       (m.b e ω 0).total, (m.b e ω 1).total,
