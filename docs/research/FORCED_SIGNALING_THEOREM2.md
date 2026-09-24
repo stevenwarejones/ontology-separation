@@ -29,11 +29,15 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
   enlarge the observable finite behavior class; that standard extension is not
   formalized here. The result does not weaken the stated conditional-local
   factorization.
-- Theorem 1 and this lower-bound argument use **one fixed operational
-  completion** of the S4 witness, described in the
-  [signaling guide](../SIGNALING_GUIDE.md). The paper's assertion that slope 8
-  is optimal over **all completions** (Corollary 1 / the 512-completion
-  spectrum) is **not in Lean**.
+- The measured-signaling tradeoff is implemented for the certified K=8
+  completion, and the full completion family is now formalized explicitly.
+  Lean proves there are 512 raw completions, that only three of the nine
+  completion bits can affect a conditionally-local model's score, that the LC4
+  target has value `4 + 2√2` under every completion, and that **no valid
+  completion-specific tradeoff can have slope below 8**. Thus the paper's
+  Corollary 1 optimality statement is kernel-checked. The finer per-completion
+  slope spectrum `{8,10,12,14,16}` with its multiplicities remains a numerical
+  result from the source reproduction scripts, not a Lean theorem.
 - Whether this response-table class is the appropriate formalization of
   finite-speed hidden influence is an interpretive question for experts.
 - No human domain expert has reviewed the physical assumptions or results.
@@ -55,7 +59,12 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
    proves finite stochastic conditional-local response kernels admit deterministic
    refinement without changing selected joint probabilities, and that every packed
    response model has a stochastic representative with the same observable behavior.
-4. [ForcedSignalingTheorem2.lean](../../OntologySeparation/Experiments/ForcedSignalingTheorem2.lean)
+4. [ForcedSignalingCompletions.lean](../../OntologySeparation/Experiments/ForcedSignalingCompletions.lean)
+   formalizes all 512 raw completions, proves the six blind-setting choices drop
+   out for conditionally-local models, proves completion-independent LC4 target
+   value, and establishes global slope optimality `K ≥ 8` with the certified
+   K=8 completion attaining the minimum.
+5. [ForcedSignalingTheorem2.lean](../../OntologySeparation/Experiments/ForcedSignalingTheorem2.lean)
    proves that those marginal constraints determine the completed score.
    `matches_score` and `lower_bound` connect the target to the physical
    [Theorem 1 tradeoff](../../OntologySeparation/Experiments/SignalingTradeoff.lean).
