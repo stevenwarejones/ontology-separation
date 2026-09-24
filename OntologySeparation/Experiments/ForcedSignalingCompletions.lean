@@ -48,6 +48,14 @@ def Completion.slope (c : Completion) : ℤ :=
 
 theorem optimalCompletion_slope : optimalCompletion.slope = 8 := by decide
 
+set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
+theorem Completion.slope_mem (c : Completion) :
+    c.slope = 8 ∨ c.slope = 10 ∨ c.slope = 12 ∨
+      c.slope = 14 ∨ c.slope = 16 := by
+  rcases c with ⟨z1,w1,z2,w2,z3,z4,x5,y5,y6⟩
+  cases w1 <;> cases w2 <;> cases x5 <;> simp [Completion.slope]
+
 
 /-- No operational completion has a slope below eight. -/
 theorem Completion.eight_le_slope (c : Completion) : 8 ≤ c.slope := by
@@ -58,14 +66,6 @@ theorem minimum_completion_slope :
     (∀ c : Completion, 8 ≤ c.slope) ∧
     ∃ c : Completion, c.slope = 8 :=
   ⟨Completion.eight_le_slope, ⟨optimalCompletion, optimalCompletion_slope⟩⟩
-
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
-theorem Completion.slope_mem (c : Completion) :
-    c.slope = 8 ∨ c.slope = 10 ∨ c.slope = 12 ∨
-      c.slope = 14 ∨ c.slope = 16 := by
-  rcases c with ⟨z1,w1,z2,w2,z3,z4,x5,y5,y6⟩
-  cases w1 <;> cases w2 <;> cases x5 <;> simp [Completion.slope]
 
 /-- There are exactly 512 operational completions. -/
 theorem completion_count : Fintype.card Completion = 512 := by decide
