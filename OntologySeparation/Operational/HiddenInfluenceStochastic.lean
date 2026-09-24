@@ -378,13 +378,13 @@ theorem StochasticModel.selectedMass_strategyGiven
       (m.c e ω (boolSetting z)).mass v.c := by
   classical
   rcases v with ⟨va,vb,vc,vd⟩
-  have hb0sum : (m.b e ω 0).mass false + (m.b e ω 0).mass true = 1 := by
+  have hb0sum : (m.b e ω 0).mass true + (m.b e ω 0).mass false = 1 := by
     simpa [Fintype.sum_bool] using (m.b e ω 0).total
-  have hb1sum : (m.b e ω 1).mass false + (m.b e ω 1).mass true = 1 := by
+  have hb1sum : (m.b e ω 1).mass true + (m.b e ω 1).mass false = 1 := by
     simpa [Fintype.sum_bool] using (m.b e ω 1).total
-  have hc0sum : (m.c e ω 0).mass false + (m.c e ω 0).mass true = 1 := by
+  have hc0sum : (m.c e ω 0).mass true + (m.c e ω 0).mass false = 1 := by
     simpa [Fintype.sum_bool] using (m.c e ω 0).total
-  have hc1sum : (m.c e ω 1).mass false + (m.c e ω 1).mass true = 1 := by
+  have hc1sum : (m.c e ω 1).mass true + (m.c e ω 1).mass false = 1 := by
     simpa [Fintype.sum_bool] using (m.c e ω 1).total
   have hb0 : (m.b e ω 0).mass true = 1 - (m.b e ω 0).mass false := by linarith
   have hb1 : (m.b e ω 1).mass true = 1 - (m.b e ω 1).mass false := by linarith
