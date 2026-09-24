@@ -359,5 +359,37 @@ theorem Model.stochastic_roundtrip (m : Model) :
       StochasticModel.determinize_ofStrategies_observational m.toStrategies s o
     _ = m.behavior.prob s o := m.fromStrategies_toStrategies s o
 
+
+/-- The stochastic representative of an existing packed model returns exactly
+the same hidden-response weights after determinization. -/
+theorem Model.stochastic_roundtrip_weight (m : Model) (j : Atom) :
+    ((StochasticModel.ofStrategies m.toStrategies).determinize).weight j =
+      m.weight j := by
+  rw [StochasticModel.determinize_ofStrategies_weight]
+  exact m.fromStrategies_toStrategies_weight j
+
+/-- The explicit stochastic representative preserves every recipient TV. -/
+theorem Model.stochastic_roundtrip_tv (m : Model) (c : Context) :
+    tv ((StochasticModel.ofStrategies m.toStrategies).behavior) c =
+      tv m.behavior c := by
+  unfold StochasticModel.behavior tv difference marginal mean
+  simp only [Model.behavior]
+  simp_rw [m.stochastic_roundtrip_weight]
+
+/-- The explicit stochastic representative preserves the overall signaling
+strength used by the forced-signaling theorem. -/
+theorem Model.stochastic_roundtrip_signaling (m : Model) :
+    (StochasticModel.ofStrategies m.toStrategies).signaling = m.signaling := by
+  unfold StochasticModel.signaling Model.signaling
+  apply le_antisymm
+  · apply Finset.sup'_le
+    intro c hc
+    rw [m.stochastic_roundtrip_tv]
+    exact Finset.le_sup' (tv m.behavior) hc
+  · apply Finset.sup'_le
+    intro c hc
+    rw [← m.stochastic_roundtrip_tv]
+    exact Finset.le_sup' (tv (StochasticModel.ofStrategies m.toStrategies).behavior) hc
+
 end
 end OntologySeparation.HiddenInfluence
