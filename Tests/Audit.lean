@@ -490,6 +490,8 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.HiddenInfluence.StochasticModel.toStrategies_ofStrategies
 #print axioms OntologySeparation.HiddenInfluence.Model.stochastic_roundtrip
 #print axioms OntologySeparation.HiddenInfluence.Model.fromStrategies_prob_eq_selectedMass
+#print axioms OntologySeparation.HiddenInfluence.lateFromBool_surjective
+#print axioms OntologySeparation.HiddenInfluence.VisibleOutcome.toOutcome_surjective
 #print axioms OntologySeparation.HiddenInfluence.StochasticModel.behavior_prob_eq_factorized
 #print axioms OntologySeparation.HiddenInfluence.Model.stochastic_roundtrip_weight
 #print axioms OntologySeparation.HiddenInfluence.Model.stochastic_roundtrip_signaling
