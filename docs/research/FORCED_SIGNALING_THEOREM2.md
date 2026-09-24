@@ -63,7 +63,9 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
    formalizes all 512 raw completions, proves the six blind-setting choices drop
    out for conditionally-local models, proves completion-independent LC4 target
    value, and establishes global slope optimality `K ≥ 8` with the certified
-   K=8 completion attaining the minimum.
+   K=8 completion attaining the minimum. `stochastic_completion_globally_sharp`
+   then lifts the same all-completions statement to the finite stochastic
+   conditional-local class proved equivalent in `HiddenInfluenceStochastic`.
 5. [ForcedSignalingTheorem2.lean](../../OntologySeparation/Experiments/ForcedSignalingTheorem2.lean)
    proves that those marginal constraints determine the completed score.
    `matches_score` and `lower_bound` connect the target to the physical
