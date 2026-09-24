@@ -62,7 +62,13 @@ It makes no novelty claim and has not been reviewed by a human domain expert.
    proves finite stochastic conditional-local response kernels admit deterministic
    refinement without changing selected joint probabilities, and that every packed
    response model has a stochastic representative with the same observable behavior.
-4. [ForcedSignalingTheorem2.lean](../../OntologySeparation/Experiments/ForcedSignalingTheorem2.lean)
+4. [ForcedSignalingCompletions.lean](../../OntologySeparation/Experiments/ForcedSignalingCompletions.lean)
+   defines all 512 completion choices, proves their exact slope spectrum and
+   multiplicities, proves the completion-dependent universal tradeoff, and
+   identifies slope 8 as the global minimum. [ForcedSignalingCompletionWitness.lean](../../OntologySeparation/Experiments/ForcedSignalingCompletionWitness.lean)
+   supplies exact normalized rational witnesses showing each completion's slope
+   is attained and therefore cannot be lowered.
+5. [ForcedSignalingTheorem2.lean](../../OntologySeparation/Experiments/ForcedSignalingTheorem2.lean)
    proves that those marginal constraints determine the completed score.
    `matches_score` and `lower_bound` connect the target to the physical
    [Theorem 1 tradeoff](../../OntologySeparation/Experiments/SignalingTradeoff.lean).
