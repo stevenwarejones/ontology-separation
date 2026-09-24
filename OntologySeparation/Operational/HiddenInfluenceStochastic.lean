@@ -202,6 +202,41 @@ def VisibleOutcome.toOutcome (v : VisibleOutcome) : Outcome :=
     have hd := Bool.toNat_le v.d
     omega⟩
 
+
+/-- Decode every operational late setting back to the Boolean pair used by the
+stochastic kernels. -/
+def lateToBool (l : Late) : Bool × Bool :=
+  (decide (l.val / 2 = 1), decide (l.val % 2 = 1))
+
+/-- The Boolean late-setting encoding covers every operational late setting. -/
+theorem lateFromBool_lateToBool (l : Late) :
+    lateFromBool (lateToBool l).1 (lateToBool l).2 = l := by
+  apply Fin.ext
+  fin_cases l <;> decide
+
+theorem lateFromBool_surjective : Function.Surjective (fun p : Bool × Bool =>
+    lateFromBool p.1 p.2) := by
+  intro l
+  exact ⟨lateToBool l, lateFromBool_lateToBool l⟩
+
+/-- Decode every packed operational output to its four visible Boolean bits. -/
+def outcomeToVisible (o : Outcome) : VisibleOutcome where
+  a := decide (o.val / 8 = 1)
+  b := decide (o.val / 4 % 2 = 1)
+  c := decide (o.val / 2 % 2 = 1)
+  d := decide (o.val % 2 = 1)
+
+/-- The visible-outcome encoding covers every operational output. -/
+theorem VisibleOutcome.toOutcome_outcomeToVisible (o : Outcome) :
+    (outcomeToVisible o).toOutcome = o := by
+  apply Fin.ext
+  fin_cases o <;> decide
+
+theorem VisibleOutcome.toOutcome_surjective :
+    Function.Surjective VisibleOutcome.toOutcome := by
+  intro o
+  exact ⟨outcomeToVisible o, VisibleOutcome.toOutcome_outcomeToVisible o⟩
+
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 /-- The named deterministic strategy probability is exactly the corresponding
