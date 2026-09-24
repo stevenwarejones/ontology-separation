@@ -48,6 +48,17 @@ def Completion.slope (c : Completion) : ℤ :=
 
 theorem optimalCompletion_slope : optimalCompletion.slope = 8 := by decide
 
+
+/-- No operational completion has a slope below eight. -/
+theorem Completion.eight_le_slope (c : Completion) : 8 ≤ c.slope := by
+  rcases c.slope_mem with h | h | h | h | h <;> omega
+
+/-- Eight is the exact minimum of the completion-dependent slope function. -/
+theorem minimum_completion_slope :
+    (∀ c : Completion, 8 ≤ c.slope) ∧
+    ∃ c : Completion, c.slope = 8 :=
+  ⟨Completion.eight_le_slope, ⟨optimalCompletion, optimalCompletion_slope⟩⟩
+
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem Completion.slope_mem (c : Completion) :
