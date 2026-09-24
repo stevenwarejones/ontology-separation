@@ -415,16 +415,22 @@ theorem Model.stochastic_roundtrip_tv (m : Model) (c : Context) :
 strength used by the forced-signaling theorem. -/
 theorem Model.stochastic_roundtrip_signaling (m : Model) :
     (StochasticModel.ofStrategies m.toStrategies).signaling = m.signaling := by
+  have htv (c : Context) :
+      tv ((StochasticModel.ofStrategies m.toStrategies).determinize).behavior c =
+        tv m.behavior c := by
+    change tv (StochasticModel.ofStrategies m.toStrategies).behavior c = tv m.behavior c
+    exact m.stochastic_roundtrip_tv c
   unfold StochasticModel.signaling Model.signaling
   apply le_antisymm
   · apply Finset.sup'_le
     intro c hc
-    rw [m.stochastic_roundtrip_tv]
+    rw [htv c]
     exact Finset.le_sup' (tv m.behavior) hc
   · apply Finset.sup'_le
     intro c hc
-    rw [← m.stochastic_roundtrip_tv]
-    exact Finset.le_sup' (tv (StochasticModel.ofStrategies m.toStrategies).behavior) hc
+    rw [← htv c]
+    exact Finset.le_sup'
+      (tv ((StochasticModel.ofStrategies m.toStrategies).determinize).behavior) hc
 
 end
 end OntologySeparation.HiddenInfluence
