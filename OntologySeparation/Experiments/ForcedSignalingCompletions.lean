@@ -118,6 +118,35 @@ noncomputable def completedScore (c : Completion) (p : Behavior interface) : ℝ
   2 * mean p ⟨1, by omega⟩
       ⟨2 * c.y6.toNat + 1, by cases c.y6 <;> simp⟩ acdSign
 
+def completedScoreCoeff (c : Completion) (j : Atom) : ℤ :=
+  (if early j = ⟨c.w1.toNat, by cases c.w1 <;> simp⟩ then
+      parity 0 (output j ⟨c.z1.toNat, by cases c.z1 <;> simp⟩) else 0) +
+  (if early j = ⟨c.w2.toNat, by cases c.w2 <;> simp⟩ then
+      parity 1 (output j ⟨2 + c.z2.toNat, by cases c.z2 <;> simp⟩) else 0) +
+  (if early j = (2 : Early) then
+      parity 2 (output j ⟨c.z3.toNat, by cases c.z3 <;> simp⟩) else 0) -
+  (if early j = (2 : Early) then
+      parity 3 (output j ⟨2 + c.z4.toNat, by cases c.z4 <;> simp⟩) else 0) +
+  2 * (if early j = ⟨2 * c.x5.toNat, by cases c.x5 <;> simp⟩ then
+      parity 4 (output j ⟨2 * c.y5.toNat, by cases c.y5 <;> simp⟩) else 0) +
+  2 * (if early j = (1 : Early) then
+      parity 5 (output j ⟨2 * c.y6.toNat + 1, by cases c.y6 <;> simp⟩) else 0)
+
+/-- Every completed score is a linear functional of the physical response
+weights, with coefficients defined independently from the LP certificate. -/
+theorem completedScore_eq (m : Model) (c : Completion) :
+    completedScore c m.behavior =
+      ∑ j, (completedScoreCoeff c j : ℝ) * m.weight j := by
+  unfold completedScore
+  simp only [mean_eq, Finset.mul_sum,
+    ← Finset.sum_add_distrib, ← Finset.sum_sub_distrib]
+  apply Finset.sum_congr rfl
+  intro j _
+  simp only [completedScoreCoeff, Int.cast_add, Int.cast_sub, Int.cast_mul,
+    Int.cast_ofNat, Int.cast_ite, Int.cast_zero]
+  simp [abSign, abdSign, cdSign, acdSign, parity, sign]
+  ring
+
 /-- The named optimal completion is exactly the fixed score already certified. -/
 theorem completedScore_optimal (p : Behavior interface) :
     completedScore optimalCompletion p = score p := by
