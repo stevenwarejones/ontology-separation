@@ -360,6 +360,9 @@ theorem StochasticModel.selected_probability {Ω : Type} [Fintype Ω]
   unfold StochasticModel.toStrategies StochasticModel.factorizedProbability
   rw [selectedMass_bind]
   simp_rw [m.selectedMass_strategyGiven]
+  apply Finset.sum_congr rfl
+  intro ω _
+  ring
 /-- The stochastic factorized joint probability and the packed observable
 behavior agree for every early context, late setting and full outcome. -/
 theorem StochasticModel.behavior_prob_eq_factorized
