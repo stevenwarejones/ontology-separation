@@ -77,8 +77,8 @@ def weightQ2 (j : Atom) : Q2 :=
   | _ => 0
 
 set_option maxRecDepth 100000 in
-private theorem weight_allowed : ∀ j : Atom, AllowedWeight (weightQ2 j) := by
-  with_unfolding_all decide +kernel
+private theorem weight_allowed (j : Atom) : AllowedWeight (weightQ2 j) := by
+  fin_cases j <;> simp [AllowedWeight, weightQ2]
 
 theorem weight_nonnegative (j : Atom) : 0 ≤ Q2.toReal (weightQ2 j) :=
   allowedWeight_nonnegative (weight_allowed j)
@@ -106,7 +106,7 @@ private theorem acd_matches_q2 :
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
   with_unfolding_all decide +kernel
 
-theorem matches : ForcedSignalingTheorem2.MatchesCluster model where
+theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
     calc
       modelABD model x y ww a b d =
@@ -126,11 +126,11 @@ noncomputable def delta : ℝ := Q2.toReal deltaQ2
 
 theorem epsilon_nonnegative : 0 ≤ Q2.toReal epsilonQ2 := by
   simp [epsilonQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem delta_nonnegative : 0 ≤ delta := by
   simp [delta, deltaQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem difference_exact (c : Context) (o : Recipient) :
     difference model.behavior c o = Q2.toReal (diffQ2 weightQ2 c o) :=
@@ -265,8 +265,8 @@ def weightQ2 (j : Atom) : Q2 :=
   | _ => 0
 
 set_option maxRecDepth 100000 in
-private theorem weight_allowed : ∀ j : Atom, AllowedWeight (weightQ2 j) := by
-  with_unfolding_all decide +kernel
+private theorem weight_allowed (j : Atom) : AllowedWeight (weightQ2 j) := by
+  fin_cases j <;> simp [AllowedWeight, weightQ2]
 
 theorem weight_nonnegative (j : Atom) : 0 ≤ Q2.toReal (weightQ2 j) :=
   allowedWeight_nonnegative (weight_allowed j)
@@ -294,7 +294,7 @@ private theorem acd_matches_q2 :
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
   with_unfolding_all decide +kernel
 
-theorem matches : ForcedSignalingTheorem2.MatchesCluster model where
+theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
     calc
       modelABD model x y ww a b d =
@@ -314,11 +314,11 @@ noncomputable def delta : ℝ := Q2.toReal deltaQ2
 
 theorem epsilon_nonnegative : 0 ≤ Q2.toReal epsilonQ2 := by
   simp [epsilonQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem delta_nonnegative : 0 ≤ delta := by
   simp [delta, deltaQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem difference_exact (c : Context) (o : Recipient) :
     difference model.behavior c o = Q2.toReal (diffQ2 weightQ2 c o) :=
@@ -456,8 +456,8 @@ def weightQ2 (j : Atom) : Q2 :=
   | _ => 0
 
 set_option maxRecDepth 100000 in
-private theorem weight_allowed : ∀ j : Atom, AllowedWeight (weightQ2 j) := by
-  with_unfolding_all decide +kernel
+private theorem weight_allowed (j : Atom) : AllowedWeight (weightQ2 j) := by
+  fin_cases j <;> simp [AllowedWeight, weightQ2]
 
 theorem weight_nonnegative (j : Atom) : 0 ≤ Q2.toReal (weightQ2 j) :=
   allowedWeight_nonnegative (weight_allowed j)
@@ -485,7 +485,7 @@ private theorem acd_matches_q2 :
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
   with_unfolding_all decide +kernel
 
-theorem matches : ForcedSignalingTheorem2.MatchesCluster model where
+theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
     calc
       modelABD model x y ww a b d =
@@ -505,11 +505,11 @@ noncomputable def delta : ℝ := Q2.toReal deltaQ2
 
 theorem epsilon_nonnegative : 0 ≤ Q2.toReal epsilonQ2 := by
   simp [epsilonQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem delta_nonnegative : 0 ≤ delta := by
   simp [delta, deltaQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem difference_exact (c : Context) (o : Recipient) :
     difference model.behavior c o = Q2.toReal (diffQ2 weightQ2 c o) :=
@@ -709,8 +709,8 @@ def weightQ2 (j : Atom) : Q2 :=
   | _ => 0
 
 set_option maxRecDepth 100000 in
-private theorem weight_allowed : ∀ j : Atom, AllowedWeight (weightQ2 j) := by
-  with_unfolding_all decide +kernel
+private theorem weight_allowed (j : Atom) : AllowedWeight (weightQ2 j) := by
+  fin_cases j <;> simp [AllowedWeight, weightQ2]
 
 theorem weight_nonnegative (j : Atom) : 0 ≤ Q2.toReal (weightQ2 j) :=
   allowedWeight_nonnegative (weight_allowed j)
@@ -738,7 +738,7 @@ private theorem acd_matches_q2 :
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
   with_unfolding_all decide +kernel
 
-theorem matches : ForcedSignalingTheorem2.MatchesCluster model where
+theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
     calc
       modelABD model x y ww a b d =
@@ -758,11 +758,11 @@ noncomputable def delta : ℝ := Q2.toReal deltaQ2
 
 theorem epsilon_nonnegative : 0 ≤ Q2.toReal epsilonQ2 := by
   simp [epsilonQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem delta_nonnegative : 0 ≤ delta := by
   simp [delta, deltaQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem difference_exact (c : Context) (o : Recipient) :
     difference model.behavior c o = Q2.toReal (diffQ2 weightQ2 c o) :=
@@ -969,8 +969,8 @@ def weightQ2 (j : Atom) : Q2 :=
   | _ => 0
 
 set_option maxRecDepth 100000 in
-private theorem weight_allowed : ∀ j : Atom, AllowedWeight (weightQ2 j) := by
-  with_unfolding_all decide +kernel
+private theorem weight_allowed (j : Atom) : AllowedWeight (weightQ2 j) := by
+  fin_cases j <;> simp [AllowedWeight, weightQ2]
 
 theorem weight_nonnegative (j : Atom) : 0 ≤ Q2.toReal (weightQ2 j) :=
   allowedWeight_nonnegative (weight_allowed j)
@@ -998,7 +998,7 @@ private theorem acd_matches_q2 :
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
   with_unfolding_all decide +kernel
 
-theorem matches : ForcedSignalingTheorem2.MatchesCluster model where
+theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
     calc
       modelABD model x y ww a b d =
@@ -1018,11 +1018,11 @@ noncomputable def delta : ℝ := Q2.toReal deltaQ2
 
 theorem epsilon_nonnegative : 0 ≤ Q2.toReal epsilonQ2 := by
   simp [epsilonQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem delta_nonnegative : 0 ≤ delta := by
   simp [delta, deltaQ2, Q2.toReal, q, qrat]
-  nlinarith [sqrtTwo_ge_one]
+  nlinarith [ForcedSignalingCertificateModel.sqrtTwo_ge_one]
 
 theorem difference_exact (c : Context) (o : Recipient) :
     difference model.behavior c o = Q2.toReal (diffQ2 weightQ2 c o) :=
