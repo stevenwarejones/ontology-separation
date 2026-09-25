@@ -69,3 +69,4 @@ import OntologySeparation.Experiments.NoisyLC4ForcedSignaling
 import OntologySeparation.Experiments.ImperfectTwoRecordAccess
 
 import OntologySeparation.Experiments.ForcedSignalingDirectional
+import OntologySeparation.Experiments.ForcedSignalingPropositionWitnesses
