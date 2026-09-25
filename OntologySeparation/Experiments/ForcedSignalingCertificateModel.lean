@@ -39,7 +39,8 @@ noncomputable def modelOfWeight (w : WeightQ2)
   normalized e := by
     have h := congrArg Q2.toReal (ht e)
     rw [ForcedSignalingLC4.toReal_sum] at h
-    simpa only [apply_ite, Q2.toReal_zero, Q2.toReal_qrat, Rat.cast_one] using h
+    simpa only [apply_ite, ForcedSignalingLC4.toReal_zero,
+      ForcedSignalingLC4.toReal_qrat, Rat.cast_one] using h
 
 def abdQ2 (w : WeightQ2) (x y ww a b d : Bool) : Q2 :=
   ∑ j : Atom,
@@ -95,23 +96,29 @@ theorem difference_eq_toReal (w : WeightQ2) (hn ht) (c : Context) (o : Recipient
 
 /-- Six proper recipient subsets of a three-party record: three singles then
 three pairs. The result lives in Fin 4; single-party projections use only 0,1. -/
-def properProject (r0 r1 r2 : ℕ) (s : Fin 6) : Fin 4 :=
-  ⟨if s.val = 0 then r0
-    else if s.val = 1 then r1
-    else if s.val = 2 then r2
-    else if s.val = 3 then 2*r0+r1
-    else if s.val = 4 then 2*r0+r2
-    else 2*r1+r2, by
-      have h0 : r0 < 2 := by omega
-      have h1 : r1 < 2 := by omega
-      have h2 : r2 < 2 := by omega
+def properProject (r0 r1 r2 : Fin 2) (s : Fin 6) : Fin 4 :=
+  ⟨if s.val = 0 then r0.val
+    else if s.val = 1 then r1.val
+    else if s.val = 2 then r2.val
+    else if s.val = 3 then 2*r0.val+r1.val
+    else if s.val = 4 then 2*r0.val+r2.val
+    else 2*r1.val+r2.val, by
+      have h0 := r0.isLt
+      have h1 := r1.isLt
+      have h2 := r2.isLt
       omega⟩
 
 def projectAProper (s : Fin 6) (o : Outcome) : Fin 4 :=
-  properProject (o.val / 4 % 2) (o.val / 2 % 2) (o.val % 2) s
+  properProject
+    ⟨o.val / 4 % 2, Nat.mod_lt _ (by omega)⟩
+    ⟨o.val / 2 % 2, Nat.mod_lt _ (by omega)⟩
+    ⟨o.val % 2, Nat.mod_lt _ (by omega)⟩ s
 
 def projectDProper (s : Fin 6) (o : Outcome) : Fin 4 :=
-  properProject (o.val / 8) (o.val / 4 % 2) (o.val / 2 % 2) s
+  properProject
+    ⟨o.val / 8, by omega⟩
+    ⟨o.val / 4 % 2, Nat.mod_lt _ (by omega)⟩
+    ⟨o.val / 2 % 2, Nat.mod_lt _ (by omega)⟩ s
 
 noncomputable def marginal4 (p : Behavior interface) (e : Early) (l : Late)
     (project : Outcome → Fin 4) (o : Fin 4) : ℝ :=
@@ -130,7 +137,8 @@ theorem marginal4_eq_toReal (w : WeightQ2) (hn ht) (e : Early) (l : Late)
   rw [mean_eq, ForcedSignalingLC4.toReal_sum]
   apply Finset.sum_congr rfl
   intro j _
-  by_cases h : early j = e ∧ project (output j l) = o <;> simp [h]
+  by_cases h : early j = e ∧ project (output j l) = o <;>
+    simp [h, modelOfWeight]
 
 end
 end OntologySeparation.ForcedSignalingCertificateModel
