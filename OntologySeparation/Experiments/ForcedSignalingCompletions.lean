@@ -175,6 +175,68 @@ def marginalCoeffAt (c : Completion) (j : Atom) : ℤ :=
           o.val / 8 = a.toNat ∧ o.val / 2 % 2 = cc.toNat ∧ o.val % 2 = d.toNat
         then 1 else 0))
 
+/-- Coefficient after removing the six blind-party completion choices.
+Only the three effective early-setting bits remain. -/
+def reducedOperationalCoeff (w1 w2 x5 : Bool) (j : Atom) : ℤ :=
+  (if early j = earlyOf false w1
+    then parity 0 (output j (lateOf false false)) else 0) +
+  (if early j = earlyOf false w2
+    then parity 1 (output j (lateOf true false)) else 0) +
+  (if early j = earlyOf true false
+    then parity 2 (output j (lateOf false false)) else 0) -
+  (if early j = earlyOf true false
+    then parity 3 (output j (lateOf true false)) else 0) +
+  2 * (if early j = earlyOf x5 false
+    then parity 4 (output j (lateOf false false)) else 0) +
+  2 * (if early j = earlyOf false true
+    then parity 5 (output j (lateOf false true)) else 0)
+
+/-- Marginal coefficient parameterized directly by the three effective
+completion bits, avoiding any enumeration over the 512 raw completions. -/
+def reducedMarginalCoeffAt (w1 w2 x5 : Bool) (j : Atom) : ℤ :=
+  (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
+      (sgn a * sgn b) *
+        (if
+          let o := output j (lateOf false false)
+          early j = earlyOf false w1 ∧
+          o.val / 8 = a.toNat ∧ o.val / 4 % 2 = b.toNat ∧ o.val % 2 = d.toNat
+        then 1 else 0)) +
+  (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
+      (sgn a * sgn b) *
+        (if
+          let o := output j (lateOf true false)
+          early j = earlyOf false w2 ∧
+          o.val / 8 = a.toNat ∧ o.val / 4 % 2 = b.toNat ∧ o.val % 2 = d.toNat
+        then 1 else 0)) +
+  (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
+      (sgn a * sgn b * sgn d) *
+        (if
+          let o := output j (lateOf false false)
+          early j = earlyOf true false ∧
+          o.val / 8 = a.toNat ∧ o.val / 4 % 2 = b.toNat ∧ o.val % 2 = d.toNat
+        then 1 else 0)) -
+  (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
+      (sgn a * sgn b * sgn d) *
+        (if
+          let o := output j (lateOf true false)
+          early j = earlyOf true false ∧
+          o.val / 8 = a.toNat ∧ o.val / 4 % 2 = b.toNat ∧ o.val % 2 = d.toNat
+        then 1 else 0)) +
+  2 * (∑ a : Bool, ∑ cc : Bool, ∑ d : Bool,
+      (sgn cc * sgn d) *
+        (if
+          let o := output j (lateOf false false)
+          early j = earlyOf x5 false ∧
+          o.val / 8 = a.toNat ∧ o.val / 2 % 2 = cc.toNat ∧ o.val % 2 = d.toNat
+        then 1 else 0)) +
+  2 * (∑ a : Bool, ∑ cc : Bool, ∑ d : Bool,
+      (sgn a * sgn cc * sgn d) *
+        (if
+          let o := output j (lateOf false true)
+          early j = earlyOf false true ∧
+          o.val / 8 = a.toNat ∧ o.val / 2 % 2 = cc.toNat ∧ o.val % 2 = d.toNat
+        then 1 else 0))
+
 set_option maxRecDepth 100000 in
 theorem parity0_blind_z : ∀ (j : Atom) (z : Bool),
     parity 0 (output j (lateOf false z)) =
@@ -211,17 +273,32 @@ theorem parity5_blind_y : ∀ (j : Atom) (y : Bool),
       parity 5 (output j (lateOf false true)) := by
   decide +kernel
 
+theorem operationalCoeff_eq_reduced (c : Completion) (j : Atom) :
+    operationalCoeff c j =
+      reducedOperationalCoeff c.w1 c.w2 c.x5 j := by
+  unfold operationalCoeff reducedOperationalCoeff
+  rw [parity0_blind_z j c.z1, parity1_blind_z j c.z2,
+    parity2_blind_z j c.z3, parity3_blind_z j c.z4,
+    parity4_blind_y j c.y5, parity5_blind_y j c.y6]
+
+theorem marginalCoeffAt_eq_reduced (c : Completion) (j : Atom) :
+    marginalCoeffAt c j =
+      reducedMarginalCoeffAt c.w1 c.w2 c.x5 j := by
+  rfl
+
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
-theorem operationalCoeff_eq_marginalCoeffAt :
-    ∀ c : Completion, ∀ j : Atom,
-      operationalCoeff c j = marginalCoeffAt c j := by
-  intro c
-  cases hw1 : c.w1 <;> cases hw2 : c.w2 <;> cases hx5 : c.x5 <;>
-    simp_rw [operationalCoeff, hw1, hw2, hx5,
-      parity0_blind_z, parity1_blind_z, parity2_blind_z,
-      parity3_blind_z, parity4_blind_y, parity5_blind_y] <;>
-    with_unfolding_all decide +kernel
+theorem reducedOperationalCoeff_eq_reducedMarginal :
+    ∀ w1 w2 x5 : Bool, ∀ j : Atom,
+      reducedOperationalCoeff w1 w2 x5 j =
+        reducedMarginalCoeffAt w1 w2 x5 j := by
+  decide +kernel
+
+theorem operationalCoeff_eq_marginalCoeffAt
+    (c : Completion) (j : Atom) :
+    operationalCoeff c j = marginalCoeffAt c j := by
+  rw [operationalCoeff_eq_reduced, marginalCoeffAt_eq_reduced,
+    reducedOperationalCoeff_eq_reducedMarginal]
 
 theorem marginalScore_eq_sum (c : Completion) (m : Model) :
     marginalScore c m =
@@ -289,17 +366,53 @@ def targetMarginalScoreQ2 (c : Completion) : ForcedSignalingLC4.Q2 :=
         (ForcedSignalingLC4.qrat (sgn a * sgn cc * sgn d))
         (ForcedSignalingLC4.acd false true true a cc d))
 
+def targetMarginalScoreQ2Effective (w1 w2 x5 : Bool) :
+    ForcedSignalingLC4.Q2 :=
+  (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
+      ForcedSignalingLC4.qmul
+        (ForcedSignalingLC4.qrat (sgn a * sgn b))
+        (ForcedSignalingLC4.abd false false w1 a b d)) +
+  (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
+      ForcedSignalingLC4.qmul
+        (ForcedSignalingLC4.qrat (sgn a * sgn b))
+        (ForcedSignalingLC4.abd false true w2 a b d)) +
+  (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
+      ForcedSignalingLC4.qmul
+        (ForcedSignalingLC4.qrat (sgn a * sgn b * sgn d))
+        (ForcedSignalingLC4.abd true false false a b d)) -
+  (∑ a : Bool, ∑ b : Bool, ∑ d : Bool,
+      ForcedSignalingLC4.qmul
+        (ForcedSignalingLC4.qrat (sgn a * sgn b * sgn d))
+        (ForcedSignalingLC4.abd true true false a b d)) +
+  ForcedSignalingLC4.qmul (ForcedSignalingLC4.qrat 2)
+    (∑ a : Bool, ∑ cc : Bool, ∑ d : Bool,
+      ForcedSignalingLC4.qmul
+        (ForcedSignalingLC4.qrat (sgn cc * sgn d))
+        (ForcedSignalingLC4.acd x5 false false a cc d)) +
+  ForcedSignalingLC4.qmul (ForcedSignalingLC4.qrat 2)
+    (∑ a : Bool, ∑ cc : Bool, ∑ d : Bool,
+      ForcedSignalingLC4.qmul
+        (ForcedSignalingLC4.qrat (sgn a * sgn cc * sgn d))
+        (ForcedSignalingLC4.acd false true true a cc d))
+
+theorem targetMarginalScoreQ2_eq_effective (c : Completion) :
+    targetMarginalScoreQ2 c =
+      targetMarginalScoreQ2Effective c.w1 c.w2 c.x5 := by
+  rfl
+
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
+theorem targetMarginalScoreQ2Effective_eq_score :
+    ∀ w1 w2 x5 : Bool,
+      targetMarginalScoreQ2Effective w1 w2 x5 =
+        ForcedSignalingLC4.score := by
+  decide +kernel
+
 /-- The LC4 target has the same S4 value for every operational completion. -/
-theorem targetMarginalScoreQ2_eq_score :
-    ∀ c : Completion,
-      targetMarginalScoreQ2 c = ForcedSignalingLC4.score := by
-  intro c
-  cases hw1 : c.w1 <;> cases hw2 : c.w2 <;> cases hx5 : c.x5 <;>
-    simp only [targetMarginalScoreQ2, hw1, hw2, hx5] <;>
-    rw [ForcedSignalingLC4.score_exact] <;>
-    with_unfolding_all decide +kernel
+theorem targetMarginalScoreQ2_eq_score (c : Completion) :
+    targetMarginalScoreQ2 c = ForcedSignalingLC4.score := by
+  rw [targetMarginalScoreQ2_eq_effective,
+    targetMarginalScoreQ2Effective_eq_score]
 
 private theorem toReal_sub
     (a b : ForcedSignalingLC4.Q2) :
