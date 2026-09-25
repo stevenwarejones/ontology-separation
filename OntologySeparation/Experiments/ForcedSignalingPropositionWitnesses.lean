@@ -1,6 +1,19 @@
 import OntologySeparation.Experiments.ForcedSignalingCertificateModel
 import OntologySeparation.Operational.HiddenInfluenceCausality
 
+/-!
+Exact Q(sqrt 2) witness data ported without numerical adjustment from
+stevenwarejones/forced-signaling commit
+bae83b865ea60b1fbc4b808e66dc9bbaf7da2d4b:
+  * paper/directional_certificates.json
+  * paper/invisible_certificates.json
+
+The standalone source verifiers are paper/verify_directional.py and
+paper/verify_invisibility.py. Lean independently rechecks normalization,
+LC4 marginal reproduction, recipient differences, directional TVs, proper
+recipient invisibility, and the parity-shift structure from the ported weights.
+-/
+
 namespace OntologySeparation.ForcedSignalingPropositionWitnesses
 noncomputable section
 open scoped BigOperators
