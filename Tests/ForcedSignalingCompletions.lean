@@ -24,14 +24,17 @@ example : ValidSlope optimalCompletion 8 :=
 the same three effective bits. -/
 def sameEffectiveVariant : Completion := ⟨511, by norm_num⟩
 
-example : sameEffective optimalCompletion sameEffectiveVariant := by
+theorem sameEffective_variant :
+    sameEffective optimalCompletion sameEffectiveVariant := by
+  unfold sameEffective Completion.effective
   decide
 
 /-- Six raw completion bits can change while every conditionally-local score stays equal. -/
 example (m : Model) :
     operationalScore optimalCompletion m.behavior =
       operationalScore sameEffectiveVariant m.behavior :=
-  score_eq_of_sameEffective (c := optimalCompletion) (d := sameEffectiveVariant) (by decide) m
+  score_eq_of_sameEffective (c := optimalCompletion) (d := sameEffectiveVariant)
+    sameEffective_variant m
 
 /-- LC4-matching models have the same exact target score under every completion. -/
 example (c : Completion) {m : Model}
