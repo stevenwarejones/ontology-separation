@@ -33,7 +33,7 @@ example :
   rw [DirectionalD.deltaA_exact, DirectionalD.deltaD_exact, DirectionalD.delta_value]
 
 example : OntologySeparation.ForcedSignalingTheorem2.MatchesCluster InvisibleBalanced.model :=
-  InvisibleBalanced.matches
+  InvisibleBalanced.matchesCluster
 
 example (s : Fin 6) (w y z : Bool) (o : Fin 4) :
     OntologySeparation.ForcedSignalingCertificateModel.marginal4
