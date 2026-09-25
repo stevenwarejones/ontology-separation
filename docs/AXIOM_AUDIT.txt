@@ -667,3 +667,40 @@
 'OntologySeparation.ImperfectTwoRecordAccess.perfect_copy_corner' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.ForcedSignalingDirectional.signaling_eq_max' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingDirectional.directional_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingDirectional.lc4_directional_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.proposition1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.proposition1_A_attains' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.proposition1_D_attains' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.proposition2_A' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.proposition2_D' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.proposition2_balanced' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.pairwise_invisible_optimum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.stochastic_signaling_eq_max' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.stochastic_directional_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ForcedSignalingPropositions.stochastic_lc4_directional_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
