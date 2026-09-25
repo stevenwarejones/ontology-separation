@@ -508,3 +508,18 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.HiddenInfluenceCompletion.coefficient_lower_bound_all_completions
 #print axioms OntologySeparation.HiddenInfluenceCompletion.optimal_completion_globally_sharp
 #print axioms OntologySeparation.HiddenInfluenceCompletion.stochastic_completion_globally_sharp
+
+-- White-noise LC4 forced-signaling robustness.
+#print axioms OntologySeparation.NoisyLC4.Threshold.seed_abd_matches
+#print axioms OntologySeparation.NoisyLC4.Threshold.seed_acd_matches
+#print axioms OntologySeparation.NoisyLC4.Threshold.signaling_zero
+#print axioms OntologySeparation.NoisyLC4.White.signaling_zero
+#print axioms OntologySeparation.NoisyLC4.matches_score
+#print axioms OntologySeparation.NoisyLC4.lower_bound
+#print axioms OntologySeparation.NoisyLC4.Threshold.matches_noisy
+#print axioms OntologySeparation.NoisyLC4.White.matches_noisy
+#print axioms OntologySeparation.NoisyLC4.aboveModel_signaling
+#print axioms OntologySeparation.NoisyLC4.exact_curve
+#print axioms OntologySeparation.NoisyLC4.sigma_ninety_percent
+#print axioms OntologySeparation.NoisyLC4.sigma_ninetyfive_percent
+#print axioms OntologySeparation.NoisyLC4.exact_curve_stochastic

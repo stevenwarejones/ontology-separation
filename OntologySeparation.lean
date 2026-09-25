@@ -65,3 +65,4 @@ import OntologySeparation.Experiments.QuantumTwoObserverMonogamy
 import OntologySeparation.Experiments.FriendshipMonogamyQuantum
 
 import OntologySeparation.Experiments.ForcedSignalingCompletions
+import OntologySeparation.Experiments.NoisyLC4ForcedSignaling
