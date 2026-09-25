@@ -1,10 +1,11 @@
-import OntologySeparation.Experiments.ForcedSignalingPropositionWitnesses
+import OntologySeparation.Experiments.ForcedSignalingPropositions
 
 namespace Tests.ForcedSignalingPropositions
 open OntologySeparation
 open OntologySeparation.HiddenInfluence
 open OntologySeparation.ForcedSignalingDirectional
 open OntologySeparation.ForcedSignalingPropositionWitnesses
+open OntologySeparation.ForcedSignalingPropositions
 
 example (m : Model) :
     m.signaling = max (deltaA m) (deltaD m) :=
@@ -58,3 +59,20 @@ example (c : Context) (o : Recipient) :
       (InvisibleBalanced.paritySign o : ℝ) *
         difference InvisibleBalanced.model.behavior c 0 :=
   InvisibleBalanced.triple_difference_parity c o
+
+
+example :
+    (∀ m : Model,
+      OntologySeparation.ForcedSignalingTheorem2.MatchesCluster m →
+      PairwiseInvisible m →
+      (Real.sqrt 2 - 1) / 2 ≤ deltaA m + deltaD m) ∧
+    ∃ m : Model,
+      OntologySeparation.ForcedSignalingTheorem2.MatchesCluster m ∧
+      PairwiseInvisible m ∧
+      deltaA m + deltaD m = (Real.sqrt 2 - 1) / 2 :=
+  pairwise_invisible_optimum
+
+example {Ω : Type} [Fintype Ω] (m : StochasticModel Ω) :
+    score m.behavior ≤
+      6 + 4 * stochasticDeltaA m + 4 * stochasticDeltaD m :=
+  stochastic_directional_bound m
