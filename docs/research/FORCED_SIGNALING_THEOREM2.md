@@ -94,3 +94,11 @@ library and tests, regenerates the axiom snapshot, and checks the report layer.
 The [audit registry](../../Tests/Audit.lean) includes the public proof-chain
 roots; [its generated output](../AXIOM_AUDIT.txt) records their transitive
 axioms. No external numerical evaluation is used as a proof rule.
+
+## White-noise robustness
+
+The exact cluster-point theorem now has a separate
+[white-noise robustness guide](NOISY_LC4_FORCED_SIGNALING.md). For visibility
+`p`, Lean proves the exact minimum
+`max 0 ((p * (4 + 2√2) - 6) / 8)`, including explicit attaining models and
+checked values at 90% and 95% visibility.

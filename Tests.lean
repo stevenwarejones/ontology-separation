@@ -72,3 +72,4 @@ import Tests.LFAgencySqrtTwo
 import Tests.HiddenInfluenceStochastic
 
 import Tests.ForcedSignalingCompletions
+import Tests.NoisyLC4ForcedSignaling
