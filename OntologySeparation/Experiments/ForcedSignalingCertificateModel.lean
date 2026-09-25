@@ -136,8 +136,11 @@ theorem marginal4_eq_toReal (w : WeightQ2) (hn ht) (e : Early) (l : Late)
   apply Finset.sum_congr rfl
   intro j _
   dsimp only [modelOfWeight]
-  exact toReal_indicator
-    (early j = e ∧ project (output j l) = o) (w j)
+  by_cases he : early j = e
+  · by_cases hp : project (output j l) = o
+    · simp [he, hp]
+    · simp [he, hp]
+  · simp [he]
 
 end
 end OntologySeparation.ForcedSignalingCertificateModel
