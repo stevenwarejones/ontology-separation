@@ -103,10 +103,8 @@ def properProject (r0 r1 r2 : Fin 2) (s : Fin 6) : Fin 4 :=
     else if s.val = 3 then 2*r0.val+r1.val
     else if s.val = 4 then 2*r0.val+r2.val
     else 2*r1.val+r2.val, by
-      have h0 := r0.isLt
-      have h1 := r1.isLt
-      have h2 := r2.isLt
-      omega⟩
+      fin_cases s <;> simp
+      all_goals omega⟩
 
 def projectAProper (s : Fin 6) (o : Outcome) : Fin 4 :=
   properProject
@@ -137,8 +135,8 @@ theorem marginal4_eq_toReal (w : WeightQ2) (hn ht) (e : Early) (l : Late)
   rw [mean_eq, ForcedSignalingLC4.toReal_sum]
   apply Finset.sum_congr rfl
   intro j _
-  by_cases h : early j = e ∧ project (output j l) = o <;>
-    simp [h, modelOfWeight]
+  dsimp only [modelOfWeight]
+  exact toReal_indicator _ _
 
 end
 end OntologySeparation.ForcedSignalingCertificateModel
