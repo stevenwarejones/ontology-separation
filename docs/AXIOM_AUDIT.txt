@@ -652,3 +652,18 @@
 'OntologySeparation.NoisyLC4.sigma_ninety_percent' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.NoisyLC4.sigma_ninetyfive_percent' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.NoisyLC4.exact_curve_stochastic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ImperfectTwoRecordAccess.source_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ImperfectTwoRecordAccess.distanceA_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ImperfectTwoRecordAccess.distanceB_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ImperfectTwoRecordAccess.distance_pair_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ImperfectTwoRecordAccess.attainable_square' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ImperfectTwoRecordAccess.attainable_region_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ImperfectTwoRecordAccess.perfect_copy_corner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
