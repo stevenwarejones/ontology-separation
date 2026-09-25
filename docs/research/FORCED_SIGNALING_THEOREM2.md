@@ -87,6 +87,20 @@ explicitly.
 Every theorem name above is in the `OntologySeparation` namespace (the witness
 and final-theorem module names give their respective subnamespaces).
 
+## Directional and pairwise-invisible refinements
+
+Propositions 1 and 2 are formalized separately in
+[FORCED_SIGNALING_PROPOSITIONS.md](FORCED_SIGNALING_PROPOSITIONS.md).
+That extension kernel-checks the directional tradeoff
+`S4^op <= 6 + 4 deltaA + 4 deltaD`, exact one-sided directional attainment,
+and three LC4-matching models whose every one- and two-party recipient marginal
+is non-signaling while the surviving full-record change is a pure parity shift.
+The finite stochastic directional bound is also lifted through the existing
+determinization theorem.
+
+Lemma 2, collectibility, spacetime geometry, and finite-sample statistical
+claims remain outside the Lean scope.
+
 ## Verification
 
 Run `lake exe cache get`, then `sh scripts/check.sh`. The latter builds the
