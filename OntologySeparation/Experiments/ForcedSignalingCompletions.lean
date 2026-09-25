@@ -514,8 +514,10 @@ theorem stochasticValidSlope_to_valid
     change operationalScore c
         ((StochasticModel.ofStrategies m.toStrategies).determinize).behavior =
       operationalScore c m.behavior
-    unfold operationalScore mean
-    simp_rw [m.stochastic_roundtrip]
+    rw [operationalScore_eq_sum, operationalScore_eq_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    rw [m.stochastic_roundtrip_weight]
   rw [hscore] at hs
   exact hs
 
