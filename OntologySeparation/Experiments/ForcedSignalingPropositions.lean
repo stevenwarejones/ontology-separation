@@ -65,7 +65,7 @@ theorem proposition1_A_attains :
     ForcedSignalingTheorem2.MatchesCluster DirectionalA.model ∧
     deltaA DirectionalA.model = (Real.sqrt 2 - 1) / 2 ∧
     deltaD DirectionalA.model = 0 := by
-  refine ⟨DirectionalA.matches, ?_, DirectionalA.deltaD_exact⟩
+  refine ⟨DirectionalA.matchesCluster, ?_, DirectionalA.deltaD_exact⟩
   rw [DirectionalA.deltaA_exact, DirectionalA.delta_value]
 
 /-- Proposition 1 one-sided attainment in the D direction. -/
@@ -73,7 +73,7 @@ theorem proposition1_D_attains :
     ForcedSignalingTheorem2.MatchesCluster DirectionalD.model ∧
     deltaA DirectionalD.model = 0 ∧
     deltaD DirectionalD.model = (Real.sqrt 2 - 1) / 2 := by
-  refine ⟨DirectionalD.matches, DirectionalD.deltaA_exact, ?_⟩
+  refine ⟨DirectionalD.matchesCluster, DirectionalD.deltaA_exact, ?_⟩
   rw [DirectionalD.deltaD_exact, DirectionalD.delta_value]
 
 def invisibleA : PairwiseInvisible InvisibleA.model where
@@ -109,7 +109,7 @@ theorem proposition2_A :
     PairwiseInvisible InvisibleA.model ∧
     deltaA InvisibleA.model = (Real.sqrt 2 - 1) / 2 ∧
     deltaD InvisibleA.model = 0 := by
-  refine ⟨InvisibleA.matches, invisibleA, ?_, InvisibleA.deltaD_exact⟩
+  refine ⟨InvisibleA.matchesCluster, invisibleA, ?_, InvisibleA.deltaD_exact⟩
   rw [InvisibleA.deltaA_exact, InvisibleA.delta_value]
 
 /-- Proposition 2 D-only pairwise-invisible attaining model. -/
@@ -118,7 +118,7 @@ theorem proposition2_D :
     PairwiseInvisible InvisibleD.model ∧
     deltaA InvisibleD.model = 0 ∧
     deltaD InvisibleD.model = (Real.sqrt 2 - 1) / 2 := by
-  refine ⟨InvisibleD.matches, invisibleD, InvisibleD.deltaA_exact, ?_⟩
+  refine ⟨InvisibleD.matchesCluster, invisibleD, InvisibleD.deltaA_exact, ?_⟩
   rw [InvisibleD.deltaD_exact, InvisibleD.delta_value]
 
 /-- Proposition 2 balanced pairwise-invisible attaining model. -/
@@ -127,7 +127,7 @@ theorem proposition2_balanced :
     PairwiseInvisible InvisibleBalanced.model ∧
     deltaA InvisibleBalanced.model = (Real.sqrt 2 - 1) / 4 ∧
     deltaD InvisibleBalanced.model = (Real.sqrt 2 - 1) / 4 := by
-  refine ⟨InvisibleBalanced.matches, invisibleBalanced, ?_, ?_⟩
+  refine ⟨InvisibleBalanced.matchesCluster, invisibleBalanced, ?_, ?_⟩
   · rw [InvisibleBalanced.deltaA_exact, InvisibleBalanced.delta_value]
   · rw [InvisibleBalanced.deltaD_exact, InvisibleBalanced.delta_value]
 
@@ -146,7 +146,7 @@ theorem pairwise_invisible_optimum :
   constructor
   · intro m hm _
     exact lc4_directional_lower_bound hm
-  · refine ⟨InvisibleBalanced.model, InvisibleBalanced.matches,
+  · refine ⟨InvisibleBalanced.model, InvisibleBalanced.matchesCluster,
       invisibleBalanced, ?_⟩
     rw [InvisibleBalanced.deltaA_exact, InvisibleBalanced.deltaD_exact,
       InvisibleBalanced.delta_value]
