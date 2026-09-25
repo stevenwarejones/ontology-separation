@@ -523,3 +523,12 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.NoisyLC4.sigma_ninety_percent
 #print axioms OntologySeparation.NoisyLC4.sigma_ninetyfive_percent
 #print axioms OntologySeparation.NoisyLC4.exact_curve_stochastic
+
+-- Continuous two-imperfect-record access region.
+#print axioms OntologySeparation.ImperfectTwoRecordAccess.source_swap
+#print axioms OntologySeparation.ImperfectTwoRecordAccess.distanceA_exact
+#print axioms OntologySeparation.ImperfectTwoRecordAccess.distanceB_exact
+#print axioms OntologySeparation.ImperfectTwoRecordAccess.distance_pair_exact
+#print axioms OntologySeparation.ImperfectTwoRecordAccess.attainable_square
+#print axioms OntologySeparation.ImperfectTwoRecordAccess.attainable_region_iff
+#print axioms OntologySeparation.ImperfectTwoRecordAccess.perfect_copy_corner
