@@ -18,7 +18,7 @@ open ForcedSignalingDirectional
 open ForcedSignalingCertificateModel
 open ForcedSignalingPropositionWitnesses
 
-/-- All six one-/two-party recipient projections are blind to A and D setting
+/-- All six one- and two-party recipient projections are blind to A and D setting
 changes; B and C cannot signal even to their full complementary triples; and the
 A/D full-triple difference is a pure parity shift. -/
 structure PairwiseInvisible (m : Model) : Prop where
