@@ -4,7 +4,10 @@ This note records the Lean 4 scope of Propositions 1 and 2 from the
 [forced-signaling manuscript](https://github.com/stevenwarejones/forced-signaling).
 The source certificates are `paper/directional_certificates.json` and
 `paper/invisible_certificates.json`, whose standalone exact verifiers are
-`verify_directional.py` and `verify_invisibility.py`.
+`verify_directional.py` and `verify_invisibility.py`. They were ported from
+`stevenwarejones/forced-signaling` commit
+`bae83b865ea60b1fbc4b808e66dc9bbaf7da2d4b`; no certificate values were
+adjusted during the Lean port.
 
 The formalization makes no novelty claim and has not been reviewed by a human
 domain expert.
