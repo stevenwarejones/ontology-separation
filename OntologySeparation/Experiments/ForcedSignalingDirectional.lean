@@ -27,12 +27,16 @@ noncomputable def deltaD (m : Model) : ℝ :=
   Finset.univ.sup' Finset.univ_nonempty (fun i : Fin 8 => tv m.behavior (contextD i))
 
 theorem tv_le_deltaA (m : Model) (i : Fin 8) :
-    tv m.behavior (contextA i) ≤ deltaA m :=
-  Finset.le_sup' _ (Finset.mem_univ i)
+    tv m.behavior (contextA i) ≤ deltaA m := by
+  unfold deltaA
+  exact Finset.le_sup' (fun k : Fin 8 => tv m.behavior (contextA k))
+    (Finset.mem_univ i)
 
 theorem tv_le_deltaD (m : Model) (i : Fin 8) :
-    tv m.behavior (contextD i) ≤ deltaD m :=
-  Finset.le_sup' _ (Finset.mem_univ i)
+    tv m.behavior (contextD i) ≤ deltaD m := by
+  unfold deltaD
+  exact Finset.le_sup' (fun k : Fin 8 => tv m.behavior (contextD k))
+    (Finset.mem_univ i)
 
 theorem deltaA_le_signaling (m : Model) : deltaA m ≤ m.signaling := by
   unfold deltaA
@@ -93,18 +97,18 @@ private theorem row_bound (m : Model) (i : ForcedSignaling.Row) :
       dsimp [HiddenInfluence.LP.tvRow, c]
       omega
     rw [if_neg h, hi, HiddenInfluence.lp_tv]
-    by_cases ha : i.val < 264
-    · rw [if_pos ha]
-      let k : Fin 8 := ⟨i.val - 256, by omega⟩
+    by_cases hc8 : c.val < 8
+    · rw [if_pos (by dsimp [HiddenInfluence.LP.tvRow]; omega)]
+      let k : Fin 8 := ⟨c.val, hc8⟩
       have hc : contextA k = c := by
         apply Fin.ext
-        dsimp [contextA, k, c]
+        rfl
       exact mul_le_mul_of_nonneg_left (by simpa [hc] using tv_le_deltaA m k) (by norm_num)
-    · rw [if_neg ha]
-      let k : Fin 8 := ⟨i.val - 264, by omega⟩
+    · rw [if_neg (by dsimp [HiddenInfluence.LP.tvRow]; omega)]
+      let k : Fin 8 := ⟨c.val - 8, by omega⟩
       have hc : contextD k = c := by
         apply Fin.ext
-        dsimp [contextD, k, c]
+        dsimp [contextD, k]
         omega
       exact mul_le_mul_of_nonneg_left (by simpa [hc] using tv_le_deltaD m k) (by norm_num)
 
@@ -136,8 +140,8 @@ theorem directional_bound (m : Model) :
       (show 0 ≤ m.lpWeights j by
         unfold Model.lpWeights
         refine Fin.addCases (m := 256) (n := 128) (fun a => ?_) (fun a => ?_) j
-        · exact m.nonnegative a
-        · simp [abs_nonneg]))
+        · simpa only [Fin.addCases_left] using m.nonnegative a
+        · simp only [Fin.addCases_right, abs_nonneg]))
   have hn : (∑ k : Fin 4, (ForcedSignaling.normalizationDual k : ℝ) *
       ForcedSignaling.pairing (ForcedSignaling.normalization k) m.lpWeights) = 6 := by
     norm_num [HiddenInfluence.lp_normalized, ForcedSignaling.normalizationDual,
