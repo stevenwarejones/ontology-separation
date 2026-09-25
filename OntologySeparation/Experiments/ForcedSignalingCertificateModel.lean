@@ -16,6 +16,21 @@ theorem sqrtTwo_ge_one : (1 : ℝ) ≤ Real.sqrt 2 :=
 theorem sqrtTwo_le_two : Real.sqrt 2 ≤ (2 : ℝ) :=
   ForcedSignalingLC4Witness.sqrtTwo_le_two
 
+def AllowedWeight (w : Q2) : Prop :=
+  w = 0 ∨
+  w = qrat (1/8) ∨
+  w = q (-1/8) (1/8) ∨
+  w = q (1/8) (-1/16) ∨
+  w = q 0 (1/16) ∨
+  w = q (-1/16) (1/16) ∨
+  w = qrat (1/16)
+
+theorem allowedWeight_nonnegative {w : Q2} (h : AllowedWeight w) :
+    0 ≤ Q2.toReal w := by
+  rcases h with h | h | h | h | h | h | h <;> rw [h] <;>
+    simp [Q2.toReal, q, qrat] <;>
+    nlinarith [sqrtTwo_ge_one, sqrtTwo_le_two, Real.sqrt_nonneg (2 : ℝ)]
+
 noncomputable def modelOfWeight (w : WeightQ2)
     (hn : ∀ j, 0 ≤ Q2.toReal (w j))
     (ht : ∀ e : Early, (∑ j, if early j = e then w j else 0) = qrat 1) : Model where
