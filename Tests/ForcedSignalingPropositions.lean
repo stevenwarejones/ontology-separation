@@ -15,25 +15,43 @@ example (m : Model) :
     score m.behavior ≤ 6 + 4 * deltaA m + 4 * deltaD m :=
   directional_bound m
 
-example {m : Model} (h : OntologySeparation.ForcedSignalingTheorem2.MatchesCluster m) :
+example {m : Model}
+    (h : OntologySeparation.ForcedSignalingTheorem2.MatchesCluster m) :
     (Real.sqrt 2 - 1) / 2 ≤ deltaA m + deltaD m :=
   lc4_directional_lower_bound h
 
-end Tests.ForcedSignalingPropositions
-
-
 example :
+    OntologySeparation.ForcedSignalingTheorem2.MatchesCluster DirectionalA.model ∧
     deltaA DirectionalA.model = (Real.sqrt 2 - 1) / 2 ∧
-      deltaD DirectionalA.model = 0 := by
-  rw [DirectionalA.deltaA_exact, DirectionalA.deltaD_exact, DirectionalA.delta_value]
+    deltaD DirectionalA.model = 0 :=
+  proposition1_A_attains
 
 example :
+    OntologySeparation.ForcedSignalingTheorem2.MatchesCluster DirectionalD.model ∧
     deltaA DirectionalD.model = 0 ∧
-      deltaD DirectionalD.model = (Real.sqrt 2 - 1) / 2 := by
-  rw [DirectionalD.deltaA_exact, DirectionalD.deltaD_exact, DirectionalD.delta_value]
+    deltaD DirectionalD.model = (Real.sqrt 2 - 1) / 2 :=
+  proposition1_D_attains
 
-example : OntologySeparation.ForcedSignalingTheorem2.MatchesCluster InvisibleBalanced.model :=
-  InvisibleBalanced.matchesCluster
+example :
+    OntologySeparation.ForcedSignalingTheorem2.MatchesCluster InvisibleA.model ∧
+    PairwiseInvisible InvisibleA.model ∧
+    deltaA InvisibleA.model = (Real.sqrt 2 - 1) / 2 ∧
+    deltaD InvisibleA.model = 0 :=
+  proposition2_A
+
+example :
+    OntologySeparation.ForcedSignalingTheorem2.MatchesCluster InvisibleD.model ∧
+    PairwiseInvisible InvisibleD.model ∧
+    deltaA InvisibleD.model = 0 ∧
+    deltaD InvisibleD.model = (Real.sqrt 2 - 1) / 2 :=
+  proposition2_D
+
+example :
+    OntologySeparation.ForcedSignalingTheorem2.MatchesCluster InvisibleBalanced.model ∧
+    PairwiseInvisible InvisibleBalanced.model ∧
+    deltaA InvisibleBalanced.model = (Real.sqrt 2 - 1) / 4 ∧
+    deltaD InvisibleBalanced.model = (Real.sqrt 2 - 1) / 4 :=
+  proposition2_balanced
 
 example (s : Fin 6) (w y z : Bool) (o : Fin 4) :
     OntologySeparation.ForcedSignalingCertificateModel.marginal4
@@ -48,18 +66,11 @@ example (s : Fin 6) (w y z : Bool) (o : Fin 4) :
         (OntologySeparation.ForcedSignalingCertificateModel.projectAProper s) o :=
   InvisibleBalanced.properA_nonsignaling s w y z o
 
-example :
-    deltaA InvisibleBalanced.model = (Real.sqrt 2 - 1) / 4 ∧
-      deltaD InvisibleBalanced.model = (Real.sqrt 2 - 1) / 4 := by
-  rw [InvisibleBalanced.deltaA_exact, InvisibleBalanced.deltaD_exact,
-    InvisibleBalanced.delta_value]
-
 example (c : Context) (o : Recipient) :
     difference InvisibleBalanced.model.behavior c o =
       (InvisibleBalanced.paritySign o : ℝ) *
         difference InvisibleBalanced.model.behavior c 0 :=
   InvisibleBalanced.triple_difference_parity c o
-
 
 example :
     (∀ m : Model,
@@ -76,3 +87,10 @@ example {Ω : Type} [Fintype Ω] (m : StochasticModel Ω) :
     score m.behavior ≤
       6 + 4 * stochasticDeltaA m + 4 * stochasticDeltaD m :=
   stochastic_directional_bound m
+
+example {Ω : Type} [Fintype Ω] {m : StochasticModel Ω}
+    (h : OntologySeparation.ForcedSignalingTheorem2.StochasticMatchesCluster m) :
+    (Real.sqrt 2 - 1) / 2 ≤ stochasticDeltaA m + stochasticDeltaD m :=
+  stochastic_lc4_directional_lower_bound h
+
+end Tests.ForcedSignalingPropositions
