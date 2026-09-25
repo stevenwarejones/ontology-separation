@@ -46,6 +46,10 @@ structure PairwiseInvisible (m : Model) : Prop where
   silentC : ∀ e : Early, ∀ y : Fin 2, ∀ o : Recipient,
     marginal m.behavior e (lateChoice y 0) recipientC o =
       marginal m.behavior e (lateChoice y 1) recipientC o
+  parity : ∀ c : Context, ∀ o : Recipient,
+    difference m.behavior c o =
+      ((if (o.val / 4 + o.val / 2 % 2 + o.val % 2) % 2 = 0
+        then 1 else -1 : ℤ) : ℝ) * difference m.behavior c 0
 
 /-- Proposition 1: directional refinement plus the exact LC4 lower bound. -/
 theorem proposition1 :
@@ -77,18 +81,27 @@ def invisibleA : PairwiseInvisible InvisibleA.model where
   properD := InvisibleA.properD_nonsignaling
   silentB := InvisibleA.B_silent
   silentC := InvisibleA.C_silent
+  parity := by
+    intro c o
+    simpa [InvisibleA.paritySign] using InvisibleA.triple_difference_parity c o
 
 def invisibleD : PairwiseInvisible InvisibleD.model where
   properA := InvisibleD.properA_nonsignaling
   properD := InvisibleD.properD_nonsignaling
   silentB := InvisibleD.B_silent
   silentC := InvisibleD.C_silent
+  parity := by
+    intro c o
+    simpa [InvisibleD.paritySign] using InvisibleD.triple_difference_parity c o
 
 def invisibleBalanced : PairwiseInvisible InvisibleBalanced.model where
   properA := InvisibleBalanced.properA_nonsignaling
   properD := InvisibleBalanced.properD_nonsignaling
   silentB := InvisibleBalanced.B_silent
   silentC := InvisibleBalanced.C_silent
+  parity := by
+    intro c o
+    simpa [InvisibleBalanced.paritySign] using InvisibleBalanced.triple_difference_parity c o
 
 /-- Proposition 2 A-only pairwise-invisible attaining model. -/
 theorem proposition2_A :
