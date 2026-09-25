@@ -11,6 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: leanprover/lean-action@v1
+        env:
+          # Keep peak memory bounded on the hosted runner. The QIT/mathlib
+          # dependency graph plus the forced-signaling kernel checks can
+          # otherwise trigger runner shutdowns before branch-specific modules
+          # are reached.
+          LEAN_NUM_THREADS: "1"
         with:
           test: false
       - uses: actions/setup-python@v5

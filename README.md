@@ -116,6 +116,10 @@ explicit real-projective Born-rule model.
   no-signaling friend models, plus an exact singlet witness above six.
 - **Bell versus LF:** a conditional PR box violates CHSH on non-friend settings
   while remaining allowed by the LF model.
+- **Forced signaling:** an exact LC4 minimum-signaling theorem for finite
+  stochastic conditional-local models, plus kernel-checked completion-independent
+  optimality of tradeoff slope 8 across all 512 raw S₄ completions. The finer
+  per-completion slope spectrum 8–16 remains numerical rather than a Lean theorem.
 - **Memory experiments:** exact matrix calculations for echo, inaccessible leakage
   and phase control at arbitrary specified dephasing strength.
 - **Assumption profiles:** all sixteen binary combinations of four selected laws

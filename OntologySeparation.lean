@@ -63,3 +63,5 @@ import OntologySeparation.Experiments.TwoRecordEnvironment
 import OntologySeparation.Experiments.QuantumAccessMonogamy
 import OntologySeparation.Experiments.QuantumTwoObserverMonogamy
 import OntologySeparation.Experiments.FriendshipMonogamyQuantum
+
+import OntologySeparation.Experiments.ForcedSignalingCompletions

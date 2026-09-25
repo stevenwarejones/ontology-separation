@@ -624,3 +624,18 @@
 'OntologySeparation.ForcedSignalingTheorem2.exact_forced_signaling_stochastic_value' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.HiddenInfluenceCompletion.completion_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluenceCompletion.operationalScore_eq_marginalScore' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluenceCompletion.coefficient_lower_bound_all_completions' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluenceCompletion.optimal_completion_globally_sharp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.HiddenInfluenceCompletion.stochastic_completion_globally_sharp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
