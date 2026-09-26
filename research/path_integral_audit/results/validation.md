@@ -13,11 +13,17 @@ Date: 2026-09-26 UTC. Repository base: `c10474e9b45cca2ea260eec2d9f348a12cf62677
 - `fetch_data.py --verify-only`: reports all 19 expected files unavailable and exits 2. This is the correct missing-input result, not a successful download.
 - Original workbook extraction and observed-data reproduction: **not run; originals inaccessible**. No claims of passing workbook-content validation.
 
-## Full repository gate
+## Full repository gate and CI evidence
 
-`sh scripts/check.sh` stopped in the build stage: existing `ForcedSignalingLC4Witness` compiler process exited 137 during a broad concurrent rebuild. An isolated rebuild and a further `LEAN_NUM_THREADS=1` rebuild both also exited 137. During the last attempt, the environment's 8 GiB cgroup was full and its OOM-kill counter increased from 7 to 8. No Lean proof diagnostic was emitted for these failures. The file is unchanged from the base commit.
+Local full/isolated/single-thread builds exhausted the shared 8 GiB environment in the existing `ForcedSignalingLC4Witness`. A proof-decomposition experiment was attempted and then discarded once CI supplied full verification; no changes to that existing proof are included.
 
-The full gate, whole-repository axiom snapshot regeneration and downstream checks are therefore **not completed locally**. The new module/tests and standard report passed separately. This is a draft checkpoint, not a claim that the full repository gate is green. Next action: run the unchanged gate with sufficient memory/CI; if it fails with a proof diagnostic, investigate that diagnostic before considering the PR ready. Do not weaken proof checking or silently reuse stale compiled artifacts.
+On PR #84 commit `7ef21978018473de694d9441a3a58ae0f3b94b2c`, [CI run 36211257318](https://github.com/stevenwarejones/ontology-separation/actions/runs/36211257318), verify job `108318095178`, completed `sh scripts/check.sh` successfully at 2026-09-26 02:30:07 UTC. This includes the whole-repository audit, generated exports, 65 Python tests and downstream adopter checks. Python 3.10/3.11/3.12 jobs all passed.
+
+The subsequent snapshot-consistency step failed solely because `docs/AXIOM_AUDIT.txt` lacked the nine new roots. The exact generated diff was recovered from that job's log and applied; its appended bytes also match the independently generated local `results/path-axioms.txt`. No generated predictions were hand-edited. The next CI run must confirm snapshot consistency. This distinguishes a successful proof/test gate from the overall first run's failed status.
+
+## Follow-up analytical checks
+
+`intervention_checks.py` passes 48 reproducibly seeded mixed-state/effect cases against independent direct density-matrix evaluation (maximum error 2.23e-16), including the imaginary contrast sign. It verifies complete lossy outcome normalization, a coherent state with zero detectable contrast, the intermediate-window counterexample and 32 numerical checks of the telescoping bound. Precision figures are recorded in `intervention.json`. These calculations validate the implementation of the stated model, not physical calibration, experimental novelty or statistical power. The generalized physical/statistical derivations are not Lean-certified.
 
 ## Environment
 

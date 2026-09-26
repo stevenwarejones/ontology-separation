@@ -1,6 +1,6 @@
 # Photon path-integral audit
 
-**Status: method audit and exact finite model completed; empirical replication blocked by data access.** This is work package 3 of the path-reality investigation. The paper and full supplement were read. The 19-file Dryad manifest is pinned, but no spreadsheet bytes have been obtained: the API returns 401, public file links and archive-information endpoint return 403. A metadata listing is not a dataset replication. Updated 2026-09-26 UTC (September 25 in New York).
+**Status: method audit and exact finite model completed; empirical replication blocked by data access.** This is work package 3 of the path-reality investigation. The main paper and relevant supplement sections were reviewed; review depth is recorded in the literature comparison. The 19-file Dryad manifest is pinned, but no spreadsheet bytes have been obtained: the API returns 401, public file links and archive-information endpoint return 403. A metadata listing is not a dataset replication. Updated 2026-09-26 UTC (September 25 in New York).
 
 ## Finding relevant to ontology-separation
 
@@ -12,13 +12,19 @@ The accompanying Lean model proves these logical distinctions in a small ideal e
 
 **Repository scope:** keep the work here while it compares universes/model classes through explicit observable predictions. Package related audit code, formal certificates, tests and documentation in one cohesive PR. If standalone instrumentation or general data-analysis tooling becomes the main purpose, propose a focused repository (as with forced-signaling) before moving it. Current scope remains ontology checking.
 
+## Follow-up design and current verification
+
+The [physical correspondence audit](physical-bridge.md) maps measured signals to model objects and derives a finite-window error bound. The [follow-up protocol](follow-up-protocol.md) specifies a regional phase intervention, full loss outcomes, restricted null class and finite-sample decision rule. [Primary-literature comparison](literature-comparison.md) records what was actually reviewed and supplies the package-2 handoff. Its proposed apparatus bridge remains unverified.
+
+CI run [36211257318](https://github.com/stevenwarejones/ontology-separation/actions/runs/36211257318) passed the entire `scripts/check.sh`, including the whole-repository axiom audit and downstream checks. Its final generated-file check found only the nine missing audit-root entries; that exact generated output is now included. Local memory limits therefore no longer prevent verification of the substantive code. A fresh CI run must confirm snapshot consistency. Original data access still blocks empirical completion.
+
 ## Sources and provenance
 
 - Wen et al., Science Advances 12, eaeh1011 (2026), [paper DOI](https://doi.org/10.1126/sciadv.aeh1011), [PMC text](https://pmc.ncbi.nlm.nih.gov/articles/PMC13510607/), [Europe PMC XML](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13510607/fullTextXML).
 - [Supplement archive](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13510607/supplementaryFiles), containing `sciadv.aeh1011_sm.pdf`, 20 pages. Sections 6–8 explain extraction, noise simulation and endpoint grouping. PDF page 4 was visually checked against text extraction.
 - [Dryad dataset](https://doi.org/10.5061/dryad.x0k6djj14), version 3, version ID 450489; CC0. `manifest.json` preserves filenames, sizes, download URLs and author-repository SHA-256 values. Those hashes describe expected originals, not locally verified downloads.
 - `provenance.json` records locally acquired source hashes, URLs, retrieval date and repository base commit. Paper/supplement originals remain ignored under `raw/`; paper license is CC BY-NC 4.0.
-- [Literature search log](literature-search-log.md) records five checkpoints, primary sources, failed searches, and consequences. [Question register](open-questions.md) preserves blockers and next actions.
+- [Literature search log](literature-search-log.md) records six checkpoints, primary sources, failed searches, and consequences. [Question register](open-questions.md) preserves blockers and next actions.
 
 ## Inferential chain and assumptions
 
@@ -127,6 +133,7 @@ python research/path_integral_audit/fetch_data.py
 python research/path_integral_audit/fetch_data.py --verify-only
 python research/path_integral_audit/extract_workbooks.py
 python research/path_integral_audit/synthetic_checks.py
+python research/path_integral_audit/intervention_checks.py
 sh scripts/check.sh
 ```
 
@@ -143,9 +150,10 @@ After acquisition: verify all sheets against [data-dictionary.md](data-dictionar
 | Full public-data replication | Downloader, all-sheet extractor, manifest | **Blocked: 19 originals inaccessible** |
 | Independent analytical checks | Composition identity, conditioning/covariance derivations | Complete within stated assumptions |
 | Numerical diagnostics | Reproducible synthetic grid/noise results | Complete synthetic work; no empirical fit claimed |
+| Follow-up design | Regional phase intervention, loss, calibration and finite-data criterion | Design specified; feasibility/calibration and stronger contextuality witness remain open |
 | Alternative models | Explicit comparison table and exact countermodel | Complete for declared finite classes |
 | Formal verification | Lean proofs, counterexamples, audit roots, standard export | See validation record |
-| Repeated literature checks | Five logged checkpoints plus limitations | Complete current-source pass; refresh before empirical conclusions |
-| Every open question accounted for | Q01–Q20 with evidence/dependencies/next steps | No silent abandonment; blocked questions remain open |
+| Repeated literature checks | Six logged checkpoints plus limitations | Complete current-source pass; refresh before empirical conclusions |
+| Every open question accounted for | Q01–Q24 with evidence/dependencies/next steps | No silent abandonment; blocked questions remain open |
 
 The practical next dependency is obtaining the original data, not making a stronger ontological claim from the current plot.

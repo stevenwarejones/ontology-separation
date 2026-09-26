@@ -52,6 +52,18 @@ Direct primary metadata: [Crossref record](https://api.crossref.org/works/10.112
 
 Adverse checks: retained the 94.9/94.4 discrepancy, fidelity normalization question, finite-window bridge, phase-bin convention and incomplete raw-data evidence. Rejected the apparent missing trace-distance square root after checking MathML. A separate analytical full-Gaussian calculation raises a question about the numerical bound under that domain assumption (Q19); it was cross-checked by Gaussian quadrature rather than presented as an established author error. Verified that the formal countermodel is a context-dependent response table, not a complete trajectory theory. No evidence found here supports an FTL or backward-time intervention claim.
 
+## Checkpoint 6 — physical correspondence and a concrete follow-up
+
+Questions: Does the finite window implement the same propagation as the observed endpoint experiment? What is a useful intervention with an explicit null class? Which contextuality theorem is appropriate for a finite pointer?
+
+Searches performed: `"propagator" "tomography" "finite aperture" photons`; the titles of the Lundeen direct-wavefunction and Magaña-Loaiza looped-trajectory papers; `single photon path interference local phase shift weak measurement phase shifter contextuality experiment`; `Kunjwal Lostaglio Pusey anomalous weak values contextuality noise 2019 operational equivalences`; `"single photon" "phase" Grangier Roger Aspect 1986 interference experiment`; `"Experimental demonstration" "contextuality" "anomalous weak values" Piacentini`. Both engines were used. Some results were unrelated names or secondary summaries; these were not technical evidence. Search coverage does not justify an exhaustive novelty claim.
+
+Primary review deepened beyond the earlier abstract pass: downloaded Matzkin v2 and Lundeen author PDFs, Kunjwal full HTML and the looped-trajectory paper's primary XML. Read Matzkin's main weak-probe derivation/discussion; Lundeen's main reconstruction/ensemble description; the looped paper's theory/results/methods; Kunjwal Sections II.3–II.6, III.2 and IV. `literature-comparison.md` records review depth, exact identifiers and remaining full-proof/supplement obligations. Downloaded originals are hashed in provenance, not redistributed.
+
+Consequences: derive a projection-window error bound and a leave-and-return counterexample; specify a phase intervention without changing the selected aperture; retain loss and joint probabilities; identify the finite-pointer contextuality theorem and its missing equivalences for package 2. Do not mistake the older experimental contextuality claim for verification of all later theorem assumptions. Q18/Q20 updated; Q21–Q24 track design, calibration, stronger witness and novelty/power dependencies. `intervention_checks.py` checks the independent density-matrix expansion and loss/window counterexamples, not observed data.
+
+The Grangier and Piacentini searches identified useful precedents but were not full experimental-paper reviews in this checkpoint. Their full protocols and supplements should be assessed if selected as the apparatus/witness baseline. This is an explicit review boundary, not a closed question about all existing experiments.
+
 ## Refresh triggers
 
 Repeat targeted searches and source-version checks when raw files arrive, an author clarification/correction appears, a physical model changes, or work package 2 proposes a concrete inequality. Record the actual new evidence and revisit every dependent numerical/proof/prose claim. Do not interpret repeated empty searches as closure of a scientific question.

@@ -51,6 +51,34 @@
       "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13510607/supplementaryFiles",
       "bytes": 53954,
       "sha256": "202c33d5ddf5f70bfc8474cbd07e8608f4339d9ca70be1ecb54f656b9b72f808"
+    },
+    {
+      "file": "kunjwal2019.html",
+      "url": "https://arxiv.org/html/1812.06940v2",
+      "retrieved_date_utc": "2026-09-26",
+      "bytes": 886390,
+      "sha256": "6089948c1d3b2e66e51c6fa9116da578bca7d20476468e3d83e7e4a4cce93835"
+    },
+    {
+      "file": "matzkin2020.pdf",
+      "url": "https://arxiv.org/pdf/2002.00832",
+      "retrieved_date_utc": "2026-09-26",
+      "bytes": 720230,
+      "sha256": "2784314d8ba5721bb7661acdb03d0b6504d03f5289c5baa227aa47d39b1e1265"
+    },
+    {
+      "file": "lundeen2011.pdf",
+      "url": "https://arxiv.org/pdf/1112.3575",
+      "retrieved_date_utc": "2026-09-26",
+      "bytes": 480596,
+      "sha256": "8b43005116bf6648c8d5dce9b4555cac9f8910300ced1db0cf36189a53d58221"
+    },
+    {
+      "file": "looped2016.xml",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5196392/fullTextXML",
+      "retrieved_date_utc": "2026-09-26",
+      "bytes": 75974,
+      "sha256": "d0ad2195be3876fb5ebfcfddfd1cbda0c9284ba96e62007b2971f3dfec80863f"
     }
   ]
 }
