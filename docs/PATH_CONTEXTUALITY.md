@@ -99,3 +99,10 @@ unchanged and reveals it as the pointer; the observed pointer is fair but the
 pointwise cap fails. `countermodels_same_joint` proves equality of their entire
 joint tables. These illustrate different omitted premises, not complete rivals
 for the quantum tomographic calibration family.
+
+The reduced null is also inhabited at the reference q=16/25, d=1/50 and
+bypass probability 49/625: `reference_null_nonempty` supplies a fair probe,
+identity transition and stochastic final response. Its joint probability is
+49/1250. Thus the violating example is not exploiting incompatible calibration
+parameters in the reduced ontic class. This one-state example is not claimed
+to reproduce the complete quantum calibration family.

@@ -21,3 +21,4 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.PathContextuality.contextual_statistics
 #export_theorem OntologySeparation.PathContextuality.operational_fairness_not_response_cap
 #export_theorem OntologySeparation.PathContextuality.countermodels_same_joint
+#export_theorem OntologySeparation.PathContextuality.reference_null_nonempty

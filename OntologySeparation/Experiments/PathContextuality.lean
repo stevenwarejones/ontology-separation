@@ -157,5 +157,24 @@ theorem null_nonempty : nullModel.ResponseCap (1/2) ∧ nullModel.Disturbance 0 
     intro l j; norm_num [nullModel]
   · norm_num [Model.pF, FiniteDistribution.mean, nullModel, coin]
   · norm_num [Model.pMinus, Model.observed, nullModel, coin]
+/-- The reduced null remains inhabited at the violating example's q, d and
+bypass probability. Its probe is fair and its hidden disturbance is identity. -/
+def referenceNull : Model Unit where
+  preparation := nullModel.preparation
+  probe := nullModel.probe
+  final _ := coin (49/625) (by norm_num) (by norm_num)
+
+theorem reference_null_nonempty : referenceNull.ResponseCap (16/25) ∧
+    referenceNull.Disturbance (1/50) ∧ referenceNull.pF = 49/625 ∧
+    referenceNull.pMinus = 49/1250 := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro l; norm_num [Model.negative, referenceNull, nullModel]
+  · refine ⟨fun _ => ⟨fun _ => 1, by intro x; norm_num, by simp⟩, ?_⟩
+    intro l j
+    have hj : j = l := Subsingleton.elim _ _
+    norm_num [referenceNull, nullModel, hj]
+  · norm_num [Model.pF, FiniteDistribution.mean, referenceNull, nullModel, coin]
+  · norm_num [Model.pMinus, Model.observed, referenceNull, nullModel, coin]
+
 end
 end OntologySeparation.PathContextuality

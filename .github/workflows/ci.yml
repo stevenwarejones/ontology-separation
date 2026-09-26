@@ -18,7 +18,7 @@ jobs:
           test: false
           # Get errors in the finite instrument before the expensive full graph.
           # scripts/check.sh below still builds and verifies the complete project.
-          build-args: "OntologySeparation.Experiments.PathContextualityCountermodels"
+          build-args: "OntologySeparation.Experiments.PathContextualityCountermodels Tests.PathContextuality"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

@@ -47,7 +47,7 @@ def contextualPointer : Model Bool where
 
 theorem contextual_identity : contextualPointer.Disturbance 0 := by
   refine ⟨fun l => ⟨fun j => if j = l then 1 else 0,
-    by intro j; split_ifs <;> norm_num, by simp⟩, ?_⟩
+    by intro j; dsimp only; split_ifs <;> norm_num, by simp⟩, ?_⟩
   intro l j
   cases l <;> cases j <;> norm_num [contextualPointer]
 

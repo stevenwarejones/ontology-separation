@@ -669,3 +669,5 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathContextuality.contextual_statistics
 #print axioms OntologySeparation.PathContextuality.operational_fairness_not_response_cap
 #print axioms OntologySeparation.PathContextuality.countermodels_same_joint
+#print axioms OntologySeparation.PathContextuality.referenceNull
+#print axioms OntologySeparation.PathContextuality.reference_null_nonempty
