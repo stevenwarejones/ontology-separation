@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/PathContextualityStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>OntologySeparation.PathContextuality.Model.cap_of_measurement_equivalence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ) (pm : ℝ),
+  0 ≤ pm →
+    ∀ (e : Λ → ℝ),
+      (∀ (l : Λ), e l ≤ 1) → (∀ (l : Λ), m.negative l = (1 - pm) / 2 + pm * e l) → m.ResponseCap ((1 + pm) / 2)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.Model.bound</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ) (q d : ℝ),
+  0 ≤ d → m.ResponseCap q → m.Disturbance d → m.pMinus ≤ q * m.pF + d * (1 - m.pF)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.Model.trivial_bound</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ) (q : ℝ),
+  m.ResponseCap q → m.pMinus ≤ q</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.Model.full_bound</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ) (q d : ℝ),
+  0 ≤ d → m.ResponseCap q → m.Disturbance d → m.pMinus ≤ Min.min q (q * m.pF + d * (1 - m.pF))</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.Model.robust_bound</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ) (q d epsA epsF a f : ℝ),
+  0 ≤ d →
+    m.ResponseCap q →
+      m.Disturbance d → |a - m.pMinus| ≤ epsA → |f - m.pF| ≤ epsF → a ≤ q * f + d * (1 - f) + epsA + |q - d| * epsF</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.null_nonempty</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.nullModel.ResponseCap (1 / 2) ∧
+  OntologySeparation.PathContextuality.nullModel.Disturbance 0 ∧
+    OntologySeparation.PathContextuality.nullModel.pF = 1 / 4 ∧
+      OntologySeparation.PathContextuality.nullModel.pMinus = 1 / 8</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.kraus_complete</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∑ m, (OntologySeparation.PathContextuality.kraus m).conjTranspose * OntologySeparation.PathContextuality.kraus m = 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.effect_equivalence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>(OntologySeparation.PathContextuality.kraus Bool.false).conjTranspose *
+    OntologySeparation.PathContextuality.kraus Bool.false =
+  ↑OntologySeparation.PathContextuality.referencePm • (1 - OntologySeparation.PathContextuality.pathP) +
+    ↑((1 - OntologySeparation.PathContextuality.referencePm) / 2) • 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.channel_equivalence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (X : Matrix Bool Bool ℂ),
+  ∑ m, OntologySeparation.PathContextuality.kraus m * X * (OntologySeparation.PathContextuality.kraus m).conjTranspose =
+    ↑(1 - OntologySeparation.PathContextuality.referenceD) • X +
+      ↑OntologySeparation.PathContextuality.referenceD •
+        (OntologySeparation.PathContextuality.pathZ * X * OntologySeparation.PathContextuality.pathZ.conjTranspose)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.quantum_realizes_table</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : OntologySeparation.PathContextuality.jointInterface.Setting)
+  (o : OntologySeparation.PathContextuality.jointInterface.Outcome),
+  OntologySeparation.PathContextuality.quantumJoint.prob s o = OntologySeparation.PathContextuality.exactTable.prob s o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.bypass_probability</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>↑(OntologySeparation.PathContextuality.finalReadout.prob OntologySeparation.PathContextuality.source.state Bool.true) =
+  49 / 625</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.exact_gap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.exactTable.prob () (Bool.false, Bool.true) -
+    (16 / 25 * (49 / 625) + 1 / 50 * (1 - 49 / 625)) =
+  297 / 15625</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.quantum_exclusion</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ),
+  m.ResponseCap (16 / 25) →
+    m.Disturbance (1 / 50) →
+      m.pF = 49 / 625 →
+        ¬OntologySeparation.ObservationallyEquivalent m.observed OntologySeparation.PathContextuality.quantumJoint</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.invasive_cap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (l : Bool), OntologySeparation.PathContextuality.invasiveModel.negative l ≤ 1 / 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.invasive_statistics</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.invasiveModel.pF = 1 / 2 ∧
+  OntologySeparation.PathContextuality.invasiveModel.pMinus = 1 / 2 ∧
+    ∑ b, OntologySeparation.PathContextuality.invasiveModel.observed.prob () (b, Bool.true) = 1 / 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.unchanged_marginal_not_zero_disturbance</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.invasiveModel.Disturbance 0 → False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.contextual_identity</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∃ D,
+  ∀ (l j : Bool),
+    (OntologySeparation.PathContextuality.contextualPointer.probe l).mass (Bool.false, j) +
+        (OntologySeparation.PathContextuality.contextualPointer.probe l).mass (Bool.true, j) =
+      ((1 - 0) * if j = l then 1 else 0) + 0 * (D l).mass j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.contextual_statistics</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.contextualPointer.pF = 1 / 2 ∧
+  OntologySeparation.PathContextuality.contextualPointer.pMinus = 1 / 2 ∧
+    ∑ f, OntologySeparation.PathContextuality.contextualPointer.observed.prob () (Bool.false, f) = 1 / 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.operational_fairness_not_response_cap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.contextualPointer.ResponseCap (1 / 2) → False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.countermodels_same_joint</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : OntologySeparation.PathContextuality.jointInterface.Setting)
+  (o : OntologySeparation.PathContextuality.jointInterface.Outcome),
+  OntologySeparation.PathContextuality.invasiveModel.observed.prob s o =
+    OntologySeparation.PathContextuality.contextualPointer.observed.prob s o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.reference_null_nonempty</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.referenceNull.ResponseCap (16 / 25) ∧
+  OntologySeparation.PathContextuality.referenceNull.Disturbance (1 / 50) ∧
+    OntologySeparation.PathContextuality.referenceNull.pF = 49 / 625 ∧
+      OntologySeparation.PathContextuality.referenceNull.pMinus = 49 / 1250</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.ceiling_mono</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {q qU d dU f : ℝ},
+  0 ≤ f → f ≤ 1 → q ≤ qU → d ≤ dU → Min.min q (q * f + d * (1 - f)) ≤ Min.min qU (qU * f + dU * (1 - f))</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.Model.pF_nonneg</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ), 0 ≤ m.pF</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.Model.pF_le_one</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ), m.pF ≤ 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.Model.full_bound_of_upper</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ) (q d qU dU : ℝ),
+  0 ≤ d → m.ResponseCap q → m.Disturbance d → q ≤ qU → d ≤ dU → m.pMinus ≤ Min.min qU (qU * m.pF + dU * (1 - m.pF))</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.reference_cap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ) (e : Λ → ℝ),
+  (∀ (l : Λ), e l ≤ 1) →
+    (∀ (l : Λ),
+        m.negative l =
+          (1 - OntologySeparation.PathContextuality.referencePm) / 2 +
+            OntologySeparation.PathContextuality.referencePm * e l) →
+      m.ResponseCap (16 / 25)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.quantum_exclusion_of_representations</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ : Type} [inst : Fintype Λ] (m : OntologySeparation.PathContextuality.Model Λ) (e : Λ → ℝ),
+  (∀ (l : Λ), e l ≤ 1) →
+    (∀ (l : Λ),
+        m.negative l =
+          (1 - OntologySeparation.PathContextuality.referencePm) / 2 +
+            OntologySeparation.PathContextuality.referencePm * e l) →
+      m.Disturbance OntologySeparation.PathContextuality.referenceD →
+        m.pF = 49 / 625 →
+          ¬OntologySeparation.ObservationallyEquivalent m.observed OntologySeparation.PathContextuality.quantumJoint</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.drop_cap_realizes_quantum</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.dropCapModel.Disturbance (1 / 50) ∧
+  OntologySeparation.PathContextuality.dropCapModel.pF = 49 / 625 ∧
+    OntologySeparation.ObservationallyEquivalent OntologySeparation.PathContextuality.dropCapModel.observed
+        OntologySeparation.PathContextuality.quantumJoint ∧
+      ¬OntologySeparation.PathContextuality.dropCapModel.ResponseCap (16 / 25)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PathContextuality.drop_disturbance_realizes_quantum</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PathContextuality.dropDisturbanceModel.ResponseCap (16 / 25) ∧
+  OntologySeparation.PathContextuality.dropDisturbanceModel.pF = 49 / 625 ∧
+    OntologySeparation.ObservationallyEquivalent OntologySeparation.PathContextuality.dropDisturbanceModel.observed
+        OntologySeparation.PathContextuality.quantumJoint ∧
+      ¬OntologySeparation.PathContextuality.dropDisturbanceModel.Disturbance (1 / 50)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>

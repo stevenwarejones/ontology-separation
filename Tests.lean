@@ -88,3 +88,5 @@ import Tests.Collectibility
 import Tests.PathInterference
 
 import Tests.ContinuumFinite
+import Tests.PathContextuality
+import Tests.PathCompatibility

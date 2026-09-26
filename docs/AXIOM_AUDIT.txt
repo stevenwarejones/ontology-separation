@@ -1257,3 +1257,97 @@
  Classical.choice,
  Quot.sound]
 'OntologySeparation.PhaseIntervention.excludes_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.observed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.cap_of_measurement_equivalence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.Model.bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.trivial_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.full_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.robust_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.nullModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.null_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.kraus_complete' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.effect_equivalence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.channel_equivalence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.source' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.finalReadout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.jointReadout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.quantumJoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.exactTable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.quantum_realizes_table' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.bypass_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.exact_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.quantum_exclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.fairPreparation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.bitFinal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.invasiveModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.invasive_cap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.invasive_statistics' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.unchanged_marginal_not_zero_disturbance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.contextualPointer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.contextual_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.contextual_statistics' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.operational_fairness_not_response_cap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.countermodels_same_joint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.referenceNull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.reference_null_nonempty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.ceiling_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.pF_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.pF_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.full_bound_of_upper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.referencePm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.referenceD' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.reference_cap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.quantum_exclusion_of_representations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.dropCapModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.drop_cap_realizes_quantum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.dropDisturbanceModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.drop_disturbance_realizes_quantum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.Model.pPlus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.positive_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.negative_marginal_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.Model.success_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.Model.robust_positive_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.reference_necessary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.referenceFlow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.boundaryModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.boundary_statistics' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.boundary_cap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.boundary_disturbance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.reference_disturbance_lower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.reference_disturbance_attained' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.ReferenceRegion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathContextuality.reference_region_sufficient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.reference_compatible_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathContextuality.reference_finite_compatible_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
