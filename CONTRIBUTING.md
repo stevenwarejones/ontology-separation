@@ -19,5 +19,39 @@ reviewable example to demonstrate any API change.
   separately in the change description. Do not claim experimental confirmation
   from a formalized ideal model.
 
+`sh scripts/check.sh` defaults to one Lean thread to bound memory use, matching
+CI. On a machine with sufficient memory, opt into more threads locally:
+
+```sh
+LEAN_NUM_THREADS=8 sh scripts/check.sh
+```
+
+CI restores pinned dependency and incremental project builds, then runs all
+builds, tests, axiom audits and snapshot checks before saving caches. PR and
+`main` push verification do not run the additional kernel replay audit.
+
+A nightly run of Verify performs all the usual verification plus serial replay
+of every built project and test module, including cached declarations. It runs
+on the default branch at 07:17 UTC (03:17 New York in summer, 02:17 in winter),
+once this workflow is merged. GitHub may delay scheduled runs. The workflow's
+manual **Run workflow** trigger also runs the full audit; select `main` to audit
+the current default branch. Neither scheduled nor manual runs deploy Pages.
+
+Run the full replay locally after `sh scripts/check.sh`:
+
+```sh
+LEAN_NUM_THREADS=1 lake env leanchecker --verbose OntologySeparation Tests
+```
+
+This uses Lean 4.30's bundled checker with each module's imported environment.
+Third-party dependency declarations are not independently replayed; this is an
+additional check using Lean's own kernel, not an external verifier. The normal
+build checks newly compiled proofs, while restored compiled artifacts are
+trusted until the nightly replay. That cache trust already existed before this
+CI change. Nightly replay adds detection after merge, not a pre-merge guarantee;
+any nightly failure needs investigation. Replay failures fail the nightly/manual
+run and prevent its cache saves. Wait for all required checks on the latest PR
+commit before merging.
+
 The initial code was AI-assisted and has not received independent expert physics
 review. Passing Lean validates formal deductions, not their empirical premises.
