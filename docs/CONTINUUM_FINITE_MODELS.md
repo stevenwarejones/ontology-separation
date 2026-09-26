@@ -1,9 +1,12 @@
 # Continuum dynamics versus finite models
 
-**Draft for substantive review.** The finishing connections below are implemented;
-final full-source verification and regenerated evidence are pending. The committed
-105-root/96-theorem snapshots describe the earlier verified baseline, not the new
-connections. No new theorem is certified by those older artifacts.
+**Draft for substantive review.** The complete unchanged `scripts/check.sh` passed
+for proof revision `b9ecc055aca53ff38c42413ff31c87f7a9963233` in
+[CI run 36277055257](https://github.com/stevenwarejones/ontology-separation/actions/runs/36277055257),
+including `lake build`, `lake build Tests`, the axiom audit and every report.
+The committed artifacts are the exact outputs from that run: all 201 continuum
+audit roots and 164 theorem exports. No Lean sources changed after generation.
+The evidence commit must also pass the final-head generated-output consistency gate.
 
 ## Common models and accessible experiments
 
@@ -118,11 +121,10 @@ can be refitted. Full loss and zero visibility are other exact failures.
 used in the companion fixed-allocation design. Its shared-scale interval test
 exploits several momenta while preserving one scale across settings.
 
-## Completed-source connections and their verification obligations
+## Verified connections and independent checks
 
-The following table identifies the implementation chain. Final checking and
-regeneration, described above, are required before treating the new roots as
-verified completion.
+The following table identifies the chain checked by the full verification run
+above. Numerical tests provide independent corroboration of the stated models.
 
 | Connection | Public declarations | Independent numerical checks |
 |---|---|---|
@@ -154,9 +156,13 @@ handle wrapping, calibration widths and sampling.
 
 ## Evidence and limits
 
-All new trust roots are registered in `Tests/Audit.lean`; the report source
-exports the approximation, joint-law and witness chain. The committed baseline generated
-audit/report came from `4864f79`; the expanded roots require fresh generation.
+All 201 continuum trust roots are registered in `Tests/Audit.lean` and covered
+by the regenerated `docs/AXIOM_AUDIT.txt`, using only `propext`,
+`Classical.choice` and `Quot.sound`. The regenerated
+`examples/continuum-finite.html` contains all 164 exported theorems, including
+the approximation, heterogeneous joint-law, physical propagator and noisy witness
+chain. All other generated reports already matched the checked-in versions.
+Kernel replay retains the repository’s existing nightly/manual policy.
 The companion [numerical study](https://github.com/stevenwarejones/path-reality-tests/pull/9)
 contains independent cyclic matrix, Born-rule, tail, joint-law and count-decision
 tests, 660 baseline scenarios, and a shared-scale sensitivity comparison.
