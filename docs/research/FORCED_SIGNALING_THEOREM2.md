@@ -134,3 +134,13 @@ variable or general field-dynamics equivalence is claimed.
 slope optimum using a **realized** LC4 witness. This sharpness conclusion is
 proved separately from the lower-bound transfer. The white-noise result in this
 bridge is a lower-bound corollary; a physical exact noisy curve is not asserted.
+
+## Timing and collectible signals
+
+The stacked timing/collectibility development is documented in
+[FORCED_SIGNALING_COLLECTIBILITY.md](FORCED_SIGNALING_COLLECTIBILITY.md). Its
+claim table maps the pinned-recipient lemma, the explicit segment obstruction,
+the two positive layouts, and the physical payoff to their Lean entry points.
+The finite timing menu shares a seed law and retained responses across branches;
+it includes a completion to the full quantum joint distribution in each
+connected branch. Validation of this draft and the regenerated audit are pending.

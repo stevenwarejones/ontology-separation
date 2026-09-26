@@ -78,3 +78,5 @@ import Tests.ImperfectTwoRecordAccess
 import Tests.ForcedSignalingPropositions
 
 import Tests.VCausal
+
+import Tests.Collectibility
