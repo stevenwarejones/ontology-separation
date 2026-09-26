@@ -16,6 +16,7 @@ def pairIsometry (e : Fin 2 → H) (he : Orthonormal ℂ e) : TwoMode →ₗᵢ[
   map_add' u v := by simp [add_smul, sum_add_distrib]
   map_smul' c u := by simp [mul_smul, smul_sum]
   norm_map' u := by
+    change ‖∑ i, u i • e i‖ = ‖u‖
     have h := he.inner_sum (fun i => u i) (fun i => u i) univ
     rw [inner_self_eq_norm_sq_to_K] at h
     simp only [← Complex.normSq_eq_conj_mul_self, Complex.normSq_eq_norm_sq] at h
@@ -26,7 +27,7 @@ def pairIsometry (e : Fin 2 → H) (he : Orthonormal ℂ e) : TwoMode →ₗᵢ[
 
 @[simp] theorem pairIsometry_single (e : Fin 2 → H) (he : Orthonormal ℂ e) (i : Fin 2) :
     pairIsometry e he (EuclideanSpace.single i 1) = e i := by
-  simp [pairIsometry, PiLp.single_apply]
+  fin_cases i <;> simp [pairIsometry, PiLp.single_apply]
 end Pair
 
 def spectralPair (j₀ j₁ : ℤ) (i : Fin 2) : SpectralHilbert :=
@@ -47,8 +48,10 @@ def twoModeEmbedding (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) : TwoMode →ₗᵢ[�
     (u : TwoMode) (j : ℤ) :
     twoModeEmbedding j₀ j₁ h u j =
       (if j = j₀ then u 0 else 0) + (if j = j₁ then u 1 else 0) := by
-  simp [twoModeEmbedding, pairIsometry, spectralPair, Fin.sum_univ_two,
-    lp.single_apply, eq_comm, smul_eq_mul]
+  change (∑ i : Fin 2, u i • spectralPair j₀ j₁ i) j = _
+  rw [Fin.sum_univ_two]
+  simp [spectralPair, lp.coeFn_add, lp.coeFn_smul, lp.coeFn_single,
+    Pi.single_apply, smul_eq_mul, eq_comm]
 
 @[simp] theorem twoModeEmbedding_norm (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (u : TwoMode) :
     ‖twoModeEmbedding j₀ j₁ h u‖ = ‖u‖ := (twoModeEmbedding j₀ j₁ h).norm_map u
@@ -99,17 +102,20 @@ theorem pairProjection_orthogonal (e : TwoMode →ₗᵢ[ℂ] H) (u : TwoMode) (
     inner ℂ (e u) (x-pairProjection e x) = 0 := by
   rw [inner_sub_right]
   change inner ℂ (e u) x-inner ℂ (e u) (e (pairExtraction e x)) = 0
-  rw [e.inner_map_map, ← e.toContinuousLinearMap.adjoint_inner_right u x]
-  exact sub_self _
+  rw [e.inner_map_map]
+  apply sub_eq_zero.mpr
+  exact (e.toContinuousLinearMap.adjoint_inner_right u x).symm
 
 theorem pairProjection_pythagoras (e : TwoMode →ₗᵢ[ℂ] H) (x : H) :
     ‖pairExtraction e x‖^2 + ‖x-pairProjection e x‖^2 = ‖x‖^2 := by
   have hi := e.toContinuousLinearMap.adjoint_inner_left (pairExtraction e x) x
+  change inner ℂ (pairExtraction e x) (pairExtraction e x) =
+    inner ℂ x (e (pairExtraction e x)) at hi
   have hr : (inner ℂ x (pairProjection e x)).re = ‖pairExtraction e x‖^2 := by
     change (inner ℂ x (e (pairExtraction e x))).re = _
     rw [← hi]
     exact inner_self_eq_norm_sq _
-  rw [norm_sub_sq, hr]
+  rw [norm_sub_sq (𝕜 := ℂ), hr]
   change ‖pairExtraction e x‖^2 +
     (‖x‖^2-2*‖pairExtraction e x‖^2+‖e (pairExtraction e x)‖^2) = _
   rw [e.norm_map]

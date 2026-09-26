@@ -1091,3 +1091,25 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.pairProjection_pythagoras
 #print axioms OntologySeparation.ContinuumFinite.transportedInterferometer
 #print axioms OntologySeparation.ContinuumFinite.transportedInterferometer_agrees
+
+#print axioms OntologySeparation.ContinuumFinite.fourierBasis
+#print axioms OntologySeparation.ContinuumFinite.fourierBasis_apply
+#print axioms OntologySeparation.ContinuumFinite.fourierAnalysis
+#print axioms OntologySeparation.ContinuumFinite.fourier_inversion
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_eq_repr
+#print axioms OntologySeparation.ContinuumFinite.fourierAnalysis_synthesis
+#print axioms OntologySeparation.ContinuumFinite.siteFrequency
+#print axioms OntologySeparation.ContinuumFinite.cyclicHamiltonian
+#print axioms OntologySeparation.ContinuumFinite.cyclicHamiltonian_apply
+#print axioms OntologySeparation.ContinuumFinite.cyclicHamiltonian_mode
+#print axioms OntologySeparation.ContinuumFinite.cyclicHamiltonian_synthesis
+#print axioms OntologySeparation.ContinuumFinite.phase_time_derivative
+#print axioms OntologySeparation.ContinuumFinite.siteEvolve_derivative
+#print axioms OntologySeparation.ContinuumFinite.schrodingerGenerator
+#print axioms OntologySeparation.ContinuumFinite.schrodingerGenerator_synthesis
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_zero
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_derivative
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_schrodinger
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_unique
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_synthesis
