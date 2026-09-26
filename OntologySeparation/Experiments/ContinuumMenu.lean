@@ -12,7 +12,7 @@ variable {I : Type} (O : I → Type) [∀ s, Fintype (O s)] (n : I → ℕ)
 
 def MenuSamples : List I → Type
   | [] => Unit
-  | s :: m => Samples (O s) (n s) × MenuSamples O n m
+  | s :: m => Samples (O s) (n s) × MenuSamples m
 
 @[reducible] def menuFintype : (m : List I) → Fintype (MenuSamples O n m)
   | [] => inferInstanceAs (Fintype Unit)
@@ -25,8 +25,10 @@ instance (m : List I) : Fintype (MenuSamples O n m) := menuFintype O n m
 /-- Each multinomial observation stays intact; only trials/settings are independent. -/
 def menuLaw (p : ∀ s, FiniteDistribution (O s)) :
     (m : List I) → FiniteDistribution (MenuSamples O n m)
-  | [] => { mass := fun _ => 1, nonneg := by intro; norm_num,
-      total := by simp [MenuSamples] }
+  | [] =>
+      { mass := fun _ => 1
+        nonneg := by intro; norm_num
+        total := by simp [MenuSamples] }
   | s :: m => distributionProduct (iid (p s) (n s)) (menuLaw p m)
 
 theorem menu_tv (p q : ∀ s, FiniteDistribution (O s)) (m : List I)

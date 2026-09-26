@@ -1121,3 +1121,26 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.menu_test_error
 #print axioms OntologySeparation.ContinuumFinite.finite_family_convergence
 #print axioms OntologySeparation.ContinuumFinite.finite_menu_nonseparation
+
+#print axioms OntologySeparation.ContinuumFinite.noisyPostprocess
+#print axioms OntologySeparation.ContinuumFinite.noisyPostprocess_interferometer
+#print axioms OntologySeparation.ContinuumFinite.spectralReadout
+#print axioms OntologySeparation.ContinuumFinite.spectralReadout_agrees
+#print axioms OntologySeparation.ContinuumFinite.spectral_noisy_witness
+
+#print axioms OntologySeparation.ContinuumFinite.siteFrequency_intCast
+#print axioms OntologySeparation.ContinuumFinite.sitePropagatorCLM
+#print axioms OntologySeparation.ContinuumFinite.sitePropagatorCLM_apply
+#print axioms OntologySeparation.ContinuumFinite.fourierAnalysis_mode
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_mode
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_bandSynthesis
+#print axioms OntologySeparation.ContinuumFinite.sitePairEmbedding
+#print axioms OntologySeparation.ContinuumFinite.sitePairEmbedding_no_alias
+#print axioms OntologySeparation.ContinuumFinite.sitePairEmbedding_band
+#print axioms OntologySeparation.ContinuumFinite.sitePairEmbedding_intertwines
+#print axioms OntologySeparation.ContinuumFinite.site_readout_agrees
+
+#print axioms OntologySeparation.ContinuumFinite.continuum_mode_ratio
+#print axioms OntologySeparation.ContinuumFinite.lattice_half_angle
+#print axioms OntologySeparation.ContinuumFinite.lattice_mode_ratio
+#print axioms OntologySeparation.ContinuumFinite.shared_scale_two_modes_impossible

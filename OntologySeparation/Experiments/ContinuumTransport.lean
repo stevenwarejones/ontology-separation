@@ -50,8 +50,9 @@ def twoModeEmbedding (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) : TwoMode →ₗᵢ[�
       (if j = j₀ then u 0 else 0) + (if j = j₁ then u 1 else 0) := by
   change (∑ i : Fin 2, u i • spectralPair j₀ j₁ i) j = _
   rw [Fin.sum_univ_two]
-  simp [spectralPair, lp.coeFn_add, lp.coeFn_smul, lp.coeFn_single,
-    Pi.single_apply, Pi.add_apply, Pi.smul_apply, smul_eq_mul, eq_comm]
+  change u 0 * (lp.single 2 j₀ (1 : ℂ)) j + u 1 * (lp.single 2 j₁ (1 : ℂ)) j = _
+  by_cases h0 : j = j₀ <;> by_cases h1 : j = j₁ <;>
+    simp [lp.single_apply, h0, h1, eq_comm]
 
 @[simp] theorem twoModeEmbedding_norm (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (u : TwoMode) :
     ‖twoModeEmbedding j₀ j₁ h u‖ = ‖u‖ := (twoModeEmbedding j₀ j₁ h).norm_map u
@@ -145,6 +146,92 @@ theorem transportedInterferometer_agrees (e : TwoMode →ₗᵢ[ℂ] H) (q : ℝ
   fin_cases o <;>
     simp [transportedInterferometer, pairProjection, e.norm_map, interferometer_failure]
 end Transport
+
+/-- Stochastic loss/bin randomization retaining pre-existing failure mass. -/
+def noisyPostprocess (eta v : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1)
+    (hv0 : 0 ≤ v) (hv1 : v ≤ 1) (p : FiniteDistribution (Fin 3)) :
+    FiniteDistribution (Fin 3) where
+  mass o := if o = 0 then eta*((1+v)/2*p.mass 0+(1-v)/2*p.mass 1)
+    else if o = 1 then eta*((1-v)/2*p.mass 0+(1+v)/2*p.mass 1)
+    else p.mass 2+(1-eta)*(p.mass 0+p.mass 1)
+  nonneg o := by
+    have h0 := p.nonneg 0; have h1 := p.nonneg 1; have h2 := p.nonneg 2
+    have hv : 0 ≤ 1-v := sub_nonneg.mpr hv1
+    have he : 0 ≤ 1-eta := sub_nonneg.mpr he1
+    fin_cases o <;> norm_num <;> positivity
+  total := by
+    have ht := p.total
+    rw [Fin.sum_univ_three] at ht
+    norm_num [Fin.sum_univ_three, Fin.ext_iff]
+    linear_combination ht
+
+theorem noisyPostprocess_interferometer (eta v q : ℝ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+    (u : TwoMode) (hu : ‖u‖ = 1) (o : Fin 3) :
+    (noisyPostprocess eta v he0 he1 hv0 hv1 ((interferometer q).distribution u hu)).mass o =
+      (noisyReadout eta v q he0 he1 hv0 hv1 u hu).mass o := by
+  have ht := (interferometer q).complete u
+  change (∑ o, ‖interferometerOperator q o u‖^2) = _ at ht
+  rw [Fin.sum_univ_three, interferometer_failure, hu] at ht
+  have hs : ‖interferometerOperator q 0 u‖^2+‖interferometerOperator q 1 u‖^2 = 1 := by linarith
+  fin_cases o <;> simp [noisyPostprocess, noisyReadout, BornInstrument.distribution,
+    interferometer, interferometer_failure, hs]
+
+/-- Complete operational law after the actual infinite-space evolution. -/
+def spectralReadout (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (w : ℤ → ℝ)
+    (t eta v q : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+    (u : TwoMode) (hu : ‖u‖ = 1) : FiniteDistribution (Fin 3) :=
+  noisyPostprocess eta v he0 he1 hv0 hv1
+    ((transportedInterferometer (twoModeEmbedding j₀ j₁ h) q).distribution
+      (hilbertEvolve w t (twoModeEmbedding j₀ j₁ h u)) (by simp [hu]))
+
+theorem spectralReadout_agrees (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (w : ℤ → ℝ)
+    (t eta v q : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+    (u : TwoMode) (hu : ‖u‖ = 1) (o : Fin 3) :
+    (spectralReadout j₀ j₁ h w t eta v q he0 he1 hv0 hv1 u hu).mass o =
+      (noisyReadout eta v q he0 he1 hv0 hv1 (twoModeEvolve (w j₀) (w j₁) t u)
+        (by simp [hu])).mass o := by
+  unfold spectralReadout
+  simp_rw [twoModeEmbedding_intertwines]
+  have hm (k : Fin 3) := transportedInterferometer_agrees (twoModeEmbedding j₀ j₁ h) q
+    (twoModeEvolve (w j₀) (w j₁) t u) (by simp [hu]) k
+  calc
+    _ = (noisyPostprocess eta v he0 he1 hv0 hv1
+      ((interferometer q).distribution (twoModeEvolve (w j₀) (w j₁) t u) (by simp [hu]))).mass o := by
+        simp only [noisyPostprocess, hm]
+    _ = _ := noisyPostprocess_interferometer eta v q he0 he1 hv0 hv1 _ _ o
+
+/-- The N=4 witness starts with the same normalized vector in infinite l²,
+uses each declared evolution, and measures both through the complete instrument. -/
+theorem spectral_noisy_witness (eta v : ℝ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1) :
+    let t := Real.pi/witnessGap
+    let p := spectralReadout 0 1 (by norm_num) (frequency witnessCircle) t eta v (t/2)
+      he0 he1 hv0 hv1 (twoModeState 0) (twoModeState_normalized 0)
+    let q := spectralReadout 0 1 (by norm_num)
+      (ringLatticeFrequency witnessCircle (witnessCircle.length/4)) t eta v (t/2)
+      he0 he1 hv0 hv1 (twoModeState 0) (twoModeState_normalized 0)
+    p.mass 0 = eta*(1+v)/2 ∧ p.mass 1 = eta*(1-v)/2 ∧ p.mass 2 = 1-eta ∧
+    q.mass 0 = eta*(1-v)/2 ∧ q.mass 1 = eta*(1+v)/2 ∧ q.mass 2 = 1-eta ∧ tv p q = eta*v := by
+  dsimp only
+  have ht := lattice_noisy_witness eta v he0 he1 hv0 hv1
+  dsimp only at ht
+  have hp : (spectralReadout 0 1 (by norm_num) (frequency witnessCircle) (Real.pi/witnessGap)
+      eta v (Real.pi/witnessGap/2) he0 he1 hv0 hv1 (twoModeState 0) (twoModeState_normalized 0)).mass 0 =
+      eta*(1+v)/2 := by rw [spectralReadout_agrees]; exact ht.1
+  have htable :
+      let p := spectralReadout 0 1 (by norm_num) (frequency witnessCircle) (Real.pi/witnessGap)
+        eta v (Real.pi/witnessGap/2) he0 he1 hv0 hv1 (twoModeState 0) (twoModeState_normalized 0)
+      let q := spectralReadout 0 1 (by norm_num)
+        (ringLatticeFrequency witnessCircle (witnessCircle.length/4)) (Real.pi/witnessGap)
+        eta v (Real.pi/witnessGap/2) he0 he1 hv0 hv1 (twoModeState 0) (twoModeState_normalized 0)
+      (p.mass 0 = eta*(1+v)/2 ∧ p.mass 1 = eta*(1-v)/2 ∧ p.mass 2 = 1-eta) ∧
+      (q.mass 0 = eta*(1-v)/2 ∧ q.mass 1 = eta*(1+v)/2 ∧ q.mass 2 = 1-eta) := by
+    dsimp only
+    simp_rw [spectralReadout_agrees]
+    exact ⟨⟨ht.1, ht.2.1, ht.2.2.1⟩, ht.2.2.2⟩
+  exact ⟨htable.1.1, htable.1.2.1, htable.1.2.2, htable.2.1,
+    htable.2.2.1, htable.2.2.2, (noisy_witness_tv _ _ eta v he0 hv0 htable.1 htable.2).2.2.2⟩
 
 end
 end OntologySeparation.ContinuumFinite
