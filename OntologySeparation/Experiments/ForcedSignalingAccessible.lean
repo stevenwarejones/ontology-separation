@@ -182,5 +182,53 @@ theorem zero_accessible_D {order : EarlyOrder} {Ω : Type} [Fintype Ω]
   simp_rw [pinned_D_subsets p h R hp x y z w]
   simp
 
+/-- The every-model branch needs only noncollectibility of the blind pair;
+being on the segment is one sufficient geometric reason for that hypothesis. -/
+theorem zero_accessible_A_of_blind_pair_not_collectible
+    {order : EarlyOrder} {Ω : Type} [Fintype Ω]
+    (p : Protocol order Ω) (h : ForcedSignalingTheorem2.MatchesCluster p.toModel)
+    (L : Layout) (R : Finset Party) (hA : Party.A ∉ R)
+    (hBC : ¬ Collectible (L .A) {L .B,L .C})
+    (hc : Collectible (L .A) (R.image L)) (x y z w : Bool) :
+    (1/2 : ℝ) * ∑ r : Party → Bool,
+      |recordProb (p.run (earlyOf x w) y z) (setRecord R) r -
+        recordProb (p.run (earlyOf false w) y z) (setRecord R) r| = 0 := by
+  have hp : R ⊆ {.B,.D} ∨ R ⊆ {.C,.D} := by
+    rcases recipients_A_dichotomy R hA with hR | hR | hR
+    · exact Or.inl hR
+    · exact Or.inr hR
+    · exfalso
+      apply hBC (hc.mono (by simp) ?_)
+      intro r hr
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hr
+      rcases hr with rfl | rfl
+      · exact Finset.mem_image.mpr ⟨.B,hR (by simp),rfl⟩
+      · exact Finset.mem_image.mpr ⟨.C,hR (by simp),rfl⟩
+  simp_rw [pinned_A_subsets p h R hp x y z w]
+  simp
+
+theorem zero_accessible_D_of_blind_pair_not_collectible
+    {order : EarlyOrder} {Ω : Type} [Fintype Ω]
+    (p : Protocol order Ω) (h : ForcedSignalingTheorem2.MatchesCluster p.toModel)
+    (L : Layout) (R : Finset Party) (hD : Party.D ∉ R)
+    (hBC : ¬ Collectible (L .D) {L .B,L .C})
+    (hc : Collectible (L .D) (R.image L)) (x y z w : Bool) :
+    (1/2 : ℝ) * ∑ r : Party → Bool,
+      |recordProb (p.run (earlyOf x w) y z) (setRecord R) r -
+        recordProb (p.run (earlyOf x false) y z) (setRecord R) r| = 0 := by
+  have hp : R ⊆ {.A,.B} ∨ R ⊆ {.A,.C} := by
+    rcases recipients_D_dichotomy R hD with hR | hR | hR
+    · exact Or.inl hR
+    · exact Or.inr hR
+    · exfalso
+      apply hBC (hc.mono (by simp) ?_)
+      intro r hr
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hr
+      rcases hr with rfl | rfl
+      · exact Finset.mem_image.mpr ⟨.B,hR (by simp),rfl⟩
+      · exact Finset.mem_image.mpr ⟨.C,hR (by simp),rfl⟩
+  simp_rw [pinned_D_subsets p h R hp x y z w]
+  simp
+
 end
 end OntologySeparation.ForcedSignalingAccessible

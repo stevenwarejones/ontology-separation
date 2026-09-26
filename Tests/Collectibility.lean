@@ -1,3 +1,5 @@
+import OntologySeparation.Experiments.ForcedSignalingAccessibleOptimum
+import OntologySeparation.Experiments.ForcedSignalingGeometryRobustness
 import OntologySeparation.Experiments.ForcedSignalingTimingExtension
 import OntologySeparation.Experiments.ForcedSignalingAccessible
 import OntologySeparation.Experiments.ForcedSignalingPinned
@@ -65,3 +67,51 @@ example {Ω : Type} [Fintype Ω] (p : Protocol .disconnected Ω)
       subst r
       exact lightFuture_refl _)
   · norm_num [threeSite, lightFuture]
+
+/-- The segment obstruction rules out collecting the entire blind-pair record. -/
+example : ¬ Collectible (threeSite .A) {threeSite .B, threeSite .C} := by
+  apply not_collectible_of_between <;> norm_num [threeSite]
+
+/-- Ordinary light cones are closed, including the exactly null boundary. -/
+example : lightFuture ⟨0,0⟩ ⟨1,1⟩ := by norm_num [lightFuture]
+example : ¬ lightFuture ⟨0,0⟩ ⟨1,101/100⟩ := by norm_num [lightFuture]
+
+/-- A collector on the sender's boundary is not superluminal. -/
+example : ¬ Collectible ⟨0,0⟩ {⟨1,1⟩} := by
+  rintro ⟨_,q,hq,hs⟩
+  exact hs (lightFuture_trans (by norm_num [lightFuture]) (hq ⟨1,1⟩ (by simp)))
+
+example (dt : Party → ℚ) (h0 : ∀ p, 0 ≤ dt p) (h1 : ∀ p, dt p ≤ 1/100) :
+    ForcedSignalingCollectibility.BothCollectible
+      (ForcedSignalingGeometryRobustness.durationLayout ForcedSignalingLayouts.minimal dt) :=
+  ForcedSignalingGeometryRobustness.minimal_duration_collectible dt h0 h1
+
+example : ¬ ForcedSignalingGeometryRobustness.restorationFrameTests (1/2) 10000 := by
+  norm_num [ForcedSignalingGeometryRobustness.restorationFrameTests,
+    ForcedSignalingLayouts.lightSpeed]
+
+/-- The positive layout has an attained accessible minimum, not just a bound. -/
+example : ∃ m : HiddenInfluence.Model,
+    ForcedSignalingTheorem2.MatchesCluster m ∧
+    ForcedSignalingAccessibleOptimum.accessible m ForcedSignalingLayouts.minimal =
+      (Real.sqrt 2-1)/4 := by
+  simpa only [if_pos ForcedSignalingCollectibility.minimal_both_collectible] using
+    (ForcedSignalingAccessibleOptimum.proposition2_layout_minimum ForcedSignalingLayouts.minimal).2
+
+/-- The obstructed layout has an attained zero accessible minimum. -/
+example : ∃ m : HiddenInfluence.Model,
+    ForcedSignalingTheorem2.MatchesCluster m ∧
+    ForcedSignalingAccessibleOptimum.accessible m threeSite = 0 := by
+  have hn : ¬ ForcedSignalingCollectibility.BothCollectible threeSite := by
+    intro h
+    have hbc := h.1.mono (show ({threeSite .B,threeSite .C} : Finset Event).Nonempty by simp)
+      (show ({threeSite .B,threeSite .C} : Finset Event) ⊆
+        {threeSite .B,threeSite .C,threeSite .D} by
+          intro r hr
+          simp only [Finset.mem_insert,Finset.mem_singleton] at hr ⊢
+          rcases hr with rfl | rfl <;> simp)
+    exact not_collectible_of_between (threeSite .A) (threeSite .B) (threeSite .C)
+      (by norm_num [threeSite]) (by norm_num [threeSite])
+      (by norm_num [threeSite]) (by norm_num [threeSite]) hbc
+  simpa only [if_neg hn] using
+    (ForcedSignalingAccessibleOptimum.proposition2_layout_minimum threeSite).2

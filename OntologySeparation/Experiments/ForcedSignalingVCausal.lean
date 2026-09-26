@@ -176,5 +176,19 @@ theorem vcausal_exact_forced_signaling {L : Layout} {v : ℚ} {order : EarlyOrde
   exact ⟨fun _ _ m h => vcausal_forced_signaling_lower_bound m h,
     witnessOn hL ho, witnessOn_matches hL ho, witnessOn_signaling hL ho⟩
 
+/-- Li's NS ∩ conditional-local exclusion, for the explicitly finite stochastic
+class and the exact LC4 target. B/C cannot signal in this class; `Within 0`
+requires zero recipient TV for the remaining A/D switches. -/
+theorem conditional_local_nonsignaling_exclusion {Ω : Type} [Fintype Ω]
+    (m : StochasticModel Ω) (hNS : Within m.behavior 0) :
+    ¬ ForcedSignalingTheorem2.StochasticMatchesCluster m := by
+  intro hQ
+  have hlo := ForcedSignalingTheorem2.stochastic_lower_bound hQ
+  rw [ForcedSignalingTheorem2.targetDelta_value] at hlo
+  have hhi : m.signaling ≤ 0 := (signaling_le_iff m.determinize 0).mpr hNS
+  have hs := Real.sq_sqrt (show (0 : ℝ) ≤ 2 by norm_num)
+  have hn := Real.sqrt_nonneg (2 : ℝ)
+  nlinarith
+
 end
 end OntologySeparation.ForcedSignalingVCausal

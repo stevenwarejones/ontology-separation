@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 set -eu
+python3 scripts/check_vcausal_geometry.py
 lake build
 lake build Tests
 lake env lean examples/CustomUniverse.lean

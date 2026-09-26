@@ -1,9 +1,17 @@
 # From forced signaling to collectible records
 
-This development uses a **fixed preferred frame**, rational coordinates in 1+1
-spacetime, c=1, finite classical randomness, and fixed settings during each
-single-input switch. It does not treat an unknown preferred frame, boosts, a
-delay cover, adaptive communication protocols, or finite-sample statistics.
+## Physical assumptions
+
+The results assume a fixed preferred frame; 1+1 dimensions; instantaneous
+measurement events; finite classical randomness; Bell screening-off;
+measurement independence; no postselection; and, for the timing results,
+the specified finite menu of blind, delayed-B and delayed-C interventions.
+Coordinates are rational, with c=1; probabilities are real. Settings other than
+the switched input are held fixed. Timing consistency is an additional premise
+for transferring connected-branch data, not for the direct fixed-layout bound.
+
+The results do not supply an unknown-frame delay cover, arbitrary adaptive
+communication, finite-sample statistics, or an all-layout physical theory.
 
 ## Collection geometry
 
@@ -21,8 +29,12 @@ cones has apex
 `collectible_criterion` proves that collection is possible exactly when
 `u* < u(sender)` or `w* < w(sender)`. Thus the criterion is a finite rational
 calculation and includes an explicit collection point. Hidden-influence cones
-are open; ordinary light cones are closed. All positive examples have strict
-margins, so their conclusions do not hinge on boundary conventions.
+are open; ordinary light cones are closed. The sender-exclusion margins are strict. In the minimal example the
+collector at (39/20,1) lies exactly on B’s light-cone boundary (and the
+mirror collector on C’s). The cone is closed, so this is allowed. Delaying
+either collector by any positive amount less than 1/20 preserves receipt
+of every record and keeps both collectors outside their respective sender
+cones; the strict margins are 1/20 and 3/5, respectively.
 
 ## Recipient sets and the segment obstruction
 
@@ -57,6 +69,28 @@ Its early A→D threshold is
 `restoration_threshold_rounding` verifies the interval 400.275 < threshold <
 400.285, hence the paper's rounded 400.28. It is not asserted as an exact
 rational equality. The supplied speed 10000 satisfies the actual cone tests.
+
+## Complete accessible-signaling minimum
+
+`ForcedSignalingAccessibleOptimum.proposition2_layout_minimum` proves the full
+piecewise formula of Proposition 2 in the rational 1+1 setting: the minimum is
+(√2−1)/4 when both full complements are collectible, and zero otherwise.
+`stochastic_layout_minimum` covers the full finite stochastic conditional-local
+class. Both branches include an actual attaining model, using the existing
+balanced or one-sided pairwise-invisible certificates. This theorem does not
+assume that the blind pair alone carries the forced signal.
+
+`accessible` is the finite maximum over all 16 early-setting switches and all
+seven nonempty recipient subsets, with zero contribution from an uncollectible
+record. `recordParties_complete` checks exhaustive coverage;
+`proper_encoding` and `full_encoding` prove that the statistic's labels encode
+exactly the bits of those recipient sets. Singles use padded outcome labels,
+which only add zero-probability entries. The maximization keeps every other
+setting fixed for each switch and introduces no postselection or hidden-state
+access. The separate `zero_accessible_A_of_blind_pair_not_collectible` and D
+analogue prove the every-model zero branch whenever the blind pair is not
+collectible; the segment condition is one sufficient reason, not a required
+assumption of that stronger result.
 
 ## Physical payoff
 
@@ -106,6 +140,7 @@ construct one theory reproducing quantum mechanics for every possible layout.
 | Collection criterion | `collectible_criterion` |
 | Minimal separated layout and exact margins | `minimal_lc4`, `minimal_A_collectible`, `minimal_D_collectible`, `minimal_margins` |
 | Fixed-frame four-site restoration | `restoration_lc4`, `restoration_A_collectible`, `restoration_D_collectible` |
+| Full piecewise accessible minimum, with attained branches | `proposition2_layout_minimum`, `stochastic_layout_minimum` |
 | Forced usable signal | `vcausal_forced_superluminal_signal`, `timing_forced_superluminal_signal` |
 | Sharpness with quantum connected timing branches | `attaining_timing_extension` |
 
@@ -115,3 +150,76 @@ The [definitions audit](FORCED_SIGNALING_DEFINITIONS_AUDIT.md) remains essential
 classical screening-off is an assumption, not a consequence of cone geometry,
 and conditional locality alone is different from no-signaling ∩ conditional
 locality. The mathematical proofs do not decide which ontology nature uses.
+
+## Headline, noise and the original no-go corollary
+
+`ForcedSignaling.physical_main` bundles full-behavior soundness, LC4 realization,
+the collectible lower bound on the restoration layout, and an attaining blind
+protocol whose two delayed branches reproduce the full quantum distribution.
+`restorationTiming` supplies both delayed events, rather than assuming that such
+events exist.
+
+`ForcedSignalingVCausal.conditional_local_nonsignaling_exclusion` reproduces the
+NS ∩ conditional-local exclusion for the explicitly finite stochastic LC4 class.
+It follows from the positive certified lower bound, not a new inequality.
+`noisy_collectible_signal` transfers the entire certified curve
+Σ(p)=max(0,(p(4+2√2)−6)/8) to a collectible full-recipient record.
+`restoration_ninety_percent_signal` proves strictly more than 0.018 at p=0.9.
+Below the positivity threshold the theorem still holds but does not force a
+nonzero signal. This is white-noise visibility in `MatchesNoisyCluster`, not
+an arbitrary experimental error model or a finite-sample confidence bound.
+
+## Robustness and candidate frames
+
+`ForcedSignalingGeometryRobustness.precedes_duration` gives the general cone-slack
+condition for bounded nonnegative timing errors. In the minimal example every
+outcome may independently occur between 0 and 1/100 time units after its choice:
+`minimal_duration_lc4`, `minimal_duration_order`, and
+`minimal_duration_cross_events` certify both outcome geometry and the stronger
+choice-to-other-outcome exclusions. `minimal_duration_collectible` moves the
+collectors later by 1/100 and preserves direct collection. These are geometric
+robustness results for stationary sites. They do not construct arbitrary
+continuous measurement dynamics; the stochastic protocol still has the stated
+response-table semantics.
+
+For |β|<1, `boost β (t,x)=(t−βx,x−βt)` omits the common positive Lorentz gamma
+factor. Cone tests are homogeneous, so this scale does not change them.
+`boost_lightFuture` and `boost_collectible` prove preservation of ordinary
+causality and collection. `restoration_frame_iff` characterizes the **exact**
+set of rational candidate frame velocities and rational hidden speeds in this
+coordinate framework yielding a collectible LC4
+layout by the explicit inequalities `restorationFrameTests`. The additional
+A-before-D condition is `restoration_frame_order_iff`. These are tests of the
+same laboratory events in a candidate preferred frame, not a Lorentz-invariance
+claim for hidden propagation. For example, at v=10000 the blindness condition
+already requires |β|≤1/10000; an arbitrary boost does not preserve blindness.
+A single protocol or delay menu covering every unknown preferred frame remains
+unproved.
+
+`scripts/check_vcausal_geometry.py` independently recomputes exact rational
+cone tests, collection apexes, sender margins, cone boundaries, the restoration
+threshold, duration corner cases, and frame examples. It is part of
+`scripts/check.sh`. The finite test grid supplements the universal Lean proofs;
+it does not replace them.
+
+## Assumption-deletion audit
+
+The proposed four-assumption `MinimalCore` is **not established**, and would be
+incorrect for the direct fixed-layout conclusion if it included timing
+consistency as a necessary premise. The direct lower bound assumes the LC4
+marginals and does not use timing consistency at all. The latter is needed to
+infer those marginals from data in different interventions. A valid deletion
+adversary must keep the target and every other assumption fixed; changing the
+target from LC4 to a PR-box parity table does not meet that obligation.
+
+| Assumption | Checked evidence | Exact limitation |
+|---|---|---|
+| Measurement independence | `measurement_dependence_parity`: a seed encoding actual inputs realizes the PR parity | Demonstrates failure of the local-table implication; not an LC4 deletion adversary |
+| Bell screening-off | `nonsignalingBox_marginals` and `postselection_not_local` | No-signaling is insufficient to imply deterministic local responses; not a complete LC4 minimality proof |
+| No postselection | `postselection_parity`, `postselection_half` | Constant 1/2 acceptance can create the PR parity after selection; does not authorize filtering LC4 records |
+| Timing consistency | Shared-mechanism preservation theorems; the direct LC4 bound has no timing premise | Necessary to the stated transfer argument, not proved logically necessary to every possible no-go argument |
+
+The adversary framework's `MinimalCore.deletionAdversary` requires an actual
+model for each deletion. No placeholder core or weakened target is registered.
+Proving a minimal physical premise set requires a common enlarged model language
+and LC4-specific deletion witnesses, which remain separate research obligations.

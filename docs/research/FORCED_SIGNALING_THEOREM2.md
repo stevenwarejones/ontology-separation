@@ -156,3 +156,10 @@ completion of the delayed branch. All public theorem roots are in the audit regi
 | Four-site restoration | Lean in one preferred frame: `restoration_lc4`, both collection witnesses |
 | Forced signal outside the sender's light cone | Lean: `vcausal_forced_superluminal_signal` |
 | Shared timing mechanism and finite-menu sharpness | Lean: `timing_forced_superluminal_signal`, `attaining_timing_extension` |
+
+The complete [physical assumptions](FORCED_SIGNALING_COLLECTIBILITY.md#physical-assumptions)
+are stated together in the collectibility guide.
+
+The full layout-dependent accessible minimum is now `ForcedSignalingAccessibleOptimum.proposition2_layout_minimum`
+(with `stochastic_layout_minimum` for finite stochastic models); both branches
+contain explicit attaining models, and recipient coding is audited.

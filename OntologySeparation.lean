@@ -78,3 +78,7 @@ import OntologySeparation.Experiments.ForcedSignalingVCausalCompletions
 
 import OntologySeparation.Experiments.ForcedSignalingTimingExtension
 import OntologySeparation.Experiments.ForcedSignalingAccessible
+
+import OntologySeparation.Operational.VCausalFiniteSupport
+import OntologySeparation.Experiments.ForcedSignalingPhysicalMain
+import OntologySeparation.Experiments.ForcedSignalingAccessibleOptimum

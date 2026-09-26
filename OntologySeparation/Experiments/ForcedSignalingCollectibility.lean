@@ -49,5 +49,35 @@ theorem minimal_both_collectible : BothCollectible ForcedSignalingLayouts.minima
 theorem restoration_both_collectible : BothCollectible ForcedSignalingLayouts.restoration :=
   ⟨ForcedSignalingLayouts.restoration_A_collectible, ForcedSignalingLayouts.restoration_D_collectible⟩
 
+/-- The same direct-collection conclusion for the entire certified noise curve. -/
+theorem noisy_collectible_signal
+    {L : Layout} {v : ℚ} {order : EarlyOrder} {Ω : Type} [Fintype Ω]
+    (m : VCausal.Model L v order Ω) (visibility : ℝ)
+    (hQ : NoisyLC4.MatchesNoisyCluster visibility m.toProtocol.toModel)
+    (hL : BothCollectible L) :
+    ∃ c : Context, Collectible (L (sender c)) (recipients L c) ∧
+      max 0 ((visibility * (4 + 2 * Real.sqrt 2) - 6) / 8) ≤
+        tv m.toProtocol.toModel.behavior c := by
+  obtain ⟨c,hc⟩ := signaling_attained m.toProtocol.toModel
+  refine ⟨c,both_collectible_context hL c,?_⟩
+  rw [← hc]
+  exact ForcedSignalingVCausal.vcausal_noise_lower_bound m.toProtocol visibility hQ
+
+/-- At 90% visibility the exact lower bound is greater than 0.018. -/
+theorem restoration_ninety_percent_signal {Ω : Type} [Fintype Ω]
+    (m : VCausal.Model ForcedSignalingLayouts.restoration 10000 .aFirst Ω)
+    (hQ : NoisyLC4.MatchesNoisyCluster (9/10) m.toProtocol.toModel) :
+    ∃ c : Context,
+      Collectible (ForcedSignalingLayouts.restoration (sender c))
+        (recipients ForcedSignalingLayouts.restoration c) ∧
+      (18/1000 : ℝ) < tv m.toProtocol.toModel.behavior c := by
+  obtain ⟨c,hc,hv⟩ := noisy_collectible_signal m (9/10) hQ restoration_both_collectible
+  refine ⟨c,hc,lt_of_lt_of_le ?_ hv⟩
+  apply lt_of_lt_of_le _ (le_max_right _ _)
+  have hs := Real.sq_sqrt (show (0 : ℝ) ≤ 2 by norm_num)
+  have hn := Real.sqrt_nonneg (2 : ℝ)
+  have ht : (106/75 : ℝ) < Real.sqrt 2 := by nlinarith
+  linarith
+
 end
 end OntologySeparation.ForcedSignalingCollectibility

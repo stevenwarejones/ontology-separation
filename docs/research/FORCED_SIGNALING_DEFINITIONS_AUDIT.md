@@ -18,7 +18,8 @@ It makes no novelty claim and is not an empirical justification of screening-off
 The table uses equation pointers and paraphrases rather than long reproduced
 passages. A source's silence about a cone boundary is not evidence for a chosen
 convention. Lean uses open hidden cones (Li S.I.5) and closed ordinary light
-cones. The concrete examples have strict margins.
+cones. The concrete examples have strict hidden-link and sender-exclusion margins;
+recipient-to-collector links may lie on a closed light-cone boundary.
 
 ## Comparison
 
@@ -48,7 +49,7 @@ cones. The concrete examples have strict margins.
    projected law matches the completion, and reconstructs the **whole** behavior.
    The LC4 uniform-product early law supplies such a model in every early order.
 4. There is no claimed `Lean smaller` result within the explicitly finite,
-   classical, fixed-layout class. Infinite hidden spaces and unrestricted physical
+   classical, fixed-layout class. General infinite-support hidden laws and unrestricted physical
    ontologies are **not established**, not silently classified as equivalent.
 5. Classical screening-off is a physical assumption. Cone geometry restricts
    communication paths; it does not by itself imply Bell factorization.
@@ -108,3 +109,21 @@ one setting-independent law \(\rho(\lambda)\) and causal response functions.
 that condition; `realize_full_behavior` and `realizeLC4_behavior` state the
 observable consequences. An early-context-dependent posterior in the first
 formula does not make the initial \(\rho\) depend on settings.
+
+## Finite support in arbitrary hidden spaces
+
+`SupportedProtocol order Ω` does not require `Fintype Ω`. It specifies a finite
+support, a nonnegative normalized weight function that vanishes outside it,
+and causal response tables. `SupportedProtocol.toProtocol` restricts to the
+finite support subtype, and `SupportedProtocol.full_behavior` proves exact
+preservation of the complete observed law. Thus an infinite ambient label space
+is allowed when the law has finite support. This is not a measure-theoretic
+extension to genuinely infinite support; the usual deterministic-strategy
+convex-hull argument for that case is standard but not formalized here.
+
+The [assumption-deletion audit](FORCED_SIGNALING_COLLECTIBILITY.md#assumption-deletion-audit)
+explains why the current PR-box examples do not certify a minimal LC4 premise
+set. In particular timing consistency is not a premise of the direct fixed-layout
+bound. The [geometry additions](FORCED_SIGNALING_COLLECTIBILITY.md#robustness-and-candidate-frames)
+prove bounded-duration robustness and exact candidate-frame conditions, without
+asserting continuous dynamics or an unknown-frame delay cover.
