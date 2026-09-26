@@ -8,17 +8,17 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      # Bound memory for the targeted build and every full verification step.
+      LEAN_NUM_THREADS: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: leanprover/lean-action@v1
-        env:
-          # Keep peak memory bounded on the hosted runner. The QIT/mathlib
-          # dependency graph plus the forced-signaling kernel checks can
-          # otherwise trigger runner shutdowns before branch-specific modules
-          # are reached.
-          LEAN_NUM_THREADS: "1"
         with:
           test: false
+          # Get errors in the finite instrument before the expensive full graph.
+          # scripts/check.sh below still builds and verifies the complete project.
+          build-args: "OntologySeparation.Experiments.PathContextualityCountermodels"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
