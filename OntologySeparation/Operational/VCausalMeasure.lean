@@ -59,7 +59,10 @@ theorem MeasurableProtocol.atom_allowed {order : EarlyOrder} {Ω : Type*} [Measu
   have hz : p.shared {ω | p.table ω = t} = 0 := by
     apply measure_mono_null (t := {ω | ¬ EarlyAllowed order (fun e => (p.table ω e).record)})
     · intro ω hω
-      simpa only [Set.mem_setOf_eq, hω] using h
+      have he : p.table ω = t := hω
+      change ¬ EarlyAllowed order (fun e => (p.table ω e).record)
+      rw [he]
+      exact h
     · exact ae_iff.mp p.allowed
   rw [p.atom_mass, measureReal_def, hz, ENNReal.toReal_zero] at ht
   exact ht rfl
@@ -91,7 +94,7 @@ theorem MeasurableProtocol.full_behavior {order : EarlyOrder} {Ω : Type*} [Meas
   change (p.shared.map p.table).real _ = _
   rw [map_measureReal_apply p.measurable_table (Set.toFinite _).measurableSet]
   change p.shared.real _ = p.shared.real _
-  congr 1
+  apply congrArg p.shared.real
   ext ω
   simp
 
@@ -138,7 +141,7 @@ def Protocol.toMeasurable {order : EarlyOrder} {Ω : Type} [Fintype Ω]
   table := p.table
   measurable_table := measurable_of_countable p.table
   allowed := by
-    rw [ae_iff, PMF.toMeasure_apply_eq_zero_iff (Set.toFinite _).measurableSet]
+    rw [ae_iff, (distributionPMF p.shared).toMeasure_apply_eq_zero_iff (Set.toFinite _).measurableSet]
     apply Set.disjoint_left.mpr
     intro ω hω hbad
     apply hbad
@@ -156,8 +159,11 @@ theorem Protocol.toMeasurable_mass {order : EarlyOrder} {Ω : Type} [Fintype Ω]
   rw [PMF.toMeasure_apply_fintype, ENNReal.toReal_sum (fun ω _ => by
     simp only [Set.indicator_apply, distributionPMF, PMF.ofFintype_apply]
     split <;> simp)]
-  simp [Protocol.run, FiniteKernel.map_mass, distributionPMF, Set.indicator_apply,
-    p.shared.nonneg]
+  simp only [Protocol.run, FiniteKernel.map_mass, distributionPMF, Set.indicator_apply,
+    Set.mem_setOf_eq, PMF.ofFintype_apply]
+  apply Finset.sum_congr rfl
+  intro ω _
+  split_ifs <;> simp [p.shared.nonneg]
 
 theorem Protocol.toMeasurable_behavior {order : EarlyOrder} {Ω : Type} [Fintype Ω]
     [MeasurableSpace Ω] [MeasurableSingletonClass Ω] (p : Protocol order Ω) :
@@ -166,6 +172,14 @@ theorem Protocol.toMeasurable_behavior {order : EarlyOrder} {Ω : Type} [Fintype
   obtain ⟨⟨y,z⟩,rfl⟩ := lateFromBool_surjective l
   obtain ⟨o,rfl⟩ := VisibleOutcome.toOutcome_surjective o
   rw [MeasurableProtocol.full_behavior, Protocol.toMeasurable_mass, Protocol.full_behavior]
+
+private theorem distribution_ext {α : Type} [Fintype α] (p q : FiniteDistribution α)
+    (h : ∀ a, p.mass a = q.mass a) : p = q := by
+  cases p with | mk pm pn pt =>
+    cases q with | mk qm qn qt =>
+      have he : pm = qm := funext h
+      cases he
+      rfl
 
 /-- Compression of an embedded finite protocol groups the original seed atoms
 by their complete tables, including responses at settings not selected. -/
@@ -181,11 +195,12 @@ theorem Protocol.toMeasurable_distribution {order : EarlyOrder} {Ω : Type} [Fin
     rw [PMF.toMeasure_apply_fintype, ENNReal.toReal_sum (fun ω _ => by
       simp only [Set.indicator_apply, distributionPMF, PMF.ofFintype_apply]
       split <;> simp)]
-    simp [FiniteKernel.map_mass, distributionPMF, Set.indicator_apply, p.shared.nonneg]
-  cases p.toMeasurable.distribution
-  cases FiniteKernel.map p.shared p.table
-  congr
-  exact funext hm
+    simp only [FiniteKernel.map_mass, distributionPMF, Set.indicator_apply,
+      Set.mem_setOf_eq, PMF.ofFintype_apply]
+    apply Finset.sum_congr rfl
+    intro ω _
+    split_ifs <;> simp [p.shared.nonneg]
+  exact distribution_ext _ _ hm
 
 theorem Protocol.toMeasurable_strategies {order : EarlyOrder} {Ω : Type} [Fintype Ω]
     [MeasurableSpace Ω] [MeasurableSingletonClass Ω] (p : Protocol order Ω) (e : Early) :
@@ -198,20 +213,14 @@ theorem Protocol.toMeasurable_strategies {order : EarlyOrder} {Ω : Type} [Finty
     have h := FiniteKernel.map_mean p.shared p.table
       (fun t => if t e = s then (1 : ℝ) else 0)
     simpa [Protocol.strategies, FiniteKernel.map_mass, mul_ite] using h
-  cases p.toMeasurable.toFinite.strategies e
-  cases p.strategies e
-  congr
-  exact funext hm
+  exact distribution_ext _ _ hm
 
 /-- The finite embedding and compression preserve even the packed strategy
 model, strengthening observational equivalence and transporting all objectives. -/
 theorem Protocol.toMeasurable_toModel {order : EarlyOrder} {Ω : Type} [Fintype Ω]
     [MeasurableSpace Ω] [MeasurableSingletonClass Ω] (p : Protocol order Ω) :
     p.toMeasurable.toFinite.toModel = p.toModel := by
-  unfold Protocol.toModel
-  congr 1
-  funext e
-  exact p.toMeasurable_strategies e
+  exact congrArg HiddenInfluence.Model.fromStrategies (funext p.toMeasurable_strategies)
 
 end
 end OntologySeparation.VCausal

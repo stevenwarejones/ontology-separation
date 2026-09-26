@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.ForcedSignalingMeasures
+import OntologySeparation.Operational.VCausalMeasure
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 namespace OntologySeparation.Tests.VCausalMeasure
@@ -75,7 +75,10 @@ example (p : MeasurableProtocol .aFirst ℝ) :
     p.shared {x | p.table x = backwardsTable} = 0 := by
   apply measure_mono_null (t := {x | ¬ EarlyAllowed .aFirst (fun e => (p.table x e).record)})
   · intro x hx
-    simpa only [Set.mem_setOf_eq, hx] using backwardsTable_not_allowed
+    have he : p.table x = backwardsTable := hx
+    change ¬ EarlyAllowed .aFirst (fun e => (p.table x e).record)
+    rw [he]
+    exact backwardsTable_not_allowed
   · exact ae_iff.mp p.allowed
 
 example (p : MeasurableProtocol .aFirst ℝ)
@@ -83,7 +86,10 @@ example (p : MeasurableProtocol .aFirst ℝ)
   have hz : p.shared {x | p.table x = backwardsTable} = 0 := by
     apply measure_mono_null (t := {x | ¬ EarlyAllowed .aFirst (fun e => (p.table x e).record)})
     · intro x hx
-      simpa only [Set.mem_setOf_eq, hx] using backwardsTable_not_allowed
+      have he : p.table x = backwardsTable := hx
+      change ¬ EarlyAllowed .aFirst (fun e => (p.table x e).record)
+      rw [he]
+      exact backwardsTable_not_allowed
     · exact ae_iff.mp p.allowed
   simpa [hz] using h
 
