@@ -697,3 +697,7 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathContextuality.reference_disturbance_lower
 #print axioms OntologySeparation.PathContextuality.reference_disturbance_attained
 #print axioms OntologySeparation.PathContextuality.reference_phase_invariant
+#print axioms OntologySeparation.PathContextuality.ReferenceRegion
+#print axioms OntologySeparation.PathContextuality.reference_region_sufficient
+#print axioms OntologySeparation.PathContextuality.reference_compatible_iff
+#print axioms OntologySeparation.PathContextuality.indistinguishable_error_sum

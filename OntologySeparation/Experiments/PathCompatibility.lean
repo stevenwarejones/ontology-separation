@@ -175,7 +175,7 @@ theorem boundary_cap (u : ℝ) (hu0 : 337/625 ≤ u) (hu1 : u ≤ 1081/1225) :
 private def moveKernel (l : Bool) (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1) :
     FiniteDistribution Bool where
   mass j := if j=l then 1-p else p
-  nonneg j := by dsimp only; split_ifs <;> linarith
+  nonneg j := by split_ifs <;> linarith
   total := by cases l <;> norm_num [Fintype.sum_bool]
 
 /-- The attaining family's two flip rates are bounded by the chosen disturbance.
@@ -194,6 +194,50 @@ theorem boundary_disturbance (u d : ℝ) (hu0 : 337/625 ≤ u) (hu1 : u ≤ 1081
   cases l <;> cases j <;>
     norm_num [boundaryModel, moveKernel, flip, referenceFlow] <;>
     field_simp [ne_of_gt hd] <;> ring
+
+/-- Four linear inequalities describing the complete reference-data region.
+For probability parameters, intersect this region with 0≤q,d≤1. -/
+def ReferenceRegion (q d : ℝ) : Prop :=
+  337/625 ≤ q ∧ 1/50 ≤ d ∧
+  1369/15625 ≤ q*(49/625)+d*(576/625) ∧
+  (1-d-q)*(49/625) ≤ 144/15625
+
+/-- Every point of the reference region has a two-state model. Combined with
+`reference_necessary`, this covers arbitrary finite cardinalities for this table;
+it is not a general two-state reduction theorem. -/
+theorem reference_region_sufficient (q d : ℝ) (h : ReferenceRegion q d) :
+    ∃ m : Model Bool, m.ResponseCap q ∧ m.Disturbance d ∧
+      m.pF = 49/625 ∧ ObservationallyEquivalent m.observed quantumJoint := by
+  rcases h with ⟨hq,hd,ha,hb⟩
+  have hd0 : 0 < d := by linarith
+  by_cases hq1 : q ≤ 1081/1225
+  · refine ⟨boundaryModel q hq hq1, boundary_cap _ _ _, ?_,
+      (boundary_statistics _ _ _).1, (boundary_statistics _ _ _).2⟩
+    apply boundary_disturbance q d hq hq1 hd0
+    · nlinarith
+    · dsimp [referenceFlow]
+      linarith
+  · have hlo : (337/625 : ℝ) ≤ 1081/1225 := by norm_num
+    have hhi : (1081/1225 : ℝ) ≤ 1081/1225 := le_rfl
+    refine ⟨boundaryModel (1081/1225) hlo hhi, ?_, ?_,
+      (boundary_statistics _ _ _).1, (boundary_statistics _ _ _).2⟩
+    · intro l
+      exact (boundary_cap _ hlo hhi l).trans (by linarith)
+    · apply boundary_disturbance _ d hlo hhi hd0
+      · linarith
+      · norm_num [referenceFlow]
+        exact hd
+
+/-- Exact two-state feasibility, with a necessity proof valid at every finite
+cardinality. The displayed region is therefore the finite-model frontier. -/
+theorem reference_compatible_iff (q d : ℝ) (hd : 0 ≤ d) :
+    (∃ m : Model Bool, m.ResponseCap q ∧ m.Disturbance d ∧
+      m.pF = 49/625 ∧ ObservationallyEquivalent m.observed quantumJoint) ↔
+    ReferenceRegion q d := by
+  constructor
+  · rintro ⟨m,hq,hD,hf,he⟩
+    exact reference_necessary m q d hd hq hD hf he
+  · exact reference_region_sufficient q d
 
 /-- At fixed q=16/25, the full table forces a substantially larger d than
 inverting the negative-success inequality alone. -/
@@ -214,13 +258,21 @@ theorem reference_disturbance_attained :
   exact boundary_disturbance _ _ _ _ (by norm_num) (by norm_num)
     (by norm_num [referenceFlow])
 
+/-- Identical observable distributions preclude uniform testing, even with a
+randomized decision rule. For valid tests these two means are the error risks. -/
+theorem indistinguishable_error_sum {Ω : Type} [Fintype Ω]
+    (p : FiniteDistribution Ω) (reject : Ω → ℝ) :
+    p.mean reject+p.mean (fun o => 1-reject o) = 1 := by
+  simp only [FiniteDistribution.mean, mul_sub, mul_one, Finset.sum_sub_distrib]
+  rw [p.total]
+  ring
+
 /-- Multiplying output amplitudes and reference amplitudes by the same unit
 phase preserves the local complex pointer bilinear. -/
 theorem reference_phase_invariant (u p k : ℂ) (hu : star u*u=1) :
     star (u*p)*(u*k) = star p*k := by
-  simp only [map_mul]
   calc
-    (star u*star p)*(u*k) = (star u*u)*(star p*k) := by ring
+    star (u*p)*(u*k) = (star u*u)*(star p*k) := by rw [star_mul]; ring
     _ = star p*k := by rw [hu, one_mul]
 
 end

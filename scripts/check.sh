@@ -63,3 +63,5 @@ check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples
 check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PhaseInterventionStudy.lean -o examples/phase-intervention.html
 
 check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PathContextualityStudy.lean -o examples/path-contextuality.html
+
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PathCompatibilityStudy.lean -o examples/path-compatibility.html
