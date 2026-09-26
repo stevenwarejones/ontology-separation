@@ -51,7 +51,6 @@ jobs:
       - run: sh scripts/check.sh
       - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
       - name: Replay project and test declarations with the kernel
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         # Bundled with Lean 4.30; checks declarations even on cache hits.
         # LEAN_NUM_THREADS=1 also limits the checker's module workers.
         run: lake env leanchecker --verbose OntologySeparation Tests
