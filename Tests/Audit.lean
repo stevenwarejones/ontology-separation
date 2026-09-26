@@ -1164,3 +1164,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 
 
 
+
+#print axioms OntologySeparation.ContinuumFinite.pairExtraction_coefficient
+#print axioms OntologySeparation.ContinuumFinite.spectralExtraction_apply
+#print axioms OntologySeparation.ContinuumFinite.transportedNoisyReadout_agrees
+
+#print axioms OntologySeparation.ContinuumFinite.site_noisy_readout

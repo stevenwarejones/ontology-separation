@@ -95,5 +95,24 @@ theorem site_readout_agrees (j₀ j₁ : ℤ) (ha : (j₀ : ZMod N) ≠ (j₁ : 
       ((interferometer q).distribution u hu).mass o :=
   transportedInterferometer_agrees _ q u hu o
 
+/-- Full noisy operational law after evolution by the actual site Hamiltonian. -/
+theorem site_noisy_readout (r : Circle) (t : ℝ) (j₀ j₁ : ℤ) (h : j₀ ≠ j₁)
+    (ha : (j₀ : ZMod N) ≠ (j₁ : ZMod N)) (eta v q : ℝ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+    (u : TwoMode) (hu : ‖u‖ = 1) (o : Fin 3) :
+    let e := sitePairEmbedding j₀ j₁ ha
+    let z := sitePropagator r t (e u)
+    (noisyPostprocess eta v he0 he1 hv0 hv1
+      ((transportedInterferometer e q).distribution z (by
+        dsimp [z,e]
+        rw [sitePairEmbedding_intertwines r t j₀ j₁ h ha]
+        simp [hu]))).mass o =
+    (noisyReadout eta v q he0 he1 hv0 hv1
+      (twoModeEvolve (ringLatticeFrequency r (r.length/N) j₀)
+        (ringLatticeFrequency r (r.length/N) j₁) t u) (by simp [hu])).mass o := by
+  dsimp only
+  simp_rw [sitePairEmbedding_intertwines r t j₀ j₁ h ha]
+  exact transportedNoisyReadout_agrees _ eta v q he0 he1 hv0 hv1 _ _ o
+
 end
 end OntologySeparation.ContinuumFinite

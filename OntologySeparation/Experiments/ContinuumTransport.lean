@@ -52,7 +52,7 @@ def twoModeEmbedding (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) : TwoMode →ₗᵢ[�
   rw [Fin.sum_univ_two]
   change u 0 * (lp.single 2 j₀ (1 : ℂ) : SpectralHilbert) j + u 1 * (lp.single 2 j₁ (1 : ℂ) : SpectralHilbert) j = _
   by_cases h0 : j = j₀ <;> by_cases h1 : j = j₁ <;>
-    simp [lp.single_apply, h0, h1, eq_comm]
+    simp [lp.single_apply, Pi.single_apply, h0, h1, h, h.symm, eq_comm]
 
 @[simp] theorem twoModeEmbedding_norm (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (u : TwoMode) :
     ‖twoModeEmbedding j₀ j₁ h u‖ = ‖u‖ := (twoModeEmbedding j₀ j₁ h).norm_map u
@@ -145,6 +145,13 @@ theorem transportedInterferometer_agrees (e : TwoMode →ₗᵢ[ℂ] H) (q : ℝ
     ‖interferometerOperator q o u‖^2
   fin_cases o <;>
     simp [transportedInterferometer, pairProjection, e.norm_map, interferometer_failure]
+/-- Extraction coefficients are the amplitudes along the prepared orthonormal pair. -/
+theorem pairExtraction_coefficient (e : TwoMode →ₗᵢ[ℂ] H) (x : H) (i : Fin 2) :
+    pairExtraction e x i = inner ℂ (e (EuclideanSpace.single i 1)) x := by
+  have h := e.toContinuousLinearMap.adjoint_inner_right (EuclideanSpace.single i 1) x
+  simpa [pairExtraction, EuclideanSpace.inner_single_left] using h
+
+
 end Transport
 
 /-- Stochastic loss/bin randomization retaining pre-existing failure mass. -/
@@ -235,6 +242,29 @@ theorem spectral_noisy_witness (eta v : ℝ)
     exact ⟨⟨ht.1, ht.2.1, ht.2.2.1⟩, ht.2.2.2⟩
   exact ⟨htable.1.1, htable.1.2.1, htable.1.2.2, htable.2.1,
     htable.2.2.1, htable.2.2.2, (noisy_witness_tv _ _ eta v he0 hv0 htable.1 htable.2).2.2.2⟩
+
+/-- The bounded extraction reads exactly the two selected Fourier coefficients. -/
+theorem spectralExtraction_apply (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (x : SpectralHilbert) (i : Fin 2) :
+    pairExtraction (twoModeEmbedding j₀ j₁ h) x i = x (if i = 0 then j₀ else j₁) := by
+  rw [pairExtraction_coefficient]
+  change inner ℂ (pairIsometry (spectralPair j₀ j₁) _ (EuclideanSpace.single i 1)) x = _
+  rw [pairIsometry_single]
+  simp [spectralPair,lp.inner_single_left]
+
+section NoisyTransport
+variable {H : Type} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
+
+theorem transportedNoisyReadout_agrees (e : TwoMode →ₗᵢ[ℂ] H) (eta v q : ℝ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+    (u : TwoMode) (hu : ‖u‖ = 1) (o : Fin 3) :
+    (noisyPostprocess eta v he0 he1 hv0 hv1
+      ((transportedInterferometer e q).distribution (e u) (by simpa using hu))).mass o =
+    (noisyReadout eta v q he0 he1 hv0 hv1 u hu).mass o := by
+  calc
+    _ = (noisyPostprocess eta v he0 he1 hv0 hv1 ((interferometer q).distribution u hu)).mass o := by
+      simp only [noisyPostprocess,transportedInterferometer_agrees]
+    _ = _ := noisyPostprocess_interferometer eta v q he0 he1 hv0 hv1 u hu o
+end NoisyTransport
 
 end
 end OntologySeparation.ContinuumFinite

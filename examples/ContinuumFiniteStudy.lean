@@ -186,3 +186,9 @@ import OntologySeparation.Reporting.Claim
 
 
 
+
+#export_theorem OntologySeparation.ContinuumFinite.pairExtraction_coefficient
+#export_theorem OntologySeparation.ContinuumFinite.spectralExtraction_apply
+#export_theorem OntologySeparation.ContinuumFinite.transportedNoisyReadout_agrees
+
+#export_theorem OntologySeparation.ContinuumFinite.site_noisy_readout
