@@ -683,3 +683,9 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathContextuality.drop_cap_realizes_quantum
 #print axioms OntologySeparation.PathContextuality.dropDisturbanceModel
 #print axioms OntologySeparation.PathContextuality.drop_disturbance_realizes_quantum
+#print axioms OntologySeparation.PathContextuality.Model.pPlus
+#print axioms OntologySeparation.PathContextuality.Model.positive_bound
+#print axioms OntologySeparation.PathContextuality.Model.negative_marginal_bound
+#print axioms OntologySeparation.PathContextuality.Model.success_bound
+#print axioms OntologySeparation.PathContextuality.Model.robust_positive_bound
+#print axioms OntologySeparation.PathContextuality.reference_necessary

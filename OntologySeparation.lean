@@ -78,3 +78,4 @@ import OntologySeparation.Experiments.PhaseInterventionGeometry
 import OntologySeparation.Experiments.LocalPhase
 
 import OntologySeparation.Experiments.PathContextualityCountermodels
+import OntologySeparation.Experiments.PathCompatibility

@@ -48,7 +48,7 @@ jobs:
           use-github-cache: false
           use-mathlib-cache: ${{ steps.dependencies.outputs.cache-hit != 'true' }}
       - name: Check path-contextuality proofs
-        run: lake build OntologySeparation.Experiments.PathContextualityCountermodels Tests.PathContextuality
+        run: lake build OntologySeparation.Experiments.PathCompatibility Tests.PathCompatibility
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

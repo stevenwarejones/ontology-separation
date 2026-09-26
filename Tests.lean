@@ -80,3 +80,4 @@ import Tests.PathInterference
 import Tests.PhaseIntervention
 
 import Tests.PathContextuality
+import Tests.PathCompatibility
