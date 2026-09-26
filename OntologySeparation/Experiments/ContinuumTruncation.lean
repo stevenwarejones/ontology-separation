@@ -33,10 +33,12 @@ theorem tail_sum (s : Finset ℤ) (u : SpectralHilbert) :
   classical
   rw [tail,hilbert_norm_sq]
   simp only [lp.coeFn_sub,Pi.sub_apply,projection_apply]
-  rw [_root_.tsum_subtype {j : ℤ | j ∉ s} (fun j => ‖u j‖^2)]
-  apply tsum_congr
-  intro j
-  by_cases hj : j ∈ s <;> simp [hj,Set.indicator]
+  calc
+    _ = ∑' j : ℤ, ({j : ℤ | j ∉ s} : Set ℤ).indicator (fun j => ‖u j‖^2) j := by
+      apply tsum_congr
+      intro j
+      by_cases hj : j ∈ s <;> simp [hj,Set.indicator]
+    _ = _ := (_root_.tsum_subtype {j : ℤ | j ∉ s} (fun j => ‖u j‖^2)).symm
 
 theorem tail_identity (s : Finset ℤ) (u : SpectralHilbert) :
     tail s u = ‖u‖^2-‖projection s u‖^2 := by

@@ -11,6 +11,37 @@ theorem cosine_remainder_local (x : ℝ) (hx : |x| ≤ 1) :
     |x^2/2-(1-Real.cos x)| ≤ |x|^4*(5/96) := by
   convert Real.cos_bound hx using 1 <;> congr 1 <;> ring
 
+/-- A global one-sided fourth-order remainder. The sharp Taylor coefficient
+1/24 is established independently of the conservative local mathlib estimate. -/
+theorem cosine_remainder_global (x : ℝ) :
+    0 ≤ x^2/2-(1-Real.cos x) ∧ x^2/2-(1-Real.cos x) ≤ x^4/24 := by
+  have hl : ∀ y : ℝ, 0 ≤ y^2/2-(1-Real.cos y) := by
+    intro y
+    linarith [Real.one_sub_sq_div_two_le_cos (x := y)]
+  have hd : ∀ y : ℝ, HasDerivAt (fun z : ℝ => Real.sin z-z+z^3/6)
+      (Real.cos y-1+y^2/2) y := by
+    intro y
+    convert ((Real.hasDerivAt_sin y).sub (hasDerivAt_id y)).add
+      (((hasDerivAt_id y).pow 3).div_const 6) using 1 <;> ring
+  have hm := monotone_of_hasDerivAt_nonneg hd (fun y => by linarith [hl y])
+  have hs : ∀ y : ℝ, 0 ≤ y → 0 ≤ Real.sin y-y+y^3/6 := by
+    intro y hy
+    simpa using hm hy
+  have hd' : ∀ y : ℝ, HasDerivAt (fun z : ℝ => 1-z^2/2+z^4/24-Real.cos z)
+      (Real.sin y-y+y^3/6) y := by
+    intro y
+    convert (((hasDerivAt_const y (1 : ℝ)).sub (((hasDerivAt_id y).pow 2).div_const 2)).add
+      (((hasDerivAt_id y).pow 4).div_const 24)).sub (Real.hasDerivAt_cos y) using 1 <;> ring
+  have hm' : MonotoneOn (fun z : ℝ => 1-z^2/2+z^4/24-Real.cos z) (Set.Ici 0) := by
+    apply monotoneOn_of_hasDerivWithinAt_nonneg (convex_Ici 0) (by fun_prop)
+      (fun y _ => (hd' y).hasDerivWithinAt)
+    intro y hy
+    exact hs y (le_of_lt (by simpa using hy))
+  have hu := hm' (by simp : (0 : ℝ) ∈ Set.Ici 0) (abs_nonneg x) (abs_nonneg x)
+  simp only [Real.cos_zero,zero_pow (by decide : 2 ≠ 0),zero_pow (by decide : 4 ≠ 0),
+    zero_div,sub_zero,add_zero,sub_self,Real.cos_abs,pow_abs] at hu
+  exact ⟨hl x,by nlinarith [sq_nonneg (x^2)]⟩
+
 /-- Frequencies E/hbar for physical lattice spacing a. -/
 def latticeFrequency (hbar mass spacing k : ℝ) : ℝ :=
   hbar / (mass * spacing^2) * (1-Real.cos (k*spacing))

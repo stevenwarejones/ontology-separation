@@ -1,4 +1,5 @@
 import OntologySeparation.Experiments.ContinuumBorn
+import Mathlib.Analysis.Real.Pi.Bounds
 import Mathlib.Analysis.InnerProductSpace.PiL2
 import Mathlib.Topology.Algebra.Module.FiniteDimension
 
@@ -21,21 +22,23 @@ def interferometerOperator (q : ℝ) (o : Fin 3) : TwoMode →L[ℂ] TwoMode :=
 
 theorem interferometer_plus (q : ℝ) (u : TwoMode) :
     ‖interferometerOperator q 0 u‖^2 = ‖u 0+phase q*u 1‖^2/2 := by
-  have hs : (Real.sqrt 2)^2 = (2 : ℝ) := Real.sq_sqrt (by norm_num)
-  simp [interferometerOperator,interferometerMatrix,Matrix.toEuclideanLin_apply,
-    EuclideanSpace.norm_sq_eq,Matrix.mulVec,Fin.sum_univ_two,
-    show (1/(Real.sqrt 2 : ℂ))*u 0+(phase q/(Real.sqrt 2 : ℂ))*u 1 =
-      (u 0+phase q*u 1)/(Real.sqrt 2 : ℂ) by ring,
-    norm_div,div_pow,Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg (Real.sqrt_nonneg _),hs]
+  simp only [interferometerOperator,LinearMap.coe_toContinuousLinearMap',
+    Matrix.toEuclideanLin_apply,EuclideanSpace.norm_sq_eq,Fin.sum_univ_two]
+  change ‖(Real.sqrt 2 : ℂ)⁻¹*u 0+(phase q/(Real.sqrt 2 : ℂ))*u 1‖^2+‖(0 : ℂ)‖^2 = _
+  rw [show (Real.sqrt 2 : ℂ)⁻¹*u 0+(phase q/(Real.sqrt 2 : ℂ))*u 1 =
+    (u 0+phase q*u 1)/(Real.sqrt 2 : ℂ) by ring]
+  norm_num [norm_div,div_pow,Complex.norm_real,Real.norm_eq_abs,
+    abs_of_nonneg (Real.sqrt_nonneg _),Real.sq_sqrt]
 
 theorem interferometer_minus (q : ℝ) (u : TwoMode) :
     ‖interferometerOperator q 1 u‖^2 = ‖u 0-phase q*u 1‖^2/2 := by
-  have hs : (Real.sqrt 2)^2 = (2 : ℝ) := Real.sq_sqrt (by norm_num)
-  simp [interferometerOperator,interferometerMatrix,Matrix.toEuclideanLin_apply,
-    EuclideanSpace.norm_sq_eq,Matrix.mulVec,Fin.sum_univ_two,
-    show (1/(Real.sqrt 2 : ℂ))*u 0+(-phase q/(Real.sqrt 2 : ℂ))*u 1 =
-      (u 0-phase q*u 1)/(Real.sqrt 2 : ℂ) by ring,
-    norm_div,div_pow,Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg (Real.sqrt_nonneg _),hs]
+  simp only [interferometerOperator,LinearMap.coe_toContinuousLinearMap',
+    Matrix.toEuclideanLin_apply,EuclideanSpace.norm_sq_eq,Fin.sum_univ_two]
+  change ‖(Real.sqrt 2 : ℂ)⁻¹*u 0+(-phase q/(Real.sqrt 2 : ℂ))*u 1‖^2+‖(0 : ℂ)‖^2 = _
+  rw [show (Real.sqrt 2 : ℂ)⁻¹*u 0+(-phase q/(Real.sqrt 2 : ℂ))*u 1 =
+    (u 0-phase q*u 1)/(Real.sqrt 2 : ℂ) by ring]
+  norm_num [norm_div,div_pow,Complex.norm_real,Real.norm_eq_abs,
+    abs_of_nonneg (Real.sqrt_nonneg _),Real.sq_sqrt]
 
 @[simp] theorem interferometer_failure (q : ℝ) (u : TwoMode) :
     ‖interferometerOperator q 2 u‖^2 = 0 := by
@@ -57,12 +60,12 @@ def twoModeState (theta : ℝ) : TwoMode :=
 
 theorem twoModeState_normalized (theta : ℝ) : ‖twoModeState theta‖ = 1 := by
   have h : ‖twoModeState theta‖^2 = 1 := by
-    simp [twoModeState,EuclideanSpace.norm_sq_eq,Fin.sum_univ_two,norm_div,div_pow,
+    norm_num [twoModeState,EuclideanSpace.norm_sq_eq,Fin.sum_univ_two,norm_div,div_pow,
       Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg (Real.sqrt_nonneg _),Real.sq_sqrt]
   nlinarith [norm_nonneg (twoModeState theta)]
 
 theorem phase_re (theta : ℝ) : (phase theta).re = Real.cos theta := by
-  simp [phase,Complex.exp_mul_I]
+  simp [phase,Complex.exp_mul_I,← Complex.ofReal_cos]
 
 theorem interferometer_probability (q theta : ℝ) :
     ((interferometer q).distribution (twoModeState theta) (twoModeState_normalized theta)).mass 0 =
@@ -71,9 +74,10 @@ theorem interferometer_probability (q theta : ℝ) :
   rw [interferometer_plus]
   have hsum : twoModeState theta 0+phase q*twoModeState theta 1 =
       (1+phase (q+theta))/(Real.sqrt 2 : ℂ) := by
-    simp only [twoModeState,WithLp.toLp_apply,Matrix.cons_val_zero,Matrix.cons_val_one,
-      ← phase_add]
+    change 1/(Real.sqrt 2 : ℂ)+phase q*(phase theta/(Real.sqrt 2 : ℂ)) = _
+    rw [phase_add]
     ring
+
   rw [hsum,norm_div,div_pow,Complex.norm_real,Real.norm_eq_abs,
     abs_of_nonneg (Real.sqrt_nonneg _),Real.sq_sqrt (by norm_num)]
   have h := Complex.normSq_add (1 : ℂ) (phase (q+theta))
@@ -92,9 +96,10 @@ def noisyReadout (eta v q : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1)
     else if o = 1 then eta*((1-v)/2*‖interferometerOperator q 0 u‖^2+
       (1+v)/2*‖interferometerOperator q 1 u‖^2) else 1-eta
   nonneg o := by
-    fin_cases o <;> simp <;> positivity
+    fin_cases o <;> norm_num <;> first | positivity | linarith
   total := by
     have h := (interferometer q).complete u
+    change (∑ o, ‖interferometerOperator q o u‖^2) = ‖u‖^2 at h
     rw [Fin.sum_univ_three,interferometer_failure,hu] at h
     simp only [Fin.sum_univ_three]
     norm_num
@@ -108,6 +113,7 @@ theorem noisyReadout_table (eta v q theta : ℝ) (he0 : 0 ≤ eta) (he1 : eta �
   have hp := interferometer_probability q theta
   change ‖interferometerOperator q 0 (twoModeState theta)‖^2 = plus 1 1 (q+theta) at hp
   have ht := (interferometer q).complete (twoModeState theta)
+  change (∑ o, ‖interferometerOperator q o (twoModeState theta)‖^2) = ‖twoModeState theta‖^2 at ht
   rw [Fin.sum_univ_three,interferometer_failure,twoModeState_normalized] at ht
   dsimp [noisyReadout,plus,minus,failure] at *
   norm_num at *
@@ -143,10 +149,10 @@ theorem explicit_separating_born_experiment :
   rw [interferometer_probability,interferometer_probability]
   have hc : Real.pi/witnessGap/2 + -(Real.pi/witnessGap)*(1/2) = 0 := by ring
   have hl : Real.pi/witnessGap/2 + -(Real.pi/witnessGap)*(4/Real.pi^2) = Real.pi := by
-    have hg := ne_of_gt witnessGap_pos
-    unfold witnessGap at *
-    field_simp
-    <;> ring
+    calc
+      _ = (Real.pi/witnessGap)*witnessGap := by unfold witnessGap; ring
+      _ = Real.pi := div_mul_cancel₀ _ (ne_of_gt witnessGap_pos)
+
   rw [hc,hl]
   simp [plus]
 

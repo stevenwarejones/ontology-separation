@@ -1032,3 +1032,5 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.noisyReadout_table
 #print axioms OntologySeparation.ContinuumFinite.witnessGap_pos
 #print axioms OntologySeparation.ContinuumFinite.explicit_separating_born_experiment
+
+#print axioms OntologySeparation.ContinuumFinite.cosine_remainder_global
