@@ -98,8 +98,9 @@ is non-signaling while the surviving full-record change is a pure parity shift.
 The finite stochastic directional bound is also lifted through the existing
 determinization theorem.
 
-Lemma 2, collectibility, spacetime geometry, and finite-sample statistical
-claims remain outside the Lean scope.
+Lemma 2, fixed-frame collectibility, and spacetime geometry are formalized in
+the timing/collection extension below. Finite-sample statistical claims and
+unknown-preferred-frame delay covers remain outside this development.
 
 ## Verification
 
@@ -137,10 +138,21 @@ bridge is a lower-bound corollary; a physical exact noisy curve is not asserted.
 
 ## Timing and collectible signals
 
-The stacked timing/collectibility development is documented in
+The timing/collectibility development is documented in
 [FORCED_SIGNALING_COLLECTIBILITY.md](FORCED_SIGNALING_COLLECTIBILITY.md). Its
 claim table maps the pinned-recipient lemma, the explicit segment obstruction,
 the two positive layouts, and the physical payoff to their Lean entry points.
 The finite timing menu shares a seed law and retained responses across branches;
 it includes a completion to the full quantum joint distribution in each
-connected branch. Validation of this draft and the regenerated audit are pending.
+connected branch. Tests include a concrete three-site zero-TV case and quantum
+completion of the delayed branch. All public theorem roots are in the audit registry.
+
+
+| Manuscript claim | Lean status and entry points |
+|---|---|
+| Lemma 2: recipient sets omitting a blind party are pinned | Lean: `pinned_A_subsets`, `pinned_D_subsets`, and the recipient-set dichotomies |
+| Zero accessible signal in the three-site geometry | Lean with explicit segment/time hypotheses: `zero_accessible_A`, `zero_accessible_D` |
+| Separated four-site example, margins 1/20 and 3/5 | Lean: `minimal_lc4`, `minimal_margins`, both collection witnesses |
+| Four-site restoration | Lean in one preferred frame: `restoration_lc4`, both collection witnesses |
+| Forced signal outside the sender's light cone | Lean: `vcausal_forced_superluminal_signal` |
+| Shared timing mechanism and finite-menu sharpness | Lean: `timing_forced_superluminal_signal`, `attaining_timing_extension` |

@@ -74,10 +74,10 @@ theorem early_marginal_fromStrategies (q : Early → FiniteDistribution Strategy
   rw [Finset.sum_comm]
   simp_rw [← Finset.sum_mul]
   rw [← atomEquiv.sum_comp]
-  simp only [atomEquiv, Fintype.sum_prod_type]
+  simp only [atomEquiv, Equiv.coe_fn_mk, Fintype.sum_prod_type]
   simp only [strategy_early, HiddenInfluence.Model.fromStrategies_weight_strategyAtom, early_marginal_coeff]
   rw [FiniteKernel.map_mass]
-  simp [ite_mul, Finset.sum_ite_irrel]
+  simp [ite_mul, ite_and, Finset.sum_ite_irrel]
 
 /-- LC4 matching supplies a realizable early law for every early causal order. -/
 theorem matches_early_uniform (m : HiddenInfluence.Model)

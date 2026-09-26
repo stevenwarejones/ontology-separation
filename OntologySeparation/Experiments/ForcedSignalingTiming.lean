@@ -6,6 +6,7 @@ noncomputable section
 open scoped BigOperators
 open HiddenInfluence VCausal ForcedSignalingLC4Witness ForcedSignalingLC4
 
+set_option maxHeartbeats 0 in
 private theorem abd_bits (s : Strategy) (y : Bool) (a b d : Bool) :
     ((s.visible y false).toOutcome.val / 8 = a.toNat ∧
       (s.visible y false).toOutcome.val / 4 % 2 = b.toNat ∧
@@ -15,6 +16,7 @@ private theorem abd_bits (s : Strategy) (y : Bool) (a b d : Bool) :
   cases y <;> cases a <;> cases b <;> cases d <;> cases sa <;> cases sd <;>
     cases sb0 <;> cases sb1 <;> cases sc0 <;> cases sc1 <;> decide
 
+set_option maxHeartbeats 0 in
 private theorem acd_bits (s : Strategy) (z : Bool) (a c d : Bool) :
     ((s.visible false z).toOutcome.val / 8 = a.toNat ∧
       (s.visible false z).toOutcome.val / 2 % 2 = c.toNat ∧
@@ -30,12 +32,11 @@ theorem protocol_ABD {order : EarlyOrder} {Ω : Type} [Fintype Ω]
       recordProb (p.run (earlyOf x w) y false) abdRecord (a,b,d) := by
   unfold modelABD Protocol.toModel
   rw [← atomEquiv.sum_comp]
-  simp only [atomEquiv, Fintype.sum_prod_type, strategy_early,
+  simp only [atomEquiv, Equiv.coe_fn_mk, Fintype.sum_prod_type, strategy_early,
     show lateOf y false = lateFromBool y false from rfl,
     strategy_visible_output, HiddenInfluence.Model.fromStrategies_weight_strategyAtom]
-  simp_rw [and_assoc, abd_bits]
+  simp_rw [abd_bits]
   simp only [ite_and, ite_mul, zero_mul, Finset.sum_ite_irrel]
-  simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true]
   unfold recordProb Protocol.run
   rw [FiniteKernel.map_mean]
   have hh := FiniteKernel.map_mean p.shared (fun ω => p.table ω (earlyOf x w))
@@ -48,12 +49,11 @@ theorem protocol_ACD {order : EarlyOrder} {Ω : Type} [Fintype Ω]
       recordProb (p.run (earlyOf x w) false z) acdRecord (a,c,d) := by
   unfold modelACD Protocol.toModel
   rw [← atomEquiv.sum_comp]
-  simp only [atomEquiv, Fintype.sum_prod_type, strategy_early,
+  simp only [atomEquiv, Equiv.coe_fn_mk, Fintype.sum_prod_type, strategy_early,
     show lateOf false z = lateFromBool false z from rfl,
     strategy_visible_output, HiddenInfluence.Model.fromStrategies_weight_strategyAtom]
-  simp_rw [and_assoc, acd_bits]
+  simp_rw [acd_bits]
   simp only [ite_and, ite_mul, zero_mul, Finset.sum_ite_irrel]
-  simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true]
   unfold recordProb Protocol.run
   rw [FiniteKernel.map_mean]
   have hh := FiniteKernel.map_mean p.shared (fun ω => p.table ω (earlyOf x w))

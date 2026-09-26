@@ -12,22 +12,34 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem quantum_BD : ∀ x y w b d,
     (∑ a : Bool, abd x y w a b d) = ∑ a : Bool, abd false y w a b d := by
-  with_unfolding_all decide +kernel
+  intro x y w b d
+  simp_rw [← ForcedSignalingLC4Witness.seed_abd_matches]
+  cases x <;> cases y <;> cases w <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem quantum_CD : ∀ x z w c d,
     (∑ a : Bool, acd x z w a c d) = ∑ a : Bool, acd false z w a c d := by
-  with_unfolding_all decide +kernel
+  intro x z w c d
+  simp_rw [← ForcedSignalingLC4Witness.seed_acd_matches]
+  cases x <;> cases z <;> cases w <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem quantum_AB : ∀ x y w a b,
     (∑ d : Bool, abd x y w a b d) = ∑ d : Bool, abd x y false a b d := by
-  with_unfolding_all decide +kernel
+  intro x y w a b
+  simp_rw [← ForcedSignalingLC4Witness.seed_abd_matches]
+  cases x <;> cases y <;> cases w <;> cases a <;> cases b <;>
+    with_unfolding_all decide +kernel
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem quantum_AC : ∀ x z w a c,
     (∑ d : Bool, acd x z w a c d) = ∑ d : Bool, acd x z false a c d := by
-  with_unfolding_all decide +kernel
+  intro x z w a c
+  simp_rw [← ForcedSignalingLC4Witness.seed_acd_matches]
+  cases x <;> cases z <;> cases w <;> cases a <;> cases c <;>
+    with_unfolding_all decide +kernel
 
 theorem pinned_BD {m : Model} (h : ForcedSignalingTheorem2.MatchesCluster m)
     (x y w b d : Bool) :

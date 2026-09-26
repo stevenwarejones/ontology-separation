@@ -22,10 +22,12 @@ private theorem record_project {α β : Type} [Fintype α] [Fintype β]
   have hm : ∀ a, (FiniteKernel.map d f).mass a = (FiniteKernel.map d' f).mass a := by
     intro a
     simpa [FiniteKernel.map_mass, recordProb, mul_ite] using h a
-  unfold recordProb
-  rw [← FiniteKernel.map_mean d f (fun a => if g a = b then 1 else 0),
-    ← FiniteKernel.map_mean d' f (fun a => if g a = b then 1 else 0)]
-  simp_rw [hm]
+  let k : α → ℝ := fun a => if g a = b then 1 else 0
+  have hd := FiniteKernel.map_mean d f k
+  have hd' := FiniteKernel.map_mean d' f k
+  have hh : (∑ a, (FiniteKernel.map d f).mass a * k a) =
+      ∑ a, (FiniteKernel.map d' f).mass a * k a := by simp_rw [hm]
+  simpa only [recordProb, Function.comp_apply, k] using hd.symm.trans (hh.trans hd')
 
 private theorem pair_ABD (d : FiniteDistribution VisibleOutcome) (b k : Bool) :
     recordProb d (fun o => (o.b,o.d)) (b,k) = ∑ a : Bool, recordProb d abdRecord (a,b,k) := by
@@ -36,7 +38,7 @@ private theorem pair_ABD (d : FiniteDistribution VisibleOutcome) (b k : Bool) :
   simp only [Fintype.sum_bool, ← mul_add]
   congr 1
   cases o with | mk a b' c d' =>
-    cases a <;> cases b <;> cases k <;> cases b' <;> cases d' <;> decide
+    cases a <;> cases b <;> cases k <;> cases b' <;> cases d' <;> norm_num [abdRecord,acdRecord]
 
 private theorem pair_ACD (d : FiniteDistribution VisibleOutcome) (c k : Bool) :
     recordProb d (fun o => (o.c,o.d)) (c,k) = ∑ a : Bool, recordProb d acdRecord (a,c,k) := by
@@ -47,7 +49,7 @@ private theorem pair_ACD (d : FiniteDistribution VisibleOutcome) (c k : Bool) :
   simp only [Fintype.sum_bool, ← mul_add]
   congr 1
   cases o with | mk a b c' d' =>
-    cases a <;> cases c <;> cases k <;> cases c' <;> cases d' <;> decide
+    cases a <;> cases c <;> cases k <;> cases c' <;> cases d' <;> norm_num [abdRecord,acdRecord]
 
 private theorem pair_AB (d : FiniteDistribution VisibleOutcome) (a b : Bool) :
     recordProb d (fun o => (o.a,o.b)) (a,b) = ∑ k : Bool, recordProb d abdRecord (a,b,k) := by
@@ -58,7 +60,7 @@ private theorem pair_AB (d : FiniteDistribution VisibleOutcome) (a b : Bool) :
   simp only [Fintype.sum_bool, ← mul_add]
   congr 1
   cases o with | mk a' b' c d =>
-    cases a <;> cases b <;> cases a' <;> cases b' <;> cases d <;> decide
+    cases a <;> cases b <;> cases a' <;> cases b' <;> cases d <;> norm_num [abdRecord,acdRecord]
 
 private theorem pair_AC (d : FiniteDistribution VisibleOutcome) (a c : Bool) :
     recordProb d (fun o => (o.a,o.c)) (a,c) = ∑ k : Bool, recordProb d acdRecord (a,c,k) := by
@@ -69,7 +71,7 @@ private theorem pair_AC (d : FiniteDistribution VisibleOutcome) (a c : Bool) :
   simp only [Fintype.sum_bool, ← mul_add]
   congr 1
   cases o with | mk a' b c' d =>
-    cases a <;> cases c <;> cases a' <;> cases c' <;> cases d <;> decide
+    cases a <;> cases c <;> cases a' <;> cases c' <;> cases d <;> norm_num [abdRecord,acdRecord]
 
 private theorem abd_independent {order : EarlyOrder} {Ω : Type} [Fintype Ω]
     (p : Protocol order Ω) (e : Early) (y z : Bool) (r : Triple) :

@@ -33,8 +33,8 @@ cones. The concrete examples have strict margins.
 | Observable data | ABD and ACD (Lemma 1) | AB and BC, after relabeling (III.2) | LC4 ABD/ACD; common operational distribution (S.I.4) | Same LC4 families | `MatchesCluster`: **identical** families. Full table preservation is stronger than merely matching these marginals |
 | No-signaling | Separate condition in Lemma 1(b) | Separate hypothesis in Lemma 1(i) | HIC = NS ∩ CL (Eq. 1/S2) | NS relaxed and violation quantified | `StochasticModel` alone is **Lean larger** than HIC by design; do not identify it with HIC |
 | Signaling size | Existence of dependence, no numerical TV normalization | Existence of dependence (III.3) | No-signaling constraints | Maximum single-input-switch TV to full complement | `Model.signaling`: **different quantity** from a Boolean NS violation. For normalized finite distributions, TV=0 iff all recipient probabilities agree; positive TV witnesses a violation |
-| Usable communication | Joint records collected outside sender light cone (Fig. 3) | III.3 distinguishes inaccessible geometry | Explicit collection events S10 | Direct collection; fixed settings; no adaptive extensions | `Collectible` in follow-up PR: same closed-light-cone criterion in 1+1. A signaling table alone does not prove accessibility |
-| Timing consistency | Random measurement-time choices transfer marginals | Delaying one blind party preserves other marginal (III.2) | S18–S19, choices at original events | Separate physical premise | Fixed-layout `Protocol` alone does **not establish** cross-layout consistency; follow-up constructs a common timing protocol |
+| Usable communication | Joint records collected outside sender light cone (Fig. 3) | III.3 distinguishes inaccessible geometry | Explicit collection events S10 | Direct collection; fixed settings; no adaptive extensions | `VCausal.Collectible`: same closed-light-cone criterion in 1+1. A signaling table alone does not prove accessibility |
+| Timing consistency | Random measurement-time choices transfer marginals | Delaying one blind party preserves other marginal (III.2) | S18–S19, choices at original events | Separate physical premise | Fixed-layout `Protocol` alone does **not establish** cross-layout consistency; `TimingProtocol` supplies a common finite timing mechanism |
 
 ## Consequences for the Lean results
 
@@ -66,8 +66,11 @@ The exact LC4 minimum is over the finite classical protocol class in one fixed
 preferred-frame layout. Rational spacetime coordinates do not restrict the real
 probability weights. It is not yet a sharpness statement for a single theory
 reproducing quantum mechanics across every possible measurement arrangement.
-The follow-up timing PR must state separately what it establishes about a finite
-menu of interventions and the extension of an attaining witness.
+The timing extension proves sharpness for a finite menu of blind, delayed-B,
+and delayed-C interventions, with the full quantum distribution in both
+connected branches. See [the collectibility guide](FORCED_SIGNALING_COLLECTIBILITY.md)
+and `ForcedSignalingTimingExtension.attaining_timing_extension`. A single
+all-layout theory is not established.
 
 ## Why the response-table semantics is causal
 
@@ -88,3 +91,20 @@ same seed. The reservoir construction pre-samples potential tables for every
 context, before learning which context is actual. Its shared distribution can
 depend on the specified model, but not on the actual settings. This distinction
 is essential to measurement independence.
+
+The existing finite stochastic completion interface has the explicit form
+
+\[
+P(a,b,c,d\mid x,y,z,w)=\sum_\omega\mu_{xw}(\omega)
+ A_{xw,\omega}(a)D_{xw,\omega}(d)
+ B_{xw,\omega,y}(b)C_{xw,\omega,z}(c).
+\]
+
+This is conditional locality of the blind pair after early information has been
+included in the conditioning state. The physical interface instead starts with
+one setting-independent law \(\rho(\lambda)\) and causal response functions.
+`EarlyMatches` expresses the extra compatibility condition on its AD marginal.
+`realizable_iff_early` is an exact finite response-law characterization under
+that condition; `realize_full_behavior` and `realizeLC4_behavior` state the
+observable consequences. An early-context-dependent posterior in the first
+formula does not make the initial \(\rho\) depend on settings.
