@@ -247,5 +247,149 @@ theorem lattice_born_witness :
     plus 1 1 (Real.pi/witnessGap/2 + -(Real.pi/witnessGap)*(4/Real.pi^2)) = 0 at h
   convert h using 1 <;> congr 1 <;> ring
 
+@[simp] theorem twoModeEvolve_norm (w₀ w₁ t : ℝ) (u : TwoMode) :
+    ‖twoModeEvolve w₀ w₁ t u‖ = ‖u‖ := by
+  have h : ‖twoModeEvolve w₀ w₁ t u‖^2 = ‖u‖^2 := by
+    simp [twoModeEvolve, EuclideanSpace.norm_sq_eq, Fin.sum_univ_two,
+      norm_mul, phase_norm]
+  nlinarith [norm_nonneg u, norm_nonneg (twoModeEvolve w₀ w₁ t u)]
+
+/-- The full noisy law after diagonal evolution, including loss. -/
+theorem evolved_noisyReadout_table (eta v q w₀ w₁ t : ℝ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1) :
+    let u := twoModeEvolve w₀ w₁ t (twoModeState 0)
+    let p := noisyReadout eta v q he0 he1 hv0 hv1 u
+      (by simp [u, twoModeState_normalized])
+    p.mass 0 = plus eta v (q-t*(w₁-w₀)) ∧
+    p.mass 1 = minus eta v (q-t*(w₁-w₀)) ∧ p.mass 2 = failure eta := by
+  have hp := evolved_readout_probability q w₀ w₁ t
+  have ht := (interferometer q).complete (twoModeEvolve w₀ w₁ t (twoModeState 0))
+  change (∑ o, ‖interferometerOperator q o _‖^2) = _ at ht
+  rw [Fin.sum_univ_three, interferometer_failure, twoModeEvolve_norm,
+    twoModeState_normalized] at ht
+  have hm : ‖interferometerOperator q 1 (twoModeEvolve w₀ w₁ t (twoModeState 0))‖^2 =
+      1-plus 1 1 (q-t*(w₁-w₀)) := by rw [hp] at ht; linarith
+  dsimp [noisyReadout]
+  rw [hp, hm]
+  norm_num [Fin.ext_iff, plus, minus, failure]
+  constructor <;> ring
+
+/-- Both noisy tables of the fixed N=4 experiment, from the actual two-mode
+propagators with the derived physical frequencies. -/
+theorem lattice_noisy_witness (eta v : ℝ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1) :
+    let t := Real.pi/witnessGap
+    let q := t/2
+    let u := twoModeEvolve (frequency witnessCircle 0) (frequency witnessCircle 1) t (twoModeState 0)
+    let z := twoModeEvolve (ringLatticeFrequency witnessCircle (witnessCircle.length/4) 0)
+      (ringLatticeFrequency witnessCircle (witnessCircle.length/4) 1) t (twoModeState 0)
+    let p := noisyReadout eta v q he0 he1 hv0 hv1 u (by simp [u, twoModeState_normalized])
+    let r := noisyReadout eta v q he0 he1 hv0 hv1 z (by simp [z, twoModeState_normalized])
+    p.mass 0 = eta*(1+v)/2 ∧ p.mass 1 = eta*(1-v)/2 ∧ p.mass 2 = 1-eta ∧
+    r.mass 0 = eta*(1-v)/2 ∧ r.mass 1 = eta*(1+v)/2 ∧ r.mass 2 = 1-eta := by
+  dsimp only
+  have hc := evolved_noisyReadout_table eta v (Real.pi/witnessGap/2)
+    (frequency witnessCircle 0) (frequency witnessCircle 1) (Real.pi/witnessGap) he0 he1 hv0 hv1
+  have hl := evolved_noisyReadout_table eta v (Real.pi/witnessGap/2)
+    (ringLatticeFrequency witnessCircle (witnessCircle.length/4) 0)
+    (ringLatticeFrequency witnessCircle (witnessCircle.length/4) 1)
+    (Real.pi/witnessGap) he0 he1 hv0 hv1
+  have hphase : Real.pi/witnessGap/2 - Real.pi/witnessGap*(4/Real.pi^2-0) = Real.pi := by
+    calc
+      _ = (Real.pi/witnessGap)*witnessGap := by unfold witnessGap; ring
+      _ = Real.pi := div_mul_cancel₀ _ (ne_of_gt witnessGap_pos)
+  rw [witness_frequencies.1, witness_frequencies.2.1] at hc
+  rw [witness_frequencies.2.2.1, witness_frequencies.2.2.2, hphase] at hl
+  have hzero : Real.pi/witnessGap/2 - Real.pi/witnessGap*(1/2-0) = 0 := by ring
+  rw [hzero] at hc
+  simpa [plus, minus, failure, witness_frequencies.1, witness_frequencies.2.1,
+    witness_frequencies.2.2.1, witness_frequencies.2.2.2] using
+    And.intro hc.1 (And.intro hc.2.1 (And.intro hc.2.2 hl))
+
+/-- Complete-outcome contrast and TV, including the equal failure probabilities. -/
+theorem noisy_witness_tv (p r : FiniteDistribution (Fin 3)) (eta v : ℝ)
+    (he : 0 ≤ eta) (hv : 0 ≤ v)
+    (hp : p.mass 0 = eta*(1+v)/2 ∧ p.mass 1 = eta*(1-v)/2 ∧ p.mass 2 = 1-eta)
+    (hr : r.mass 0 = eta*(1-v)/2 ∧ r.mass 1 = eta*(1+v)/2 ∧ r.mass 2 = 1-eta) :
+    p.mass 0-r.mass 0 = eta*v ∧ p.mass 1-r.mass 1 = -(eta*v) ∧
+    p.mass 2=r.mass 2 ∧ tv p r = eta*v := by
+  have h0 : p.mass 0-r.mass 0 = eta*v := by rw [hp.1, hr.1]; ring
+  have h1 : p.mass 1-r.mass 1 = -(eta*v) := by rw [hp.2.1, hr.2.1]; ring
+  refine ⟨h0, h1, hp.2.2.trans hr.2.2.symm, ?_⟩
+  simp [tv, l1, Fin.sum_univ_three, h0, h1, hp.2.2, hr.2.2,
+    abs_of_nonneg (mul_nonneg he hv)]
+
+/-- Phase calibration contributes a derived eta*v*radius/2 error per model. -/
+theorem plus_phase_radius (eta v q theta delta radius : ℝ)
+    (he : 0 ≤ eta) (hv : 0 ≤ v) (hd : |delta| ≤ radius) :
+    |plus eta v (q+theta+delta)-plus eta v (q+theta)| ≤ eta*v/2*radius := by
+  have h := plus_phase_lipschitz eta v (q+theta+delta) (q+theta) he hv
+  have hc : q+theta+delta-(q+theta) = delta := by ring
+  rw [hc] at h
+  exact h.trans (mul_le_mul_of_nonneg_left hd (by positivity))
+
+/-- Strict disjointness of the two witness probability intervals. -/
+theorem noisy_witness_robust (eta v p r rp rr : ℝ) (he : 0 ≤ eta) (hv : 0 ≤ v)
+    (hp : |p-eta*(1+v)/2| ≤ rp) (hr : |r-eta*(1-v)/2| ≤ rr)
+    (hgap : rp+rr < eta*v) : p ≠ r := by
+  apply robust_coordinate_separation p r (eta*(1+v)/2) (eta*(1-v)/2) rp rr hp hr
+  have h : eta*(1+v)/2-eta*(1-v)/2 = eta*v := by ring
+  simpa [h, abs_of_nonneg (mul_nonneg he hv)] using hgap
+
+/-- At exact touching, the shared boundary belongs to both closed intervals. -/
+theorem noisy_witness_touching (a b rp rr : ℝ) (h : a-b = rp+rr)
+    (hp : 0 ≤ rp) (hr : 0 ≤ rr) :
+    |(a-rp)-a| ≤ rp ∧ |(a-rp)-b| ≤ rr := by
+  have h1 : a-rp-a = -rp := by ring
+  have h2 : a-rp-b = rr := by linarith
+  simp [h1, h2, abs_of_nonneg hp, abs_of_nonneg hr]
+
+/-- A full-turn phase difference is a sufficient blind control for all outcomes.
+It is deliberately not an iff for a single cosine setting. -/
+theorem phase_wrap_noisy_tables (eta v q theta phi : ℝ) (k : ℤ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+    (hphase : theta-phi = k*(2*Real.pi)) (o : Fin 3) :
+    (noisyReadout eta v q he0 he1 hv0 hv1 (twoModeState theta) (twoModeState_normalized theta)).mass o =
+    (noisyReadout eta v q he0 he1 hv0 hv1 (twoModeState phi) (twoModeState_normalized phi)).mass o := by
+  have ht := noisyReadout_table eta v q theta he0 he1 hv0 hv1
+  have hp := noisyReadout_table eta v q phi he0 he1 hv0 hv1
+  have harg : q+theta = (q+phi)+k*(2*Real.pi) := by linarith
+  have hc : Real.cos (q+theta) = Real.cos (q+phi) := by
+    rw [harg, Real.cos_add_int_mul_two_pi]
+  dsimp only at ht hp
+  fin_cases o
+  · rw [ht.1, hp.1]; simp [plus, hc]
+  · rw [ht.2.1, hp.2.1]; simp [minus, hc]
+  · exact ht.2.2.trans hp.2.2.symm
+
+/-- Explicit signed blind times for the witness gap; k=0 includes time zero. -/
+theorem witness_blind_phase (k : ℤ) :
+    let t := k*(2*Real.pi)/witnessGap
+    (-t*(4/Real.pi^2))-(-t*(1/2)) = k*(2*Real.pi) := by
+  dsimp only
+  calc
+    _ = (k*(2*Real.pi)/witnessGap)*witnessGap := by unfold witnessGap; ring
+    _ = _ := div_mul_cancel₀ _ (ne_of_gt witnessGap_pos)
+
+/-- One positive energy can be absorbed in a positive kinetic-scale change. -/
+theorem one_momentum_scale_match (Ec Ea : ℝ) (hc : 0 < Ec) (ha : 0 < Ea) :
+    0 < Ec/Ea ∧ (Ec/Ea)*Ea = Ec :=
+  ⟨div_pos hc ha, div_mul_cancel₀ _ ha.ne'⟩
+
+/-- Exact condition for that scale change to lie in the symmetric calibration interval. -/
+theorem one_momentum_scale_interval (Ec Ea radius : ℝ) (ha : 0 < Ea) :
+    (1-radius ≤ Ec/Ea ∧ Ec/Ea ≤ 1+radius) ↔
+      |Ec-Ea| ≤ radius*Ea := by
+  rw [abs_le, le_div_iff₀ ha, div_le_iff₀ ha]
+  constructor <;> rintro ⟨h1,h2⟩ <;> constructor <;> nlinarith
+
+/-- Matching the rescaled gap matches every time and every common noisy readout. -/
+theorem one_momentum_all_times (Ec Ea scale eta v q t : ℝ)
+    (h : scale*Ea = Ec) (he0 : 0 ≤ eta) (he1 : eta ≤ 1)
+    (hv0 : 0 ≤ v) (hv1 : v ≤ 1) (o : Fin 3) :
+    (noisyReadout eta v q he0 he1 hv0 hv1 (evolvedTwoMode Ec t) (twoModeState_normalized _)).mass o =
+    (noisyReadout eta v q he0 he1 hv0 hv1 (evolvedTwoMode (scale*Ea) t)
+      (twoModeState_normalized _)).mass o := by rw [h]
+
 end
 end OntologySeparation.ContinuumFinite

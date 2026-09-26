@@ -1058,3 +1058,16 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.bandSynthesis_mass
 #print axioms OntologySeparation.ContinuumFinite.bandSynthesis_kinetic
 #print axioms OntologySeparation.ContinuumFinite.bandSynthesis_evolve
+
+#print axioms OntologySeparation.ContinuumFinite.twoModeEvolve_norm
+#print axioms OntologySeparation.ContinuumFinite.evolved_noisyReadout_table
+#print axioms OntologySeparation.ContinuumFinite.lattice_noisy_witness
+#print axioms OntologySeparation.ContinuumFinite.noisy_witness_tv
+#print axioms OntologySeparation.ContinuumFinite.plus_phase_radius
+#print axioms OntologySeparation.ContinuumFinite.noisy_witness_robust
+#print axioms OntologySeparation.ContinuumFinite.noisy_witness_touching
+#print axioms OntologySeparation.ContinuumFinite.phase_wrap_noisy_tables
+#print axioms OntologySeparation.ContinuumFinite.witness_blind_phase
+#print axioms OntologySeparation.ContinuumFinite.one_momentum_scale_match
+#print axioms OntologySeparation.ContinuumFinite.one_momentum_scale_interval
+#print axioms OntologySeparation.ContinuumFinite.one_momentum_all_times
