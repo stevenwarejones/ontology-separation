@@ -86,3 +86,6 @@ import Tests.VCausal
 import Tests.Collectibility
 
 import Tests.PathInterference
+
+import Tests.PathContextuality
+import Tests.PathCompatibility
