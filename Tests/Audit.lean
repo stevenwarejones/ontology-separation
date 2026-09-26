@@ -550,7 +550,7 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignalingPropositions.stochastic_directional_bound
 #print axioms OntologySeparation.ForcedSignalingPropositions.stochastic_lc4_directional_lower_bound
 
--- Exact finite illustration accompanying the photon path-integral audit.
+-- Exact finite path-interference case study
 #print axioms OntologySeparation.PathInterference.coherent
 #print axioms OntologySeparation.PathInterference.routeBehavior
 #print axioms OntologySeparation.PathInterference.path_eq_transfer

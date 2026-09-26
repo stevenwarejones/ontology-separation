@@ -2,11 +2,12 @@ import OntologySeparation.Core.FiniteModels
 import OntologySeparation.Core.ExperimentAccess
 import Mathlib.Tactic.NormNum
 
-/-! An exact two-path, two-phase illustration for the Wen data audit.
-This is NOT a model of that apparatus or a certificate about its observations.
-The amplitudes describe an ideal balanced interferometer at phases 0 and pi.
-The excluded class is explicitly incoherent; a context-dependent response model
-is separately exhibited with exactly the coherent probabilities. -/
+/-! An exact two-path, two-phase ideal interferometer showing
+(1) path-sum and transfer descriptions are observationally equivalent,
+(2) a defined incoherent class is excluded,
+(3) an explicitly enlarged context-dependent response class contains the target,
+(4) separation depends on phase-sensitive access.
+The amplitudes describe an ideal balanced interferometer at phases 0 and pi. -/
 namespace OntologySeparation.PathInterference
 noncomputable section
 open FiniteModels ExperimentAccess

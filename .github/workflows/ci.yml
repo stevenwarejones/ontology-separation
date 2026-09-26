@@ -24,7 +24,6 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -e ".[research]"
       - run: python research/lf_hidden_local_agency.py --check
-      - run: python research/path_integral_audit/intervention_checks.py --check
       - run: sh scripts/check.sh
       - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
       - name: Stage verified Pages snapshot

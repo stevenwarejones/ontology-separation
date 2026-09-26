@@ -87,7 +87,5 @@ implemented capability; use each guide's stated scope and checked examples.
 
 [Tradeoff reconciliation and flagship decision](research/TRADEOFF_DECISION_SPIKE.md): pinned external results, a checked LP certificate, and the next physical proof obligations.
 
-[Photon path-integral audit](../research/path_integral_audit/README.md): distinguish
-reconstructed histories from operational model separation, with an exact finite
-interference certificate. Empirical spreadsheet replication remains blocked by
-data access; synthetic calculations are explicitly separate.
+[Exact path-interference case study](PATH_INTERFERENCE_CASE_STUDY.md): path/transfer
+equivalence, a defined incoherent-class exclusion and phase-sensitive access.
