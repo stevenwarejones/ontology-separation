@@ -77,3 +77,4 @@ import Tests.ImperfectTwoRecordAccess
 
 import Tests.ForcedSignalingPropositions
 import Tests.PathInterference
+import Tests.PhaseIntervention

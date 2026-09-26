@@ -72,3 +72,7 @@ import OntologySeparation.Experiments.ForcedSignalingDirectional
 import OntologySeparation.Experiments.ForcedSignalingPropositionWitnesses
 import OntologySeparation.Experiments.ForcedSignalingPropositions
 import OntologySeparation.Experiments.PathInterference
+import OntologySeparation.Experiments.PhaseInterventionExamples
+
+import OntologySeparation.Experiments.PhaseInterventionGeometry
+import OntologySeparation.Experiments.LocalPhase

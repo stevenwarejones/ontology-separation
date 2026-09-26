@@ -30,6 +30,7 @@ records, read-or-reverse choices, and checked LF/profile conclusions.
 |---|---|---|
 | Compare every permitted experiment | [Experiment access](docs/EXPERIMENT_ACCESS.md) | Lean |
 | Separate path descriptions from observable model differences | [Path-interference case study](docs/PATH_INTERFERENCE_CASE_STUDY.md) · [report](examples/path-interference.html) | Lean; ideal two-path interferometer |
+| Test a controlled phase intervention | [Four-phase guide](docs/PHASE_INTERVENTION.md) · [report](examples/phase-intervention.html) | Lean; coherence, definite regions, loss and calibration |
 | Study partial environment access | [Partial-access guide](docs/PARTIAL_ENVIRONMENT_GUIDE.md) · [report](examples/partial-environment.html) | Lean; specified overlap and probability allowances |
 | Plan a finite-shot rejection test | [Finite-shot guide](docs/FINITE_SHOT_GUIDE.md) · [report](examples/finite-shot.html) | Lean; explicit calibration premises |
 | Bound every allowed binary measurement | [Discrimination guide](docs/ENVIRONMENT_DISCRIMINATION_GUIDE.md) · [report](examples/environment-discrimination.html) | Lean |

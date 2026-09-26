@@ -60,3 +60,6 @@ be established; an unusual weak value or interference fringe alone is not enough
 No faster-than-light or backward-time propagation is established by this example.
 
 Empirical studies of path-reality claims live in [path-reality-tests](https://github.com/stevenwarejones/path-reality-tests).
+
+[Four-phase extension](PHASE_INTERVENTION.md): arbitrary finite mixed states and
+complete readouts, calibrated-null bounds and a sharp lossy quantum example.
