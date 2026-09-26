@@ -1,3 +1,4 @@
+import Tests.SpacetimeInfluence
 import Tests.Core
 import Tests.Catalog
 import Tests.Audit
@@ -78,5 +79,3 @@ import Tests.ImperfectTwoRecordAccess
 import Tests.ForcedSignalingPropositions
 import Tests.PathInterference
 import Tests.PhaseIntervention
-
-import Tests.SpacetimeInfluence

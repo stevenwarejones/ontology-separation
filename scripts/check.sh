@@ -35,8 +35,7 @@ PYTHONPATH=python python3 -m ontology_separation.proof_report examples/ExternalC
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/SignalingStudy.lean -o examples/signaling-tradeoff.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFPaperStudy.lean -o examples/lf-paper.html
 
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/SpacetimeInfluenceStudy.lean -o examples/spacetime-influence.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFReadoutStudy.lean -o examples/lf-readout.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PathInterferenceStudy.lean -o examples/path-interference.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PhaseInterventionStudy.lean -o examples/phase-intervention.html
-
-PYTHONPATH=python python3 -m ontology_separation.proof_report examples/SpacetimeInfluenceStudy.lean -o examples/spacetime-influence.html

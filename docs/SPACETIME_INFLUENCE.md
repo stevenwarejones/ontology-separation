@@ -9,7 +9,7 @@ physics or an experimental exclusion of hidden trajectories.
 
 Read the [generated theorem report](../examples/spacetime-influence.html) or
 run the [editable source](../examples/SpacetimeInfluenceStudy.lean). The detailed
-[prospective optical study](https://github.com/stevenwarejones/path-reality-tests/tree/d52f46faac61913cc4595fd471f0046d703f1193/studies/spacetime-causal-influence)
+[prospective optical study](https://github.com/stevenwarejones/path-reality-tests/tree/33b45eb500e10968d67dfe85b5ae56d0b5cd6bf3/studies/spacetime-causal-influence)
 contains the protocol comparison, literature record, statistical derivation,
 synthetic power calculations and unresolved apparatus requirements. This immutable
 commit link survives branch deletion; neither repository needs the other to build.
