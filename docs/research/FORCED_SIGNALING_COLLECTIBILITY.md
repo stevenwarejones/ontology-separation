@@ -206,7 +206,9 @@ it does not replace them.
 
 `ForcedSignalingLC4MinimalCore.minimalCore` packages a three-premise
 `AdversarySearch.MinimalCore` for the **same exact LC4 marginal target with zero
-A/D full-recipient TV** used by the forced-signaling exclusion. Every deletion
+A/D full-recipient TV** used by the forced-signaling exclusion. Matching is required at every setting,
+including both settings of the omitted blind party; `Matches.noSignalB` and
+`Matches.noSignalC` make the resulting late-party silence explicit. Every deletion
 witness reports the full LC4 Born distribution; none substitutes a PR-box target.
 
 | Deleted assumption | Witness | Retained assumptions |

@@ -197,15 +197,17 @@ theorem restoration_blind_iff (β v : ℚ) (hv : 0 ≤ v) :
     · rintro ⟨hbc,hcb⟩
       by_contra h
       have hp : 0 < β := by nlinarith
-      exact hcb ⟨by linarith, by nlinarith⟩
+      have := hcb hp
+      nlinarith
     · intro h
-      constructor <;> rintro ⟨ht,hs⟩ <;> nlinarith
+      constructor <;> intro ht <;> nlinarith
   · rw [abs_of_neg (lt_of_not_ge hb)]
     constructor
     · rintro ⟨hbc,hcb⟩
       by_contra h
-      exact hbc ⟨by linarith, by nlinarith⟩
+      have := hbc (by nlinarith)
+      nlinarith
     · intro h
-      constructor <;> rintro ⟨ht,hs⟩ <;> nlinarith
+      constructor <;> intro ht <;> nlinarith
 
 end OntologySeparation.ForcedSignalingGeometryRobustness

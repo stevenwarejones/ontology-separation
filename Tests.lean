@@ -1,3 +1,4 @@
+import Tests.PhaseIntervention
 import Tests.ForcedSignalingMinimalCore
 import Tests.VCausalMeasure
 import Tests.Core
@@ -82,3 +83,5 @@ import Tests.ForcedSignalingPropositions
 import Tests.VCausal
 
 import Tests.Collectibility
+
+import Tests.PathInterference

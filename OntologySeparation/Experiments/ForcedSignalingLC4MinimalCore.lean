@@ -11,10 +11,10 @@ def quantumLaw : LawTable := fun s => quantum s.1 s.2.1 s.2.2
 
 theorem quantum_matches : Matches quantumLaw := by
   constructor
-  · intro x y w a b d
-    simpa [quantumLaw, FiniteKernel.map_mass, recordProb, mul_ite] using quantum_abd x y false w a b d
-  · intro x z w a c d
-    simpa [quantumLaw, FiniteKernel.map_mass, recordProb, mul_ite] using quantum_acd x false z w a c d
+  · intro x y z w a b d
+    simpa [quantumLaw, FiniteKernel.map_mass, recordProb, mul_ite] using quantum_abd x y z w a b d
+  · intro x y z w a c d
+    simpa [quantumLaw, FiniteKernel.map_mass, recordProb, mul_ite] using quantum_acd x y z w a c d
 
 set_option maxHeartbeats 0 in
 private theorem marginal_A (d : LawTable) (e : Early) (y z : Bool) (r : Recipient) :

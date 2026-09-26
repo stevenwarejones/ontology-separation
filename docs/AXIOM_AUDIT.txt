@@ -704,274 +704,119 @@
 'OntologySeparation.ForcedSignalingPropositions.stochastic_lc4_directional_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.VCausal.precedes_irrefl' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.precedes_trans' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.lightFuture_refl' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.lightFuture_trans' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.relay_inside_cone' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.LC4Layout.no_late_to_early' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.map_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.reservoir_mean' depends on axioms: [propext,
+'OntologySeparation.PathInterference.coherent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.routeBehavior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.path_eq_transfer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.excludes_incoherent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.incoherent_class_nonempty' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.condition_weight' depends on axioms: [propext,
+'OntologySeparation.PathInterference.contextualMembership' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.descriptions_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.restricted_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.expanded_not_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.Region.phaseMap_isometry' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.disintegrate' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.behavior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.dephase' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.phase_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.probability_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.quadrature_contrasts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.zero_contrasts_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.opposite_average' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.dephased_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.dephased_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.dephased_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.coherent_eq_dephased_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.map_single_le' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.restricted_access_equivalent' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.condition_support' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.full_access_equivalent_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.map_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.bind_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.complete_eq_target' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.mixture_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.postprocess' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.postprocess_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.nearBlind_pair_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.estimated_pair_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.excludes_nearBlind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.excludes_blind_mixture' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.erase_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.erased_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.contextual_matches' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_contrast' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_nearBlind_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.secondMode' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.imaginarySource' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.plusReadout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.imaginary_coherence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.two_phases_can_miss_coherence' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.HiddenInfluence.FiniteKernel.complete_preserves_record' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.insensitive_readout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.insensitive_source_not_dephased' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.VCausal.Protocol.full_behavior' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.Protocol.no_backwards_A' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.Protocol.no_backwards_D' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.backwardsTable_not_allowed' depends on axioms: [propext]
-'OntologySeparation.VCausal.EarlyModel.no_backwards_A' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.EarlyModel.no_backwards_D' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.realize_strategies' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.realize_full_behavior' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.Protocol.earlyMatches' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.realizable_iff_early' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.postselection_parity' does not depend on any axioms
-'OntologySeparation.VCausal.postselection_half' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.postselection_not_local' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.measurement_dependence_parity' does not depend on any axioms
-'OntologySeparation.VCausal.nonsignalingBox_marginals' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.vcausal_forced_signaling_lower_bound' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.lossy_excludes_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.zero_efficiency_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.visibilityState' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.inefficientReadout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.quantum_realizes_lossy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.selectionCounterexample' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.vcausal_tradeoff' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.vcausal_noise_lower_bound' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.postselection_changes_contrast' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.lc4_AD_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.early_marginal_fromStrategies' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.nearBlind_iff_feasible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.triangle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.triangle_pairwise' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.triangle_nearBlind_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.triangle_pairwise_not_sufficient' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.matches_early_uniform' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.binary_nearBlind_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.observed' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.realizeLC4_weight' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.realizeLC4_behavior' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.occupation' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.stochastic_realization' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.contrast_identity' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.witnessOn_matches' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.witnessOn_signaling' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.contrast_le_occupation' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.vcausal_exact_forced_signaling' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.robust_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.vcausal_coefficient_lower_bound_all_completions' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.either_arm' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.vcausal_optimal_completion_globally_sharp' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.LocalCompatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.localCompatible_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.visibility_occupation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_local_necessary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.explicit_quantum_violation' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.VCausal.backwards_marginal_not_realizable' depends on axioms: [propext,
+'OntologySeparation.PhaseIntervention.balancedModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.balanced_occupation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.balanced_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_local_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.boundary_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.allInP' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.drop_occupation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.drop_locality' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.predetermined' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.settingPreparation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.drop_setting_independence' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.VCausal.lightFuture_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.apex_plus' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.apex_minus' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.apex_receives' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.apex_before_collection' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.collectible_iff_apex' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.collectible_criterion' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.segment_obstruction' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.not_collectible_of_between' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.Collectible.mono' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.recipients_A_dichotomy' depends on axioms: [propext, Quot.sound]
-'OntologySeparation.VCausal.recipients_D_dichotomy' depends on axioms: [propext, Quot.sound]
-'OntologySeparation.VCausal.collectible_A_pinned_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.collectible_D_pinned_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.VCausal.TimingProtocol.delayC_preserves_ABD' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.VCausal.TimingProtocol.delayB_preserves_ACD' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.VCausal.TimingProtocol.completeTarget_runC' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.VCausal.TimingProtocol.completeTarget_runB' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.minimal_lc4' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.minimal_order' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.minimal_A_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.minimal_D_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.minimal_margins' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.restoration_lc4' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.restoration_order' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.restoration_A_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.restoration_D_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingLayouts.restoration_threshold_rounding' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingCollectibility.both_collectible_context' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingCollectibility.signaling_attained' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingCollectibility.vcausal_forced_superluminal_signal' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingCollectibility.minimal_both_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingCollectibility.restoration_both_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingPinned.pinned_BD' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingPinned.pinned_CD' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingPinned.pinned_AB' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingPinned.pinned_AC' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingPinned.pinned_projection' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingTiming.protocol_ABD' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingTiming.protocol_ACD' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingTiming.ConnectedMatches.blind_matches' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTiming.timing_forced_superluminal_signal' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.LC4FullDistribution.quantum_abd' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.LC4FullDistribution.quantum_acd' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.target_ABD_matches' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.target_ACD_matches' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.delayC_quantum' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.delayB_quantum' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.delayC_keeps_existing_records' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.delayB_keeps_existing_records' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.quantumTiming_runC' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.quantumTiming_runB' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.quantumTiming_connected' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingTimingExtension.attaining_timing_extension' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessible.pinned_A_subsets' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessible.pinned_D_subsets' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessible.zero_accessible_A' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessible.zero_accessible_D' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingVCausal.conditional_local_nonsignaling_exclusion' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.VCausal.SupportedProtocol.full_behavior' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingCollectibility.noisy_collectible_signal' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingCollectibility.restoration_ninety_percent_signal' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.precedes_duration' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.minimal_duration_lc4' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.minimal_duration_order' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.minimal_duration_cross_events' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.minimal_collector_delay' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.minimal_duration_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.boost_lightFuture' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.boost_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.restoration_boost_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.restoration_frame_iff' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingGeometryRobustness.restoration_frame_order_iff' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignaling.physical_main' depends on axioms: [propext, Classical.choice, Quot.sound]
-'OntologySeparation.ForcedSignalingAccessible.zero_accessible_A_of_blind_pair_not_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessible.zero_accessible_D_of_blind_pair_not_collectible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessibleOptimum.recordParties_complete' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessibleOptimum.proper_encoding' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessibleOptimum.full_encoding' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessibleOptimum.accessible_nonnegative' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessibleOptimum.accessible_invisible' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessibleOptimum.proposition2_layout_minimum' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'OntologySeparation.ForcedSignalingAccessibleOptimum.stochastic_layout_minimum' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'OntologySeparation.PhaseIntervention.excludes_local' depends on axioms: [propext, Classical.choice, Quot.sound]

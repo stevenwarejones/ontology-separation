@@ -38,8 +38,8 @@ def Unfiltered {Ω : Type} [Fintype Ω] (m : Mechanism Ω) : Prop :=
 theorem unfiltered_rate {Ω : Type} [Fintype Ω] (m : Mechanism Ω)
     (h : Unfiltered m) (s : Input) : m.rate s = 1 := by
   have hs := congrArg (fun f : VisibleOutcome → ℝ => ∑ o, f o) (funext (m.selected s))
-  simpa [h s, ← Finset.mul_sum, (m.reported s).total,
-    (FiniteKernel.bind (m.seed s) (fun ω => m.response ω s)).total] using hs
+  simpa only [h s, mul_one, ← Finset.mul_sum, (m.reported s).total,
+    (FiniteKernel.bind (m.seed s) (fun ω => m.response ω s)).total, mul_one] using hs
 
 theorem unfiltered_report {Ω : Type} [Fintype Ω] (m : Mechanism Ω)
     (h : Unfiltered m) (s : Input) (o : VisibleOutcome) :
@@ -64,12 +64,24 @@ theorem behavior_visible (d : LawTable) (e : Early) (y z : Bool) (o : VisibleOut
   simp [behavior, late_encode, outcomeToVisible_toOutcome]
 
 structure Matches (d : LawTable) : Prop where
-  abd : ∀ x y w a b dd,
-    recordProb (d (earlyOf x w,y,false)) abdRecord (a,b,dd) =
+  abd : ∀ x y z w a b dd,
+    recordProb (d (earlyOf x w,y,z)) abdRecord (a,b,dd) =
       Q2.toReal (ForcedSignalingLC4.abd x y w a b dd)
-  acd : ∀ x z w a c dd,
-    recordProb (d (earlyOf x w,false,z)) acdRecord (a,c,dd) =
+  acd : ∀ x y z w a c dd,
+    recordProb (d (earlyOf x w,y,z)) acdRecord (a,c,dd) =
       Q2.toReal (ForcedSignalingLC4.acd x z w a c dd)
+
+/-- Matching the complete no-blind-pair family also fixes the omitted-setting
+comparisons, even in the enlarged language used for deletion adversaries. -/
+theorem Matches.noSignalB {d : LawTable} (h : Matches d) (x z w a c dd : Bool) :
+    recordProb (d (earlyOf x w,false,z)) acdRecord (a,c,dd) =
+      recordProb (d (earlyOf x w,true,z)) acdRecord (a,c,dd) :=
+  (h.acd x false z w a c dd).trans (h.acd x true z w a c dd).symm
+
+theorem Matches.noSignalC {d : LawTable} (h : Matches d) (x y w a b dd : Bool) :
+    recordProb (d (earlyOf x w,y,false)) abdRecord (a,b,dd) =
+      recordProb (d (earlyOf x w,y,true)) abdRecord (a,b,dd) :=
+  (h.abd x y false w a b dd).trans (h.abd x y true w a b dd).symm
 
 def Target {Ω : Type} [Fintype Ω] (m : Mechanism Ω) : Prop :=
   Matches m.reported ∧ Within (behavior m.reported) 0
@@ -115,13 +127,17 @@ theorem matches_model (d : LawTable) (m : HiddenInfluence.Model)
     (hq : Matches d) : ForcedSignalingTheorem2.MatchesCluster m := by
   constructor
   · intro x y w a b dd
-    rw [← hq.abd, record_model d m h, mean_eq]
-    simp only [modelABD, lateOf, lateFromBool, ite_and, abd_bits]
-    rfl
+    rw [← hq.abd x y false w a b dd, record_model d m h, mean_eq]
+    simp only [modelABD, lateOf, lateFromBool, abd_bits]
+    apply Finset.sum_congr rfl
+    intro atom _
+    split_ifs <;> simp_all
   · intro x z w a c dd
-    rw [← hq.acd, record_model d m h, mean_eq]
-    simp only [modelACD, lateOf, lateFromBool, ite_and, acd_bits]
-    rfl
+    rw [← hq.acd x false z w a c dd, record_model d m h, mean_eq]
+    simp only [modelACD, lateOf, lateFromBool, acd_bits]
+    apply Finset.sum_congr rfl
+    intro atom _
+    split_ifs <;> simp_all
 
 theorem excludes {Ω : Type} [Fintype Ω] (m : Mechanism Ω)
     (hi : Independent m) (hl : LocalResponses m) (hu : Unfiltered m) : ¬ Target m := by
