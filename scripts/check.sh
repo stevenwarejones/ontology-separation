@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 set -eu
+python3 scripts/check_vcausal_geometry.py
 lake build
 lake build Tests
 lake env lean examples/CustomUniverse.lean
@@ -37,4 +38,5 @@ PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFPaperSt
 
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFReadoutStudy.lean -o examples/lf-readout.html
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PathInterferenceStudy.lean -o examples/path-interference.html
+
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PhaseInterventionStudy.lean -o examples/phase-intervention.html
