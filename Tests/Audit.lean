@@ -1051,3 +1051,5 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 
 #print axioms OntologySeparation.ContinuumFinite.witness_frequencies
 #print axioms OntologySeparation.ContinuumFinite.lattice_born_witness
+
+#print axioms OntologySeparation.ContinuumFinite.finite_resource_test_error

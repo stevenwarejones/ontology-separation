@@ -2,8 +2,8 @@ import OntologySeparation.Experiments.ContinuumTruncation
 import OntologySeparation.Experiments.FiniteDispersion
 
 /-! The finite-band and tail estimates are composed in one common Hilbert space.
-The local 5/96 cosine estimate is used throughout; no sharp global constant is
-claimed. All measurements below are complete Born instruments. -/
+The global 1/24 dispersion coefficient is proved independently of the
+older local 5/96 estimate. The normalized tail estimate is conservative. All measurements below are complete Born instruments. -/
 namespace OntologySeparation.ContinuumFinite
 noncomputable section
 open Finset Filter
@@ -200,6 +200,27 @@ theorem finite_resource_nonseparation (r : Circle) (u : SpectralHilbert) (hu : �
     hilbertEvolve (ringLatticeFrequency r (r.length/N)) t (normalizedProjection s u))
   have hmul := (lt_div_iff₀ (by positivity : (0 : ℝ) < (n : ℝ)+1)).mp hd
   nlinarith
+
+/-- The operational test-error conclusion with normalization supplied by the
+constructed dynamics, rather than postulated event probabilities. -/
+theorem finite_resource_test_error (r : Circle) (u : SpectralHilbert) (hu : ‖u‖ = 1)
+    (T margin : ℝ) (hT : 0 ≤ T) (hm : 0 < margin) (n : ℕ) :
+    ∃ s : Finset ℤ, ∃ J N₀ : ℕ,
+      ∃ hp : projection s u ≠ 0, (∀ j ∈ s, j.natAbs ≤ J) ∧
+      ∀ N : ℕ, N₀ ≤ N → 2*J < N ∧ ∀ t : ℝ, |t| ≤ T →
+      ∀ (O : Type) [Fintype O] (d : BornInstrument SpectralHilbert O),
+      let p := d.distribution (hilbertEvolve (frequency r) t u) (by simpa using hu)
+      let q := d.distribution (hilbertEvolve (ringLatticeFrequency r (r.length/N)) t (normalizedProjection s u))
+        (by simpa using normalizedProjection_norm s u hp)
+      ∀ f : Samples O n → ℝ, (∀ x, 0 ≤ f x) → (∀ x, f x ≤ 1) →
+        1-margin < (iid p n).mean f+(1-(iid q n).mean f) := by
+  obtain ⟨s,J,N₀,hp,hJ,h⟩ := finite_resource_nonseparation r u hu T margin hT hm n
+  refine ⟨s,J,N₀,hp,hJ,fun N hN => ?_⟩
+  obtain ⟨ha,hb⟩ := h N hN
+  refine ⟨ha,fun t ht O _ d f hf0 hf1 => ?_⟩
+  have hv := hb t ht O d (by simpa using hu) (by simpa using normalizedProjection_norm s u hp)
+  have he := test_error _ _ f hf0 hf1
+  linarith
 
 end
 end OntologySeparation.ContinuumFinite

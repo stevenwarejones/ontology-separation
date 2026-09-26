@@ -15,3 +15,14 @@ example (theta : ℝ) : plus 0 1 theta = plus 0 1 0 := by simp [plus]
 example : plus 1 1 Real.pi < plus 1 1 0 :=
   strict_cosine_separation 1 1 Real.pi (by norm_num) (by norm_num) (by simp)
 
+
+example (x : ℝ) : 0 ≤ x^2/2-(1-Real.cos x) ∧ x^2/2-(1-Real.cos x) ≤ x^4/24 :=
+  cosine_remainder_global x
+
+example (r : Circle) (a t : ℝ) (j : ℤ) :
+    relativePhase (frequency r) (-j) j t = 0 :=
+  (symmetric_mode_negative_control r a t j).1
+
+example (u : SpectralHilbert) (hu : ‖u‖ = 1) (T epsilon : ℝ)
+    (hT : 0 ≤ T) (he : 0 < epsilon) :=
+  finite_resource_test_error witnessCircle u hu T epsilon hT he 100

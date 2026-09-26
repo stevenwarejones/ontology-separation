@@ -223,7 +223,8 @@ theorem witness_frequencies :
     simp [waveNumber,witnessCircle,Real.pi_ne_zero]
   have hz : waveNumber witnessCircle 0 = 0 := by simp [waveNumber]
   have ha : witnessCircle.length/4 = Real.pi/2 := by dsimp [witnessCircle]; ring
-  simp [frequency,ringLatticeFrequency,latticeFrequency,hk,hz,ha,witnessCircle,Real.cos_pi_div_two]
+  simp only [frequency,ringLatticeFrequency,latticeFrequency,hk,hz,ha]
+  norm_num [witnessCircle,Real.cos_pi_div_two]
   <;> ring
 
 /-- Explicit fixed lattice separation now stated directly with the circle and
@@ -240,7 +241,8 @@ theorem lattice_born_witness :
   rw [witness_frequencies.1,witness_frequencies.2.1,witness_frequencies.2.2.1,
     witness_frequencies.2.2.2,evolved_readout_probability,evolved_readout_probability]
   have h := explicit_separating_born_experiment
-  dsimp only at h
+  dsimp only [evolvedTwoMode] at h
+  rw [interferometer_probability,interferometer_probability] at h
   change plus 1 1 (Real.pi/witnessGap/2 + -(Real.pi/witnessGap)*(1/2)) = 1 ∧
     plus 1 1 (Real.pi/witnessGap/2 + -(Real.pi/witnessGap)*(4/Real.pi^2)) = 0 at h
   convert h using 1 <;> congr 1 <;> ring

@@ -32,8 +32,8 @@ theorem modeVector_orthonormal : Orthonormal ℂ (modeVector (N := N)) := by
         change inner ℂ ((Real.sqrt (N : ℝ) : ℂ)⁻¹*fourierCharacter j n)
           ((Real.sqrt (N : ℝ) : ℂ)⁻¹*fourierCharacter k n) = _
         rw [RCLike.inner_apply']
-        simp only [map_mul,map_inv,Complex.conj_ofReal]
-        ring
+        simp [Complex.star_def, map_mul]
+        <;> ring
       _ = 0 := by rw [h,mul_zero]
 
 def fourierSynthesis (c : ZMod N → ℂ) : EuclideanSpace ℂ (ZMod N) :=
@@ -42,9 +42,10 @@ def fourierSynthesis (c : ZMod N → ℂ) : EuclideanSpace ℂ (ZMod N) :=
 theorem fourierSynthesis_mass (c : ZMod N → ℂ) :
     ‖fourierSynthesis c‖^2 = ∑ j, ‖c j‖^2 := by
   have h := modeVector_orthonormal.inner_sum c c univ
+  rw [inner_self_eq_norm_sq_to_K] at h
+  simp only [← Complex.normSq_eq_conj_mul_self, Complex.normSq_eq_norm_sq] at h
   have hr := congrArg Complex.re h
-  simpa only [fourierSynthesis,inner_self_eq_norm_sq_to_K,Complex.ofReal_re,map_sum,
-    Complex.mul_re,Complex.conj_re,Complex.conj_im,← Complex.sq_norm,Complex.normSq_apply] using hr
+  simpa [fourierSynthesis, Complex.re_sum] using hr
 
 @[simp] theorem fourierSynthesis_apply (c : ZMod N → ℂ) (n : ZMod N) :
     fourierSynthesis c n = ∑ j, c j*normalizedFourierMode j n := by

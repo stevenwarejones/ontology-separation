@@ -1,73 +1,120 @@
 # Continuum dynamics versus finite models
 
-**Development status: incomplete; not review-ready.** At 49c6daa the focused build, all 30 new audit roots, and the full
-`scripts/check.sh` pass have been checked; the final CI gate identified only
-uncommitted generated artifacts. The current branch adds further lattice and
-statistical proofs, which require their own final-head verification. Both PRs
-remain drafts. Existing verification gates are retained.
+**Draft: final combined verification and generated artifacts are in progress.**
+The infinite spectral evolution, exact finite embedding, cyclic spectrum,
+product-TV, Born continuity, global cosine remainder and normalized truncation
+modules have compiled in CI. New composition and witness additions require
+verification at the final head. This document distinguishes those checks from
+mathematical claims; the draft is not a merge recommendation.
 
-The question concerns complete observable probability distributions under common
-preparation, evolution and measurement controls. A finite path sum equal to a
-matrix product is one calculation in two forms. It is not a competing theory.
+## Common models and accessible experiments
 
-## Defined continuum benchmark and exact counterexample
+The continuum state space is all square-summable complex Fourier coefficients
+indexed by the integers, represented by `SpectralVector` and identified explicitly
+with the Hilbert space `lp (fun _ : ℤ => ℂ) 2`. A circle has positive circumference
+L, mass m and hbar. The frequencies E/hbar are hbar*(2πj/L)²/(2m).
+Spectral evolution multiplies each coefficient by exp(−itE/hbar). The group law,
+inverse, norm preservation and distance preservation are proved.
 
-`ContinuumSpectral` represents all square-summable complex sequences indexed by
-Z, not a finite list of modes. It defines norm mass and real-frequency spectral
-evolution. Proof terms establish preservation of mass and coefficient distance,
-the group law and inverse. `Circle` fixes positive circumference, mass and hbar;
-its frequencies are hbar*(2πj/L)²/(2m).
+| Finite object | Interpretation |
+|---|---|
+| Terms in a finite path sum | Same amplitude as the corresponding matrix product |
+| Time slices with continuous integrations | Infinitely many intermediate positions remain |
+| Sites on an N-site ring | Specified periodic nearest-neighbor dynamics; continuous time |
+| Accessible Fourier modes | A finite spectral model can match the continuum exactly |
+| Detector outcomes | Finite readout does not imply finite microscopic trajectories |
+| Ontic states or occupied paths | A separate ontology claim, not inferred by a dispersion test |
 
-A finite support is an explicit restriction on this infinite space. On that
-support, replacing every inaccessible frequency by zero preserves the evolved
-state exactly, hence every outcome of every common normalized detector. This
-is the exact restricted spectral counterexample. The `finiteEmbedding` constructor zero-extends a genuinely finite coefficient
-vector. Its mass theorem identifies the infinite norm sum with the finite
-norm sum, and `finiteEmbedding_intertwines` transports finite diagonal evolution
-exactly. Normalized finite preparation and all common detector outcomes are
-preserved. These results compiled at 49c6daa.
-The position-space Fourier identification with L² of the circle is external.
-The development does not yet bundle a Hilbert-space unitary or strong continuity.
+The common interface fixes preparation, mode labels, time, phase reference and
+complete measurement outcomes. A finite preparation is zero-extended into the
+infinite space. `finiteEmbedding_intertwines` proves exact transport of finite
+spectral evolution. The spectral finite model agrees exactly on every accessible
+mode and therefore on every shared detector outcome. Its position couplings need
+not be nearest-neighbor. Thus finite dimensionality alone is not excluded.
 
-`ContinuumSeparation` defines a complete plus/minus/failure probability table,
-normalization, positivity, cosine contrast and a phase Lipschitz bound. It proves
-zero-visibility/full-loss failures, absorption by an unconstrained reference,
-and disjointness under calibrated probability perturbations. These are readout
-lemmas: they do not yet connect the lattice generator to an actual Born POVM.
-The arbitrary normalized `Detector` interface supports **exact equality only**.
-It permits discontinuous responses and supplies no approximation guarantee.
-Approximation requires a separate Born-rule interface.
-`ContinuumApproximation` at 49c6daa proves a conservative local cosine remainder
-5/96 for |ka|≤1, a frequency-error bound, scalar phase Lipschitzness and a
-dimension-independent finite coefficient error. It does not certify the empirical
-global 1/24 estimate.
-The added `ContinuumStatistics` develops complete product-law TV and test-error
-proofs; it remains to connect these to a Born detector and approximant family.
+## Cyclic dynamics, approximation and finite resources
 
-## Mathematical obligations before review readiness
+`FiniteDispersion` defines the actual directed periodic shifts on Z/NZ, including
+N=1,2, and derives the character eigenvalue 2−chi(j)−chi(−j). Converting characters
+to phases gives 2(1−cos(2πj/N)). Fourier columns are normalized and orthogonal.
+The strict condition N>2J excludes aliases for all integer modes |j|≤J.
+`FiniteFourier` constructs normalized Fourier synthesis, norm preservation and
+intertwining with the cyclic operator. `cyclicKinetic_spectrum` supplies physical
+units: E_a=hbar²(1−cos(ka))/(m a²), with a=L/N.
 
-| Obligation | Current disposition | Required result |
-|---|---|---|
-| Infinite spectral evolution | Compiled and audited at 49c6daa | Final-head audit/report refresh |
-| Finite spectral counterexample | Finite embedding, mass, intertwining and complete detector equality compiled at 49c6daa | Final-head checks |
-| Nearest-neighbor lattice | Cyclic character spectrum, normalization, orthogonality and strict alias exclusion added | Compile and connect physical constants |
-| Cosine remainder | Local 5/96 frequency estimate compiled at 49c6daa | Global 1/24 is separate and not certified by this theorem |
-| Approximation | Finite phase/vector estimate compiled at 49c6daa | Born TV conversion, normalized truncation and tau=1 case |
-| Strong convergence | Not yet formalized | Fixed state, bounded time, explicit cutoff/site quantifiers |
-| Finite-resource impossibility | Full product TV and randomized-test proofs added | Compile; connect to approximant family |
-| Separating experiment | Probability-level lemmas written | Born realization, explicit dynamics/parameters, phase interval and nuisances |
-| Trust/report | Roots registered; snapshots absent | Full check and exact generated-file equality on final head |
+The older local 5/96 estimate remains available under |ka|≤1. A separate
+`cosine_remainder_global` proves
 
-No acceptance item is closed merely because this table lists it. The remaining
-analysis bridges are necessary dependencies of the intended approximation and
-no-uniform-separation claims. They are not replaced by assumed error bounds.
+    0 ≤ x²/2 − (1−cos x) ≤ x⁴/24
 
-The companion empirical study develops the mathematical derivations and
-independent matrix/probability checks. It labels these as non-formalized and
-supplies no experimental exclusion. No general exclusion of finite ontologies,
-count of occupied trajectories, or construction of a real-time path measure is
-claimed. Continuous-time lattices can have infinitely many histories; a finite
-mode description can exactly summarize restricted continuum experiments.
+for every real x, using derivative monotonicity. `frequency_error_global` and
+`frequency_error_band` give the global coefficient used by the companion study.
+For |k|≤K and |t|≤T the retained-band norm error is bounded by
+T*hbar*a²*K⁴/(24m). No computational time step enters this result.
+
+`projection` is an actual finite Hilbert projection. `tail_sum` identifies its
+squared distance with the discarded probability. `normalizedProjection` has unit
+norm when retained mass is nonzero; `zero_retained_iff_tail_one` handles the
+excluded endpoint exactly. The proved conservative norm bound is 2*sqrt(tau).
+This is not the sharper pure-state trace-distance sqrt(tau) derivation in the
+numerical guide. The composed bound therefore uses **2*sqrt(tau)+epsilon**.
+Normalized projections converge strongly for each fixed infinite state.
+
+`BornInstrument` consists of bounded complex-linear Kraus operators with
+completeness sum_o ||K_o u||²=||u||². Probabilities are ||K_o u||². Their
+TV continuity is derived from this structure, not assumed. The arbitrary
+normalized `Detector` remains restricted to exact-equality results.
+`born_tv` proves TV≤||u−v||. `ContinuumStatistics` proves the complete product-law
+bound TV(p^n,q^n)≤min(1,n TV(p,q)) and every randomized test's error bound
+alpha+beta≥1−TV, with TV=half L1.
+
+`lattice_strong_convergence` chooses a finite cutoff and site threshold for a
+fixed normalized state, bounded times and any positive norm tolerance. Every
+larger N excludes aliases and meets the tolerance. `finite_resource_nonseparation`
+and `finite_resource_test_error` compose this with actual Born joint data at any
+fixed finite trial count. The cutoff may depend on the state and requested
+precision. This is not unrestricted operator-norm convergence and does not say
+that a fixed finite lattice is forever untestable.
+
+## A separating fixed alternative
+
+`ContinuumWitness` constructs the balanced recombiner as explicit complex
+matrices and proves Kraus completeness. Diagonal two-mode evolution produces a
+relative phase −t*(w1−w0); the Born probability after the common reference q is
+(1+cos(q−t*(w1−w0)))/2. Loss and symmetric visibility randomization give the
+complete plus/minus/failure table used by the numerical protocol.
+
+For L=2π, m=hbar=1, modes 0 and 1 and N=4, the frequencies are 1/2 and 4/π².
+Their positive gap is d=1/2−4/π². At t=π/d with reference q=t/2 the continuum
+plus probability is 1 and the lattice plus probability is 0. These explicit
+controls separate this fixed nearest-neighbor alternative. Symmetric modes
+−j,j have no relative energy signal. General phases can wrap into blind spots;
+there is no monotonic exclusion claim.
+
+The noisy readout is physically calibrated. `free_reference_born_equivalence`
+shows equality of the entire outcome table if a separate unconstrained reference
+can be refitted. Full loss and zero visibility are other exact failures.
+`robust_coordinate_separation` gives the sufficient probability-interval criterion
+used in the companion fixed-allocation design. Its shared-scale interval test
+exploits several momenta while preserving one scale across settings.
+
+## Evidence and limits
+
+All new trust roots are registered in `Tests/Audit.lean`; the report source
+exports the approximation, joint-law and witness chain. The committed generated
+audit/report must be refreshed from a successful combined build before readiness.
+The companion [numerical study](https://github.com/stevenwarejones/path-reality-tests/pull/9)
+contains independent cyclic matrix, Born-rule, tail, joint-law and count-decision
+tests, 660 baseline scenarios, and a shared-scale sensitivity comparison.
+Numerical corroboration is distinct from Lean checking and experimental evidence.
+
+The Fourier identification with position-space L² on the circle is external.
+The benchmark is a nonrelativistic free massive particle, not photon dynamics.
+The repeated-data theorem covers independent fixed allocations, not adaptive
+controls, correlated trials, ancillas or optional stopping. No compatible dataset
+currently supplies the apparatus and calibration certificates for an exclusion.
+No general exclusion of finite ontologies, count of occupied trajectories, or
+construction of a real-time path measure is claimed.
 
 ## Closest primary sources
 
