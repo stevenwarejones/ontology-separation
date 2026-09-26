@@ -81,7 +81,7 @@ def SpectralVector.toHilbert (c : SpectralVector) : lp (fun _ : ℤ => ℂ) 2 :=
 
 theorem hilbert_norm_sq (u : lp (fun _ : ℤ => ℂ) 2) :
     ‖u‖^2 = ∑' j, ‖u j‖^2 := by
-  simpa using lp.norm_rpow_eq_tsum (p := (2 : ℝ≥0∞)) (by norm_num) u
+  simpa using lp.norm_rpow_eq_tsum (p := (2 : ENNReal)) (by norm_num) u
 
 theorem spectral_hilbert_mass (c : SpectralVector) : ‖c.toHilbert‖^2 = mass c :=
   hilbert_norm_sq _

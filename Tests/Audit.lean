@@ -999,3 +999,15 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.hilbert_norm_sq
 #print axioms OntologySeparation.ContinuumFinite.spectral_hilbert_mass
 #print axioms OntologySeparation.ContinuumFinite.spectral_hilbert_normalized
+
+#print axioms OntologySeparation.ContinuumFinite.projection_apply
+#print axioms OntologySeparation.ContinuumFinite.projection_norm_sq
+#print axioms OntologySeparation.ContinuumFinite.tail_sum
+#print axioms OntologySeparation.ContinuumFinite.tail_identity
+#print axioms OntologySeparation.ContinuumFinite.normalizedProjection_norm
+#print axioms OntologySeparation.ContinuumFinite.projection_normalization_distance
+#print axioms OntologySeparation.ContinuumFinite.normalizedProjection_error
+#print axioms OntologySeparation.ContinuumFinite.zero_retained_iff_tail_one
+#print axioms OntologySeparation.ContinuumFinite.projection_tendsto
+#print axioms OntologySeparation.ContinuumFinite.normalizedProjection_tendsto
+#print axioms OntologySeparation.ContinuumFinite.exists_normalized_cutoff

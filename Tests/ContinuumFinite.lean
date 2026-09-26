@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.ContinuumBorn
+import OntologySeparation.Experiments.ContinuumTruncation
 import OntologySeparation.Experiments.FiniteDispersion
 open OntologySeparation.ContinuumFinite
 

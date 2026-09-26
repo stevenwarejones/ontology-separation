@@ -60,7 +60,7 @@ theorem cyclic_cosine_eigenvalue (j : ℤ) (n : ZMod N) :
   have hn : (2*Real.pi*(-j)/N : ℝ) = -(2*Real.pi*j/N) := by push_cast; ring
   rw [Int.cast_neg,hn]
   have hp := phase_pair (2*Real.pi*j/N)
-  push_cast
+  push_cast at hp ⊢
   linear_combination -fourierCharacter (j : ZMod N) n * hp
 
 /-- Strict low-band alias exclusion. The endpoint N=2J is deliberately absent. -/
