@@ -51,19 +51,21 @@ theorem cyclicKinetic_spectrum (r : Circle) (N : ℕ) [NeZero N] (j : ℤ) (n : 
   field_simp
   <;> ring
 
-/-- Uniform local dispersion bound, stated in physical wave number and spacing. -/
+/-- Uniform global dispersion bound in physical wave number and spacing. -/
 theorem frequency_error_band (r : Circle) (a K k : ℝ) (ha : 0 < a)
-    (hk : |k| ≤ K) (hKa : K*a ≤ 1) :
+    (hk : |k| ≤ K) :
     |continuumFrequency r.hbar r.mass k-latticeFrequency r.hbar r.mass a k| ≤
-      5*r.hbar*a^2*K^4/(96*r.mass) := by
-  have hab : |k*a| ≤ K*a := by rw [abs_mul,abs_of_pos ha]; exact mul_le_mul_of_nonneg_right hk ha.le
-  have h := frequency_error_local r.hbar r.mass a k r.hbar_pos.le r.mass_pos ha.ne' (hab.trans hKa)
+      r.hbar*a^2*K^4/(24*r.mass) := by
+  have hh := r.hbar_pos
+  have hm := r.mass_pos
+  have h := frequency_error_global r.hbar r.mass a k hh.le hm ha.ne'
+  rw [abs_of_nonneg h.1]
+  have hk4 : k^4 ≤ K^4 := by
+    have := pow_le_pow_left₀ (abs_nonneg k) hk 4
+    simpa only [pow_abs,abs_of_nonneg (by positivity : 0 ≤ k^4)] using this
   calc
-    _ ≤ r.hbar/(r.mass*a^2)*(|k*a|^4*(5/96)) := h
-    _ ≤ r.hbar/(r.mass*a^2)*((K*a)^4*(5/96)) := by
-      have hh := r.hbar_pos; have hm := r.mass_pos
-      gcongr
-    _ = _ := by field_simp <;> ring
+    _ ≤ r.hbar*a^2*k^4/(24*r.mass) := h.2
+    _ ≤ _ := by gcongr
 
 /-- Finite-band norm estimate before any measurement or repetition. -/
 theorem hilbert_band_error (s : Finset ℤ) (u : SpectralHilbert) (hu : ‖u‖ = 1)
@@ -98,15 +100,15 @@ theorem lattice_tail_error (r : Circle) (s : Finset ℤ) (u : SpectralHilbert)
     (hK : ∀ j ∈ s, |waveNumber r j| ≤ K) (hKa : K*a ≤ 1) :
     ‖hilbertEvolve (frequency r) t u-
       hilbertEvolve (ringLatticeFrequency r a) t (normalizedProjection s u)‖ ≤
-      2*Real.sqrt (tail s u)+T*(5*r.hbar*a^2*K^4/(96*r.mass)) := by
-  have he : 0 ≤ T*(5*r.hbar*a^2*K^4/(96*r.mass)) := by
+      2*Real.sqrt (tail s u)+T*(r.hbar*a^2*K^4/(24*r.mass)) := by
+  have he : 0 ≤ T*(r.hbar*a^2*K^4/(24*r.mass)) := by
     have hh := r.hbar_pos; have hm := r.mass_pos
     positivity
   have hb := hilbert_band_error s (normalizedProjection s u) (normalizedProjection_norm s u hp)
     (fun j hj => by simp [normalizedProjection,lp.coeFn_smul,projection_apply,hj])
     (frequency r) (ringLatticeFrequency r a) t _ he (by
       intro j hj
-      have hfreq := frequency_error_band r a K (waveNumber r j) ha (hK j hj) hKa
+      have hfreq := frequency_error_band r a K (waveNumber r j) ha (hK j hj)
       have hfac : |(-t*frequency r j)-(-t*ringLatticeFrequency r a j)| =
           |t| *|continuumFrequency r.hbar r.mass (waveNumber r j)-
             latticeFrequency r.hbar r.mass a (waveNumber r j)| := by
@@ -154,9 +156,9 @@ theorem lattice_strong_convergence (r : Circle) (u : SpectralHilbert) (hu : ‖u
     tendsto_const_div_atTop_nhds_zero_nat r.length
   have hka : Tendsto (fun N : ℕ => K*(r.length/N)) atTop (𝓝 0) := by
     simpa using ha.const_mul K
-  have herr : Tendsto (fun N : ℕ => T*(5*r.hbar*(r.length/N)^2*K^4/(96*r.mass)))
+  have herr : Tendsto (fun N : ℕ => T*(r.hbar*(r.length/N)^2*K^4/(24*r.mass)))
       atTop (𝓝 0) := by
-    convert (((ha.pow 2).const_mul (5*r.hbar)).mul_const (K^4)).div_const (96*r.mass) |>.const_mul T using 1 <;> simp
+    convert (((ha.pow 2).const_mul (r.hbar)).mul_const (K^4)).div_const (24*r.mass) |>.const_mul T using 1 <;> simp
   let J := s.sup Int.natAbs
   have hJ : ∀ j ∈ s, j.natAbs ≤ J := fun j hj => le_sup hj
   have ev := (hka.eventually_lt_const (by norm_num : (0 : ℝ) < 1)).and

@@ -61,6 +61,24 @@ theorem frequency_error_local (hbar mass spacing k : ℝ)
   rw [factor, abs_mul, abs_of_nonneg (by positivity : 0 ≤ hbar/(mass*spacing^2))]
   exact mul_le_mul_of_nonneg_left (cosine_remainder_local _ hx) (by positivity)
 
+/-- Global nonnegative dispersion defect with the empirical 1/24 constant. -/
+theorem frequency_error_global (hbar mass spacing k : ℝ)
+    (hh : 0 ≤ hbar) (hm : 0 < mass) (ha : spacing ≠ 0) :
+    0 ≤ continuumFrequency hbar mass k-latticeFrequency hbar mass spacing k ∧
+    continuumFrequency hbar mass k-latticeFrequency hbar mass spacing k ≤
+      hbar*spacing^2*k^4/(24*mass) := by
+  have factor : continuumFrequency hbar mass k-latticeFrequency hbar mass spacing k =
+      hbar/(mass*spacing^2)*((k*spacing)^2/2-(1-Real.cos (k*spacing))) := by
+    unfold continuumFrequency latticeFrequency
+    field_simp [ne_of_gt hm,ha] <;> ring
+  have hc := cosine_remainder_global (k*spacing)
+  have hf : 0 ≤ hbar/(mass*spacing^2) := by positivity
+  rw [factor]
+  refine ⟨mul_nonneg hf hc.1, ?_⟩
+  calc
+    _ ≤ hbar/(mass*spacing^2)*((k*spacing)^4/24) := mul_le_mul_of_nonneg_left hc.2 hf
+    _ = _ := by field_simp [ne_of_gt hm,ha] <;> ring
+
 theorem phase_difference (x y : ℝ) : ‖phase x-phase y‖ ≤ |x-y| := by
   have hp : phase y*phase (x-y) = phase x := by
     rw [← phase_add]

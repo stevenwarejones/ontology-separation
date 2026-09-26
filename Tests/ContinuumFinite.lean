@@ -1,5 +1,5 @@
 import OntologySeparation.Experiments.ContinuumWitness
-import OntologySeparation.Experiments.ContinuumLimit
+import OntologySeparation.Experiments.FiniteFourier
 import OntologySeparation.Experiments.FiniteDispersion
 open OntologySeparation.ContinuumFinite
 

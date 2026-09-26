@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.ContinuumBorn
+import OntologySeparation.Experiments.ContinuumLimit
 import Mathlib.Analysis.Real.Pi.Bounds
 import Mathlib.Analysis.InnerProductSpace.PiL2
 import Mathlib.Topology.Algebra.Module.FiniteDimension
@@ -144,7 +144,8 @@ theorem twoModeEvolve_relative (w₀ w₁ t : ℝ) :
   · simp [twoModeEvolve,twoModeState]
   · change phase (-t*w₁)*(phase 0/(Real.sqrt 2 : ℂ)) =
       phase (-t*w₀)*(phase (-t*(w₁-w₀))/(Real.sqrt 2 : ℂ))
-    rw [phase_zero,← mul_div_assoc,← phase_add]
+    simp only [phase_zero,mul_one,← mul_div_assoc]
+    rw [← phase_add]
     congr 2
     ring
 
@@ -152,7 +153,7 @@ theorem evolved_readout_probability (q w₀ w₁ t : ℝ) :
     ‖interferometerOperator q 0 (twoModeEvolve w₀ w₁ t (twoModeState 0))‖^2 =
       plus 1 1 (q-t*(w₁-w₀)) := by
   rw [twoModeEvolve_relative,map_smul,norm_smul,phase_norm,one_mul]
-  exact interferometer_probability q (-t*(w₁-w₀))
+  convert interferometer_probability q (-t*(w₁-w₀)) using 1 <;> congr 1 <;> ring
 
 /-- Symmetric modes have equal energies and give no relative-dispersion signal. -/
 theorem symmetric_mode_negative_control (r : Circle) (a t : ℝ) (j : ℤ) :
@@ -205,6 +206,44 @@ theorem explicit_separating_born_experiment :
 
   rw [hc,hl]
   simp [plus]
+
+def witnessCircle : Circle where
+  length := 2*Real.pi
+  mass := 1
+  hbar := 1
+  length_pos := by positivity
+  mass_pos := by norm_num
+  hbar_pos := by norm_num
+
+theorem witness_frequencies :
+    frequency witnessCircle 0 = 0 ∧ frequency witnessCircle 1 = 1/2 ∧
+    ringLatticeFrequency witnessCircle (witnessCircle.length/4) 0 = 0 ∧
+    ringLatticeFrequency witnessCircle (witnessCircle.length/4) 1 = 4/Real.pi^2 := by
+  have hk : waveNumber witnessCircle 1 = 1 := by
+    simp [waveNumber,witnessCircle,Real.pi_ne_zero]
+  have hz : waveNumber witnessCircle 0 = 0 := by simp [waveNumber]
+  have ha : witnessCircle.length/4 = Real.pi/2 := by dsimp [witnessCircle]; ring
+  simp [frequency,ringLatticeFrequency,latticeFrequency,hk,hz,ha,witnessCircle,Real.cos_pi_div_two]
+  <;> ring
+
+/-- Explicit fixed lattice separation now stated directly with the circle and
+lattice frequencies derived from the cyclic kinetic operator. -/
+theorem lattice_born_witness :
+    let t := Real.pi/witnessGap
+    let q := t/2
+    ‖interferometerOperator q 0 (twoModeEvolve (frequency witnessCircle 0)
+      (frequency witnessCircle 1) t (twoModeState 0))‖^2 = 1 ∧
+    ‖interferometerOperator q 0 (twoModeEvolve
+      (ringLatticeFrequency witnessCircle (witnessCircle.length/4) 0)
+      (ringLatticeFrequency witnessCircle (witnessCircle.length/4) 1) t (twoModeState 0))‖^2 = 0 := by
+  dsimp only
+  rw [witness_frequencies.1,witness_frequencies.2.1,witness_frequencies.2.2.1,
+    witness_frequencies.2.2.2,evolved_readout_probability,evolved_readout_probability]
+  have h := explicit_separating_born_experiment
+  dsimp only at h
+  change plus 1 1 (Real.pi/witnessGap/2 + -(Real.pi/witnessGap)*(1/2)) = 1 ∧
+    plus 1 1 (Real.pi/witnessGap/2 + -(Real.pi/witnessGap)*(4/Real.pi^2)) = 0 at h
+  convert h using 1 <;> congr 1 <;> ring
 
 end
 end OntologySeparation.ContinuumFinite

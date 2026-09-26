@@ -1039,3 +1039,15 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.evolved_readout_probability
 #print axioms OntologySeparation.ContinuumFinite.symmetric_mode_negative_control
 #print axioms OntologySeparation.ContinuumFinite.free_reference_born_equivalence
+
+#print axioms OntologySeparation.ContinuumFinite.frequency_error_global
+
+#print axioms OntologySeparation.ContinuumFinite.modeVector_orthonormal
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_mass
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_apply
+#print axioms OntologySeparation.ContinuumFinite.siteEvolve_mass
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_cyclic
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_kinetic
+
+#print axioms OntologySeparation.ContinuumFinite.witness_frequencies
+#print axioms OntologySeparation.ContinuumFinite.lattice_born_witness
