@@ -115,13 +115,17 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem seed_abd_matches :
     ∀ x y w a b d, seedABD x y w a b d = ForcedSignalingLC4.abd x y w a b d := by
-  with_unfolding_all decide +kernel
+  intro x y w a b d
+  cases x <;> cases y <;> cases w <;> cases a <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem seed_acd_matches :
     ∀ x z w a c d, seedACD x z w a c d = ForcedSignalingLC4.acd x z w a c d := by
-  with_unfolding_all decide +kernel
+  intro x z w a c d
+  cases x <;> cases z <;> cases w <;> cases a <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 noncomputable def modelABD (m : Model) (x y w a b d : Bool) : ℝ :=
   ∑ j : Atom,
@@ -185,9 +189,11 @@ theorem difference_exact (c : Context) (o : Recipient) :
 def epsilonQ2 : Q2 := q (-1/16) (1/16)
 
 set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
 private theorem diff_shape : ∀ c o,
     diffQ2 c o = 0 ∨ diffQ2 c o = epsilonQ2 ∨ diffQ2 c o = -epsilonQ2 := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 theorem epsilon_nonnegative : 0 ≤ Q2.toReal epsilonQ2 := by
   simp [epsilonQ2, Q2.toReal, q]
@@ -203,7 +209,8 @@ private theorem diff_active : ∀ c o,
     if c.val = 5 ∨ c.val = 7 ∨ c.val = 12 ∨ c.val = 14 then
       diffQ2 c o = epsilonQ2 ∨ diffQ2 c o = -epsilonQ2
     else diffQ2 c o = 0 := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 private theorem abs_difference_exact (c : Context) (o : Recipient) :
     |difference model.behavior c o| =
