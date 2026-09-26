@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.PhaseInterventionExamples
+import OntologySeparation.Experiments.LocalPhase
 import OntologySeparation.Signaling
 import OntologySeparation.Experiments.PathInterference
 import OntologySeparation.Certificates.ForcedSignaling
@@ -604,3 +604,35 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PhaseIntervention.quantum_realizes_lossy
 #print axioms OntologySeparation.PhaseIntervention.selectionCounterexample
 #print axioms OntologySeparation.PhaseIntervention.postselection_changes_contrast
+
+-- Normalized geometry and the local-phase definite-region class
+#print axioms OntologySeparation.PhaseIntervention.nearBlind_iff_feasible
+#print axioms OntologySeparation.PhaseIntervention.triangle
+#print axioms OntologySeparation.PhaseIntervention.triangle_pairwise
+#print axioms OntologySeparation.PhaseIntervention.triangle_nearBlind_iff
+#print axioms OntologySeparation.PhaseIntervention.triangle_pairwise_not_sufficient
+#print axioms OntologySeparation.PhaseIntervention.binary_nearBlind_iff
+#print axioms OntologySeparation.PhaseIntervention.LocalPhaseModel
+#print axioms OntologySeparation.PhaseIntervention.LocalPhaseModel.observed
+#print axioms OntologySeparation.PhaseIntervention.LocalPhaseModel.occupation
+#print axioms OntologySeparation.PhaseIntervention.LocalPhaseModel.contrast_identity
+#print axioms OntologySeparation.PhaseIntervention.LocalPhaseModel.contrast_le_occupation
+#print axioms OntologySeparation.PhaseIntervention.LocalPhaseModel.robust_bound
+#print axioms OntologySeparation.PhaseIntervention.LocalPhaseModel.either_arm
+#print axioms OntologySeparation.PhaseIntervention.LocalCompatible
+#print axioms OntologySeparation.PhaseIntervention.localCompatible_bound
+#print axioms OntologySeparation.PhaseIntervention.visibility_occupation
+#print axioms OntologySeparation.PhaseIntervention.lossy_local_necessary
+#print axioms OntologySeparation.PhaseIntervention.explicit_quantum_violation
+#print axioms OntologySeparation.PhaseIntervention.balancedModel
+#print axioms OntologySeparation.PhaseIntervention.balanced_occupation
+#print axioms OntologySeparation.PhaseIntervention.balanced_probability
+#print axioms OntologySeparation.PhaseIntervention.lossy_local_iff
+#print axioms OntologySeparation.PhaseIntervention.boundary_nonempty
+#print axioms OntologySeparation.PhaseIntervention.allInP
+#print axioms OntologySeparation.PhaseIntervention.drop_occupation
+#print axioms OntologySeparation.PhaseIntervention.drop_locality
+#print axioms OntologySeparation.PhaseIntervention.predetermined
+#print axioms OntologySeparation.PhaseIntervention.settingPreparation
+#print axioms OntologySeparation.PhaseIntervention.drop_setting_independence
+#print axioms OntologySeparation.PhaseIntervention.excludes_local

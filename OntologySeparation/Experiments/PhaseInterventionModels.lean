@@ -185,8 +185,8 @@ theorem lossy_contrast (η v : ℝ) (hη₀ : 0 ≤ η) (hη₁ : η ≤ 1)
   norm_num [lossy, fringe]
   ring
 
-/-- The nearest phase-blind behavior is the phase average. The entrywise budget
-needed to contain this target is exactly half the observed full contrast. -/
+/-- For this lossy family, the phase average is a nearest phase-blind behavior.
+The required entrywise budget is exactly half this family’s full contrast. -/
 theorem lossy_nearBlind_iff (η v δ : ℝ) (hη₀ : 0 ≤ η) (hη₁ : η ≤ 1)
     (hv₀ : 0 ≤ v) (hv₁ : v ≤ 1) (hδ : 0 ≤ δ) :
     NearBlind (lossy η v hη₀ hη₁ hv₀ hv₁) δ ↔ η * v ≤ 2 * δ := by

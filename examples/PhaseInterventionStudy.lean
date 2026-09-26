@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.PhaseInterventionExamples
+import OntologySeparation.Experiments.LocalPhase
 import OntologySeparation.Reporting.Claim
 
 /-! Finite quantum model comparison; physical calibration and simultaneous
@@ -16,3 +16,19 @@ confidence bounds are external premises, not certified experimental results. -/
 #export_theorem OntologySeparation.PhaseIntervention.insensitive_source_not_dephased
 #export_theorem OntologySeparation.PhaseIntervention.postselection_changes_contrast
 #export_theorem OntologySeparation.PhaseIntervention.contextual_matches
+#export_theorem OntologySeparation.PhaseIntervention.nearBlind_iff_feasible
+#export_theorem OntologySeparation.PhaseIntervention.triangle_pairwise_not_sufficient
+#export_theorem OntologySeparation.PhaseIntervention.triangle_nearBlind_iff
+#export_theorem OntologySeparation.PhaseIntervention.binary_nearBlind_iff
+#export_theorem OntologySeparation.PhaseIntervention.LocalPhaseModel.contrast_identity
+#export_theorem OntologySeparation.PhaseIntervention.LocalPhaseModel.contrast_le_occupation
+#export_theorem OntologySeparation.PhaseIntervention.LocalPhaseModel.robust_bound
+#export_theorem OntologySeparation.PhaseIntervention.LocalPhaseModel.either_arm
+#export_theorem OntologySeparation.PhaseIntervention.visibility_occupation
+#export_theorem OntologySeparation.PhaseIntervention.lossy_local_iff
+#export_theorem OntologySeparation.PhaseIntervention.boundary_nonempty
+#export_theorem OntologySeparation.PhaseIntervention.explicit_quantum_violation
+#export_theorem OntologySeparation.PhaseIntervention.drop_occupation
+#export_theorem OntologySeparation.PhaseIntervention.drop_locality
+#export_theorem OntologySeparation.PhaseIntervention.drop_setting_independence
+#export_theorem OntologySeparation.PhaseIntervention.excludes_local

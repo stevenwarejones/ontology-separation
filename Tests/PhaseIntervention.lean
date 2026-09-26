@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.PhaseInterventionExamples
+import OntologySeparation.Experiments.LocalPhase
 
 open OntologySeparation PhaseIntervention FiniteModels ExperimentAccess
 
@@ -50,3 +50,37 @@ example {O : Type} [Fintype O] (p : Behavior (phaseInterface O)) (δ r : ℝ)
     (estimate : Phase → O → ℝ) (he : ∀ s o, |estimate s o - p.prob s o| ≤ r)
     (s t : Phase) (o : O) (h : 2*δ + 2*r < |estimate s o - estimate t o|) :
     ¬ NearBlind p δ := excludes_nearBlind p δ r estimate he s t o h
+
+-- Normalization obstructs a common three-outcome behavior despite passing all pairs.
+example : ¬ NearBlind triangle (3/5) := by
+  rw [triangle_nearBlind_iff]
+  norm_num
+example : ∀ s t o, |triangle.prob s o - triangle.prob t o| ≤ 2*(3/5) := by
+  intro s t o
+  have h := triangle_pairwise (1/10) (by norm_num) s t o
+  norm_num at h ⊢
+  exact h
+example : LocalCompatible (lossy 1 (1/2) (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)) (1/2) := boundary_nonempty
+example : ¬ LocalCompatible (lossy 1 (3/5) (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)) (1/2) := explicit_quantum_violation
+-- Low efficiency can keep even unit visibility inside the local class.
+example : LocalCompatible (lossy (2/5) 1 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)) (1/2) := by
+  rw [lossy_local_iff]
+  norm_num
+
+-- The three dropped-premise constructions apply to the violating quantum table.
+example : (allInP (lossy 1 (3/5) (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num))).occupation = 1 := (drop_occupation _).1
+example : ∃ μ : FiniteDistribution (Fin 2),
+    (∑ l : Fin 2, if l.val = 0 then μ.mass l else 0) = 1/2 ∧
+    ObservationallyEquivalent (mixture (fun _ =>
+      lossy 1 (3/5) (by norm_num) (by norm_num) (by norm_num) (by norm_num)) μ)
+      (lossy 1 (3/5) (by norm_num) (by norm_num) (by norm_num) (by norm_num)) :=
+  drop_locality _
+example : (settingPreparation (lossy 1 (3/5) (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)) .zero).mass (false, 0) ≠
+    (settingPreparation (lossy 1 (3/5) (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)) .half).mass (false, 0) := by
+  norm_num [settingPreparation, lossy, fringe]

@@ -772,3 +772,51 @@
 'OntologySeparation.PhaseIntervention.postselection_changes_contrast' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.PhaseIntervention.nearBlind_iff_feasible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.triangle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.triangle_pairwise' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.triangle_nearBlind_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.triangle_pairwise_not_sufficient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.binary_nearBlind_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.observed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.occupation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.contrast_identity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.contrast_le_occupation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.robust_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalPhaseModel.either_arm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.LocalCompatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.localCompatible_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.visibility_occupation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_local_necessary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.explicit_quantum_violation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.balancedModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.balanced_occupation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.balanced_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_local_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.boundary_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.allInP' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.drop_occupation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.drop_locality' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.predetermined' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.settingPreparation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.drop_setting_independence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.excludes_local' depends on axioms: [propext, Classical.choice, Quot.sound]
