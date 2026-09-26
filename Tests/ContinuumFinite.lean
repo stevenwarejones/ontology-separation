@@ -19,7 +19,7 @@ example : plus 1 1 Real.pi < plus 1 1 0 :=
 example (x : ℝ) : 0 ≤ x^2/2-(1-Real.cos x) ∧ x^2/2-(1-Real.cos x) ≤ x^4/24 :=
   cosine_remainder_global x
 
-example (r : Circle) (a t : ℝ) (j : ℤ) :
+example (r : OntologySeparation.ContinuumFinite.Circle) (a t : ℝ) (j : ℤ) :
     relativePhase (frequency r) (-j) j t = 0 :=
   (symmetric_mode_negative_control r a t j).1
 

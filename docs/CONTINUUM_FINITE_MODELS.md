@@ -1,10 +1,11 @@
 # Continuum dynamics versus finite models
 
 **Draft: final combined verification and generated artifacts are in progress.**
-The infinite spectral evolution, exact finite embedding, cyclic spectrum,
-product-TV, Born continuity, global cosine remainder and normalized truncation
-modules have compiled in CI. New composition and witness additions require
-verification at the final head. This document distinguishes those checks from
+All continuum modules, including the finite Fourier embedding, limit/test-error
+composition and explicit Born witness, compiled together at `1f678da`.
+The test suite then exposed an ambiguous `Circle` type name; the regression now
+uses the fully qualified model type. Final tests and generated evidence are
+being checked at the corrected head. This document distinguishes those checks from
 mathematical claims; the draft is not a merge recommendation.
 
 ## Common models and accessible experiments
@@ -113,8 +114,10 @@ Numerical corroboration is distinct from Lean checking and experimental evidence
 
 The Fourier identification with position-space L² on the circle is external.
 The benchmark is a nonrelativistic free massive particle, not photon dynamics.
-The repeated-data theorem covers independent fixed allocations, not adaptive
-controls, correlated trials, ancillas or optional stopping. No compatible dataset
+The repeated-data theorem explicitly covers independent repetitions of a fixed
+preparation/evolution/measurement. `product_tv` supplies the composition step
+for differing fixed strata. Adaptive controls, correlated trials, ancillas and
+optional stopping are outside the theorem. No compatible dataset
 currently supplies the apparatus and calibration certificates for an exclusion.
 No general exclusion of finite ontologies, count of occupied trajectories, or
 construction of a real-time path measure is claimed.
