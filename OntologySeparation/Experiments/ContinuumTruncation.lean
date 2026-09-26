@@ -28,22 +28,19 @@ theorem projection_norm_sq (s : Finset ℤ) (u : SpectralHilbert) :
     ‖projection s u‖^2 = ∑ j ∈ s, ‖u j‖^2 := by
   simpa [projection] using lp.norm_sum_single (p := (2 : ENNReal)) (by norm_num) (fun j => u j) s
 
-theorem tail_sum (s : Finset ℤ) (u : SpectralHilbert) :
-    tail s u = ∑' j : {j : ℤ // j ∉ s}, ‖u j‖^2 := by
-  classical
-  rw [tail,hilbert_norm_sq]
-  simp only [lp.coeFn_sub,Pi.sub_apply,projection_apply]
-  calc
-    _ = ∑' j : ℤ, ({j : ℤ | j ∉ s} : Set ℤ).indicator (fun j => ‖u j‖^2) j := by
-      apply tsum_congr
-      intro j
-      by_cases hj : j ∈ s <;> simp [hj,Set.indicator]
-    _ = _ := (_root_.tsum_subtype {j : ℤ | j ∉ s} (fun j => ‖u j‖^2)).symm
-
 theorem tail_identity (s : Finset ℤ) (u : SpectralHilbert) :
     tail s u = ‖u‖^2-‖projection s u‖^2 := by
   rw [projection_norm_sq]
   simpa [tail,projection] using lp.norm_compl_sum_single (p := (2 : ENNReal)) (by norm_num) u s
+
+theorem tail_sum (s : Finset ℤ) (u : SpectralHilbert) :
+    tail s u = ∑' j : {j : ℤ // j ∉ s}, ‖u j‖^2 := by
+  have hu : Summable (fun j : ℤ => ‖u j‖^2) := by
+    simpa using u.property.summable (by norm_num : 0 < (2 : ENNReal).toReal)
+  have hsplit := hu.sum_add_tsum_subtype_compl s
+  rw [← hilbert_norm_sq] at hsplit
+  rw [tail_identity,projection_norm_sq]
+  linarith
 
 theorem normalizedProjection_norm (s : Finset ℤ) (u : SpectralHilbert)
     (h : projection s u ≠ 0) : ‖normalizedProjection s u‖ = 1 := by
