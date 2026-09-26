@@ -58,7 +58,7 @@ theorem cyclic_cosine_eigenvalue (j : ℤ) (n : ZMod N) :
   rw [cyclic_character_eigenvalue,character_integer_phase]
   rw [show -(j : ZMod N) = ((-j : ℤ) : ZMod N) by simp,character_integer_phase]
   have hn : (2*Real.pi*(-j)/N : ℝ) = -(2*Real.pi*j/N) := by push_cast; ring
-  rw [hn]
+  rw [Int.cast_neg,hn]
   have hp := phase_pair (2*Real.pi*j/N)
   push_cast
   linear_combination -fourierCharacter (j : ZMod N) n * hp
@@ -75,7 +75,9 @@ theorem no_alias (J : ℕ) (hN : 2*J < N) (a b : ℤ)
   omega
 
 theorem character_star (z : ZMod N) : star (ZMod.stdAddChar z) = ZMod.stdAddChar (-z) := by
-  simp [ZMod.stdAddChar_apply,AddChar.map_neg_eq_inv,Circle.coe_inv_eq_conj]
+  change star (↑(ZMod.toCircle z) : ℂ) = ↑(ZMod.toCircle (-z))
+  rw [map_neg_eq_inv, _root_.Circle.coe_inv_eq_conj]
+  rfl
 
 /-- Full Fourier orthogonality, not merely normalization of each column. -/
 theorem character_orthogonality (j k : ZMod N) :

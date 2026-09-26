@@ -990,3 +990,12 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.no_alias
 #print axioms OntologySeparation.ContinuumFinite.character_star
 #print axioms OntologySeparation.ContinuumFinite.character_orthogonality
+
+#print axioms OntologySeparation.ContinuumFinite.BornInstrument.distribution
+#print axioms OntologySeparation.ContinuumFinite.born_tv
+#print axioms OntologySeparation.ContinuumFinite.born_iid_tv
+#print axioms OntologySeparation.ContinuumFinite.born_test_error
+#print axioms OntologySeparation.ContinuumFinite.SpectralVector.toHilbert
+#print axioms OntologySeparation.ContinuumFinite.hilbert_norm_sq
+#print axioms OntologySeparation.ContinuumFinite.spectral_hilbert_mass
+#print axioms OntologySeparation.ContinuumFinite.spectral_hilbert_normalized
