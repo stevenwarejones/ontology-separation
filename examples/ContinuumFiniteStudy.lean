@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.ContinuumApproximation
+import OntologySeparation.Experiments.FiniteDispersion
 import OntologySeparation.Reporting.Claim
 
 #export_theorem OntologySeparation.ContinuumFinite.evolve_mass
@@ -30,3 +30,22 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.frequency_error_local
 #export_theorem OntologySeparation.ContinuumFinite.phase_difference
 #export_theorem OntologySeparation.ContinuumFinite.finite_phase_error_sq
+
+#export_theorem OntologySeparation.ContinuumFinite.product_l1
+#export_theorem OntologySeparation.ContinuumFinite.product_tv
+#export_theorem OntologySeparation.ContinuumFinite.tv_le_one
+#export_theorem OntologySeparation.ContinuumFinite.test_mean_bound
+#export_theorem OntologySeparation.ContinuumFinite.test_error
+#export_theorem OntologySeparation.ContinuumFinite.iid
+#export_theorem OntologySeparation.ContinuumFinite.iid_tv
+#export_theorem OntologySeparation.ContinuumFinite.iid_tv_capped
+
+#export_theorem OntologySeparation.ContinuumFinite.cyclic_character_eigenvalue
+#export_theorem OntologySeparation.ContinuumFinite.character_norm
+#export_theorem OntologySeparation.ContinuumFinite.normalizedFourierMode_mass
+#export_theorem OntologySeparation.ContinuumFinite.character_integer_phase
+#export_theorem OntologySeparation.ContinuumFinite.phase_pair
+#export_theorem OntologySeparation.ContinuumFinite.cyclic_cosine_eigenvalue
+#export_theorem OntologySeparation.ContinuumFinite.no_alias
+#export_theorem OntologySeparation.ContinuumFinite.character_star
+#export_theorem OntologySeparation.ContinuumFinite.character_orthogonality

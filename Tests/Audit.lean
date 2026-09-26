@@ -970,3 +970,23 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.frequency_error_local
 #print axioms OntologySeparation.ContinuumFinite.phase_difference
 #print axioms OntologySeparation.ContinuumFinite.finite_phase_error_sq
+
+#print axioms OntologySeparation.ContinuumFinite.distributionProduct
+#print axioms OntologySeparation.ContinuumFinite.product_l1
+#print axioms OntologySeparation.ContinuumFinite.product_tv
+#print axioms OntologySeparation.ContinuumFinite.tv_le_one
+#print axioms OntologySeparation.ContinuumFinite.test_mean_bound
+#print axioms OntologySeparation.ContinuumFinite.test_error
+#print axioms OntologySeparation.ContinuumFinite.iid
+#print axioms OntologySeparation.ContinuumFinite.iid_tv
+#print axioms OntologySeparation.ContinuumFinite.iid_tv_capped
+
+#print axioms OntologySeparation.ContinuumFinite.cyclic_character_eigenvalue
+#print axioms OntologySeparation.ContinuumFinite.character_norm
+#print axioms OntologySeparation.ContinuumFinite.normalizedFourierMode_mass
+#print axioms OntologySeparation.ContinuumFinite.character_integer_phase
+#print axioms OntologySeparation.ContinuumFinite.phase_pair
+#print axioms OntologySeparation.ContinuumFinite.cyclic_cosine_eigenvalue
+#print axioms OntologySeparation.ContinuumFinite.no_alias
+#print axioms OntologySeparation.ContinuumFinite.character_star
+#print axioms OntologySeparation.ContinuumFinite.character_orthogonality

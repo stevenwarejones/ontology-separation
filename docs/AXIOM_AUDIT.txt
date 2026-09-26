@@ -1257,6 +1257,30 @@
  Classical.choice,
  Quot.sound]
 'OntologySeparation.PhaseIntervention.excludes_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.evolve' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.evolve_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.evolve_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.evolve_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.evolve_inverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.evolve_distance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.evolve_supported' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.finite_spectral_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.complete_detector_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.spectralFinite_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.readout_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.readout_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.zero_visibility' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.full_loss' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.reference_absorbs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.cosine_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.strict_cosine_separation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.plus_phase_lipschitz' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.robust_coordinate_separation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.test_error_of_event_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'OntologySeparation.PathContextuality.Model.observed' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PathContextuality.Model.cap_of_measurement_equivalence' depends on axioms: [propext,
  Classical.choice,
@@ -1351,3 +1375,21 @@
 'OntologySeparation.PathContextuality.reference_finite_compatible_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'OntologySeparation.ContinuumFinite.finiteEmbedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.finiteEmbedding_supported' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.finiteEmbedding_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.finiteEmbedding_intertwines' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.finite_complete_probability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.finite_evolved_normalized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.cosine_remainder_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.frequency_error_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.phase_difference' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.finite_phase_error_sq' depends on axioms: [propext, Classical.choice, Quot.sound]

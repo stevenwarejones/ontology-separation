@@ -1,8 +1,10 @@
 # Continuum dynamics versus finite models
 
-**Development status: incomplete; not review-ready.** The new Lean source has
-not been compiled in the local environment. Neither the audit snapshot nor the
-new theorem report has been generated. Existing verification gates are retained.
+**Development status: incomplete; not review-ready.** At 49c6daa the focused build, all 30 new audit roots, and the full
+`scripts/check.sh` pass have been checked; the final CI gate identified only
+uncommitted generated artifacts. The current branch adds further lattice and
+statistical proofs, which require their own final-head verification. Both PRs
+remain drafts. Existing verification gates are retained.
 
 The question concerns complete observable probability distributions under common
 preparation, evolution and measurement controls. A finite path sum equal to a
@@ -19,9 +21,11 @@ its frequencies are hbar*(2πj/L)²/(2m).
 A finite support is an explicit restriction on this infinite space. On that
 support, replacing every inaccessible frequency by zero preserves the evolved
 state exactly, hence every outcome of every common normalized detector. This
-is the exact restricted spectral counterexample. A full finite-dimensional
-embedding/normalization construction still needs certification; the current
-statement compares finitely supported states inside the infinite representation.
+is the exact restricted spectral counterexample. The `finiteEmbedding` constructor zero-extends a genuinely finite coefficient
+vector. Its mass theorem identifies the infinite norm sum with the finite
+norm sum, and `finiteEmbedding_intertwines` transports finite diagonal evolution
+exactly. Normalized finite preparation and all common detector outcomes are
+preserved. These results compiled at 49c6daa.
 The position-space Fourier identification with L² of the circle is external.
 The development does not yet bundle a Hilbert-space unitary or strong continuity.
 
@@ -30,19 +34,27 @@ normalization, positivity, cosine contrast and a phase Lipschitz bound. It prove
 zero-visibility/full-loss failures, absorption by an unconstrained reference,
 and disjointness under calibrated probability perturbations. These are readout
 lemmas: they do not yet connect the lattice generator to an actual Born POVM.
-The conditional test-error lemma does not replace a product-distribution TV proof.
+The arbitrary normalized `Detector` interface supports **exact equality only**.
+It permits discontinuous responses and supplies no approximation guarantee.
+Approximation requires a separate Born-rule interface.
+`ContinuumApproximation` at 49c6daa proves a conservative local cosine remainder
+5/96 for |ka|≤1, a frequency-error bound, scalar phase Lipschitzness and a
+dimension-independent finite coefficient error. It does not certify the empirical
+global 1/24 estimate.
+The added `ContinuumStatistics` develops complete product-law TV and test-error
+proofs; it remains to connect these to a Born detector and approximant family.
 
 ## Mathematical obligations before review readiness
 
 | Obligation | Current disposition | Required result |
 |---|---|---|
-| Infinite spectral evolution | Proof terms written, unverified | Successful Lean build and generated audit/report |
-| Finite spectral counterexample | Support-restricted equality written | Construct finite state embedding and transported detector |
-| Nearest-neighbor lattice | Not yet formalized | DFT normalization, cyclic kinetic spectrum, aliasing and small-N conventions |
-| Cosine remainder | Not yet formalized | Explicit energy error bound with hypotheses and constants |
-| Approximation | Not yet formalized | l² evolution error, POVM TV conversion, normalized truncation and tau=1 case |
+| Infinite spectral evolution | Compiled and audited at 49c6daa | Final-head audit/report refresh |
+| Finite spectral counterexample | Finite embedding, mass, intertwining and complete detector equality compiled at 49c6daa | Final-head checks |
+| Nearest-neighbor lattice | Cyclic character spectrum, normalization, orthogonality and strict alias exclusion added | Compile and connect physical constants |
+| Cosine remainder | Local 5/96 frequency estimate compiled at 49c6daa | Global 1/24 is separate and not certified by this theorem |
+| Approximation | Finite phase/vector estimate compiled at 49c6daa | Born TV conversion, normalized truncation and tau=1 case |
 | Strong convergence | Not yet formalized | Fixed state, bounded time, explicit cutoff/site quantifiers |
-| Finite-resource impossibility | Conditional test-error algebra only | Full joint product TV bound connected to approximant family |
+| Finite-resource impossibility | Full product TV and randomized-test proofs added | Compile; connect to approximant family |
 | Separating experiment | Probability-level lemmas written | Born realization, explicit dynamics/parameters, phase interval and nuisances |
 | Trust/report | Roots registered; snapshots absent | Full check and exact generated-file equality on final head |
 
