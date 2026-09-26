@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.ContinuumMenu
 import OntologySeparation.Experiments.FiniteHamiltonian
 import OntologySeparation.Experiments.ContinuumTransport
 import OntologySeparation.Experiments.FiniteFourier
@@ -148,3 +149,8 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.sitePropagator_schrodinger
 #export_theorem OntologySeparation.ContinuumFinite.sitePropagator_unique
 #export_theorem OntologySeparation.ContinuumFinite.sitePropagator_synthesis
+
+#export_theorem OntologySeparation.ContinuumFinite.menu_tv
+#export_theorem OntologySeparation.ContinuumFinite.menu_test_error
+#export_theorem OntologySeparation.ContinuumFinite.finite_family_convergence
+#export_theorem OntologySeparation.ContinuumFinite.finite_menu_nonseparation

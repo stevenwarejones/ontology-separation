@@ -81,7 +81,16 @@ theorem cyclicHamiltonian_synthesis (r : Circle) (c : ZMod N → ℂ) :
 theorem phase_time_derivative (w t : ℝ) :
     HasDerivAt (fun t : ℝ => phase (-t*w)) ((-Complex.I*(w : ℂ))*phase (-t*w)) t := by
   have h := ((Complex.ofRealCLM.hasDerivAt (x := t)).mul_const (-Complex.I*(w : ℂ))).cexp
-  convert h using 1 <;> simp [phase, Complex.ofReal_mul, Complex.ofReal_neg] <;> congr 1 <;> ring
+  have heq (x : ℝ) : phase (-x*w) = Complex.exp ((x : ℂ)*(-Complex.I*(w : ℂ))) := by
+    unfold phase
+    congr 1
+    push_cast
+    ring
+  convert h using 1
+  · funext x; exact heq x
+  · rw [heq]
+    simp only [Complex.ofRealCLM_apply, Complex.ofReal_one, one_mul]
+    ring
 
 /-- Finite synthesis permits termwise vector-valued differentiation. -/
 theorem siteEvolve_derivative (w : ZMod N → ℝ) (c : ZMod N → ℂ) (t : ℝ) :
@@ -90,7 +99,8 @@ theorem siteEvolve_derivative (w : ZMod N → ℝ) (c : ZMod N → ℂ) (t : ℝ
   have h := HasDerivAt.sum (u := (univ : Finset (ZMod N)))
     (fun j _ => ((phase_time_derivative (w j) t).mul_const (c j)).smul_const (modeVector j))
   convert h using 1
-  · rfl
+  · funext x
+    simp only [siteEvolve, fourierSynthesis, Finset.sum_apply]
   · unfold fourierSynthesis
     apply sum_congr rfl
     intro j _
@@ -105,8 +115,9 @@ theorem schrodingerGenerator_synthesis (r : Circle) (c : ZMod N → ℂ) :
     schrodingerGenerator r (fourierSynthesis c) =
       fourierSynthesis (fun j => (-Complex.I*(siteFrequency r j : ℂ))*c j) := by
   have hh : (r.hbar : ℂ) ≠ 0 := by exact_mod_cast r.hbar_pos.ne'
-  simp only [schrodingerGenerator, ContinuousLinearMap.smul_apply, cyclicHamiltonian_synthesis,
-    fourierSynthesis, smul_sum, smul_smul]
+  change (-Complex.I/(r.hbar : ℂ)) • cyclicHamiltonian r (fourierSynthesis c) = _
+  rw [cyclicHamiltonian_synthesis]
+  simp only [fourierSynthesis, smul_sum, smul_smul]
   apply sum_congr rfl
   intro j _
   congr 1
@@ -147,8 +158,8 @@ theorem sitePropagator_unique (r : Circle) (u : EuclideanSpace ℂ (ZMod N))
     (hf : ∀ t, HasDerivAt f (schrodingerGenerator r (f t)) t) :
     f = fun t => sitePropagator r t u := by
   apply ODE_solution_unique_univ (v := fun _ => schrodingerGenerator r)
-    (s := fun _ => Set.univ) (t₀ := 0)
-    (fun _ => (schrodingerGenerator r).lipschitz.lipschitzOnWith)
+    (s := fun _ => Set.univ) (t₀ := 0) (K := ‖schrodingerGenerator (N := N) r‖₊)
+    (fun _ => (schrodingerGenerator (N := N) r).lipschitz.lipschitzOnWith)
     (fun t => ⟨hf t, Set.mem_univ _⟩)
     (fun t => ⟨sitePropagator_derivative r u t, Set.mem_univ _⟩)
   simpa using h0

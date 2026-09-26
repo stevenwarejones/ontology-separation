@@ -51,7 +51,7 @@ def twoModeEmbedding (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) : TwoMode →ₗᵢ[�
   change (∑ i : Fin 2, u i • spectralPair j₀ j₁ i) j = _
   rw [Fin.sum_univ_two]
   simp [spectralPair, lp.coeFn_add, lp.coeFn_smul, lp.coeFn_single,
-    Pi.single_apply, smul_eq_mul, eq_comm]
+    Pi.single_apply, Pi.add_apply, Pi.smul_apply, smul_eq_mul, eq_comm]
 
 @[simp] theorem twoModeEmbedding_norm (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (u : TwoMode) :
     ‖twoModeEmbedding j₀ j₁ h u‖ = ‖u‖ := (twoModeEmbedding j₀ j₁ h).norm_map u
@@ -111,10 +111,10 @@ theorem pairProjection_pythagoras (e : TwoMode →ₗᵢ[ℂ] H) (x : H) :
   have hi := e.toContinuousLinearMap.adjoint_inner_left (pairExtraction e x) x
   change inner ℂ (pairExtraction e x) (pairExtraction e x) =
     inner ℂ x (e (pairExtraction e x)) at hi
-  have hr : (inner ℂ x (pairProjection e x)).re = ‖pairExtraction e x‖^2 := by
-    change (inner ℂ x (e (pairExtraction e x))).re = _
+  have hr : RCLike.re (inner ℂ x (pairProjection e x)) = ‖pairExtraction e x‖^2 := by
+    change RCLike.re (inner ℂ x (e (pairExtraction e x))) = _
     rw [← hi]
-    exact inner_self_eq_norm_sq _
+    exact inner_self_eq_norm_sq (𝕜 := ℂ) (pairExtraction e x)
   rw [norm_sub_sq (𝕜 := ℂ), hr]
   change ‖pairExtraction e x‖^2 +
     (‖x‖^2-2*‖pairExtraction e x‖^2+‖e (pairExtraction e x)‖^2) = _

@@ -1113,3 +1113,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.sitePropagator_schrodinger
 #print axioms OntologySeparation.ContinuumFinite.sitePropagator_unique
 #print axioms OntologySeparation.ContinuumFinite.sitePropagator_synthesis
+
+#print axioms OntologySeparation.ContinuumFinite.MenuSamples
+#print axioms OntologySeparation.ContinuumFinite.menuFintype
+#print axioms OntologySeparation.ContinuumFinite.menuLaw
+#print axioms OntologySeparation.ContinuumFinite.menu_tv
+#print axioms OntologySeparation.ContinuumFinite.menu_test_error
+#print axioms OntologySeparation.ContinuumFinite.finite_family_convergence
+#print axioms OntologySeparation.ContinuumFinite.finite_menu_nonseparation
