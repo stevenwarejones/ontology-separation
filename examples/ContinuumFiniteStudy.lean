@@ -107,3 +107,8 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.witness_frequencies
 #export_theorem OntologySeparation.ContinuumFinite.lattice_born_witness
 #export_theorem OntologySeparation.ContinuumFinite.finite_resource_test_error
+
+#export_theorem OntologySeparation.ContinuumFinite.band_modes_orthonormal
+#export_theorem OntologySeparation.ContinuumFinite.bandSynthesis_mass
+#export_theorem OntologySeparation.ContinuumFinite.bandSynthesis_kinetic
+#export_theorem OntologySeparation.ContinuumFinite.bandSynthesis_evolve

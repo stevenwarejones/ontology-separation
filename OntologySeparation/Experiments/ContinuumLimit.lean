@@ -219,7 +219,11 @@ theorem finite_resource_test_error (r : Circle) (u : SpectralHilbert) (hu : ‖u
   obtain ⟨ha,hb⟩ := h N hN
   refine ⟨ha,fun t ht O _ d f hf0 hf1 => ?_⟩
   have hv := hb t ht O d (by simpa using hu) (by simpa using normalizedProjection_norm s u hp)
-  have he := test_error _ _ f hf0 hf1
+  have he := test_error
+    (iid (d.distribution (hilbertEvolve (frequency r) t u) (by simpa using hu)) n)
+    (iid (d.distribution (hilbertEvolve (ringLatticeFrequency r (r.length/N)) t
+      (normalizedProjection s u)) (by simpa using normalizedProjection_norm s u hp)) n)
+    f hf0 hf1
   linarith
 
 end

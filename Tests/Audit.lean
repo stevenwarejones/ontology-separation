@@ -1053,3 +1053,8 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.lattice_born_witness
 
 #print axioms OntologySeparation.ContinuumFinite.finite_resource_test_error
+
+#print axioms OntologySeparation.ContinuumFinite.band_modes_orthonormal
+#print axioms OntologySeparation.ContinuumFinite.bandSynthesis_mass
+#print axioms OntologySeparation.ContinuumFinite.bandSynthesis_kinetic
+#print axioms OntologySeparation.ContinuumFinite.bandSynthesis_evolve
