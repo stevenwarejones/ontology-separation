@@ -125,7 +125,7 @@ def dropDisturbanceModel : Model (Fin 3) where
       split_ifs <;> first | exact exactTable.nonneg _ _ | norm_num
     total := by
       fin_cases l <;>
-        norm_num [Fintype.sum_prod_type, Fintype.sum_bool, Fin.sum_univ_succ, exactTable] }
+        norm_num [Fintype.sum_prod_type, Fintype.sum_bool, Fin.sum_univ_succ, Fin.ext_iff, exactTable] }
   final l := coin (if l = 0 then 49/625 else if l = 1 then 1 else 0)
     (by fin_cases l <;> norm_num) (by fin_cases l <;> norm_num)
 
@@ -138,7 +138,7 @@ theorem drop_disturbance_realizes_quantum :
   have hq : dropDisturbanceModel.ResponseCap (16/25) := by
     intro l
     fin_cases l <;>
-      norm_num [Model.negative, dropDisturbanceModel, Fin.sum_univ_succ, exactTable]
+      norm_num [Model.negative, dropDisturbanceModel, Fin.sum_univ_succ, Fin.ext_iff, exactTable]
   have hf : dropDisturbanceModel.pF = 49/625 := by
     norm_num [Model.pF, FiniteDistribution.mean, dropDisturbanceModel, coin,
       Fin.sum_univ_succ]
@@ -147,7 +147,7 @@ theorem drop_disturbance_realizes_quantum :
     rw [quantum_realizes_table s o]
     rcases o with ⟨m,f⟩
     cases m <;> cases f <;>
-      norm_num [Model.observed, dropDisturbanceModel, coin, exactTable, Fin.sum_univ_succ]
+      norm_num [Model.observed, dropDisturbanceModel, coin, exactTable, Fin.sum_univ_succ, Fin.ext_iff]
   exact ⟨hq, hf, he, fun hD => quantum_exclusion dropDisturbanceModel hq hD hf he⟩
 
 end
