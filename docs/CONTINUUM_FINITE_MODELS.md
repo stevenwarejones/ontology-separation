@@ -1,12 +1,7 @@
 # Continuum dynamics versus finite models
 
-**Draft for substantive review.** The complete unchanged `scripts/check.sh` passed
-for proof revision `b9ecc055aca53ff38c42413ff31c87f7a9963233` in
-[CI run 36277055257](https://github.com/stevenwarejones/ontology-separation/actions/runs/36277055257),
-including `lake build`, `lake build Tests`, the axiom audit and every report.
-The committed artifacts are the exact outputs from that run: all 201 continuum
-audit roots and 164 theorem exports. No Lean sources changed after generation.
-The evidence commit must also pass the final-head generated-output consistency gate.
+The formal results are machine-checked in Lean;
+[`AXIOM_AUDIT.txt`](AXIOM_AUDIT.txt) lists the axioms used.
 
 ## Common models and accessible experiments
 
@@ -123,8 +118,8 @@ exploits several momenta while preserving one scale across settings.
 
 ## Verified connections and independent checks
 
-The following table identifies the chain checked by the full verification run
-above. Numerical tests provide independent corroboration of the stated models.
+The following table identifies the machine-checked connections. Numerical tests
+provide independent corroboration of the stated models.
 
 | Connection | Public declarations | Independent numerical checks |
 |---|---|---|
@@ -157,13 +152,12 @@ handle wrapping, calibration widths and sampling.
 ## Evidence and limits
 
 All 201 continuum trust roots are registered in `Tests/Audit.lean` and covered
-by the regenerated `docs/AXIOM_AUDIT.txt`, using only `propext`,
-`Classical.choice` and `Quot.sound`. The regenerated
+by `docs/AXIOM_AUDIT.txt`, using only `propext`,
+`Classical.choice` and `Quot.sound`. The theorem report
 `examples/continuum-finite.html` contains all 164 exported theorems, including
 the approximation, heterogeneous joint-law, physical propagator and noisy witness
-chain. All other generated reports already matched the checked-in versions.
-Kernel replay retains the repository’s existing nightly/manual policy.
-The companion [numerical study](https://github.com/stevenwarejones/path-reality-tests/pull/9)
+chain.
+The companion [numerical study](https://github.com/stevenwarejones/path-reality-tests/tree/main/studies/continuum-finite-models)
 contains independent cyclic matrix, Born-rule, tail, joint-law and count-decision
 tests, 660 baseline scenarios, and a shared-scale sensitivity comparison.
 Numerical corroboration is distinct from Lean checking and experimental evidence.
