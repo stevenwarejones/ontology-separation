@@ -32,7 +32,10 @@ def observed (m : Model Λ) : Behavior jointInterface where
           (m.probe l).mass (b,j) * (m.final j).prob () f) =
           ∑ j : Λ, (m.probe l).mass (b,j) := by
         rw [Finset.sum_comm]
-        simp_rw [← Finset.mul_sum, Behavior.normalized, mul_one]
+        apply Finset.sum_congr rfl
+        intro j hj
+        rw [← Finset.mul_sum, (m.final j).normalized ()]
+        exact mul_one _
       simp_rw [inner]
       simpa [Fintype.sum_prod_type] using (m.probe l).total
     simp_rw [h, mul_one]
@@ -96,8 +99,8 @@ theorem bound (m : Model Λ) (q d : ℝ) (hd : 0 ≤ d)
         rw [Finset.sum_add_distrib, ← Finset.sum_mul, ← Finset.sum_mul,
           ← Finset.mul_sum, (D l).total]
         simp [negative]
-      _ ≤ _ := add_le_add_right (mul_le_mul_of_nonneg_right (hq l)
-        ((m.final l).nonneg () true)) _
+      _ ≤ _ := add_le_add (mul_le_mul_of_nonneg_right (hq l)
+        ((m.final l).nonneg () true)) le_rfl
   calc
     m.pMinus ≤ ∑ l, m.preparation.mass l *
         (q * (m.final l).prob () true + d * (1-(m.final l).prob () true)) :=
@@ -130,10 +133,10 @@ inference from operational closeness to ontic closeness. -/
 theorem robust_bound (m : Model Λ) (q d epsA epsF a f : ℝ)
     (hd : 0 ≤ d) (hq : m.ResponseCap q) (hD : m.Disturbance d)
     (ha : |a-m.pMinus| ≤ epsA) (hf : |f-m.pF| ≤ epsF) :
-    a ≤ q*f+d*(1-f)+epsA+|q-d|*epsF := by
+    a ≤ q*f+d*(1-f)+epsA+|q-d| * epsF := by
   have hb := m.bound q d hd hq hD
   have he := (abs_le.mp ha).2
-  have hprod : |(q-d)*(m.pF-f)| ≤ |q-d|*epsF := by
+  have hprod : |(q-d)*(m.pF-f)| ≤ |q-d| * epsF := by
     rw [abs_mul, abs_sub_comm m.pF f]
     exact mul_le_mul_of_nonneg_left hf (abs_nonneg _)
   have hu := (abs_le.mp hprod).2
@@ -151,7 +154,7 @@ theorem null_nonempty : nullModel.ResponseCap (1/2) ∧ nullModel.Disturbance 0 
   refine ⟨?_, ?_, ?_, ?_⟩
   · intro l; simp [Model.negative, nullModel]
   · refine ⟨fun _ => ⟨fun _ => 1, by intro x; norm_num, by simp⟩, ?_⟩
-    intro l j; simp [nullModel]
+    intro l j; norm_num [nullModel]
   · norm_num [Model.pF, FiniteDistribution.mean, nullModel, coin]
   · norm_num [Model.pMinus, Model.observed, nullModel, coin]
 end
