@@ -10,11 +10,22 @@ noncomputable section
 abbrev jointInterface : Interface := { Setting := Unit, Outcome := Bool × Bool }
 
 /-- `false` is the negative pointer; `true` is successful final readout.
-No deterministic path or deterministic final response is assumed. -/
+The same preparation distribution is used in probe and bypass trials, and the
+same final response function is used after both procedures. These shared-context
+premises are built into the type. No deterministic path or deterministic final
+response is assumed. -/
 structure Model (Λ : Type) [Fintype Λ] where
   preparation : FiniteDistribution Λ
   probe : Λ → FiniteDistribution (Bool × Λ)
   final : Λ → Behavior binaryInterface
+
+/-- Upper calibration bounds are conservative for the capped null ceiling.
+This is a deterministic monotonicity statement; statistical coverage is external. -/
+theorem ceiling_mono {q qU d dU f : ℝ} (hf0 : 0 ≤ f) (hf1 : f ≤ 1)
+    (hq : q ≤ qU) (hd : d ≤ dU) :
+    min q (q*f+d*(1-f)) ≤ min qU (qU*f+dU*(1-f)) :=
+  min_le_min hq (add_le_add (mul_le_mul_of_nonneg_right hq hf0)
+    (mul_le_mul_of_nonneg_right hd (sub_nonneg.mpr hf1)))
 
 namespace Model
 variable {Λ : Type} [Fintype Λ]
@@ -126,6 +137,20 @@ theorem full_bound (m : Model Λ) (q d : ℝ) (hd : 0 ≤ d)
     (hq : m.ResponseCap q) (hD : m.Disturbance d) :
     m.pMinus ≤ min q (q*m.pF+d*(1-m.pF)) :=
   le_min (m.trivial_bound q hq) (m.bound q d hd hq hD)
+
+theorem pF_nonneg (m : Model Λ) : 0 ≤ m.pF :=
+  Finset.sum_nonneg fun l _ => mul_nonneg (m.preparation.nonneg l)
+    ((m.final l).nonneg () true)
+
+theorem pF_le_one (m : Model Λ) : m.pF ≤ 1 :=
+  m.preparation.mean_le _ _ (fun l => (m.final l).prob_le_one () true)
+
+/-- Replace actual calibration parameters by simultaneous upper bounds. -/
+theorem full_bound_of_upper (m : Model Λ) (q d qU dU : ℝ) (hd : 0 ≤ d)
+    (hq : m.ResponseCap q) (hD : m.Disturbance d) (hqu : q ≤ qU) (hdu : d ≤ dU) :
+    m.pMinus ≤ min qU (qU*m.pF+dU*(1-m.pF)) :=
+  (m.full_bound q d hd hq hD).trans
+    (ceiling_mono m.pF_nonneg m.pF_le_one hqu hdu)
 
 /-- Robustness to explicitly bounded probability discrepancies. These are
 observable closeness to a model satisfying the representation premises, NOT an

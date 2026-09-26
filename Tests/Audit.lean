@@ -671,3 +671,15 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathContextuality.countermodels_same_joint
 #print axioms OntologySeparation.PathContextuality.referenceNull
 #print axioms OntologySeparation.PathContextuality.reference_null_nonempty
+#print axioms OntologySeparation.PathContextuality.ceiling_mono
+#print axioms OntologySeparation.PathContextuality.Model.pF_nonneg
+#print axioms OntologySeparation.PathContextuality.Model.pF_le_one
+#print axioms OntologySeparation.PathContextuality.Model.full_bound_of_upper
+#print axioms OntologySeparation.PathContextuality.referencePm
+#print axioms OntologySeparation.PathContextuality.referenceD
+#print axioms OntologySeparation.PathContextuality.reference_cap
+#print axioms OntologySeparation.PathContextuality.quantum_exclusion_of_representations
+#print axioms OntologySeparation.PathContextuality.dropCapModel
+#print axioms OntologySeparation.PathContextuality.drop_cap_realizes_quantum
+#print axioms OntologySeparation.PathContextuality.dropDisturbanceModel
+#print axioms OntologySeparation.PathContextuality.drop_disturbance_realizes_quantum

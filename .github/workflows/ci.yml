@@ -38,7 +38,15 @@ jobs:
         with:
           path: .lake
           key: verified-lake-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
-      - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
+      - name: Check committed generated outputs
+        run: |
+          git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
+          untracked_reports="$(git ls-files --others --exclude-standard -- examples)"
+          if [ -n "$untracked_reports" ]; then
+            echo "Generated example files must be committed:"
+            echo "$untracked_reports"
+            exit 1
+          fi
       - name: Attach regenerated proof reports and axiom audit
         if: always() && steps.full-check.outcome == 'success'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

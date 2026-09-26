@@ -22,6 +22,11 @@ noncontextuality, convex mixing and the identity's diagonal representation imply
 No deterministic path or sharp final response is required. Consequently the
 exclusion covers the definite-occupancy subclass as well as stochastic responses.
 
+Alongside these two representation premises, the model assumes the same preparation
+μ in probe and bypass runs and the same final response r after the probe and in
+the bypass. These shared-procedure premises are enforced by the model type.
+Setting-dependent preparation is illustrated only in the Python companion.
+
 These representation premises are explicit inputs. Operational equivalence is
 an equality of observed procedure probabilities across all allowed tests;
 noncontextuality identifies their representations. Neither concept is a synonym
@@ -38,7 +43,12 @@ In path basis (Q,P), use K₋=diag(4/5,3/5), K₊=diag(3/5,4/5), preparation
 |ψ⟩=(4,3)/5 and success vector |φ⟩=(4,−3)/5. The orthogonal failure vector is
 (3,4)/5. `kraus_complete` proves normalization. `effect_equivalence` proves the
 measurement equivalence with p_m=7/25. `channel_equivalence` proves the full
-matrix identity M(X)=49X/50+ZXZ/50 for every complex X; d=1/50.
+matrix identity M(X)=49X/50+ZXZ/50 for every complex X; `referenceD` is 1/50.
+`reference_cap` derives 16/25 from `referencePm` = 7/25 through
+`cap_of_measurement_equivalence`. `quantum_exclusion_of_representations` uses
+this bridge and the disturbance representation at `referenceD`. The operator
+identities motivate these representations; noncontextuality and convex mixing
+remain additional ontological premises.
 
 The complete POVM `jointReadout` is constructed by pulling each final effect
 back through its Kraus branch. `quantum_realizes_table` identifies its complex
@@ -71,7 +81,9 @@ modes, drift and unrecorded trials invalidate that inference unless bounded.
 `Model.robust_bound` propagates explicit probability discrepancies from a model
 satisfying the premises: a ≤ q f+d(1−f)+ε_a+|q−d|ε_f. It does not turn measured
 operational discrepancies into ontic error bounds. Exact equivalences or an
-additional defended model premise remain necessary. The empirical companion specifies loss, confidence coverage and calibration cost separately.
+additional defended model premise remain necessary. `ceiling_mono` and
+`Model.full_bound_of_upper` justify replacing q and d by upper confidence bounds
+when 0≤f≤1. The empirical companion specifies loss, confidence coverage and calibration cost separately.
 
 Relative to [#85's local-phase model](PHASE_INTERVENTION.md), this tests a different
 conjunction: measurement/transformation noncontextual representations of specified
@@ -82,12 +94,13 @@ or negative chronological-time inference.
 
 ## Verification
 
-Source: `PathContextuality.lean`, `PathContextualityQuantum.lean`; regressions:
+Source: `PathContextuality.lean`, `PathContextualityQuantum.lean`,
+`PathContextualityCountermodels.lean`; regressions:
 `Tests/PathContextuality.lean`; report: `examples/PathContextualityStudy.lean`.
 All constructors and theorem roots are registered in `Tests/Audit.lean`.
 Run `sh scripts/check.sh`; generated reports and the complete axiom snapshot
 must match the verified head. The companion study is
-[path-contextuality](https://github.com/stevenwarejones/path-reality-tests/tree/study/path-contextuality/studies/path-contextuality).
+[path-contextuality](https://github.com/stevenwarejones/path-reality-tests/pull/5).
 
 ## Complete countermodels
 
@@ -106,3 +119,10 @@ identity transition and stochastic final response. Its joint probability is
 49/1250. Thus the violating example is not exploiting incompatible calibration
 parameters in the reduced ontic class. This one-state example is not claimed
 to reproduce the complete quantum calibration family.
+
+`drop_cap_realizes_quantum` and `drop_disturbance_realizes_quantum` each match
+the entire reference quantum joint table and bypass probability 49/625. The
+first retains disturbance 1/50 but violates the response cap; the second retains
+the cap 16/25 but violates disturbance 1/50. Thus each representation premise
+is needed at these reference data. These reduced-interface models are not
+claimed to match every quantum tomographic calibration procedure.
