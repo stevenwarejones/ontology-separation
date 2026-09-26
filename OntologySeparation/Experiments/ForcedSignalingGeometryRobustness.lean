@@ -182,4 +182,30 @@ theorem restoration_frame_order_iff (β v : ℚ) :
   rw [boost_precedes_iff]
   norm_num [restoration, lightSpeed, mul_comm]
 
+/-- For these fixed laboratory B/C events, a candidate boost retains the
+blind pair exactly in this speed-dependent window. Early A-to-D inclusion
+alone does not establish this condition. The hidden-cone boundary is included. -/
+theorem restoration_blind_iff (β v : ℚ) (hv : 0 ≤ v) :
+    (¬ precedes v (boost β (restoration .B)) (boost β (restoration .C)) ∧
+     ¬ precedes v (boost β (restoration .C)) (boost β (restoration .B))) ↔
+      v * |β| ≤ 1 := by
+  simp only [boost_precedes_iff]
+  norm_num [restoration, lightSpeed]
+  by_cases hb : 0 ≤ β
+  · rw [abs_of_nonneg hb]
+    constructor
+    · rintro ⟨hbc,hcb⟩
+      by_contra h
+      have hp : 0 < β := by nlinarith
+      exact hcb ⟨by linarith, by nlinarith⟩
+    · intro h
+      constructor <;> rintro ⟨ht,hs⟩ <;> nlinarith
+  · rw [abs_of_neg (lt_of_not_ge hb)]
+    constructor
+    · rintro ⟨hbc,hcb⟩
+      by_contra h
+      exact hbc ⟨by linarith, by nlinarith⟩
+    · intro h
+      constructor <;> rintro ⟨ht,hs⟩ <;> nlinarith
+
 end OntologySeparation.ForcedSignalingGeometryRobustness

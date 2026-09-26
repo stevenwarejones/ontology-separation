@@ -128,8 +128,11 @@ realizability obligation. `ForcedSignalingVCausal.lc4_AD_uniform` supplies the
 LC4 early law, and `vcausal_exact_forced_signaling` gives an attaining finite
 classical protocol on any qualifying fixed layout, for all three early orders.
 These are fixed-layout statements. Cross-timing consistency and accessibility
-require their separate protocol and geometric hypotheses. No infinite-hidden-
-variable or general field-dynamics equivalence is claimed.
+require their separate protocol and geometric hypotheses. The separate
+[general-measure bridge](FORCED_SIGNALING_MEASURES.md) removes finite support
+for measurable deterministic response tables and transfers the exact minimum,
+with an embedded attainer. General field-dynamics equivalence and arbitrary
+Markov-kernel randomization are not claimed.
 
 `vcausal_optimal_completion_globally_sharp` also transfers the all-512-completion
 slope optimum using a **realized** LC4 witness. This sharpness conclusion is

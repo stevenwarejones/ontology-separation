@@ -192,7 +192,7 @@ layout by the explicit inequalities `restorationFrameTests`. The additional
 A-before-D condition is `restoration_frame_order_iff`. These are tests of the
 same laboratory events in a candidate preferred frame, not a Lorentz-invariance
 claim for hidden propagation. For example, at v=10000 the blindness condition
-already requires |β|≤1/10000; an arbitrary boost does not preserve blindness.
+is exactly v|β|≤1 (`restoration_blind_iff`), so requires |β|≤1/10000; an arbitrary boost does not preserve blindness.
 A single protocol or delay menu covering every unknown preferred frame remains
 unproved.
 
@@ -204,22 +204,41 @@ it does not replace them.
 
 ## Assumption-deletion audit
 
-The proposed four-assumption `MinimalCore` is **not established**, and would be
-incorrect for the direct fixed-layout conclusion if it included timing
-consistency as a necessary premise. The direct lower bound assumes the LC4
-marginals and does not use timing consistency at all. The latter is needed to
-infer those marginals from data in different interventions. A valid deletion
-adversary must keep the target and every other assumption fixed; changing the
-target from LC4 to a PR-box parity table does not meet that obligation.
+`ForcedSignalingLC4MinimalCore.minimalCore` packages a three-premise
+`AdversarySearch.MinimalCore` for the **same exact LC4 marginal target with zero
+A/D full-recipient TV** used by the forced-signaling exclusion. Every deletion
+witness reports the full LC4 Born distribution; none substitutes a PR-box target.
 
-| Assumption | Checked evidence | Exact limitation |
+| Deleted assumption | Witness | Retained assumptions |
 |---|---|---|
-| Measurement independence | `measurement_dependence_parity`: a seed encoding actual inputs realizes the PR parity | Demonstrates failure of the local-table implication; not an LC4 deletion adversary |
-| Bell screening-off | `nonsignalingBox_marginals` and `postselection_not_local` | No-signaling is insufficient to imply deterministic local responses; not a complete LC4 minimality proof |
-| No postselection | `postselection_parity`, `postselection_half` | Constant 1/2 acceptance can create the PR parity after selection; does not authorize filtering LC4 records |
-| Timing consistency | Shared-mechanism preservation theorems; the direct LC4 bound has no timing premise | Necessary to the stated transfer argument, not proved logically necessary to every possible no-go argument |
+| Setting independence | `dependent quantumLaw` draws its seed from the setting-dependent Born law | Deterministic local responses, no filtering |
+| Local responses (the refined screening-off condition) | `jointResponse quantumLaw` uses a joint response kernel | One setting-independent seed law, no filtering |
+| No postselection | `filtered quantumLaw` accepts a uniform outcome seed with probability equal to its Born probability; acceptance rate is exactly 1/16 | Setting-independent seed, deterministic local responses |
 
-The adversary framework's `MinimalCore.deletionAdversary` requires an actual
-model for each deletion. No placeholder core or weakened target is registered.
-Proving a minimal physical premise set requires a common enlarged model language
-and LC4-specific deletion witnesses, which remain separate research obligations.
+The generic `ForcedSignalingAssumptionCore.excludes` applies to every finite
+hidden type. The deletion models each use 16 seeds. `deletion_witness` proves
+that each model meets the target and retained assumptions and actually violates
+the omitted law. The checked `quantum_zero_signal` result uses the full Born
+law's A-to-BCD and D-to-ABC marginals.
+
+This is premise-by-premise necessity **within the enlarged conditional-local
+mechanism language**. It is not a complete physical-ontology minimality claim:
+the language does not impose early causal order, spacetime geometry or a common
+cross-timing mechanism. The joint-response witness, in particular, is a
+countermodel in that language, not a proposed finite-speed physical theory.
+
+`no_fourth_premise_core` proves that adding any fourth premise cannot produce a
+minimal four-premise core for this same target while retaining the three laws.
+The direct LC4 bound already excludes the target without timing consistency.
+Timing is used to transfer marginals between interventions; proving its
+necessity requires a separately specified intervention target and model language.
+
+## General measurable hidden laws
+
+`VCausal.MeasurableProtocol` and `ForcedSignalingMeasures` extend fixed-layout
+soundness, the exact LC4 minimum, all-completions slope optimality, the noisy
+lower bound and the collectible lower-bound component to arbitrary measurable
+hidden probability spaces with measurable deterministic response tables.
+Full-behavior pushforward equality and a finite-witness embedding justify both
+sides of the exact minimum. See [the measure guide](FORCED_SIGNALING_MEASURES.md)
+for the continuous example, rejection tests and remaining Markov-kernel scope.

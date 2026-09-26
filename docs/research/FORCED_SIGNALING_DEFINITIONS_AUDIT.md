@@ -48,8 +48,9 @@ recipient-to-collector links may lie on a closed light-cone boundary.
 3. The finite realization construction accepts an early common-cause model whose
    projected law matches the completion, and reconstructs the **whole** behavior.
    The LC4 uniform-product early law supplies such a model in every early order.
-4. There is no claimed `Lean smaller` result within the explicitly finite,
-   classical, fixed-layout class. General infinite-support hidden laws and unrestricted physical
+4. The general-measure extension proves exact finite compression for measurable
+   deterministic response tables with an arbitrary probability law, including
+   infinite support. General Markov-kernel dilations and unrestricted physical
    ontologies are **not established**, not silently classified as equivalent.
 5. Classical screening-off is a physical assumption. Cone geometry restricts
    communication paths; it does not by itself imply Bell factorization.
@@ -63,8 +64,9 @@ recipient-to-collector links may lie on a closed light-cone boundary.
 
 ## Scope of the exact optimum
 
-The exact LC4 minimum is over the finite classical protocol class in one fixed
-preferred-frame layout. Rational spacetime coordinates do not restrict the real
+The exact LC4 minimum is proved both for finite classical protocols and for
+measurable deterministic-table protocols with arbitrary hidden probability
+spaces, in one fixed preferred-frame layout. Rational spacetime coordinates do not restrict the real
 probability weights. It is not yet a sharpness statement for a single theory
 reproducing quantum mechanics across every possible measurement arrangement.
 The timing extension proves sharpness for a finite menu of blind, delayed-B,
@@ -117,13 +119,16 @@ support, a nonnegative normalized weight function that vanishes outside it,
 and causal response tables. `SupportedProtocol.toProtocol` restricts to the
 finite support subtype, and `SupportedProtocol.full_behavior` proves exact
 preservation of the complete observed law. Thus an infinite ambient label space
-is allowed when the law has finite support. This is not a measure-theoretic
-extension to genuinely infinite support; the usual deterministic-strategy
-convex-hull argument for that case is standard but not formalized here.
+is allowed when the law has finite support. This older interface remains intact.
+The separate `MeasurableProtocol` interface now proves exact finite compression
+for arbitrary probability measures, preserving full behavior and a.e. early
+causal constraints. See [the measure guide](FORCED_SIGNALING_MEASURES.md).
+A general Markov-kernel randomization theorem remains outside the port.
 
 The [assumption-deletion audit](FORCED_SIGNALING_COLLECTIBILITY.md#assumption-deletion-audit)
-explains why the current PR-box examples do not certify a minimal LC4 premise
-set. In particular timing consistency is not a premise of the direct fixed-layout
-bound. The [geometry additions](FORCED_SIGNALING_COLLECTIBILITY.md#robustness-and-candidate-frames)
+documents the LC4-specific three-premise `MinimalCore`, whose deletion
+witnesses all report the full Born law. This replaces the earlier gap left by
+the illustrative PR-box examples. Timing consistency is not a premise of the
+direct fixed-layout bound; its intervention-specific necessity is not claimed. The [geometry additions](FORCED_SIGNALING_COLLECTIBILITY.md#robustness-and-candidate-frames)
 prove bounded-duration robustness and exact candidate-frame conditions, without
 asserting continuous dynamics or an unknown-frame delay cover.
