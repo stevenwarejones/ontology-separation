@@ -159,13 +159,21 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem seed_abd_matches :
     ∀ x y w a b d, seedABD x y w a b d = thresholdABD x y w a b d := by
-  with_unfolding_all decide +kernel
+  intro x y w a b d
+  unfold thresholdABD
+  simp_rw [← ForcedSignalingLC4Witness.seed_abd_matches]
+  cases x <;> cases y <;> cases w <;> cases a <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem seed_acd_matches :
     ∀ x z w a c d, seedACD x z w a c d = thresholdACD x z w a c d := by
-  with_unfolding_all decide +kernel
+  intro x z w a c d
+  unfold thresholdACD
+  simp_rw [← ForcedSignalingLC4Witness.seed_acd_matches]
+  cases x <;> cases z <;> cases w <;> cases a <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 private theorem toReal_indicator (P : Prop) [Decidable P] (w : Q2) :
     (if P then (1 : ℝ) else 0) * Q2.toReal w = Q2.toReal (if P then w else 0) := by
@@ -283,12 +291,16 @@ def seedACD (x z w a c d : Bool) : Q2 :=
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem seed_abd_uniform : ∀ x y w a b d, seedABD x y w a b d = qrat (1/8) := by
-  with_unfolding_all decide +kernel
+  intro x y w a b d
+  cases x <;> cases y <;> cases w <;> cases a <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem seed_acd_uniform : ∀ x z w a c d, seedACD x z w a c d = qrat (1/8) := by
-  with_unfolding_all decide +kernel
+  intro x z w a c d
+  cases x <;> cases z <;> cases w <;> cases a <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 private theorem toReal_indicator (P : Prop) [Decidable P] (w : Q2) :
     (if P then (1 : ℝ) else 0) * Q2.toReal w = Q2.toReal (if P then w else 0) := by
