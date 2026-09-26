@@ -1,24 +1,52 @@
 name: Verify
 on:
   pull_request:
+  schedule:
+    # 03:17 New York during daylight saving; 02:17 during standard time.
+    - cron: '17 7 * * *'
+  workflow_dispatch:
   push:
     branches: [main]
 permissions:
   contents: read
+# Superseded PR commits do not need to finish. Keep main runs independent so
+# a newer push cannot cancel a verified Pages deployment in progress.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      # Apply the limit to Lake, tests, reports and downstream checks alike.
+      LEAN_NUM_THREADS: "1"
     steps:
       - uses: actions/checkout@v4
-      - uses: leanprover/lean-action@v1
-        env:
-          # Keep peak memory bounded on the hosted runner. The QIT/mathlib
-          # dependency graph plus the forced-signaling kernel checks can
-          # otherwise trigger runner shutdowns before branch-specific modules
-          # are reached.
-          LEAN_NUM_THREADS: "1"
+      - name: Restore pinned dependencies
+        id: dependencies
+        uses: actions/cache/restore@v4
         with:
+          path: .lake/packages
+          key: lean-deps-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}
+      - name: Restore project and test builds
+        id: project
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .lake/build
+            examples/downstream/.lake/build
+          key: lean-project-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}
+          restore-keys: |
+            lean-project-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+      - uses: leanprover/lean-action@v1
+        with:
+          # check.sh owns the build; save its complete output only after all
+          # verification and snapshot checks succeed.
+          build: false
           test: false
+          lint: false
+          use-github-cache: false
+          use-mathlib-cache: ${{ steps.dependencies.outputs.cache-hit != 'true' }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -26,6 +54,25 @@ jobs:
       - run: python research/lf_hidden_local_agency.py --check
       - run: sh scripts/check.sh
       - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
+      - name: Replay project and test declarations with the kernel
+        # Replay is an extra nightly audit, not part of PR/push verification.
+        # Manual runs provide an on-demand full audit with the same checks.
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: lake env leanchecker --verbose OntologySeparation Tests
+      - name: Save pinned dependencies
+        if: steps.dependencies.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/packages
+          key: ${{ steps.dependencies.outputs.cache-primary-key }}
+      - name: Save verified project and test builds
+        if: steps.project.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            .lake/build
+            examples/downstream/.lake/build
+          key: ${{ steps.project.outputs.cache-primary-key }}
       - name: Stage verified Pages snapshot
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: python scripts/build_pages.py _site
