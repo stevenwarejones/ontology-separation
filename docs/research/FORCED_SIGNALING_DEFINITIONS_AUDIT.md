@@ -18,7 +18,8 @@ It makes no novelty claim and is not an empirical justification of screening-off
 The table uses equation pointers and paraphrases rather than long reproduced
 passages. A source's silence about a cone boundary is not evidence for a chosen
 convention. Lean uses open hidden cones (Li S.I.5) and closed ordinary light
-cones. The concrete examples have strict margins.
+cones. The concrete examples have strict hidden-link and sender-exclusion margins;
+recipient-to-collector links may lie on a closed light-cone boundary.
 
 ## Comparison
 
@@ -88,3 +89,37 @@ same seed. The reservoir construction pre-samples potential tables for every
 context, before learning which context is actual. Its shared distribution can
 depend on the specified model, but not on the actual settings. This distinction
 is essential to measurement independence.
+
+The existing finite stochastic completion interface has the explicit form
+
+\[
+P(a,b,c,d\mid x,y,z,w)=\sum_\omega\mu_{xw}(\omega)
+ A_{xw,\omega}(a)D_{xw,\omega}(d)
+ B_{xw,\omega,y}(b)C_{xw,\omega,z}(c).
+\]
+
+This is conditional locality of the blind pair after early information has been
+included in the conditioning state. The physical interface instead starts with
+one setting-independent law \(\rho(\lambda)\) and causal response functions.
+`EarlyMatches` expresses the extra compatibility condition on its AD marginal.
+`realizable_iff_early` is an exact finite response-law characterization under
+that condition; `realize_full_behavior` and `realizeLC4_behavior` state the
+observable consequences. An early-context-dependent posterior in the first
+formula does not make the initial \(\rho\) depend on settings.
+
+## Finite support in arbitrary hidden spaces
+
+`SupportedProtocol order Ω` does not require `Fintype Ω`. It specifies a finite
+support, a nonnegative normalized weight function that vanishes outside it,
+and causal response tables. `SupportedProtocol.toProtocol` restricts to the
+finite support subtype, and `SupportedProtocol.full_behavior` proves exact
+preservation of the complete observed law. Thus an infinite ambient label space
+is allowed when the law has finite support. This is not a measure-theoretic
+extension to genuinely infinite support; the usual deterministic-strategy
+convex-hull argument for that case is standard but not formalized here.
+
+
+Timing consistency is needed for transferring data between interventions, not
+for the fixed-layout exclusion with LC4 matching already assumed. The PR-box
+examples in `VCausalAssumptions` are not LC4-specific deletion adversaries and
+do not certify a four-premise `MinimalCore`.

@@ -7,7 +7,8 @@ import Mathlib.Tactic.NormNum
 
 /-! Preferred-frame geometry. Coordinates are (ct,x), with c=1.
 Hidden cones are open, as in Li et al. S.I.5; ordinary causal futures are closed.
-The strict inequalities in the examples keep boundary conventions immaterial. -/
+Hidden links and sender exclusion have strict margins in the examples.
+A recipient-to-collector link may lie on the closed light-cone boundary. -/
 namespace OntologySeparation.VCausal
 
 structure Event where

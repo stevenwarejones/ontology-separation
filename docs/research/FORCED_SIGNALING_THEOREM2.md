@@ -98,8 +98,9 @@ is non-signaling while the surviving full-record change is a pure parity shift.
 The finite stochastic directional bound is also lifted through the existing
 determinization theorem.
 
-Lemma 2, collectibility, spacetime geometry, and finite-sample statistical
-claims remain outside the Lean scope.
+Fixed-layout spacetime geometry and the finite causal bridge are formalized
+below. Lemma 2 and collectibility belong to the separate timing/collection
+extension. Finite-sample statistical claims remain outside this bridge.
 
 ## Verification
 
@@ -134,3 +135,8 @@ variable or general field-dynamics equivalence is claimed.
 slope optimum using a **realized** LC4 witness. This sharpness conclusion is
 proved separately from the lower-bound transfer. The white-noise result in this
 bridge is a lower-bound corollary; a physical exact noisy curve is not asserted.
+
+The finite NS ∩ conditional-local exclusion is explicitly stated as
+`ForcedSignalingVCausal.conditional_local_nonsignaling_exclusion`.
+`VCausal.SupportedProtocol.full_behavior` also covers finite-support laws
+on arbitrary ambient hidden types without requiring a global `Fintype`.

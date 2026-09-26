@@ -75,3 +75,5 @@ import OntologySeparation.Experiments.ForcedSignalingPropositions
 import OntologySeparation.Experiments.ForcedSignalingVCausal
 import OntologySeparation.Operational.VCausalAssumptions
 import OntologySeparation.Experiments.ForcedSignalingVCausalCompletions
+
+import OntologySeparation.Operational.VCausalFiniteSupport

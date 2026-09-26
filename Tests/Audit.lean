@@ -1,3 +1,4 @@
+import OntologySeparation.Operational.VCausalFiniteSupport
 import OntologySeparation.Experiments.ForcedSignalingVCausalCompletions
 import OntologySeparation.Experiments.ForcedSignalingVCausal
 import OntologySeparation.Operational.VCausalAssumptions
@@ -600,3 +601,7 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignalingVCausal.vcausal_optimal_completion_globally_sharp
 
 #print axioms OntologySeparation.VCausal.backwards_marginal_not_realizable
+
+-- Additional review obligations: exact finite scope and geometry.
+#print axioms OntologySeparation.ForcedSignalingVCausal.conditional_local_nonsignaling_exclusion
+#print axioms OntologySeparation.VCausal.SupportedProtocol.full_behavior

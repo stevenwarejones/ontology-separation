@@ -14,6 +14,9 @@ LC4 marginal reproduction, recipient differences, directional TVs, proper
 recipient invisibility, and the parity-shift structure from the ported weights.
 -/
 
+-- Elaborate the exact certificates sequentially to bound peak memory.
+set_option Elab.async false
+
 namespace OntologySeparation.ForcedSignalingPropositionWitnesses
 noncomputable section
 open scoped BigOperators
@@ -100,7 +103,8 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem totalsQ2 : ∀ e : Early,
     (∑ j : Atom, if early j = e then weightQ2 j else 0) = qrat 1 := by
-  with_unfolding_all decide +kernel
+  intro e
+  fin_cases e <;> with_unfolding_all decide +kernel
 
 noncomputable def model : Model :=
   modelOfWeight weightQ2 weight_nonnegative totalsQ2
@@ -110,14 +114,20 @@ set_option maxHeartbeats 0 in
 private theorem abd_matches_q2 :
     ∀ x y ww a b d,
       abdQ2 weightQ2 x y ww a b d = ForcedSignalingLC4.abd x y ww a b d := by
-  with_unfolding_all decide +kernel
+  intro x y ww a b d
+  rw [← ForcedSignalingLC4Witness.seed_abd_matches]
+  cases x <;> cases y <;> cases ww <;> cases a <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem acd_matches_q2 :
     ∀ x z ww a c d,
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
-  with_unfolding_all decide +kernel
+  intro x z ww a c d
+  rw [← ForcedSignalingLC4Witness.seed_acd_matches]
+  cases x <;> cases z <;> cases ww <;> cases a <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
@@ -155,7 +165,8 @@ private theorem diff_active : ∀ c o,
     if c.val = 5 ∨ c.val = 7 then
       diffQ2 weightQ2 c o = epsilonQ2 ∨ diffQ2 weightQ2 c o = -epsilonQ2
     else diffQ2 weightQ2 c o = 0 := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 private theorem abs_difference_exact (c : Context) (o : Recipient) :
     |difference model.behavior c o| =
@@ -288,7 +299,8 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem totalsQ2 : ∀ e : Early,
     (∑ j : Atom, if early j = e then weightQ2 j else 0) = qrat 1 := by
-  with_unfolding_all decide +kernel
+  intro e
+  fin_cases e <;> with_unfolding_all decide +kernel
 
 noncomputable def model : Model :=
   modelOfWeight weightQ2 weight_nonnegative totalsQ2
@@ -298,14 +310,20 @@ set_option maxHeartbeats 0 in
 private theorem abd_matches_q2 :
     ∀ x y ww a b d,
       abdQ2 weightQ2 x y ww a b d = ForcedSignalingLC4.abd x y ww a b d := by
-  with_unfolding_all decide +kernel
+  intro x y ww a b d
+  rw [← ForcedSignalingLC4Witness.seed_abd_matches]
+  cases x <;> cases y <;> cases ww <;> cases a <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem acd_matches_q2 :
     ∀ x z ww a c d,
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
-  with_unfolding_all decide +kernel
+  intro x z ww a c d
+  rw [← ForcedSignalingLC4Witness.seed_acd_matches]
+  cases x <;> cases z <;> cases ww <;> cases a <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
@@ -343,7 +361,8 @@ private theorem diff_active : ∀ c o,
     if c.val = 12 ∨ c.val = 14 then
       diffQ2 weightQ2 c o = epsilonQ2 ∨ diffQ2 weightQ2 c o = -epsilonQ2
     else diffQ2 weightQ2 c o = 0 := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 private theorem abs_difference_exact (c : Context) (o : Recipient) :
     |difference model.behavior c o| =
@@ -479,7 +498,8 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem totalsQ2 : ∀ e : Early,
     (∑ j : Atom, if early j = e then weightQ2 j else 0) = qrat 1 := by
-  with_unfolding_all decide +kernel
+  intro e
+  fin_cases e <;> with_unfolding_all decide +kernel
 
 noncomputable def model : Model :=
   modelOfWeight weightQ2 weight_nonnegative totalsQ2
@@ -489,14 +509,20 @@ set_option maxHeartbeats 0 in
 private theorem abd_matches_q2 :
     ∀ x y ww a b d,
       abdQ2 weightQ2 x y ww a b d = ForcedSignalingLC4.abd x y ww a b d := by
-  with_unfolding_all decide +kernel
+  intro x y ww a b d
+  rw [← ForcedSignalingLC4Witness.seed_abd_matches]
+  cases x <;> cases y <;> cases ww <;> cases a <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem acd_matches_q2 :
     ∀ x z ww a c d,
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
-  with_unfolding_all decide +kernel
+  intro x z ww a c d
+  rw [← ForcedSignalingLC4Witness.seed_acd_matches]
+  cases x <;> cases z <;> cases ww <;> cases a <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
@@ -534,7 +560,8 @@ private theorem diff_active : ∀ c o,
     if c.val = 5 ∨ c.val = 7 then
       diffQ2 weightQ2 c o = epsilonQ2 ∨ diffQ2 weightQ2 c o = -epsilonQ2
     else diffQ2 weightQ2 c o = 0 := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 private theorem abs_difference_exact (c : Context) (o : Recipient) :
     |difference model.behavior c o| =
@@ -596,7 +623,9 @@ private theorem properA_q2 :
           (projectAProper s) o =
         properMarginalQ2 weightQ2 (earlyOf true ww) (lateOf y z)
           (projectAProper s) o := by
-  with_unfolding_all decide +kernel
+  intro s ww y z o
+  fin_cases s <;> cases ww <;> cases y <;> cases z <;> fin_cases o <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
@@ -606,7 +635,9 @@ private theorem properD_q2 :
           (projectDProper s) o =
         properMarginalQ2 weightQ2 (earlyOf x true) (lateOf y z)
           (projectDProper s) o := by
-  with_unfolding_all decide +kernel
+  intro s x y z o
+  fin_cases s <;> cases x <;> cases y <;> cases z <;> fin_cases o <;>
+    with_unfolding_all decide +kernel
 
 /-- Every single- and two-party recipient marginal is blind to A's setting. -/
 theorem properA_nonsignaling (s : Fin 6) (ww y z : Bool) (o : Fin 4) :
@@ -644,7 +675,8 @@ set_option maxHeartbeats 0 in
 private theorem parity_q2 : ∀ c o,
     diffQ2 weightQ2 c o =
       qmul (qrat (paritySign o)) (diffQ2 weightQ2 c 0) := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 /-- For A/D sender comparisons the surviving full three-party change is a pure
 binary parity shift. B/C sender changes vanish entirely by B_silent/C_silent. -/
@@ -732,7 +764,8 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem totalsQ2 : ∀ e : Early,
     (∑ j : Atom, if early j = e then weightQ2 j else 0) = qrat 1 := by
-  with_unfolding_all decide +kernel
+  intro e
+  fin_cases e <;> with_unfolding_all decide +kernel
 
 noncomputable def model : Model :=
   modelOfWeight weightQ2 weight_nonnegative totalsQ2
@@ -742,14 +775,20 @@ set_option maxHeartbeats 0 in
 private theorem abd_matches_q2 :
     ∀ x y ww a b d,
       abdQ2 weightQ2 x y ww a b d = ForcedSignalingLC4.abd x y ww a b d := by
-  with_unfolding_all decide +kernel
+  intro x y ww a b d
+  rw [← ForcedSignalingLC4Witness.seed_abd_matches]
+  cases x <;> cases y <;> cases ww <;> cases a <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem acd_matches_q2 :
     ∀ x z ww a c d,
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
-  with_unfolding_all decide +kernel
+  intro x z ww a c d
+  rw [← ForcedSignalingLC4Witness.seed_acd_matches]
+  cases x <;> cases z <;> cases ww <;> cases a <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
@@ -787,7 +826,8 @@ private theorem diff_active : ∀ c o,
     if c.val = 12 ∨ c.val = 14 then
       diffQ2 weightQ2 c o = epsilonQ2 ∨ diffQ2 weightQ2 c o = -epsilonQ2
     else diffQ2 weightQ2 c o = 0 := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 private theorem abs_difference_exact (c : Context) (o : Recipient) :
     |difference model.behavior c o| =
@@ -849,7 +889,9 @@ private theorem properA_q2 :
           (projectAProper s) o =
         properMarginalQ2 weightQ2 (earlyOf true ww) (lateOf y z)
           (projectAProper s) o := by
-  with_unfolding_all decide +kernel
+  intro s ww y z o
+  fin_cases s <;> cases ww <;> cases y <;> cases z <;> fin_cases o <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
@@ -859,7 +901,9 @@ private theorem properD_q2 :
           (projectDProper s) o =
         properMarginalQ2 weightQ2 (earlyOf x true) (lateOf y z)
           (projectDProper s) o := by
-  with_unfolding_all decide +kernel
+  intro s x y z o
+  fin_cases s <;> cases x <;> cases y <;> cases z <;> fin_cases o <;>
+    with_unfolding_all decide +kernel
 
 /-- Every single- and two-party recipient marginal is blind to A's setting. -/
 theorem properA_nonsignaling (s : Fin 6) (ww y z : Bool) (o : Fin 4) :
@@ -897,7 +941,8 @@ set_option maxHeartbeats 0 in
 private theorem parity_q2 : ∀ c o,
     diffQ2 weightQ2 c o =
       qmul (qrat (paritySign o)) (diffQ2 weightQ2 c 0) := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 /-- For A/D sender comparisons the surviving full three-party change is a pure
 binary parity shift. B/C sender changes vanish entirely by B_silent/C_silent. -/
@@ -992,7 +1037,8 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem totalsQ2 : ∀ e : Early,
     (∑ j : Atom, if early j = e then weightQ2 j else 0) = qrat 1 := by
-  with_unfolding_all decide +kernel
+  intro e
+  fin_cases e <;> with_unfolding_all decide +kernel
 
 noncomputable def model : Model :=
   modelOfWeight weightQ2 weight_nonnegative totalsQ2
@@ -1002,14 +1048,20 @@ set_option maxHeartbeats 0 in
 private theorem abd_matches_q2 :
     ∀ x y ww a b d,
       abdQ2 weightQ2 x y ww a b d = ForcedSignalingLC4.abd x y ww a b d := by
-  with_unfolding_all decide +kernel
+  intro x y ww a b d
+  rw [← ForcedSignalingLC4Witness.seed_abd_matches]
+  cases x <;> cases y <;> cases ww <;> cases a <;> cases b <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 private theorem acd_matches_q2 :
     ∀ x z ww a c d,
       acdQ2 weightQ2 x z ww a c d = ForcedSignalingLC4.acd x z ww a c d := by
-  with_unfolding_all decide +kernel
+  intro x z ww a c d
+  rw [← ForcedSignalingLC4Witness.seed_acd_matches]
+  cases x <;> cases z <;> cases ww <;> cases a <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
 
 theorem matchesCluster : ForcedSignalingTheorem2.MatchesCluster model where
   abd x y ww a b d := by
@@ -1047,7 +1099,8 @@ private theorem diff_active : ∀ c o,
     if c.val = 5 ∨ c.val = 7 ∨ c.val = 12 ∨ c.val = 14 then
       diffQ2 weightQ2 c o = epsilonQ2 ∨ diffQ2 weightQ2 c o = -epsilonQ2
     else diffQ2 weightQ2 c o = 0 := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 private theorem abs_difference_exact (c : Context) (o : Recipient) :
     |difference model.behavior c o| =
@@ -1112,7 +1165,9 @@ private theorem properA_q2 :
           (projectAProper s) o =
         properMarginalQ2 weightQ2 (earlyOf true ww) (lateOf y z)
           (projectAProper s) o := by
-  with_unfolding_all decide +kernel
+  intro s ww y z o
+  fin_cases s <;> cases ww <;> cases y <;> cases z <;> fin_cases o <;>
+    with_unfolding_all decide +kernel
 
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
@@ -1122,7 +1177,9 @@ private theorem properD_q2 :
           (projectDProper s) o =
         properMarginalQ2 weightQ2 (earlyOf x true) (lateOf y z)
           (projectDProper s) o := by
-  with_unfolding_all decide +kernel
+  intro s x y z o
+  fin_cases s <;> cases x <;> cases y <;> cases z <;> fin_cases o <;>
+    with_unfolding_all decide +kernel
 
 /-- Every single- and two-party recipient marginal is blind to A's setting. -/
 theorem properA_nonsignaling (s : Fin 6) (ww y z : Bool) (o : Fin 4) :
@@ -1160,7 +1217,8 @@ set_option maxHeartbeats 0 in
 private theorem parity_q2 : ∀ c o,
     diffQ2 weightQ2 c o =
       qmul (qrat (paritySign o)) (diffQ2 weightQ2 c 0) := by
-  with_unfolding_all decide +kernel
+  intro c o
+  fin_cases c <;> fin_cases o <;> with_unfolding_all decide +kernel
 
 /-- For A/D sender comparisons the surviving full three-party change is a pure
 binary parity shift. B/C sender changes vanish entirely by B_silent/C_silent. -/
