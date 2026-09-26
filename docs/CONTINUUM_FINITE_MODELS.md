@@ -1,11 +1,11 @@
 # Continuum dynamics versus finite models
 
-**Draft: generated evidence refresh remains in progress.**
-At `1289d1b`, `lake build`, `lake build Tests` and the full axiom audit passed.
-The report generator then rejected nine definitions mistakenly included in its
-theorem-only export list. Those definitions remain audited; the corrected report
-exports the 96 proved theorems among the 105 audit registrations. The unchanged
-full verification gate must pass and the regenerated files must be committed.
+**Draft for substantive review.** At `4864f79`, the full `scripts/check.sh`
+passed, including the library, tests, axiom audit and theorem-report generation.
+The committed audit and HTML are the exact generated outputs from that run:
+105 audited continuum definitions/theorems and 96 exported proved theorems.
+The post-generation comparison failed because the old snapshots were stale;
+these refreshed snapshots address that mismatch. Final-head CI must still pass.
 
 ## Common models and accessible experiments
 
@@ -121,7 +121,7 @@ already certified by the present report.
 
 All new trust roots are registered in `Tests/Audit.lean`; the report source
 exports the approximation, joint-law and witness chain. The committed generated
-audit/report must be refreshed from a successful combined build before readiness.
+audit/report were refreshed from the successful full check at `4864f79`.
 The companion [numerical study](https://github.com/stevenwarejones/path-reality-tests/pull/9)
 contains independent cyclic matrix, Born-rule, tail, joint-law and count-decision
 tests, 660 baseline scenarios, and a shared-scale sensitivity comparison.

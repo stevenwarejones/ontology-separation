@@ -1393,3 +1393,112 @@
 'OntologySeparation.ContinuumFinite.frequency_error_local' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ContinuumFinite.phase_difference' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.ContinuumFinite.finite_phase_error_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.distributionProduct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.product_l1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.product_tv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.tv_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.test_mean_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.test_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.iid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.iid_tv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.iid_tv_capped' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.cyclic_character_eigenvalue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.character_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.normalizedFourierMode_mass' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.character_integer_phase' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.phase_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.cyclic_cosine_eigenvalue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.no_alias' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.character_star' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.character_orthogonality' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.BornInstrument.distribution' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.born_tv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.born_iid_tv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.born_test_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.SpectralVector.toHilbert' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.hilbert_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.spectral_hilbert_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.spectral_hilbert_normalized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.projection_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.projection_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.tail_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.tail_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.normalizedProjection_norm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.projection_normalization_distance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.normalizedProjection_error' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.zero_retained_iff_tail_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.projection_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.normalizedProjection_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.exists_normalized_cutoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.fromHilbert' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.hilbertEvolve_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.hilbertEvolve_distance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.cyclicKinetic_spectrum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.frequency_error_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.hilbert_band_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.lattice_tail_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.lattice_strong_convergence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.finite_resource_nonseparation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.interferometer_plus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.interferometer_minus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.interferometer_failure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.interferometer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.twoModeState_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.interferometer_probability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.noisyReadout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.noisyReadout_table' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.witnessGap_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.explicit_separating_born_experiment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.cosine_remainder_global' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.twoModeEvolve_relative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.evolved_readout_probability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.symmetric_mode_negative_control' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.free_reference_born_equivalence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.frequency_error_global' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.modeVector_orthonormal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.fourierSynthesis_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.fourierSynthesis_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.siteEvolve_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.fourierSynthesis_cyclic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.fourierSynthesis_kinetic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.witness_frequencies' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.lattice_born_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.finite_resource_test_error' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.ContinuumFinite.band_modes_orthonormal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.bandSynthesis_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.bandSynthesis_kinetic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.ContinuumFinite.bandSynthesis_evolve' depends on axioms: [propext, Classical.choice, Quot.sound]
