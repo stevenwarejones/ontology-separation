@@ -1,3 +1,5 @@
+import Tests.ForcedSignalingMinimalCore
+import Tests.VCausalMeasure
 import Tests.Core
 import Tests.Catalog
 import Tests.Audit
