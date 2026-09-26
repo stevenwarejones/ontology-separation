@@ -28,9 +28,12 @@ def observed (m : Model Λ) : Behavior jointInterface where
     simp_rw [← Finset.mul_sum, Fintype.sum_prod_type]
     have h (l : Λ) : (∑ b : Bool, ∑ f : Bool, ∑ j : Λ,
         (m.probe l).mass (b,j) * (m.final j).prob () f) = 1 := by
-      simp_rw [Finset.sum_comm (s := Finset.univ) (t := Finset.univ)
-        (f := fun f j => (m.probe l).mass (_,j) * (m.final j).prob () f)]
-      simp_rw [← Finset.mul_sum, Behavior.normalized, mul_one]
+      have inner (b : Bool) : (∑ f : Bool, ∑ j : Λ,
+          (m.probe l).mass (b,j) * (m.final j).prob () f) =
+          ∑ j : Λ, (m.probe l).mass (b,j) := by
+        rw [Finset.sum_comm]
+        simp_rw [← Finset.mul_sum, Behavior.normalized, mul_one]
+      simp_rw [inner]
       simpa [Fintype.sum_prod_type] using (m.probe l).total
     simp_rw [h, mul_one]
     exact m.preparation.total

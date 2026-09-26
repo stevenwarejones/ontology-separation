@@ -71,8 +71,7 @@ modes, drift and unrecorded trials invalidate that inference unless bounded.
 `Model.robust_bound` propagates explicit probability discrepancies from a model
 satisfying the premises: a ≤ q f+d(1−f)+ε_a+|q−d|ε_f. It does not turn measured
 operational discrepancies into ontic error bounds. Exact equivalences or an
-additional defended model premise remain necessary. The empirical companion
-will specify loss, confidence coverage and calibration cost separately.
+additional defended model premise remain necessary. The empirical companion specifies loss, confidence coverage and calibration cost separately.
 
 Relative to [#85's local-phase model](PHASE_INTERVENTION.md), this tests a different
 conjunction: measurement/transformation noncontextual representations of specified
@@ -89,3 +88,14 @@ All constructors and theorem roots are registered in `Tests/Audit.lean`.
 Run `sh scripts/check.sh`; generated reports and the complete axiom snapshot
 must match the verified head. The companion study is
 [path-contextuality](https://github.com/stevenwarejones/path-reality-tests/tree/study/path-contextuality/studies/path-contextuality).
+
+## Complete countermodels
+
+`invasiveModel` resets a fair hidden bit to a fair pointer; its final marginal is
+unchanged, but the joint negative-success rate is 1/2 instead of the d=0 ceiling
+1/4. `unchanged_marginal_not_zero_disturbance` proves that its actual transition
+cannot satisfy the zero-disturbance premise. `contextualPointer` leaves the bit
+unchanged and reveals it as the pointer; the observed pointer is fair but the
+pointwise cap fails. `countermodels_same_joint` proves equality of their entire
+joint tables. These illustrate different omitted premises, not complete rivals
+for the quantum tomographic calibration family.

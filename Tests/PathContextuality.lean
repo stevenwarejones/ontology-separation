@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.PathContextualityQuantum
+import OntologySeparation.Experiments.PathContextualityCountermodels
 
 open OntologySeparation OntologySeparation.PathContextuality
 

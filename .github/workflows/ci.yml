@@ -25,7 +25,18 @@ jobs:
       - run: python -m pip install -e ".[research]"
       - run: python research/lf_hidden_local_agency.py --check
       - run: sh scripts/check.sh
+        id: full-check
       - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
+      - name: Attach regenerated proof reports and axiom audit
+        if: always() && steps.full-check.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: proof-reports-${{ github.sha }}
+          path: |
+            docs/AXIOM_AUDIT.txt
+            examples/*.html
+          retention-days: 14
+          if-no-files-found: error
       - name: Stage verified Pages snapshot
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: python scripts/build_pages.py _site

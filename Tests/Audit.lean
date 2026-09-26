@@ -658,3 +658,14 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathContextuality.bypass_probability
 #print axioms OntologySeparation.PathContextuality.exact_gap
 #print axioms OntologySeparation.PathContextuality.quantum_exclusion
+#print axioms OntologySeparation.PathContextuality.fairPreparation
+#print axioms OntologySeparation.PathContextuality.bitFinal
+#print axioms OntologySeparation.PathContextuality.invasiveModel
+#print axioms OntologySeparation.PathContextuality.invasive_cap
+#print axioms OntologySeparation.PathContextuality.invasive_statistics
+#print axioms OntologySeparation.PathContextuality.unchanged_marginal_not_zero_disturbance
+#print axioms OntologySeparation.PathContextuality.contextualPointer
+#print axioms OntologySeparation.PathContextuality.contextual_identity
+#print axioms OntologySeparation.PathContextuality.contextual_statistics
+#print axioms OntologySeparation.PathContextuality.operational_fairness_not_response_cap
+#print axioms OntologySeparation.PathContextuality.countermodels_same_joint

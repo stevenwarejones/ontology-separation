@@ -75,7 +75,8 @@ def exactTable : Behavior jointInterface where
 theorem quantum_realizes_table : ObservationallyEquivalent quantumJoint exactTable := by
   intro s o
   rcases o with ⟨m,f⟩
-  change (jointReadout.prob source.state (m,f) : ℝ) = _
+  change (FiniteQuantum.measure jointReadout).prob source.state (m,f) = _
+  rw [FiniteQuantum.measure_prob]
   rw [QIT.POVM.prob_eq_trace_re]
   cases m <;> cases f <;>
     norm_num [jointReadout, source, QIT.PureVector.state, finalReadout, kraus,

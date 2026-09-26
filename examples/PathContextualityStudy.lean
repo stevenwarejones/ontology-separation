@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.PathContextualityQuantum
+import OntologySeparation.Experiments.PathContextualityCountermodels
 import OntologySeparation.Reporting.Claim
 
 #export_theorem OntologySeparation.PathContextuality.Model.cap_of_measurement_equivalence
@@ -14,3 +14,10 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.PathContextuality.bypass_probability
 #export_theorem OntologySeparation.PathContextuality.exact_gap
 #export_theorem OntologySeparation.PathContextuality.quantum_exclusion
+#export_theorem OntologySeparation.PathContextuality.invasive_cap
+#export_theorem OntologySeparation.PathContextuality.invasive_statistics
+#export_theorem OntologySeparation.PathContextuality.unchanged_marginal_not_zero_disturbance
+#export_theorem OntologySeparation.PathContextuality.contextual_identity
+#export_theorem OntologySeparation.PathContextuality.contextual_statistics
+#export_theorem OntologySeparation.PathContextuality.operational_fairness_not_response_cap
+#export_theorem OntologySeparation.PathContextuality.countermodels_same_joint
