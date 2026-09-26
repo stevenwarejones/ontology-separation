@@ -1,6 +1,10 @@
 name: Verify
 on:
   pull_request:
+  schedule:
+    # 03:17 New York during daylight saving; 02:17 during standard time.
+    - cron: '17 7 * * *'
+  workflow_dispatch:
   push:
     branches: [main]
 permissions:
@@ -51,8 +55,9 @@ jobs:
       - run: sh scripts/check.sh
       - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
       - name: Replay project and test declarations with the kernel
-        # Bundled with Lean 4.30; checks declarations even on cache hits.
-        # LEAN_NUM_THREADS=1 also limits the checker's module workers.
+        # Replay is an extra nightly audit, not part of PR/push verification.
+        # Manual runs provide an on-demand full audit with the same checks.
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: lake env leanchecker --verbose OntologySeparation Tests
       - name: Save pinned dependencies
         if: steps.dependencies.outputs.cache-hit != 'true'
