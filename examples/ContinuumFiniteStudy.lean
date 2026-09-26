@@ -37,7 +37,6 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.tv_le_one
 #export_theorem OntologySeparation.ContinuumFinite.test_mean_bound
 #export_theorem OntologySeparation.ContinuumFinite.test_error
-#export_theorem OntologySeparation.ContinuumFinite.iid
 #export_theorem OntologySeparation.ContinuumFinite.iid_tv
 #export_theorem OntologySeparation.ContinuumFinite.iid_tv_capped
 
@@ -51,14 +50,9 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.character_star
 #export_theorem OntologySeparation.ContinuumFinite.character_orthogonality
 
-#export_theorem OntologySeparation.ContinuumFinite.evolve
-#export_theorem OntologySeparation.ContinuumFinite.finiteEmbedding
-#export_theorem OntologySeparation.ContinuumFinite.distributionProduct
-#export_theorem OntologySeparation.ContinuumFinite.BornInstrument.distribution
 #export_theorem OntologySeparation.ContinuumFinite.born_tv
 #export_theorem OntologySeparation.ContinuumFinite.born_iid_tv
 #export_theorem OntologySeparation.ContinuumFinite.born_test_error
-#export_theorem OntologySeparation.ContinuumFinite.SpectralVector.toHilbert
 #export_theorem OntologySeparation.ContinuumFinite.hilbert_norm_sq
 #export_theorem OntologySeparation.ContinuumFinite.spectral_hilbert_mass
 #export_theorem OntologySeparation.ContinuumFinite.spectral_hilbert_normalized
@@ -73,7 +67,6 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.projection_tendsto
 #export_theorem OntologySeparation.ContinuumFinite.normalizedProjection_tendsto
 #export_theorem OntologySeparation.ContinuumFinite.exists_normalized_cutoff
-#export_theorem OntologySeparation.ContinuumFinite.fromHilbert
 #export_theorem OntologySeparation.ContinuumFinite.hilbertEvolve_norm
 #export_theorem OntologySeparation.ContinuumFinite.hilbertEvolve_distance
 #export_theorem OntologySeparation.ContinuumFinite.cyclicKinetic_spectrum
@@ -85,10 +78,8 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.interferometer_plus
 #export_theorem OntologySeparation.ContinuumFinite.interferometer_minus
 #export_theorem OntologySeparation.ContinuumFinite.interferometer_failure
-#export_theorem OntologySeparation.ContinuumFinite.interferometer
 #export_theorem OntologySeparation.ContinuumFinite.twoModeState_normalized
 #export_theorem OntologySeparation.ContinuumFinite.interferometer_probability
-#export_theorem OntologySeparation.ContinuumFinite.noisyReadout
 #export_theorem OntologySeparation.ContinuumFinite.noisyReadout_table
 #export_theorem OntologySeparation.ContinuumFinite.witnessGap_pos
 #export_theorem OntologySeparation.ContinuumFinite.explicit_separating_born_experiment

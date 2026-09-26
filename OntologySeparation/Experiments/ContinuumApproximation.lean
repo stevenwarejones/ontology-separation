@@ -1,8 +1,9 @@
 import OntologySeparation.Experiments.ContinuumSeparation
 
 /-! Scalar dispersion and finite-band vector estimates. Constants and band
-hypotheses are explicit. The global 1/24 remainder and infinite tail-to-POVM
-bridge in the mathematical guide remain separate obligations. -/
+hypotheses are explicit. This module proves the global 1/24 remainder;
+ContinuumTruncation, ContinuumBorn and ContinuumLimit supply the normalized
+tail, measurement and strong-convergence bridge. -/
 namespace OntologySeparation.ContinuumFinite
 noncomputable section
 

@@ -1,12 +1,11 @@
 # Continuum dynamics versus finite models
 
-**Draft: final combined verification and generated artifacts are in progress.**
-All continuum modules, including the finite Fourier embedding, limit/test-error
-composition and explicit Born witness, compiled together at `1f678da`.
-The test suite then exposed an ambiguous `Circle` type name; the regression now
-uses the fully qualified model type. Final tests and generated evidence are
-being checked at the corrected head. This document distinguishes those checks from
-mathematical claims; the draft is not a merge recommendation.
+**Draft: generated evidence refresh remains in progress.**
+At `1289d1b`, `lake build`, `lake build Tests` and the full axiom audit passed.
+The report generator then rejected nine definitions mistakenly included in its
+theorem-only export list. Those definitions remain audited; the corrected report
+exports the 96 proved theorems among the 105 audit registrations. The unchanged
+full verification gate must pass and the regenerated files must be committed.
 
 ## Common models and accessible experiments
 
@@ -102,6 +101,22 @@ can be refitted. Full loss and zero visibility are other exact failures.
 used in the companion fixed-allocation design. Its shared-scale interval test
 exploits several momenta while preserving one scale across settings.
 
+## Remaining formal scope and bridge obligations
+
+The fixed N=4 witness is ideal (efficiency and visibility both one).
+`noisyReadout_table` and `robust_coordinate_separation` are proved ingredients,
+but a calibrated noisy specialization of this witness is not yet exported.
+An explicit phase-wrap blind-time theorem and shared-scale overlap theorem are
+also not exported; the numerical companion checks these effects independently.
+They must not be inferred from the ideal witness alone.
+
+The explicit witness uses `TwoMode`. Its isometric embedding into the infinite
+spectral Hilbert space is not formalized. Fourier synthesis proves the finite
+kinetic operator identity and transports lattice phases, but a differential
+Schrödinger-equation statement identifying `siteEvolve` as the propagator
+of `cyclicKinetic` is not yet exported. These are bridge obligations, not claims
+already certified by the present report.
+
 ## Evidence and limits
 
 All new trust roots are registered in `Tests/Audit.lean`; the report source
@@ -131,6 +146,11 @@ construction of a real-time path measure is claimed.
   discretization versus long-range exact discretization. His infinite lattice
   is not the finite accessible-mode counterexample here.
   https://theory.sinp.msu.ru/~tarasov/PDF/PLA2016.pdf
+- Chou, arXiv:2008.03698v1 (2020), Eqs. 7, 11–16: finite Fourier
+  Hamiltonians with quadratic momentum energies versus central differences.
+  This is close prior art for the spectral counterexample; the underlying
+  dispersion distinction is not claimed as new.
+  https://arxiv.org/pdf/2008.03698
 - Brun–Mlodinow, arXiv:1802.03911v1, Eqs. 17–23, published PRD 99, 015012
   (2019): dispersion-sensitive interference in a different, anisotropic Dirac
   quantum-walk model. Its sensitivity estimates do not transfer to this ring.
