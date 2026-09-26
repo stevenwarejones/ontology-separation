@@ -1071,3 +1071,23 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.one_momentum_scale_match
 #print axioms OntologySeparation.ContinuumFinite.one_momentum_scale_interval
 #print axioms OntologySeparation.ContinuumFinite.one_momentum_all_times
+
+#print axioms OntologySeparation.ContinuumFinite.pairIsometry
+#print axioms OntologySeparation.ContinuumFinite.pairIsometry_single
+#print axioms OntologySeparation.ContinuumFinite.spectralPair
+#print axioms OntologySeparation.ContinuumFinite.spectralPair_orthonormal
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_apply
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_norm
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_inner
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_injective
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_support
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_intertwines
+#print axioms OntologySeparation.ContinuumFinite.pairExtraction
+#print axioms OntologySeparation.ContinuumFinite.pairExtraction_embedding
+#print axioms OntologySeparation.ContinuumFinite.pairProjection
+#print axioms OntologySeparation.ContinuumFinite.pairProjection_idempotent
+#print axioms OntologySeparation.ContinuumFinite.pairProjection_orthogonal
+#print axioms OntologySeparation.ContinuumFinite.pairProjection_pythagoras
+#print axioms OntologySeparation.ContinuumFinite.transportedInterferometer
+#print axioms OntologySeparation.ContinuumFinite.transportedInterferometer_agrees

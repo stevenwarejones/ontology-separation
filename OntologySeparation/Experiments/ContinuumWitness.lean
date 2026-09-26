@@ -358,8 +358,8 @@ theorem phase_wrap_noisy_tables (eta v q theta phi : ℝ) (k : ℤ)
     rw [harg, Real.cos_add_int_mul_two_pi]
   dsimp only at ht hp
   fin_cases o
-  · rw [ht.1, hp.1]; simp [plus, hc]
-  · rw [ht.2.1, hp.2.1]; simp [minus, hc]
+  · exact ht.1.trans ((show plus eta v (q+theta) = plus eta v (q+phi) by simp [plus, hc]).trans hp.1.symm)
+  · exact ht.2.1.trans ((show minus eta v (q+theta) = minus eta v (q+phi) by simp [minus, hc]).trans hp.2.1.symm)
   · exact ht.2.2.trans hp.2.2.symm
 
 /-- Explicit signed blind times for the witness gap; k=0 includes time zero. -/
