@@ -27,37 +27,37 @@ check lake build
 check lake build Tests
 check lake env lean examples/CustomUniverse.lean
 check lake env lean examples/PhysicistWorkflow.lean
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/Publish.lean -o examples/operational-results.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/Publish.lean -o examples/operational-results.html
 check python3 scripts/audit.py
 check python3 scripts/check_export.py
 check python3 scripts/export.py
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/RecordAccessStudy.lean -o examples/record-access.html
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/ModelClassStudy.lean -o examples/model-classes.html
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/PartialLeakageStudy.lean -o examples/partial-leakage.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/RecordAccessStudy.lean -o examples/record-access.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/ModelClassStudy.lean -o examples/model-classes.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PartialLeakageStudy.lean -o examples/partial-leakage.html
 check python3 scripts/test.py
 check node scripts/check_examples.cjs
 check sh scripts/check_downstream.sh
 check python3 scripts/check_scenario_export.py
-PYTHONPATH=python check python3 -m ontology_separation.scenario_report examples/downstream/RecipeStudy.lean -o examples/recipe-comparison.html
-PYTHONPATH=python check python3 -m ontology_separation.scenario_report examples/downstream/TwoQubitStudy.lean -o examples/two-qubit-comparison.html
-PYTHONPATH=python check python3 -m ontology_separation.scenario_report examples/downstream/FriendStudy.lean -o examples/local-friendliness-protocol.html
+check env PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downstream/RecipeStudy.lean -o examples/recipe-comparison.html
+check env PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downstream/TwoQubitStudy.lean -o examples/two-qubit-comparison.html
+check env PYTHONPATH=python python3 -m ontology_separation.scenario_report examples/downstream/FriendStudy.lean -o examples/local-friendliness-protocol.html
 check python3 scripts/check_recipes.py
 
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/EnvironmentAccessStudy.lean -o examples/environment-access.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/EnvironmentAccessStudy.lean -o examples/environment-access.html
 
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/EnvironmentDiscriminationStudy.lean -o examples/environment-discrimination.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/EnvironmentDiscriminationStudy.lean -o examples/environment-discrimination.html
 
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/FiniteShotStudy.lean -o examples/finite-shot.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/FiniteShotStudy.lean -o examples/finite-shot.html
 
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/PartialEnvironmentStudy.lean -o examples/partial-environment.html
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/LFAssumptionStudy.lean -o examples/lf-assumptions.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PartialEnvironmentStudy.lean -o examples/partial-environment.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFAssumptionStudy.lean -o examples/lf-assumptions.html
 
 check python3 scripts/check_external_certificate.py
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/ExternalCertificateStudy.lean -o examples/external-certificate.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/ExternalCertificateStudy.lean -o examples/external-certificate.html
 
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/SignalingStudy.lean -o examples/signaling-tradeoff.html
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/LFPaperStudy.lean -o examples/lf-paper.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/SignalingStudy.lean -o examples/signaling-tradeoff.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFPaperStudy.lean -o examples/lf-paper.html
 
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/LFReadoutStudy.lean -o examples/lf-readout.html
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/PathInterferenceStudy.lean -o examples/path-interference.html
-PYTHONPATH=python check python3 -m ontology_separation.proof_report examples/PhaseInterventionStudy.lean -o examples/phase-intervention.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFReadoutStudy.lean -o examples/lf-readout.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PathInterferenceStudy.lean -o examples/path-interference.html
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PhaseInterventionStudy.lean -o examples/phase-intervention.html

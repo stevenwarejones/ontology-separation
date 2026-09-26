@@ -19,5 +19,27 @@ reviewable example to demonstrate any API change.
   separately in the change description. Do not claim experimental confirmation
   from a formalized ideal model.
 
+`sh scripts/check.sh` defaults to one Lean thread to bound memory use, matching
+CI. On a machine with sufficient memory, opt into more threads locally:
+
+```sh
+LEAN_NUM_THREADS=8 sh scripts/check.sh
+```
+
+CI restores pinned dependency and incremental project builds, then runs all
+verification and snapshot checks before saving caches. On pushes to `main`, it
+also runs Lean 4.30's bundled checker, serially:
+
+```sh
+LEAN_NUM_THREADS=1 lake env leanchecker --verbose OntologySeparation Tests
+```
+
+This replays declarations in every built project and test module through Lean's
+kernel, including declarations restored from caches. It uses each module's
+imported environment: third-party dependency declarations are not independently
+replayed. This is an additional check using Lean's own kernel, not an external
+verifier. Replay must succeed before caches are saved or Pages is deployed; its
+full-project runtime is not yet benchmarked.
+
 The initial code was AI-assisted and has not received independent expert physics
 review. Passing Lean validates formal deductions, not their empirical premises.
