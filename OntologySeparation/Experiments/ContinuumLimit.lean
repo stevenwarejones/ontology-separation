@@ -97,7 +97,7 @@ actual tail contribution and a uniform bounded-time constant. -/
 theorem lattice_tail_error (r : Circle) (s : Finset ℤ) (u : SpectralHilbert)
     (hu : ‖u‖ = 1) (hp : projection s u ≠ 0) (a K T t : ℝ)
     (ha : 0 < a) (hT : 0 ≤ T) (ht : |t| ≤ T)
-    (hK : ∀ j ∈ s, |waveNumber r j| ≤ K) (hKa : K*a ≤ 1) :
+    (hK : ∀ j ∈ s, |waveNumber r j| ≤ K) :
     ‖hilbertEvolve (frequency r) t u-
       hilbertEvolve (ringLatticeFrequency r a) t (normalizedProjection s u)‖ ≤
       2*Real.sqrt (tail s u)+T*(r.hbar*a^2*K^4/(24*r.mass)) := by
@@ -154,23 +154,20 @@ theorem lattice_strong_convergence (r : Circle) (u : SpectralHilbert) (hu : ‖u
     exact single_le_sum (fun i _ => abs_nonneg (waveNumber r i)) hj
   have ha : Tendsto (fun N : ℕ => r.length/(N : ℝ)) atTop (𝓝 0) :=
     tendsto_const_div_atTop_nhds_zero_nat r.length
-  have hka : Tendsto (fun N : ℕ => K*(r.length/N)) atTop (𝓝 0) := by
-    simpa using ha.const_mul K
   have herr : Tendsto (fun N : ℕ => T*(r.hbar*(r.length/N)^2*K^4/(24*r.mass)))
       atTop (𝓝 0) := by
     convert (((ha.pow 2).const_mul (r.hbar)).mul_const (K^4)).div_const (24*r.mass) |>.const_mul T using 1 <;> simp
   let J := s.sup Int.natAbs
   have hJ : ∀ j ∈ s, j.natAbs ≤ J := fun j hj => le_sup hj
-  have ev := (hka.eventually_lt_const (by norm_num : (0 : ℝ) < 1)).and
-    ((herr.eventually_lt_const (by positivity : (0 : ℝ) < epsilon/2)).and
-      (eventually_ge_atTop (2*J+1)))
+  have ev := (herr.eventually_lt_const (by positivity : (0 : ℝ) < epsilon/2)).and
+    (eventually_ge_atTop (2*J+1))
   obtain ⟨N₀,hN₀⟩ := eventually_atTop.mp ev
   refine ⟨s,J,N₀,hp,hJ,fun N hN => ?_⟩
-  obtain ⟨hka',herr',hlarge⟩ := hN₀ N hN
+  obtain ⟨herr',hlarge⟩ := hN₀ N hN
   have hn : 0 < N := by omega
   refine ⟨by omega,hn,fun t ht => ?_⟩
   have hb := lattice_tail_error r s u hu hp (r.length/N) K T t
-    (div_pos r.length_pos (by exact_mod_cast hn)) hT ht hK hka'.le
+    (div_pos r.length_pos (by exact_mod_cast hn)) hT ht hK
   rw [tail,Real.sqrt_sq (norm_nonneg _)] at hb
   have hd' := hd.trans_le (min_le_left _ _)
   linarith

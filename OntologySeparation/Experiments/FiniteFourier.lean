@@ -45,7 +45,7 @@ theorem fourierSynthesis_mass (c : ZMod N → ℂ) :
   rw [inner_self_eq_norm_sq_to_K] at h
   simp only [← Complex.normSq_eq_conj_mul_self, Complex.normSq_eq_norm_sq] at h
   have hr := congrArg Complex.re h
-  simpa [fourierSynthesis, Complex.re_sum] using hr
+  simpa [fourierSynthesis, Complex.re_sum, ← Complex.ofReal_pow] using hr
 
 @[simp] theorem fourierSynthesis_apply (c : ZMod N → ℂ) (n : ZMod N) :
     fourierSynthesis c n = ∑ j, c j*normalizedFourierMode j n := by
@@ -100,7 +100,7 @@ theorem bandSynthesis_mass (s : Finset ℤ) (J : ℕ) (hN : 2*J < N)
   rw [inner_self_eq_norm_sq_to_K] at h
   simp only [← Complex.normSq_eq_conj_mul_self, Complex.normSq_eq_norm_sq] at h
   have hr := congrArg Complex.re h
-  simpa [bandSynthesis, Complex.re_sum] using hr
+  simpa [bandSynthesis, Complex.re_sum, ← Complex.ofReal_pow] using hr
 
 /-- Applying the finite kinetic Hamiltonian to the embedded cutoff is exactly
 multiplication by the same lattice energies used in the approximation theorem. -/

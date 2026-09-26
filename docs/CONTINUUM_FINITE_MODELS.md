@@ -39,7 +39,10 @@ N=1,2, and derives the character eigenvalue 2−chi(j)−chi(−j). Converting c
 to phases gives 2(1−cos(2πj/N)). Fourier columns are normalized and orthogonal.
 The strict condition N>2J excludes aliases for all integer modes |j|≤J.
 `FiniteFourier` constructs normalized Fourier synthesis, norm preservation and
-intertwining with the cyclic operator. `cyclicKinetic_spectrum` supplies physical
+intertwining with the cyclic operator. `bandSynthesis` explicitly maps the
+alias-free retained integer modes to N-site states, preserves their mass, and
+transports the same lattice frequencies used in the approximation theorem.
+`cyclicKinetic_spectrum` supplies physical
 units: E_a=hbar²(1−cos(ka))/(m a²), with a=L/N.
 
 The older local 5/96 estimate remains available under |ka|≤1. A separate
