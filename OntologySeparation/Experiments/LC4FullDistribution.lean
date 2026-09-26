@@ -139,5 +139,41 @@ theorem quantum_acd (x y z w a c d : Bool) :
   intro o _
   split <;> simp_all
 
+set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
+private theorem noSignalAQ : ∀ y z w b c d,
+    (∑ a : Bool, fullProb false y z w a b c d) =
+    (∑ a : Bool, fullProb true y z w a b c d) := by
+  simp only [fullProb_eq_table]
+  intro y z w b c d
+  cases y <;> cases z <;> cases w <;> cases b <;> cases c <;> cases d <;>
+    with_unfolding_all decide +kernel
+
+set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
+private theorem noSignalDQ : ∀ x y z a b c,
+    (∑ d : Bool, fullProb x y z false a b c d) =
+    (∑ d : Bool, fullProb x y z true a b c d) := by
+  simp only [fullProb_eq_table]
+  intro x y z a b c
+  cases x <;> cases y <;> cases z <;> cases a <;> cases b <;> cases c <;>
+    with_unfolding_all decide +kernel
+
+/-- The full Born law has zero A-to-BCD signaling. -/
+theorem quantum_noSignalA (y z w b c d : Bool) :
+    (∑ a : Bool, (quantum (ForcedSignalingLC4Witness.earlyOf false w) y z).mass ⟨a,b,c,d⟩) =
+    (∑ a : Bool, (quantum (ForcedSignalingLC4Witness.earlyOf true w) y z).mass ⟨a,b,c,d⟩) := by
+  have he : ∀ x w, xSetting (ForcedSignalingLC4Witness.earlyOf x w) = x ∧
+      wSetting (ForcedSignalingLC4Witness.earlyOf x w) = w := by decide +kernel
+  simp only [quantum, he, ← toReal_sum, noSignalAQ]
+
+/-- The full Born law has zero D-to-ABC signaling. -/
+theorem quantum_noSignalD (x y z a b c : Bool) :
+    (∑ d : Bool, (quantum (ForcedSignalingLC4Witness.earlyOf x false) y z).mass ⟨a,b,c,d⟩) =
+    (∑ d : Bool, (quantum (ForcedSignalingLC4Witness.earlyOf x true) y z).mass ⟨a,b,c,d⟩) := by
+  have he : ∀ x w, xSetting (ForcedSignalingLC4Witness.earlyOf x w) = x ∧
+      wSetting (ForcedSignalingLC4Witness.earlyOf x w) = w := by decide +kernel
+  simp only [quantum, he, ← toReal_sum, noSignalDQ]
+
 end
 end OntologySeparation.LC4FullDistribution
