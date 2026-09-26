@@ -83,7 +83,8 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem marginalCoeff_eq_scoreCoeff : ∀ j : Atom,
     marginalCoeff j = scoreCoeff j := by
-  with_unfolding_all decide +kernel
+  intro j
+  fin_cases j <;> with_unfolding_all decide +kernel
 
 theorem marginalScore_eq_score (m : Model) :
     marginalScore m = score m.behavior := by
@@ -122,6 +123,8 @@ set_option maxRecDepth 100000 in
 set_option maxHeartbeats 0 in
 theorem targetMarginalScore_exact :
     targetMarginalScoreQ2 = ForcedSignalingLC4.score := by
+  unfold targetMarginalScoreQ2
+  simp_rw [← seed_abd_matches, ← seed_acd_matches]
   rw [ForcedSignalingLC4.score_exact]
   with_unfolding_all decide +kernel
 

@@ -1,3 +1,6 @@
+import OntologySeparation.Experiments.ForcedSignalingVCausalCompletions
+import OntologySeparation.Experiments.ForcedSignalingVCausal
+import OntologySeparation.Operational.VCausalAssumptions
 import OntologySeparation.Signaling
 import OntologySeparation.Certificates.ForcedSignaling
 import OntologySeparation.PartialEnvironment
@@ -548,3 +551,52 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignalingPropositions.stochastic_signaling_eq_max
 #print axioms OntologySeparation.ForcedSignalingPropositions.stochastic_directional_bound
 #print axioms OntologySeparation.ForcedSignalingPropositions.stochastic_lc4_directional_lower_bound
+
+-- Finite preferred-frame causal semantics and exact LC4 realization.
+#print axioms OntologySeparation.VCausal.precedes_irrefl
+#print axioms OntologySeparation.VCausal.precedes_trans
+#print axioms OntologySeparation.VCausal.lightFuture_refl
+#print axioms OntologySeparation.VCausal.lightFuture_trans
+#print axioms OntologySeparation.VCausal.relay_inside_cone
+#print axioms OntologySeparation.VCausal.LC4Layout.no_late_to_early
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.map_mass
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.reservoir_mean
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.condition_weight
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.disintegrate
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.map_single_le
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.condition_support
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.map_mean
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.bind_mean
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.complete_eq_target
+#print axioms OntologySeparation.HiddenInfluence.FiniteKernel.complete_preserves_record
+#print axioms OntologySeparation.VCausal.Protocol.full_behavior
+#print axioms OntologySeparation.VCausal.Protocol.no_backwards_A
+#print axioms OntologySeparation.VCausal.Protocol.no_backwards_D
+#print axioms OntologySeparation.VCausal.backwardsTable_not_allowed
+#print axioms OntologySeparation.VCausal.EarlyModel.no_backwards_A
+#print axioms OntologySeparation.VCausal.EarlyModel.no_backwards_D
+#print axioms OntologySeparation.VCausal.realize_strategies
+#print axioms OntologySeparation.VCausal.realize_full_behavior
+#print axioms OntologySeparation.VCausal.Protocol.earlyMatches
+#print axioms OntologySeparation.VCausal.realizable_iff_early
+#print axioms OntologySeparation.VCausal.postselection_parity
+#print axioms OntologySeparation.VCausal.postselection_half
+#print axioms OntologySeparation.VCausal.postselection_not_local
+#print axioms OntologySeparation.VCausal.measurement_dependence_parity
+#print axioms OntologySeparation.VCausal.nonsignalingBox_marginals
+#print axioms OntologySeparation.ForcedSignalingVCausal.vcausal_forced_signaling_lower_bound
+#print axioms OntologySeparation.ForcedSignalingVCausal.vcausal_tradeoff
+#print axioms OntologySeparation.ForcedSignalingVCausal.vcausal_noise_lower_bound
+#print axioms OntologySeparation.ForcedSignalingVCausal.lc4_AD_uniform
+#print axioms OntologySeparation.ForcedSignalingVCausal.early_marginal_fromStrategies
+#print axioms OntologySeparation.ForcedSignalingVCausal.matches_early_uniform
+#print axioms OntologySeparation.ForcedSignalingVCausal.realizeLC4_weight
+#print axioms OntologySeparation.ForcedSignalingVCausal.realizeLC4_behavior
+#print axioms OntologySeparation.ForcedSignalingVCausal.stochastic_realization
+#print axioms OntologySeparation.ForcedSignalingVCausal.witnessOn_matches
+#print axioms OntologySeparation.ForcedSignalingVCausal.witnessOn_signaling
+#print axioms OntologySeparation.ForcedSignalingVCausal.vcausal_exact_forced_signaling
+#print axioms OntologySeparation.ForcedSignalingVCausal.vcausal_coefficient_lower_bound_all_completions
+#print axioms OntologySeparation.ForcedSignalingVCausal.vcausal_optimal_completion_globally_sharp
+
+#print axioms OntologySeparation.VCausal.backwards_marginal_not_realizable

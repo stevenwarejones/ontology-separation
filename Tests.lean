@@ -76,3 +76,5 @@ import Tests.NoisyLC4ForcedSignaling
 import Tests.ImperfectTwoRecordAccess
 
 import Tests.ForcedSignalingPropositions
+
+import Tests.VCausal

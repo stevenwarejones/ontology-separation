@@ -116,3 +116,21 @@ The exact cluster-point theorem now has a separate
 `p`, Lean proves the exact minimum
 `max 0 ((p * (4 + 2√2) - 6) / 8)`, including explicit attaining models and
 checked values at 90% and 95% visibility.
+
+## Preferred-frame physical bridge
+
+See [the definitions audit](FORCED_SIGNALING_DEFINITIONS_AUDIT.md) for the
+physical scope and the distinction between conditional locality and NS ∩ CL.
+`VCausal.Protocol.full_behavior` preserves every four-party probability.
+`VCausal.realizable_iff_early` identifies the exact remaining finite early-law
+realizability obligation. `ForcedSignalingVCausal.lc4_AD_uniform` supplies the
+LC4 early law, and `vcausal_exact_forced_signaling` gives an attaining finite
+classical protocol on any qualifying fixed layout, for all three early orders.
+These are fixed-layout statements. Cross-timing consistency and accessibility
+require their separate protocol and geometric hypotheses. No infinite-hidden-
+variable or general field-dynamics equivalence is claimed.
+
+`vcausal_optimal_completion_globally_sharp` also transfers the all-512-completion
+slope optimum using a **realized** LC4 witness. This sharpness conclusion is
+proved separately from the lower-bound transfer. The white-noise result in this
+bridge is a lower-bound corollary; a physical exact noisy curve is not asserted.
