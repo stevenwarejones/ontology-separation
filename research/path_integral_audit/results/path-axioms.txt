@@ -1,0 +1,11 @@
+'OntologySeparation.PathInterference.coherent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.routeBehavior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.path_eq_transfer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.excludes_incoherent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.incoherent_class_nonempty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PathInterference.contextualMembership' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.descriptions_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.restricted_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PathInterference.expanded_not_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]

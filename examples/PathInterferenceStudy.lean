@@ -1,0 +1,11 @@
+import OntologySeparation.Experiments.PathInterference
+import OntologySeparation.Reporting.Claim
+
+/-! Ideal finite mathematics only: no experimental observations are imported. -/
+#export_theorem OntologySeparation.PathInterference.path_eq_transfer
+#export_theorem OntologySeparation.PathInterference.excludes_incoherent
+#export_theorem OntologySeparation.PathInterference.incoherent_class_nonempty
+#export_theorem OntologySeparation.PathInterference.contextual_response_matches
+#export_theorem OntologySeparation.PathInterference.descriptions_equivalent
+#export_theorem OntologySeparation.PathInterference.restricted_equivalent
+#export_theorem OntologySeparation.PathInterference.expanded_not_equivalent

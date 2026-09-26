@@ -1,0 +1,11 @@
+import OntologySeparation.Experiments.PathInterference
+
+#print axioms OntologySeparation.PathInterference.coherent
+#print axioms OntologySeparation.PathInterference.routeBehavior
+#print axioms OntologySeparation.PathInterference.path_eq_transfer
+#print axioms OntologySeparation.PathInterference.excludes_incoherent
+#print axioms OntologySeparation.PathInterference.incoherent_class_nonempty
+#print axioms OntologySeparation.PathInterference.contextualMembership
+#print axioms OntologySeparation.PathInterference.descriptions_equivalent
+#print axioms OntologySeparation.PathInterference.restricted_equivalent
+#print axioms OntologySeparation.PathInterference.expanded_not_equivalent

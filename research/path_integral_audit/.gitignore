@@ -1,0 +1,4 @@
+raw/
+results/access-log.json
+results/workbooks/
+results/*.log
