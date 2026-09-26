@@ -184,3 +184,7 @@ For the research layer, use the advanced paths above or the
 For the LF paper-to-code correspondence, see [the LF joint-event walkthrough](docs/research/LF_PAPER_GUIDE.md) and its [checked HTML report](examples/lf-paper.html).
 
 Explore imperfect friend readout with [the sharp error-budget study](docs/research/LF_READOUT_GUIDE.md) and its [checked HTML report](examples/lf-readout.html).
+
+The [spacetime influence study](docs/SPACETIME_INFLUENCE.md) derives a finite
+causal no-influence theorem, countermodels, and conditional calibration/geometry
+bounds, with a separate prospective optical protocol and sensitivity study.

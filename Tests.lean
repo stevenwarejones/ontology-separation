@@ -1,3 +1,4 @@
+import Tests.SpacetimeInfluence
 import Tests.Core
 import Tests.Catalog
 import Tests.Audit
