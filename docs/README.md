@@ -86,3 +86,6 @@ implemented capability; use each guide's stated scope and checked examples.
 - [Exact separator search](SEPARATOR_SEARCH.md) — certify base agreement, then search an explicit finite candidate family for an oriented separator.
 
 [Tradeoff reconciliation and flagship decision](research/TRADEOFF_DECISION_SPIKE.md): pinned external results, a checked LP certificate, and the next physical proof obligations.
+
+[Exact path-interference case study](PATH_INTERFERENCE_CASE_STUDY.md): path/transfer
+equivalence, a defined incoherent-class exclusion and phase-sensitive access.

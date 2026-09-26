@@ -1,4 +1,5 @@
 import OntologySeparation.Signaling
+import OntologySeparation.Experiments.PathInterference
 import OntologySeparation.Certificates.ForcedSignaling
 import OntologySeparation.PartialEnvironment
 import OntologySeparation.Statistics
@@ -548,3 +549,14 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ForcedSignalingPropositions.stochastic_signaling_eq_max
 #print axioms OntologySeparation.ForcedSignalingPropositions.stochastic_directional_bound
 #print axioms OntologySeparation.ForcedSignalingPropositions.stochastic_lc4_directional_lower_bound
+
+-- Exact finite path-interference case study
+#print axioms OntologySeparation.PathInterference.coherent
+#print axioms OntologySeparation.PathInterference.routeBehavior
+#print axioms OntologySeparation.PathInterference.path_eq_transfer
+#print axioms OntologySeparation.PathInterference.excludes_incoherent
+#print axioms OntologySeparation.PathInterference.incoherent_class_nonempty
+#print axioms OntologySeparation.PathInterference.contextualMembership
+#print axioms OntologySeparation.PathInterference.descriptions_equivalent
+#print axioms OntologySeparation.PathInterference.restricted_equivalent
+#print axioms OntologySeparation.PathInterference.expanded_not_equivalent

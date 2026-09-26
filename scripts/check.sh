@@ -36,3 +36,4 @@ PYTHONPATH=python python3 -m ontology_separation.proof_report examples/Signaling
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFPaperStudy.lean -o examples/lf-paper.html
 
 PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFReadoutStudy.lean -o examples/lf-readout.html
+PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PathInterferenceStudy.lean -o examples/path-interference.html
