@@ -24,7 +24,7 @@ theorem interferometer_plus (q : ℝ) (u : TwoMode) :
     ‖interferometerOperator q 0 u‖^2 = ‖u 0+phase q*u 1‖^2/2 := by
   simp only [interferometerOperator,LinearMap.coe_toContinuousLinearMap',
     Matrix.toEuclideanLin_apply,EuclideanSpace.norm_sq_eq,Fin.sum_univ_two]
-  change ‖(Real.sqrt 2 : ℂ)⁻¹*u 0+(phase q/(Real.sqrt 2 : ℂ))*u 1‖^2+‖(0 : ℂ)‖^2 = _
+  simp [interferometerMatrix,Matrix.vecHead,Matrix.vecTail]
   rw [show (Real.sqrt 2 : ℂ)⁻¹*u 0+(phase q/(Real.sqrt 2 : ℂ))*u 1 =
     (u 0+phase q*u 1)/(Real.sqrt 2 : ℂ) by ring]
   norm_num [norm_div,div_pow,Complex.norm_real,Real.norm_eq_abs,
@@ -34,7 +34,7 @@ theorem interferometer_minus (q : ℝ) (u : TwoMode) :
     ‖interferometerOperator q 1 u‖^2 = ‖u 0-phase q*u 1‖^2/2 := by
   simp only [interferometerOperator,LinearMap.coe_toContinuousLinearMap',
     Matrix.toEuclideanLin_apply,EuclideanSpace.norm_sq_eq,Fin.sum_univ_two]
-  change ‖(Real.sqrt 2 : ℂ)⁻¹*u 0+(-phase q/(Real.sqrt 2 : ℂ))*u 1‖^2+‖(0 : ℂ)‖^2 = _
+  simp [interferometerMatrix,Matrix.vecHead,Matrix.vecTail]
   rw [show (Real.sqrt 2 : ℂ)⁻¹*u 0+(-phase q/(Real.sqrt 2 : ℂ))*u 1 =
     (u 0-phase q*u 1)/(Real.sqrt 2 : ℂ) by ring]
   norm_num [norm_div,div_pow,Complex.norm_real,Real.norm_eq_abs,
@@ -102,8 +102,8 @@ def noisyReadout (eta v q : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1)
     change (∑ o, ‖interferometerOperator q o u‖^2) = ‖u‖^2 at h
     rw [Fin.sum_univ_three,interferometer_failure,hu] at h
     simp only [Fin.sum_univ_three]
-    norm_num
-    nlinarith
+    norm_num [Fin.ext_iff]
+    linear_combination eta * h
 
 /-- Both visible bins, and failure, are included in the calibrated formula. -/
 theorem noisyReadout_table (eta v q theta : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1)
@@ -115,17 +115,67 @@ theorem noisyReadout_table (eta v q theta : ℝ) (he0 : 0 ≤ eta) (he1 : eta �
   have ht := (interferometer q).complete (twoModeState theta)
   change (∑ o, ‖interferometerOperator q o (twoModeState theta)‖^2) = ‖twoModeState theta‖^2 at ht
   rw [Fin.sum_univ_three,interferometer_failure,twoModeState_normalized] at ht
-  dsimp [noisyReadout,plus,minus,failure] at *
-  norm_num at *
-  constructor
-  · nlinarith
-  constructor
-  · nlinarith
-  · rfl
+  have hm : ‖interferometerOperator q 1 (twoModeState theta)‖^2 = 1-plus 1 1 (q+theta) := by
+    rw [hp] at ht
+    linarith
+  dsimp [noisyReadout]
+  rw [hp,hm]
+  norm_num [plus,minus,failure,Fin.ext_iff]
+  constructor <;> ring
 
 /-- The actual state produced by the two diagonal mode energies; the zero-mode
 energy is zero. The reference q is shared between hypotheses. -/
 def evolvedTwoMode (w t : ℝ) : TwoMode := twoModeState (-t*w)
+
+/-- The actual diagonal propagator on the two selected mode coefficients. -/
+def twoModeEvolve (w₀ w₁ t : ℝ) (u : TwoMode) : TwoMode :=
+  WithLp.toLp 2 ![phase (-t*w₀)*u 0,phase (-t*w₁)*u 1]
+
+def relativePhase (w : ℤ → ℝ) (j₀ j₁ : ℤ) (t : ℝ) : ℝ := -t*(w j₁-w j₀)
+
+def relativePhaseDifference (w v : ℤ → ℝ) (j₀ j₁ : ℤ) (t : ℝ) : ℝ :=
+  relativePhase w j₀ j₁ t-relativePhase v j₀ j₁ t
+
+theorem twoModeEvolve_relative (w₀ w₁ t : ℝ) :
+    twoModeEvolve w₀ w₁ t (twoModeState 0) =
+      phase (-t*w₀) • twoModeState (-t*(w₁-w₀)) := by
+  ext i
+  fin_cases i
+  · simp [twoModeEvolve,twoModeState]
+  · change phase (-t*w₁)*(phase 0/(Real.sqrt 2 : ℂ)) =
+      phase (-t*w₀)*(phase (-t*(w₁-w₀))/(Real.sqrt 2 : ℂ))
+    rw [phase_zero,← mul_div_assoc,← phase_add]
+    congr 2
+    ring
+
+theorem evolved_readout_probability (q w₀ w₁ t : ℝ) :
+    ‖interferometerOperator q 0 (twoModeEvolve w₀ w₁ t (twoModeState 0))‖^2 =
+      plus 1 1 (q-t*(w₁-w₀)) := by
+  rw [twoModeEvolve_relative,map_smul,norm_smul,phase_norm,one_mul]
+  exact interferometer_probability q (-t*(w₁-w₀))
+
+/-- Symmetric modes have equal energies and give no relative-dispersion signal. -/
+theorem symmetric_mode_negative_control (r : Circle) (a t : ℝ) (j : ℤ) :
+    relativePhase (frequency r) (-j) j t = 0 ∧
+    relativePhase (fun k => latticeFrequency r.hbar r.mass a (waveNumber r k)) (-j) j t = 0 := by
+  have hk : waveNumber r (-j) = -waveNumber r j := by simp [waveNumber]; ring
+  simp [relativePhase,frequency,hk,latticeFrequency,neg_mul,Real.cos_neg]
+
+/-- Without an externally fixed phase reference the *whole* noisy Born table can
+be matched. This is an exact operational non-identifiability example. -/
+theorem free_reference_born_equivalence (eta v q theta phi : ℝ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1) (o : Fin 3) :
+    (noisyReadout eta v q he0 he1 hv0 hv1 (twoModeState theta) (twoModeState_normalized theta)).mass o =
+    (noisyReadout eta v (q+theta-phi) he0 he1 hv0 hv1 (twoModeState phi) (twoModeState_normalized phi)).mass o := by
+  have h₁ := noisyReadout_table eta v q theta he0 he1 hv0 hv1
+  have h₂ := noisyReadout_table eta v (q+theta-phi) phi he0 he1 hv0 hv1
+  have heq : q+theta-phi+phi = q+theta := by ring
+  dsimp only at h₁ h₂
+  rw [heq] at h₂
+  fin_cases o
+  · exact h₁.1.trans h₂.1.symm
+  · exact h₁.2.1.trans h₂.2.1.symm
+  · exact h₁.2.2.trans h₂.2.2.symm
 
 /-- N=4, L=2π, m=hbar=1 gives a concrete nonzero dispersion gap. -/
 def witnessGap : ℝ := (1/2)-4/Real.pi^2

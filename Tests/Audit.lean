@@ -1034,3 +1034,8 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.explicit_separating_born_experiment
 
 #print axioms OntologySeparation.ContinuumFinite.cosine_remainder_global
+
+#print axioms OntologySeparation.ContinuumFinite.twoModeEvolve_relative
+#print axioms OntologySeparation.ContinuumFinite.evolved_readout_probability
+#print axioms OntologySeparation.ContinuumFinite.symmetric_mode_negative_control
+#print axioms OntologySeparation.ContinuumFinite.free_reference_born_equivalence

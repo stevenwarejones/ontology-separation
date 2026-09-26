@@ -43,7 +43,7 @@ theorem cyclicKinetic_spectrum (r : Circle) (N : ℕ) [NeZero N] (j : ℤ) (n : 
   have hL := ne_of_gt r.length_pos
   have hn : (N : ℝ) ≠ 0 := by exact_mod_cast (NeZero.ne N)
   have hk : waveNumber r j*(r.length/N) = 2*Real.pi*j/N := by
-    unfold waveNumber; field_simp; ring
+    unfold waveNumber; field_simp <;> ring
   rw [cyclicKinetic,cyclic_cosine_eigenvalue]
   unfold latticeFrequency
   rw [hk,← mul_assoc,← Complex.ofReal_mul]
@@ -60,8 +60,10 @@ theorem frequency_error_band (r : Circle) (a K k : ℝ) (ha : 0 < a)
   have h := frequency_error_local r.hbar r.mass a k r.hbar_pos.le r.mass_pos ha.ne' (hab.trans hKa)
   calc
     _ ≤ r.hbar/(r.mass*a^2)*(|k*a|^4*(5/96)) := h
-    _ ≤ r.hbar/(r.mass*a^2)*((K*a)^4*(5/96)) := by gcongr
-    _ = _ := by field_simp; ring
+    _ ≤ r.hbar/(r.mass*a^2)*((K*a)^4*(5/96)) := by
+      have hh := r.hbar_pos; have hm := r.mass_pos
+      gcongr
+    _ = _ := by field_simp <;> ring
 
 /-- Finite-band norm estimate before any measurement or repetition. -/
 theorem hilbert_band_error (s : Finset ℤ) (u : SpectralHilbert) (hu : ‖u‖ = 1)
@@ -70,15 +72,19 @@ theorem hilbert_band_error (s : Finset ℤ) (u : SpectralHilbert) (hu : ‖u‖ 
     ‖hilbertEvolve w t u-hilbertEvolve v t u‖ ≤ epsilon := by
   classical
   have hc : (∑ j : s, ‖u j‖^2) = 1 := by
-    rw [Finset.sum_coe_sort]
     have hn := hilbert_norm_sq u
     rw [tsum_eq_sum (s := s) (fun j hj => by simp [hs j hj]),hu] at hn
-    simpa using hn.symm
+    calc
+      _ = ∑ j ∈ s, ‖u j‖^2 := Finset.sum_coe_sort _ _
+      _ = 1 := by simpa using hn.symm
   have hf := finite_phase_error_sq (fun j : s => u j) (fun j => -t*w j) (fun j => -t*v j)
     epsilon he hc (fun j => h j j.property)
   have hd : ‖hilbertEvolve w t u-hilbertEvolve v t u‖^2 ≤ epsilon^2 := by
-    rw [hilbert_norm_sq,tsum_eq_sum (s := s) (fun j hj => by simp [hs j hj])]
-    simpa only [Finset.sum_coe_sort,lp.coeFn_sub,Pi.sub_apply,hilbertEvolve_apply] using hf
+    rw [hilbert_norm_sq]
+    simp only [lp.coeFn_sub,Pi.sub_apply,hilbertEvolve_apply]
+    rw [tsum_eq_sum (s := s) (fun j hj => by simp [hs j hj])]
+    rw [← Finset.sum_coe_sort]
+    exact hf
   nlinarith [norm_nonneg (hilbertEvolve w t u-hilbertEvolve v t u)]
 
 def ringLatticeFrequency (r : Circle) (a : ℝ) (j : ℤ) : ℝ :=
@@ -93,14 +99,16 @@ theorem lattice_tail_error (r : Circle) (s : Finset ℤ) (u : SpectralHilbert)
     ‖hilbertEvolve (frequency r) t u-
       hilbertEvolve (ringLatticeFrequency r a) t (normalizedProjection s u)‖ ≤
       2*Real.sqrt (tail s u)+T*(5*r.hbar*a^2*K^4/(96*r.mass)) := by
-  have he : 0 ≤ T*(5*r.hbar*a^2*K^4/(96*r.mass)) := by positivity
+  have he : 0 ≤ T*(5*r.hbar*a^2*K^4/(96*r.mass)) := by
+    have hh := r.hbar_pos; have hm := r.mass_pos
+    positivity
   have hb := hilbert_band_error s (normalizedProjection s u) (normalizedProjection_norm s u hp)
     (fun j hj => by simp [normalizedProjection,lp.coeFn_smul,projection_apply,hj])
     (frequency r) (ringLatticeFrequency r a) t _ he (by
       intro j hj
       have hfreq := frequency_error_band r a K (waveNumber r j) ha (hK j hj) hKa
       have hfac : |(-t*frequency r j)-(-t*ringLatticeFrequency r a j)| =
-          |t|*|continuumFrequency r.hbar r.mass (waveNumber r j)-
+          |t| *|continuumFrequency r.hbar r.mass (waveNumber r j)-
             latticeFrequency r.hbar r.mass a (waveNumber r j)| := by
         rw [show (-t*frequency r j)-(-t*ringLatticeFrequency r a j) =
           -t*(continuumFrequency r.hbar r.mass (waveNumber r j)-
@@ -137,7 +145,7 @@ theorem lattice_strong_convergence (r : Circle) (u : SpectralHilbert) (hu : ‖u
   have hp : projection s u ≠ 0 := by
     intro hz
     have := hd.trans_le (min_le_right _ _)
-    simp [hz,hu] at this
+    norm_num [hz,hu] at this
   let K : ℝ := ∑ j ∈ s, |waveNumber r j|
   have hK : ∀ j ∈ s, |waveNumber r j| ≤ K := by
     intro j hj
