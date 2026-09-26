@@ -22,7 +22,7 @@ theorem positive_bound (m : Model Λ) (q d : ℝ) (hd : 0 ≤ d)
       (Finset.single_le_sum (fun j _ => (m.probe l).nonneg (false,j))
         (Finset.mem_univ l)).trans (hq l)
     have he := hD l l
-    simp only [if_pos rfl, mul_one] at he
+    simp at he
     have hp : 1-d-q ≤ (m.probe l).mass (true,l) := by
       nlinarith [mul_nonneg hd ((D l).nonneg l)]
     exact (mul_le_mul_of_nonneg_right hp ((m.final l).nonneg () true)).trans
@@ -124,12 +124,104 @@ theorem reference_necessary {Λ : Type} [Fintype Λ] (m : Model Λ) (q d : ℝ)
   have hs := m.success_bound d hd hD
   have ha := m.bound q d hd hq hD
   have hb := m.positive_bound q d hd hq hD
-  simp only [he, quantum_realizes_table, Fintype.sum_bool] at hn
+  simp only [Fintype.sum_bool] at hn
+  rw [he () (false,true), he () (false,false),
+    quantum_realizes_table () (false,true), quantum_realizes_table () (false,false)] at hn
   norm_num [exactTable] at hn
   rw [hf,hm,hp] at hs
   rw [hf,hm] at ha
   rw [hf,hp] at hb
   refine ⟨hn, ?_, ?_, hb⟩ <;> linarith
+
+/-- F-to-S transition needed when S has negative response u. -/
+def referenceFlow (u : ℝ) : ℝ := (1369/15625-(49/625)*u)/(576/625)
+
+/-- Two-state attaining family, S=false and F=true. The parameter u is the
+negative response at S; all four observed cells remain fixed. -/
+def boundaryModel (u : ℝ) (hu0 : 337/625 ≤ u) (hu1 : u ≤ 1081/1225) : Model Bool where
+  preparation := dropCapModel.preparation
+  probe l := {
+    mass o := if l then
+      (if o.1 then (if o.2 then 51/100-referenceFlow u else 0)
+       else (if o.2 then 49/100 else referenceFlow u))
+      else (if o.1 then (if o.2 then 1-u-144/1225 else 144/1225)
+       else (if o.2 then 0 else u))
+    nonneg o := by
+      cases l <;> rcases o with ⟨m,j⟩ <;> cases m <;> cases j <;>
+        norm_num [referenceFlow] <;> linarith
+    total := by
+      cases l <;> norm_num [Fintype.sum_prod_type, Fintype.sum_bool] <;> ring }
+  final := bitFinal
+
+theorem boundary_statistics (u : ℝ) (hu0 : 337/625 ≤ u) (hu1 : u ≤ 1081/1225) :
+    (boundaryModel u hu0 hu1).pF = 49/625 ∧
+    ObservationallyEquivalent (boundaryModel u hu0 hu1).observed quantumJoint := by
+  constructor
+  · norm_num [Model.pF, FiniteDistribution.mean, boundaryModel, dropCapModel,
+      bitFinal, coin, Fintype.sum_bool]
+  · intro s o
+    rw [quantum_realizes_table s o]
+    rcases o with ⟨m,f⟩
+    cases m <;> cases f <;>
+      norm_num [Model.observed, boundaryModel, dropCapModel, bitFinal, coin,
+        exactTable, Fintype.sum_bool, referenceFlow] <;> ring
+
+theorem boundary_cap (u : ℝ) (hu0 : 337/625 ≤ u) (hu1 : u ≤ 1081/1225) :
+    (boundaryModel u hu0 hu1).ResponseCap u := by
+  intro l
+  cases l <;> norm_num [Model.negative, boundaryModel, Fintype.sum_bool, referenceFlow] <;>
+    linarith
+
+private def moveKernel (l : Bool) (p : ℝ) (hp0 : 0 ≤ p) (hp1 : p ≤ 1) :
+    FiniteDistribution Bool where
+  mass j := if j=l then 1-p else p
+  nonneg j := by dsimp only; split_ifs <;> linarith
+  total := by cases l <;> norm_num [Fintype.sum_bool]
+
+/-- The attaining family's two flip rates are bounded by the chosen disturbance.
+The extra disturbance is absorbed into the stochastic residual kernel. -/
+theorem boundary_disturbance (u d : ℝ) (hu0 : 337/625 ≤ u) (hu1 : u ≤ 1081/1225)
+    (hd : 0 < d) (hS : 1-u-144/1225 ≤ d) (hF : referenceFlow u ≤ d) :
+    (boundaryModel u hu0 hu1).Disturbance d := by
+  let flip : Bool → ℝ := fun l => if l then referenceFlow u else 1-u-144/1225
+  have hf0 (l : Bool) : 0 ≤ flip l := by
+    cases l <;> dsimp [flip, referenceFlow] <;> linarith
+  have hf1 (l : Bool) : flip l ≤ d := by
+    cases l <;> assumption
+  refine ⟨fun l => moveKernel l (flip l/d) (div_nonneg (hf0 l) hd.le)
+    ((div_le_one hd).mpr (hf1 l)), ?_⟩
+  intro l j
+  cases l <;> cases j <;>
+    norm_num [boundaryModel, moveKernel, flip, referenceFlow] <;>
+    field_simp [ne_of_gt hd] <;> ring
+
+/-- At fixed q=16/25, the full table forces a substantially larger d than
+inverting the negative-success inequality alone. -/
+theorem reference_disturbance_lower {Λ : Type} [Fintype Λ] (m : Model Λ) (d : ℝ)
+    (hd : 0 ≤ d) (hq : m.ResponseCap (16/25)) (hD : m.Disturbance d)
+    (hf : m.pF = 49/625) (he : ObservationallyEquivalent m.observed quantumJoint) :
+    297/1225 ≤ d := by
+  have h := (reference_necessary m (16/25) d hd hq hD hf he).2.2.2
+  linarith
+
+/-- Attainment of the complete-table minimum at the reference cap. -/
+theorem reference_disturbance_attained :
+    ∃ m : Model Bool, m.ResponseCap (16/25) ∧ m.Disturbance (297/1225) ∧
+      m.pF = 49/625 ∧ ObservationallyEquivalent m.observed quantumJoint := by
+  let m := boundaryModel (16/25) (by norm_num) (by norm_num)
+  refine ⟨m, boundary_cap _ _ _, ?_, (boundary_statistics _ _ _).1,
+    (boundary_statistics _ _ _).2⟩
+  exact boundary_disturbance _ _ _ _ (by norm_num) (by norm_num)
+    (by norm_num [referenceFlow])
+
+/-- Multiplying output amplitudes and reference amplitudes by the same unit
+phase preserves the local complex pointer bilinear. -/
+theorem reference_phase_invariant (u p k : ℂ) (hu : star u*u=1) :
+    star (u*p)*(u*k) = star p*k := by
+  simp only [map_mul]
+  calc
+    (star u*star p)*(u*k) = (star u*u)*(star p*k) := by ring
+    _ = star p*k := by rw [hu, one_mul]
 
 end
 end OntologySeparation.PathContextuality

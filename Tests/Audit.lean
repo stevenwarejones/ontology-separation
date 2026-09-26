@@ -689,3 +689,11 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathContextuality.Model.success_bound
 #print axioms OntologySeparation.PathContextuality.Model.robust_positive_bound
 #print axioms OntologySeparation.PathContextuality.reference_necessary
+#print axioms OntologySeparation.PathContextuality.referenceFlow
+#print axioms OntologySeparation.PathContextuality.boundaryModel
+#print axioms OntologySeparation.PathContextuality.boundary_statistics
+#print axioms OntologySeparation.PathContextuality.boundary_cap
+#print axioms OntologySeparation.PathContextuality.boundary_disturbance
+#print axioms OntologySeparation.PathContextuality.reference_disturbance_lower
+#print axioms OntologySeparation.PathContextuality.reference_disturbance_attained
+#print axioms OntologySeparation.PathContextuality.reference_phase_invariant
