@@ -146,7 +146,7 @@ end Model
 /-- One-state null: fair pointer, no disturbance, arbitrary stochastic readout. -/
 def nullModel : Model Unit where
   preparation := ⟨fun _ => 1, by intro x; norm_num, by simp⟩
-  probe _ := ⟨fun _ => 1/2, by intro x; norm_num, by simp [Fintype.sum_prod_type]⟩
+  probe _ := ⟨fun _ => 1/2, by intro x; norm_num, by simp⟩
   final _ := coin (1/4) (by norm_num) (by norm_num)
 
 theorem null_nonempty : nullModel.ResponseCap (1/2) ∧ nullModel.Disturbance 0 ∧
