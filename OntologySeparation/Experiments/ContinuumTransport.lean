@@ -262,7 +262,8 @@ theorem transportedNoisyReadout_agrees (e : TwoMode →ₗᵢ[ℂ] H) (eta v q :
     (noisyReadout eta v q he0 he1 hv0 hv1 u hu).mass o := by
   calc
     _ = (noisyPostprocess eta v he0 he1 hv0 hv1 ((interferometer q).distribution u hu)).mass o := by
-      simp only [noisyPostprocess,transportedInterferometer_agrees]
+      have hm (k : Fin 3) := transportedInterferometer_agrees e q u hu k
+      simp only [noisyPostprocess,hm]
     _ = _ := noisyPostprocess_interferometer eta v q he0 he1 hv0 hv1 u hu o
 end NoisyTransport
 

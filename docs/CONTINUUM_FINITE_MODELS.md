@@ -1,11 +1,9 @@
 # Continuum dynamics versus finite models
 
-**Draft for substantive review.** At `4864f79`, the full `scripts/check.sh`
-passed, including the library, tests, axiom audit and theorem-report generation.
-The committed audit and HTML are the exact generated outputs from that run:
-105 audited continuum definitions/theorems and 96 exported proved theorems.
-The post-generation comparison failed because the old snapshots were stale;
-these refreshed snapshots address that mismatch. Final-head CI must still pass.
+**Draft for substantive review.** The finishing connections below are implemented;
+final full-source verification and regenerated evidence are pending. The committed
+105-root/96-theorem snapshots describe the earlier verified baseline, not the new
+connections. No new theorem is certified by those older artifacts.
 
 ## Common models and accessible experiments
 
@@ -43,7 +41,16 @@ intertwining with the cyclic operator. `bandSynthesis` explicitly maps the
 alias-free retained integer modes to N-site states, preserves their mass, and
 transports the same lattice frequencies used in the approximation theorem.
 `cyclicKinetic_spectrum` supplies physical
-units: E_a=hbar²(1−cos(ka))/(m a²), with a=L/N.
+units: E_a=hbar²(1−cos(ka))/(m a²), with a=L/N. `fourier_inversion`
+proves that these columns span the whole site space. `cyclicHamiltonian` is the
+bounded complex-linear physical operator. `sitePropagator_schrodinger` proves
+i*hbar*psi'=H_N psi for arbitrary initial site states, and
+`sitePropagator_unique` identifies the solution uniquely. N=1 and N=2 retain
+both directed shifts. `sitePropagator_bandSynthesis` connects this propagator
+to the same lattice approximation used in the common infinite space.
+
+No derivative is claimed for arbitrary infinite square-summable states under
+the unbounded continuum generator; the infinite evolution remains spectral.
 
 The older local 5/96 estimate remains available under |ka|≤1. A separate
 `cosine_remainder_global` proves
@@ -79,6 +86,16 @@ fixed finite trial count. The cutoff may depend on the state and requested
 precision. This is not unrestricted operator-norm convergence and does not say
 that a fixed finite lattice is forever untestable.
 
+`ContinuumMenu` defines independent data with different finite outcome spaces
+and fixed nonnegative counts at each setting. `menu_tv` proves
+TV≤min(1,sum_s n_s*epsilon_s); `menu_test_error` covers randomized decisions.
+`finite_family_convergence` chooses a common cutoff and site threshold for a
+finite family of fixed normalized states. `finite_menu_nonseparation` composes
+that construction with the actual Born laws for a fixed menu. Preparations,
+times, measurements and counts precede the cutoff/threshold quantifiers.
+Zero counts and unequal counts are included; multinomial bins are not assumed
+independent of one another.
+
 ## A separating fixed alternative
 
 `ContinuumWitness` constructs the balanced recombiner as explicit complex
@@ -101,27 +118,45 @@ can be refitted. Full loss and zero visibility are other exact failures.
 used in the companion fixed-allocation design. Its shared-scale interval test
 exploits several momenta while preserving one scale across settings.
 
-## Remaining formal scope and bridge obligations
+## Completed-source connections and their verification obligations
 
-The fixed N=4 witness is ideal (efficiency and visibility both one).
-`noisyReadout_table` and `robust_coordinate_separation` are proved ingredients,
-but a calibrated noisy specialization of this witness is not yet exported.
-An explicit phase-wrap blind-time theorem and shared-scale overlap theorem are
-also not exported; the numerical companion checks these effects independently.
-They must not be inferred from the ideal witness alone.
+The following table identifies the implementation chain. Final checking and
+regeneration, described above, are required before treating the new roots as
+verified completion.
 
-The explicit witness uses `TwoMode`. Its isometric embedding into the infinite
-spectral Hilbert space is not formalized. Fourier synthesis proves the finite
-kinetic operator identity and transports lattice phases, but a differential
-Schrödinger-equation statement identifying `siteEvolve` as the propagator
-of `cyclicKinetic` is not yet exported. These are bridge obligations, not claims
-already certified by the present report.
+| Connection | Public declarations | Independent numerical checks |
+|---|---|---|
+| Two-mode preparation in infinite l² | `twoModeEmbedding_apply`, `twoModeEmbedding_inner`, `twoModeEmbedding_intertwines` | Isometric matrix preparation and evolution |
+| Bounded extraction and complete Born readout | `spectralExtraction_apply`, `pairProjection_orthogonal`, `transportedInterferometer`, `transportedInterferometer_agrees` | Kraus completeness on arbitrary states, including the complement |
+| Noisy end-to-end witness | `spectralReadout_agrees`, `spectral_noisy_witness`, `site_noisy_readout` | All three bins, exact eta*v TV, loss/visibility boundaries |
+| Finite physical dynamics | `fourier_inversion`, `cyclicHamiltonian_mode`, `sitePropagator_derivative`, `sitePropagator_schrodinger`, `sitePropagator_unique`, `sitePropagator_bandSynthesis` | Matrix exponential and centered derivative with nonunit hbar; N=1,2 |
+| Calibrated and blind controls | `noisy_witness_phase_robust`, `noisy_witness_touching`, `witness_blind_readout`, `noisy_phase_degenerate` | Signed blind times including zero and complete failures |
+| Shared scale | `one_momentum_scale_interval`, `one_momentum_all_times`, `lattice_mode_ratio`, `shared_scale_two_modes_impossible` | One-mode overlap and two-mode ratio obstruction |
+| Fixed heterogeneous experiment | `menu_tv`, `menu_test_error`, `finite_family_convergence`, `finite_menu_nonseparation` | Unequal/zero counts and exact product-law discrimination |
+
+The noisy N=4 witness has tables eta*(1±v)/2 with the click bins interchanged
+between the models; both have failure 1−eta. Its TV is eta*v. Phase uncertainty
+contributes at most eta*v*radius/2 per model. The sum of certified probability
+radii must be strictly smaller than the nominal contrast; exact touching
+admits a shared boundary point. Statistical confidence radii in the empirical
+protocol are additional to these deterministic nuisance bounds.
+
+The blind times t=2*pi*k/(1/2−4/pi²) match the complete noisy tables for every
+integer k, including zero. Full-turn matching is sufficient, not necessary for
+a single cosine setting, which also has reflection coincidences.
+
+For a single positive gap, rescaling by Ec/Ea exactly matches all times; the
+bounded-interval theorem states the exact condition on the calibration radius.
+Modes 1 and 2 have continuum ratio 4 and lattice ratio 4*cos²(pi/N) for N>4.
+Positive shared multipliers therefore cannot match both gaps. This does not
+by itself certify any finite menu: the numerical interval certificates still
+handle wrapping, calibration widths and sampling.
 
 ## Evidence and limits
 
 All new trust roots are registered in `Tests/Audit.lean`; the report source
-exports the approximation, joint-law and witness chain. The committed generated
-audit/report were refreshed from the successful full check at `4864f79`.
+exports the approximation, joint-law and witness chain. The committed baseline generated
+audit/report came from `4864f79`; the expanded roots require fresh generation.
 The companion [numerical study](https://github.com/stevenwarejones/path-reality-tests/pull/9)
 contains independent cyclic matrix, Born-rule, tail, joint-law and count-decision
 tests, 660 baseline scenarios, and a shared-scale sensitivity comparison.
@@ -129,9 +164,8 @@ Numerical corroboration is distinct from Lean checking and experimental evidence
 
 The Fourier identification with position-space L² on the circle is external.
 The benchmark is a nonrelativistic free massive particle, not photon dynamics.
-The repeated-data theorem explicitly covers independent repetitions of a fixed
-preparation/evolution/measurement. `product_tv` supplies the composition step
-for differing fixed strata. Adaptive controls, correlated trials, ancillas and
+The repeated-data theorem covers a fixed heterogeneous menu of preparations,
+evolutions and measurements with independent acquisition and fixed counts. Adaptive controls, correlated trials, ancillas and
 optional stopping are outside the theorem. No compatible dataset
 currently supplies the apparatus and calibration certificates for an exclusion.
 No general exclusion of finite ontologies, count of occupied trajectories, or
