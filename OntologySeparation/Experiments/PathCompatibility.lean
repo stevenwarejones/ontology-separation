@@ -239,6 +239,20 @@ theorem reference_compatible_iff (q d : ℝ) (hd : 0 ≤ d) :
     exact reference_necessary m q d hd hq hD hf he
   · exact reference_region_sufficient q d
 
+/-- Feasibility over any finite ontology, with an explicit two-state attainer
+for every feasible point. No cardinality bound is assumed in the forward direction. -/
+theorem reference_finite_compatible_iff (q d : ℝ) (hd : 0 ≤ d) :
+    (∃ (Λ : Type) (inst : Fintype Λ), letI := inst;
+      ∃ m : Model Λ, m.ResponseCap q ∧ m.Disturbance d ∧
+        m.pF = 49/625 ∧ ObservationallyEquivalent m.observed quantumJoint) ↔
+    ReferenceRegion q d := by
+  constructor
+  · rintro ⟨Λ, inst, m, hq, hD, hf, he⟩
+    letI := inst
+    exact reference_necessary m q d hd hq hD hf he
+  · intro h
+    exact ⟨Bool, inferInstance, reference_region_sufficient q d h⟩
+
 /-- At fixed q=16/25, the full table forces a substantially larger d than
 inverting the negative-success inequality alone. -/
 theorem reference_disturbance_lower {Λ : Type} [Fintype Λ] (m : Model Λ) (d : ℝ)
@@ -258,8 +272,9 @@ theorem reference_disturbance_attained :
   exact boundary_disturbance _ _ _ _ (by norm_num) (by norm_num)
     (by norm_num [referenceFlow])
 
-/-- Identical observable distributions preclude uniform testing, even with a
-randomized decision rule. For valid tests these two means are the error risks. -/
+/-- Algebraic helper: complementary test scores sum to one in one distribution.
+Using this as a no-testing result additionally requires two hypothesis classes
+to share this observable distribution; that physical premise is not proved here. -/
 theorem indistinguishable_error_sum {Ω : Type} [Fintype Ω]
     (p : FiniteDistribution Ω) (reject : Ω → ℝ) :
     p.mean reject+p.mean (fun o => 1-reject o) = 1 := by
@@ -267,7 +282,8 @@ theorem indistinguishable_error_sum {Ω : Type} [Fintype Ω]
   rw [p.total]
   ring
 
-/-- Multiplying output amplitudes and reference amplitudes by the same unit
+/-- Algebraic helper, not a physical identification theorem. Multiplying
+output amplitudes and reference amplitudes by the same unit
 phase preserves the local complex pointer bilinear. -/
 theorem reference_phase_invariant (u p k : ℂ) (hu : star u*u=1) :
     star (u*p)*(u*k) = star p*k := by

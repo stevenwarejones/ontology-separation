@@ -15,3 +15,5 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.PathContextuality.reference_disturbance_attained
 #export_theorem OntologySeparation.PathContextuality.reference_phase_invariant
 #export_theorem OntologySeparation.PathContextuality.indistinguishable_error_sum
+
+#export_theorem OntologySeparation.PathContextuality.reference_finite_compatible_iff
