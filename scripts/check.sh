@@ -59,6 +59,7 @@ check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples
 check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/SignalingStudy.lean -o examples/signaling-tradeoff.html
 check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFPaperStudy.lean -o examples/lf-paper.html
 
+check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/SpacetimeInfluenceStudy.lean -o examples/spacetime-influence.html
 check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/LFReadoutStudy.lean -o examples/lf-readout.html
 check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PathInterferenceStudy.lean -o examples/path-interference.html
 check env PYTHONPATH=python python3 -m ontology_separation.proof_report examples/PhaseInterventionStudy.lean -o examples/phase-intervention.html
