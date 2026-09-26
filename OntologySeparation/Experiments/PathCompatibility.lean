@@ -272,24 +272,5 @@ theorem reference_disturbance_attained :
   exact boundary_disturbance _ _ _ _ (by norm_num) (by norm_num)
     (by norm_num [referenceFlow])
 
-/-- Algebraic helper: complementary test scores sum to one in one distribution.
-Using this as a no-testing result additionally requires two hypothesis classes
-to share this observable distribution; that physical premise is not proved here. -/
-theorem indistinguishable_error_sum {Ω : Type} [Fintype Ω]
-    (p : FiniteDistribution Ω) (reject : Ω → ℝ) :
-    p.mean reject+p.mean (fun o => 1-reject o) = 1 := by
-  simp only [FiniteDistribution.mean, mul_sub, mul_one, Finset.sum_sub_distrib]
-  rw [p.total]
-  ring
-
-/-- Algebraic helper, not a physical identification theorem. Multiplying
-output amplitudes and reference amplitudes by the same unit
-phase preserves the local complex pointer bilinear. -/
-theorem reference_phase_invariant (u p k : ℂ) (hu : star u*u=1) :
-    star (u*p)*(u*k) = star p*k := by
-  calc
-    star (u*p)*(u*k) = (star u*u)*(star p*k) := by rw [star_mul]; ring
-    _ = star p*k := by rw [hu, one_mul]
-
 end
 end OntologySeparation.PathContextuality

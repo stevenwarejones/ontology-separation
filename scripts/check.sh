@@ -23,6 +23,7 @@ check() {
 if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
   printf '### Verification timings\n\n| Command | Elapsed | Exit |\n| --- | ---: | ---: |\n' >> "$GITHUB_STEP_SUMMARY"
 fi
+check python3 scripts/check_vcausal_geometry.py
 check lake build
 check lake build Tests
 check lake env lean examples/CustomUniverse.lean

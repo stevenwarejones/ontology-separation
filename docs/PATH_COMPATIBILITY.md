@@ -20,15 +20,10 @@ At the reference table, the sharp boundary for 337/625 ≤ q ≤ 1 is
 d_min(q) = max(1/50, (1369/15625−q·49/625)/(576/625), 1−q−144/1225).
 
 The necessary inequalities and the full attaining family are encoded in
-`PathCompatibility.lean`, culminating in `reference_finite_compatible_iff`. Formal CI
-is still pending; do not interpret the draft as a verified formal certificate.
+`PathCompatibility.lean`, culminating in `reference_finite_compatible_iff`.
+The full CI gate checks Lean proofs, the axiom audit and generated reports on
+each head. See PR #87 for the current verification status.
 The empirical companion independently verifies the models using exact fractions.
-
-The algebraic helper `reference_phase_invariant` expresses the phase ambiguity of the local pointer
-bilinear. `indistinguishable_error_sum` is the complementary-expectations identity. A
-no-testing application separately requires a distribution shared by both hypothesis
-classes; neither helper proves that physical premise.
-These identities have separate physical premises in the empirical reconstruction.
 
 Every public definition/theorem is registered in `Tests/Audit.lean`.
 `examples/PathCompatibilityStudy.lean` exports the theorem report; run the full
@@ -44,8 +39,10 @@ At q=16/25, the positive-success cell is a second witness, with disturbance
 threshold 297/1225 rather than 13/320 from the negative-success inequality.
 At d=1/50, however, its gap is 109/6250 (0.01744), below the negative gap
 297/15625 (0.019008); its observed cell is rare (144/15625). This establishes
-improved tolerance to disturbance, not improved statistical power. The empirical
-companion tests both witnesses with simultaneous confidence coverage.
+improved tolerance to disturbance; at this ideal point the joint Hoeffding
+budget is slightly larger. In the empirical companion's declared lossy models,
+the joint budget is smaller and the positive witness can survive alone. Those
+are conditional noise-model calculations, not measured apparatus performance.
 
 The positive floor is an elementary consequence of the same cap and disturbance
 premises. We make no novelty claim. KLP (2019), published Theorem 3 and Appendix B,

@@ -1,3 +1,6 @@
+import Tests.PhaseIntervention
+import Tests.ForcedSignalingMinimalCore
+import Tests.VCausalMeasure
 import Tests.Core
 import Tests.Catalog
 import Tests.Audit
@@ -76,8 +79,12 @@ import Tests.NoisyLC4ForcedSignaling
 import Tests.ImperfectTwoRecordAccess
 
 import Tests.ForcedSignalingPropositions
+
+import Tests.VCausal
+
+import Tests.Collectibility
+
 import Tests.PathInterference
-import Tests.PhaseIntervention
 
 import Tests.PathContextuality
 import Tests.PathCompatibility
