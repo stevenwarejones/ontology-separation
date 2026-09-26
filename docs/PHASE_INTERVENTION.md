@@ -101,6 +101,10 @@ loss. This is a response-level locality premise, stronger than spatial locality:
 a phase-sensitive field in an otherwise empty arm can propagate locally to the
 recombiner and change a Q particle's eventual response.
 
+The same bound follows by integration for any preparation probability measure with
+measurable region and response functions; the Lean development certifies finite
+ontic spaces.
+
 The occupation premise identifies μ(P)=w with the probability reported by a
 which-region measurement on the same preparation. Then
 
@@ -143,7 +147,7 @@ contexts, Q-response invariance and setting independence **jointly**. It does no
 identify which premise failed. The occupation equality is a noncontextuality-type
 identification, not something proved by measuring a frequency. Context-dependent
 occupation theories, Bohmian-style theories and empty-arm field models can survive.
-The companion [empirical protocol](https://github.com/stevenwarejones/path-reality-tests/tree/study/audit-completion/studies/phase-intervention-design)
+The companion [empirical protocol](https://github.com/stevenwarejones/path-reality-tests/tree/main/studies/phase-intervention-design)
 uses this bound as its occupation-calibrated target, with complete heralded
 outcomes and simultaneous binomial intervals.
 
@@ -198,7 +202,7 @@ test is established. The empirical work lives in
 
 The development is in
 [PhaseIntervention](../OntologySeparation/Experiments/PhaseIntervention.lean),
-[PhaseInterventionModels](../OntologySeparation/Experiments/PhaseInterventionModels.lean)
+[PhaseInterventionModels](../OntologySeparation/Experiments/PhaseInterventionModels.lean),
 [PhaseInterventionExamples](../OntologySeparation/Experiments/PhaseInterventionExamples.lean),
 [PhaseInterventionGeometry](../OntologySeparation/Experiments/PhaseInterventionGeometry.lean)
 and [LocalPhase](../OntologySeparation/Experiments/LocalPhase.lean).
