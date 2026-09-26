@@ -842,7 +842,6 @@
 'OntologySeparation.SpacetimeInfluence.receiver_access_equivalent' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'OntologySeparation.SpacetimeInfluence.fairPair' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.SpacetimeInfluence.postselection_counterexample' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -868,3 +867,30 @@
  Quot.sound]
 'OntologySeparation.SpacetimeInfluence.spacelike_of_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.SpacetimeInfluence.earlier_record' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.PreparationDependentModel.atSetting' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.PreparationDependentModel.observed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.ReceiverDependentModel.atSetting' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.ReceiverDependentModel.observed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.SelectedModel.weight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.SelectedModel.acceptance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.SelectedModel.observed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.dependentReceiver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.dependentReceiver_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.selectedSharedBit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.selectedSharedBit_acceptance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.postselected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.countermodel_fields' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -654,7 +654,6 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.SpacetimeInfluence.uncorrelatedBit
 #print axioms OntologySeparation.SpacetimeInfluence.receiverPredictions
 #print axioms OntologySeparation.SpacetimeInfluence.receiver_access_equivalent
-#print axioms OntologySeparation.SpacetimeInfluence.fairPair
 #print axioms OntologySeparation.SpacetimeInfluence.postselection_counterexample
 #print axioms OntologySeparation.SpacetimeInfluence.dependentPreparation
 #print axioms OntologySeparation.SpacetimeInfluence.dependentPreparation_gap
@@ -672,3 +671,16 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.SpacetimeInfluence.strict_interval_exclusion
 #print axioms OntologySeparation.SpacetimeInfluence.spacelike_of_budget
 #print axioms OntologySeparation.SpacetimeInfluence.earlier_record
+#print axioms OntologySeparation.SpacetimeInfluence.PreparationDependentModel.atSetting
+#print axioms OntologySeparation.SpacetimeInfluence.PreparationDependentModel.observed
+#print axioms OntologySeparation.SpacetimeInfluence.ReceiverDependentModel.atSetting
+#print axioms OntologySeparation.SpacetimeInfluence.ReceiverDependentModel.observed
+#print axioms OntologySeparation.SpacetimeInfluence.SelectedModel.weight
+#print axioms OntologySeparation.SpacetimeInfluence.SelectedModel.acceptance
+#print axioms OntologySeparation.SpacetimeInfluence.SelectedModel.observed
+#print axioms OntologySeparation.SpacetimeInfluence.dependentReceiver
+#print axioms OntologySeparation.SpacetimeInfluence.dependentReceiver_gap
+#print axioms OntologySeparation.SpacetimeInfluence.selectedSharedBit
+#print axioms OntologySeparation.SpacetimeInfluence.selectedSharedBit_acceptance
+#print axioms OntologySeparation.SpacetimeInfluence.postselected
+#print axioms OntologySeparation.SpacetimeInfluence.countermodel_fields

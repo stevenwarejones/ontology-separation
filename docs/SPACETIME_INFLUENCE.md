@@ -9,11 +9,10 @@ physics or an experimental exclusion of hidden trajectories.
 
 Read the [generated theorem report](../examples/spacetime-influence.html) or
 run the [editable source](../examples/SpacetimeInfluenceStudy.lean). The detailed
-[prospective optical study](https://github.com/stevenwarejones/path-reality-tests/tree/study/spacetime-influence/studies/spacetime-causal-influence)
+[prospective optical study](https://github.com/stevenwarejones/path-reality-tests/tree/d52f46faac61913cc4595fd471f0046d703f1193/studies/spacetime-causal-influence)
 contains the protocol comparison, literature record, statistical derivation,
-synthetic power calculations and unresolved apparatus requirements. This link
-tracks a review branch until the companion is merged; neither repository needs
-the other's branch to build.
+synthetic power calculations and unresolved apparatus requirements. This immutable
+commit link survives branch deletion; neither repository needs the other to build.
 
 ## Definitions and mathematical result
 
@@ -49,7 +48,8 @@ nonperturbative detector/QFT treatment; [Martín-Martínez,
 arXiv:1509.07864v2](https://arxiv.org/abs/1509.07864v2) analyzes localization,
 cutoff and rotating-wave hazards. These results do not calibrate an actual lab.
 
-`binary_influence` identifies binary TV with the absolute selected-outcome gap.
+`influence` has exactly two settings; an extension to more settings would need
+a specified pair or maximum over setting pairs. `binary_influence` identifies binary TV with the absolute selected-outcome gap.
 The normalized `alternative g` has probabilities (1±g)/2 and influence exactly
 g for 0≤g≤1. `alternative_excluded` excludes every finite `Model` at g>0,
 including the explicit `sharedBit` witness. It is an operational alternative
@@ -62,12 +62,23 @@ table, not a relativistic field theory. Boundary g=0 and g=1 are checked.
 that model from the specified model with an independent sender bit. This toy
 equivalence does not extend to all hidden-path interpretations.
 
-`postselection_counterexample` checks independent fair bits r,y selected by r=y:
-the selected r is determined by y although the unconditional bits are fair.
-`dependentPreparation_gap` instead supplies setting-dependent preparation with
-a fixed readout and gap one. The g-family supplies setting-dependent response
-with fixed trivial preparation. Together these show why preparation/assignment,
-receiver locality and complete sampling are separate premises. The empirical
+Three separate structures relax one premise at a time. Their field types retain
+normalization, and `countermodel_fields` checks the unchanged concrete fields:
+
+| Model | Relaxed premise | Fields retained | Checked gap |
+|---|---|---|---|
+| `dependentPreparation : PreparationDependentModel` | Preparation may depend on x | Original normalized sender and fixed receiver; complete summation | `dependentPreparation_gap = 1` |
+| `dependentReceiver : ReceiverDependentModel` | Receiver may read x | Original fair preparation and normalized sender; complete summation | `dependentReceiver_gap = 1` |
+| `selectedSharedBit : SelectedModel` | Sender-dependent discarding permitted | Entire underlying `sharedBit` causal model unchanged | `postselection_counterexample`: unconditional influence 0, selected influence 1 |
+
+The selection event is explicitly `a=x`. `SelectedModel.weight` sums the
+accepted joint probabilities, and `acceptance` is their total. A strictly
+positive acceptance premise gives a normalized conditional `observed` behavior.
+`selectedSharedBit_acceptance` proves acceptance 1/2 for **each** setting; the
+postselection theorem proves fair unconditional receiver marginals and computes
+the selected TV using `influence`. No selected probability is supplied by hand.
+The g-family remains a normalized operational table, not a premise-isolating
+model or a dynamical theory. The empirical
 guide adds explicit wire, timestamp, predictable-setting and overwritten-record
 countermodels. Observational conditioning is identified with do-interventions
 only under the randomized-assignment and consistency premises.
@@ -97,7 +108,9 @@ a probability allowance. A detector/coupling calibration is still needed.
 transport simultaneous probability intervals into rejection and an absolute
 upper limit. `rejection_risk` proves the finite union bound for confidence and
 calibration failures. `fair_score_mean` and `biased_score_mean` check the
-randomized-score expectation arithmetic. All new roots are in
+randomized-score expectation arithmetic. These and `calibrated_gap` are small
+algebraic helper lemmas, not independent scientific results; exported-claim counts
+are a coverage inventory, not a measure of novelty. All new roots are in
 [Tests/Audit.lean](../Tests/Audit.lean).
 
 The empirical study derives a fixed-horizon conditional Hoeffding score interval
@@ -122,7 +135,9 @@ are new or that the optical protocol improves any published measured bound.
 Sources are [SpacetimeInfluence](../OntologySeparation/Experiments/SpacetimeInfluence.lean)
 and [SpacetimeInfluenceBounds](../OntologySeparation/Experiments/SpacetimeInfluenceBounds.lean);
 [tests](../Tests/SpacetimeInfluence.lean) include nonzero, zero, maximal-gap,
-strict-boundary and geometry examples. Run `sh scripts/check.sh` to rebuild
+strict-boundary and geometry examples. Boundary regressions apply the actual
+`strict_interval_exclusion` and `spacelike_of_budget` results; the explicit
+lightlike endpoint also disproves a non-strict replacement of the geometry condition. Run `sh scripts/check.sh` to rebuild
 the complete library, tests, axiom snapshot and HTML from source. Only the usual
 `propext`, `Classical.choice` and `Quot.sound` axioms are accepted.
 
