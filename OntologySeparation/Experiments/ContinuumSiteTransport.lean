@@ -39,8 +39,8 @@ def sitePropagatorCLM (r : Circle) (t : ℝ) :
 
 theorem fourierAnalysis_mode (j k : ZMod N) :
     fourierAnalysis (modeVector j) k = if k = j then 1 else 0 := by
-  rw [← fourierBasis_apply j]
-  simp [fourierAnalysis, OrthonormalBasis.repr_self, PiLp.single_apply, eq_comm]
+  have h := congrArg (fun x : EuclideanSpace ℂ (ZMod N) => x k) (fourierBasis.repr_self j)
+  simpa [fourierAnalysis,PiLp.single_apply,eq_comm] using h
 
 theorem sitePropagator_mode (r : Circle) (t : ℝ) (j : ZMod N) :
     sitePropagator r t (modeVector j) = phase (-t*siteFrequency r j) • modeVector j := by
@@ -75,8 +75,10 @@ theorem sitePairEmbedding_no_alias (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (J : �
 theorem sitePairEmbedding_band (j₀ j₁ : ℤ) (h : j₀ ≠ j₁)
     (ha : (j₀ : ZMod N) ≠ (j₁ : ZMod N)) (u : TwoMode) :
     bandSynthesis (N := N) {j₀,j₁} (twoModeEmbedding j₀ j₁ h u) = sitePairEmbedding j₀ j₁ ha u := by
-  rw [bandSynthesis,Finset.sum_coe_sort]
-  simp [sitePairEmbedding,pairIsometry,Fin.sum_univ_two,h,h.symm]
+  calc
+    _ = ∑ j ∈ ({j₀,j₁} : Finset ℤ), twoModeEmbedding j₀ j₁ h u j • modeVector (j : ZMod N) :=
+      Finset.sum_coe_sort _ _
+    _ = _ := by simp [sitePairEmbedding,pairIsometry,Fin.sum_univ_two,h,h.symm]
 
 theorem sitePairEmbedding_intertwines (r : Circle) (t : ℝ) (j₀ j₁ : ℤ)
     (h : j₀ ≠ j₁) (ha : (j₀ : ZMod N) ≠ (j₁ : ZMod N)) (u : TwoMode) :
