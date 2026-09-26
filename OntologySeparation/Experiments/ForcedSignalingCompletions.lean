@@ -406,7 +406,12 @@ theorem targetMarginalScoreQ2Effective_eq_score :
     ∀ w1 w2 x5 : Bool,
       targetMarginalScoreQ2Effective w1 w2 x5 =
         ForcedSignalingLC4.score := by
-  decide +kernel
+  intro w1 w2 x5
+  unfold targetMarginalScoreQ2Effective
+  simp_rw [← ForcedSignalingLC4Witness.seed_abd_matches,
+    ← ForcedSignalingLC4Witness.seed_acd_matches]
+  rw [ForcedSignalingLC4.score_exact]
+  cases w1 <;> cases w2 <;> cases x5 <;> with_unfolding_all decide +kernel
 
 /-- The LC4 target has the same S4 value for every operational completion. -/
 theorem targetMarginalScoreQ2_eq_score (c : Completion) :
