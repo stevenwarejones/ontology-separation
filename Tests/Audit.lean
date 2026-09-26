@@ -873,3 +873,25 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PhaseIntervention.settingPreparation
 #print axioms OntologySeparation.PhaseIntervention.drop_setting_independence
 #print axioms OntologySeparation.PhaseIntervention.excludes_local
+
+-- Continuum spectral evolution and explicitly scoped readout lemmas.
+#print axioms OntologySeparation.ContinuumFinite.evolve
+#print axioms OntologySeparation.ContinuumFinite.evolve_mass
+#print axioms OntologySeparation.ContinuumFinite.evolve_zero
+#print axioms OntologySeparation.ContinuumFinite.evolve_add
+#print axioms OntologySeparation.ContinuumFinite.evolve_inverse
+#print axioms OntologySeparation.ContinuumFinite.evolve_distance
+#print axioms OntologySeparation.ContinuumFinite.evolve_supported
+#print axioms OntologySeparation.ContinuumFinite.finite_spectral_exact
+#print axioms OntologySeparation.ContinuumFinite.complete_detector_exact
+#print axioms OntologySeparation.ContinuumFinite.spectralFinite_exact
+#print axioms OntologySeparation.ContinuumFinite.readout_normalized
+#print axioms OntologySeparation.ContinuumFinite.readout_nonneg
+#print axioms OntologySeparation.ContinuumFinite.zero_visibility
+#print axioms OntologySeparation.ContinuumFinite.full_loss
+#print axioms OntologySeparation.ContinuumFinite.reference_absorbs
+#print axioms OntologySeparation.ContinuumFinite.cosine_gap
+#print axioms OntologySeparation.ContinuumFinite.strict_cosine_separation
+#print axioms OntologySeparation.ContinuumFinite.plus_phase_lipschitz
+#print axioms OntologySeparation.ContinuumFinite.robust_coordinate_separation
+#print axioms OntologySeparation.ContinuumFinite.test_error_of_event_bound
