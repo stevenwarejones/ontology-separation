@@ -13,9 +13,16 @@ jobs:
       LEAN_NUM_THREADS: "1"
     steps:
       - uses: actions/checkout@v4
+      - name: Restore pinned Lean build cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: .lake
+          key: verified-lake-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
+          restore-keys: verified-lake-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-
       - uses: leanprover/lean-action@v1
         with:
           test: false
+          use-github-cache: false
           # Get errors in the finite instrument before the expensive full graph.
           # scripts/check.sh below still builds and verifies the complete project.
           build-args: "OntologySeparation.Experiments.PathContextualityCountermodels Tests.PathContextuality"
@@ -26,6 +33,11 @@ jobs:
       - run: python research/lf_hidden_local_agency.py --check
       - run: sh scripts/check.sh
         id: full-check
+      - name: Save complete verified Lean build cache
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: .lake
+          key: verified-lake-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
       - run: git diff --exit-code -- python/ontology_separation/data/report.json docs/MATRIX.md docs/matrix.html examples docs/AXIOM_AUDIT.txt
       - name: Attach regenerated proof reports and axiom audit
         if: always() && steps.full-check.outcome == 'success'
