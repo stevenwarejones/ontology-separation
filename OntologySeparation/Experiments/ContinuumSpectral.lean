@@ -119,5 +119,48 @@ theorem spectralFinite_exact (s : Finset ℤ) (c : SpectralVector)
   intro j hj
   simp [spectralFinite, hj]
 
+/-- Zero extension of genuinely finite mode coefficients. -/
+def finiteEmbedding (s : Finset ℤ) (c : s → ℂ) : SpectralVector where
+  coefficient j := if h : j ∈ s then c ⟨j,h⟩ else 0
+  summable := summable_of_ne_finset_zero (s := s) (by
+    intro j hj
+    simp [hj])
+
+theorem finiteEmbedding_supported (s : Finset ℤ) (c : s → ℂ) :
+    Supported s (finiteEmbedding s c) := by
+  intro j hj
+  simp [finiteEmbedding, hj]
+
+theorem finiteEmbedding_mass (s : Finset ℤ) (c : s → ℂ) :
+    mass (finiteEmbedding s c) = ∑ j : s, ‖c j‖ ^ 2 := by
+  unfold mass
+  rw [tsum_eq_sum (s := s) (fun j hj => by simp [finiteEmbedding, hj])]
+  rw [← Finset.sum_coe_sort]
+  apply Finset.sum_congr rfl
+  intro j _
+  simp [finiteEmbedding, j.property]
+
+/-- The finite-dimensional diagonal propagator. -/
+def finiteEvolve (s : Finset ℤ) (w : ℤ → ℝ) (t : ℝ) (c : s → ℂ) (j : s) : ℂ :=
+  phase (-t*w j) * c j
+
+theorem finiteEmbedding_intertwines (s : Finset ℤ) (w : ℤ → ℝ) (t : ℝ) (c : s → ℂ) :
+    finiteEmbedding s (finiteEvolve s w t c) = evolve w t (finiteEmbedding s c) := by
+  ext j
+  by_cases hj : j ∈ s
+  · simp [finiteEmbedding, finiteEvolve, evolve, hj]
+  · simp [finiteEmbedding, evolve, hj]
+
+theorem finite_complete_probability {O : Type} [Fintype O] (d : Detector O)
+    (s : Finset ℤ) (w : ℤ → ℝ) (t : ℝ) (c : s → ℂ) (o : O) :
+    d.probability (finiteEmbedding s (finiteEvolve s w t c)) o =
+    d.probability (evolve w t (finiteEmbedding s c)) o := by
+  rw [finiteEmbedding_intertwines]
+
+theorem finite_evolved_normalized (s : Finset ℤ) (w : ℤ → ℝ) (t : ℝ) (c : s → ℂ)
+    (hc : (∑ j : s, ‖c j‖ ^ 2) = 1) :
+    mass (finiteEmbedding s (finiteEvolve s w t c)) = 1 := by
+  rw [finiteEmbedding_intertwines, evolve_mass, finiteEmbedding_mass, hc]
+
 end
 end OntologySeparation.ContinuumFinite

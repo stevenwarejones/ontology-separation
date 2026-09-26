@@ -959,3 +959,14 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathContextuality.reference_compatible_iff
 
 #print axioms OntologySeparation.PathContextuality.reference_finite_compatible_iff
+
+#print axioms OntologySeparation.ContinuumFinite.finiteEmbedding
+#print axioms OntologySeparation.ContinuumFinite.finiteEmbedding_supported
+#print axioms OntologySeparation.ContinuumFinite.finiteEmbedding_mass
+#print axioms OntologySeparation.ContinuumFinite.finiteEmbedding_intertwines
+#print axioms OntologySeparation.ContinuumFinite.finite_complete_probability
+#print axioms OntologySeparation.ContinuumFinite.finite_evolved_normalized
+#print axioms OntologySeparation.ContinuumFinite.cosine_remainder_local
+#print axioms OntologySeparation.ContinuumFinite.frequency_error_local
+#print axioms OntologySeparation.ContinuumFinite.phase_difference
+#print axioms OntologySeparation.ContinuumFinite.finite_phase_error_sq

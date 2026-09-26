@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.ContinuumSeparation
+import OntologySeparation.Experiments.ContinuumApproximation
 import OntologySeparation.Reporting.Claim
 
 #export_theorem OntologySeparation.ContinuumFinite.evolve_mass
@@ -20,3 +20,13 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.plus_phase_lipschitz
 #export_theorem OntologySeparation.ContinuumFinite.robust_coordinate_separation
 #export_theorem OntologySeparation.ContinuumFinite.test_error_of_event_bound
+
+#export_theorem OntologySeparation.ContinuumFinite.finiteEmbedding_supported
+#export_theorem OntologySeparation.ContinuumFinite.finiteEmbedding_mass
+#export_theorem OntologySeparation.ContinuumFinite.finiteEmbedding_intertwines
+#export_theorem OntologySeparation.ContinuumFinite.finite_complete_probability
+#export_theorem OntologySeparation.ContinuumFinite.finite_evolved_normalized
+#export_theorem OntologySeparation.ContinuumFinite.cosine_remainder_local
+#export_theorem OntologySeparation.ContinuumFinite.frequency_error_local
+#export_theorem OntologySeparation.ContinuumFinite.phase_difference
+#export_theorem OntologySeparation.ContinuumFinite.finite_phase_error_sq

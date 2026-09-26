@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.ContinuumSeparation
+import OntologySeparation.Experiments.ContinuumApproximation
 open OntologySeparation.ContinuumFinite
 
 example (w : ℤ → ℝ) (t : ℝ) (c : SpectralVector) (h : mass c = 1) :

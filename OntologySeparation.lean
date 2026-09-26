@@ -94,4 +94,4 @@ import OntologySeparation.Experiments.ForcedSignalingAccessibleOptimum
 
 import OntologySeparation.Experiments.PathInterference
 
-import OntologySeparation.Experiments.ContinuumSeparation
+import OntologySeparation.Experiments.ContinuumApproximation

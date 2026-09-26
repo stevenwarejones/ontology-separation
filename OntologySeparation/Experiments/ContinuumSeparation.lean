@@ -23,7 +23,9 @@ theorem readout_nonneg (eta visibility theta : ℝ) (he : 0 ≤ eta) (he1 : eta 
     0 ≤ plus eta visibility theta ∧ 0 ≤ minus eta visibility theta ∧ 0 ≤ failure eta := by
   have hc := Real.neg_one_le_cos theta
   have hc1 := Real.cos_le_one theta
+  have hlo := mul_le_mul_of_nonneg_left hc hv
   have lo : -1 ≤ visibility*Real.cos theta := by nlinarith
+  have hhi := mul_le_mul_of_nonneg_left hc1 hv
   have hi : visibility*Real.cos theta ≤ 1 := by nlinarith
   exact ⟨div_nonneg (mul_nonneg he (by linarith)) (by norm_num),
     div_nonneg (mul_nonneg he (by linarith)) (by norm_num), by dsimp [failure]; linarith⟩
@@ -65,10 +67,10 @@ theorem plus_phase_lipschitz (eta visibility x y : ℝ) (he : 0 ≤ eta) (hv : 0
 theorem robust_coordinate_separation (p q p0 q0 rp rq : ℝ)
     (hp : |p-p0| ≤ rp) (hq : |q-q0| ≤ rq) (hgap : rp+rq < |p0-q0|) : p ≠ q := by
   intro h
+  subst q
   have htri : |p0-q0| ≤ |p0-p|+|p-q0| := by
     simpa only [sub_add_sub_cancel] using abs_add_le (p0-p) (p-q0)
   have hp' : |p0-p| ≤ rp := by simpa only [abs_sub_comm] using hp
-  rw [h] at htri
   linarith
 
 /-- Conditional test-error algebra. A TV/product theorem is a separate obligation. -/
