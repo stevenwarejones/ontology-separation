@@ -1021,3 +1021,14 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.lattice_tail_error
 #print axioms OntologySeparation.ContinuumFinite.lattice_strong_convergence
 #print axioms OntologySeparation.ContinuumFinite.finite_resource_nonseparation
+
+#print axioms OntologySeparation.ContinuumFinite.interferometer_plus
+#print axioms OntologySeparation.ContinuumFinite.interferometer_minus
+#print axioms OntologySeparation.ContinuumFinite.interferometer_failure
+#print axioms OntologySeparation.ContinuumFinite.interferometer
+#print axioms OntologySeparation.ContinuumFinite.twoModeState_normalized
+#print axioms OntologySeparation.ContinuumFinite.interferometer_probability
+#print axioms OntologySeparation.ContinuumFinite.noisyReadout
+#print axioms OntologySeparation.ContinuumFinite.noisyReadout_table
+#print axioms OntologySeparation.ContinuumFinite.witnessGap_pos
+#print axioms OntologySeparation.ContinuumFinite.explicit_separating_born_experiment

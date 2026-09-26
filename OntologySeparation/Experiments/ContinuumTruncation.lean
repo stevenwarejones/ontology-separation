@@ -22,7 +22,7 @@ def normalizedProjection (s : Finset ℤ) (u : SpectralHilbert) : SpectralHilber
 @[simp] theorem projection_apply (s : Finset ℤ) (u : SpectralHilbert) (j : ℤ) :
     projection s u j = if j ∈ s then u j else 0 := by
   classical
-  simp [projection,lp.coeFn_sum,lp.coeFn_single,Finset.sum_apply,Finset.sum_pi_single]
+  simp only [projection,lp.coeFn_sum,lp.coeFn_single,Finset.sum_apply,Finset.sum_pi_single]
 
 theorem projection_norm_sq (s : Finset ℤ) (u : SpectralHilbert) :
     ‖projection s u‖^2 = ∑ j ∈ s, ‖u j‖^2 := by
@@ -33,7 +33,7 @@ theorem tail_sum (s : Finset ℤ) (u : SpectralHilbert) :
   classical
   rw [tail,hilbert_norm_sq]
   simp only [lp.coeFn_sub,Pi.sub_apply,projection_apply]
-  rw [_root_.tsum_subtype]
+  rw [_root_.tsum_subtype {j : ℤ | j ∉ s} (fun j => ‖u j‖^2)]
   apply tsum_congr
   intro j
   by_cases hj : j ∈ s <;> simp [hj,Set.indicator]

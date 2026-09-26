@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.ContinuumWitness
 import OntologySeparation.Experiments.ContinuumLimit
 import OntologySeparation.Experiments.FiniteDispersion
 open OntologySeparation.ContinuumFinite
@@ -14,4 +15,3 @@ example (theta : ℝ) : plus 0 1 theta = plus 0 1 0 := by simp [plus]
 example : plus 1 1 Real.pi < plus 1 1 0 :=
   strict_cosine_separation 1 1 Real.pi (by norm_num) (by norm_num) (by simp)
 
-example : ¬ ((0:ℝ) ≠ 0) := by simp
