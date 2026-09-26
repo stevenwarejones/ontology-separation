@@ -820,3 +820,51 @@
  Classical.choice,
  Quot.sound]
 'OntologySeparation.PhaseIntervention.excludes_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.influence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.Model.joint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.Model.marginal_formula' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.Model.observed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.Model.no_influence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.Model.marginal_independent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.binary_influence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.bernoulli' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.alternative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.alternative_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.alternative_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.sharedBit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.sharedBit_correlated' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.uncorrelatedBit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.receiverPredictions' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.receiver_access_equivalent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.fairPair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.postselection_counterexample' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.dependentPreparation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.dependentPreparation_gap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.local_operation_fixes_effect' depends on axioms: [propext, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.fair_score_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.biased_score_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.coupling_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.calibrated_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.contamination_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.eventMass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.three_event_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.rejection_risk' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.difference_interval' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.absolute_interval_upper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.strict_interval_exclusion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.SpacetimeInfluence.spacelike_of_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.SpacetimeInfluence.earlier_record' depends on axioms: [propext, Classical.choice, Quot.sound]

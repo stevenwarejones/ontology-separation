@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/SpacetimeInfluenceStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>OntologySeparation.SpacetimeInfluence.Model.marginal_formula</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ A B : Type} [inst : Fintype Λ] [inst_1 : Fintype A] [inst_2 : Fintype B]
+  (m : OntologySeparation.SpacetimeInfluence.Model Λ A B) (x : Bool) (b : B),
+  ∑ a, m.joint.prob x (a, b) = ∑ l, m.preparation.mass l * (m.receiver l).mass b</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.Model.no_influence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Λ A B : Type} [inst : Fintype Λ] [inst_1 : Fintype A] [inst_2 : Fintype B]
+  (m : OntologySeparation.SpacetimeInfluence.Model Λ A B),
+  OntologySeparation.SpacetimeInfluence.influence m.observed = 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.binary_influence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p : OntologySeparation.Behavior (OntologySeparation.SpacetimeInfluence.interface Bool)),
+  OntologySeparation.SpacetimeInfluence.influence p = |p.prob Bool.true Bool.true - p.prob Bool.false Bool.true|</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.alternative_gap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (g : ℝ) (h0 : 0 ≤ g) (h1 : g ≤ 1),
+  OntologySeparation.SpacetimeInfluence.influence (OntologySeparation.SpacetimeInfluence.alternative g h0 h1) = g</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.alternative_excluded</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (g : ℝ) (h0 : 0 &lt; g) (h1 : g ≤ 1) {Λ A : Type} [inst : Fintype Λ] [inst_1 : Fintype A]
+  (m : OntologySeparation.SpacetimeInfluence.Model Λ A Bool),
+  ¬OntologySeparation.ObservationallyEquivalent m.observed (OntologySeparation.SpacetimeInfluence.alternative g ⋯ h1)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.sharedBit_correlated</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.SpacetimeInfluence.sharedBit.joint.prob Bool.false (Bool.true, Bool.true) = 1 / 2 ∧
+  OntologySeparation.SpacetimeInfluence.sharedBit.joint.prob Bool.false (Bool.true, Bool.false) = 0 ∧
+    OntologySeparation.SpacetimeInfluence.sharedBit.observed.prob Bool.false Bool.true = 1 / 2 ∧
+      OntologySeparation.SpacetimeInfluence.influence OntologySeparation.SpacetimeInfluence.sharedBit.observed = 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.receiver_access_equivalent</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p : Unit),
+  (fun x =&gt; True) p →
+    OntologySeparation.ObservationallyEquivalent (OntologySeparation.SpacetimeInfluence.receiverPredictions Bool.true p)
+      (OntologySeparation.SpacetimeInfluence.receiverPredictions Bool.false p)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.postselection_counterexample</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∑ r, OntologySeparation.SpacetimeInfluence.fairPair.mass (r, Bool.false) = 1 / 2 ∧
+  ∑ r, OntologySeparation.SpacetimeInfluence.fairPair.mass (r, Bool.true) = 1 / 2 ∧
+    OntologySeparation.SpacetimeInfluence.fairPair.mass (Bool.true, Bool.false) /
+          ∑ r, OntologySeparation.SpacetimeInfluence.fairPair.mass (r, Bool.false) =
+        1 / 2 ∧
+      OntologySeparation.SpacetimeInfluence.fairPair.mass (Bool.true, Bool.true) /
+            ∑ r, OntologySeparation.SpacetimeInfluence.fairPair.mass (r, Bool.true) =
+          1 / 2 ∧
+        (OntologySeparation.SpacetimeInfluence.fairPair.mass (Bool.true, Bool.true) /
+              ∑ r, if r = Bool.true then OntologySeparation.SpacetimeInfluence.fairPair.mass (r, Bool.true) else 0) =
+            1 ∧
+          (0 / ∑ r, if r = Bool.false then OntologySeparation.SpacetimeInfluence.fairPair.mass (r, Bool.false) else 0) =
+            0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.dependentPreparation_gap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.SpacetimeInfluence.influence OntologySeparation.SpacetimeInfluence.dependentPreparation = 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.local_operation_fixes_effect</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {R I : Type} [inst : Ring R] [inst_1 : StarRing R] [inst_2 : Fintype I] (K : I → R) (E : R),
+  ∑ i, Star.star (K i) * K i = 1 → (∀ (i : I), E * K i = K i * E) → ∑ i, Star.star (K i) * E * K i = E</pre></td><td>propext, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.fair_score_mean</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p0 p1 : ℝ), 1 / 2 * (1 - 2 * p0) + 1 / 2 * (2 * p1 - 1) = p1 - p0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.biased_score_mean</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p0 p1 pi : ℝ), (1 - pi) * (1 - 2 * p0) + pi * (2 * p1 - 1) = p1 - p0 + (2 * pi - 1) * (p1 + p0 - 1)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.coupling_gap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (d : OntologySeparation.FiniteDistribution (Bool × Bool)),
+  |d.mass (Bool.true, Bool.true) + d.mass (Bool.true, Bool.false) -
+        (d.mass (Bool.true, Bool.true) + d.mass (Bool.false, Bool.true))| ≤
+    d.mass (Bool.true, Bool.false) + d.mass (Bool.false, Bool.true)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.calibrated_gap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p0 p1 q e0 e1 : ℝ), |p0 - q| ≤ e0 → |p1 - q| ≤ e1 → |p1 - p0| ≤ e0 + e1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.contamination_gap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (q r0 r1 e0 e1 : ℝ),
+  0 ≤ q →
+    q ≤ 1 →
+      0 ≤ r0 →
+        r0 ≤ 1 → 0 ≤ r1 → r1 ≤ 1 → 0 ≤ e0 → 0 ≤ e1 → |(1 - e1) * q + e1 * r1 - ((1 - e0) * q + e0 * r0)| ≤ Max.max e0 e1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.rejection_risk</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {Ω : Type} [inst : Fintype Ω] (d : OntologySeparation.FiniteDistribution Ω) (reject fail0 fail1 failCal : Ω → Bool)
+  (a0 a1 ac : ℝ),
+  (∀ (w : Ω), reject w = Bool.true → fail0 w = Bool.true ∨ fail1 w = Bool.true ∨ failCal w = Bool.true) →
+    OntologySeparation.SpacetimeInfluence.eventMass d fail0 ≤ a0 →
+      OntologySeparation.SpacetimeInfluence.eventMass d fail1 ≤ a1 →
+        OntologySeparation.SpacetimeInfluence.eventMass d failCal ≤ ac →
+          OntologySeparation.SpacetimeInfluence.eventMass d reject ≤ a0 + a1 + ac</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.difference_interval</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p0 p1 l0 u0 l1 u1 : ℝ), l0 ≤ p0 ∧ p0 ≤ u0 → l1 ≤ p1 ∧ p1 ≤ u1 → l1 - u0 ≤ p1 - p0 ∧ p1 - p0 ≤ u1 - l0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.absolute_interval_upper</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (d l u : ℝ), l ≤ d ∧ d ≤ u → |d| ≤ Max.max (-l) u</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.strict_interval_exclusion</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (d l u budget : ℝ), l ≤ d ∧ d ≤ u → |d| ≤ budget → budget &lt; l ∨ u &lt; -budget → False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.spacelike_of_budget</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (c d dmin a0 a1 b0 b1 ta tb : ℝ),
+  0 ≤ c → dmin ≤ d → a0 ≤ ta ∧ ta ≤ a1 → b0 ≤ tb ∧ tb ≤ b1 → c * Max.max (b1 - a0) (a1 - b0) &lt; dmin → c * |tb - ta| &lt; d</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.SpacetimeInfluence.earlier_record</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (recordLatest choiceEarliest recordTime choiceTime : ℝ),
+  recordTime ≤ recordLatest → choiceEarliest ≤ choiceTime → recordLatest &lt; choiceEarliest → recordTime &lt; choiceTime</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
