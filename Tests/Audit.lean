@@ -1011,3 +1011,13 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.projection_tendsto
 #print axioms OntologySeparation.ContinuumFinite.normalizedProjection_tendsto
 #print axioms OntologySeparation.ContinuumFinite.exists_normalized_cutoff
+
+#print axioms OntologySeparation.ContinuumFinite.fromHilbert
+#print axioms OntologySeparation.ContinuumFinite.hilbertEvolve_norm
+#print axioms OntologySeparation.ContinuumFinite.hilbertEvolve_distance
+#print axioms OntologySeparation.ContinuumFinite.cyclicKinetic_spectrum
+#print axioms OntologySeparation.ContinuumFinite.frequency_error_band
+#print axioms OntologySeparation.ContinuumFinite.hilbert_band_error
+#print axioms OntologySeparation.ContinuumFinite.lattice_tail_error
+#print axioms OntologySeparation.ContinuumFinite.lattice_strong_convergence
+#print axioms OntologySeparation.ContinuumFinite.finite_resource_nonseparation

@@ -22,7 +22,7 @@ def normalizedProjection (s : Finset ℤ) (u : SpectralHilbert) : SpectralHilber
 @[simp] theorem projection_apply (s : Finset ℤ) (u : SpectralHilbert) (j : ℤ) :
     projection s u j = if j ∈ s then u j else 0 := by
   classical
-  simp [projection,lp.coeFn_sum,lp.coeFn_single,Finset.sum_pi_single]
+  simp [projection,lp.coeFn_sum,lp.coeFn_single,Finset.sum_apply,Finset.sum_pi_single]
 
 theorem projection_norm_sq (s : Finset ℤ) (u : SpectralHilbert) :
     ‖projection s u‖^2 = ∑ j ∈ s, ‖u j‖^2 := by
@@ -33,7 +33,7 @@ theorem tail_sum (s : Finset ℤ) (u : SpectralHilbert) :
   classical
   rw [tail,hilbert_norm_sq]
   simp only [lp.coeFn_sub,Pi.sub_apply,projection_apply]
-  rw [tsum_subtype]
+  rw [_root_.tsum_subtype]
   apply tsum_congr
   intro j
   by_cases hj : j ∈ s <;> simp [hj,Set.indicator]
@@ -69,7 +69,7 @@ theorem normalizedProjection_error (s : Finset ℤ) (u : SpectralHilbert)
     simpa [hu,norm_sub_rev] using abs_norm_sub_norm_le (projection s u) u
   calc
     ‖u-normalizedProjection s u‖ ≤ ‖u-projection s u‖+‖projection s u-normalizedProjection s u‖ :=
-      norm_sub_le _ _ _
+      by simpa only [dist_eq_norm] using dist_triangle u (projection s u) (normalizedProjection s u)
     _ ≤ 2*‖u-projection s u‖ := by rw [projection_normalization_distance s u h]; linarith
     _ = 2*Real.sqrt (tail s u) := by rw [tail,Real.sqrt_sq (norm_nonneg _)]
 

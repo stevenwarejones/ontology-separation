@@ -1,4 +1,4 @@
-import OntologySeparation.Experiments.ContinuumTruncation
+import OntologySeparation.Experiments.ContinuumLimit
 import OntologySeparation.Experiments.SpacetimeInfluenceBounds
 import OntologySeparation.Experiments.PhaseInterventionExamples
 import OntologySeparation.Experiments.PhaseInterventionGeometry
