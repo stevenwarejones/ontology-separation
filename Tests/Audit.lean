@@ -1,3 +1,4 @@
+import OntologySeparation.Experiments.PhaseInterventionExamples
 import OntologySeparation.Signaling
 import OntologySeparation.Experiments.PathInterference
 import OntologySeparation.Certificates.ForcedSignaling
@@ -560,3 +561,46 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathInterference.descriptions_equivalent
 #print axioms OntologySeparation.PathInterference.restricted_equivalent
 #print axioms OntologySeparation.PathInterference.expanded_not_equivalent
+
+-- Four-phase intervention: physical models, access, robustness and counterexamples
+#print axioms OntologySeparation.PhaseIntervention.Region.phaseMap_isometry
+#print axioms OntologySeparation.PhaseIntervention.behavior
+#print axioms OntologySeparation.PhaseIntervention.dephase
+#print axioms OntologySeparation.PhaseIntervention.phase_expansion
+#print axioms OntologySeparation.PhaseIntervention.probability_formula
+#print axioms OntologySeparation.PhaseIntervention.quadrature_contrasts
+#print axioms OntologySeparation.PhaseIntervention.zero_contrasts_iff
+#print axioms OntologySeparation.PhaseIntervention.opposite_average
+#print axioms OntologySeparation.PhaseIntervention.dephased_invariant
+#print axioms OntologySeparation.PhaseIntervention.dephased_probability
+#print axioms OntologySeparation.PhaseIntervention.dephased_blind
+#print axioms OntologySeparation.PhaseIntervention.coherent_eq_dephased_iff
+#print axioms OntologySeparation.PhaseIntervention.restricted_access_equivalent
+#print axioms OntologySeparation.PhaseIntervention.full_access_equivalent_iff
+#print axioms OntologySeparation.PhaseIntervention.mixture_blind
+#print axioms OntologySeparation.PhaseIntervention.postprocess
+#print axioms OntologySeparation.PhaseIntervention.postprocess_blind
+#print axioms OntologySeparation.PhaseIntervention.nearBlind_pair_bound
+#print axioms OntologySeparation.PhaseIntervention.estimated_pair_bound
+#print axioms OntologySeparation.PhaseIntervention.excludes_nearBlind
+#print axioms OntologySeparation.PhaseIntervention.excludes_blind_mixture
+#print axioms OntologySeparation.PhaseIntervention.erase_probability
+#print axioms OntologySeparation.PhaseIntervention.erased_equivalent
+#print axioms OntologySeparation.PhaseIntervention.contextual_matches
+#print axioms OntologySeparation.PhaseIntervention.lossy
+#print axioms OntologySeparation.PhaseIntervention.lossy_contrast
+#print axioms OntologySeparation.PhaseIntervention.lossy_nearBlind_iff
+#print axioms OntologySeparation.PhaseIntervention.secondMode
+#print axioms OntologySeparation.PhaseIntervention.imaginarySource
+#print axioms OntologySeparation.PhaseIntervention.plusReadout
+#print axioms OntologySeparation.PhaseIntervention.imaginary_coherence
+#print axioms OntologySeparation.PhaseIntervention.two_phases_can_miss_coherence
+#print axioms OntologySeparation.PhaseIntervention.insensitive_readout
+#print axioms OntologySeparation.PhaseIntervention.insensitive_source_not_dephased
+#print axioms OntologySeparation.PhaseIntervention.lossy_excludes_blind
+#print axioms OntologySeparation.PhaseIntervention.zero_efficiency_blind
+#print axioms OntologySeparation.PhaseIntervention.visibilityState
+#print axioms OntologySeparation.PhaseIntervention.inefficientReadout
+#print axioms OntologySeparation.PhaseIntervention.quantum_realizes_lossy
+#print axioms OntologySeparation.PhaseIntervention.selectionCounterexample
+#print axioms OntologySeparation.PhaseIntervention.postselection_changes_contrast

@@ -1,0 +1,18 @@
+import OntologySeparation.Experiments.PhaseInterventionExamples
+import OntologySeparation.Reporting.Claim
+
+/-! Finite quantum model comparison; physical calibration and simultaneous
+confidence bounds are external premises, not certified experimental results. -/
+#export_theorem OntologySeparation.PhaseIntervention.probability_formula
+#export_theorem OntologySeparation.PhaseIntervention.quadrature_contrasts
+#export_theorem OntologySeparation.PhaseIntervention.dephased_invariant
+#export_theorem OntologySeparation.PhaseIntervention.full_access_equivalent_iff
+#export_theorem OntologySeparation.PhaseIntervention.mixture_blind
+#export_theorem OntologySeparation.PhaseIntervention.excludes_blind_mixture
+#export_theorem OntologySeparation.PhaseIntervention.excludes_nearBlind
+#export_theorem OntologySeparation.PhaseIntervention.lossy_nearBlind_iff
+#export_theorem OntologySeparation.PhaseIntervention.quantum_realizes_lossy
+#export_theorem OntologySeparation.PhaseIntervention.two_phases_can_miss_coherence
+#export_theorem OntologySeparation.PhaseIntervention.insensitive_source_not_dephased
+#export_theorem OntologySeparation.PhaseIntervention.postselection_changes_contrast
+#export_theorem OntologySeparation.PhaseIntervention.contextual_matches

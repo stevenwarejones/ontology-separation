@@ -89,3 +89,6 @@ implemented capability; use each guide's stated scope and checked examples.
 
 [Exact path-interference case study](PATH_INTERFERENCE_CASE_STUDY.md): path/transfer
 equivalence, a defined incoherent-class exclusion and phase-sensitive access.
+
+[Four-phase intervention](PHASE_INTERVENTION.md): general finite quantum derivation,
+loss-aware model exclusion, sharp calibration threshold and counterexamples.

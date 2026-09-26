@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/PhaseInterventionStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>OntologySeparation.PhaseIntervention.probability_formula</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H O : Type} [inst : Fintype H] [inst_1 : DecidableEq H] [inst_2 : Fintype O] [inst_3 : DecidableEq O]
+  (ρ : QIT.State H) (R : OntologySeparation.PhaseIntervention.Region H) (M : QIT.POVM O H)
+  (s : OntologySeparation.PhaseIntervention.Phase) (o : O),
+  (OntologySeparation.PhaseIntervention.behavior ρ R M).prob s o =
+    OntologySeparation.PhaseIntervention.baseline ρ R (M.effects o) +
+      2 *
+        (OntologySeparation.PhaseIntervention.factor s *
+            OntologySeparation.PhaseIntervention.coherence ρ R (M.effects o)).re</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.quadrature_contrasts</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H O : Type} [inst : Fintype H] [inst_1 : DecidableEq H] [inst_2 : Fintype O] [inst_3 : DecidableEq O]
+  (ρ : QIT.State H) (R : OntologySeparation.PhaseIntervention.Region H) (M : QIT.POVM O H) (o : O),
+  (OntologySeparation.PhaseIntervention.behavior ρ R M).prob OntologySeparation.PhaseIntervention.Phase.zero o -
+        (OntologySeparation.PhaseIntervention.behavior ρ R M).prob OntologySeparation.PhaseIntervention.Phase.half o =
+      4 * (OntologySeparation.PhaseIntervention.coherence ρ R (M.effects o)).re ∧
+    (OntologySeparation.PhaseIntervention.behavior ρ R M).prob OntologySeparation.PhaseIntervention.Phase.quarter o -
+        (OntologySeparation.PhaseIntervention.behavior ρ R M).prob
+          OntologySeparation.PhaseIntervention.Phase.threeQuarter o =
+      -4 * (OntologySeparation.PhaseIntervention.coherence ρ R (M.effects o)).im</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.dephased_invariant</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : Fintype H] [inst_1 : DecidableEq H] (ρ : QIT.State H)
+  (R : OntologySeparation.PhaseIntervention.Region H) (s : OntologySeparation.PhaseIntervention.Phase),
+  QIT.POVM.isometryLiftState (OntologySeparation.PhaseIntervention.dephase ρ R) (R.phaseMap s) ⋯ =
+    OntologySeparation.PhaseIntervention.dephase ρ R</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.full_access_equivalent_iff</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {O : Type} [inst : Fintype O] {H : Type} [inst_1 : Fintype H] [inst_2 : DecidableEq H] [inst_3 : DecidableEq O]
+  (ρ : QIT.State H) (R : OntologySeparation.PhaseIntervention.Region H) (M : QIT.POVM O H),
+  OntologySeparation.ExperimentAccess.Equivalent (OntologySeparation.PhaseIntervention.phasePredictions ρ R M)
+      (fun x =&gt; True) Bool.true Bool.false ↔
+    ∀ (o : O), OntologySeparation.PhaseIntervention.coherence ρ R (M.effects o) = 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.mixture_blind</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {O G : Type} [inst : Fintype O] [inst_1 : Fintype G]
+  (g : G → OntologySeparation.Behavior (OntologySeparation.PhaseIntervention.phaseInterface O)),
+  (∀ (k : G), OntologySeparation.PhaseIntervention.PhaseBlind (g k)) →
+    ∀ (w : OntologySeparation.FiniteDistribution G),
+      OntologySeparation.PhaseIntervention.PhaseBlind (OntologySeparation.FiniteModels.mixture g w)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.excludes_blind_mixture</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {O G : Type} [inst : Fintype O] [inst_1 : Fintype G]
+  (g : G → OntologySeparation.Behavior (OntologySeparation.PhaseIntervention.phaseInterface O)),
+  (∀ (k : G), OntologySeparation.PhaseIntervention.PhaseBlind (g k)) →
+    ∀ (p : OntologySeparation.Behavior (OntologySeparation.PhaseIntervention.phaseInterface O))
+      (s t : OntologySeparation.PhaseIntervention.Phase) (o : O),
+      p.prob s o ≠ p.prob t o → ¬OntologySeparation.FiniteModels.Compatible g p</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.excludes_nearBlind</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {O : Type} [inst : Fintype O]
+  (p : OntologySeparation.Behavior (OntologySeparation.PhaseIntervention.phaseInterface O)) (δ r : ℝ)
+  (estimate : OntologySeparation.PhaseIntervention.Phase → O → ℝ),
+  (∀ (s : OntologySeparation.PhaseIntervention.Phase) (o : O), |estimate s o - p.prob s o| ≤ r) →
+    ∀ (s t : OntologySeparation.PhaseIntervention.Phase) (o : O),
+      2 * δ + 2 * r &lt; |estimate s o - estimate t o| → ¬OntologySeparation.PhaseIntervention.NearBlind p δ</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.lossy_nearBlind_iff</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (η v δ : ℝ) (hη₀ : 0 ≤ η) (hη₁ : η ≤ 1) (hv₀ : 0 ≤ v) (hv₁ : v ≤ 1),
+  0 ≤ δ →
+    (OntologySeparation.PhaseIntervention.NearBlind (OntologySeparation.PhaseIntervention.lossy η v hη₀ hη₁ hv₀ hv₁) δ ↔
+      η * v ≤ 2 * δ)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.quantum_realizes_lossy</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (η v : ℝ) (hη₀ : 0 ≤ η) (hη₁ : η ≤ 1) (hv₀ : 0 ≤ v) (hv₁ : v ≤ 1),
+  OntologySeparation.ObservationallyEquivalent
+    (OntologySeparation.PhaseIntervention.behavior (OntologySeparation.PhaseIntervention.visibilityState v hv₀ hv₁)
+      OntologySeparation.PhaseIntervention.secondMode
+      (OntologySeparation.PhaseIntervention.inefficientReadout η hη₀ hη₁))
+    (OntologySeparation.PhaseIntervention.lossy η v hη₀ hη₁ hv₀ hv₁)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.two_phases_can_miss_coherence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>(OntologySeparation.PhaseIntervention.behavior OntologySeparation.PhaseIntervention.imaginarySource.state
+          OntologySeparation.PhaseIntervention.secondMode OntologySeparation.PhaseIntervention.plusReadout).prob
+      OntologySeparation.PhaseIntervention.Phase.zero Bool.false =
+    (OntologySeparation.PhaseIntervention.behavior OntologySeparation.PhaseIntervention.imaginarySource.state
+          OntologySeparation.PhaseIntervention.secondMode OntologySeparation.PhaseIntervention.plusReadout).prob
+      OntologySeparation.PhaseIntervention.Phase.half Bool.false ∧
+  (OntologySeparation.PhaseIntervention.behavior OntologySeparation.PhaseIntervention.imaginarySource.state
+            OntologySeparation.PhaseIntervention.secondMode OntologySeparation.PhaseIntervention.plusReadout).prob
+        OntologySeparation.PhaseIntervention.Phase.quarter Bool.false -
+      (OntologySeparation.PhaseIntervention.behavior OntologySeparation.PhaseIntervention.imaginarySource.state
+            OntologySeparation.PhaseIntervention.secondMode OntologySeparation.PhaseIntervention.plusReadout).prob
+        OntologySeparation.PhaseIntervention.Phase.threeQuarter Bool.false =
+    -24 / 25</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.insensitive_source_not_dephased</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.PhaseIntervention.imaginarySource.state =
+    OntologySeparation.PhaseIntervention.dephase OntologySeparation.PhaseIntervention.imaginarySource.state
+      OntologySeparation.PhaseIntervention.secondMode →
+  False</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.postselection_changes_contrast</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>(∀ (s : (OntologySeparation.PhaseIntervention.phaseInterface (Fin 3)).Setting),
+    OntologySeparation.PhaseIntervention.selectionCounterexample.prob s 0 = 1 / 4) ∧
+  OntologySeparation.PhaseIntervention.selectionCounterexample.prob OntologySeparation.PhaseIntervention.Phase.zero 0 /
+        (OntologySeparation.PhaseIntervention.selectionCounterexample.prob
+            OntologySeparation.PhaseIntervention.Phase.zero 0 +
+          OntologySeparation.PhaseIntervention.selectionCounterexample.prob
+            OntologySeparation.PhaseIntervention.Phase.zero 1) -
+      OntologySeparation.PhaseIntervention.selectionCounterexample.prob OntologySeparation.PhaseIntervention.Phase.half
+          0 /
+        (OntologySeparation.PhaseIntervention.selectionCounterexample.prob
+            OntologySeparation.PhaseIntervention.Phase.half 0 +
+          OntologySeparation.PhaseIntervention.selectionCounterexample.prob
+            OntologySeparation.PhaseIntervention.Phase.half 1) =
+    1 / 4</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.PhaseIntervention.contextual_matches</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {O : Type} [inst : Fintype O]
+  (p : OntologySeparation.Behavior (OntologySeparation.PhaseIntervention.phaseInterface O))
+  (s : OntologySeparation.PhaseIntervention.Phase) (o : O),
+  (OntologySeparation.PhaseIntervention.contextualResponse p s ()).mass o = p.prob s o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>

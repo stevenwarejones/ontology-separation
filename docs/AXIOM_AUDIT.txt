@@ -715,3 +715,60 @@
 'OntologySeparation.PathInterference.descriptions_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PathInterference.restricted_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
 'OntologySeparation.PathInterference.expanded_not_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.Region.phaseMap_isometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.behavior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.dephase' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.phase_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.probability_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.quadrature_contrasts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.zero_contrasts_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.opposite_average' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.dephased_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.dephased_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.dephased_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.coherent_eq_dephased_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.restricted_access_equivalent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.full_access_equivalent_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.mixture_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.postprocess' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.postprocess_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.nearBlind_pair_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.estimated_pair_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.excludes_nearBlind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.excludes_blind_mixture' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.erase_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.erased_equivalent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.contextual_matches' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_contrast' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_nearBlind_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.secondMode' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.imaginarySource' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.plusReadout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.imaginary_coherence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.two_phases_can_miss_coherence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.insensitive_readout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.insensitive_source_not_dephased' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.lossy_excludes_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.zero_efficiency_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.visibilityState' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.inefficientReadout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.quantum_realizes_lossy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OntologySeparation.PhaseIntervention.selectionCounterexample' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OntologySeparation.PhaseIntervention.postselection_changes_contrast' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
