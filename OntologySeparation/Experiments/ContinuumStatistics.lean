@@ -27,7 +27,7 @@ theorem product_l1 (p r : FiniteDistribution A) (q s : FiniteDistribution B) :
   rw [Fintype.sum_prod_type]
   calc
     (∑ a, ∑ b, |p.mass a*q.mass b-r.mass a*s.mass b|) ≤
-      ∑ a, ∑ b, (|p.mass a-r.mass a|*q.mass b+r.mass a*|q.mass b-s.mass b|) := by
+      ∑ a, ∑ b, (|p.mass a-r.mass a| *q.mass b+r.mass a*|q.mass b-s.mass b|) := by
         apply sum_le_sum
         intro a _
         apply sum_le_sum
@@ -93,7 +93,7 @@ def Samples (A : Type) : ℕ → Type
   | 0 => Unit
   | n+1 => A × Samples A n
 
-def samplesFintype (A : Type) [Fintype A] : (n : ℕ) → Fintype (Samples A n)
+@[reducible] def samplesFintype (A : Type) [Fintype A] : (n : ℕ) → Fintype (Samples A n)
   | 0 => inferInstanceAs (Fintype Unit)
   | n+1 => by
       letI := samplesFintype A n
