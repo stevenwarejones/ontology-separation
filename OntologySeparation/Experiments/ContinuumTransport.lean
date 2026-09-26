@@ -50,7 +50,7 @@ def twoModeEmbedding (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) : TwoMode →ₗᵢ[�
       (if j = j₀ then u 0 else 0) + (if j = j₁ then u 1 else 0) := by
   change (∑ i : Fin 2, u i • spectralPair j₀ j₁ i) j = _
   rw [Fin.sum_univ_two]
-  change u 0 * (lp.single 2 j₀ (1 : ℂ)) j + u 1 * (lp.single 2 j₁ (1 : ℂ)) j = _
+  change u 0 * (lp.single 2 j₀ (1 : ℂ) : SpectralHilbert) j + u 1 * (lp.single 2 j₁ (1 : ℂ) : SpectralHilbert) j = _
   by_cases h0 : j = j₀ <;> by_cases h1 : j = j₁ <;>
     simp [lp.single_apply, h0, h1, eq_comm]
 
@@ -162,7 +162,10 @@ def noisyPostprocess (eta v : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1)
   total := by
     have ht := p.total
     rw [Fin.sum_univ_three] at ht
-    norm_num [Fin.sum_univ_three, Fin.ext_iff]
+    rw [Fin.sum_univ_three]
+    change eta*((1+v)/2*p.mass 0+(1-v)/2*p.mass 1) +
+      eta*((1-v)/2*p.mass 0+(1+v)/2*p.mass 1) +
+      (p.mass 2+(1-eta)*(p.mass 0+p.mass 1)) = 1
     linear_combination ht
 
 theorem noisyPostprocess_interferometer (eta v q : ℝ)

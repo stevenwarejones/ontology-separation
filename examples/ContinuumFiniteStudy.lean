@@ -175,3 +175,14 @@ import OntologySeparation.Reporting.Claim
 #export_theorem OntologySeparation.ContinuumFinite.lattice_half_angle
 #export_theorem OntologySeparation.ContinuumFinite.lattice_mode_ratio
 #export_theorem OntologySeparation.ContinuumFinite.shared_scale_two_modes_impossible
+
+#export_theorem OntologySeparation.ContinuumFinite.phase_re
+#export_theorem OntologySeparation.ContinuumFinite.noisy_phase_degenerate
+#export_theorem OntologySeparation.ContinuumFinite.witness_blind_readout
+#export_theorem OntologySeparation.ContinuumFinite.noisy_witness_phase_robust
+
+
+
+
+
+

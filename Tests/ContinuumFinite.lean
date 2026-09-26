@@ -31,3 +31,24 @@ example (r : OntologySeparation.ContinuumFinite.Circle) (a t : ℝ) (j : ℤ) :
 example (u : SpectralHilbert) (hu : ‖u‖ = 1) (T epsilon : ℝ)
     (hT : 0 ≤ T) (he : 0 < epsilon) :=
   finite_resource_test_error witnessCircle u hu T epsilon hT he 100
+
+-- The omitted orthogonal complement must be a failure outcome.
+example (q : ℝ) (u : SpectralHilbert) :
+    (∑ o, ‖(transportedInterferometer (twoModeEmbedding 0 1 (by norm_num)) q).operator o u‖^2) = ‖u‖^2 :=
+  (transportedInterferometer _ q).complete u
+
+-- The physical equation includes the small rings, without dropping a directed shift.
+example (u : EuclideanSpace ℂ (ZMod 2)) (t : ℝ) :
+    (Complex.I*(witnessCircle.hbar : ℂ)) • deriv (fun t => sitePropagator witnessCircle t u) t =
+      cyclicHamiltonian witnessCircle (sitePropagator witnessCircle t u) :=
+  sitePropagator_schrodinger witnessCircle u t
+
+example (r : OntologySeparation.ContinuumFinite.Circle) (sc sa : ℝ) (hc : 0 < sc) (ha : 0 < sa) :
+    ¬(sc*frequency r 1 = sa*ringLatticeFrequency r (r.length/5) 1 ∧
+      sc*frequency r 2 = sa*ringLatticeFrequency r (r.length/5) 2) :=
+  shared_scale_two_modes_impossible r 5 (by norm_num) sc sa hc ha
+
+example (O : Fin 2 → Type) [∀ i, Fintype (O i)]
+    (p q : ∀ i, OntologySeparation.FiniteDistribution (O i)) :
+    tv (menuLaw O (fun _ => 0) p []) (menuLaw O (fun _ => 0) q []) = 0 := by
+  simp [menuLaw,tv,l1]

@@ -1144,3 +1144,23 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.ContinuumFinite.lattice_half_angle
 #print axioms OntologySeparation.ContinuumFinite.lattice_mode_ratio
 #print axioms OntologySeparation.ContinuumFinite.shared_scale_two_modes_impossible
+
+#print axioms OntologySeparation.ContinuumFinite.interferometerMatrix
+#print axioms OntologySeparation.ContinuumFinite.interferometerOperator
+#print axioms OntologySeparation.ContinuumFinite.twoModeState
+#print axioms OntologySeparation.ContinuumFinite.phase_re
+#print axioms OntologySeparation.ContinuumFinite.evolvedTwoMode
+#print axioms OntologySeparation.ContinuumFinite.twoModeEvolve
+#print axioms OntologySeparation.ContinuumFinite.relativePhase
+#print axioms OntologySeparation.ContinuumFinite.relativePhaseDifference
+#print axioms OntologySeparation.ContinuumFinite.witnessGap
+#print axioms OntologySeparation.ContinuumFinite.witnessCircle
+#print axioms OntologySeparation.ContinuumFinite.noisy_phase_degenerate
+#print axioms OntologySeparation.ContinuumFinite.witness_blind_readout
+#print axioms OntologySeparation.ContinuumFinite.noisy_witness_phase_robust
+
+
+
+
+
+

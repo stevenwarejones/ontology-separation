@@ -58,8 +58,8 @@ theorem lattice_mode_ratio (r : Circle) (N : ℕ) (hN : 4 < N) :
   have hw : 0 < ringLatticeFrequency r (r.length/N) 1 := by
     unfold ringLatticeFrequency latticeFrequency
     rw [h1]
-    exact div_pos (mul_pos r.hbar_pos hcos)
-      (mul_pos r.mass_pos (sq_pos_of_pos (div_pos r.length_pos hn)))
+    exact mul_pos (div_pos r.hbar_pos
+      (mul_pos r.mass_pos (sq_pos_of_pos (div_pos r.length_pos hn)))) hcos
   have he : ringLatticeFrequency r (r.length/N) 2 =
       4*Real.cos (Real.pi/(N : ℝ))^2*ringLatticeFrequency r (r.length/N) 1 := by
     unfold ringLatticeFrequency latticeFrequency

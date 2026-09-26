@@ -391,5 +391,42 @@ theorem one_momentum_all_times (Ec Ea scale eta v q t : ℝ)
     (noisyReadout eta v q he0 he1 hv0 hv1 (evolvedTwoMode (scale*Ea) t)
       (twoModeState_normalized _)).mass o := by rw [h]
 
+/-- Loss or zero visibility erases every phase distinction in the full table. -/
+theorem noisy_phase_degenerate (eta v q theta phi : ℝ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+    (h : eta = 0 ∨ v = 0) (o : Fin 3) :
+    (noisyReadout eta v q he0 he1 hv0 hv1 (twoModeState theta) (twoModeState_normalized theta)).mass o =
+    (noisyReadout eta v q he0 he1 hv0 hv1 (twoModeState phi) (twoModeState_normalized phi)).mass o := by
+  have ht := noisyReadout_table eta v q theta he0 he1 hv0 hv1
+  have hp := noisyReadout_table eta v q phi he0 he1 hv0 hv1
+  dsimp only at ht hp
+  fin_cases o
+  · exact ht.1.trans ((show plus eta v (q+theta) = plus eta v (q+phi) by
+      rcases h with h | h <;> simp [plus,h]).trans hp.1.symm)
+  · exact ht.2.1.trans ((show minus eta v (q+theta) = minus eta v (q+phi) by
+      rcases h with h | h <;> simp [minus,h]).trans hp.2.1.symm)
+  · exact ht.2.2.trans hp.2.2.symm
+
+/-- Explicit blind times composed with all three actual evolved readout bins. -/
+theorem witness_blind_readout (eta v q : ℝ) (k : ℤ)
+    (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1) (o : Fin 3) :
+    let t := k*(2*Real.pi)/witnessGap
+    (noisyReadout eta v q he0 he1 hv0 hv1 (evolvedTwoMode (4/Real.pi^2) t)
+      (twoModeState_normalized _)).mass o =
+    (noisyReadout eta v q he0 he1 hv0 hv1 (evolvedTwoMode (1/2) t)
+      (twoModeState_normalized _)).mass o := by
+  exact phase_wrap_noisy_tables eta v q _ _ k he0 he1 hv0 hv1 (witness_blind_phase k) o
+
+/-- Phase radii imply probability radii, which imply strict robust witness
+separation. Statistical confidence radii are separate from these deterministic bounds. -/
+theorem noisy_witness_phase_robust (eta v dc da rc ra : ℝ)
+    (he : 0 ≤ eta) (hv : 0 ≤ v) (hc : |dc| ≤ rc) (ha : |da| ≤ ra)
+    (hgap : eta*v/2*rc+eta*v/2*ra < eta*v) :
+    plus eta v dc ≠ plus eta v (Real.pi+da) := by
+  apply noisy_witness_robust eta v _ _ (eta*v/2*rc) (eta*v/2*ra) he hv
+  · simpa [plus] using plus_phase_radius eta v 0 0 dc rc he hv hc
+  · simpa [plus] using plus_phase_radius eta v 0 Real.pi da ra he hv ha
+  · exact hgap
+
 end
 end OntologySeparation.ContinuumFinite
