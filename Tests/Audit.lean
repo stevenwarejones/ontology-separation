@@ -636,3 +636,25 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PhaseIntervention.settingPreparation
 #print axioms OntologySeparation.PhaseIntervention.drop_setting_independence
 #print axioms OntologySeparation.PhaseIntervention.excludes_local
+
+-- Finite path-projector contextuality
+#print axioms OntologySeparation.PathContextuality.Model.observed
+#print axioms OntologySeparation.PathContextuality.Model.cap_of_measurement_equivalence
+#print axioms OntologySeparation.PathContextuality.Model.bound
+#print axioms OntologySeparation.PathContextuality.Model.trivial_bound
+#print axioms OntologySeparation.PathContextuality.Model.full_bound
+#print axioms OntologySeparation.PathContextuality.Model.robust_bound
+#print axioms OntologySeparation.PathContextuality.nullModel
+#print axioms OntologySeparation.PathContextuality.null_nonempty
+#print axioms OntologySeparation.PathContextuality.kraus_complete
+#print axioms OntologySeparation.PathContextuality.effect_equivalence
+#print axioms OntologySeparation.PathContextuality.channel_equivalence
+#print axioms OntologySeparation.PathContextuality.source
+#print axioms OntologySeparation.PathContextuality.finalReadout
+#print axioms OntologySeparation.PathContextuality.jointReadout
+#print axioms OntologySeparation.PathContextuality.quantumJoint
+#print axioms OntologySeparation.PathContextuality.exactTable
+#print axioms OntologySeparation.PathContextuality.quantum_realizes_table
+#print axioms OntologySeparation.PathContextuality.bypass_probability
+#print axioms OntologySeparation.PathContextuality.exact_gap
+#print axioms OntologySeparation.PathContextuality.quantum_exclusion
