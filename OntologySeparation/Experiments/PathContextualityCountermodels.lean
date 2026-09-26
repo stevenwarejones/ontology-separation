@@ -109,6 +109,9 @@ theorem drop_cap_realizes_quantum : dropCapModel.Disturbance (1/50) ∧
     have hs := h false
     norm_num [Model.negative, dropCapModel, Fintype.sum_bool] at hs
 
+private theorem zero_ne_two : (0 : Fin 3) ≠ 2 := by decide
+private theorem two_ne_one : (2 : Fin 3) ≠ 1 := by decide
+
 /-- Exact reference table with only disturbance dropped. States 0,1,2 are L,S,F;
 L has stochastic bypass success 49/625, while S/F succeed/fail deterministically. -/
 def dropDisturbanceModel : Model (Fin 3) where
@@ -125,7 +128,7 @@ def dropDisturbanceModel : Model (Fin 3) where
       split_ifs <;> first | exact exactTable.nonneg _ _ | norm_num
     total := by
       fin_cases l <;>
-        norm_num [Fintype.sum_prod_type, Fintype.sum_bool, Fin.sum_univ_succ, Fin.ext_iff, exactTable] }
+        norm_num [Fintype.sum_prod_type, Fintype.sum_bool, Fin.sum_univ_succ, zero_ne_two, two_ne_one, exactTable] }
   final l := coin (if l = 0 then 49/625 else if l = 1 then 1 else 0)
     (by fin_cases l <;> norm_num) (by fin_cases l <;> norm_num)
 
@@ -138,7 +141,7 @@ theorem drop_disturbance_realizes_quantum :
   have hq : dropDisturbanceModel.ResponseCap (16/25) := by
     intro l
     fin_cases l <;>
-      norm_num [Model.negative, dropDisturbanceModel, Fin.sum_univ_succ, Fin.ext_iff, exactTable]
+      norm_num [Model.negative, dropDisturbanceModel, Fin.sum_univ_succ, zero_ne_two, two_ne_one, exactTable]
   have hf : dropDisturbanceModel.pF = 49/625 := by
     norm_num [Model.pF, FiniteDistribution.mean, dropDisturbanceModel, coin,
       Fin.sum_univ_succ]
@@ -147,7 +150,7 @@ theorem drop_disturbance_realizes_quantum :
     rw [quantum_realizes_table s o]
     rcases o with ⟨m,f⟩
     cases m <;> cases f <;>
-      norm_num [Model.observed, dropDisturbanceModel, coin, exactTable, Fin.sum_univ_succ, Fin.ext_iff]
+      norm_num [Model.observed, dropDisturbanceModel, coin, exactTable, Fin.sum_univ_succ, zero_ne_two, two_ne_one]
   exact ⟨hq, hf, he, fun hD => quantum_exclusion dropDisturbanceModel hq hD hf he⟩
 
 end
