@@ -1,3 +1,10 @@
+import OntologySeparation.Experiments.ContinuumSiteTransport
+import OntologySeparation.Experiments.ContinuumScale
+import OntologySeparation.Experiments.ContinuumMenu
+import OntologySeparation.Experiments.FiniteHamiltonian
+import OntologySeparation.Experiments.ContinuumTransport
+import OntologySeparation.Experiments.ContinuumWitness
+import OntologySeparation.Experiments.FiniteFourier
 import OntologySeparation.Experiments.SpacetimeInfluenceBounds
 import OntologySeparation.Experiments.PhaseInterventionExamples
 import OntologySeparation.Experiments.PhaseInterventionGeometry
@@ -93,3 +100,5 @@ import OntologySeparation.Experiments.ForcedSignalingPhysicalMain
 import OntologySeparation.Experiments.ForcedSignalingAccessibleOptimum
 
 import OntologySeparation.Experiments.PathInterference
+
+import OntologySeparation.Experiments.FiniteDispersion

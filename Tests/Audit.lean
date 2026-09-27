@@ -874,6 +874,27 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PhaseIntervention.drop_setting_independence
 #print axioms OntologySeparation.PhaseIntervention.excludes_local
 
+-- Continuum spectral evolution and explicitly scoped readout lemmas.
+#print axioms OntologySeparation.ContinuumFinite.evolve
+#print axioms OntologySeparation.ContinuumFinite.evolve_mass
+#print axioms OntologySeparation.ContinuumFinite.evolve_zero
+#print axioms OntologySeparation.ContinuumFinite.evolve_add
+#print axioms OntologySeparation.ContinuumFinite.evolve_inverse
+#print axioms OntologySeparation.ContinuumFinite.evolve_distance
+#print axioms OntologySeparation.ContinuumFinite.evolve_supported
+#print axioms OntologySeparation.ContinuumFinite.finite_spectral_exact
+#print axioms OntologySeparation.ContinuumFinite.complete_detector_exact
+#print axioms OntologySeparation.ContinuumFinite.spectralFinite_exact
+#print axioms OntologySeparation.ContinuumFinite.readout_normalized
+#print axioms OntologySeparation.ContinuumFinite.readout_nonneg
+#print axioms OntologySeparation.ContinuumFinite.zero_visibility
+#print axioms OntologySeparation.ContinuumFinite.full_loss
+#print axioms OntologySeparation.ContinuumFinite.reference_absorbs
+#print axioms OntologySeparation.ContinuumFinite.cosine_gap
+#print axioms OntologySeparation.ContinuumFinite.strict_cosine_separation
+#print axioms OntologySeparation.ContinuumFinite.plus_phase_lipschitz
+#print axioms OntologySeparation.ContinuumFinite.robust_coordinate_separation
+#print axioms OntologySeparation.ContinuumFinite.test_error_of_event_bound
 -- Finite path-projector contextuality
 #print axioms OntologySeparation.PathContextuality.Model.observed
 #print axioms OntologySeparation.PathContextuality.Model.cap_of_measurement_equivalence
@@ -938,3 +959,214 @@ import OntologySeparation.Experiments.PartialLeakageRobustness
 #print axioms OntologySeparation.PathContextuality.reference_compatible_iff
 
 #print axioms OntologySeparation.PathContextuality.reference_finite_compatible_iff
+
+#print axioms OntologySeparation.ContinuumFinite.finiteEmbedding
+#print axioms OntologySeparation.ContinuumFinite.finiteEmbedding_supported
+#print axioms OntologySeparation.ContinuumFinite.finiteEmbedding_mass
+#print axioms OntologySeparation.ContinuumFinite.finiteEmbedding_intertwines
+#print axioms OntologySeparation.ContinuumFinite.finite_complete_probability
+#print axioms OntologySeparation.ContinuumFinite.finite_evolved_normalized
+#print axioms OntologySeparation.ContinuumFinite.cosine_remainder_local
+#print axioms OntologySeparation.ContinuumFinite.frequency_error_local
+#print axioms OntologySeparation.ContinuumFinite.phase_difference
+#print axioms OntologySeparation.ContinuumFinite.finite_phase_error_sq
+
+#print axioms OntologySeparation.ContinuumFinite.distributionProduct
+#print axioms OntologySeparation.ContinuumFinite.product_l1
+#print axioms OntologySeparation.ContinuumFinite.product_tv
+#print axioms OntologySeparation.ContinuumFinite.tv_le_one
+#print axioms OntologySeparation.ContinuumFinite.test_mean_bound
+#print axioms OntologySeparation.ContinuumFinite.test_error
+#print axioms OntologySeparation.ContinuumFinite.iid
+#print axioms OntologySeparation.ContinuumFinite.iid_tv
+#print axioms OntologySeparation.ContinuumFinite.iid_tv_capped
+
+#print axioms OntologySeparation.ContinuumFinite.cyclic_character_eigenvalue
+#print axioms OntologySeparation.ContinuumFinite.character_norm
+#print axioms OntologySeparation.ContinuumFinite.normalizedFourierMode_mass
+#print axioms OntologySeparation.ContinuumFinite.character_integer_phase
+#print axioms OntologySeparation.ContinuumFinite.phase_pair
+#print axioms OntologySeparation.ContinuumFinite.cyclic_cosine_eigenvalue
+#print axioms OntologySeparation.ContinuumFinite.no_alias
+#print axioms OntologySeparation.ContinuumFinite.character_star
+#print axioms OntologySeparation.ContinuumFinite.character_orthogonality
+
+#print axioms OntologySeparation.ContinuumFinite.BornInstrument.distribution
+#print axioms OntologySeparation.ContinuumFinite.born_tv
+#print axioms OntologySeparation.ContinuumFinite.born_iid_tv
+#print axioms OntologySeparation.ContinuumFinite.born_test_error
+#print axioms OntologySeparation.ContinuumFinite.SpectralVector.toHilbert
+#print axioms OntologySeparation.ContinuumFinite.hilbert_norm_sq
+#print axioms OntologySeparation.ContinuumFinite.spectral_hilbert_mass
+#print axioms OntologySeparation.ContinuumFinite.spectral_hilbert_normalized
+
+#print axioms OntologySeparation.ContinuumFinite.projection_apply
+#print axioms OntologySeparation.ContinuumFinite.projection_norm_sq
+#print axioms OntologySeparation.ContinuumFinite.tail_sum
+#print axioms OntologySeparation.ContinuumFinite.tail_identity
+#print axioms OntologySeparation.ContinuumFinite.normalizedProjection_norm
+#print axioms OntologySeparation.ContinuumFinite.projection_normalization_distance
+#print axioms OntologySeparation.ContinuumFinite.normalizedProjection_error
+#print axioms OntologySeparation.ContinuumFinite.zero_retained_iff_tail_one
+#print axioms OntologySeparation.ContinuumFinite.projection_tendsto
+#print axioms OntologySeparation.ContinuumFinite.normalizedProjection_tendsto
+#print axioms OntologySeparation.ContinuumFinite.exists_normalized_cutoff
+
+#print axioms OntologySeparation.ContinuumFinite.fromHilbert
+#print axioms OntologySeparation.ContinuumFinite.hilbertEvolve_norm
+#print axioms OntologySeparation.ContinuumFinite.hilbertEvolve_distance
+#print axioms OntologySeparation.ContinuumFinite.cyclicKinetic_spectrum
+#print axioms OntologySeparation.ContinuumFinite.frequency_error_band
+#print axioms OntologySeparation.ContinuumFinite.hilbert_band_error
+#print axioms OntologySeparation.ContinuumFinite.lattice_tail_error
+#print axioms OntologySeparation.ContinuumFinite.lattice_strong_convergence
+#print axioms OntologySeparation.ContinuumFinite.finite_resource_nonseparation
+
+#print axioms OntologySeparation.ContinuumFinite.interferometer_plus
+#print axioms OntologySeparation.ContinuumFinite.interferometer_minus
+#print axioms OntologySeparation.ContinuumFinite.interferometer_failure
+#print axioms OntologySeparation.ContinuumFinite.interferometer
+#print axioms OntologySeparation.ContinuumFinite.twoModeState_normalized
+#print axioms OntologySeparation.ContinuumFinite.interferometer_probability
+#print axioms OntologySeparation.ContinuumFinite.noisyReadout
+#print axioms OntologySeparation.ContinuumFinite.noisyReadout_table
+#print axioms OntologySeparation.ContinuumFinite.witnessGap_pos
+#print axioms OntologySeparation.ContinuumFinite.explicit_separating_born_experiment
+
+#print axioms OntologySeparation.ContinuumFinite.cosine_remainder_global
+
+#print axioms OntologySeparation.ContinuumFinite.twoModeEvolve_relative
+#print axioms OntologySeparation.ContinuumFinite.evolved_readout_probability
+#print axioms OntologySeparation.ContinuumFinite.symmetric_mode_negative_control
+#print axioms OntologySeparation.ContinuumFinite.free_reference_born_equivalence
+
+#print axioms OntologySeparation.ContinuumFinite.frequency_error_global
+
+#print axioms OntologySeparation.ContinuumFinite.modeVector_orthonormal
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_mass
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_apply
+#print axioms OntologySeparation.ContinuumFinite.siteEvolve_mass
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_cyclic
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_kinetic
+
+#print axioms OntologySeparation.ContinuumFinite.witness_frequencies
+#print axioms OntologySeparation.ContinuumFinite.lattice_born_witness
+
+#print axioms OntologySeparation.ContinuumFinite.finite_resource_test_error
+
+#print axioms OntologySeparation.ContinuumFinite.band_modes_orthonormal
+#print axioms OntologySeparation.ContinuumFinite.bandSynthesis_mass
+#print axioms OntologySeparation.ContinuumFinite.bandSynthesis_kinetic
+#print axioms OntologySeparation.ContinuumFinite.bandSynthesis_evolve
+
+#print axioms OntologySeparation.ContinuumFinite.twoModeEvolve_norm
+#print axioms OntologySeparation.ContinuumFinite.evolved_noisyReadout_table
+#print axioms OntologySeparation.ContinuumFinite.lattice_noisy_witness
+#print axioms OntologySeparation.ContinuumFinite.noisy_witness_tv
+#print axioms OntologySeparation.ContinuumFinite.plus_phase_radius
+#print axioms OntologySeparation.ContinuumFinite.noisy_witness_robust
+#print axioms OntologySeparation.ContinuumFinite.noisy_witness_touching
+#print axioms OntologySeparation.ContinuumFinite.phase_wrap_noisy_tables
+#print axioms OntologySeparation.ContinuumFinite.witness_blind_phase
+#print axioms OntologySeparation.ContinuumFinite.one_momentum_scale_match
+#print axioms OntologySeparation.ContinuumFinite.one_momentum_scale_interval
+#print axioms OntologySeparation.ContinuumFinite.one_momentum_all_times
+
+#print axioms OntologySeparation.ContinuumFinite.pairIsometry
+#print axioms OntologySeparation.ContinuumFinite.pairIsometry_single
+#print axioms OntologySeparation.ContinuumFinite.spectralPair
+#print axioms OntologySeparation.ContinuumFinite.spectralPair_orthonormal
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_apply
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_norm
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_inner
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_injective
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_support
+#print axioms OntologySeparation.ContinuumFinite.twoModeEmbedding_intertwines
+#print axioms OntologySeparation.ContinuumFinite.pairExtraction
+#print axioms OntologySeparation.ContinuumFinite.pairExtraction_embedding
+#print axioms OntologySeparation.ContinuumFinite.pairProjection
+#print axioms OntologySeparation.ContinuumFinite.pairProjection_idempotent
+#print axioms OntologySeparation.ContinuumFinite.pairProjection_orthogonal
+#print axioms OntologySeparation.ContinuumFinite.pairProjection_pythagoras
+#print axioms OntologySeparation.ContinuumFinite.transportedInterferometer
+#print axioms OntologySeparation.ContinuumFinite.transportedInterferometer_agrees
+
+#print axioms OntologySeparation.ContinuumFinite.fourierBasis
+#print axioms OntologySeparation.ContinuumFinite.fourierBasis_apply
+#print axioms OntologySeparation.ContinuumFinite.fourierAnalysis
+#print axioms OntologySeparation.ContinuumFinite.fourier_inversion
+#print axioms OntologySeparation.ContinuumFinite.fourierSynthesis_eq_repr
+#print axioms OntologySeparation.ContinuumFinite.fourierAnalysis_synthesis
+#print axioms OntologySeparation.ContinuumFinite.siteFrequency
+#print axioms OntologySeparation.ContinuumFinite.cyclicHamiltonian
+#print axioms OntologySeparation.ContinuumFinite.cyclicHamiltonian_apply
+#print axioms OntologySeparation.ContinuumFinite.cyclicHamiltonian_mode
+#print axioms OntologySeparation.ContinuumFinite.cyclicHamiltonian_synthesis
+#print axioms OntologySeparation.ContinuumFinite.phase_time_derivative
+#print axioms OntologySeparation.ContinuumFinite.siteEvolve_derivative
+#print axioms OntologySeparation.ContinuumFinite.schrodingerGenerator
+#print axioms OntologySeparation.ContinuumFinite.schrodingerGenerator_synthesis
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_zero
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_derivative
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_schrodinger
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_unique
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_synthesis
+
+#print axioms OntologySeparation.ContinuumFinite.MenuSamples
+#print axioms OntologySeparation.ContinuumFinite.menuFintype
+#print axioms OntologySeparation.ContinuumFinite.menuLaw
+#print axioms OntologySeparation.ContinuumFinite.menu_tv
+#print axioms OntologySeparation.ContinuumFinite.menu_test_error
+#print axioms OntologySeparation.ContinuumFinite.finite_family_convergence
+#print axioms OntologySeparation.ContinuumFinite.finite_menu_nonseparation
+
+#print axioms OntologySeparation.ContinuumFinite.noisyPostprocess
+#print axioms OntologySeparation.ContinuumFinite.noisyPostprocess_interferometer
+#print axioms OntologySeparation.ContinuumFinite.spectralReadout
+#print axioms OntologySeparation.ContinuumFinite.spectralReadout_agrees
+#print axioms OntologySeparation.ContinuumFinite.spectral_noisy_witness
+
+#print axioms OntologySeparation.ContinuumFinite.siteFrequency_intCast
+#print axioms OntologySeparation.ContinuumFinite.sitePropagatorCLM
+#print axioms OntologySeparation.ContinuumFinite.sitePropagatorCLM_apply
+#print axioms OntologySeparation.ContinuumFinite.fourierAnalysis_mode
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_mode
+#print axioms OntologySeparation.ContinuumFinite.sitePropagator_bandSynthesis
+#print axioms OntologySeparation.ContinuumFinite.sitePairEmbedding
+#print axioms OntologySeparation.ContinuumFinite.sitePairEmbedding_no_alias
+#print axioms OntologySeparation.ContinuumFinite.sitePairEmbedding_band
+#print axioms OntologySeparation.ContinuumFinite.sitePairEmbedding_intertwines
+#print axioms OntologySeparation.ContinuumFinite.site_readout_agrees
+
+#print axioms OntologySeparation.ContinuumFinite.continuum_mode_ratio
+#print axioms OntologySeparation.ContinuumFinite.lattice_half_angle
+#print axioms OntologySeparation.ContinuumFinite.lattice_mode_ratio
+#print axioms OntologySeparation.ContinuumFinite.shared_scale_two_modes_impossible
+
+#print axioms OntologySeparation.ContinuumFinite.interferometerMatrix
+#print axioms OntologySeparation.ContinuumFinite.interferometerOperator
+#print axioms OntologySeparation.ContinuumFinite.twoModeState
+#print axioms OntologySeparation.ContinuumFinite.phase_re
+#print axioms OntologySeparation.ContinuumFinite.evolvedTwoMode
+#print axioms OntologySeparation.ContinuumFinite.twoModeEvolve
+#print axioms OntologySeparation.ContinuumFinite.relativePhase
+#print axioms OntologySeparation.ContinuumFinite.relativePhaseDifference
+#print axioms OntologySeparation.ContinuumFinite.witnessGap
+#print axioms OntologySeparation.ContinuumFinite.witnessCircle
+#print axioms OntologySeparation.ContinuumFinite.noisy_phase_degenerate
+#print axioms OntologySeparation.ContinuumFinite.witness_blind_readout
+#print axioms OntologySeparation.ContinuumFinite.noisy_witness_phase_robust
+
+
+
+
+
+
+
+#print axioms OntologySeparation.ContinuumFinite.pairExtraction_coefficient
+#print axioms OntologySeparation.ContinuumFinite.spectralExtraction_apply
+#print axioms OntologySeparation.ContinuumFinite.transportedNoisyReadout_agrees
+
+#print axioms OntologySeparation.ContinuumFinite.site_noisy_readout

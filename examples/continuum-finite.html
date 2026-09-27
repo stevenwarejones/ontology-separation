@@ -1,0 +1,719 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational results — Ontology Separation</title><style>
+body{font:16px system-ui;margin:2rem;color:#182635;background:#f6f8fb}p{max-width:90ch;line-height:1.5}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #cbd3dd;padding:.8rem;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}code{overflow-wrap:anywhere}
+.bound{background:#fff3d6}.open{background:#eef0f3;color:#52606c}.scroll{overflow-x:auto}
+.comparison{background:white;border:1px solid #cbd3dd;border-radius:8px;padding:1rem;margin:1rem 0}
+.comparison p{margin:.45rem 0}.search{background:#eef5fb;border:1px solid #9fb9cf;border-radius:8px;padding:1rem;margin:1rem 0}
+@media(max-width:700px){body{margin:.7rem}td,th{padding:.4rem}}
+</style></head><body><h1>Operational results</h1><p>Formal statements exported by Lean from <code>examples/ContinuumFiniteStudy.lean</code>.
+Each row states exactly what its proof establishes. The definitions determine its physical meaning.
+This file is a snapshot: editing HTML or JSON cannot supply a proof. Recheck the trusted Lean source.
+These are mathematical results, not statistical claims about experimental data.</p>
+<h2>Formal theorem statements</h2><div class="scroll"><table><thead><tr><th>Declaration</th><th>Checked result</th><th>Formal proposition</th><th>Logical axioms</th></tr></thead><tbody><tr><td><code>OntologySeparation.ContinuumFinite.evolve_mass</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w : ℤ → ℝ) (t : ℝ) (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.mass (OntologySeparation.ContinuumFinite.evolve w t c) =
+    OntologySeparation.ContinuumFinite.mass c</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.evolve_zero</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w : ℤ → ℝ) (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.evolve w 0 c = c</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.evolve_add</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w : ℤ → ℝ) (s t : ℝ) (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.evolve w (s + t) c =
+    OntologySeparation.ContinuumFinite.evolve w s (OntologySeparation.ContinuumFinite.evolve w t c)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.evolve_inverse</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w : ℤ → ℝ) (t : ℝ) (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.evolve w (-t) (OntologySeparation.ContinuumFinite.evolve w t c) = c</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.evolve_distance</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w : ℤ → ℝ) (t : ℝ) (u v : OntologySeparation.ContinuumFinite.SpectralVector),
+  ∑&#x27; (j : ℤ),
+      ‖(OntologySeparation.ContinuumFinite.evolve w t u).coefficient j -
+            (OntologySeparation.ContinuumFinite.evolve w t v).coefficient j‖ ^
+        2 =
+    ∑&#x27; (j : ℤ), ‖u.coefficient j - v.coefficient j‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.evolve_supported</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.Supported s c →
+    ∀ (w : ℤ → ℝ) (t : ℝ),
+      OntologySeparation.ContinuumFinite.Supported s (OntologySeparation.ContinuumFinite.evolve w t c)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finite_spectral_exact</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.Supported s c →
+    ∀ (w v : ℤ → ℝ),
+      (∀ j ∈ s, w j = v j) →
+        ∀ (t : ℝ), OntologySeparation.ContinuumFinite.evolve w t c = OntologySeparation.ContinuumFinite.evolve v t c</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.complete_detector_exact</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {O : Type} [inst : Fintype O] (d : OntologySeparation.ContinuumFinite.Detector O) (s : Finset ℤ)
+  (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.Supported s c →
+    ∀ (w v : ℤ → ℝ),
+      (∀ j ∈ s, w j = v j) →
+        ∀ (t : ℝ) (o : O),
+          d.probability (OntologySeparation.ContinuumFinite.evolve w t c) o =
+            d.probability (OntologySeparation.ContinuumFinite.evolve v t c) o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.spectralFinite_exact</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.Supported s c →
+    ∀ (w : ℤ → ℝ) (t : ℝ),
+      OntologySeparation.ContinuumFinite.evolve w t c =
+        OntologySeparation.ContinuumFinite.evolve (OntologySeparation.ContinuumFinite.spectralFinite s w) t c</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.readout_normalized</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta visibility theta : ℝ),
+  OntologySeparation.ContinuumFinite.plus eta visibility theta +
+        OntologySeparation.ContinuumFinite.minus eta visibility theta +
+      OntologySeparation.ContinuumFinite.failure eta =
+    1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.readout_nonneg</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta visibility theta : ℝ),
+  0 ≤ eta →
+    eta ≤ 1 →
+      0 ≤ visibility →
+        visibility ≤ 1 →
+          0 ≤ OntologySeparation.ContinuumFinite.plus eta visibility theta ∧
+            0 ≤ OntologySeparation.ContinuumFinite.minus eta visibility theta ∧
+              0 ≤ OntologySeparation.ContinuumFinite.failure eta</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.zero_visibility</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta theta : ℝ), OntologySeparation.ContinuumFinite.plus eta 0 theta = eta / 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.full_loss</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (visibility theta : ℝ),
+  OntologySeparation.ContinuumFinite.plus 0 visibility theta = 0 ∧
+    OntologySeparation.ContinuumFinite.minus 0 visibility theta = 0 ∧ OntologySeparation.ContinuumFinite.failure 0 = 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.reference_absorbs</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta visibility theta delta : ℝ),
+  OntologySeparation.ContinuumFinite.plus eta visibility (theta + delta - delta) =
+    OntologySeparation.ContinuumFinite.plus eta visibility theta</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cosine_gap</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta visibility delta : ℝ),
+  OntologySeparation.ContinuumFinite.plus eta visibility 0 -
+      OntologySeparation.ContinuumFinite.plus eta visibility delta =
+    eta * visibility * (1 - Real.cos delta) / 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.strict_cosine_separation</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta visibility delta : ℝ),
+  0 &lt; eta →
+    0 &lt; visibility →
+      Real.cos delta &lt; 1 →
+        OntologySeparation.ContinuumFinite.plus eta visibility delta &lt;
+          OntologySeparation.ContinuumFinite.plus eta visibility 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.plus_phase_lipschitz</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta visibility x y : ℝ),
+  0 ≤ eta →
+    0 ≤ visibility →
+      |OntologySeparation.ContinuumFinite.plus eta visibility x -
+            OntologySeparation.ContinuumFinite.plus eta visibility y| ≤
+        eta * visibility / 2 * |x - y|</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.robust_coordinate_separation</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p q p0 q0 rp rq : ℝ), |p - p0| ≤ rp → |q - q0| ≤ rq → rp + rq &lt; |p0 - q0| → p ≠ q</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.test_error_of_event_bound</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (rejectP rejectQ epsilon : ℝ), |rejectQ - rejectP| ≤ epsilon → 1 - epsilon ≤ rejectP + (1 - rejectQ)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finiteEmbedding_supported</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (c : ↥s → ℂ),
+  OntologySeparation.ContinuumFinite.Supported s (OntologySeparation.ContinuumFinite.finiteEmbedding s c)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finiteEmbedding_mass</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (c : ↥s → ℂ),
+  OntologySeparation.ContinuumFinite.mass (OntologySeparation.ContinuumFinite.finiteEmbedding s c) = ∑ j, ‖c j‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finiteEmbedding_intertwines</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (w : ℤ → ℝ) (t : ℝ) (c : ↥s → ℂ),
+  OntologySeparation.ContinuumFinite.finiteEmbedding s (OntologySeparation.ContinuumFinite.finiteEvolve s w t c) =
+    OntologySeparation.ContinuumFinite.evolve w t (OntologySeparation.ContinuumFinite.finiteEmbedding s c)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finite_complete_probability</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {O : Type} [inst : Fintype O] (d : OntologySeparation.ContinuumFinite.Detector O) (s : Finset ℤ) (w : ℤ → ℝ) (t : ℝ)
+  (c : ↥s → ℂ) (o : O),
+  d.probability
+      (OntologySeparation.ContinuumFinite.finiteEmbedding s (OntologySeparation.ContinuumFinite.finiteEvolve s w t c))
+      o =
+    d.probability
+      (OntologySeparation.ContinuumFinite.evolve w t (OntologySeparation.ContinuumFinite.finiteEmbedding s c)) o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finite_evolved_normalized</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (w : ℤ → ℝ) (t : ℝ) (c : ↥s → ℂ),
+  ∑ j, ‖c j‖ ^ 2 = 1 →
+    OntologySeparation.ContinuumFinite.mass
+        (OntologySeparation.ContinuumFinite.finiteEmbedding s
+          (OntologySeparation.ContinuumFinite.finiteEvolve s w t c)) =
+      1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cosine_remainder_local</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (x : ℝ), |x| ≤ 1 → |x ^ 2 / 2 - (1 - Real.cos x)| ≤ |x| ^ 4 * (5 / 96)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.frequency_error_local</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (hbar mass spacing k : ℝ),
+  0 ≤ hbar →
+    0 &lt; mass →
+      spacing ≠ 0 →
+        |k * spacing| ≤ 1 →
+          |OntologySeparation.ContinuumFinite.continuumFrequency hbar mass k -
+                OntologySeparation.ContinuumFinite.latticeFrequency hbar mass spacing k| ≤
+            hbar / (mass * spacing ^ 2) * (|k * spacing| ^ 4 * (5 / 96))</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.phase_difference</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (x y : ℝ), ‖OntologySeparation.ContinuumFinite.phase x - OntologySeparation.ContinuumFinite.phase y‖ ≤ |x - y|</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finite_phase_error_sq</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {ι : Type} [inst : Fintype ι] (c : ι → ℂ) (x y : ι → ℝ) (epsilon : ℝ),
+  0 ≤ epsilon →
+    ∑ i, ‖c i‖ ^ 2 = 1 →
+      (∀ (i : ι), |x i - y i| ≤ epsilon) →
+        ∑ i,
+            ‖OntologySeparation.ContinuumFinite.phase (x i) * c i -
+                  OntologySeparation.ContinuumFinite.phase (y i) * c i‖ ^
+              2 ≤
+          epsilon ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.product_l1</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {A B : Type} [inst : Fintype A] [inst_1 : Fintype B] (p r : OntologySeparation.FiniteDistribution A)
+  (q s : OntologySeparation.FiniteDistribution B),
+  OntologySeparation.ContinuumFinite.l1 (OntologySeparation.ContinuumFinite.distributionProduct p q)
+      (OntologySeparation.ContinuumFinite.distributionProduct r s) ≤
+    OntologySeparation.ContinuumFinite.l1 p r + OntologySeparation.ContinuumFinite.l1 q s</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.product_tv</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {A B : Type} [inst : Fintype A] [inst_1 : Fintype B] (p r : OntologySeparation.FiniteDistribution A)
+  (q s : OntologySeparation.FiniteDistribution B),
+  OntologySeparation.ContinuumFinite.tv (OntologySeparation.ContinuumFinite.distributionProduct p q)
+      (OntologySeparation.ContinuumFinite.distributionProduct r s) ≤
+    OntologySeparation.ContinuumFinite.tv p r + OntologySeparation.ContinuumFinite.tv q s</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.tv_le_one</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {A : Type} [inst : Fintype A] (p q : OntologySeparation.FiniteDistribution A),
+  OntologySeparation.ContinuumFinite.tv p q ≤ 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.test_mean_bound</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {A : Type} [inst : Fintype A] (p q : OntologySeparation.FiniteDistribution A) (f : A → ℝ),
+  (∀ (a : A), 0 ≤ f a) → (∀ (a : A), f a ≤ 1) → |q.mean f - p.mean f| ≤ OntologySeparation.ContinuumFinite.tv p q</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.test_error</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {A : Type} [inst : Fintype A] (p q : OntologySeparation.FiniteDistribution A) (f : A → ℝ),
+  (∀ (a : A), 0 ≤ f a) →
+    (∀ (a : A), f a ≤ 1) → 1 - OntologySeparation.ContinuumFinite.tv p q ≤ p.mean f + (1 - q.mean f)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.iid_tv</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {A : Type} [inst : Fintype A] (p q : OntologySeparation.FiniteDistribution A) (n : ℕ),
+  OntologySeparation.ContinuumFinite.tv (OntologySeparation.ContinuumFinite.iid p n)
+      (OntologySeparation.ContinuumFinite.iid q n) ≤
+    ↑n * OntologySeparation.ContinuumFinite.tv p q</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.iid_tv_capped</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {A : Type} [inst : Fintype A] (p q : OntologySeparation.FiniteDistribution A) (n : ℕ),
+  OntologySeparation.ContinuumFinite.tv (OntologySeparation.ContinuumFinite.iid p n)
+      (OntologySeparation.ContinuumFinite.iid q n) ≤
+    Min.min 1 (↑n * OntologySeparation.ContinuumFinite.tv p q)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cyclic_character_eigenvalue</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j n : ZMod N),
+  OntologySeparation.ContinuumFinite.cyclicDifference (OntologySeparation.ContinuumFinite.fourierCharacter j) n =
+    (2 - ZMod.stdAddChar j - ZMod.stdAddChar (-j)) * OntologySeparation.ContinuumFinite.fourierCharacter j n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.character_norm</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j n : ZMod N), ‖OntologySeparation.ContinuumFinite.fourierCharacter j n‖ = 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.normalizedFourierMode_mass</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j : ZMod N), ∑ n, ‖OntologySeparation.ContinuumFinite.normalizedFourierMode j n‖ ^ 2 = 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.character_integer_phase</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j : ℤ),
+  ZMod.stdAddChar ↑j = OntologySeparation.ContinuumFinite.phase (2 * Real.pi * ↑j / ↑N)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.phase_pair</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (x : ℝ),
+  OntologySeparation.ContinuumFinite.phase x + OntologySeparation.ContinuumFinite.phase (-x) = ↑(2 * Real.cos x)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cyclic_cosine_eigenvalue</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j : ℤ) (n : ZMod N),
+  OntologySeparation.ContinuumFinite.cyclicDifference (OntologySeparation.ContinuumFinite.fourierCharacter ↑j) n =
+    ↑(2 * (1 - Real.cos (2 * Real.pi * ↑j / ↑N))) * OntologySeparation.ContinuumFinite.fourierCharacter (↑j) n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.no_alias</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [NeZero N] (J : ℕ), 2 * J &lt; N → ∀ (a b : ℤ), a.natAbs ≤ J → b.natAbs ≤ J → ↑a = ↑b → a = b</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.character_star</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (z : ZMod N), Star.star (ZMod.stdAddChar z) = ZMod.stdAddChar (-z)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.character_orthogonality</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j k : ZMod N),
+  ∑ n,
+      Star.star (OntologySeparation.ContinuumFinite.fourierCharacter j n) *
+        OntologySeparation.ContinuumFinite.fourierCharacter k n =
+    if j = k then ↑N else 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.born_tv</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] {O : Type} [inst_2 : Fintype O]
+  (d : OntologySeparation.ContinuumFinite.BornInstrument H O) (u v : H) (hu : ‖u‖ = 1) (hv : ‖v‖ = 1),
+  OntologySeparation.ContinuumFinite.tv (d.distribution u hu) (d.distribution v hv) ≤ ‖u - v‖</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.born_iid_tv</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] {O : Type} [inst_2 : Fintype O]
+  (d : OntologySeparation.ContinuumFinite.BornInstrument H O) (u v : H) (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (n : ℕ),
+  OntologySeparation.ContinuumFinite.tv (OntologySeparation.ContinuumFinite.iid (d.distribution u hu) n)
+      (OntologySeparation.ContinuumFinite.iid (d.distribution v hv) n) ≤
+    Min.min 1 (↑n * ‖u - v‖)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.born_test_error</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] {O : Type} [inst_2 : Fintype O]
+  (d : OntologySeparation.ContinuumFinite.BornInstrument H O) (u v : H) (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (n : ℕ)
+  (f : OntologySeparation.ContinuumFinite.Samples O n → ℝ),
+  (∀ (a : OntologySeparation.ContinuumFinite.Samples O n), 0 ≤ f a) →
+    (∀ (a : OntologySeparation.ContinuumFinite.Samples O n), f a ≤ 1) →
+      1 - Min.min 1 (↑n * ‖u - v‖) ≤
+        (OntologySeparation.ContinuumFinite.iid (d.distribution u hu) n).mean f +
+          (1 - (OntologySeparation.ContinuumFinite.iid (d.distribution v hv) n).mean f)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.hilbert_norm_sq</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (u : ↥(lp (fun x =&gt; ℂ) 2)), ‖u‖ ^ 2 = ∑&#x27; (j : ℤ), ‖↑u j‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.spectral_hilbert_mass</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (c : OntologySeparation.ContinuumFinite.SpectralVector), ‖c.toHilbert‖ ^ 2 = OntologySeparation.ContinuumFinite.mass c</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.spectral_hilbert_normalized</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (c : OntologySeparation.ContinuumFinite.SpectralVector),
+  OntologySeparation.ContinuumFinite.mass c = 1 → ‖c.toHilbert‖ = 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.projection_apply</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert) (j : ℤ),
+  ↑(OntologySeparation.ContinuumFinite.projection s u) j = if j ∈ s then ↑u j else 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.projection_norm_sq</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖OntologySeparation.ContinuumFinite.projection s u‖ ^ 2 = ∑ j ∈ s, ‖↑u j‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.tail_sum</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  OntologySeparation.ContinuumFinite.tail s u = ∑&#x27; (j : { j // j ∉ s }), ‖↑u ↑j‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.tail_identity</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  OntologySeparation.ContinuumFinite.tail s u = ‖u‖ ^ 2 - ‖OntologySeparation.ContinuumFinite.projection s u‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.normalizedProjection_norm</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  OntologySeparation.ContinuumFinite.projection s u ≠ 0 →
+    ‖OntologySeparation.ContinuumFinite.normalizedProjection s u‖ = 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.projection_normalization_distance</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  OntologySeparation.ContinuumFinite.projection s u ≠ 0 →
+    ‖OntologySeparation.ContinuumFinite.projection s u - OntologySeparation.ContinuumFinite.normalizedProjection s u‖ =
+      |‖OntologySeparation.ContinuumFinite.projection s u‖ - 1|</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.normalizedProjection_error</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖u‖ = 1 →
+    OntologySeparation.ContinuumFinite.projection s u ≠ 0 →
+      ‖u - OntologySeparation.ContinuumFinite.normalizedProjection s u‖ ≤
+        2 * √(OntologySeparation.ContinuumFinite.tail s u)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.zero_retained_iff_tail_one</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖u‖ = 1 → (OntologySeparation.ContinuumFinite.projection s u = 0 ↔ OntologySeparation.ContinuumFinite.tail s u = 1)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.projection_tendsto</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  Filter.Tendsto (fun s =&gt; OntologySeparation.ContinuumFinite.projection s u) Filter.atTop (nhds u)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.normalizedProjection_tendsto</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖u‖ = 1 → Filter.Tendsto (fun s =&gt; OntologySeparation.ContinuumFinite.normalizedProjection s u) Filter.atTop (nhds u)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.exists_normalized_cutoff</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖u‖ = 1 →
+    ∀ (epsilon : ℝ),
+      0 &lt; epsilon →
+        ∃ s,
+          ∀ (s&#x27; : Finset ℤ),
+            s ⊆ s&#x27; →
+              ‖u - OntologySeparation.ContinuumFinite.normalizedProjection s&#x27; u‖ &lt; epsilon ∧
+                OntologySeparation.ContinuumFinite.projection s&#x27; u ≠ 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.hilbertEvolve_norm</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w : ℤ → ℝ) (t : ℝ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖OntologySeparation.ContinuumFinite.hilbertEvolve w t u‖ = ‖u‖</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.hilbertEvolve_distance</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w : ℤ → ℝ) (t : ℝ) (u v : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖OntologySeparation.ContinuumFinite.hilbertEvolve w t u - OntologySeparation.ContinuumFinite.hilbertEvolve w t v‖ =
+    ‖u - v‖</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cyclicKinetic_spectrum</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (N : ℕ) [inst : NeZero N] (j : ℤ) (n : ZMod N),
+  OntologySeparation.ContinuumFinite.cyclicKinetic r N (OntologySeparation.ContinuumFinite.fourierCharacter ↑j) n =
+    ↑(r.hbar *
+          OntologySeparation.ContinuumFinite.latticeFrequency r.hbar r.mass (r.length / ↑N)
+            (OntologySeparation.ContinuumFinite.waveNumber r j)) *
+      OntologySeparation.ContinuumFinite.fourierCharacter (↑j) n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.frequency_error_band</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (a K k : ℝ),
+  0 &lt; a →
+    |k| ≤ K →
+      |OntologySeparation.ContinuumFinite.continuumFrequency r.hbar r.mass k -
+            OntologySeparation.ContinuumFinite.latticeFrequency r.hbar r.mass a k| ≤
+        r.hbar * a ^ 2 * K ^ 4 / (24 * r.mass)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.hilbert_band_error</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (s : Finset ℤ) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖u‖ = 1 →
+    (∀ j ∉ s, ↑u j = 0) →
+      ∀ (w v : ℤ → ℝ) (t epsilon : ℝ),
+        0 ≤ epsilon →
+          (∀ j ∈ s, |-t * w j - -t * v j| ≤ epsilon) →
+            ‖OntologySeparation.ContinuumFinite.hilbertEvolve w t u -
+                  OntologySeparation.ContinuumFinite.hilbertEvolve v t u‖ ≤
+              epsilon</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.lattice_tail_error</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (s : Finset ℤ)
+  (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖u‖ = 1 →
+    OntologySeparation.ContinuumFinite.projection s u ≠ 0 →
+      ∀ (a K T t : ℝ),
+        0 &lt; a →
+          0 ≤ T →
+            |t| ≤ T →
+              (∀ j ∈ s, |OntologySeparation.ContinuumFinite.waveNumber r j| ≤ K) →
+                ‖OntologySeparation.ContinuumFinite.hilbertEvolve (OntologySeparation.ContinuumFinite.frequency r) t u -
+                      OntologySeparation.ContinuumFinite.hilbertEvolve
+                        (OntologySeparation.ContinuumFinite.ringLatticeFrequency r a) t
+                        (OntologySeparation.ContinuumFinite.normalizedProjection s u)‖ ≤
+                  2 * √(OntologySeparation.ContinuumFinite.tail s u) + T * (r.hbar * a ^ 2 * K ^ 4 / (24 * r.mass))</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.lattice_strong_convergence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖u‖ = 1 →
+    ∀ (T epsilon : ℝ),
+      0 ≤ T →
+        0 &lt; epsilon →
+          ∃ s J N₀,
+            OntologySeparation.ContinuumFinite.projection s u ≠ 0 ∧
+              (∀ j ∈ s, j.natAbs ≤ J) ∧
+                ∀ (N : ℕ),
+                  N₀ ≤ N →
+                    2 * J &lt; N ∧
+                      0 &lt; N ∧
+                        ∀ (t : ℝ),
+                          |t| ≤ T →
+                            ‖OntologySeparation.ContinuumFinite.hilbertEvolve
+                                    (OntologySeparation.ContinuumFinite.frequency r) t u -
+                                  OntologySeparation.ContinuumFinite.hilbertEvolve
+                                    (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N)) t
+                                    (OntologySeparation.ContinuumFinite.normalizedProjection s u)‖ &lt;
+                              epsilon</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finite_resource_nonseparation</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  ‖u‖ = 1 →
+    ∀ (T margin : ℝ),
+      0 ≤ T →
+        0 &lt; margin →
+          ∀ (n : ℕ),
+            ∃ s J N₀,
+              OntologySeparation.ContinuumFinite.projection s u ≠ 0 ∧
+                (∀ j ∈ s, j.natAbs ≤ J) ∧
+                  ∀ (N : ℕ),
+                    N₀ ≤ N →
+                      2 * J &lt; N ∧
+                        ∀ (t : ℝ),
+                          |t| ≤ T →
+                            ∀ (O : Type) [inst : Fintype O]
+                              (d :
+                                OntologySeparation.ContinuumFinite.BornInstrument
+                                  (↥OntologySeparation.ContinuumFinite.SpectralHilbert) O)
+                              (h₁ :
+                                ‖OntologySeparation.ContinuumFinite.hilbertEvolve
+                                      (OntologySeparation.ContinuumFinite.frequency r) t u‖ =
+                                  1)
+                              (h₂ :
+                                ‖OntologySeparation.ContinuumFinite.hilbertEvolve
+                                      (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N)) t
+                                      (OntologySeparation.ContinuumFinite.normalizedProjection s u)‖ =
+                                  1),
+                              OntologySeparation.ContinuumFinite.tv
+                                  (OntologySeparation.ContinuumFinite.iid
+                                    (d.distribution
+                                      (OntologySeparation.ContinuumFinite.hilbertEvolve
+                                        (OntologySeparation.ContinuumFinite.frequency r) t u)
+                                      h₁)
+                                    n)
+                                  (OntologySeparation.ContinuumFinite.iid
+                                    (d.distribution
+                                      (OntologySeparation.ContinuumFinite.hilbertEvolve
+                                        (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N)) t
+                                        (OntologySeparation.ContinuumFinite.normalizedProjection s u))
+                                      h₂)
+                                    n) &lt;
+                                margin</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.interferometer_plus</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (q : ℝ) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  ‖(OntologySeparation.ContinuumFinite.interferometerOperator q 0) u‖ ^ 2 =
+    ‖u.ofLp 0 + OntologySeparation.ContinuumFinite.phase q * u.ofLp 1‖ ^ 2 / 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.interferometer_minus</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (q : ℝ) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  ‖(OntologySeparation.ContinuumFinite.interferometerOperator q 1) u‖ ^ 2 =
+    ‖u.ofLp 0 - OntologySeparation.ContinuumFinite.phase q * u.ofLp 1‖ ^ 2 / 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.interferometer_failure</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (q : ℝ) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  ‖(OntologySeparation.ContinuumFinite.interferometerOperator q 2) u‖ ^ 2 = 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeState_normalized</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (theta : ℝ), ‖OntologySeparation.ContinuumFinite.twoModeState theta‖ = 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.interferometer_probability</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (q theta : ℝ),
+  ((OntologySeparation.ContinuumFinite.interferometer q).distribution
+          (OntologySeparation.ContinuumFinite.twoModeState theta) ⋯).mass
+      0 =
+    OntologySeparation.ContinuumFinite.plus 1 1 (q + theta)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.noisyReadout_table</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v q theta : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1),
+  have p :=
+    OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+      (OntologySeparation.ContinuumFinite.twoModeState theta) ⋯;
+  p.mass 0 = OntologySeparation.ContinuumFinite.plus eta v (q + theta) ∧
+    p.mass 1 = OntologySeparation.ContinuumFinite.minus eta v (q + theta) ∧
+      p.mass 2 = OntologySeparation.ContinuumFinite.failure eta</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.witnessGap_pos</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>Real.wrapped✝.1 0 OntologySeparation.ContinuumFinite.witnessGap</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.explicit_separating_born_experiment</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>((OntologySeparation.ContinuumFinite.interferometer
+              (Real.pi / OntologySeparation.ContinuumFinite.witnessGap / 2)).distribution
+          (OntologySeparation.ContinuumFinite.evolvedTwoMode (1 / 2)
+            (Real.pi / OntologySeparation.ContinuumFinite.witnessGap))
+          ⋯).mass
+      0 =
+    1 ∧
+  ((OntologySeparation.ContinuumFinite.interferometer
+              (Real.pi / OntologySeparation.ContinuumFinite.witnessGap / 2)).distribution
+          (OntologySeparation.ContinuumFinite.evolvedTwoMode (4 / Real.pi ^ 2)
+            (Real.pi / OntologySeparation.ContinuumFinite.witnessGap))
+          ⋯).mass
+      0 =
+    0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cosine_remainder_global</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (x : ℝ), 0 ≤ x ^ 2 / 2 - (1 - Real.cos x) ∧ x ^ 2 / 2 - (1 - Real.cos x) ≤ x ^ 4 / 24</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeEvolve_relative</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w₀ w₁ t : ℝ),
+  OntologySeparation.ContinuumFinite.twoModeEvolve w₀ w₁ t (OntologySeparation.ContinuumFinite.twoModeState 0) =
+    OntologySeparation.ContinuumFinite.phase (-t * w₀) •
+      OntologySeparation.ContinuumFinite.twoModeState (-t * (w₁ - w₀))</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.evolved_readout_probability</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (q w₀ w₁ t : ℝ),
+  ‖(OntologySeparation.ContinuumFinite.interferometerOperator q 0)
+          (OntologySeparation.ContinuumFinite.twoModeEvolve w₀ w₁ t
+            (OntologySeparation.ContinuumFinite.twoModeState 0))‖ ^
+      2 =
+    OntologySeparation.ContinuumFinite.plus 1 1 (q - t * (w₁ - w₀))</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.symmetric_mode_negative_control</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (a t : ℝ) (j : ℤ),
+  OntologySeparation.ContinuumFinite.relativePhase (OntologySeparation.ContinuumFinite.frequency r) (-j) j t = 0 ∧
+    OntologySeparation.ContinuumFinite.relativePhase
+        (fun k =&gt;
+          OntologySeparation.ContinuumFinite.latticeFrequency r.hbar r.mass a
+            (OntologySeparation.ContinuumFinite.waveNumber r k))
+        (-j) j t =
+      0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.free_reference_born_equivalence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v q theta phi : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1) (o : Fin 3),
+  (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+          (OntologySeparation.ContinuumFinite.twoModeState theta) ⋯).mass
+      o =
+    (OntologySeparation.ContinuumFinite.noisyReadout eta v (q + theta - phi) he0 he1 hv0 hv1
+          (OntologySeparation.ContinuumFinite.twoModeState phi) ⋯).mass
+      o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.frequency_error_global</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (hbar mass spacing k : ℝ),
+  0 ≤ hbar →
+    0 &lt; mass →
+      spacing ≠ 0 →
+        0 ≤
+            OntologySeparation.ContinuumFinite.continuumFrequency hbar mass k -
+              OntologySeparation.ContinuumFinite.latticeFrequency hbar mass spacing k ∧
+          OntologySeparation.ContinuumFinite.continuumFrequency hbar mass k -
+              OntologySeparation.ContinuumFinite.latticeFrequency hbar mass spacing k ≤
+            hbar * spacing ^ 2 * k ^ 4 / (24 * mass)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.modeVector_orthonormal</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N], Orthonormal ℂ OntologySeparation.ContinuumFinite.modeVector</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourierSynthesis_mass</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (c : ZMod N → ℂ),
+  ‖OntologySeparation.ContinuumFinite.fourierSynthesis c‖ ^ 2 = ∑ j, ‖c j‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourierSynthesis_apply</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (c : ZMod N → ℂ) (n : ZMod N),
+  (OntologySeparation.ContinuumFinite.fourierSynthesis c).ofLp n =
+    ∑ j, c j * OntologySeparation.ContinuumFinite.normalizedFourierMode j n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.siteEvolve_mass</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (w : ZMod N → ℝ) (t : ℝ) (c : ZMod N → ℂ),
+  ‖OntologySeparation.ContinuumFinite.siteEvolve w t c‖ ^ 2 = ∑ j, ‖c j‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourierSynthesis_cyclic</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (c : ZMod N → ℂ) (n : ZMod N),
+  OntologySeparation.ContinuumFinite.cyclicDifference
+      (fun n =&gt; (OntologySeparation.ContinuumFinite.fourierSynthesis c).ofLp n) n =
+    (OntologySeparation.ContinuumFinite.fourierSynthesis fun j =&gt;
+          (2 - ZMod.stdAddChar j - ZMod.stdAddChar (-j)) * c j).ofLp
+      n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourierSynthesis_kinetic</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (c : ZMod N → ℂ) (n : ZMod N),
+  OntologySeparation.ContinuumFinite.cyclicKinetic r N
+      (fun n =&gt; (OntologySeparation.ContinuumFinite.fourierSynthesis c).ofLp n) n =
+    ↑(r.hbar ^ 2 / (2 * r.mass * (r.length / ↑N) ^ 2)) *
+      (OntologySeparation.ContinuumFinite.fourierSynthesis fun j =&gt;
+            (2 - ZMod.stdAddChar j - ZMod.stdAddChar (-j)) * c j).ofLp
+        n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.witness_frequencies</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>OntologySeparation.ContinuumFinite.frequency OntologySeparation.ContinuumFinite.witnessCircle 0 = 0 ∧
+  OntologySeparation.ContinuumFinite.frequency OntologySeparation.ContinuumFinite.witnessCircle 1 = 1 / 2 ∧
+    OntologySeparation.ContinuumFinite.ringLatticeFrequency OntologySeparation.ContinuumFinite.witnessCircle
+          (OntologySeparation.ContinuumFinite.witnessCircle.length / 4) 0 =
+        0 ∧
+      OntologySeparation.ContinuumFinite.ringLatticeFrequency OntologySeparation.ContinuumFinite.witnessCircle
+          (OntologySeparation.ContinuumFinite.witnessCircle.length / 4) 1 =
+        4 / Real.pi ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.lattice_born_witness</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>‖(OntologySeparation.ContinuumFinite.interferometerOperator
+            (Real.pi / OntologySeparation.ContinuumFinite.witnessGap / 2) 0)
+          (OntologySeparation.ContinuumFinite.twoModeEvolve
+            (OntologySeparation.ContinuumFinite.frequency OntologySeparation.ContinuumFinite.witnessCircle 0)
+            (OntologySeparation.ContinuumFinite.frequency OntologySeparation.ContinuumFinite.witnessCircle 1)
+            (Real.pi / OntologySeparation.ContinuumFinite.witnessGap)
+            (OntologySeparation.ContinuumFinite.twoModeState 0))‖ ^
+      2 =
+    1 ∧
+  ‖(OntologySeparation.ContinuumFinite.interferometerOperator
+            (Real.pi / OntologySeparation.ContinuumFinite.witnessGap / 2) 0)
+          (OntologySeparation.ContinuumFinite.twoModeEvolve
+            (OntologySeparation.ContinuumFinite.ringLatticeFrequency OntologySeparation.ContinuumFinite.witnessCircle
+              (OntologySeparation.ContinuumFinite.witnessCircle.length / 4) 0)
+            (OntologySeparation.ContinuumFinite.ringLatticeFrequency OntologySeparation.ContinuumFinite.witnessCircle
+              (OntologySeparation.ContinuumFinite.witnessCircle.length / 4) 1)
+            (Real.pi / OntologySeparation.ContinuumFinite.witnessGap)
+            (OntologySeparation.ContinuumFinite.twoModeState 0))‖ ^
+      2 =
+    0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finite_resource_test_error</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert)
+  (hu : ‖u‖ = 1) (T margin : ℝ),
+  0 ≤ T →
+    0 &lt; margin →
+      ∀ (n : ℕ),
+        ∃ s J N₀,
+          ∃ (hp : OntologySeparation.ContinuumFinite.projection s u ≠ 0),
+            (∀ j ∈ s, j.natAbs ≤ J) ∧
+              ∀ (N : ℕ),
+                N₀ ≤ N →
+                  2 * J &lt; N ∧
+                    ∀ (t : ℝ),
+                      |t| ≤ T →
+                        ∀ (O : Type) [inst : Fintype O]
+                          (d :
+                            OntologySeparation.ContinuumFinite.BornInstrument
+                              (↥OntologySeparation.ContinuumFinite.SpectralHilbert) O),
+                          have p :=
+                            d.distribution
+                              (OntologySeparation.ContinuumFinite.hilbertEvolve
+                                (OntologySeparation.ContinuumFinite.frequency r) t u)
+                              ⋯;
+                          have q :=
+                            d.distribution
+                              (OntologySeparation.ContinuumFinite.hilbertEvolve
+                                (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N)) t
+                                (OntologySeparation.ContinuumFinite.normalizedProjection s u))
+                              ⋯;
+                          ∀ (f : OntologySeparation.ContinuumFinite.Samples O n → ℝ),
+                            (∀ (x : OntologySeparation.ContinuumFinite.Samples O n), 0 ≤ f x) →
+                              (∀ (x : OntologySeparation.ContinuumFinite.Samples O n), f x ≤ 1) →
+                                1 - margin &lt;
+                                  (OntologySeparation.ContinuumFinite.iid p n).mean f +
+                                    (1 - (OntologySeparation.ContinuumFinite.iid q n).mean f)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.band_modes_orthonormal</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (s : Finset ℤ) (J : ℕ),
+  2 * J &lt; N → (∀ j ∈ s, j.natAbs ≤ J) → Orthonormal ℂ fun j =&gt; OntologySeparation.ContinuumFinite.modeVector ↑↑j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.bandSynthesis_mass</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (s : Finset ℤ) (J : ℕ),
+  2 * J &lt; N →
+    (∀ j ∈ s, j.natAbs ≤ J) →
+      ∀ (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+        ‖OntologySeparation.ContinuumFinite.bandSynthesis s u‖ ^ 2 = ∑ j, ‖↑u ↑j‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.bandSynthesis_kinetic</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (s : Finset ℤ)
+  (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert) (n : ZMod N),
+  OntologySeparation.ContinuumFinite.cyclicKinetic r N
+      (fun n =&gt; (OntologySeparation.ContinuumFinite.bandSynthesis s u).ofLp n) n =
+    ∑ j,
+      ↑u ↑j * ↑(r.hbar * OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) ↑j) *
+        OntologySeparation.ContinuumFinite.normalizedFourierMode (↑↑j) n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.bandSynthesis_evolve</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (s : Finset ℤ)
+  (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert) (t : ℝ) (n : ZMod N),
+  (OntologySeparation.ContinuumFinite.bandSynthesis s
+          (OntologySeparation.ContinuumFinite.hilbertEvolve
+            (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N)) t u)).ofLp
+      n =
+    ∑ j,
+      OntologySeparation.ContinuumFinite.phase
+            (-t * OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) ↑j) *
+          ↑u ↑j *
+        OntologySeparation.ContinuumFinite.normalizedFourierMode (↑↑j) n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeEvolve_norm</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w₀ w₁ t : ℝ) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  ‖OntologySeparation.ContinuumFinite.twoModeEvolve w₀ w₁ t u‖ = ‖u‖</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.evolved_noisyReadout_table</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v q w₀ w₁ t : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1),
+  let u := OntologySeparation.ContinuumFinite.twoModeEvolve w₀ w₁ t (OntologySeparation.ContinuumFinite.twoModeState 0);
+  have p := OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1 u ⋯;
+  p.mass 0 = OntologySeparation.ContinuumFinite.plus eta v (q - t * (w₁ - w₀)) ∧
+    p.mass 1 = OntologySeparation.ContinuumFinite.minus eta v (q - t * (w₁ - w₀)) ∧
+      p.mass 2 = OntologySeparation.ContinuumFinite.failure eta</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.lattice_noisy_witness</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1),
+  have t := Real.pi / OntologySeparation.ContinuumFinite.witnessGap;
+  have q := t / 2;
+  let u :=
+    OntologySeparation.ContinuumFinite.twoModeEvolve
+      (OntologySeparation.ContinuumFinite.frequency OntologySeparation.ContinuumFinite.witnessCircle 0)
+      (OntologySeparation.ContinuumFinite.frequency OntologySeparation.ContinuumFinite.witnessCircle 1) t
+      (OntologySeparation.ContinuumFinite.twoModeState 0);
+  let z :=
+    OntologySeparation.ContinuumFinite.twoModeEvolve
+      (OntologySeparation.ContinuumFinite.ringLatticeFrequency OntologySeparation.ContinuumFinite.witnessCircle
+        (OntologySeparation.ContinuumFinite.witnessCircle.length / 4) 0)
+      (OntologySeparation.ContinuumFinite.ringLatticeFrequency OntologySeparation.ContinuumFinite.witnessCircle
+        (OntologySeparation.ContinuumFinite.witnessCircle.length / 4) 1)
+      t (OntologySeparation.ContinuumFinite.twoModeState 0);
+  have p := OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1 u ⋯;
+  have r := OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1 z ⋯;
+  p.mass 0 = eta * (1 + v) / 2 ∧
+    p.mass 1 = eta * (1 - v) / 2 ∧
+      p.mass 2 = 1 - eta ∧ r.mass 0 = eta * (1 - v) / 2 ∧ r.mass 1 = eta * (1 + v) / 2 ∧ r.mass 2 = 1 - eta</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.noisy_witness_tv</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (p r : OntologySeparation.FiniteDistribution (Fin 3)) (eta v : ℝ),
+  0 ≤ eta →
+    0 ≤ v →
+      p.mass 0 = eta * (1 + v) / 2 ∧ p.mass 1 = eta * (1 - v) / 2 ∧ p.mass 2 = 1 - eta →
+        r.mass 0 = eta * (1 - v) / 2 ∧ r.mass 1 = eta * (1 + v) / 2 ∧ r.mass 2 = 1 - eta →
+          p.mass 0 - r.mass 0 = eta * v ∧
+            p.mass 1 - r.mass 1 = -(eta * v) ∧ p.mass 2 = r.mass 2 ∧ OntologySeparation.ContinuumFinite.tv p r = eta * v</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.plus_phase_radius</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v q theta delta radius : ℝ),
+  0 ≤ eta →
+    0 ≤ v →
+      |delta| ≤ radius →
+        |OntologySeparation.ContinuumFinite.plus eta v (q + theta + delta) -
+              OntologySeparation.ContinuumFinite.plus eta v (q + theta)| ≤
+          eta * v / 2 * radius</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.noisy_witness_robust</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v p r rp rr : ℝ),
+  0 ≤ eta → 0 ≤ v → |p - eta * (1 + v) / 2| ≤ rp → |r - eta * (1 - v) / 2| ≤ rr → rp + rr &lt; eta * v → p ≠ r</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.noisy_witness_touching</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (a b rp rr : ℝ), a - b = rp + rr → 0 ≤ rp → 0 ≤ rr → |a - rp - a| ≤ rp ∧ |a - rp - b| ≤ rr</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.phase_wrap_noisy_tables</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v q theta phi : ℝ) (k : ℤ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1),
+  theta - phi = ↑k * (2 * Real.pi) →
+    ∀ (o : Fin 3),
+      (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+              (OntologySeparation.ContinuumFinite.twoModeState theta) ⋯).mass
+          o =
+        (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+              (OntologySeparation.ContinuumFinite.twoModeState phi) ⋯).mass
+          o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.witness_blind_phase</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (k : ℤ),
+  have t := ↑k * (2 * Real.pi) / OntologySeparation.ContinuumFinite.witnessGap;
+  -t * (4 / Real.pi ^ 2) - -t * (1 / 2) = ↑k * (2 * Real.pi)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.one_momentum_scale_match</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (Ec Ea : ℝ), 0 &lt; Ec → 0 &lt; Ea → 0 &lt; Ec / Ea ∧ Ec / Ea * Ea = Ec</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.one_momentum_scale_interval</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (Ec Ea radius : ℝ), 0 &lt; Ea → (1 - radius ≤ Ec / Ea ∧ Ec / Ea ≤ 1 + radius ↔ |Ec - Ea| ≤ radius * Ea)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.one_momentum_all_times</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (Ec Ea scale eta v q t : ℝ),
+  scale * Ea = Ec →
+    ∀ (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1) (o : Fin 3),
+      (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+              (OntologySeparation.ContinuumFinite.evolvedTwoMode Ec t) ⋯).mass
+          o =
+        (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+              (OntologySeparation.ContinuumFinite.evolvedTwoMode (scale * Ea) t) ⋯).mass
+          o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.pairIsometry_single</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] (e : Fin 2 → H) (he : Orthonormal ℂ e)
+  (i : Fin 2), (OntologySeparation.ContinuumFinite.pairIsometry e he) (EuclideanSpace.single i 1) = e i</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.spectralPair_orthonormal</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ), j₀ ≠ j₁ → Orthonormal ℂ (OntologySeparation.ContinuumFinite.spectralPair j₀ j₁)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeEmbedding_apply</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (u : OntologySeparation.ContinuumFinite.TwoMode) (j : ℤ),
+  ↑((OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h) u) j =
+    (if j = j₀ then u.ofLp 0 else 0) + if j = j₁ then u.ofLp 1 else 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeEmbedding_norm</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  ‖(OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h) u‖ = ‖u‖</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeEmbedding_inner</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (u v : OntologySeparation.ContinuumFinite.TwoMode),
+  Inner.inner ℂ ((OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h) u)
+      ((OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h) v) =
+    Inner.inner ℂ u v</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeEmbedding_injective</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ) (h : j₀ ≠ j₁), Function.Injective ⇑(OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeEmbedding_support</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  ∀ j ∉ {j₀, j₁}, ↑((OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h) u) j = 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.twoModeEmbedding_intertwines</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (w : ℤ → ℝ) (t : ℝ) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  OntologySeparation.ContinuumFinite.hilbertEvolve w t
+      ((OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h) u) =
+    (OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h)
+      (OntologySeparation.ContinuumFinite.twoModeEvolve (w j₀) (w j₁) t u)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.pairExtraction_embedding</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] [inst_2 : CompleteSpace H]
+  (e : OntologySeparation.ContinuumFinite.TwoMode →ₗᵢ[ℂ] H) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  (OntologySeparation.ContinuumFinite.pairExtraction e) (e u) = u</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.pairProjection_idempotent</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] [inst_2 : CompleteSpace H]
+  (e : OntologySeparation.ContinuumFinite.TwoMode →ₗᵢ[ℂ] H) (x : H),
+  (OntologySeparation.ContinuumFinite.pairProjection e) ((OntologySeparation.ContinuumFinite.pairProjection e) x) =
+    (OntologySeparation.ContinuumFinite.pairProjection e) x</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.pairProjection_orthogonal</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] [inst_2 : CompleteSpace H]
+  (e : OntologySeparation.ContinuumFinite.TwoMode →ₗᵢ[ℂ] H) (u : OntologySeparation.ContinuumFinite.TwoMode) (x : H),
+  Inner.inner ℂ (e u) (x - (OntologySeparation.ContinuumFinite.pairProjection e) x) = 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.pairProjection_pythagoras</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] [inst_2 : CompleteSpace H]
+  (e : OntologySeparation.ContinuumFinite.TwoMode →ₗᵢ[ℂ] H) (x : H),
+  ‖(OntologySeparation.ContinuumFinite.pairExtraction e) x‖ ^ 2 +
+      ‖x - (OntologySeparation.ContinuumFinite.pairProjection e) x‖ ^ 2 =
+    ‖x‖ ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.transportedInterferometer_agrees</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] [inst_2 : CompleteSpace H]
+  (e : OntologySeparation.ContinuumFinite.TwoMode →ₗᵢ[ℂ] H) (q : ℝ) (u : OntologySeparation.ContinuumFinite.TwoMode)
+  (hu : ‖u‖ = 1) (o : Fin 3),
+  ((OntologySeparation.ContinuumFinite.transportedInterferometer e q).distribution (e u) ⋯).mass o =
+    ((OntologySeparation.ContinuumFinite.interferometer q).distribution u hu).mass o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourierBasis_apply</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j : ZMod N),
+  OntologySeparation.ContinuumFinite.fourierBasis j = OntologySeparation.ContinuumFinite.modeVector j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourier_inversion</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (u : EuclideanSpace ℂ (ZMod N)),
+  OntologySeparation.ContinuumFinite.fourierSynthesis (OntologySeparation.ContinuumFinite.fourierAnalysis u) = u</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourierSynthesis_eq_repr</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (c : ZMod N → ℂ),
+  OntologySeparation.ContinuumFinite.fourierSynthesis c =
+    OntologySeparation.ContinuumFinite.fourierBasis.repr.symm (WithLp.toLp 2 c)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourierAnalysis_synthesis</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (c : ZMod N → ℂ),
+  OntologySeparation.ContinuumFinite.fourierAnalysis (OntologySeparation.ContinuumFinite.fourierSynthesis c) = c</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cyclicHamiltonian_apply</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (u : EuclideanSpace ℂ (ZMod N))
+  (n : ZMod N),
+  ((OntologySeparation.ContinuumFinite.cyclicHamiltonian r) u).ofLp n =
+    OntologySeparation.ContinuumFinite.cyclicKinetic r N u.ofLp n</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cyclicHamiltonian_mode</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (j : ZMod N),
+  (OntologySeparation.ContinuumFinite.cyclicHamiltonian r) (OntologySeparation.ContinuumFinite.modeVector j) =
+    ↑(r.hbar * OntologySeparation.ContinuumFinite.siteFrequency r j) • OntologySeparation.ContinuumFinite.modeVector j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.cyclicHamiltonian_synthesis</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (c : ZMod N → ℂ),
+  (OntologySeparation.ContinuumFinite.cyclicHamiltonian r) (OntologySeparation.ContinuumFinite.fourierSynthesis c) =
+    OntologySeparation.ContinuumFinite.fourierSynthesis fun j =&gt;
+      ↑(r.hbar * OntologySeparation.ContinuumFinite.siteFrequency r j) * c j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.phase_time_derivative</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (w t : ℝ),
+  HasDerivAt (fun t =&gt; OntologySeparation.ContinuumFinite.phase (-t * w))
+    (-Complex.I * ↑w * OntologySeparation.ContinuumFinite.phase (-t * w)) t</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.siteEvolve_derivative</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (w : ZMod N → ℝ) (c : ZMod N → ℂ) (t : ℝ),
+  HasDerivAt (fun t =&gt; OntologySeparation.ContinuumFinite.siteEvolve w t c)
+    (OntologySeparation.ContinuumFinite.fourierSynthesis fun j =&gt;
+      -Complex.I * ↑(w j) * (OntologySeparation.ContinuumFinite.phase (-t * w j) * c j))
+    t</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.schrodingerGenerator_synthesis</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (c : ZMod N → ℂ),
+  (OntologySeparation.ContinuumFinite.schrodingerGenerator r) (OntologySeparation.ContinuumFinite.fourierSynthesis c) =
+    OntologySeparation.ContinuumFinite.fourierSynthesis fun j =&gt;
+      -Complex.I * ↑(OntologySeparation.ContinuumFinite.siteFrequency r j) * c j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePropagator_zero</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (u : EuclideanSpace ℂ (ZMod N)),
+  OntologySeparation.ContinuumFinite.sitePropagator r 0 u = u</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePropagator_derivative</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (u : EuclideanSpace ℂ (ZMod N)) (t : ℝ),
+  HasDerivAt (fun t =&gt; OntologySeparation.ContinuumFinite.sitePropagator r t u)
+    ((OntologySeparation.ContinuumFinite.schrodingerGenerator r)
+      (OntologySeparation.ContinuumFinite.sitePropagator r t u))
+    t</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePropagator_schrodinger</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (u : EuclideanSpace ℂ (ZMod N)) (t : ℝ),
+  (Complex.I * ↑r.hbar) • deriv (fun t =&gt; OntologySeparation.ContinuumFinite.sitePropagator r t u) t =
+    (OntologySeparation.ContinuumFinite.cyclicHamiltonian r) (OntologySeparation.ContinuumFinite.sitePropagator r t u)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePropagator_unique</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (u : EuclideanSpace ℂ (ZMod N))
+  (f : ℝ → EuclideanSpace ℂ (ZMod N)),
+  f 0 = u →
+    (∀ (t : ℝ), HasDerivAt f ((OntologySeparation.ContinuumFinite.schrodingerGenerator r) (f t)) t) →
+      f = fun t =&gt; OntologySeparation.ContinuumFinite.sitePropagator r t u</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePropagator_synthesis</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (c : ZMod N → ℂ) (t : ℝ),
+  OntologySeparation.ContinuumFinite.sitePropagator r t (OntologySeparation.ContinuumFinite.fourierSynthesis c) =
+    OntologySeparation.ContinuumFinite.siteEvolve (OntologySeparation.ContinuumFinite.siteFrequency r) t c</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.menu_tv</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {I : Type} (O : I → Type) [inst : (s : I) → Fintype (O s)] (n : I → ℕ)
+  (p q : (s : I) → OntologySeparation.FiniteDistribution (O s)) (m : List I) (epsilon : I → ℝ),
+  (∀ s ∈ m, OntologySeparation.ContinuumFinite.tv (p s) (q s) ≤ epsilon s) →
+    OntologySeparation.ContinuumFinite.tv (OntologySeparation.ContinuumFinite.menuLaw O n p m)
+        (OntologySeparation.ContinuumFinite.menuLaw O n q m) ≤
+      Min.min 1 (List.map (fun s =&gt; ↑(n s) * epsilon s) m).sum</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.menu_test_error</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {I : Type} (O : I → Type) [inst : (s : I) → Fintype (O s)] (n : I → ℕ)
+  (p q : (s : I) → OntologySeparation.FiniteDistribution (O s)) (m : List I) (epsilon : I → ℝ),
+  (∀ s ∈ m, OntologySeparation.ContinuumFinite.tv (p s) (q s) ≤ epsilon s) →
+    ∀ (f : OntologySeparation.ContinuumFinite.MenuSamples O n m → ℝ),
+      (∀ (x : OntologySeparation.ContinuumFinite.MenuSamples O n m), 0 ≤ f x) →
+        (∀ (x : OntologySeparation.ContinuumFinite.MenuSamples O n m), f x ≤ 1) →
+          1 - Min.min 1 (List.map (fun s =&gt; ↑(n s) * epsilon s) m).sum ≤
+            (OntologySeparation.ContinuumFinite.menuLaw O n p m).mean f +
+              (1 - (OntologySeparation.ContinuumFinite.menuLaw O n q m).mean f)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finite_family_convergence</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {I : Type} [Fintype I] (r : OntologySeparation.ContinuumFinite.Circle)
+  (u : I → ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  (∀ (i : I), ‖u i‖ = 1) →
+    ∀ (T epsilon : ℝ),
+      0 ≤ T →
+        0 &lt; epsilon →
+          ∃ s J N₀,
+            (∀ (i : I), OntologySeparation.ContinuumFinite.projection s (u i) ≠ 0) ∧
+              (∀ j ∈ s, j.natAbs ≤ J) ∧
+                ∀ (N : ℕ),
+                  N₀ ≤ N →
+                    2 * J &lt; N ∧
+                      0 &lt; N ∧
+                        ∀ (i : I) (t : ℝ),
+                          |t| ≤ T →
+                            ‖OntologySeparation.ContinuumFinite.hilbertEvolve
+                                    (OntologySeparation.ContinuumFinite.frequency r) t (u i) -
+                                  OntologySeparation.ContinuumFinite.hilbertEvolve
+                                    (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N)) t
+                                    (OntologySeparation.ContinuumFinite.normalizedProjection s (u i))‖ &lt;
+                              epsilon</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.finite_menu_nonseparation</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {I : Type} [Fintype I] (O : I → Type) [inst : (i : I) → Fintype (O i)] (r : OntologySeparation.ContinuumFinite.Circle)
+  (u : I → ↥OntologySeparation.ContinuumFinite.SpectralHilbert) (hu : ∀ (i : I), ‖u i‖ = 1)
+  (d :
+    (i : I) →
+      OntologySeparation.ContinuumFinite.BornInstrument (↥OntologySeparation.ContinuumFinite.SpectralHilbert) (O i))
+  (n : I → ℕ) (m : List I) (t : I → ℝ) (T margin : ℝ),
+  0 ≤ T →
+    (∀ (i : I), |t i| ≤ T) →
+      0 &lt; margin →
+        ∃ s J N₀,
+          ∃ (hp : ∀ (i : I), OntologySeparation.ContinuumFinite.projection s (u i) ≠ 0),
+            (∀ j ∈ s, j.natAbs ≤ J) ∧
+              ∀ (N : ℕ),
+                N₀ ≤ N →
+                  2 * J &lt; N ∧
+                    have p := fun i =&gt;
+                      (d i).distribution
+                        (OntologySeparation.ContinuumFinite.hilbertEvolve
+                          (OntologySeparation.ContinuumFinite.frequency r) (t i) (u i))
+                        ⋯;
+                    have q := fun i =&gt;
+                      (d i).distribution
+                        (OntologySeparation.ContinuumFinite.hilbertEvolve
+                          (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N)) (t i)
+                          (OntologySeparation.ContinuumFinite.normalizedProjection s (u i)))
+                        ⋯;
+                    OntologySeparation.ContinuumFinite.tv (OntologySeparation.ContinuumFinite.menuLaw O n p m)
+                          (OntologySeparation.ContinuumFinite.menuLaw O n q m) &lt;
+                        margin ∧
+                      ∀ (f : OntologySeparation.ContinuumFinite.MenuSamples O n m → ℝ),
+                        (∀ (x : OntologySeparation.ContinuumFinite.MenuSamples O n m), 0 ≤ f x) →
+                          (∀ (x : OntologySeparation.ContinuumFinite.MenuSamples O n m), f x ≤ 1) →
+                            1 - margin &lt;
+                              (OntologySeparation.ContinuumFinite.menuLaw O n p m).mean f +
+                                (1 - (OntologySeparation.ContinuumFinite.menuLaw O n q m).mean f)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.noisyPostprocess_interferometer</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v q : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+  (u : OntologySeparation.ContinuumFinite.TwoMode) (hu : ‖u‖ = 1) (o : Fin 3),
+  (OntologySeparation.ContinuumFinite.noisyPostprocess eta v he0 he1 hv0 hv1
+          ((OntologySeparation.ContinuumFinite.interferometer q).distribution u hu)).mass
+      o =
+    (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1 u hu).mass o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.spectralReadout_agrees</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (w : ℤ → ℝ) (t eta v q : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+  (u : OntologySeparation.ContinuumFinite.TwoMode) (hu : ‖u‖ = 1) (o : Fin 3),
+  (OntologySeparation.ContinuumFinite.spectralReadout j₀ j₁ h w t eta v q he0 he1 hv0 hv1 u hu).mass o =
+    (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+          (OntologySeparation.ContinuumFinite.twoModeEvolve (w j₀) (w j₁) t u) ⋯).mass
+      o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.spectral_noisy_witness</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1),
+  have t := Real.pi / OntologySeparation.ContinuumFinite.witnessGap;
+  have p :=
+    OntologySeparation.ContinuumFinite.spectralReadout 0 1 ⋯
+      (OntologySeparation.ContinuumFinite.frequency OntologySeparation.ContinuumFinite.witnessCircle) t eta v (t / 2)
+      he0 he1 hv0 hv1 (OntologySeparation.ContinuumFinite.twoModeState 0) ⋯;
+  have q :=
+    OntologySeparation.ContinuumFinite.spectralReadout 0 1 ⋯
+      (OntologySeparation.ContinuumFinite.ringLatticeFrequency OntologySeparation.ContinuumFinite.witnessCircle
+        (OntologySeparation.ContinuumFinite.witnessCircle.length / 4))
+      t eta v (t / 2) he0 he1 hv0 hv1 (OntologySeparation.ContinuumFinite.twoModeState 0) ⋯;
+  p.mass 0 = eta * (1 + v) / 2 ∧
+    p.mass 1 = eta * (1 - v) / 2 ∧
+      p.mass 2 = 1 - eta ∧
+        q.mass 0 = eta * (1 - v) / 2 ∧
+          q.mass 1 = eta * (1 + v) / 2 ∧ q.mass 2 = 1 - eta ∧ OntologySeparation.ContinuumFinite.tv p q = eta * v</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.siteFrequency_intCast</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (j : ℤ),
+  OntologySeparation.ContinuumFinite.siteFrequency r ↑j =
+    OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePropagatorCLM_apply</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (t : ℝ) (u : EuclideanSpace ℂ (ZMod N)),
+  (OntologySeparation.ContinuumFinite.sitePropagatorCLM r t) u = OntologySeparation.ContinuumFinite.sitePropagator r t u</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.fourierAnalysis_mode</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j k : ZMod N),
+  OntologySeparation.ContinuumFinite.fourierAnalysis (OntologySeparation.ContinuumFinite.modeVector j) k =
+    if k = j then 1 else 0</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePropagator_mode</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (t : ℝ) (j : ZMod N),
+  OntologySeparation.ContinuumFinite.sitePropagator r t (OntologySeparation.ContinuumFinite.modeVector j) =
+    OntologySeparation.ContinuumFinite.phase (-t * OntologySeparation.ContinuumFinite.siteFrequency r j) •
+      OntologySeparation.ContinuumFinite.modeVector j</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePropagator_bandSynthesis</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (t : ℝ) (s : Finset ℤ)
+  (u : ↥OntologySeparation.ContinuumFinite.SpectralHilbert),
+  OntologySeparation.ContinuumFinite.sitePropagator r t (OntologySeparation.ContinuumFinite.bandSynthesis s u) =
+    OntologySeparation.ContinuumFinite.bandSynthesis s
+      (OntologySeparation.ContinuumFinite.hilbertEvolve
+        (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N)) t u)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePairEmbedding_no_alias</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [NeZero N] (j₀ j₁ : ℤ), j₀ ≠ j₁ → ∀ (J : ℕ), j₀.natAbs ≤ J → j₁.natAbs ≤ J → 2 * J &lt; N → ↑j₀ ≠ ↑j₁</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePairEmbedding_band</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (ha : ↑j₀ ≠ ↑j₁) (u : OntologySeparation.ContinuumFinite.TwoMode),
+  OntologySeparation.ContinuumFinite.bandSynthesis {j₀, j₁}
+      ((OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h) u) =
+    (OntologySeparation.ContinuumFinite.sitePairEmbedding j₀ j₁ ha) u</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.sitePairEmbedding_intertwines</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (t : ℝ) (j₀ j₁ : ℤ),
+  j₀ ≠ j₁ →
+    ∀ (ha : ↑j₀ ≠ ↑j₁) (u : OntologySeparation.ContinuumFinite.TwoMode),
+      OntologySeparation.ContinuumFinite.sitePropagator r t
+          ((OntologySeparation.ContinuumFinite.sitePairEmbedding j₀ j₁ ha) u) =
+        (OntologySeparation.ContinuumFinite.sitePairEmbedding j₀ j₁ ha)
+          (OntologySeparation.ContinuumFinite.twoModeEvolve
+            (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) j₀)
+            (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) j₁) t u)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.site_readout_agrees</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (j₀ j₁ : ℤ) (ha : ↑j₀ ≠ ↑j₁) (q : ℝ) (u : OntologySeparation.ContinuumFinite.TwoMode)
+  (hu : ‖u‖ = 1) (o : Fin 3),
+  ((OntologySeparation.ContinuumFinite.transportedInterferometer
+              (OntologySeparation.ContinuumFinite.sitePairEmbedding j₀ j₁ ha) q).distribution
+          ((OntologySeparation.ContinuumFinite.sitePairEmbedding j₀ j₁ ha) u) ⋯).mass
+      o =
+    ((OntologySeparation.ContinuumFinite.interferometer q).distribution u hu).mass o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.continuum_mode_ratio</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle),
+  OntologySeparation.ContinuumFinite.frequency r 1 &gt; 0 ∧
+    OntologySeparation.ContinuumFinite.frequency r 2 = 4 * OntologySeparation.ContinuumFinite.frequency r 1 ∧
+      OntologySeparation.ContinuumFinite.frequency r 2 / OntologySeparation.ContinuumFinite.frequency r 1 = 4</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.lattice_half_angle</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (N : ℕ),
+  4 &lt; N →
+    0 &lt; Real.pi / ↑N ∧
+      Real.pi / ↑N &lt; Real.pi / 2 ∧
+        0 &lt; Real.sin (Real.pi / ↑N) ∧ 0 &lt; Real.cos (Real.pi / ↑N) ∧ Real.cos (Real.pi / ↑N) ^ 2 &lt; 1</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.lattice_mode_ratio</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (N : ℕ),
+  4 &lt; N →
+    have w := OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N);
+    0 &lt; w 1 ∧ w 2 = 4 * Real.cos (Real.pi / ↑N) ^ 2 * w 1 ∧ w 2 / w 1 = 4 * Real.cos (Real.pi / ↑N) ^ 2</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.shared_scale_two_modes_impossible</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (r : OntologySeparation.ContinuumFinite.Circle) (N : ℕ),
+  4 &lt; N →
+    ∀ (sc sa : ℝ),
+      0 &lt; sc →
+        0 &lt; sa →
+          ¬(sc * OntologySeparation.ContinuumFinite.frequency r 1 =
+                sa * OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) 1 ∧
+              sc * OntologySeparation.ContinuumFinite.frequency r 2 =
+                sa * OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) 2)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.phase_re</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (theta : ℝ), (OntologySeparation.ContinuumFinite.phase theta).re = Real.cos theta</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.noisy_phase_degenerate</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v q theta phi : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1),
+  eta = 0 ∨ v = 0 →
+    ∀ (o : Fin 3),
+      (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+              (OntologySeparation.ContinuumFinite.twoModeState theta) ⋯).mass
+          o =
+        (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+              (OntologySeparation.ContinuumFinite.twoModeState phi) ⋯).mass
+          o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.witness_blind_readout</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v q : ℝ) (k : ℤ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1) (o : Fin 3),
+  have t := ↑k * (2 * Real.pi) / OntologySeparation.ContinuumFinite.witnessGap;
+  (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+          (OntologySeparation.ContinuumFinite.evolvedTwoMode (4 / Real.pi ^ 2) t) ⋯).mass
+      o =
+    (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+          (OntologySeparation.ContinuumFinite.evolvedTwoMode (1 / 2) t) ⋯).mass
+      o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.noisy_witness_phase_robust</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (eta v dc da rc ra : ℝ),
+  0 ≤ eta →
+    0 ≤ v →
+      |dc| ≤ rc →
+        |da| ≤ ra →
+          eta * v / 2 * rc + eta * v / 2 * ra &lt; eta * v →
+            OntologySeparation.ContinuumFinite.plus eta v dc ≠
+              OntologySeparation.ContinuumFinite.plus eta v (Real.pi + da)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.pairExtraction_coefficient</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] [inst_2 : CompleteSpace H]
+  (e : OntologySeparation.ContinuumFinite.TwoMode →ₗᵢ[ℂ] H) (x : H) (i : Fin 2),
+  ((OntologySeparation.ContinuumFinite.pairExtraction e) x).ofLp i = Inner.inner ℂ (e (EuclideanSpace.single i 1)) x</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.spectralExtraction_apply</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ (j₀ j₁ : ℤ) (h : j₀ ≠ j₁) (x : ↥OntologySeparation.ContinuumFinite.SpectralHilbert) (i : Fin 2),
+  ((OntologySeparation.ContinuumFinite.pairExtraction (OntologySeparation.ContinuumFinite.twoModeEmbedding j₀ j₁ h))
+          x).ofLp
+      i =
+    ↑x (if i = 0 then j₀ else j₁)</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.transportedNoisyReadout_agrees</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {H : Type} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ H] [inst_2 : CompleteSpace H]
+  (e : OntologySeparation.ContinuumFinite.TwoMode →ₗᵢ[ℂ] H) (eta v q : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v)
+  (hv1 : v ≤ 1) (u : OntologySeparation.ContinuumFinite.TwoMode) (hu : ‖u‖ = 1) (o : Fin 3),
+  (OntologySeparation.ContinuumFinite.noisyPostprocess eta v he0 he1 hv0 hv1
+          ((OntologySeparation.ContinuumFinite.transportedInterferometer e q).distribution (e u) ⋯)).mass
+      o =
+    (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1 u hu).mass o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr><tr><td><code>OntologySeparation.ContinuumFinite.site_noisy_readout</code><br>Theorem · see full assumptions</td><td>Theorem · see full assumptions</td><td><pre>∀ {N : ℕ} [inst : NeZero N] (r : OntologySeparation.ContinuumFinite.Circle) (t : ℝ) (j₀ j₁ : ℤ) (h : j₀ ≠ j₁)
+  (ha : ↑j₀ ≠ ↑j₁) (eta v q : ℝ) (he0 : 0 ≤ eta) (he1 : eta ≤ 1) (hv0 : 0 ≤ v) (hv1 : v ≤ 1)
+  (u : OntologySeparation.ContinuumFinite.TwoMode) (hu : ‖u‖ = 1) (o : Fin 3),
+  let e := OntologySeparation.ContinuumFinite.sitePairEmbedding j₀ j₁ ha;
+  let z := OntologySeparation.ContinuumFinite.sitePropagator r t (e u);
+  (OntologySeparation.ContinuumFinite.noisyPostprocess eta v he0 he1 hv0 hv1
+          ((OntologySeparation.ContinuumFinite.transportedInterferometer e q).distribution z ⋯)).mass
+      o =
+    (OntologySeparation.ContinuumFinite.noisyReadout eta v q he0 he1 hv0 hv1
+          (OntologySeparation.ContinuumFinite.twoModeEvolve
+            (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) j₀)
+            (OntologySeparation.ContinuumFinite.ringLatticeFrequency r (r.length / ↑N) j₁) t u)
+          ⋯).mass
+      o</pre></td><td>propext, Classical.choice, Quot.sound</td></tr></tbody></table></div></body></html>
